@@ -450,12 +450,6 @@
     <Compile Include="..\Microsoft.Phone.Controls.Toolkit\Common\ItemsControlExtensions.cs">
       <Link>Common\ItemsControlExtensions.cs</Link>
     </Compile>
-    <Compile Include="..\Microsoft.Phone.Controls.Toolkit\MultiselectList\MultiselectItem.cs">
-      <Link>MultiselectList\MultiselectItem.cs</Link>
-    </Compile>
-    <Compile Include="..\Microsoft.Phone.Controls.Toolkit\MultiselectList\MultiselectList.cs">
-      <Link>MultiselectList\MultiselectList.cs</Link>
-    </Compile>
     <Compile Include="..\Microsoft.Phone.Controls.Toolkit\Primitives\LoopingSelectorDataSource.cs">
       <Link>Primitives\LoopingSelectorDataSource.cs</Link>
     </Compile>
@@ -470,9 +464,6 @@
     </Compile>
     <Compile Include="..\Microsoft.Phone.Controls.Toolkit\ProgressBar\PerformanceProgressBar.cs">
       <Link>ProgressBar\PerformanceProgressBar.cs</Link>
-    </Compile>
-    <Compile Include="..\Microsoft.Phone.Controls.Toolkit\ProgressBar\RelativeAnimatingContentControl.cs">
-      <Link>ProgressBar\RelativeAnimatingContentControl.cs</Link>
     </Compile>
     <Compile Include="DateTimePickers\DatePickerPage.xaml.cs">
       <DependentUpon>DatePickerPage.xaml</DependentUpon>
