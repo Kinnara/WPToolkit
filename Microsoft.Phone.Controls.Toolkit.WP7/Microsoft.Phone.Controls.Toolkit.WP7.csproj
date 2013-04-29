@@ -254,6 +254,9 @@
     <Compile Include="..\Microsoft.Phone.Controls.Toolkit\ExpanderView\ExpanderView.cs">
       <Link>ExpanderView\ExpanderView.cs</Link>
     </Compile>
+    <Compile Include="..\Microsoft.Phone.Controls.Toolkit\ListPicker\IListPickerPage.cs">
+      <Link>ListPicker\IListPickerPage.cs</Link>
+    </Compile>
     <Compile Include="..\Microsoft.Phone.Controls.Toolkit\LongListSelector\LongListSelectorItem.cs">
       <Link>LongListSelector\LongListSelectorItem.cs</Link>
     </Compile>

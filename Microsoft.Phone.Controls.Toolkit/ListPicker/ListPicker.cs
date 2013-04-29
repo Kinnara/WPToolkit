@@ -17,6 +17,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
 using System.Windows.Navigation;
+using Microsoft.Phone.Controls.Primitives;
 
 namespace Microsoft.Phone.Controls
 {
@@ -67,7 +68,7 @@ namespace Microsoft.Phone.Controls
         private object _frameContentWhenOpened;
         private NavigationInTransition _savedNavigationInTransition;
         private NavigationOutTransition _savedNavigationOutTransition;
-        private ListPickerPage _listPickerPage;
+        private IListPickerPage _listPickerPage;
         private TextBlock _multipleSelectionModeSummary;
         private Border _border;
 
@@ -1315,7 +1316,7 @@ namespace Microsoft.Phone.Controls
             else if (null == _listPickerPage && _hasPickerPageOpen)
             {
                 _hasPickerPageOpen = false;
-                _listPickerPage = e.Content as ListPickerPage;
+                _listPickerPage = e.Content as IListPickerPage;
                 if (null != _listPickerPage)
                 {
                     // Sets the flow direction.

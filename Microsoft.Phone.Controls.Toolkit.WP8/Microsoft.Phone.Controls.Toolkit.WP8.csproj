@@ -272,6 +272,9 @@
     <Compile Include="..\Microsoft.Phone.Controls.Toolkit\CustomMessageBox\DismissedEventArgs.cs">
       <Link>CustomMessageBox\DismissedEventArgs.cs</Link>
     </Compile>
+    <Compile Include="..\Microsoft.Phone.Controls.Toolkit\ListPicker\IListPickerPage.cs">
+      <Link>ListPicker\IListPickerPage.cs</Link>
+    </Compile>
     <Compile Include="..\Microsoft.Phone.Controls.Toolkit\PhoneTextBox\PhoneTextBox.cs">
       <Link>PhoneTextBox\PhoneTextBox.cs</Link>
     </Compile>

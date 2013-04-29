@@ -602,7 +602,7 @@
                                             Storyboard.TargetProperty="Background"
                                             Duration="0">
                                             <DiscreteObjectKeyFrame
-                                                Value="{StaticResource PhoneTextBoxEditBackgroundColor}"
+                                                Value="{StaticResource PhoneTextBoxEditBackgroundBrush}"
                                                 KeyTime="0"/>
                                         </ObjectAnimationUsingKeyFrames>
                                         <ObjectAnimationUsingKeyFrames

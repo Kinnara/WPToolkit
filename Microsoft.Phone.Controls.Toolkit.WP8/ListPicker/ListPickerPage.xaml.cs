@@ -14,6 +14,7 @@ using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
 using System.Windows.Navigation;
+using Microsoft.Phone.Controls.Primitives;
 using Microsoft.Phone.Shell;
 
 namespace Microsoft.Phone.Controls
@@ -21,7 +22,7 @@ namespace Microsoft.Phone.Controls
     /// <summary>
     /// Displays the list of items and allows single or multiple selection.
     /// </summary>
-    public partial class ListPickerPage : PhoneApplicationPage
+    public partial class ListPickerPage : PhoneApplicationPage, IListPickerPage
     {
         private const string StateKey_Value = "ListPickerPage_State_Value";
 
