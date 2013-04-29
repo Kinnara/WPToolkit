@@ -139,6 +139,11 @@ namespace Microsoft.Phone.Controls
         private Color _systemTrayColor;
 
         /// <summary>
+        /// The current opacity of the system tray.
+        /// </summary>
+        private double _systemTrayOpacity;
+
+        /// <summary>
         /// Called when the message is being dismissing.
         /// </summary>
         public event EventHandler<DismissingEventArgs> Dismissing;
@@ -389,10 +394,12 @@ namespace Microsoft.Phone.Controls
             if ((bool)e.NewValue)
             {
                 target.VerticalAlignment = VerticalAlignment.Stretch;
+                target.Margin = new Thickness(0, 0, 0, -12);
             }
             else
             {
                 target.VerticalAlignment = VerticalAlignment.Top;
+                target.ClearValue(FrameworkElement.MarginProperty);
             }
         }
 
@@ -506,6 +513,9 @@ namespace Microsoft.Phone.Controls
                 // Cache the original color of the system tray.
                 _systemTrayColor = SystemTray.BackgroundColor;
 
+                // Cache the original opacity of the system tray.
+                _systemTrayOpacity = SystemTray.Opacity;
+
                 // Change the color of the system tray to match the message box.
                 if (Background is SolidColorBrush)
                 {
@@ -514,6 +524,11 @@ namespace Microsoft.Phone.Controls
                 else
                 {
                     SystemTray.BackgroundColor = (Color)Application.Current.Resources["PhoneChromeColor"];
+                }
+
+                if (SystemTray.Opacity < 1)
+                {
+                    SystemTray.Opacity = 0.999;
                 }
             }
 
@@ -544,6 +559,7 @@ namespace Microsoft.Phone.Controls
                 if (target != null)
                 {
                     _systemTrayColor = target._systemTrayColor;
+                    _systemTrayOpacity = target._systemTrayOpacity;
                     _hasApplicationBar = target._hasApplicationBar;
                     target.Dismiss();
                 }
@@ -614,14 +630,6 @@ namespace Microsoft.Phone.Controls
                 }
             }
 
-            // Handle the dismissed event.
-            var handlerDismissed = Dismissed;
-            if (handlerDismissed != null)
-            {
-                DismissedEventArgs args = new DismissedEventArgs(source);
-                handlerDismissed(this, args);
-            }       
-
             // Set the current instance to null.
             _currentInstance = null;
 
@@ -636,20 +644,20 @@ namespace Microsoft.Phone.Controls
                 swivelTransition.Completed += (s, e) =>
                 {
                     swivelTransition.Stop();
-                    ClosePopup(restoreOriginalValues);
+                    ClosePopup(restoreOriginalValues, source);
                 };
                swivelTransition.Begin();
             }
             else
             {
-                ClosePopup(restoreOriginalValues);
+                ClosePopup(restoreOriginalValues, source);
             }    
         }
 
         /// <summary>
         /// Closes the pop up.
         /// </summary>
-        private void ClosePopup(bool restoreOriginalValues)
+        private void ClosePopup(bool restoreOriginalValues, CustomMessageBoxResult source)
         {
             // Remove the popup.
             _popup.IsOpen = false;
@@ -659,10 +667,11 @@ namespace Microsoft.Phone.Controls
             if (restoreOriginalValues)
             {
                 // Set the system tray back to its original 
-                // color if necessary.
+                // color nad opacity if necessary.
                 if (SystemTray.IsVisible)
                 {
                     SystemTray.BackgroundColor = _systemTrayColor;
+                    SystemTray.Opacity = _systemTrayOpacity;
                 }
 
                 // Bring the application bar if necessary.
@@ -685,6 +694,14 @@ namespace Microsoft.Phone.Controls
             {
                 _frame.Navigating -= OnNavigating;
                 _frame = null;
+            }
+
+            // Handle the dismissed event.
+            var handlerDismissed = Dismissed;
+            if (handlerDismissed != null)
+            {
+                DismissedEventArgs args = new DismissedEventArgs(source);
+                handlerDismissed(this, args);
             }
         }
 

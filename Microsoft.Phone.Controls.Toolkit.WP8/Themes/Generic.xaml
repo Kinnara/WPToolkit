@@ -1503,8 +1503,8 @@
                                 x:Name="LeftButton"  
                                 Grid.Row="1" Grid.Column="0"
                                 Content="{TemplateBinding LeftButtonContent}"
-                                IsEnabled="{Binding IsLeftButtonEnabled}"
-                                Foreground="{TemplateBinding Foreground}"
+                                IsEnabled="{TemplateBinding IsLeftButtonEnabled}"
+                                Foreground="{Binding Foreground, RelativeSource={RelativeSource TemplatedParent}}"
                                 Margin="12,0,0,12"   
                                 Visibility="Collapsed"                                                            
                                 controls:TiltEffect.IsTiltEnabled="True"/>
@@ -1512,8 +1512,8 @@
                                 x:Name="RightButton"
                                 Grid.Row="1" Grid.Column="1"
                                 Content="{TemplateBinding RightButtonContent}"
-                                IsEnabled="{Binding IsRightButtonEnabled}"
-                                Foreground="{TemplateBinding Foreground}"
+                                IsEnabled="{TemplateBinding IsRightButtonEnabled}"
+                                Foreground="{Binding Foreground, RelativeSource={RelativeSource TemplatedParent}}"
                                 Margin="0,0,12,12"
                                 Visibility="Collapsed"                             
                                 controls:TiltEffect.IsTiltEnabled="True"/>
