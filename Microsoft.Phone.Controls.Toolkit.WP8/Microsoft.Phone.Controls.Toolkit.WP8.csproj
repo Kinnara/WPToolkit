@@ -1,0 +1,890 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>10.0.20506</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{486642F0-AB94-4F28-B49C-106CA3134239}</ProjectGuid>
+    <ProjectTypeGuids>{C089C8C0-30E0-4E22-80C0-CE093F111A43};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Microsoft.Phone.Controls</RootNamespace>
+    <AssemblyName>Microsoft.Phone.Controls.Toolkit</AssemblyName>
+    <TargetFrameworkIdentifier>WindowsPhone</TargetFrameworkIdentifier>
+    <TargetFrameworkVersion>v8.0</TargetFrameworkVersion>
+    <SilverlightVersion>$(TargetFrameworkVersion)</SilverlightVersion>
+    <SilverlightApplication>false</SilverlightApplication>
+    <ValidateXaml>true</ValidateXaml>
+    <MinimumVisualStudioVersion>11.0</MinimumVisualStudioVersion>
+    <ThrowErrorsInValidation>true</ThrowErrorsInValidation>
+    <SignAssembly>True</SignAssembly>
+    <AssemblyOriginatorKeyFile>..\PhoneToolkit.snk</AssemblyOriginatorKeyFile>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>..\Bin\WP8\Debug\</OutputPath>
+    <DefineConstants>TRACE;DEBUG;CODE_ANALYSIS;SILVERLIGHT;WINDOWS_PHONE;WP8</DefineConstants>
+    <NoStdLib>true</NoStdLib>
+    <NoConfig>true</NoConfig>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <RunCodeAnalysis>true</RunCodeAnalysis>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+    <DocumentationFile>..\Bin\WP8\Debug\Microsoft.Phone.Controls.Toolkit.XML</DocumentationFile>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>..\Bin\WP8\Release\</OutputPath>
+    <DefineConstants>TRACE;SILVERLIGHT;WINDOWS_PHONE;WP8</DefineConstants>
+    <NoStdLib>true</NoStdLib>
+    <NoConfig>true</NoConfig>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <DocumentationFile>..\Bin\WP8\Release\Microsoft.Phone.Controls.Toolkit.XML</DocumentationFile>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>Bin\x86\Debug</OutputPath>
+    <DefineConstants>DEBUG;TRACE;SILVERLIGHT;WINDOWS_PHONE</DefineConstants>
+    <NoStdLib>true</NoStdLib>
+    <NoConfig>true</NoConfig>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>Bin\x86\Release</OutputPath>
+    <DefineConstants>TRACE;SILVERLIGHT;WINDOWS_PHONE</DefineConstants>
+    <NoStdLib>true</NoStdLib>
+    <NoConfig>true</NoConfig>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|ARM' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>Bin\ARM\Debug</OutputPath>
+    <DefineConstants>DEBUG;TRACE;SILVERLIGHT;WINDOWS_PHONE</DefineConstants>
+    <NoStdLib>true</NoStdLib>
+    <NoConfig>true</NoConfig>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|ARM' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>Bin\ARM\Release</OutputPath>
+    <DefineConstants>TRACE;SILVERLIGHT;WINDOWS_PHONE</DefineConstants>
+    <NoStdLib>true</NoStdLib>
+    <NoConfig>true</NoConfig>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="..\Microsoft.Phone.Controls.Toolkit\AutoCompleteBox\AutoCompleteBox.cs">
+      <Link>AutoCompleteBox\AutoCompleteBox.cs</Link>
+    </Compile>
+    <Compile Include="..\Microsoft.Phone.Controls.Toolkit\AutoCompleteBox\AutoCompleteFilter.cs">
+      <Link>AutoCompleteBox\AutoCompleteFilter.cs</Link>
+    </Compile>
+    <Compile Include="..\Microsoft.Phone.Controls.Toolkit\AutoCompleteBox\AutoCompleteFilterMode.cs">
+      <Link>AutoCompleteBox\AutoCompleteFilterMode.cs</Link>
+    </Compile>
+    <Compile Include="..\Microsoft.Phone.Controls.Toolkit\AutoCompleteBox\AutoCompleteFilterPredicate.cs">
+      <Link>AutoCompleteBox\AutoCompleteFilterPredicate.cs</Link>
+    </Compile>
+    <Compile Include="..\Microsoft.Phone.Controls.Toolkit\AutoCompleteBox\ISelectionAdapter.cs">
+      <Link>AutoCompleteBox\ISelectionAdapter.cs</Link>
+    </Compile>
+    <Compile Include="..\Microsoft.Phone.Controls.Toolkit\AutoCompleteBox\PopulatedEventArgs.cs">
+      <Link>AutoCompleteBox\PopulatedEventArgs.cs</Link>
+    </Compile>
+    <Compile Include="..\Microsoft.Phone.Controls.Toolkit\AutoCompleteBox\PopulatedEventHandler.cs">
+      <Link>AutoCompleteBox\PopulatedEventHandler.cs</Link>
+    </Compile>
+    <Compile Include="..\Microsoft.Phone.Controls.Toolkit\AutoCompleteBox\PopulatingEventArgs.cs">
+      <Link>AutoCompleteBox\PopulatingEventArgs.cs</Link>
+    </Compile>
+    <Compile Include="..\Microsoft.Phone.Controls.Toolkit\AutoCompleteBox\PopulatingEventHandler.cs">
+      <Link>AutoCompleteBox\PopulatingEventHandler.cs</Link>
+    </Compile>
+    <Compile Include="..\Microsoft.Phone.Controls.Toolkit\AutoCompleteBox\PopupHelper.cs">
+      <Link>AutoCompleteBox\PopupHelper.cs</Link>
+    </Compile>
+    <Compile Include="..\Microsoft.Phone.Controls.Toolkit\AutoCompleteBox\SelectorSelectionAdapter.cs">
+      <Link>AutoCompleteBox\SelectorSelectionAdapter.cs</Link>
+    </Compile>
+    <Compile Include="..\Microsoft.Phone.Controls.Toolkit\Common\BindingEvaluator.cs">
+      <Link>Common\BindingEvaluator.cs</Link>
+    </Compile>
+    <Compile Include="..\Microsoft.Phone.Controls.Toolkit\Common\CultureInfoExtensions.cs">
+      <Link>Common\CultureInfoExtensions.cs</Link>
+    </Compile>
+    <Compile Include="..\Microsoft.Phone.Controls.Toolkit\Common\Extensions.cs">
+      <Link>Common\Extensions.cs</Link>
+    </Compile>
+    <Compile Include="..\Microsoft.Phone.Controls.Toolkit\Common\InteractionHelper.cs">
+      <Link>Common\InteractionHelper.cs</Link>
+    </Compile>
+    <Compile Include="..\Microsoft.Phone.Controls.Toolkit\Common\ItemsControlHelper.cs">
+      <Link>Common\ItemsControlHelper.cs</Link>
+    </Compile>
+    <Compile Include="..\Microsoft.Phone.Controls.Toolkit\Common\IUpdateVisualState.cs">
+      <Link>Common\IUpdateVisualState.cs</Link>
+    </Compile>
+    <Compile Include="..\Microsoft.Phone.Controls.Toolkit\Common\LengthConverter.cs">
+      <Link>Common\LengthConverter.cs</Link>
+    </Compile>
+    <Compile Include="..\Microsoft.Phone.Controls.Toolkit\Common\MathHelpers.cs">
+      <Link>Common\MathHelpers.cs</Link>
+    </Compile>
+    <Compile Include="..\Microsoft.Phone.Controls.Toolkit\Common\NumericExtensions.cs">
+      <Link>Common\NumericExtensions.cs</Link>
+    </Compile>
+    <Compile Include="..\Microsoft.Phone.Controls.Toolkit\Common\PhoneHelper.cs">
+      <Link>Common\PhoneHelper.cs</Link>
+    </Compile>
+    <Compile Include="..\Microsoft.Phone.Controls.Toolkit\Common\PhysicsConstants.cs">
+      <Link>Common\PhysicsConstants.cs</Link>
+    </Compile>
+    <Compile Include="..\Microsoft.Phone.Controls.Toolkit\Common\RoutedPropertyChangingEventArgs.cs">
+      <Link>Common\RoutedPropertyChangingEventArgs.cs</Link>
+    </Compile>
+    <Compile Include="..\Microsoft.Phone.Controls.Toolkit\Common\RoutedPropertyChangingEventHandler.cs">
+      <Link>Common\RoutedPropertyChangingEventHandler.cs</Link>
+    </Compile>
+    <Compile Include="..\Microsoft.Phone.Controls.Toolkit\Common\SafeRaise.cs">
+      <Link>Common\SafeRaise.cs</Link>
+    </Compile>
+    <Compile Include="..\Microsoft.Phone.Controls.Toolkit\Common\TemplatedVisualTreeExtensions.cs">
+      <Link>Common\TemplatedVisualTreeExtensions.cs</Link>
+    </Compile>
+    <Compile Include="..\Microsoft.Phone.Controls.Toolkit\Common\TimeTypeConverter.cs">
+      <Link>Common\TimeTypeConverter.cs</Link>
+    </Compile>
+    <Compile Include="..\Microsoft.Phone.Controls.Toolkit\Common\TypeConverters.cs">
+      <Link>Common\TypeConverters.cs</Link>
+    </Compile>
+    <Compile Include="..\Microsoft.Phone.Controls.Toolkit\Common\VisualStates.cs">
+      <Link>Common\VisualStates.cs</Link>
+    </Compile>
+    <Compile Include="..\Microsoft.Phone.Controls.Toolkit\Common\VisualTreeExtensions.cs">
+      <Link>Common\VisualTreeExtensions.cs</Link>
+    </Compile>
+    <Compile Include="..\Microsoft.Phone.Controls.Toolkit\Common\WeakEventListener.cs">
+      <Link>Common\WeakEventListener.cs</Link>
+    </Compile>
+    <Compile Include="..\Microsoft.Phone.Controls.Toolkit\Common\WeakReferenceHelper.cs">
+      <Link>Common\WeakReferenceHelper.cs</Link>
+    </Compile>
+    <Compile Include="..\Microsoft.Phone.Controls.Toolkit\ContextMenu\ContextMenu.cs">
+      <Link>ContextMenu\ContextMenu.cs</Link>
+    </Compile>
+    <Compile Include="..\Microsoft.Phone.Controls.Toolkit\ContextMenu\ContextMenuService.cs">
+      <Link>ContextMenu\ContextMenuService.cs</Link>
+    </Compile>
+    <Compile Include="..\Microsoft.Phone.Controls.Toolkit\ContextMenu\MenuBase.cs">
+      <Link>ContextMenu\MenuBase.cs</Link>
+    </Compile>
+    <Compile Include="..\Microsoft.Phone.Controls.Toolkit\ContextMenu\MenuItem.cs">
+      <Link>ContextMenu\MenuItem.cs</Link>
+    </Compile>
+    <Compile Include="..\Microsoft.Phone.Controls.Toolkit\ContextMenu\Separator.cs">
+      <Link>ContextMenu\Separator.cs</Link>
+    </Compile>
+    <Compile Include="..\Microsoft.Phone.Controls.Toolkit\CustomMessageBox\CustomMessageBoxResult.cs">
+      <Link>CustomMessageBox\CustomMessageBoxResult.cs</Link>
+    </Compile>
+    <Compile Include="..\Microsoft.Phone.Controls.Toolkit\CustomMessageBox\DismissingEventArgs.cs">
+      <Link>CustomMessageBox\DismissingEventArgs.cs</Link>
+    </Compile>
+    <Compile Include="..\Microsoft.Phone.Controls.Toolkit\Data\HierarchicalDataTemplate.cs">
+      <Link>Data\HierarchicalDataTemplate.cs</Link>
+    </Compile>
+    <Compile Include="..\Microsoft.Phone.Controls.Toolkit\DateTimeConverters\DailyDateTimeConverter.cs">
+      <Link>DateTimeConverters\DailyDateTimeConverter.cs</Link>
+    </Compile>
+    <Compile Include="..\Microsoft.Phone.Controls.Toolkit\DateTimeConverters\DateTimeFormatHelper.cs">
+      <Link>DateTimeConverters\DateTimeFormatHelper.cs</Link>
+    </Compile>
+    <Compile Include="..\Microsoft.Phone.Controls.Toolkit\DateTimeConverters\FullViewDateTimeConverter.cs">
+      <Link>DateTimeConverters\FullViewDateTimeConverter.cs</Link>
+    </Compile>
+    <Compile Include="..\Microsoft.Phone.Controls.Toolkit\DateTimeConverters\HourlyDateTimeConverter.cs">
+      <Link>DateTimeConverters\HourlyDateTimeConverter.cs</Link>
+    </Compile>
+    <Compile Include="..\Microsoft.Phone.Controls.Toolkit\DateTimeConverters\ListViewDateTimeConverter.cs">
+      <Link>DateTimeConverters\ListViewDateTimeConverter.cs</Link>
+    </Compile>
+    <Compile Include="..\Microsoft.Phone.Controls.Toolkit\DateTimeConverters\RelativeTimeConverter.cs">
+      <Link>DateTimeConverters\RelativeTimeConverter.cs</Link>
+    </Compile>
+    <Compile Include="..\Microsoft.Phone.Controls.Toolkit\DateTimeConverters\ThreadDateTimeConverter.cs">
+      <Link>DateTimeConverters\ThreadDateTimeConverter.cs</Link>
+    </Compile>
+    <Compile Include="..\Microsoft.Phone.Controls.Toolkit\DateTimePickers\DataSource.cs">
+      <Link>DateTimePickers\DataSource.cs</Link>
+    </Compile>
+    <Compile Include="..\Microsoft.Phone.Controls.Toolkit\DateTimePickers\DatePicker.cs">
+      <Link>DateTimePickers\DatePicker.cs</Link>
+    </Compile>
+    <Compile Include="..\Microsoft.Phone.Controls.Toolkit\DateTimePickers\DateTimePickerBase.cs">
+      <Link>DateTimePickers\DateTimePickerBase.cs</Link>
+    </Compile>
+    <Compile Include="..\Microsoft.Phone.Controls.Toolkit\DateTimePickers\DateTimePickerPageBase.cs">
+      <Link>DateTimePickers\DateTimePickerPageBase.cs</Link>
+    </Compile>
+    <Compile Include="..\Microsoft.Phone.Controls.Toolkit\DateTimePickers\DateTimePickerResources.cs">
+      <Link>DateTimePickers\DateTimePickerResources.cs</Link>
+    </Compile>
+    <Compile Include="..\Microsoft.Phone.Controls.Toolkit\DateTimePickers\DateTimeWrapper.cs">
+      <Link>DateTimePickers\DateTimeWrapper.cs</Link>
+    </Compile>
+    <Compile Include="..\Microsoft.Phone.Controls.Toolkit\DateTimePickers\DateTimeValueChangedEventArgs.cs">
+      <Link>DateTimePickers\DateTimeValueChangedEventArgs.cs</Link>
+    </Compile>
+    <Compile Include="..\Microsoft.Phone.Controls.Toolkit\DateTimePickers\IDateTimePickerPage.cs">
+      <Link>DateTimePickers\IDateTimePickerPage.cs</Link>
+    </Compile>
+    <Compile Include="..\Microsoft.Phone.Controls.Toolkit\DateTimePickers\RecurringDaysPicker.cs">
+      <Link>DateTimePickers\RecurringDaysPicker.cs</Link>
+    </Compile>
+    <Compile Include="..\Microsoft.Phone.Controls.Toolkit\DateTimePickers\TimePicker.cs">
+      <Link>DateTimePickers\TimePicker.cs</Link>
+    </Compile>
+    <Compile Include="..\Microsoft.Phone.Controls.Toolkit\Effects\SlideInEffect.cs">
+      <Link>Effects\SlideInEffect.cs</Link>
+    </Compile>
+    <Compile Include="..\Microsoft.Phone.Controls.Toolkit\ExpanderView\ExpanderView.cs">
+      <Link>ExpanderView\ExpanderView.cs</Link>
+    </Compile>
+    <Compile Include="..\Microsoft.Phone.Controls.Toolkit\CustomMessageBox\CustomMessageBox.cs">
+      <Link>CustomMessageBox\CustomMessageBox.cs</Link>
+    </Compile>
+    <Compile Include="..\Microsoft.Phone.Controls.Toolkit\CustomMessageBox\DismissedEventArgs.cs">
+      <Link>CustomMessageBox\DismissedEventArgs.cs</Link>
+    </Compile>
+    <Compile Include="..\Microsoft.Phone.Controls.Toolkit\PhoneTextBox\PhoneTextBox.cs">
+      <Link>PhoneTextBox\PhoneTextBox.cs</Link>
+    </Compile>
+    <Compile Include="..\Microsoft.Phone.Controls.Toolkit\GlobalSuppressions.cs">
+      <Link>GlobalSuppressions.cs</Link>
+    </Compile>
+    <Compile Include="..\Microsoft.Phone.Controls.Toolkit\HeaderedItemsControl\HeaderedItemsControl.cs">
+      <Link>HeaderedItemsControl\HeaderedItemsControl.cs</Link>
+    </Compile>
+    <Compile Include="..\Microsoft.Phone.Controls.Toolkit\HubTile\HubTile.cs">
+      <Link>HubTile\HubTile.cs</Link>
+    </Compile>
+    <Compile Include="..\Microsoft.Phone.Controls.Toolkit\HubTile\HubTileConverters.cs">
+      <Link>HubTile\HubTileConverters.cs</Link>
+    </Compile>
+    <Compile Include="..\Microsoft.Phone.Controls.Toolkit\HubTile\HubTileService.cs">
+      <Link>HubTile\HubTileService.cs</Link>
+    </Compile>
+    <Compile Include="..\Microsoft.Phone.Controls.Toolkit\Input\GestureListener.cs">
+      <Link>Input\GestureListener.cs</Link>
+    </Compile>
+    <Compile Include="..\Microsoft.Phone.Controls.Toolkit\Input\GestureHelperEventArgs.cs">
+      <Link>Input\GestureHelperEventArgs.cs</Link>
+    </Compile>
+    <Compile Include="Input\GestureListenerStatic.cs" />
+    <Compile Include="..\Microsoft.Phone.Controls.Toolkit\Input\GestureService.cs">
+      <Link>Input\GestureService.cs</Link>
+    </Compile>
+    <Compile Include="..\Microsoft.Phone.Controls.Toolkit\ListPicker\ExpansionMode.cs">
+      <Link>ListPicker\ExpansionMode.cs</Link>
+    </Compile>
+    <Compile Include="..\Microsoft.Phone.Controls.Toolkit\LocalizedResources\ControlResources.cs.Designer.cs">
+      <Link>LocalizedResources\ControlResources.cs.Designer.cs</Link>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ControlResources.cs.resx</DependentUpon>
+    </Compile>
+    <Compile Include="..\Microsoft.Phone.Controls.Toolkit\LocalizedResources\ControlResources.da.Designer.cs">
+      <Link>LocalizedResources\ControlResources.da.Designer.cs</Link>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ControlResources.da.resx</DependentUpon>
+    </Compile>
+    <Compile Include="..\Microsoft.Phone.Controls.Toolkit\LocalizedResources\ControlResources.de-DE.Designer.cs">
+      <Link>LocalizedResources\ControlResources.de-DE.Designer.cs</Link>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ControlResources.de-DE.resx</DependentUpon>
+    </Compile>
+    <Compile Include="..\Microsoft.Phone.Controls.Toolkit\LocalizedResources\ControlResources.Designer.cs">
+      <Link>LocalizedResources\ControlResources.Designer.cs</Link>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ControlResources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="..\Microsoft.Phone.Controls.Toolkit\LocalizedResources\ControlResources.el.Designer.cs">
+      <Link>LocalizedResources\ControlResources.el.Designer.cs</Link>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ControlResources.el.resx</DependentUpon>
+    </Compile>
+    <Compile Include="..\Microsoft.Phone.Controls.Toolkit\LocalizedResources\ControlResources.en-GB.Designer.cs">
+      <Link>LocalizedResources\ControlResources.en-GB.Designer.cs</Link>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ControlResources.en-GB.resx</DependentUpon>
+    </Compile>
+    <Compile Include="..\Microsoft.Phone.Controls.Toolkit\LocalizedResources\ControlResources.es-ES.Designer.cs">
+      <Link>LocalizedResources\ControlResources.es-ES.Designer.cs</Link>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ControlResources.es-ES.resx</DependentUpon>
+    </Compile>
+    <Compile Include="..\Microsoft.Phone.Controls.Toolkit\LocalizedResources\ControlResources.fi.Designer.cs">
+      <Link>LocalizedResources\ControlResources.fi.Designer.cs</Link>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ControlResources.fi.resx</DependentUpon>
+    </Compile>
+    <Compile Include="..\Microsoft.Phone.Controls.Toolkit\LocalizedResources\ControlResources.fr-FR.Designer.cs">
+      <Link>LocalizedResources\ControlResources.fr-FR.Designer.cs</Link>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ControlResources.fr-FR.resx</DependentUpon>
+    </Compile>
+    <Compile Include="..\Microsoft.Phone.Controls.Toolkit\LocalizedResources\ControlResources.hu.Designer.cs">
+      <Link>LocalizedResources\ControlResources.hu.Designer.cs</Link>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ControlResources.hu.resx</DependentUpon>
+    </Compile>
+    <Compile Include="..\Microsoft.Phone.Controls.Toolkit\LocalizedResources\ControlResources.it-IT.Designer.cs">
+      <Link>LocalizedResources\ControlResources.it-IT.Designer.cs</Link>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ControlResources.it-IT.resx</DependentUpon>
+    </Compile>
+    <Compile Include="..\Microsoft.Phone.Controls.Toolkit\LocalizedResources\ControlResources.ja.Designer.cs">
+      <Link>LocalizedResources\ControlResources.ja.Designer.cs</Link>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ControlResources.ja.resx</DependentUpon>
+    </Compile>
+    <Compile Include="..\Microsoft.Phone.Controls.Toolkit\LocalizedResources\ControlResources.ko.Designer.cs">
+      <Link>LocalizedResources\ControlResources.ko.Designer.cs</Link>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ControlResources.ko.resx</DependentUpon>
+    </Compile>
+    <Compile Include="..\Microsoft.Phone.Controls.Toolkit\LocalizedResources\ControlResources.nb-NO.Designer.cs">
+      <Link>LocalizedResources\ControlResources.nb-NO.Designer.cs</Link>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ControlResources.nb-NO.resx</DependentUpon>
+    </Compile>
+    <Compile Include="..\Microsoft.Phone.Controls.Toolkit\LocalizedResources\ControlResources.nl-NL.Designer.cs">
+      <Link>LocalizedResources\ControlResources.nl-NL.Designer.cs</Link>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ControlResources.nl-NL.resx</DependentUpon>
+    </Compile>
+    <Compile Include="..\Microsoft.Phone.Controls.Toolkit\LocalizedResources\ControlResources.pl.Designer.cs">
+      <Link>LocalizedResources\ControlResources.pl.Designer.cs</Link>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ControlResources.pl.resx</DependentUpon>
+    </Compile>
+    <Compile Include="..\Microsoft.Phone.Controls.Toolkit\LocalizedResources\ControlResources.pt-BR.Designer.cs">
+      <Link>LocalizedResources\ControlResources.pt-BR.Designer.cs</Link>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ControlResources.pt-BR.resx</DependentUpon>
+    </Compile>
+    <Compile Include="..\Microsoft.Phone.Controls.Toolkit\LocalizedResources\ControlResources.pt-PT.Designer.cs">
+      <Link>LocalizedResources\ControlResources.pt-PT.Designer.cs</Link>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ControlResources.pt-PT.resx</DependentUpon>
+    </Compile>
+    <Compile Include="..\Microsoft.Phone.Controls.Toolkit\LocalizedResources\ControlResources.ru.Designer.cs">
+      <Link>LocalizedResources\ControlResources.ru.Designer.cs</Link>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ControlResources.ru.resx</DependentUpon>
+    </Compile>
+    <Compile Include="..\Microsoft.Phone.Controls.Toolkit\LocalizedResources\ControlResources.sv-SE.Designer.cs">
+      <Link>LocalizedResources\ControlResources.sv-SE.Designer.cs</Link>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ControlResources.sv-SE.resx</DependentUpon>
+    </Compile>
+    <Compile Include="..\Microsoft.Phone.Controls.Toolkit\LocalizedResources\ControlResources.zh-CN.Designer.cs">
+      <Link>LocalizedResources\ControlResources.zh-CN.Designer.cs</Link>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ControlResources.zh-CN.resx</DependentUpon>
+    </Compile>
+    <Compile Include="..\Microsoft.Phone.Controls.Toolkit\LocalizedResources\ControlResources.zh-TW.Designer.cs">
+      <Link>LocalizedResources\ControlResources.zh-TW.Designer.cs</Link>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ControlResources.zh-TW.resx</DependentUpon>
+    </Compile>
+    <Compile Include="..\Microsoft.Phone.Controls.Toolkit\ListPicker\ListPicker.cs">
+      <Link>ListPicker\ListPicker.cs</Link>
+    </Compile>
+    <Compile Include="..\Microsoft.Phone.Controls.Toolkit\ListPicker\ListPickerItem.cs">
+      <Link>ListPicker\ListPickerItem.cs</Link>
+    </Compile>
+    <Compile Include="..\Microsoft.Phone.Controls.Toolkit\ListPicker\ListPickerMode.cs">
+      <Link>ListPicker\ListPickerMode.cs</Link>
+    </Compile>
+    <Compile Include="..\Microsoft.Phone.Controls.Toolkit\Primitives\ClipToBounds.cs">
+      <Link>Primitives\ClipToBounds.cs</Link>
+    </Compile>
+    <Compile Include="..\Microsoft.Phone.Controls.Toolkit\Common\ItemsControlExtensions.cs">
+      <Link>Common\ItemsControlExtensions.cs</Link>
+    </Compile>
+    <Compile Include="..\Microsoft.Phone.Controls.Toolkit\MultiselectList\MultiselectItem.cs">
+      <Link>MultiselectList\MultiselectItem.cs</Link>
+    </Compile>
+    <Compile Include="..\Microsoft.Phone.Controls.Toolkit\MultiselectList\MultiselectList.cs">
+      <Link>MultiselectList\MultiselectList.cs</Link>
+    </Compile>
+    <Compile Include="..\Microsoft.Phone.Controls.Toolkit\Primitives\LoopingSelectorDataSource.cs">
+      <Link>Primitives\LoopingSelectorDataSource.cs</Link>
+    </Compile>
+    <Compile Include="..\Microsoft.Phone.Controls.Toolkit\Primitives\LoopingSelector.cs">
+      <Link>Primitives\LoopingSelector.cs</Link>
+    </Compile>
+    <Compile Include="..\Microsoft.Phone.Controls.Toolkit\Primitives\LoopingSelectorItem.cs">
+      <Link>Primitives\LoopingSelectorItem.cs</Link>
+    </Compile>
+    <Compile Include="..\Microsoft.Phone.Controls.Toolkit\Primitives\ToggleSwitchButton.cs">
+      <Link>Primitives\ToggleSwitchButton.cs</Link>
+    </Compile>
+    <Compile Include="..\Microsoft.Phone.Controls.Toolkit\ProgressBar\PerformanceProgressBar.cs">
+      <Link>ProgressBar\PerformanceProgressBar.cs</Link>
+    </Compile>
+    <Compile Include="..\Microsoft.Phone.Controls.Toolkit\ProgressBar\RelativeAnimatingContentControl.cs">
+      <Link>ProgressBar\RelativeAnimatingContentControl.cs</Link>
+    </Compile>
+    <Compile Include="DateTimePickers\DatePickerPage.xaml.cs">
+      <DependentUpon>DatePickerPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="DateTimePickers\TimePickerPage.xaml.cs">
+      <DependentUpon>TimePickerPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ListPicker\ListPickerPage.xaml.cs">
+      <DependentUpon>ListPickerPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="LongListMultiSelector\LongListMultiSelector.cs" />
+    <Compile Include="LongListMultiSelector\LongListMultiSelectorItem.cs" />
+    <Compile Include="Maps\CollectionChangeListener.cs" />
+    <Compile Include="Maps\GeocoordinateExtensions.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Maps\MapItemsSourceChangeManager.cs" />
+    <Compile Include="Maps\MapChild.cs" />
+    <Compile Include="Maps\MapChildCollection.cs" />
+    <Compile Include="Maps\MapExtensions.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Maps\MapExtensionsChildrenChangeManager.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Maps\MapItemsControl.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Maps\MapItemsControlChangeManager.cs" />
+    <Compile Include="Maps\MapOverlayItem.cs" />
+    <Compile Include="Maps\PushPin.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Maps\UserLocationMarker.cs" />
+    <Compile Include="Maps\MapChildControl.cs" />
+    <Compile Include="Maps\QueryExtensions.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="..\Microsoft.Phone.Controls.Toolkit\RatingControl\Rating.cs">
+      <Link>RatingControl\Rating.cs</Link>
+    </Compile>
+    <Compile Include="..\Microsoft.Phone.Controls.Toolkit\RatingControl\RatingItem.cs">
+      <Link>RatingControl\RatingItem.cs</Link>
+    </Compile>
+    <Compile Include="..\Microsoft.Phone.Controls.Toolkit\Effects\TiltEffect.cs">
+      <Link>Effects\TiltEffect.cs</Link>
+    </Compile>
+    <Compile Include="..\Microsoft.Phone.Controls.Toolkit\Effects\TurnstileFeatherEffect.cs">
+      <Link>Effects\TurnstileFeatherEffect.cs</Link>
+    </Compile>
+    <Compile Include="..\Microsoft.Phone.Controls.Toolkit\ToggleSwitch\OffOnConverter.cs">
+      <Link>ToggleSwitch\OffOnConverter.cs</Link>
+    </Compile>
+    <Compile Include="..\Microsoft.Phone.Controls.Toolkit\ToggleSwitch\ToggleSwitch.cs">
+      <Link>ToggleSwitch\ToggleSwitch.cs</Link>
+    </Compile>
+    <Compile Include="..\Microsoft.Phone.Controls.Toolkit\Properties\Resources.Designer.cs">
+      <Link>Properties\Resources.Designer.cs</Link>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="..\Microsoft.Phone.Controls.Toolkit\Transitions\NavigationInTransition.cs">
+      <Link>Transitions\NavigationInTransition.cs</Link>
+    </Compile>
+    <Compile Include="..\Microsoft.Phone.Controls.Toolkit\Transitions\NavigationOutTransition.cs">
+      <Link>Transitions\NavigationOutTransition.cs</Link>
+    </Compile>
+    <Compile Include="..\Microsoft.Phone.Controls.Toolkit\Transitions\TransitionFrame.cs">
+      <Link>Transitions\TransitionFrame.cs</Link>
+    </Compile>
+    <Compile Include="..\Microsoft.Phone.Controls.Toolkit\Transitions\ITransition.cs">
+      <Link>Transitions\ITransition.cs</Link>
+    </Compile>
+    <Compile Include="..\Microsoft.Phone.Controls.Toolkit\Transitions\NavigationTransition.cs">
+      <Link>Transitions\NavigationTransition.cs</Link>
+    </Compile>
+    <Compile Include="..\Microsoft.Phone.Controls.Toolkit\Transitions\Transitions\FeatheredTransition.cs">
+      <Link>Transitions\Transitions\FeatheredTransition.cs</Link>
+    </Compile>
+    <Compile Include="..\Microsoft.Phone.Controls.Toolkit\Transitions\Transitions\RollTransition.cs">
+      <Link>Transitions\Transitions\RollTransition.cs</Link>
+    </Compile>
+    <Compile Include="..\Microsoft.Phone.Controls.Toolkit\Transitions\Transitions\Transition.cs">
+      <Link>Transitions\Transitions\Transition.cs</Link>
+    </Compile>
+    <Compile Include="..\Microsoft.Phone.Controls.Toolkit\Transitions\TransitionService.cs">
+      <Link>Transitions\TransitionService.cs</Link>
+    </Compile>
+    <Compile Include="..\Microsoft.Phone.Controls.Toolkit\Transitions\Transitions\RotateTransitionMode.cs">
+      <Link>Transitions\Transitions\RotateTransitionMode.cs</Link>
+    </Compile>
+    <Compile Include="..\Microsoft.Phone.Controls.Toolkit\Transitions\Transitions\RotateTransition.cs">
+      <Link>Transitions\Transitions\RotateTransition.cs</Link>
+    </Compile>
+    <Compile Include="..\Microsoft.Phone.Controls.Toolkit\Transitions\Transitions\SlideTransitionMode.cs">
+      <Link>Transitions\Transitions\SlideTransitionMode.cs</Link>
+    </Compile>
+    <Compile Include="..\Microsoft.Phone.Controls.Toolkit\Transitions\TransitionElement.cs">
+      <Link>Transitions\TransitionElement.cs</Link>
+    </Compile>
+    <Compile Include="..\Microsoft.Phone.Controls.Toolkit\Transitions\Transitions\SwivelTransition.cs">
+      <Link>Transitions\Transitions\SwivelTransition.cs</Link>
+    </Compile>
+    <Compile Include="..\Microsoft.Phone.Controls.Toolkit\Transitions\Transitions\SwivelTransitionMode.cs">
+      <Link>Transitions\Transitions\SwivelTransitionMode.cs</Link>
+    </Compile>
+    <Compile Include="..\Microsoft.Phone.Controls.Toolkit\Transitions\Transitions\SlideTransition.cs">
+      <Link>Transitions\Transitions\SlideTransition.cs</Link>
+    </Compile>
+    <Compile Include="..\Microsoft.Phone.Controls.Toolkit\Transitions\Transitions\TurnstileFeatherTransition.cs">
+      <Link>Transitions\Transitions\TurnstileFeatherTransition.cs</Link>
+    </Compile>
+    <Compile Include="..\Microsoft.Phone.Controls.Toolkit\Transitions\Transitions\TurnstileFeatherTransitionMode.cs">
+      <Link>Transitions\Transitions\TurnstileFeatherTransitionMode.cs</Link>
+    </Compile>
+    <Compile Include="..\Microsoft.Phone.Controls.Toolkit\Transitions\Transitions\TurnstileTransition.cs">
+      <Link>Transitions\Transitions\TurnstileTransition.cs</Link>
+    </Compile>
+    <Compile Include="..\Microsoft.Phone.Controls.Toolkit\Transitions\Transitions.cs">
+      <Link>Transitions\Transitions.cs</Link>
+    </Compile>
+    <Compile Include="..\Microsoft.Phone.Controls.Toolkit\Transitions\Transitions\TurnstileTransitionMode.cs">
+      <Link>Transitions\Transitions\TurnstileTransitionMode.cs</Link>
+    </Compile>
+    <Compile Include="..\Microsoft.Phone.Controls.Toolkit\WrapPanel\OrientedSize.cs">
+      <Link>WrapPanel\OrientedSize.cs</Link>
+    </Compile>
+    <Compile Include="..\Microsoft.Phone.Controls.Toolkit\WrapPanel\WrapPanel.cs">
+      <Link>WrapPanel\WrapPanel.cs</Link>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Page Include="DateTimePickers\DatePickerPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="DateTimePickers\TimePickerPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ListPicker\ListPickerPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Themes\Generic.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="..\Microsoft.Phone.Controls.Toolkit\LocalizedResources\ControlResources.cs.resx">
+      <Link>LocalizedResources\ControlResources.cs.resx</Link>
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>ControlResources.cs.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="..\Microsoft.Phone.Controls.Toolkit\LocalizedResources\ControlResources.da.resx">
+      <Link>LocalizedResources\ControlResources.da.resx</Link>
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>ControlResources.da.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="..\Microsoft.Phone.Controls.Toolkit\LocalizedResources\ControlResources.de-DE.resx">
+      <Link>LocalizedResources\ControlResources.de-DE.resx</Link>
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>ControlResources.de-DE.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="..\Microsoft.Phone.Controls.Toolkit\LocalizedResources\ControlResources.el.resx">
+      <Link>LocalizedResources\ControlResources.el.resx</Link>
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>ControlResources.el.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="..\Microsoft.Phone.Controls.Toolkit\LocalizedResources\ControlResources.en-GB.resx">
+      <Link>LocalizedResources\ControlResources.en-GB.resx</Link>
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>ControlResources.en-GB.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="..\Microsoft.Phone.Controls.Toolkit\LocalizedResources\ControlResources.es-ES.resx">
+      <Link>LocalizedResources\ControlResources.es-ES.resx</Link>
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>ControlResources.es-ES.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="..\Microsoft.Phone.Controls.Toolkit\LocalizedResources\ControlResources.fi.resx">
+      <Link>LocalizedResources\ControlResources.fi.resx</Link>
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>ControlResources.fi.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="..\Microsoft.Phone.Controls.Toolkit\LocalizedResources\ControlResources.fr-FR.resx">
+      <Link>LocalizedResources\ControlResources.fr-FR.resx</Link>
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>ControlResources.fr-FR.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="..\Microsoft.Phone.Controls.Toolkit\LocalizedResources\ControlResources.hu.resx">
+      <Link>LocalizedResources\ControlResources.hu.resx</Link>
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>ControlResources.hu.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="..\Microsoft.Phone.Controls.Toolkit\LocalizedResources\ControlResources.it-IT.resx">
+      <Link>LocalizedResources\ControlResources.it-IT.resx</Link>
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>ControlResources.it-IT.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="..\Microsoft.Phone.Controls.Toolkit\LocalizedResources\ControlResources.ja.resx">
+      <Link>LocalizedResources\ControlResources.ja.resx</Link>
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>ControlResources.ja.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="..\Microsoft.Phone.Controls.Toolkit\LocalizedResources\ControlResources.ko.resx">
+      <Link>LocalizedResources\ControlResources.ko.resx</Link>
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>ControlResources.ko.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="..\Microsoft.Phone.Controls.Toolkit\LocalizedResources\ControlResources.nb-NO.resx">
+      <Link>LocalizedResources\ControlResources.nb-NO.resx</Link>
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>ControlResources.nb-NO.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="..\Microsoft.Phone.Controls.Toolkit\LocalizedResources\ControlResources.nl-NL.resx">
+      <Link>LocalizedResources\ControlResources.nl-NL.resx</Link>
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>ControlResources.nl-NL.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="..\Microsoft.Phone.Controls.Toolkit\LocalizedResources\ControlResources.pl.resx">
+      <Link>LocalizedResources\ControlResources.pl.resx</Link>
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>ControlResources.pl.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="..\Microsoft.Phone.Controls.Toolkit\LocalizedResources\ControlResources.pt-BR.resx">
+      <Link>LocalizedResources\ControlResources.pt-BR.resx</Link>
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>ControlResources.pt-BR.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="..\Microsoft.Phone.Controls.Toolkit\LocalizedResources\ControlResources.pt-PT.resx">
+      <Link>LocalizedResources\ControlResources.pt-PT.resx</Link>
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>ControlResources.pt-PT.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="..\Microsoft.Phone.Controls.Toolkit\LocalizedResources\ControlResources.resx">
+      <Link>LocalizedResources\ControlResources.resx</Link>
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>ControlResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="..\Microsoft.Phone.Controls.Toolkit\LocalizedResources\ControlResources.ru.resx">
+      <Link>LocalizedResources\ControlResources.ru.resx</Link>
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>ControlResources.ru.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="..\Microsoft.Phone.Controls.Toolkit\LocalizedResources\ControlResources.sv-SE.resx">
+      <Link>LocalizedResources\ControlResources.sv-SE.resx</Link>
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>ControlResources.sv-SE.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="..\Microsoft.Phone.Controls.Toolkit\LocalizedResources\ControlResources.zh-CN.resx">
+      <Link>LocalizedResources\ControlResources.zh-CN.resx</Link>
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>ControlResources.zh-CN.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="..\Microsoft.Phone.Controls.Toolkit\LocalizedResources\ControlResources.zh-TW.resx">
+      <Link>LocalizedResources\ControlResources.zh-TW.resx</Link>
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>ControlResources.zh-TW.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="..\Microsoft.Phone.Controls.Toolkit\Properties\Resources.resx">
+      <Link>Properties\Resources.resx</Link>
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="..\Microsoft.Phone.Controls.Toolkit\Transitions\Storyboards\Roll.xaml">
+      <Link>Transitions\Storyboards\Roll.xaml</Link>
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Resource>
+    <Resource Include="..\Microsoft.Phone.Controls.Toolkit\Transitions\Storyboards\RotateOut180Clockwise.xaml">
+      <Link>Transitions\Storyboards\RotateOut180Clockwise.xaml</Link>
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Resource>
+    <Resource Include="..\Microsoft.Phone.Controls.Toolkit\Transitions\Storyboards\RotateOut180CounterClockwise.xaml">
+      <Link>Transitions\Storyboards\RotateOut180CounterClockwise.xaml</Link>
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Resource>
+    <Resource Include="..\Microsoft.Phone.Controls.Toolkit\Transitions\Storyboards\RotateOut90Clockwise.xaml">
+      <Link>Transitions\Storyboards\RotateOut90Clockwise.xaml</Link>
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Resource>
+    <Resource Include="..\Microsoft.Phone.Controls.Toolkit\Transitions\Storyboards\RotateOut90CounterClockwise.xaml">
+      <Link>Transitions\Storyboards\RotateOut90CounterClockwise.xaml</Link>
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Resource>
+    <Resource Include="..\Microsoft.Phone.Controls.Toolkit\Transitions\Storyboards\SlideDownFadeIn.xaml">
+      <Link>Transitions\Storyboards\SlideDownFadeIn.xaml</Link>
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Resource>
+    <Resource Include="..\Microsoft.Phone.Controls.Toolkit\Transitions\Storyboards\SlideUpFadeOut.xaml">
+      <Link>Transitions\Storyboards\SlideUpFadeOut.xaml</Link>
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Resource>
+    <Resource Include="..\Microsoft.Phone.Controls.Toolkit\Transitions\Storyboards\SwivelBackwardIn.xaml">
+      <Link>Transitions\Storyboards\SwivelBackwardIn.xaml</Link>
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Resource>
+    <Resource Include="..\Microsoft.Phone.Controls.Toolkit\Transitions\Storyboards\SwivelBackwardOut.xaml">
+      <Link>Transitions\Storyboards\SwivelBackwardOut.xaml</Link>
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Resource>
+    <Resource Include="..\Microsoft.Phone.Controls.Toolkit\Transitions\Storyboards\RotateIn180Clockwise.xaml">
+      <Link>Transitions\Storyboards\RotateIn180Clockwise.xaml</Link>
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Resource>
+    <Resource Include="..\Microsoft.Phone.Controls.Toolkit\Transitions\Storyboards\RotateIn90Clockwise.xaml">
+      <Link>Transitions\Storyboards\RotateIn90Clockwise.xaml</Link>
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Resource>
+    <Resource Include="..\Microsoft.Phone.Controls.Toolkit\Transitions\Storyboards\RotateIn180CounterClockwise.xaml">
+      <Link>Transitions\Storyboards\RotateIn180CounterClockwise.xaml</Link>
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Resource>
+    <Resource Include="..\Microsoft.Phone.Controls.Toolkit\Transitions\Storyboards\RotateIn90CounterClockwise.xaml">
+      <Link>Transitions\Storyboards\RotateIn90CounterClockwise.xaml</Link>
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Resource>
+    <Resource Include="..\Microsoft.Phone.Controls.Toolkit\Transitions\Storyboards\SlideRightFadeOut.xaml">
+      <Link>Transitions\Storyboards\SlideRightFadeOut.xaml</Link>
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Resource>
+    <Resource Include="..\Microsoft.Phone.Controls.Toolkit\Transitions\Storyboards\SlideRightFadeIn.xaml">
+      <Link>Transitions\Storyboards\SlideRightFadeIn.xaml</Link>
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Resource>
+    <Resource Include="..\Microsoft.Phone.Controls.Toolkit\Transitions\Storyboards\SlideLeftFadeOut.xaml">
+      <Link>Transitions\Storyboards\SlideLeftFadeOut.xaml</Link>
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Resource>
+    <Resource Include="..\Microsoft.Phone.Controls.Toolkit\Transitions\Storyboards\SlideLeftFadeIn.xaml">
+      <Link>Transitions\Storyboards\SlideLeftFadeIn.xaml</Link>
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Resource>
+    <Resource Include="..\Microsoft.Phone.Controls.Toolkit\Transitions\Storyboards\SlideDownFadeOut.xaml">
+      <Link>Transitions\Storyboards\SlideDownFadeOut.xaml</Link>
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Resource>
+    <Resource Include="..\Microsoft.Phone.Controls.Toolkit\Transitions\Storyboards\SlideUpFadeIn.xaml">
+      <Link>Transitions\Storyboards\SlideUpFadeIn.xaml</Link>
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Resource>
+    <Resource Include="..\Microsoft.Phone.Controls.Toolkit\Transitions\Storyboards\SwivelFullScreenOut.xaml">
+      <Link>Transitions\Storyboards\SwivelFullScreenOut.xaml</Link>
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Resource>
+    <Resource Include="..\Microsoft.Phone.Controls.Toolkit\Transitions\Storyboards\SwivelForwardOut.xaml">
+      <Link>Transitions\Storyboards\SwivelForwardOut.xaml</Link>
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Resource>
+    <Resource Include="..\Microsoft.Phone.Controls.Toolkit\Transitions\Storyboards\TurnstileForwardOut.xaml">
+      <Link>Transitions\Storyboards\TurnstileForwardOut.xaml</Link>
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Resource>
+    <Resource Include="..\Microsoft.Phone.Controls.Toolkit\Transitions\Storyboards\TurnstileForwardIn.xaml">
+      <Link>Transitions\Storyboards\TurnstileForwardIn.xaml</Link>
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Resource>
+    <Resource Include="..\Microsoft.Phone.Controls.Toolkit\Transitions\Storyboards\TurnstileBackwardIn.xaml">
+      <Link>Transitions\Storyboards\TurnstileBackwardIn.xaml</Link>
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Resource>
+    <Resource Include="..\Microsoft.Phone.Controls.Toolkit\Transitions\Storyboards\TurnstileBackwardOut.xaml">
+      <Link>Transitions\Storyboards\TurnstileBackwardOut.xaml</Link>
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Resource>
+    <Resource Include="..\Microsoft.Phone.Controls.Toolkit\Transitions\Storyboards\SwivelForwardIn.xaml">
+      <Link>Transitions\Storyboards\SwivelForwardIn.xaml</Link>
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Resource>
+    <Resource Include="..\Microsoft.Phone.Controls.Toolkit\Transitions\Storyboards\SwivelFullScreenIn.xaml">
+      <Link>Transitions\Storyboards\SwivelFullScreenIn.xaml</Link>
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Resource>
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildExtensionsPath)\Microsoft\$(TargetFrameworkIdentifier)\$(TargetFrameworkVersion)\Microsoft.$(TargetFrameworkIdentifier).$(TargetFrameworkVersion).Overrides.targets" />
+  <Import Project="$(MSBuildExtensionsPath)\Microsoft\$(TargetFrameworkIdentifier)\$(TargetFrameworkVersion)\Microsoft.$(TargetFrameworkIdentifier).CSharp.targets" />
+  <ProjectExtensions />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

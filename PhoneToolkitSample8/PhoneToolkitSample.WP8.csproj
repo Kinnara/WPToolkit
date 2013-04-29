@@ -1,0 +1,619 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>10.0.20506</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{6E98A8F0-F831-492B-ADBF-A644F1C84273}</ProjectGuid>
+    <ProjectTypeGuids>{C089C8C0-30E0-4E22-80C0-CE093F111A43};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>PhoneToolkitSample</RootNamespace>
+    <AssemblyName>PhoneToolkitSample8</AssemblyName>
+    <TargetFrameworkIdentifier>WindowsPhone</TargetFrameworkIdentifier>
+    <TargetFrameworkVersion>v8.0</TargetFrameworkVersion>
+    <SilverlightVersion>$(TargetFrameworkVersion)</SilverlightVersion>
+    <SilverlightApplication>true</SilverlightApplication>
+    <SupportedCultures>
+    </SupportedCultures>
+    <XapOutputs>true</XapOutputs>
+    <GenerateSilverlightManifest>true</GenerateSilverlightManifest>
+    <XapFilename>PhoneToolkitSample8_$(Configuration)_$(Platform).xap</XapFilename>
+    <SilverlightManifestTemplate>Properties\AppManifest.xml</SilverlightManifestTemplate>
+    <SilverlightAppEntry>PhoneToolkitSample8.App</SilverlightAppEntry>
+    <ValidateXaml>true</ValidateXaml>
+    <MinimumVisualStudioVersion>11.0</MinimumVisualStudioVersion>
+    <ThrowErrorsInValidation>true</ThrowErrorsInValidation>
+    <ExpressionBlendVersion>5.0.30806.60</ExpressionBlendVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>Bin\Debug</OutputPath>
+    <DefineConstants>TRACE;DEBUG;SILVERLIGHT;WINDOWS_PHONE;WP8</DefineConstants>
+    <NoStdLib>true</NoStdLib>
+    <NoConfig>true</NoConfig>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>Bin\Release</OutputPath>
+    <DefineConstants>TRACE;SILVERLIGHT;WINDOWS_PHONE;WP8</DefineConstants>
+    <NoStdLib>true</NoStdLib>
+    <NoConfig>true</NoConfig>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>Bin\x86\Debug</OutputPath>
+    <DefineConstants>DEBUG;TRACE;SILVERLIGHT;WINDOWS_PHONE</DefineConstants>
+    <NoStdLib>true</NoStdLib>
+    <NoConfig>true</NoConfig>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>Bin\x86\Release</OutputPath>
+    <DefineConstants>TRACE;SILVERLIGHT;WINDOWS_PHONE</DefineConstants>
+    <NoStdLib>true</NoStdLib>
+    <NoConfig>true</NoConfig>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|ARM' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>Bin\ARM\Debug</OutputPath>
+    <DefineConstants>DEBUG;TRACE;SILVERLIGHT;WINDOWS_PHONE</DefineConstants>
+    <NoStdLib>true</NoStdLib>
+    <NoConfig>true</NoConfig>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|ARM' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>Bin\ARM\Release</OutputPath>
+    <DefineConstants>TRACE;SILVERLIGHT;WINDOWS_PHONE</DefineConstants>
+    <NoStdLib>true</NoStdLib>
+    <NoConfig>true</NoConfig>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="..\PhoneToolkitSample\Data\AccentColorNameToBrush.cs">
+      <Link>Data\AccentColorNameToBrush.cs</Link>
+    </Compile>
+    <Compile Include="..\PhoneToolkitSample\Data\AllPeople.cs">
+      <Link>Data\AllPeople.cs</Link>
+    </Compile>
+    <Compile Include="..\PhoneToolkitSample\Data\ColorExtensions.cs">
+      <Link>Data\ColorExtensions.cs</Link>
+    </Compile>
+    <Compile Include="..\PhoneToolkitSample\Data\ConversationObject.cs">
+      <Link>Data\ConversationObject.cs</Link>
+    </Compile>
+    <Compile Include="..\PhoneToolkitSample\Data\DateTimeCollection.cs">
+      <Link>Data\DateTimeCollection.cs</Link>
+    </Compile>
+    <Compile Include="..\PhoneToolkitSample\Data\DateTimeObject.cs">
+      <Link>Data\DateTimeObject.cs</Link>
+    </Compile>
+    <Compile Include="..\PhoneToolkitSample\Data\EmailCollection.cs">
+      <Link>Data\EmailCollection.cs</Link>
+    </Compile>
+    <Compile Include="..\PhoneToolkitSample\Data\EmailObject.cs">
+      <Link>Data\EmailObject.cs</Link>
+    </Compile>
+    <Compile Include="..\PhoneToolkitSample\Data\GroupToBackgroundBrushValueConverter.cs">
+      <Link>Data\GroupToBackgroundBrushValueConverter.cs</Link>
+    </Compile>
+    <Compile Include="..\PhoneToolkitSample\Data\GroupToForegroundBrushValueConverter.cs">
+      <Link>Data\GroupToForegroundBrushValueConverter.cs</Link>
+    </Compile>
+    <Compile Include="..\PhoneToolkitSample\Data\InboxObject.cs">
+      <Link>Data\InboxObject.cs</Link>
+    </Compile>
+    <Compile Include="..\PhoneToolkitSample\Data\LoremIpsum.cs">
+      <Link>Data\LoremIpsum.cs</Link>
+    </Compile>
+    <Compile Include="..\PhoneToolkitSample\Data\LoremIpsumWebsites.cs">
+      <Link>Data\LoremIpsumWebsites.cs</Link>
+    </Compile>
+    <Compile Include="..\PhoneToolkitSample\Data\Movie.cs">
+      <Link>Data\Movie.cs</Link>
+    </Compile>
+    <Compile Include="..\PhoneToolkitSample\Data\MoviesByCategory.cs">
+      <Link>Data\MoviesByCategory.cs</Link>
+    </Compile>
+    <Compile Include="..\PhoneToolkitSample\Data\MoviesInCategory.cs">
+      <Link>Data\MoviesInCategory.cs</Link>
+    </Compile>
+    <Compile Include="..\PhoneToolkitSample\Data\MultilineItem.cs">
+      <Link>Data\MultilineItem.cs</Link>
+    </Compile>
+    <Compile Include="..\PhoneToolkitSample\Data\MultilineItemCollection.cs">
+      <Link>Data\MultilineItemCollection.cs</Link>
+    </Compile>
+    <Compile Include="..\PhoneToolkitSample\Data\PeopleByFirstName.cs">
+      <Link>Data\PeopleByFirstName.cs</Link>
+    </Compile>
+    <Compile Include="..\PhoneToolkitSample\Data\PeopleInGroup.cs">
+      <Link>Data\PeopleInGroup.cs</Link>
+    </Compile>
+    <Compile Include="..\PhoneToolkitSample\Data\Person.cs">
+      <Link>Data\Person.cs</Link>
+    </Compile>
+    <Compile Include="..\PhoneToolkitSample\Data\RandomPeople.cs">
+      <Link>Data\RandomPeople.cs</Link>
+    </Compile>
+    <Compile Include="..\PhoneToolkitSample\Data\Tuple.cs">
+      <Link>Data\Tuple.cs</Link>
+    </Compile>
+    <Compile Include="..\PhoneToolkitSample\Data\UnreadToBrushConverter.cs">
+      <Link>Data\UnreadToBrushConverter.cs</Link>
+    </Compile>
+    <Compile Include="..\PhoneToolkitSample\Extensions.cs">
+      <Link>Extensions.cs</Link>
+    </Compile>
+    <Compile Include="..\PhoneToolkitSample\HeaderedContentControl.cs">
+      <Link>HeaderedContentControl.cs</Link>
+    </Compile>
+    <Compile Include="..\PhoneToolkitSample\Samples\AutoCompleteBoxSample.xaml.cs">
+      <Link>Samples\AutoCompleteBoxSample.xaml.cs</Link>
+      <DependentUpon>AutoCompleteBoxSample.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="..\PhoneToolkitSample\Samples\ContextMenuPositionTest.xaml.cs">
+      <Link>Samples\ContextMenuPositionTest.xaml.cs</Link>
+    </Compile>
+    <Compile Include="..\PhoneToolkitSample\Samples\ContextMenuSample.xaml.cs">
+      <Link>Samples\ContextMenuSample.xaml.cs</Link>
+      <DependentUpon>ContextMenuSample.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="..\PhoneToolkitSample\Samples\CustomMessageBoxSample.xaml.cs">
+      <Link>Samples\CustomMessageBoxSample.xaml.cs</Link>
+      <DependentUpon>CustomMessageBoxSample.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="..\PhoneToolkitSample\Samples\DateTimeConvertersSample.xaml.cs">
+      <Link>Samples\DateTimeConvertersSample.xaml.cs</Link>
+      <DependentUpon>DateTimeConvertersSample.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="..\PhoneToolkitSample\Samples\DateTimePickerSample.xaml.cs">
+      <Link>Samples\DateTimePickerSample.xaml.cs</Link>
+      <DependentUpon>DateTimePickerSample.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="..\PhoneToolkitSample\Samples\ExpanderViewSample.xaml.cs">
+      <Link>Samples\ExpanderViewSample.xaml.cs</Link>
+      <DependentUpon>ExpanderViewSample.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="..\PhoneToolkitSample\Samples\FeatheredTransitionsSample1.xaml.cs">
+      <Link>Samples\FeatheredTransitionsSample1.xaml.cs</Link>
+      <DependentUpon>FeatheredTransitionsSample1.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="..\PhoneToolkitSample\Samples\FeatheredTransitionsSample2.xaml.cs">
+      <Link>Samples\FeatheredTransitionsSample2.xaml.cs</Link>
+      <DependentUpon>FeatheredTransitionsSample2.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="..\PhoneToolkitSample\Samples\HubTileSample.xaml.cs">
+      <Link>Samples\HubTileSample.xaml.cs</Link>
+      <DependentUpon>HubTileSample.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="..\PhoneToolkitSample\Samples\ListPickerSample.xaml.cs">
+      <Link>Samples\ListPickerSample.xaml.cs</Link>
+      <DependentUpon>ListPickerSample.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="..\PhoneToolkitSample\Samples\NavigationTransitionSample1.xaml.cs">
+      <Link>Samples\NavigationTransitionSample1.xaml.cs</Link>
+      <DependentUpon>NavigationTransitionSample1.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="..\PhoneToolkitSample\Samples\NavigationTransitionSample2.xaml.cs">
+      <Link>Samples\NavigationTransitionSample2.xaml.cs</Link>
+      <DependentUpon>NavigationTransitionSample2.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="..\PhoneToolkitSample\Samples\PersonDetail.xaml.cs">
+      <Link>Samples\PersonDetail.xaml.cs</Link>
+      <DependentUpon>PersonDetail.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="..\PhoneToolkitSample\Samples\PhoneTextBoxSample.xaml.cs">
+      <Link>Samples\PhoneTextBoxSample.xaml.cs</Link>
+      <DependentUpon>PhoneTextBoxSample.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="..\PhoneToolkitSample\Samples\RatingControlSample.xaml.cs">
+      <Link>Samples\RatingControlSample.xaml.cs</Link>
+      <DependentUpon>RatingControlSample.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="..\PhoneToolkitSample\Samples\SlideInEffectSample.xaml.cs">
+      <Link>Samples\SlideInEffectSample.xaml.cs</Link>
+      <DependentUpon>SlideInEffectSample.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="..\PhoneToolkitSample\Samples\TiltEffectSample.xaml.cs">
+      <Link>Samples\TiltEffectSample.xaml.cs</Link>
+      <DependentUpon>TiltEffectSample.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="..\PhoneToolkitSample\Samples\ToggleSwitchSample.xaml.cs">
+      <Link>Samples\ToggleSwitchSample.xaml.cs</Link>
+      <DependentUpon>ToggleSwitchSample.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="..\PhoneToolkitSample\Samples\TransitionsSample.xaml.cs">
+      <Link>Samples\TransitionsSample.xaml.cs</Link>
+      <DependentUpon>TransitionsSample.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="..\PhoneToolkitSample\Samples\TurnstileFeatherEffectSample1.xaml.cs">
+      <Link>Samples\TurnstileFeatherEffectSample1.xaml.cs</Link>
+      <DependentUpon>TurnstileFeatherEffectSample1.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="..\PhoneToolkitSample\Samples\TurnstileFeatherEffectSample2.xaml.cs">
+      <Link>Samples\TurnstileFeatherEffectSample2.xaml.cs</Link>
+      <DependentUpon>TurnstileFeatherEffectSample2.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="..\PhoneToolkitSample\Samples\WrapPanelSample.xaml.cs">
+      <Link>Samples\WrapPanelSample.xaml.cs</Link>
+      <DependentUpon>WrapPanelSample.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="App.xaml.cs">
+      <DependentUpon>App.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Data\AlphaKeyGroup.cs" />
+    <Compile Include="Data\Maps\MapsViewModel.cs" />
+    <Compile Include="Data\Maps\Store.cs" />
+    <Compile Include="Data\Maps\StoreList.cs" />
+    <Compile Include="Data\PicturesAlbum.cs" />
+    <Compile Include="LocalizedStrings.cs" />
+    <Compile Include="MainPage.xaml.cs">
+      <DependentUpon>MainPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Resources\AppResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>AppResources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Samples\GestureSample.xaml.cs">
+      <DependentUpon>GestureSample.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Samples\LockablePivotSample.xaml.cs">
+      <DependentUpon>LockablePivotSample.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Samples\LongListMultiSelectorSample.xaml.cs">
+      <DependentUpon>LongListMultiSelectorSample.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Samples\LongListSelectorSample.xaml.cs">
+      <DependentUpon>LongListSelectorSample.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Samples\MapsSample.xaml.cs">
+      <DependentUpon>MapsSample.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Samples\PerformanceProgressBarSample.xaml.cs">
+      <DependentUpon>PerformanceProgressBarSample.xaml</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <ApplicationDefinition Include="App.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </ApplicationDefinition>
+    <Page Include="..\PhoneToolkitSample\Samples\AutoCompleteBoxSample.xaml">
+      <Link>Samples\AutoCompleteBoxSample.xaml</Link>
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="..\PhoneToolkitSample\Samples\ContextMenuPositionTest.xaml">
+      <Link>Samples\ContextMenuPositionTest.xaml</Link>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="..\PhoneToolkitSample\Samples\ContextMenuSample.xaml">
+      <Link>Samples\ContextMenuSample.xaml</Link>
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="..\PhoneToolkitSample\Samples\CustomMessageBoxSample.xaml">
+      <Link>Samples\CustomMessageBoxSample.xaml</Link>
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="..\PhoneToolkitSample\Samples\DateTimeConvertersSample.xaml">
+      <Link>Samples\DateTimeConvertersSample.xaml</Link>
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="..\PhoneToolkitSample\Samples\DateTimePickerSample.xaml">
+      <Link>Samples\DateTimePickerSample.xaml</Link>
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="..\PhoneToolkitSample\Samples\ExpanderViewSample.xaml">
+      <Link>Samples\ExpanderViewSample.xaml</Link>
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="..\PhoneToolkitSample\Samples\FeatheredTransitionsSample1.xaml">
+      <Link>Samples\FeatheredTransitionsSample1.xaml</Link>
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="..\PhoneToolkitSample\Samples\FeatheredTransitionsSample2.xaml">
+      <Link>Samples\FeatheredTransitionsSample2.xaml</Link>
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="..\PhoneToolkitSample\Samples\HubTileSample.xaml">
+      <Link>Samples\HubTileSample.xaml</Link>
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="..\PhoneToolkitSample\Samples\ListPickerSample.xaml">
+      <Link>Samples\ListPickerSample.xaml</Link>
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="..\PhoneToolkitSample\Samples\NavigationTransitionSample1.xaml">
+      <Link>Samples\NavigationTransitionSample1.xaml</Link>
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="..\PhoneToolkitSample\Samples\NavigationTransitionSample2.xaml">
+      <Link>Samples\NavigationTransitionSample2.xaml</Link>
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="..\PhoneToolkitSample\Samples\PersonDetail.xaml">
+      <Link>Samples\PersonDetail.xaml</Link>
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="..\PhoneToolkitSample\Samples\PhoneTextBoxSample.xaml">
+      <Link>Samples\PhoneTextBoxSample.xaml</Link>
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="..\PhoneToolkitSample\Samples\RatingControlSample.xaml">
+      <Link>Samples\RatingControlSample.xaml</Link>
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="..\PhoneToolkitSample\Samples\SlideInEffectSample.xaml">
+      <Link>Samples\SlideInEffectSample.xaml</Link>
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="..\PhoneToolkitSample\Samples\TiltEffectSample.xaml">
+      <Link>Samples\TiltEffectSample.xaml</Link>
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="..\PhoneToolkitSample\Samples\ToggleSwitchSample.xaml">
+      <Link>Samples\ToggleSwitchSample.xaml</Link>
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="..\PhoneToolkitSample\Samples\TransitionsSample.xaml">
+      <Link>Samples\TransitionsSample.xaml</Link>
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="..\PhoneToolkitSample\Samples\TurnstileFeatherEffectSample1.xaml">
+      <Link>Samples\TurnstileFeatherEffectSample1.xaml</Link>
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="..\PhoneToolkitSample\Samples\TurnstileFeatherEffectSample2.xaml">
+      <Link>Samples\TurnstileFeatherEffectSample2.xaml</Link>
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="..\PhoneToolkitSample\Samples\WrapPanelSample.xaml">
+      <Link>Samples\WrapPanelSample.xaml</Link>
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="MainPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Samples\GestureSample.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Samples\LockablePivotSample.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Samples\LongListMultiSelectorSample.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Samples\LongListSelectorSample.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Samples\MapsSample.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Samples\PerformanceProgressBarSample.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Themes\Generic.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Properties\AppManifest.xml" />
+    <None Include="Properties\WMAppManifest.xml">
+      <SubType>Designer</SubType>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="..\PhoneToolkitSample\Data\AccentColorNameToBrush.vb">
+      <Link>Data\AccentColorNameToBrush.vb</Link>
+    </Content>
+    <Content Include="..\PhoneToolkitSample\Data\AllPeople.vb">
+      <Link>Data\AllPeople.vb</Link>
+    </Content>
+    <Content Include="..\PhoneToolkitSample\Data\ColorExtensions.vb">
+      <Link>Data\ColorExtensions.vb</Link>
+    </Content>
+    <Content Include="..\PhoneToolkitSample\Data\GroupToBackgroundBrushValueConverter.vb">
+      <Link>Data\GroupToBackgroundBrushValueConverter.vb</Link>
+    </Content>
+    <Content Include="..\PhoneToolkitSample\Data\GroupToBrushValueConverter.vb">
+      <Link>Data\GroupToBrushValueConverter.vb</Link>
+    </Content>
+    <Content Include="..\PhoneToolkitSample\Data\GroupToForegroundBrushValueConverter.vb">
+      <Link>Data\GroupToForegroundBrushValueConverter.vb</Link>
+    </Content>
+    <Content Include="..\PhoneToolkitSample\Data\loremipsum.txt">
+      <Link>Data\loremipsum.txt</Link>
+    </Content>
+    <Content Include="..\PhoneToolkitSample\Data\LoremIpsum.vb">
+      <Link>Data\LoremIpsum.vb</Link>
+    </Content>
+    <Content Include="..\PhoneToolkitSample\Data\LoremIpsumWebsites.vb">
+      <Link>Data\LoremIpsumWebsites.vb</Link>
+    </Content>
+    <Content Include="..\PhoneToolkitSample\Data\Movie.vb">
+      <Link>Data\Movie.vb</Link>
+    </Content>
+    <Content Include="..\PhoneToolkitSample\Data\MoviesByCategory.vb">
+      <Link>Data\MoviesByCategory.vb</Link>
+    </Content>
+    <Content Include="..\PhoneToolkitSample\Data\MoviesInCategory.vb">
+      <Link>Data\MoviesInCategory.vb</Link>
+    </Content>
+    <Content Include="..\PhoneToolkitSample\Data\PeopleByFirstName.vb">
+      <Link>Data\PeopleByFirstName.vb</Link>
+    </Content>
+    <Content Include="..\PhoneToolkitSample\Data\PeopleInGroup.vb">
+      <Link>Data\PeopleInGroup.vb</Link>
+    </Content>
+    <Content Include="..\PhoneToolkitSample\Data\Person.vb">
+      <Link>Data\Person.vb</Link>
+    </Content>
+    <Content Include="..\PhoneToolkitSample\Data\RandomPeople.vb">
+      <Link>Data\RandomPeople.vb</Link>
+    </Content>
+    <Content Include="..\PhoneToolkitSample\Data\Tuple.vb">
+      <Link>Data\Tuple.vb</Link>
+    </Content>
+    <Content Include="..\PhoneToolkitSample\Images\Beignets.jpg">
+      <Link>Images\Beignets.jpg</Link>
+    </Content>
+    <Content Include="..\PhoneToolkitSample\Images\Copenhagen.jpg">
+      <Link>Images\Copenhagen.jpg</Link>
+    </Content>
+    <Content Include="..\PhoneToolkitSample\Images\Dessert.jpg">
+      <Link>Images\Dessert.jpg</Link>
+    </Content>
+    <Content Include="..\PhoneToolkitSample\Images\Fruits.jpg">
+      <Link>Images\Fruits.jpg</Link>
+    </Content>
+    <Content Include="..\PhoneToolkitSample\Images\Movie.jpg">
+      <Link>Images\Movie.jpg</Link>
+    </Content>
+    <Content Include="..\PhoneToolkitSample\Images\Mürren.jpg">
+      <Link>Images\Mürren.jpg</Link>
+    </Content>
+    <Content Include="..\PhoneToolkitSample\Images\Neuschwanstein.jpg">
+      <Link>Images\Neuschwanstein.jpg</Link>
+    </Content>
+    <Content Include="..\PhoneToolkitSample\Images\Paris.jpg">
+      <Link>Images\Paris.jpg</Link>
+    </Content>
+    <Content Include="..\PhoneToolkitSample\Images\Person.jpg">
+      <Link>Images\Person.jpg</Link>
+    </Content>
+    <Content Include="..\PhoneToolkitSample\Images\Pretzel.jpg">
+      <Link>Images\Pretzel.jpg</Link>
+    </Content>
+    <Content Include="..\PhoneToolkitSample\Images\Search.png">
+      <Link>Images\Search.png</Link>
+    </Content>
+    <Content Include="..\PhoneToolkitSample\Images\Seattle.jpg">
+      <Link>Images\Seattle.jpg</Link>
+    </Content>
+    <Content Include="..\PhoneToolkitSample\Images\Shrimp.jpg">
+      <Link>Images\Shrimp.jpg</Link>
+    </Content>
+    <Content Include="..\PhoneToolkitSample\Images\SteakSandwich.jpg">
+      <Link>Images\SteakSandwich.jpg</Link>
+    </Content>
+    <Content Include="..\PhoneToolkitSample\Images\Venice.jpg">
+      <Link>Images\Venice.jpg</Link>
+    </Content>
+    <Content Include="..\PhoneToolkitSample\Toolkit.Content\ApplicationBar.Cancel.png">
+      <Link>Toolkit.Content\ApplicationBar.Cancel.png</Link>
+    </Content>
+    <Content Include="..\PhoneToolkitSample\Toolkit.Content\ApplicationBar.Check.png">
+      <Link>Toolkit.Content\ApplicationBar.Check.png</Link>
+    </Content>
+    <Content Include="..\PhoneToolkitSample\Toolkit.Content\ApplicationBar.Delete.png">
+      <Link>Toolkit.Content\ApplicationBar.Delete.png</Link>
+    </Content>
+    <Content Include="..\PhoneToolkitSample\Toolkit.Content\ApplicationBar.Select.png">
+      <Link>Toolkit.Content\ApplicationBar.Select.png</Link>
+    </Content>
+    <Content Include="Assets\AlignmentGrid.png" />
+    <Content Include="Assets\ApplicationIcon.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Assets\Tiles\FlipCycleTileLarge.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Assets\Tiles\FlipCycleTileMedium.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Assets\Tiles\FlipCycleTileSmall.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Assets\Tiles\IconicTileMediumLarge.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Assets\Tiles\IconicTileSmall.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\app_bar_me_icon.png" />
+    <Content Include="Images\maps.appbar.directions.dark.png" />
+    <Content Include="SplashScreenImage.jpg" />
+    <Content Include="Toolkit.Content\ApplicationBar.Upload.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\AppResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>AppResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Microsoft.Phone.Controls.Toolkit.WP8\Microsoft.Phone.Controls.Toolkit.WP8.csproj">
+      <Project>{486642F0-AB94-4F28-B49C-106CA3134239}</Project>
+      <Name>Microsoft.Phone.Controls.Toolkit.WP8</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.Phone.Controls, Version=8.0.0.0, Culture=neutral, PublicKeyToken=24eec0d8c86cda1e, processorArchitecture=MSIL" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Samples\icons\" />
+  </ItemGroup>
+  <Import Project="$(MSBuildExtensionsPath)\Microsoft\$(TargetFrameworkIdentifier)\$(TargetFrameworkVersion)\Microsoft.$(TargetFrameworkIdentifier).$(TargetFrameworkVersion).Overrides.targets" />
+  <Import Project="$(MSBuildExtensionsPath)\Microsoft\$(TargetFrameworkIdentifier)\$(TargetFrameworkVersion)\Microsoft.$(TargetFrameworkIdentifier).CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+  <ProjectExtensions />
+</Project>
