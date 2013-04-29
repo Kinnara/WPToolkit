@@ -1597,7 +1597,7 @@
         <Setter Property="SelectionBackground" Value="{StaticResource PhoneAccentBrush}"/>
         <Setter Property="SelectionForeground" Value="{StaticResource PhoneTextBoxSelectionForegroundBrush}"/>
         <Setter Property="BorderThickness" Value="{StaticResource PhoneBorderThickness}"/>
-        <Setter Property="Padding" Value="{StaticResource PhoneBorderThickness}"/>
+        <Setter Property="Padding" Value="2,0,2,4"/>
 
         <Setter Property="Template">
             <Setter.Value>
@@ -1627,6 +1627,9 @@
                                         <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="BorderBrush" Storyboard.TargetName="TextBorder">
                                             <DiscreteObjectKeyFrame KeyTime="0" Value="Transparent" />
                                         </ObjectAnimationUsingKeyFrames>
+                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="BorderThickness" Storyboard.TargetName="TextBorder">
+                                            <DiscreteObjectKeyFrame KeyTime="0" Value="0" />
+                                        </ObjectAnimationUsingKeyFrames>
                                         <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Margin" Storyboard.TargetName="TextBorder">
                                             <DiscreteObjectKeyFrame KeyTime="0" Value="0" />
                                         </ObjectAnimationUsingKeyFrames>
@@ -1644,7 +1647,7 @@
                                 <VisualState x:Name="Focused">
                                     <Storyboard>
                                         <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Background" Storyboard.TargetName="HintBorder">
-                                            <DiscreteObjectKeyFrame KeyTime="0" Value="white"/>
+                                            <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource PhoneTextBoxEditBackgroundBrush}"/>
                                         </ObjectAnimationUsingKeyFrames>
                                         <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="BorderBrush" Storyboard.TargetName="HintBorder">
                                             <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource PhoneTextBoxEditBorderBrush}"/>
@@ -1744,7 +1747,7 @@
                                                 Background="Transparent"
                                                 HorizontalAlignment="Left"
                                                 VerticalAlignment="Center"
-                                                Margin="3,0,3,0"
+                                                Margin="7,-2,7,2"
                                                 Visibility="{TemplateBinding ActualHintVisibility}"/>
                                 <ContentControl x:Name="ContentElement"
                                                 BorderThickness="0" 
@@ -1768,6 +1771,7 @@
                                      FontFamily="{TemplateBinding FontFamily}"
                                      SelectionForeground="{TemplateBinding SelectionForeground}"
                                      SelectionBackground="{TemplateBinding SelectionBackground}"
+                                     Padding="{TemplateBinding Padding}"
                                      TextAlignment="{TemplateBinding TextAlignment}"
                                      TextWrapping="{TemplateBinding TextWrapping}"
                                      Text="{TemplateBinding Text}"
