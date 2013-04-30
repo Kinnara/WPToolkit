@@ -657,8 +657,8 @@
                                     BorderThickness="{TemplateBinding BorderThickness}">
                                 <UserControl x:Name="UserControl" Foreground="{TemplateBinding Foreground}">
                                     <StackPanel>
-                                        <TextBlock x:Name="MultipleSelectionModeSummary" Margin="8 8 0 8" />
-                                        <Canvas x:Name="ItemsPresenterHost" MinHeight="46">
+                                        <TextBlock x:Name="MultipleSelectionModeSummary" Margin="8 2 8 6" />
+                                        <Canvas x:Name="ItemsPresenterHost" MinHeight="42">
                                             <ItemsPresenter x:Name="ItemsPresenter">
                                                 <ItemsPresenter.RenderTransform>
                                                     <TranslateTransform x:Name="ItemsPresenterTranslateTransform"/>
@@ -678,7 +678,7 @@
     <Style TargetType="controls:ListPickerItem">
         <Setter Property="Background" Value="Transparent"/>
         <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
-        <Setter Property="Padding" Value="8 10"/>
+        <Setter Property="Padding" Value="8 12 8 16"/>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="controls:ListPickerItem">

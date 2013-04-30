@@ -49,7 +49,7 @@ namespace Microsoft.Phone.Controls
         /// <summary>
         /// In Mango, the size of list pickers in expanded mode was given extra offset.
         /// </summary>
-        private const double NormalModeOffset = 4;
+        private const double NormalModeOffset = 10;
 
         private readonly DoubleAnimation _heightAnimation = new DoubleAnimation();
         private readonly DoubleAnimation _translateAnimation = new DoubleAnimation();
@@ -459,7 +459,7 @@ namespace Microsoft.Phone.Controls
         }
 
         /// <summary>
-        /// Gets or sets the Uri to use for loading the ListPickerPage instance when the control is tapped.
+        /// Gets or sets the Uri to use for loading the IListPickerPage instance when the control is tapped.
         /// </summary>
         public Uri PickerPageUri
         {
