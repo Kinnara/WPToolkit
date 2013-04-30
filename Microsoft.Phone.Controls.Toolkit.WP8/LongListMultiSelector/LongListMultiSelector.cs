@@ -21,6 +21,7 @@ namespace Microsoft.Phone.Controls
     /// Extension of the standard LongListSelector control which allows multiple selection of items
     /// </summary>
     [StyleTypedProperty(Property = "ItemContainerStyle", StyleTargetType = typeof(LongListMultiSelectorItem))]
+    [StyleTypedProperty(Property = "JumpListStyle", StyleTargetType = typeof(LongListSelector))]
     [TemplatePart(Name = InnerSelectorName, Type = typeof(LongListSelector))]
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Multi")]
     public class LongListMultiSelector : Control
@@ -614,6 +615,7 @@ namespace Microsoft.Phone.Controls
                     if (llItem != null)
                     {
                         llItem.IsSelectedChanged -= OnLongListMultiSelectorItemIsSelectedChanged;
+                        llItem.ClearValue(TiltEffect.SuppressTiltProperty);
 
                         _realizedItems.Remove(llItem.WR);
                     }
@@ -686,6 +688,11 @@ namespace Microsoft.Phone.Controls
                         llItem.IsSelectedChanged += OnLongListMultiSelectorItemIsSelectedChanged;
                         llItem.GotoState(IsSelectionEnabled ? LongListMultiSelectorItem.State.Opened : LongListMultiSelectorItem.State.Closed);
 
+                        if (LayoutMode == LongListSelectorLayoutMode.List)
+                        {
+                            TiltEffect.SetSuppressTilt(llItem, true);
+                        }
+
                         _realizedItems.Add(llItem.WR);
                     }
                 }
@@ -711,7 +718,10 @@ namespace Microsoft.Phone.Controls
                 {
                     if (item.IsSelected)
                     {
-                        SelectedItems.Add(content);
+                        if (!SelectedItems.Contains(content))
+                        {
+                            SelectedItems.Add(content);
+                        }
                     }
                     else
                     {

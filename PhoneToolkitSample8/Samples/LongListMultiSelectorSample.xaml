@@ -20,30 +20,31 @@
     FontSize="{StaticResource PhoneFontSizeNormal}"
     Foreground="{StaticResource PhoneForegroundBrush}"
     SupportedOrientations="Portrait"  Orientation="Portrait"
-    shell:SystemTray.IsVisible="True">
+    shell:SystemTray.IsVisible="True"
+    toolkit:TiltEffect.IsTiltEnabled="True">
 
     <phone:PhoneApplicationPage.Resources>
         <!-- Resources for Email LongListMultiSelector -->
         <data:UnreadToBrushConverter x:Key="UnreadToBrushConverter"/>
         <data:EmailCollection x:Key="EmailCollection"/>
         <DataTemplate x:Key="EmailItemTemplate">
-            <StackPanel Margin="0,-14,0,24" Tap="OnItemContentTap" >
+            <StackPanel Margin="24,0,0,18" Tap="OnItemContentTap" >
                 <TextBlock Text="{Binding Sender}" 
-                                       Margin="0,0,0,-4"
-                                       FontSize="{StaticResource PhoneFontSizeExtraLarge}" 
+                                       Margin="0,0,0,-5"
+                                       FontSize="37.333" 
                                        FontFamily="{StaticResource PhoneFontFamilySemiLight}"/>
                 <TextBlock Text="{Binding Subject}"
-                                       Margin="0,0,0,-4"
+                                       Margin="0,0,0,-3"
                                        Foreground="{Binding Unread, Converter={StaticResource UnreadToBrushConverter}}"
                                        FontSize="{StaticResource PhoneFontSizeNormal}" 
                                        FontFamily="{StaticResource PhoneFontFamilySemiBold}"/>
                 <TextBlock Text="{Binding Body}"
-                                       Foreground="{StaticResource PhoneSubtleBrush}"
+                                       Foreground="{StaticResource PhoneTextMidContrastBrush}"
                                        FontSize="{StaticResource PhoneFontSizeNormal}"/>
             </StackPanel>
         </DataTemplate>
         <DataTemplate x:Key="EmailItemInfoTemplate">
-            <Border Width="74" Margin="0,9,24,0">
+            <Border Width="74" Margin="0,18,24,0">
                 <TextBlock Text="{Binding Time}"
                                        HorizontalAlignment="Right"/>
             </Border>
@@ -55,16 +56,17 @@
         <data:PeopleByFirstName x:Key="buddies"/>
         <Style TargetType="phone:LongListSelector" x:Key="BuddiesJumpListStyle">
             <Setter Property="LayoutMode" Value="Grid"/>
-            <Setter Property="GridCellSize" Value="113,113"/>
+            <Setter Property="GridCellSize" Value="111,111"/>
+            <Setter Property="Padding" Value="18,13,0,0"/>
+            <Setter Property="toolkit:TiltEffect.IsTiltEnabled" Value="True"/>
             <Setter Property="ItemTemplate">
                 <Setter.Value>
                     <DataTemplate>
                         <Border Background="{Binding Converter={StaticResource GroupBackground}}" 
                                                 Width="99" Height="99" Margin="6">
                             <TextBlock Text="{Binding Key}" 
-                                                       FontFamily="{StaticResource PhoneFontFamilySemiBold}"
-                                                       FontSize="48"
-                                                       Margin="8,0,0,0"
+                                                       Style="{StaticResource JumpListAlphabetStyle}"
+                                                       Margin="10,0,0,0"
                                                        Foreground="{Binding Converter={StaticResource GroupForeground}}"                                        
                                                        VerticalAlignment="Bottom"/>
                         </Border>
@@ -73,60 +75,63 @@
             </Setter>
         </Style>
         <DataTemplate x:Key="BuddiesGroupHeaderTemplate">
-            <Border Background="Transparent" Margin="12,8,0,8">
+            <Border Background="Transparent" Padding="24,0,0,12">
                 <Border Background="{StaticResource PhoneAccentBrush}" 	
-                                        Padding="8,0,0,0" Width="62" Height="62" 				 
+                                        Width="62" Height="62" 				 
                                         HorizontalAlignment="Left">
                     <TextBlock Text="{Binding Key}" 
+                                               Style="{StaticResource LongListSelectorGroupHeaderLetterTileStyle}"
                                                Foreground="#FFFFFF" 
-                                               FontSize="48"
-                                               FontFamily="{StaticResource PhoneFontFamilySemiLight}"
                                                HorizontalAlignment="Left"
-                                               VerticalAlignment="Bottom"/>
+                                               VerticalAlignment="Bottom"
+                                               Margin="5,0,0,1"/>
                 </Border>
             </Border>
         </DataTemplate>
         <DataTemplate x:Key="BuddiesItemTemplate">
-            <Grid Margin="12,8,0,8">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="Auto"/>
-                    <ColumnDefinition Width="*"/>
-                </Grid.ColumnDefinitions>
-                <Image Width="110" Height="150" Source="{Binding ImageUrl}" VerticalAlignment="Top"/>
-                <StackPanel Grid.Column="1" VerticalAlignment="Top">
-                    <TextBlock Text="{Binding FullName}" Style="{StaticResource PhoneTextLargeStyle}" FontFamily="{StaticResource PhoneFontFamilySemiBold}" Margin="12,-12,12,6"/>
-                    <TextBlock Text="{Binding Email}" Style="{StaticResource PhoneTextNormalStyle}" TextWrapping="Wrap" FontFamily="{StaticResource PhoneFontFamilySemiBold}"/>
-                    <StackPanel Orientation="Horizontal">
-                        <TextBlock Text="Mobile:" Style="{StaticResource PhoneTextSmallStyle}"/>
-                        <TextBlock Text="{Binding Mobile}" Style="{StaticResource PhoneTextSmallStyle}" FontFamily="{StaticResource PhoneFontFamilySemiBold}"/>
+            <Border Background="Transparent">
+                <Grid Margin="24,0,0,12">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Image Width="110" Height="150" Source="{Binding ImageUrl}" VerticalAlignment="Top"/>
+                    <StackPanel Grid.Column="1" VerticalAlignment="Top">
+                        <TextBlock Text="{Binding FullName}" Style="{StaticResource PhoneTextLargeStyle}" FontFamily="{StaticResource PhoneFontFamilySemiBold}" Margin="12,-12,12,6"/>
+                        <TextBlock Text="{Binding Email}" Style="{StaticResource PhoneTextNormalStyle}" TextWrapping="Wrap" FontFamily="{StaticResource PhoneFontFamilySemiBold}"/>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="Mobile:" Style="{StaticResource PhoneTextSmallStyle}"/>
+                            <TextBlock Text="{Binding Mobile}" Style="{StaticResource PhoneTextSmallStyle}" FontFamily="{StaticResource PhoneFontFamilySemiBold}"/>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="Home:" Style="{StaticResource PhoneTextSmallStyle}"/>
+                            <TextBlock Text="{Binding Home}" Style="{StaticResource PhoneTextSmallStyle}" FontFamily="{StaticResource PhoneFontFamilySemiBold}"/>
+                        </StackPanel>
                     </StackPanel>
-                    <StackPanel Orientation="Horizontal">
-                        <TextBlock Text="Home:" Style="{StaticResource PhoneTextSmallStyle}"/>
-                        <TextBlock Text="{Binding Home}" Style="{StaticResource PhoneTextSmallStyle}" FontFamily="{StaticResource PhoneFontFamilySemiBold}"/>
-                    </StackPanel>
-                </StackPanel>
-            </Grid>
+                </Grid>
+            </Border>
         </DataTemplate>
 
 
         <!-- Resources for Pictures LongListMultiSelector -->
         <data:PicturesAlbum x:Key="PicturesAlbum"/>
         <DataTemplate x:Key="PictureItemTemplate">
-            <Grid Margin="1" Tap="OnPictureItemTap">
+            <Grid Tap="OnPictureItemTap">
                 <Image Source="{Binding Url}" Stretch="UniformToFill"/>
-                <TextBlock Text="{Binding City}" VerticalAlignment="Bottom" HorizontalAlignment="Center"/>
+                <TextBlock Text="{Binding City}" VerticalAlignment="Bottom" HorizontalAlignment="Left"
+                           FontFamily="{StaticResource PhoneFontFamilySemiBold}" Foreground="White" Margin="12,0,0,8"/>
             </Grid>
         </DataTemplate>
 
         <!-- Resources for Databound LongListSelector-->
         <DataTemplate x:Key="BuddiesGridTemplate">
-            <Grid Margin="1" Width="100" Height="100">
+            <Grid Width="99" Height="99">
                 <Image Source="{Binding ImageUrl}" Stretch="UniformToFill"/>
                 <Border
                     VerticalAlignment="Bottom"
                     HorizontalAlignment="Stretch"
                     Background="#C0808080"
-                    >
+                    Margin="0,0,0,3">
                     <TextBlock Text="{Binding FullName}"
                                FontSize="12"
                                    TextTrimming="WordEllipsis"
@@ -167,21 +172,25 @@
                      x:Name="SamplePivot"
                      SelectionChanged="OnPivotSelectionChanged">
 
-            <phone:PivotItem x:Name="MultiselectLbxItem" Header="Multiselect Lbx">
+            <phone:PivotItem x:Name="MultiselectLbxItem" Header="multiselect lbx">
                 <toolkit:LongListMultiSelector x:Name="EmailList" 
-                                                Margin="0,14,-12,0"
+                                                Margin="-12,0"
                                                 ItemsSource="{StaticResource EmailCollection}"
                                                 LayoutMode="List"
                                                 SelectionChanged="OnEmailListSelectionChanged"
                                                 IsSelectionEnabledChanged="OnEmailListIsSelectionEnabledChanged"
+                                                ItemRealized="OnEmailListItemRealized"
                                                 ItemTemplate="{StaticResource EmailItemTemplate}"
-                                                ItemInfoTemplate="{StaticResource EmailItemInfoTemplate}"
-            />
+                                                ItemInfoTemplate="{StaticResource EmailItemInfoTemplate}">
+                    <toolkit:LongListMultiSelector.ListFooter>
+                        <Rectangle Height="95"/>
+                    </toolkit:LongListMultiSelector.ListFooter>
+                </toolkit:LongListMultiSelector>
             </phone:PivotItem>
 
-            <phone:PivotItem x:Name="BuddiesPivotItem" Header="Std longlistmultiselector">
+            <phone:PivotItem x:Name="BuddiesPivotItem" Header="std longlistmultiselector">
                 <toolkit:LongListMultiSelector x:Name="buddies" Background="Transparent"
-                                                Margin="0,-8,0,0"
+                                                Margin="-12,-8,-12,0"
                                                 ItemsSource="{StaticResource buddies}"
                                                 LayoutMode="List"
                                                 IsGroupingEnabled="True"
@@ -192,11 +201,12 @@
             />
             </phone:PivotItem>
 
-            <phone:PivotItem x:Name="GridModeItem" Header="Grid mode">
+            <phone:PivotItem x:Name="GridModeItem" Header="grid mode">
                 <toolkit:LongListMultiSelector x:Name="GridSelector"
+                                               Margin="-12,0"
                                                ItemsSource="{StaticResource PicturesAlbum}"
                                                IsGroupingEnabled="False"
-                                               GridCellSize="210,180"
+                                               GridCellSize="222,222"
                                                LayoutMode="Grid"
                                                HideEmptyGroups="True"
                                                ItemTemplate="{StaticResource PictureItemTemplate}"
@@ -205,8 +215,8 @@
                 />
             </phone:PivotItem>
 
-            <phone:PivotItem x:Name="DataboundPivotItem" Header="Databinding">
-                <Grid>
+            <phone:PivotItem x:Name="DataboundPivotItem" Header="databinding">
+                <Grid Margin="12,0,0,0">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto"/>
                         <RowDefinition Height="120"/>
@@ -221,10 +231,11 @@
                                   />
                     <TextBlock Text="All Contacts" Grid.Row="2"/>
                     <toolkit:LongListMultiSelector x:Name="BoundBuddies"
+                        Margin="-24,0,-12,0"
                         Background="Transparent"
                         Grid.Row="3"
                         ItemsSource="{StaticResource buddies}"
-                                                   GridCellSize="104,108"
+                                                   GridCellSize="111,111"
                                                 LayoutMode="Grid"
                         IsGroupingEnabled="True"
                         GroupHeaderTemplate="{StaticResource BuddiesGroupHeaderTemplate}"

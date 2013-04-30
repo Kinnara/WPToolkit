@@ -290,6 +290,9 @@
     <Compile Include="..\Microsoft.Phone.Controls.Toolkit\Input\GestureListener.cs">
       <Link>Input\GestureListener.cs</Link>
     </Compile>
+    <Compile Include="..\Microsoft.Phone.Controls.Toolkit\Primitives\TiltUserControl.cs">
+      <Link>Primitives\TiltUserControl.cs</Link>
+    </Compile>
     <Compile Include="Input\GestureListenerStatic.cs" />
     <Compile Include="..\Microsoft.Phone.Controls.Toolkit\Input\GestureHelperEventArgs.cs">
       <Link>Input\GestureHelperEventArgs.cs</Link>

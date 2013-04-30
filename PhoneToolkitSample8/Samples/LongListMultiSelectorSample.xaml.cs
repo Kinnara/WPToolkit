@@ -12,6 +12,7 @@ using System.ComponentModel;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Media;
 
 namespace PhoneToolkitSample.Samples
 {
@@ -296,6 +297,31 @@ This sample and the sample code demonstrates how to use the new LongListMultiSel
         private void OnEmailListIsSelectionEnabledChanged(object sender, DependencyPropertyChangedEventArgs e)
         {
             SetupEmailApplicationBar();
+        }
+
+        private void OnEmailListItemRealized(object sender, ItemRealizationEventArgs e)
+        {
+            if (e.ItemKind == LongListSelectorItemKind.Item)
+            {
+                int childrenCount = VisualTreeHelper.GetChildrenCount(e.Container);
+                if (childrenCount > 0)
+                {
+                    LongListMultiSelectorItem llItem = VisualTreeHelper.GetChild(e.Container, 0) as LongListMultiSelectorItem;
+                    if (llItem != null)
+                    {
+                        EmailList.ItemRealized -= OnEmailListItemRealized;
+                        EmailList.ItemContainerStyle = new Style(typeof(LongListMultiSelectorItem))
+                        {
+                            BasedOn = llItem.Style,
+                            Setters =
+                            {
+                                new Setter(LongListMultiSelectorItem.HintPanelHeightProperty, 100.0),
+                                new Setter(LongListMultiSelectorItem.SelectBoxMarginProperty, new Thickness(12, -7, 5, 0))
+                            }
+                        };
+                    }
+                }
+            }
         }
 
 

@@ -181,6 +181,21 @@ namespace Microsoft.Phone.Controls
             }
         }
 
+        /// <summary>
+        /// Gets or sets the margin of the select box.
+        /// </summary>
+        public Thickness SelectBoxMargin
+        {
+            get { return (Thickness)GetValue(SelectBoxMarginProperty); }
+            set { SetValue(SelectBoxMarginProperty, value); }
+        }
+
+        /// <summary>
+        /// Identifies the SelectBoxMargin dependency property.
+        /// </summary>
+        public static readonly DependencyProperty SelectBoxMarginProperty =
+            DependencyProperty.Register("SelectBoxMargin", typeof(Thickness), typeof(LongListMultiSelectorItem), null);
+
         #endregion
 
         #region Events
