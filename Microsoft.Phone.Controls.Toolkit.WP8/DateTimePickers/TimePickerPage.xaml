@@ -23,7 +23,6 @@
 
     <primitives:DateTimePickerPageBase.Resources>
         <controls:DateTimePickerResources x:Key="DateTimePickerResources"/>
-        <ExponentialEase x:Key="Ease" EasingMode="EaseIn"/>
     </primitives:DateTimePickerPageBase.Resources>
 
     <Grid Background="{StaticResource PhoneChromeBrush}">
@@ -34,9 +33,13 @@
                         <DoubleAnimation
                             Storyboard.TargetName="PlaneProjection"
                             Storyboard.TargetProperty="RotationX"
-                            From="-50"
+                            From="-45"
                             To="0"
-                            Duration="0:0:0.2"/>
+                            Duration="0:0:0.35">
+                            <DoubleAnimation.EasingFunction>
+                                <ExponentialEase EasingMode="EaseOut" Exponent="6"/>
+                            </DoubleAnimation.EasingFunction>
+                        </DoubleAnimation>
                     </Storyboard>
                 </VisualState>
                 <VisualState x:Name="Closed">
@@ -45,8 +48,11 @@
                             Storyboard.TargetName="PlaneProjection"
                             Storyboard.TargetProperty="RotationX"
                             To="90"
-                            Duration="0:0:0.2"
-                            EasingFunction="{StaticResource Ease}"/>
+                            Duration="0:0:0.25">
+                            <DoubleAnimation.EasingFunction>
+                                <ExponentialEase EasingMode="EaseIn" Exponent="15"/>
+                            </DoubleAnimation.EasingFunction>
+                        </DoubleAnimation>
                     </Storyboard>
                 </VisualState>
             </VisualStateGroup>
@@ -73,7 +79,7 @@
             FontFamily="{StaticResource PhoneFontFamilySemiBold}"
             FontSize="{StaticResource PhoneFontSizeMedium}"
             Foreground="{StaticResource PhoneForegroundBrush}"
-            Margin="24,16,24,24"/>
+            Margin="24,16,24,17"/>
         <!-- LoopingSelectors -->
         <Grid
             Grid.Row="2"
