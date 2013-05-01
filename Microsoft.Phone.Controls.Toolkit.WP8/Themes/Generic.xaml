@@ -2028,4 +2028,111 @@
         <Setter Property="Foreground" Value="{StaticResource PhoneAccentBrush}" />
         <Setter Property="FontSize" Value="18" />
     </Style>
+
+    <Style TargetType="controls:ListViewItem">
+        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="BorderThickness" Value="0" />
+        <Setter Property="BorderBrush" Value="Transparent" />
+        <Setter Property="Padding" Value="0" />
+        <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+        <Setter Property="VerticalContentAlignment" Value="Stretch"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="controls:ListViewItem">
+                    <Border x:Name="LayoutRoot" Background="{TemplateBinding Background}" HorizontalAlignment="{TemplateBinding HorizontalAlignment}" VerticalAlignment="{TemplateBinding VerticalAlignment}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}">
+                        <VisualStateManager.VisualStateGroups>
+                            <VisualStateGroup x:Name="CommonStates">
+                                <VisualState x:Name="Normal"/>
+                                <VisualState x:Name="Disabled">
+                                    <Storyboard>
+                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="LayoutRoot" Storyboard.TargetProperty="Background">
+                                            <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource TransparentBrush}"/>
+                                        </ObjectAnimationUsingKeyFrames>
+                                        <DoubleAnimation Storyboard.TargetName="ContentContainer" Storyboard.TargetProperty="Opacity" Duration="0" To=".5" />
+                                    </Storyboard>
+                                </VisualState>
+                            </VisualStateGroup>
+                            <VisualStateGroup x:Name="SelectionStates">
+                                <VisualState x:Name="Unselected"/>
+                                <VisualState x:Name="Selected">
+                                    <Storyboard>
+                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="ContentContainer" Storyboard.TargetProperty="Foreground">
+                                            <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource PhoneAccentBrush}"/>
+                                        </ObjectAnimationUsingKeyFrames>
+                                    </Storyboard>
+                                </VisualState>
+                            </VisualStateGroup>
+                        </VisualStateManager.VisualStateGroups>
+                        <ContentControl x:Name="ContentContainer" VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}" HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}" 
+                                        Margin="{TemplateBinding Padding}" Content="{TemplateBinding Content}" ContentTemplate="{TemplateBinding ContentTemplate}" Foreground="{TemplateBinding Foreground}" />
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style TargetType="controls:ListView">
+        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="Foreground" Value="{StaticResource PhoneForegroundBrush}"/>
+        <Setter Property="BorderThickness" Value="0"/>
+        <Setter Property="BorderBrush" Value="Transparent"/>
+        <Setter Property="Padding" Value="0"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="controls:ListView">
+                    <Border Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Padding="{TemplateBinding Padding}">
+                        <phone:LongListSelector
+                            x:Name="Selector"
+                            Foreground="{TemplateBinding Foreground}"
+                            ListHeaderTemplate="{TemplateBinding ListHeaderTemplate}"
+                            ListHeader="{TemplateBinding ListHeader}"
+                            ListFooterTemplate="{TemplateBinding ListFooterTemplate}"
+                            ListFooter="{TemplateBinding ListFooter}"
+                            GroupHeaderTemplate="{TemplateBinding GroupHeaderTemplate}"
+                            GroupFooterTemplate="{TemplateBinding GroupFooterTemplate}"
+                            LayoutMode="{TemplateBinding LayoutMode}"
+                            GridCellSize="{TemplateBinding GridCellSize}"
+                            HideEmptyGroups="{TemplateBinding HideEmptyGroups}"
+                            IsGroupingEnabled="{TemplateBinding IsGroupingEnabled}"
+                            JumpListStyle="{TemplateBinding JumpListStyle}">
+                            <phone:LongListSelector.Template>
+                                <ControlTemplate TargetType="phone:LongListSelector">
+                                    <Grid Background="{TemplateBinding Background}">
+                                        <VisualStateManager.VisualStateGroups>
+                                            <VisualStateGroup x:Name="ScrollStates">
+                                                <VisualStateGroup.Transitions>
+                                                    <VisualTransition GeneratedDuration="00:00:00.5"/>
+                                                </VisualStateGroup.Transitions>
+                                                <VisualState x:Name="Scrolling">
+                                                    <Storyboard>
+                                                        <DoubleAnimation Storyboard.TargetName="VerticalScrollBar" Storyboard.TargetProperty="Opacity" To="1" Duration="0"/>
+                                                    </Storyboard>
+                                                </VisualState>
+                                                <VisualState x:Name="NotScrolling">
+                                                </VisualState>
+                                            </VisualStateGroup>
+                                        </VisualStateManager.VisualStateGroups>
+
+                                        <Grid Margin="{TemplateBinding Padding}">
+                                            <ViewportControl
+                                                x:Name="ViewportControl"
+                                                VerticalAlignment="Top"
+                                                HorizontalContentAlignment="Stretch"
+                                                />
+                                            <ScrollBar x:Name="VerticalScrollBar" Opacity="0" Margin="0,0,1,0" Orientation="Vertical" HorizontalAlignment="Right"/>
+                                        </Grid>
+                                    </Grid>
+                                </ControlTemplate>
+                            </phone:LongListSelector.Template>
+                            <phone:LongListSelector.ItemTemplate>
+                                <DataTemplate>
+                                    <controls:ListViewItem x:Name="LLSItem" Content="{Binding}"/>
+                                </DataTemplate>
+                            </phone:LongListSelector.ItemTemplate>
+                        </phone:LongListSelector>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
 </ResourceDictionary>

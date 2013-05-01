@@ -480,6 +480,9 @@
     <Compile Include="ListPicker\ListPickerPage.xaml.cs">
       <DependentUpon>ListPickerPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="ListView\ItemClickEventArgs.cs" />
+    <Compile Include="ListView\ListView.cs" />
+    <Compile Include="ListView\ListViewItem.cs" />
     <Compile Include="LongListMultiSelector\LongListMultiSelector.cs" />
     <Compile Include="LongListMultiSelector\LongListMultiSelectorItem.cs" />
     <Compile Include="Maps\CollectionChangeListener.cs" />

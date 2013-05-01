@@ -135,8 +135,6 @@
         </Style>
 
         <Style TargetType="phone:LongListSelector">
-            <Setter Property="Background" Value="Transparent"/>
-            <Setter Property="Foreground" Value="{StaticResource PhoneForegroundBrush}"/>
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="phone:LongListSelector">
