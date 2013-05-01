@@ -172,7 +172,7 @@
 
             <controls:PivotItem Header="sizes">
                 <ScrollViewer ScrollViewer.VerticalScrollBarVisibility="Hidden">
-                    <Grid Width="432" HorizontalAlignment="Left" Margin="0,0,0,12">
+                    <Grid Width="444" HorizontalAlignment="Left" Margin="0,0,0,12">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition/>
                             <ColumnDefinition/>

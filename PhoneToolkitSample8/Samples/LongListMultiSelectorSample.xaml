@@ -20,8 +20,7 @@
     FontSize="{StaticResource PhoneFontSizeNormal}"
     Foreground="{StaticResource PhoneForegroundBrush}"
     SupportedOrientations="Portrait"  Orientation="Portrait"
-    shell:SystemTray.IsVisible="True"
-    toolkit:TiltEffect.IsTiltEnabled="True">
+    shell:SystemTray.IsVisible="True">
 
     <phone:PhoneApplicationPage.Resources>
         <!-- Resources for Email LongListMultiSelector -->

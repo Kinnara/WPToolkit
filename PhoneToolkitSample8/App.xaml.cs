@@ -35,6 +35,8 @@ namespace PhoneToolkitSample8
             // Language display initialization
             InitializeLanguage();
 
+            TiltEffect.SetIsTiltEnabled(RootFrame, true);
+
             // Show graphics profiling information while debugging.
             if (Debugger.IsAttached)
             {

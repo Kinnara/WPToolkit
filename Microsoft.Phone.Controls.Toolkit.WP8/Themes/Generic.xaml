@@ -1001,14 +1001,14 @@
                                     <Border Grid.Row="0"                                        
                                         Background="{TemplateBinding Background}">
                                         <TextBlock VerticalAlignment="Bottom"
-                                               Margin="10,0,0,6"
+                                               Margin="11,0,0,6"
                                                Text="{TemplateBinding Title}"
                                                FontFamily="{StaticResource PhoneFontFamilyNormal}"
-                                               FontSize="41"
+                                               FontSize="{StaticResource PhoneFontSizeLarge}"
                                                Foreground="{TemplateBinding Foreground}"
                                                TextWrapping="NoWrap" 
                                                LineStackingStrategy="BlockLineHeight"
-                                               LineHeight="39">
+                                               LineHeight="32">
                                         </TextBlock>
                                     </Border>
                                     <Grid x:Name="BackPanel"
@@ -1025,7 +1025,7 @@
                                             <PlaneProjection CenterOfRotationY="0.5" RotationX="180"/>
                                         </Grid.Projection>
                                         <TextBlock x:Name="NotificationBlock" Grid.Row="0"
-                                               Margin="8,8,0,6"
+                                               Margin="11,9,0,6"
                                                Text="{TemplateBinding Notification}"
                                                FontFamily="{StaticResource PhoneFontFamilyNormal}"
                                                FontSize="{StaticResource PhoneFontSizeLarge}"
@@ -1034,7 +1034,7 @@
                                                LineStackingStrategy="BlockLineHeight"
                                                LineHeight="32"/>
                                         <TextBlock x:Name="MessageBlock" Grid.Row="0"
-                                               Margin="10,10,10,6"
+                                               Margin="11,7,11,7"
                                                Text="{TemplateBinding Message}"
                                                FontFamily="{StaticResource PhoneFontFamilyNormal}"
                                                FontSize="{StaticResource PhoneFontSizeNormal}"
@@ -1044,7 +1044,7 @@
                                                LineHeight="23.333"/>
                                         <TextBlock x:Name="BackTitleBlock" Grid.Row="1" 
                                                VerticalAlignment="Bottom" 
-                                               Margin="10,0,0,6"
+                                               Margin="11,0,0,7"
                                                FontFamily="{StaticResource PhoneFontFamilySemiBold}"
                                                FontSize="{StaticResource PhoneFontSizeNormal}"
                                                Foreground="{TemplateBinding Foreground}"

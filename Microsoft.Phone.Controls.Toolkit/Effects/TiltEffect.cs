@@ -124,7 +124,8 @@ namespace Microsoft.Phone.Controls
                 typeof(ListBoxItem), 
                 typeof(ListPicker),
                 typeof(MenuItem),
-                typeof(LongListSelector)
+                typeof(LongListSelector),
+                typeof(HubTile)
             };
         }
 
