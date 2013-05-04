@@ -73,7 +73,7 @@
             FontFamily="{StaticResource PhoneFontFamilySemiBold}"
             FontSize="{StaticResource PhoneFontSizeMedium}"
             Foreground="{StaticResource PhoneForegroundBrush}"
-            Margin="24,16,24,24"/>
+            Margin="23,16,0,17"/>
         <!-- LoopingSelectors -->
         <Grid
             Grid.Row="2"

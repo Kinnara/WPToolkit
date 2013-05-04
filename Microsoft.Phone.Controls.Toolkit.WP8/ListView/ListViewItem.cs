@@ -77,6 +77,41 @@ namespace Microsoft.Phone.Controls
             ChangeVisualState(false);
         }
 
+        /// <summary>
+        /// Finds the ListView to which the ListViewItem belongs
+        /// </summary>
+        /// <param name="item"></param>
+        /// <returns></returns>
+        protected static ListView FindContainer(DependencyObject item)
+        {
+            while (item != null)
+            {
+                item = System.Windows.Media.VisualTreeHelper.GetParent(item);
+                ListView listView = item as ListView;
+                if (listView != null)
+                {
+                    return listView;
+                }
+            }
+            return null;
+        }
+
+        /// <summary>
+        /// Called when content is changed. This is a good place to get the style (which depends on the ListView layout)
+        /// because the control template has not yet been expanded
+        /// </summary>
+        /// <param name="oldContent"></param>
+        /// <param name="newContent"></param>
+        protected override void OnContentChanged(object oldContent, object newContent)
+        {
+            ListView listView = FindContainer(this);
+            if (listView != null)
+            {
+                listView.ConfigureItem(this);
+            }
+            base.OnContentChanged(oldContent, newContent);
+        }
+
         private void ChangeVisualState()
         {
             ChangeVisualState(true);

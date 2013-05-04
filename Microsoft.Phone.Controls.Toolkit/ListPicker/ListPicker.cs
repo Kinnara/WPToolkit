@@ -9,6 +9,7 @@ using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.ComponentModel;
 using System.Diagnostics.CodeAnalysis;
+using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
@@ -29,7 +30,6 @@ namespace Microsoft.Phone.Controls
     [TemplatePart(Name = ItemsPresenterPartName, Type = typeof(ItemsPresenter))]
     [TemplatePart(Name = ItemsPresenterTranslateTransformPartName, Type = typeof(TranslateTransform))]
     [TemplatePart(Name = ItemsPresenterHostPartName, Type = typeof(Canvas))]
-    [TemplatePart(Name = MultipleSelectionModeSummaryPartName, Type = typeof(TextBlock))]
     [TemplateVisualState(GroupName = PickerStatesGroupName, Name = PickerStatesNormalStateName)]
     [TemplateVisualState(GroupName = PickerStatesGroupName, Name = PickerStatesHighlightedStateName)]
     [TemplateVisualState(GroupName = PickerStatesGroupName, Name = PickerStatesDisabledStateName)]
@@ -38,7 +38,6 @@ namespace Microsoft.Phone.Controls
         private const string ItemsPresenterPartName = "ItemsPresenter";
         private const string ItemsPresenterTranslateTransformPartName = "ItemsPresenterTranslateTransform";
         private const string ItemsPresenterHostPartName = "ItemsPresenterHost";
-        private const string MultipleSelectionModeSummaryPartName = "MultipleSelectionModeSummary";
         private const string BorderPartName = "Border";
 
         private const string PickerStatesGroupName = "PickerStates";
@@ -55,6 +54,7 @@ namespace Microsoft.Phone.Controls
         private readonly DoubleAnimation _translateAnimation = new DoubleAnimation();
         private readonly Storyboard _storyboard = new Storyboard();
 
+        private UIElement _root;
         private PhoneApplicationFrame _frame;
         private PhoneApplicationPage _page;
         private FrameworkElement _itemsPresenterHostParent;
@@ -65,40 +65,12 @@ namespace Microsoft.Phone.Controls
         private int _deferredSelectedIndex = -1;
         private object _deferredSelectedItem = null;
 
-        private object _frameContentWhenOpened;
-        private NavigationInTransition _savedNavigationInTransition;
-        private NavigationOutTransition _savedNavigationOutTransition;
-        private IListPickerPage _listPickerPage;
-        private TextBlock _multipleSelectionModeSummary;
         private Border _border;
-
-        /// <summary>
-        /// Whether this list picker has the picker page opened.
-        /// </summary>
-        private bool _hasPickerPageOpen;
 
         /// <summary>
         /// Event that is raised when the selection changes.
         /// </summary>
         public event SelectionChangedEventHandler SelectionChanged;
-
-        /// <summary>
-        /// Gets or sets the delegate, which is called to summarize a list of selections into a string.
-        /// If not implemented, the default summarizing behavior will be used.
-        /// If this delegate is implemented, default summarizing behavior can be achieved by returning
-        /// null instead of a string.
-        /// </summary>
-        public Func<IList, string> SummaryForSelectedItemsDelegate
-        {
-            get { return (Func<IList, string>)GetValue(SummaryForSelectedItemsDelegateProperty); }
-            set { SetValue(SummaryForSelectedItemsDelegateProperty, value); }
-        }
-
-        /// <summary>
-        /// Identifies the SummaryForSelectedItemsDelegate DependencyProperty.
-        /// </summary>
-        public static readonly DependencyProperty SummaryForSelectedItemsDelegateProperty =
-            DependencyProperty.Register("SummaryForSelectedItemsDelegate", typeof(Func<IList, string>), typeof(ListPicker), null);
 
         /// <summary>
         /// Gets or sets the ListPickerMode (ex: Normal/Expanded/Full).
@@ -124,6 +96,12 @@ namespace Microsoft.Phone.Controls
         {
             if ((ListPickerMode.Expanded == oldValue))
             {
+                if (null != _root)
+                {
+                    _root.Tap -= OnRootTap;
+                    _root = null;
+                }
+
                 if (null != _page)
                 {
                     _page.BackKeyPress -= OnPageBackKeyPress;
@@ -132,20 +110,34 @@ namespace Microsoft.Phone.Controls
 
                 if (null != _frame)
                 {
-                    _frame.ManipulationStarted -= OnFrameManipulationStarted;
+                    _frame.Navigated -= OnFrameNavigated;
                     _frame = null;
+                }
+
+                if (null != _itemsPresenterPart)
+                {
+                    _itemsPresenterPart.IsHitTestVisible = false;
                 }
             }
 
             if (ListPickerMode.Expanded == newValue)
             {
+                if (null == _root)
+                {
+                    _root = this.GetVisualAncestors().LastOrDefault();
+                    if (null != _root)
+                    {
+                        _root.AddHandler(TapEvent, new EventHandler<System.Windows.Input.GestureEventArgs>(OnRootTap), true);
+                    }
+                }
+
                 // Hook up to frame if not already done
                 if (null == _frame)
                 {
                     _frame = Application.Current.RootVisual as PhoneApplicationFrame;
                     if (null != _frame)
                     {
-                        _frame.AddHandler(ManipulationStartedEvent, new EventHandler<ManipulationStartedEventArgs>(OnFrameManipulationStarted), true);
+                        _frame.Navigated += OnFrameNavigated;
                     }
                 }
 
@@ -157,18 +149,14 @@ namespace Microsoft.Phone.Controls
                         _page.BackKeyPress += OnPageBackKeyPress;
                     }
                 }
+
+                if (null != _itemsPresenterPart)
+                {
+                    _itemsPresenterPart.IsHitTestVisible = true;
+                }
             }
 
-            if (ListPickerMode.Full == oldValue)
-            {
-                ClosePickerPage();
-            }
-            if (ListPickerMode.Full == newValue)
-            {
-                OpenPickerPage();
-            }
-
-            SizeForAppropriateView(ListPickerMode.Full != oldValue);
+            SizeForAppropriateView(true);
             IsHighlighted = (ListPickerMode.Expanded == newValue);
         }
 
@@ -351,38 +339,6 @@ namespace Microsoft.Phone.Controls
             }
         }
 
-        private static readonly DependencyProperty ShadowItemTemplateProperty =
-            DependencyProperty.Register("ShadowItemTemplate", typeof(DataTemplate), typeof(ListPicker), new PropertyMetadata(null, OnShadowOrFullModeItemTemplateChanged));
-
-        /// <summary>
-        /// Gets or sets the DataTemplate used to display each item when ListPickerMode is set to Full.
-        /// </summary>
-        public DataTemplate FullModeItemTemplate
-        {
-            get { return (DataTemplate)GetValue(FullModeItemTemplateProperty); }
-            set { SetValue(FullModeItemTemplateProperty, value); }
-        }
-
-        /// <summary>
-        /// Identifies the FullModeItemTemplate DependencyProperty.
-        /// </summary>
-        public static readonly DependencyProperty FullModeItemTemplateProperty =
-            DependencyProperty.Register("FullModeItemTemplate", typeof(DataTemplate), typeof(ListPicker), new PropertyMetadata(null, OnShadowOrFullModeItemTemplateChanged));
-
-        private static void OnShadowOrFullModeItemTemplateChanged(DependencyObject o, DependencyPropertyChangedEventArgs e)
-        {
-            ((ListPicker)o).OnShadowOrFullModeItemTemplateChanged(/*(DataTemplate)e.OldValue, (DataTemplate)e.NewValue*/);
-        }
-
-        private void OnShadowOrFullModeItemTemplateChanged(/*DataTemplate oldValue, DataTemplate newValue*/)
-        {
-            // Set ActualFullModeItemTemplate accordingly
-            SetValue(ActualFullModeItemTemplateProperty, FullModeItemTemplate ?? ItemTemplate);
-        }
-
-        private static readonly DependencyProperty ActualFullModeItemTemplateProperty =
-            DependencyProperty.Register("ActualFullModeItemTemplate", typeof(DataTemplate), typeof(ListPicker), null);
-
         /// <summary>
         /// Gets or sets the header of the control.
         /// </summary>
@@ -414,136 +370,6 @@ namespace Microsoft.Phone.Controls
             DependencyProperty.Register("HeaderTemplate", typeof(DataTemplate), typeof(ListPicker), null);
 
         /// <summary>
-        /// Gets or sets the header to use when ListPickerMode is set to Full.
-        /// </summary>
-        public object FullModeHeader
-        {
-            get { return (object)GetValue(FullModeHeaderProperty); }
-            set { SetValue(FullModeHeaderProperty, value); }
-        }
-
-        /// <summary>
-        /// Identifies the FullModeHeader DependencyProperty.
-        /// </summary>
-        public static readonly DependencyProperty FullModeHeaderProperty =
-            DependencyProperty.Register("FullModeHeader", typeof(object), typeof(ListPicker), null);
-
-        /// <summary>
-        /// Gets the maximum number of items for which Expanded mode will be used, 5.
-        /// </summary>
-        public int ItemCountThreshold
-        {
-            get { return (int)GetValue(ItemCountThresholdProperty); }
-            private set { SetValue(ItemCountThresholdProperty, value); }
-        }
-
-        /// <summary>
-        /// Identifies the ItemCountThreshold DependencyProperty.
-        /// </summary>
-        public static readonly DependencyProperty ItemCountThresholdProperty =
-            DependencyProperty.Register("ItemCountThreshold", typeof(int), typeof(ListPicker), new PropertyMetadata(5, OnItemCountThresholdChanged));
-
-        private static void OnItemCountThresholdChanged(DependencyObject o, DependencyPropertyChangedEventArgs e)
-        {
-            ((ListPicker)o).OnItemCountThresholdChanged(/*(int)e.OldValue,*/ (int)e.NewValue);
-        }
-
-        [SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic", Justification = "Following DependencyProperty property changed handler convention.")]
-        [SuppressMessage("Microsoft.Usage", "CA2208:InstantiateArgumentExceptionsCorrectly", Justification = "Providing the DependencyProperty name is preferred here.")]
-        private void OnItemCountThresholdChanged(/*int oldValue,*/ int newValue)
-        {
-            if (newValue < 0)
-            {
-                throw new ArgumentOutOfRangeException("ItemCountThreshold");
-            }
-        }
-
-        /// <summary>
-        /// Gets or sets the Uri to use for loading the IListPickerPage instance when the control is tapped.
-        /// </summary>
-        public Uri PickerPageUri
-        {
-            get { return (Uri)GetValue(PickerPageUriProperty); }
-            set { SetValue(PickerPageUriProperty, value); }
-        }
-
-        /// <summary>
-        /// Identifies the PickerPageUri DependencyProperty.
-        /// </summary>
-        public static readonly DependencyProperty PickerPageUriProperty = DependencyProperty.Register(
-            "PickerPageUri", typeof(Uri), typeof(ListPicker), null);
-
-        /// <summary>
-        /// Gets or sets how the list picker expands when tapped.
-        /// This property has an effect only when SelectionMode is Single.
-        /// When SelectionMode is Multiple, the ExpansionMode will be treated as FullScreenOnly.
-        /// ExpansionAllowed will only expand when the number of items is less than or equalt to ItemCountThreshold
-        /// Single by default.
-        /// </summary>
-        public ExpansionMode ExpansionMode
-        {
-            get { return (ExpansionMode)GetValue(ExpansionModeProperty); }
-            set { SetValue(ExpansionModeProperty, value); }
-        }
-
-        /// <summary>
-        /// Identifies the ExpansionMode DependencyProperty.
-        /// </summary>
-        public static readonly DependencyProperty ExpansionModeProperty = DependencyProperty.Register(
-            "ExpansionMode",
-            typeof(ExpansionMode),
-            typeof(ListPicker),
-            new PropertyMetadata(ExpansionMode.ExpansionAllowed, null)
-            );
-
-        /// <summary>
-        /// Gets or sets the SelectionMode. Extended is treated as Multiple.
-        /// Single by default.
-        /// </summary>
-        public SelectionMode SelectionMode
-        {
-            get { return (SelectionMode)GetValue(SelectionModeProperty); }
-            set { SetValue(SelectionModeProperty, value); }
-        }
-
-        /// <summary>
-        /// Identifies the SelectionMode DependencyProperty.
-        /// </summary>
-        public static readonly DependencyProperty SelectionModeProperty = DependencyProperty.Register(
-            "SelectionMode",
-            typeof(SelectionMode),
-            typeof(ListPicker),
-            new PropertyMetadata(SelectionMode.Single, OnSelectionModeChanged)
-            );
-
-        private static void OnSelectionModeChanged(DependencyObject o, DependencyPropertyChangedEventArgs e)
-        {
-            ((ListPicker)o).OnSelectionModeChanged((SelectionMode)e.NewValue);
-        }
-
-        private void OnSelectionModeChanged(SelectionMode newValue)
-        {
-            // Show/Hide the multiple selection mode summary text block or the items presenter depending on which selection mode chosen
-            if (newValue == SelectionMode.Multiple || newValue == SelectionMode.Extended)
-            {
-                if (_multipleSelectionModeSummary != null && _itemsPresenterHostPart != null)
-                {
-                    _multipleSelectionModeSummary.Visibility = Visibility.Visible;
-                    _itemsPresenterHostPart.Visibility = Visibility.Collapsed;
-                }
-
-            }
-            else
-            {
-                if (_multipleSelectionModeSummary != null && _itemsPresenterHostPart != null)
-                {
-                    _multipleSelectionModeSummary.Visibility = Visibility.Collapsed;
-                    _itemsPresenterHostPart.Visibility = Visibility.Visible;
-                }
-            }
-        }
-
-        /// <summary>
         /// Gets the selected items.
         /// </summary>
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly", Justification="Want to allow this to be bound to.")]
@@ -570,8 +396,6 @@ namespace Microsoft.Phone.Controls
 
         private void OnSelectedItemsChanged(IList oldValue, IList newValue)
         {
-            UpdateSummary(newValue);
-
             // Fire SelectionChanged event
             var handler = SelectionChanged;
             if (null != handler)
@@ -634,10 +458,16 @@ namespace Microsoft.Phone.Controls
 
         private void OnUnloaded(object sender, RoutedEventArgs e)
         {
+            if (null != _root)
+            {
+                _root.Tap -= OnRootTap;
+                _root = null;
+            }
+
             // Unhook any remaining event handlers
             if (null != _frame)
             {
-                _frame.ManipulationStarted -= OnFrameManipulationStarted;
+                _frame.Navigated -= OnFrameNavigated;
                 _frame = null;
             }
         }
@@ -661,7 +491,6 @@ namespace Microsoft.Phone.Controls
             _itemsPresenterTranslateTransformPart = GetTemplateChild(ItemsPresenterTranslateTransformPartName) as TranslateTransform;
             _itemsPresenterHostPart = GetTemplateChild(ItemsPresenterHostPartName) as Canvas;
             _itemsPresenterHostParent = (null != _itemsPresenterHostPart) ? _itemsPresenterHostPart.Parent as FrameworkElement : null;
-            _multipleSelectionModeSummary = GetTemplateChild(MultipleSelectionModeSummaryPartName) as TextBlock;
             _border = GetTemplateChild(BorderPartName) as Border;
 
             if (null != _itemsPresenterHostParent)
@@ -699,8 +528,6 @@ namespace Microsoft.Phone.Controls
                 }
             }
 
-            SetBinding(ShadowItemTemplateProperty, new Binding("ItemTemplate") { Source = this });
-
 
             // Commit deferred SelectedIndex (if any)
             if (-1 != _deferredSelectedIndex)
@@ -714,7 +541,6 @@ namespace Microsoft.Phone.Controls
                 _deferredSelectedItem = null;
             }
 
-            OnSelectionModeChanged(SelectionMode);
             OnSelectedItemsChanged(SelectedItems, SelectedItems);
         }
 
@@ -828,7 +654,7 @@ namespace Microsoft.Phone.Controls
 
             while (null != element)
             {
-                if (_itemsPresenterHostPart == element || _multipleSelectionModeSummary == element || _border == element)
+                if (_itemsPresenterHostPart == element || _border == element)
                 {
                     double Padding = 11.0;
                     return (p.X > 0 && p.Y > 0 - Padding && p.X < _border.RenderSize.Width && p.Y < _border.RenderSize.Height + Padding);
@@ -965,30 +791,15 @@ namespace Microsoft.Phone.Controls
         }
 
         /// <summary>
-        /// Opens the picker for selection either into Expanded or Full mode depending on the picker's state.
+        /// Opens the picker for selection into Expanded mode.
         /// </summary>
         /// <returns>Whether the picker was succesfully opened.</returns>
         public bool Open()
         {
-            if (SelectionMode == SelectionMode.Single)
+            // On interaction, switch to Expanded mode
+            if ((ListPickerMode.Normal == ListPickerMode))
             {
-                // On interaction, switch to Expanded/Full mode
-                if ((ListPickerMode.Normal == ListPickerMode))
-                {
-                    if (ExpansionMode == ExpansionMode.ExpansionAllowed && Items.Count <= ItemCountThreshold)
-                    {
-                        ListPickerMode = ListPickerMode.Expanded;
-                    }
-                    else
-                    {
-                        ListPickerMode = ListPickerMode.Full;
-                    }
-                    return true;
-                }
-            }
-            else
-            {
-                ListPickerMode = ListPickerMode.Full;
+                ListPickerMode = ListPickerMode.Expanded;
                 return true;
             }
 
@@ -1059,9 +870,6 @@ namespace Microsoft.Phone.Controls
                 case ListPickerMode.Expanded:
                     SizeForExpandedMode();
                     break;
-                case ListPickerMode.Full:
-                    // Nothing to do
-                    return;
             }
 
             // Play the height/translation animations
@@ -1136,13 +944,13 @@ namespace Microsoft.Phone.Controls
             }
         }
 
-        private void OnFrameManipulationStarted(object sender, ManipulationStartedEventArgs e)
+        private void OnRootTap(object sender, System.Windows.Input.GestureEventArgs e)
         {
             if (ListPickerMode.Expanded == ListPickerMode)
             {
                 // Manipulation outside an Expanded ListPicker reverts to Normal mode
                 DependencyObject element = e.OriginalSource as DependencyObject;
-                DependencyObject cancelElement = (DependencyObject)_itemsPresenterHostPart ?? (DependencyObject)this;
+                DependencyObject cancelElement = (DependencyObject)_border ?? (DependencyObject)this;
                 while (null != element)
                 {
                     if (cancelElement == element)
@@ -1151,6 +959,14 @@ namespace Microsoft.Phone.Controls
                     }
                     element = VisualTreeHelper.GetParent(element);
                 }
+                ListPickerMode = ListPickerMode.Normal;
+            }
+        }
+
+        private void OnFrameNavigated(object sender, NavigationEventArgs e)
+        {
+            if (ListPickerMode.Expanded == ListPickerMode)
+            {
                 ListPickerMode = ListPickerMode.Normal;
             }
         }
@@ -1181,193 +997,6 @@ namespace Microsoft.Phone.Controls
             {
                 VisualStateManager.GoToState(this, PickerStatesNormalStateName, useTransitions);
             }
-        }
-
-        /// <summary>
-        /// Updates the summary of the selected items to be displayed in the ListPicker.
-        /// </summary>
-        /// <param name="newValue">The list selected items</param>
-        [SuppressMessage("Microsoft.Globalization", "CA1303:Do not pass literals as localized parameters", MessageId = "System.Windows.Controls.TextBlock.set_Text(System.String)", Justification = "By design.")]
-        private void UpdateSummary(IList newValue)
-        {
-            const string space = " ";
-            string summary = null;
-
-            if (null != SummaryForSelectedItemsDelegate)
-            {
-                // Ask the delegate to sumarize the selected items.
-                summary = SummaryForSelectedItemsDelegate(newValue);
-            }
-
-            if (summary == null)
-            {
-                // No summary was provided, so by default, show only the first item in the selection list.
-                if (null == newValue || newValue.Count == 0)
-                {
-                    // In the case that there were no selected items, show the empty string.
-                    summary = space;
-                }
-                else
-                {
-                    summary = newValue[0].ToString();
-                }
-            }
-
-            // The display does not size correctly if the empty string is used.
-            if (String.IsNullOrEmpty(summary))
-            {
-                summary = space;
-            }
-
-            if (null != _multipleSelectionModeSummary)
-            {
-                _multipleSelectionModeSummary.Text = summary;
-            }
-        }
-
-        private void OpenPickerPage()
-        {
-            if (null == PickerPageUri)
-            {
-                throw new ArgumentException("PickerPageUri");
-            }
-
-            if (null == _frame)
-            {
-                // Hook up to necessary events and navigate
-                _frame = Application.Current.RootVisual as PhoneApplicationFrame;
-                if (null != _frame)
-                {
-                    _frameContentWhenOpened = _frame.Content;
-
-                    // Save and clear host page transitions for the upcoming "popup" navigation
-                    UIElement frameContentWhenOpenedAsUIElement = _frameContentWhenOpened as UIElement;
-
-                    if (null != frameContentWhenOpenedAsUIElement)
-                    {
-                        _savedNavigationInTransition = TransitionService.GetNavigationInTransition(frameContentWhenOpenedAsUIElement);
-                        TransitionService.SetNavigationInTransition(frameContentWhenOpenedAsUIElement, null);
-                        _savedNavigationOutTransition = TransitionService.GetNavigationOutTransition(frameContentWhenOpenedAsUIElement);
-                        TransitionService.SetNavigationOutTransition(frameContentWhenOpenedAsUIElement, null);
-
-                    }
-
-                    _frame.Navigated += OnFrameNavigated;
-                    _frame.NavigationStopped += OnFrameNavigationStoppedOrFailed;
-                    _frame.NavigationFailed += OnFrameNavigationStoppedOrFailed;
-
-                    _hasPickerPageOpen = true;
-
-                    _frame.Navigate(PickerPageUri);
-                }
-            }
-        }
-
-        private void ClosePickerPage()
-        {
-            if (null == _frame)
-            {
-                // Unhook from events
-                _frame = Application.Current.RootVisual as PhoneApplicationFrame;
-                if (null != _frame)
-                {
-                    _frame.Navigated -= OnFrameNavigated;
-                    _frame.NavigationStopped -= OnFrameNavigationStoppedOrFailed;
-                    _frame.NavigationFailed -= OnFrameNavigationStoppedOrFailed;
-
-                    // Restore host page transitions for the completed "popup" navigation
-                    UIElement frameContentWhenOpenedAsUIElement = _frameContentWhenOpened as UIElement;
-
-                    if (null != frameContentWhenOpenedAsUIElement)
-                    {
-                        TransitionService.SetNavigationInTransition(frameContentWhenOpenedAsUIElement, _savedNavigationInTransition);
-                        _savedNavigationInTransition = null;
-                        TransitionService.SetNavigationOutTransition(frameContentWhenOpenedAsUIElement, _savedNavigationOutTransition);
-                        _savedNavigationOutTransition = null;
-                    }
-
-                    _frame = null;
-                    _frameContentWhenOpened = null;
-                }
-            }
-
-            // Commit the value if available
-            if (null != _listPickerPage)
-            {
-                if (SelectionMode == SelectionMode.Single && null != _listPickerPage.SelectedItem)
-                {
-                    SelectedItem = _listPickerPage.SelectedItem;
-                }
-                else if ((SelectionMode == SelectionMode.Multiple || SelectionMode == SelectionMode.Extended) && null != _listPickerPage.SelectedItems)
-                {
-                    SelectedItems = _listPickerPage.SelectedItems;
-                }
-                _listPickerPage = null;
-            }
-        }
-
-        private void OnFrameNavigated(object sender, NavigationEventArgs e)
-        {
-            if (e.Content == _frameContentWhenOpened)
-            {
-                // Navigation to original page; close the picker page
-                ListPickerMode = ListPickerMode.Normal;
-            }
-            else if (null == _listPickerPage && _hasPickerPageOpen)
-            {
-                _hasPickerPageOpen = false;
-                _listPickerPage = e.Content as IListPickerPage;
-                if (null != _listPickerPage)
-                {
-                    // Sets the flow direction.
-                    _listPickerPage.FlowDirection = this.FlowDirection;
-
-                    // Set up the list picker page with the necesarry fields.
-                    if (null != FullModeHeader)
-                    {
-                        _listPickerPage.HeaderText = (string)FullModeHeader;
-                    }
-                    else
-                    {
-                        _listPickerPage.HeaderText = (string) Header;
-                    }
-
-                    _listPickerPage.FullModeItemTemplate = FullModeItemTemplate;
-
-                    _listPickerPage.Items.Clear();
-                    if (null != Items)
-                    {
-                        foreach (var element in Items)
-                        {
-                            _listPickerPage.Items.Add(element);
-                        }
-                    }
-
-                    _listPickerPage.SelectionMode = SelectionMode;
-
-                    if (SelectionMode == SelectionMode.Single)
-                    {
-                        _listPickerPage.SelectedItem = SelectedItem;
-                    }
-                    else
-                    {
-                        _listPickerPage.SelectedItems.Clear();
-                        if (null != SelectedItems)
-                        {
-                            foreach (var element in SelectedItems)
-                            {
-                                _listPickerPage.SelectedItems.Add(element);
-                            }
-                        }
-                    }
-                }
-            }
-        }
-
-        private void OnFrameNavigationStoppedOrFailed(object sender, EventArgs e)
-        {
-            // Abort
-            ListPickerMode = ListPickerMode.Normal;
         }
     }
 }

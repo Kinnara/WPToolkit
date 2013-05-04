@@ -70,7 +70,7 @@
                 <RowDefinition/>
             </Grid.RowDefinitions>
             <StackPanel>
-                <toolkit:ListPicker
+                <toolkit:PickerBox
                     x:Name="Family"
                     ItemsSource="{Binding Families}"
                     SelectedIndex="4"
@@ -78,7 +78,7 @@
                     Header="Transition family"
                     FullModeHeader="Transition family"
                     FullModeItemTemplate="{StaticResource FullTemplate}"/>
-                <toolkit:ListPicker
+                <toolkit:PickerBox
                     x:Name="Mode"
                     CacheMode="BitmapCache"
                     FullModeHeader="Transition mode"

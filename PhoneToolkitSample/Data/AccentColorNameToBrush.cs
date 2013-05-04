@@ -19,17 +19,26 @@ namespace PhoneToolkitSample.Data
     {
         private static Dictionary<string, SolidColorBrush> ColorNameToBrush = new Dictionary<string, SolidColorBrush>()
         {
-            { "magenta", 0xFFFF0097.ToSolidColorBrush() },
-            { "purple",  0xFFA200FF.ToSolidColorBrush() },
+            { "lime",    0xFFA4C400.ToSolidColorBrush() },
+            { "green",   0xFF60A917.ToSolidColorBrush() },
+            { "emerald", 0xFF008A00.ToSolidColorBrush() },
             { "teal",    0xFF00ABA9.ToSolidColorBrush() },
-            { "lime",    0xFF8CBF26.ToSolidColorBrush() },
-            { "brown",   0xFFA05000.ToSolidColorBrush() },
-            { "pink",    0xFFE671B8.ToSolidColorBrush() },
-            { "orange",  0xFFF09609.ToSolidColorBrush() },
-            { "blue",    0xFF1BA1E2.ToSolidColorBrush() },
+            { "cyan",    0xFF1BA1E2.ToSolidColorBrush() },
+            { "cobalt",  0xFF0050EF.ToSolidColorBrush() },
+            { "indigo",  0xFF6A00FF.ToSolidColorBrush() },
+            { "violet",  0xFFAA00FF.ToSolidColorBrush() },
+            { "pink",    0xFFF472D0.ToSolidColorBrush() },
+            { "magenta", 0xFFD80073.ToSolidColorBrush() },
+            { "crimson", 0xFFA20025.ToSolidColorBrush() },
             { "red",     0xFFE51400.ToSolidColorBrush() },
-            { "green",   0xFF339933.ToSolidColorBrush() },
-            { "mango",   0xFFF09609.ToSolidColorBrush() },
+            { "orange",  0xFFFA6800.ToSolidColorBrush() },
+            { "amber",   0xFFF0A30A.ToSolidColorBrush() },
+            { "yellow",  0xFFD8C100.ToSolidColorBrush() },
+            { "brown",   0xFF825A2C.ToSolidColorBrush() },
+            { "olive",   0xFF6D8764.ToSolidColorBrush() },
+            { "steel",   0xFF647687.ToSolidColorBrush() },
+            { "mauve",   0xFF76608A.ToSolidColorBrush() },
+            { "taupe",   0xFF7A3B3F.ToSolidColorBrush() },
         };
 
         /// <summary>

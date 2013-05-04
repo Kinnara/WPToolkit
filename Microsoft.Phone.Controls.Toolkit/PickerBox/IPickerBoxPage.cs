@@ -10,9 +10,9 @@ using System.Windows.Controls;
 namespace Microsoft.Phone.Controls.Primitives
 {
     /// <summary>
-    /// Represents an interface for ListPicker to use for communicating with a picker page.
+    /// Represents an interface for PickerBox to use for communicating with a picker page.
     /// </summary>
-    public interface IListPickerPage
+    public interface IPickerBoxPage
     {
         /// <summary>
         /// Gets or sets the string of text to display as the header of the page.

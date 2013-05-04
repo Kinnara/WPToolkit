@@ -155,6 +155,9 @@
     <Compile Include="..\Microsoft.Phone.Controls.Toolkit\Common\PhysicsConstants.cs">
       <Link>Common\PhysicsConstants.cs</Link>
     </Compile>
+    <Compile Include="..\Microsoft.Phone.Controls.Toolkit\Common\PickerPageHelper.cs">
+      <Link>Common\PickerPageHelper.cs</Link>
+    </Compile>
     <Compile Include="..\Microsoft.Phone.Controls.Toolkit\Common\RoutedPropertyChangingEventArgs.cs">
       <Link>Common\RoutedPropertyChangingEventArgs.cs</Link>
     </Compile>
@@ -272,9 +275,6 @@
     <Compile Include="..\Microsoft.Phone.Controls.Toolkit\CustomMessageBox\DismissedEventArgs.cs">
       <Link>CustomMessageBox\DismissedEventArgs.cs</Link>
     </Compile>
-    <Compile Include="..\Microsoft.Phone.Controls.Toolkit\ListPicker\IListPickerPage.cs">
-      <Link>ListPicker\IListPickerPage.cs</Link>
-    </Compile>
     <Compile Include="..\Microsoft.Phone.Controls.Toolkit\PhoneTextBox\PhoneTextBox.cs">
       <Link>PhoneTextBox\PhoneTextBox.cs</Link>
     </Compile>
@@ -299,15 +299,22 @@
     <Compile Include="..\Microsoft.Phone.Controls.Toolkit\Input\GestureHelperEventArgs.cs">
       <Link>Input\GestureHelperEventArgs.cs</Link>
     </Compile>
+    <Compile Include="..\Microsoft.Phone.Controls.Toolkit\PickerBox\IPickerBoxPage.cs">
+      <Link>PickerBox\IPickerBoxPage.cs</Link>
+    </Compile>
+    <Compile Include="..\Microsoft.Phone.Controls.Toolkit\PickerBox\PickerBox.cs">
+      <Link>PickerBox\PickerBox.cs</Link>
+    </Compile>
+    <Compile Include="..\Microsoft.Phone.Controls.Toolkit\PickerBox\PickerBoxMode.cs">
+      <Link>PickerBox\PickerBoxMode.cs</Link>
+    </Compile>
     <Compile Include="..\Microsoft.Phone.Controls.Toolkit\Primitives\TiltUserControl.cs">
       <Link>Primitives\TiltUserControl.cs</Link>
     </Compile>
+    <Compile Include="Common\LongListSelectorExtensions.cs" />
     <Compile Include="Input\GestureListenerStatic.cs" />
     <Compile Include="..\Microsoft.Phone.Controls.Toolkit\Input\GestureService.cs">
       <Link>Input\GestureService.cs</Link>
-    </Compile>
-    <Compile Include="..\Microsoft.Phone.Controls.Toolkit\ListPicker\ExpansionMode.cs">
-      <Link>ListPicker\ExpansionMode.cs</Link>
     </Compile>
     <Compile Include="..\Microsoft.Phone.Controls.Toolkit\LocalizedResources\ControlResources.cs.Designer.cs">
       <Link>LocalizedResources\ControlResources.cs.Designer.cs</Link>
@@ -477,8 +484,8 @@
     <Compile Include="DateTimePickers\TimePickerPage.xaml.cs">
       <DependentUpon>TimePickerPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="ListPicker\ListPickerPage.xaml.cs">
-      <DependentUpon>ListPickerPage.xaml</DependentUpon>
+    <Compile Include="PickerBox\PickerBoxPage.xaml.cs">
+      <DependentUpon>PickerBoxPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="ListView\ItemClickEventArgs.cs" />
     <Compile Include="ListView\ListView.cs" />
@@ -613,7 +620,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="ListPicker\ListPickerPage.xaml">
+    <Page Include="PickerBox\PickerBoxPage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

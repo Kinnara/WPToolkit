@@ -463,6 +463,18 @@ namespace Microsoft.Phone.Controls
 
 
         /// <summary>
+        /// Scrolls to a specified item in the <see cref="T:Microsoft.Phone.Controls.LongListMultiSelector"/>.
+        /// </summary>
+        /// <param name="item">The list item to scroll to.</param>
+        public void ScrollTo(object item)
+        {
+            if (_innerSelector != null)
+            {
+                _innerSelector.ScrollTo(item);
+            }
+        }
+
+        /// <summary>
         /// Template application : gets and hooks the inner LongListSelector
         /// </summary>
         public override void OnApplyTemplate()

@@ -46,6 +46,8 @@ namespace PhoneToolkitSample
 
             // Phone-specific initialization
             InitializePhoneApplication();
+
+            TiltEffect.SetIsTiltEnabled(RootFrame, true);
         }
 
         // Code to execute when the application is launching (eg, from Start)

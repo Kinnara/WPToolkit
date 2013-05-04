@@ -12,7 +12,7 @@
     FontFamily="{StaticResource PhoneFontFamilyNormal}"
     FontSize="{StaticResource PhoneFontSizeNormal}"
     Foreground="{StaticResource PhoneForegroundBrush}"
-    SupportedOrientations="Portrait" Orientation="Portrait"
+    SupportedOrientations="PortraitOrLandscape" Orientation="Portrait"
     shell:SystemTray.IsVisible="True" Margin="0,1,0,-1"
     toolkit:TiltEffect.IsTiltEnabled="True">
 
@@ -70,7 +70,7 @@
 
         <!--ContentPanel - place additional content here-->
         <Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0">
-            <phone:LongListSelector x:Name="lls">
+            <phone:LongListSelector x:Name="lls" Margin="0,0,-12,0">
                 <phone:LongListSelector.ListHeaderTemplate>
                     <DataTemplate>
                         <TextBlock x:Name="PageTitle" Text="samples" Margin="9,-7,0,12" Style="{StaticResource PhoneTextTitle1Style}" toolkit:TiltEffect.SuppressTilt="True" />

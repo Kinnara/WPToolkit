@@ -127,11 +127,13 @@
                         </toolkit:ContextMenu>
                     </toolkit:ContextMenuService.ContextMenu>
                 </Button>
-                <HyperlinkButton Margin="0,0"  
+                <HyperlinkButton Margin="-12,0"  
+                        HorizontalAlignment="Left"
                         VerticalAlignment="Center"
                         Padding="12"
                         Content="ContextMenu position test"
-                        FontSize="18" NavigateUri="/Samples/ContextMenuPositionTest.xaml"/>
+                        FontSize="18" NavigateUri="/Samples/ContextMenuPositionTest.xaml"
+                        toolkit:TiltEffect.SuppressTilt="True"/>
             </StackPanel>
         </ScrollViewer>
     </Grid>

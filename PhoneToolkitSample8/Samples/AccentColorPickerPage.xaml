@@ -1,0 +1,68 @@
+﻿<!--
+// (c) Copyright Microsoft Corporation.
+// This source is subject to the Microsoft Public License (Ms-PL).
+// Please see http://go.microsoft.com/fwlink/?LinkID=131993 for details.
+// All other rights reserved.
+-->
+
+<phone:PhoneApplicationPage 
+    x:Class="PhoneToolkitSample.Samples.AccentColorPickerPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
+    xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:toolkit="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit"
+    FontFamily="{StaticResource PhoneFontFamilyNormal}"
+    FontSize="{StaticResource PhoneFontSizeNormal}"
+    Foreground="{StaticResource PhoneForegroundBrush}"
+    SupportedOrientations="PortraitOrLandscape" Orientation="Portrait"
+    mc:Ignorable="d" d:DesignHeight="768" d:DesignWidth="480"
+    shell:SystemTray.IsVisible="True"
+    shell:SystemTray.BackgroundColor="{StaticResource PhoneChromeColor}"
+    toolkit:TiltEffect.IsTiltEnabled="True">
+
+    <Grid Background="{StaticResource PhoneChromeBrush}" x:Name="MainGrid">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+
+        <!-- Header Title -->
+        <TextBlock
+            x:Name="HeaderTitle"
+            Grid.Row="0"
+            FontFamily="{StaticResource PhoneFontFamilySemiBold}"
+            FontSize="{StaticResource PhoneFontSizeMedium}"
+            Foreground="{StaticResource PhoneForegroundBrush}"
+            Margin="23 16 0 27">
+            <TextBlock.Projection>
+                <PlaneProjection RotationX="-90"/>
+            </TextBlock.Projection>
+        </TextBlock>
+
+        <!-- List of Items -->
+        <Grid x:Name="PickerContainer" Grid.Row="1"
+              toolkit:TiltEffect.IsTiltEnabled="True"
+              Opacity="0"
+              Margin="24 12 0 0">
+            <ScrollViewer x:Name="ScrollViewer" Margin="-12 0 0 0">
+                <ListBox
+                    x:Name="Picker"
+                    ItemsSource="{Binding}"
+                    Margin="0 0 0 83"
+                    HorizontalAlignment="Left"
+                    ScrollViewer.VerticalScrollBarVisibility="Disabled"
+                    Tap="OnPickerTapped">
+                    <ListBox.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <toolkit:WrapPanel ItemWidth="111" ItemHeight="111" Width="444" Background="Transparent"/>
+                        </ItemsPanelTemplate>
+                    </ListBox.ItemsPanel>
+                </ListBox>
+            </ScrollViewer>
+        </Grid>
+    </Grid>
+
+</phone:PhoneApplicationPage>

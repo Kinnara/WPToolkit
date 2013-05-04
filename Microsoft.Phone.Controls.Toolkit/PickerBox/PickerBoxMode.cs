@@ -6,18 +6,18 @@
 namespace Microsoft.Phone.Controls
 {
     /// <summary>
-    /// The expansion mode of a ListPicker.
+    /// An enumeration defining the supported PickerBox modes.
     /// </summary>
-    public enum ExpansionMode
+    public enum PickerBoxMode
     {
         /// <summary>
-        /// Allows all items to be visible on the page.
+        /// Normal mode; only the selected item is visible on the original page.
         /// </summary>
-        ExpansionAllowed,
+        Normal,
 
         /// <summary>
-        /// Requires all items to be displayed in a full screen popup.
+        /// Full mode; all items are visible in a separate Popup.
         /// </summary>
-        FullScreenOnly
-    }
+        Full,
+    };
 }

@@ -69,8 +69,6 @@ namespace PhoneToolkitSample.Samples
                 NavigateUri = new Uri("http://silverlight.codeplex.com/", UriKind.Absolute)
             };
 
-            TiltEffect.SetIsTiltEnabled(hyperlinkButton, true);
-
             CustomMessageBox messageBox = new CustomMessageBox()
             {
                 Caption = "Allow this application to access and use your location?",
@@ -170,7 +168,7 @@ namespace PhoneToolkitSample.Samples
             {
                 Header = "Snooze for:",
                 ItemsSource = new string[] { "5 minutes", "10 minutes", "1 hour", "4 hours", "1 day" },
-                Margin = new Thickness(12, 42, 24, 18)
+                Margin = new Thickness(0, 42, 12, 18)
             };
 
             CustomMessageBox messageBox = new CustomMessageBox()
@@ -225,7 +223,8 @@ namespace PhoneToolkitSample.Samples
                 ContentTemplate = (DataTemplate)this.Resources["PivotContentTemplate"],
                 LeftButtonContent = "speak",
                 RightButtonContent = "read it",
-                IsFullScreen = true // Pivots should always be full-screen.
+                IsFullScreen = true, // Pivots should always be full-screen.
+                Margin = new Thickness()
             };
 
             messageBox.Dismissed += (s1, e1) =>

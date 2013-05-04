@@ -1,0 +1,99 @@
+﻿<!--
+// (c) Copyright Microsoft Corporation.
+// This source is subject to the Microsoft Public License (Ms-PL).
+// Please see http://go.microsoft.com/fwlink/?LinkID=131993 for details.
+// All other rights reserved.
+-->
+
+<phone:PhoneApplicationPage 
+    x:Class="Microsoft.Phone.Controls.PickerBoxPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
+    xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:toolkit="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit"
+    FontFamily="{StaticResource PhoneFontFamilyNormal}"
+    FontSize="{StaticResource PhoneFontSizeNormal}"
+    Foreground="{StaticResource PhoneForegroundBrush}"
+    SupportedOrientations="PortraitOrLandscape" Orientation="Portrait"
+    mc:Ignorable="d" d:DesignHeight="768" d:DesignWidth="480"
+    shell:SystemTray.IsVisible="True"
+    shell:SystemTray.BackgroundColor="{StaticResource PhoneChromeColor}"
+    toolkit:TiltEffect.IsTiltEnabled="True">
+
+    <phone:PhoneApplicationPage.Resources>
+        <DataTemplate x:Key="ListFooterTemplate">
+            <Rectangle Height="95"/>
+        </DataTemplate>
+        <DataTemplate x:Key="MultiPickerItemTemplate">
+            <TextBlock Text="{Binding}"
+                       FontFamily="{StaticResource PhoneFontFamilySemiLight}"
+                       FontSize="37.333"
+                       Margin="23,-4,0,37"/>
+        </DataTemplate>
+    </phone:PhoneApplicationPage.Resources>
+    
+    <Grid Background="{StaticResource PhoneChromeBrush}" x:Name="MainGrid">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+
+        <!-- Header Title -->
+        <TextBlock
+            x:Name="HeaderTitle"
+            Grid.Row="0"
+            Grid.Column="1"
+            FontFamily="{StaticResource PhoneFontFamilySemiBold}"
+            FontSize="{StaticResource PhoneFontSizeMedium}"
+            Foreground="{StaticResource PhoneForegroundBrush}"
+            Margin="23 16 0 15">
+            <TextBlock.Projection>
+                <PlaneProjection RotationX="-90"/>
+            </TextBlock.Projection>
+        </TextBlock>
+
+        <!-- List of Items -->
+        <Grid x:Name="PickerContainer" Grid.Row="1" Grid.Column="1"
+              toolkit:TiltEffect.IsTiltEnabled="True"
+              Opacity="0"
+              Margin="24 24 0 0">
+            <toolkit:ListView
+                x:Name="SinglePicker"
+                ListFooterTemplate="{StaticResource ListFooterTemplate}"
+                ItemsSource="{Binding}"
+                IsItemClickEnabled="False"
+                Visibility="Collapsed"
+                Tap="OnPickerTapped"/>
+
+            <toolkit:LongListMultiSelector
+                x:Name="MultiPicker"
+                ListFooterTemplate="{StaticResource ListFooterTemplate}"
+                ItemsSource="{Binding}"
+                EnforceIsSelectionEnabled="True"
+                Visibility="Collapsed"
+                Margin="-24,0,0,0"
+                Tap="OnPickerTapped"/>
+        </Grid>
+
+        <Rectangle x:Name="ApplicationBarPlaceholder" Width="72" Grid.RowSpan="2"/>
+    </Grid>
+
+    <phone:PhoneApplicationPage.ApplicationBar>
+        <shell:ApplicationBar IsVisible="False">
+            <shell:ApplicationBarIconButton
+                IconUri="/Toolkit.Content/ApplicationBar.Check.png"
+                Text="DONE"/>
+            <shell:ApplicationBarIconButton
+                IconUri="/Toolkit.Content/ApplicationBar.Cancel.png"
+                Text="CANCEL"/>
+        </shell:ApplicationBar>
+    </phone:PhoneApplicationPage.ApplicationBar>
+
+</phone:PhoneApplicationPage>

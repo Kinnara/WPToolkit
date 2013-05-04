@@ -580,23 +580,21 @@
         <Setter Property="Background" Value="{StaticResource PhoneTextBoxBrush}"/>
         <Setter Property="Foreground" Value="{StaticResource PhoneTextBoxForegroundBrush}"/>
         <Setter Property="BorderBrush" Value="{StaticResource PhoneTextBoxBrush}"/>
-        <Setter Property="BorderThickness" Value="{StaticResource PhoneBorderThickness}"/>
+        <Setter Property="BorderThickness" Value="2"/>
         <Setter Property="FontSize" Value="{StaticResource PhoneFontSizeMediumLarge}"/>
         <Setter Property="HorizontalContentAlignment" Value="Left"/>
-        <Setter Property="Margin" Value="{StaticResource PhoneTouchTargetOverhang}"/>
-        <Setter Property="PickerPageUri" Value="/Microsoft.Phone.Controls.Toolkit;component/ListPicker/ListPickerPage.xaml"/>
 
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="controls:ListPicker">
-                    <StackPanel>
+                    <StackPanel Margin="0,0,0,26">
                         <VisualStateManager.VisualStateGroups>
                             <VisualStateGroup x:Name="PickerStates">
                                 <VisualState x:Name="Normal"/>
                                 <VisualState x:Name="Highlighted">
                                     <Storyboard>
                                         <ObjectAnimationUsingKeyFrames
-                                            Storyboard.TargetName="Border"
+                                            Storyboard.TargetName="PickerBackground"
                                             Storyboard.TargetProperty="Background"
                                             Duration="0">
                                             <DiscreteObjectKeyFrame
@@ -604,7 +602,7 @@
                                                 KeyTime="0"/>
                                         </ObjectAnimationUsingKeyFrames>
                                         <ObjectAnimationUsingKeyFrames
-                                            Storyboard.TargetName="Border"
+                                            Storyboard.TargetName="PickerBackground"
                                             Storyboard.TargetProperty="BorderBrush"
                                             Duration="0">
                                             <DiscreteObjectKeyFrame
@@ -616,7 +614,15 @@
                                 <VisualState x:Name="Disabled">
                                     <Storyboard>
                                         <ObjectAnimationUsingKeyFrames
-                                            Storyboard.TargetName="Border"
+                                            Storyboard.TargetName="HeaderContainer"
+                                            Storyboard.TargetProperty="Foreground"
+                                            Duration="0">
+                                            <DiscreteObjectKeyFrame
+                                                Value="{StaticResource PhoneDisabledBrush}"
+                                                KeyTime="0"/>
+                                        </ObjectAnimationUsingKeyFrames>
+                                        <ObjectAnimationUsingKeyFrames
+                                            Storyboard.TargetName="PickerBackground"
                                             Storyboard.TargetProperty="Background"
                                             Duration="0">
                                             <DiscreteObjectKeyFrame
@@ -624,7 +630,7 @@
                                                 KeyTime="0"/>
                                         </ObjectAnimationUsingKeyFrames>
                                         <ObjectAnimationUsingKeyFrames
-                                            Storyboard.TargetName="Border"
+                                            Storyboard.TargetName="PickerBackground"
                                             Storyboard.TargetProperty="BorderBrush"
                                             Duration="0">
                                             <DiscreteObjectKeyFrame
@@ -644,22 +650,23 @@
                             </VisualStateGroup>
                         </VisualStateManager.VisualStateGroups>
                         <ContentControl
+                            x:Name="HeaderContainer"
                             Content="{TemplateBinding Header}"
                             ContentTemplate="{TemplateBinding HeaderTemplate}"
                             Foreground="{StaticResource PhoneSubtleBrush}"
                             FontSize="{StaticResource PhoneFontSizeNormal}"
                             HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
-                            Margin="0 0 0 8"/>
-                        <Grid>
-                            <Border x:Name="Border"
+                            Margin="11 -8 0 -5"/>
+                        <Border x:Name="Border" Background="Transparent">
+                            <Border x:Name="PickerBackground"
                                     Background="{TemplateBinding Background}"
                                     BorderBrush="{TemplateBinding BorderBrush}"
-                                    BorderThickness="{TemplateBinding BorderThickness}">
+                                    BorderThickness="{TemplateBinding BorderThickness}"
+                                    Margin="{StaticResource PhoneTouchTargetOverhang}">
                                 <UserControl x:Name="UserControl" Foreground="{TemplateBinding Foreground}">
                                     <StackPanel>
-                                        <TextBlock x:Name="MultipleSelectionModeSummary" Margin="8 2 8 6" />
-                                        <Canvas x:Name="ItemsPresenterHost" MinHeight="42">
-                                            <ItemsPresenter x:Name="ItemsPresenter">
+                                        <Canvas x:Name="ItemsPresenterHost" MinHeight="44">
+                                            <ItemsPresenter x:Name="ItemsPresenter" IsHitTestVisible="False">
                                                 <ItemsPresenter.RenderTransform>
                                                     <TranslateTransform x:Name="ItemsPresenterTranslateTransform"/>
                                                 </ItemsPresenter.RenderTransform>
@@ -668,7 +675,7 @@
                                     </StackPanel>
                                 </UserControl>
                             </Border>
-                        </Grid>
+                        </Border>
                     </StackPanel>
                 </ControlTemplate>
             </Setter.Value>
@@ -678,7 +685,7 @@
     <Style TargetType="controls:ListPickerItem">
         <Setter Property="Background" Value="Transparent"/>
         <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
-        <Setter Property="Padding" Value="8 12 8 16"/>
+        <Setter Property="Padding" Value="8 13 0 17"/>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="controls:ListPickerItem">
@@ -708,6 +715,80 @@
                             HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
                             Margin="{TemplateBinding Padding}"/> <!--Foreground="{TemplateBinding Foreground}"-->
                     </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style TargetType="controls:PickerBox">
+        <Setter Property="Background" Value="{StaticResource PhoneTextBoxBrush}"/>
+        <Setter Property="Foreground" Value="{StaticResource PhoneTextBoxForegroundBrush}"/>
+        <Setter Property="BorderBrush" Value="{StaticResource PhoneTextBoxBrush}"/>
+        <Setter Property="BorderThickness" Value="2"/>
+        <Setter Property="HorizontalContentAlignment" Value="Left"/>
+        <Setter Property="PickerPageUri" Value="/Microsoft.Phone.Controls.Toolkit;component/PickerBox/PickerBoxPage.xaml"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="controls:PickerBox">
+                    <StackPanel Margin="0,0,0,26">
+                        <ContentControl
+                            Content="{TemplateBinding Header}"
+                            ContentTemplate="{TemplateBinding HeaderTemplate}"
+                            Foreground="{StaticResource PhoneSubtleBrush}"
+                            FontSize="{StaticResource PhoneFontSizeNormal}"
+                            HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
+                            Margin="11,-8,0,-5"/>
+                        <Button
+                            x:Name="Button"
+                            ContentTemplate="{TemplateBinding ItemTemplate}"
+                            Background="{TemplateBinding Background}"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}"
+                            FontFamily="{TemplateBinding FontFamily}"
+                            Foreground="{TemplateBinding Foreground}"
+                            Padding="8,3,0,7"
+                            Height="72"
+                            HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}">
+                            <Button.Template>
+                                <ControlTemplate TargetType="ButtonBase">
+                                    <Grid Background="Transparent">
+                                        <VisualStateManager.VisualStateGroups>
+                                            <VisualStateGroup x:Name="CommonStates">
+                                                <VisualState x:Name="Normal"/>
+                                                <VisualState x:Name="MouseOver"/>
+                                                <VisualState x:Name="Pressed">
+                                                    <Storyboard>
+                                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="ButtonBackground" Storyboard.TargetProperty="Background">
+                                                            <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource PhoneTextBoxEditBackgroundBrush}" />
+                                                        </ObjectAnimationUsingKeyFrames>
+                                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="ButtonBackground" Storyboard.TargetProperty="BorderBrush">
+                                                            <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource PhoneTextBoxEditBorderBrush}" />
+                                                        </ObjectAnimationUsingKeyFrames>
+                                                    </Storyboard>
+                                                </VisualState>
+                                                <VisualState x:Name="Disabled">
+                                                    <Storyboard>
+                                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="ContentContainer" Storyboard.TargetProperty="Foreground">
+                                                            <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource PhoneDisabledBrush}" />
+                                                        </ObjectAnimationUsingKeyFrames>
+                                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="ButtonBackground" Storyboard.TargetProperty="BorderBrush">
+                                                            <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource PhoneDisabledBrush}" />
+                                                        </ObjectAnimationUsingKeyFrames>
+                                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="ButtonBackground" Storyboard.TargetProperty="Background">
+                                                            <DiscreteObjectKeyFrame KeyTime="0" Value="Transparent" />
+                                                        </ObjectAnimationUsingKeyFrames>
+                                                    </Storyboard>
+                                                </VisualState>
+                                            </VisualStateGroup>
+                                        </VisualStateManager.VisualStateGroups>
+                                        <Border x:Name="ButtonBackground" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" CornerRadius="0" Background="{TemplateBinding Background}" Margin="{StaticResource PhoneTouchTargetOverhang}" >
+                                            <ContentControl x:Name="ContentContainer" Foreground="{TemplateBinding Foreground}" HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}" VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}" Padding="{TemplateBinding Padding}" Content="{TemplateBinding Content}" ContentTemplate="{TemplateBinding ContentTemplate}"/>
+                                        </Border>
+                                    </Grid>
+                                </ControlTemplate>
+                            </Button.Template>
+                        </Button>
+                    </StackPanel>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>

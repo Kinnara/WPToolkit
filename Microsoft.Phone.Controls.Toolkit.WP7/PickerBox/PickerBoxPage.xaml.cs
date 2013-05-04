@@ -22,9 +22,9 @@ namespace Microsoft.Phone.Controls
     /// <summary>
     /// Displays the list of items and allows single or multiple selection.
     /// </summary>
-    public partial class ListPickerPage : PhoneApplicationPage, IListPickerPage
+    public partial class PickerBoxPage : PhoneApplicationPage, IPickerBoxPage
     {
-        private const string StateKey_Value = "ListPickerPage_State_Value";
+        private const string StateKey_Value = "PickerBoxPage_State_Value";
 
         private PageOrientation _lastOrientation;
 
@@ -72,12 +72,12 @@ namespace Microsoft.Phone.Controls
         private static readonly DependencyProperty IsOpenProperty =
             DependencyProperty.Register("IsOpen",
                                         typeof(bool),
-                                        typeof(ListPickerPage),
+                                        typeof(PickerBoxPage),
                                         new PropertyMetadata(false, new PropertyChangedCallback(OnIsOpenChanged)));
 
         private static void OnIsOpenChanged(DependencyObject o, DependencyPropertyChangedEventArgs e)
         {
-            (o as ListPickerPage).OnIsOpenChanged();
+            (o as PickerBoxPage).OnIsOpenChanged();
         }
 
         private void OnIsOpenChanged()
@@ -88,7 +88,7 @@ namespace Microsoft.Phone.Controls
         /// <summary>
         /// Creates a list picker page.
         /// </summary>
-        public ListPickerPage()
+        public PickerBoxPage()
         {
             InitializeComponent();
 
@@ -103,6 +103,7 @@ namespace Microsoft.Phone.Controls
         {
             OrientationChanged += OnOrientationChanged;
             _lastOrientation = Orientation;
+            OnOrientationChanged(this, new OrientationChangedEventArgs(Orientation));
 
             // Customize the ApplicationBar Buttons by providing the right text
             if (null != ApplicationBar)
@@ -124,6 +125,12 @@ namespace Microsoft.Phone.Controls
                         }
                     }
                 }
+            }
+
+            Picker.UpdateLayout();
+            if (SelectedItem != null)
+            {
+                Picker.ScrollIntoView(SelectedItem);
             }
 
             // Add a projection for each list item and turn it to -90
@@ -320,8 +327,8 @@ namespace Microsoft.Phone.Controls
                 {
                     case PageOrientation.Portrait:
                     case PageOrientation.PortraitUp:
-                        HeaderTitle.Margin = new Thickness(24, 12, 12, 12);
-                        Picker.Margin = new Thickness(24, 12, 0, 0);
+                        HeaderTitle.Margin = new Thickness(23, 16, 0, 15);
+                        ApplicationBarPlaceholder.Visibility = Visibility.Collapsed;
 
                         transitionElement.Mode = (_lastOrientation == PageOrientation.LandscapeLeft) ?
                         RotateTransitionMode.In90Counterclockwise : RotateTransitionMode.In90Clockwise;
@@ -329,20 +336,25 @@ namespace Microsoft.Phone.Controls
                         break;
                     case PageOrientation.Landscape:
                     case PageOrientation.LandscapeLeft:
-                        HeaderTitle.Margin = new Thickness(24, 24, 0, 0);
-                        Picker.Margin = new Thickness(24, 24, 0, 0);
+                        HeaderTitle.Margin = new Thickness(23, 24, 0, 15);
+                        ApplicationBarPlaceholder.Visibility = Visibility.Collapsed;
 
                         transitionElement.Mode = (_lastOrientation == PageOrientation.LandscapeRight) ?
                         RotateTransitionMode.In180Counterclockwise : RotateTransitionMode.In90Clockwise;
                         break;
                     case PageOrientation.LandscapeRight:
-                        HeaderTitle.Margin = new Thickness(24, 24, 0, 0);
-                        Picker.Margin = new Thickness(24, 24, 0, 0);
+                        HeaderTitle.Margin = new Thickness(23, 24, 0, 15);
+                        ApplicationBarPlaceholder.Visibility = ApplicationBar.IsVisible ? Visibility.Collapsed : Visibility.Visible;
 
                         transitionElement.Mode = (_lastOrientation == PageOrientation.PortraitUp) ?
                         RotateTransitionMode.In90Counterclockwise : RotateTransitionMode.In180Clockwise;
                         break;
                 }
+            }
+
+            if (newOrientation == _lastOrientation)
+            {
+                return;
             }
 
             PhoneApplicationPage phoneApplicationPage = (PhoneApplicationPage)(((PhoneApplicationFrame)Application.Current.RootVisual)).Content;

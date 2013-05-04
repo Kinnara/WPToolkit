@@ -5,47 +5,28 @@
 
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Controls.Primitives;
 using System.Windows.Media;
 
 namespace Microsoft.Phone.Controls
 {
     /// <summary>
-    /// Provides helper methods to work with ItemsControl.
+    /// Provides helper methods to work with LongListSelector.
     /// </summary>
-    public static class ItemsControlExtensions
+    public static class LongListSelectorExtensions
     {
         /// <summary>
-        /// Gets the parent ItemsControl.
-        /// </summary>
-        /// <typeparam name="T">The type of ItemsControl.</typeparam>
-        /// <param name="element">The dependency object </param>
-        /// <returns>
-        /// The parent ItemsControl or null if there is not.
-        /// </returns>
-        public static T GetParentItemsControl<T>(DependencyObject element) 
-            where T : ItemsControl
-        {
-            var parent = VisualTreeHelper.GetParent(element);
-
-            while (!(parent is T) && (parent != null))
-            {
-                parent = VisualTreeHelper.GetParent(parent as DependencyObject);
-            }
-
-            return (T)parent;
-        }
-
-        /// <summary>
         /// Gets the items that are currently in the view port
-        /// of an ItemsControl with a ScrollViewer.
+        /// of an Control.
         /// </summary>
-        /// <param name="list">The ItemsControl to search on.</param>
+        /// <param name="list">The Control to search on.</param>
         /// <returns>
         /// A list of weak references to the items in the view port.
         /// </returns>
-        public static IList<WeakReference> GetItemsInViewPort(ItemsControl list)
+        public static IList<WeakReference> GetItemsInViewPort(Control list)
         {
             IList<WeakReference> viewPortItems = new List<WeakReference>();
 
@@ -56,17 +37,17 @@ namespace Microsoft.Phone.Controls
 
         /// <summary>
         /// Gets the items that are currently in the view port
-        /// of an ItemsControl with a ScrollViewer and adds them
+        /// of an Control and adds them
         /// into a list of weak references.
         /// </summary>
         /// <param name="list">
-        /// The items control to search on.
+        /// The Control to search on.
         /// </param>
         /// <param name="items">
         /// The list of weak references where the items in 
         /// the view port will be added.
         /// </param>
-        public static void GetItemsInViewPort(ItemsControl list, IList<WeakReference> items)
+        public static void GetItemsInViewPort(Control list, IList<WeakReference> items)
         {
             int index;
             FrameworkElement container;
@@ -79,7 +60,7 @@ namespace Microsoft.Phone.Controls
                 return;
             }
 
-            ScrollViewer scrollHost = VisualTreeHelper.GetChild(list, 0) as ScrollViewer;
+            var scrollHost = list.GetFirstLogicalChildByType<ViewportControl>(false);
 
             list.UpdateLayout();
 
@@ -88,9 +69,27 @@ namespace Microsoft.Phone.Controls
                 return;
             }
 
-            for (index = 0; index < list.Items.Count; index++)
+            var contentPanel = scrollHost.Content as Canvas;
+            if (contentPanel == null || contentPanel.Children.Count == 0)
             {
-                container = (FrameworkElement)list.ItemContainerGenerator.ContainerFromIndex(index);
+                return;
+            }
+
+            var itemsPanel = contentPanel.Children[0] as Canvas;
+            if (itemsPanel == null)
+            {
+                return;
+            }
+
+            var containers = contentPanel.Children
+                .OfType<ContentPresenter>()
+                .Concat(itemsPanel.Children.OfType<ContentPresenter>())
+                .OrderBy(c => Canvas.GetTop(c))
+                .ToList();
+
+            for (index = 0; index < containers.Count; index++)
+            {
+                container = containers[index];
                 if (container != null)
                 {
                     itemTransform = null;
@@ -115,9 +114,9 @@ namespace Microsoft.Phone.Controls
                 }
             }
 
-            for (; index < list.Items.Count; index++)
+            for (; index < containers.Count; index++)
             {
-                container = (FrameworkElement)list.ItemContainerGenerator.ContainerFromIndex(index);
+                container = containers[index];
                 itemTransform = null;
                 try
                 {

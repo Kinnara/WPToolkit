@@ -133,6 +133,11 @@ namespace PhoneToolkitSample.Samples
             PrintInColors.SummaryForSelectedItemsDelegate = Summarize;
 
             RegionList.ItemsSource = _regions;
+
+#if WP7
+            AccentColor.Visibility = System.Windows.Visibility.Collapsed;
+            AccentColorWP7.Visibility = System.Windows.Visibility.Visible;
+#endif
         }
 
         private string Summarize(IList items)

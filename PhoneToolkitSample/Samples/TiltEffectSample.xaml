@@ -72,21 +72,12 @@
             
             <CheckBox Content="Touch this checkbox"/>
 
-            <TextBlock Style="{StaticResource PhoneTextNormalStyle}"
-                       TextWrapping="Wrap"
-                       Text="Tilt effect can now be applied also to ListPicker control"/>
-
-            <toolkit:ListPicker Header="Background">
-                <sys:String>dark</sys:String>
-                <sys:String>light</sys:String>
-                <sys:String>dazzle</sys:String>
-            </toolkit:ListPicker>
-
             <HyperlinkButton Content="Click for online documentation"
                              TargetName="_self"
                              HorizontalAlignment="Stretch"
                              HorizontalContentAlignment="Left"
-                             NavigateUri="http://msdn.microsoft.com/en-us/library/ff941094(VS.92).aspx"/>
+                             NavigateUri="http://msdn.microsoft.com/en-us/library/ff941094(VS.92).aspx"
+                             toolkit:TiltEffect.SuppressTilt="True"/>
 
         </StackPanel>
     </Grid>

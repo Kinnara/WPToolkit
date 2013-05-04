@@ -630,6 +630,18 @@ namespace Microsoft.Phone.Controls
         public event ItemClickEventHandler ItemClick;
 
         /// <summary>
+        /// Scrolls to a specified item in the <see cref="T:Microsoft.Phone.Controls.ListView"/>.
+        /// </summary>
+        /// <param name="item">The list item to scroll to.</param>
+        public void ScrollTo(object item)
+        {
+            if (_selector != null)
+            {
+                _selector.ScrollTo(item);
+            }
+        }
+
+        /// <summary>
         /// Builds the visual tree for the <see cref="T:Microsoft.Phone.Controls.ListView"/> control when a new template is applied.
         /// </summary>
         public override void OnApplyTemplate()
@@ -653,16 +665,16 @@ namespace Microsoft.Phone.Controls
             if (_selector != null)
             {
                 _selector.LayoutMode = LayoutMode;
-                _selector.SelectedItem = SelectedItem;
                 _selector.SelectionChanged += OnSelectorSelectionChanged;
                 _selector.ItemRealized += OnSelectorItemRealized;
                 _selector.ItemUnrealized += OnSelectorItemUnrealized;
                 _selector.JumpListOpening += OnSelectorJumpListOpening;
                 _selector.JumpListClosed += OnSelectorJumpListClosed;
                 _selector.ManipulationStateChanged += OnSelectorManipulationStateChanged;
-            }
 
-            ApplyItemsSource();
+                ApplyItemsSource();
+                _selector.SelectedItem = SelectedItem;
+            }
         }
 
         /// <summary>
@@ -715,7 +727,7 @@ namespace Microsoft.Phone.Controls
                         object item = e.Container.Content;
 
                         listViewItem.Item = item;
-                        listViewItem.IsSelected = !IsItemClickEnabled && SelectedItem == item;
+                        listViewItem.IsSelected = !IsItemClickEnabled && object.Equals(SelectedItem, item);
 
                         listViewItem.Tap += OnItemTap;
 
@@ -779,12 +791,26 @@ namespace Microsoft.Phone.Controls
             }
         }
 
+        /// <summary>
+        /// Configure an item's template according to the current state
+        /// </summary>
+        /// <param name="item"></param>
+        internal void ConfigureItem(ListViewItem item)
+        {
+            if (item != null)
+            {
+                ApplyItemContainerStyle(item);
+
+                item.ContentTemplate = ItemTemplate;
+            }
+        }
+
         private void UpdateRealizedItemsSelectionState()
         {
             bool isSelectionEnabled = !IsItemClickEnabled;
             ApplyLiveItems(item =>
             {
-                item.IsSelected = isSelectionEnabled && item.Item == SelectedItem;
+                item.IsSelected = isSelectionEnabled && object.Equals(item.Item, SelectedItem);
             });
         }
     }

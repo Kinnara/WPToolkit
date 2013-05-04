@@ -122,7 +122,7 @@ namespace Microsoft.Phone.Controls
             { 
                 typeof(ButtonBase), 
                 typeof(ListBoxItem), 
-                typeof(ListPicker),
+                typeof(ListPickerItem),
                 typeof(MenuItem),
                 typeof(LongListSelector),
                 typeof(HubTile)

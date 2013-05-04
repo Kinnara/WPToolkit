@@ -18,7 +18,7 @@ namespace Microsoft.Phone.Controls
     /// Represents a control that allows the user to choose days of the week.
     /// </summary>
     /// <QualityBand>Experimental</QualityBand>
-    public class RecurringDaysPicker : ListPicker
+    public class RecurringDaysPicker : PickerBox
     {
         private const string CommaSpace = ", ";
 

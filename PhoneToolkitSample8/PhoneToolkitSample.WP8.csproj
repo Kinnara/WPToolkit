@@ -278,6 +278,9 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>AppResources.resx</DependentUpon>
     </Compile>
+    <Compile Include="Samples\AccentColorPickerPage.xaml.cs">
+      <DependentUpon>AccentColorPickerPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Samples\GestureSample.xaml.cs">
       <DependentUpon>GestureSample.xaml</DependentUpon>
     </Compile>
@@ -417,6 +420,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="MainPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Samples\AccentColorPickerPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

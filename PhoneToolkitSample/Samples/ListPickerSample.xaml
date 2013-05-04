@@ -73,53 +73,76 @@
                     <sys:String>dazzle</sys:String>
                 </toolkit:ListPicker>
 
-                <toolkit:ListPicker Header="Background" ExpansionMode="FullscreenOnly">
+                <toolkit:PickerBox Header="Background">
                     <sys:String>dark</sys:String>
                     <sys:String>light</sys:String>
                     <sys:String>dazzle</sys:String>
-                    <toolkit:ListPicker.FullModeItemTemplate>
+                    <toolkit:PickerBox.FullModeItemTemplate>
                         <DataTemplate>
-                            <StackPanel Orientation="Horizontal" Margin="16 21 0 20">
-                                <TextBlock Text="{Binding}"
-                                       Margin="0 0 0 0"
-                                       FontSize="43" 
-                                       FontFamily="{StaticResource PhoneFontFamilyLight}"/>
-                            </StackPanel>
+                            <TextBlock Text="{Binding}"
+                                       FontFamily="{StaticResource PhoneFontFamilySemiLight}"
+                                       FontSize="37.333"
+                                       Margin="-1,-4,0,37"/>
                         </DataTemplate>
-                    </toolkit:ListPicker.FullModeItemTemplate>
-                </toolkit:ListPicker>
+                    </toolkit:PickerBox.FullModeItemTemplate>
+                </toolkit:PickerBox>
 
 
 
                 <!-- For best performance, set the CacheMode on items below a ListPicker -->
                 <!-- that will be dropping down. -->
 
-                <toolkit:ListPicker ItemsSource="{Binding}" 
+                <toolkit:PickerBox ItemsSource="{Binding}" 
                                 Header="Accent color" 
                                 FullModeHeader="ACCENTS" 
-                                CacheMode="BitmapCache">
-                    <toolkit:ListPicker.ItemTemplate>
+                                CacheMode="BitmapCache"
+                                Visibility="Collapsed"
+                                x:Name="AccentColorWP7">
+                    <toolkit:PickerBox.ItemTemplate>
                         <DataTemplate>
                             <StackPanel Orientation="Horizontal">
-                                <Rectangle Fill="{Binding Converter={StaticResource ColorNameToBrushConverter}}" Width="24" Height="24"/>
-                                <TextBlock Text="{Binding}" Margin="12 0 0 0"/>
+                                <Rectangle Fill="{Binding Converter={StaticResource ColorNameToBrushConverter}}" Width="25" Height="25" Margin="-1 2 0 0"/>
+                                <TextBlock Text="{Binding}" Margin="17 0 0 0"/>
                             </StackPanel>
                         </DataTemplate>
-                    </toolkit:ListPicker.ItemTemplate>
-                    <toolkit:ListPicker.FullModeItemTemplate>
+                    </toolkit:PickerBox.ItemTemplate>
+                    <toolkit:PickerBox.FullModeItemTemplate>
                         <DataTemplate>
                             <StackPanel Orientation="Horizontal" Margin="0 21 0 20">
                                 <Rectangle Fill="{Binding Converter={StaticResource ColorNameToBrushConverter}}" Width="43" Height="43"/>
                                 <TextBlock Text="{Binding}"
                                        Margin="16 0 0 0"
                                        FontSize="43"
-                                       FontFamily="{StaticResource PhoneFontFamilyLight}"/>
+                                       FontFamily="{StaticResource PhoneFontFamilySemiLight}"/>
                             </StackPanel>
                         </DataTemplate>
-                    </toolkit:ListPicker.FullModeItemTemplate>
-                </toolkit:ListPicker>
+                    </toolkit:PickerBox.FullModeItemTemplate>
+                </toolkit:PickerBox>
 
-                <toolkit:ListPicker Header="Print in colors" 
+                <toolkit:PickerBox ItemsSource="{Binding}" 
+                                Header="Accent color" 
+                                FullModeHeader="ACCENTS" 
+                                CacheMode="BitmapCache"
+                                PickerPageUri="/Samples/AccentColorPickerPage.xaml"
+                                x:Name="AccentColor">
+                    <toolkit:PickerBox.ItemTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Horizontal">
+                                <Rectangle Fill="{Binding Converter={StaticResource ColorNameToBrushConverter}}" Width="20" Height="20" Margin="1 2 0 0"/>
+                                <TextBlock Text="{Binding}" Margin="13 0 0 0"/>
+                            </StackPanel>
+                        </DataTemplate>
+                    </toolkit:PickerBox.ItemTemplate>
+                    <toolkit:PickerBox.FullModeItemTemplate>
+                        <DataTemplate>
+                            <Border Background="Transparent" Padding="12 0 0 0" Margin="0 0 0 12">
+                                <Rectangle Fill="{Binding Converter={StaticResource ColorNameToBrushConverter}}" Width="99" Height="99"/>
+                            </Border>
+                        </DataTemplate>
+                    </toolkit:PickerBox.FullModeItemTemplate>
+                </toolkit:PickerBox>
+
+                <toolkit:PickerBox Header="Print in colors" 
                                 SelectionMode="Multiple" 
                                 FullModeHeader="COLORS" 
                                 CacheMode="BitmapCache"
@@ -128,7 +151,7 @@
                     <sys:String>Magenta</sys:String>
                     <sys:String>Yellow</sys:String>
                     <sys:String>Black</sys:String>
-                </toolkit:ListPicker>
+                </toolkit:PickerBox>
 
                 <toolkit:RecurringDaysPicker Header="Repeats" FullModeHeader="ALARM REPEATS ON" CacheMode="BitmapCache"/>
                 
@@ -143,13 +166,19 @@
                     <sys:String>dazzle</sys:String>
                 </toolkit:ListPicker>
 
-                <toolkit:ListPicker x:Name="RegionList" Header="System Locale">
-                    <toolkit:ListPicker.FullModeItemTemplate>
+                <toolkit:PickerBox x:Name="RegionList" Header="System Locale">
+                    <toolkit:PickerBox.FullModeItemTemplate>
                         <DataTemplate>
-                            <TextBlock Text="{Binding}" Margin="0 24 24 24" TextWrapping="Wrap" Style="{StaticResource PhoneTextTitle2Style}" />
+                            <TextBlock Text="{Binding}"
+                                       FontFamily="{StaticResource PhoneFontFamilySemiLight}"
+                                       FontSize="37.333"
+                                       LineHeight="40"
+                                       LineStackingStrategy="BlockLineHeight"
+                                       TextWrapping="Wrap"
+                                       Margin="-1,4,0,39"/>
                         </DataTemplate>
-                    </toolkit:ListPicker.FullModeItemTemplate>
-                </toolkit:ListPicker>
+                    </toolkit:PickerBox.FullModeItemTemplate>
+                </toolkit:PickerBox>
             </StackPanel>
         </ScrollViewer>
     </Grid>

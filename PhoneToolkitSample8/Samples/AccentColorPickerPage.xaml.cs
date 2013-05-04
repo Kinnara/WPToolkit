@@ -16,15 +16,17 @@ using System.Windows.Media.Animation;
 using System.Windows.Navigation;
 using Microsoft.Phone.Controls.Primitives;
 using Microsoft.Phone.Shell;
+using System.Windows.Controls.Primitives;
+using Microsoft.Phone.Controls;
 
-namespace Microsoft.Phone.Controls
+namespace PhoneToolkitSample.Samples
 {
     /// <summary>
     /// Displays the list of items and allows single or multiple selection.
     /// </summary>
-    public partial class ListPickerPage : PhoneApplicationPage, IListPickerPage
+    public partial class AccentColorPickerPage : PhoneApplicationPage, IPickerBoxPage
     {
-        private const string StateKey_Value = "ListPickerPage_State_Value";
+        private const string StateKey_Value = "PickerBoxPage_State_Value";
 
         private PageOrientation _lastOrientation;
 
@@ -72,12 +74,12 @@ namespace Microsoft.Phone.Controls
         private static readonly DependencyProperty IsOpenProperty =
             DependencyProperty.Register("IsOpen",
                                         typeof(bool),
-                                        typeof(ListPickerPage),
+                                        typeof(AccentColorPickerPage),
                                         new PropertyMetadata(false, new PropertyChangedCallback(OnIsOpenChanged)));
 
         private static void OnIsOpenChanged(DependencyObject o, DependencyPropertyChangedEventArgs e)
         {
-            (o as ListPickerPage).OnIsOpenChanged();
+            (o as AccentColorPickerPage).OnIsOpenChanged();
         }
 
         private void OnIsOpenChanged()
@@ -88,7 +90,7 @@ namespace Microsoft.Phone.Controls
         /// <summary>
         /// Creates a list picker page.
         /// </summary>
-        public ListPickerPage()
+        public AccentColorPickerPage()
         {
             InitializeComponent();
 
@@ -103,28 +105,7 @@ namespace Microsoft.Phone.Controls
         {
             OrientationChanged += OnOrientationChanged;
             _lastOrientation = Orientation;
-
-            // Customize the ApplicationBar Buttons by providing the right text
-            if (null != ApplicationBar)
-            {
-                foreach (object obj in ApplicationBar.Buttons)
-                {
-                    IApplicationBarIconButton button = obj as IApplicationBarIconButton;
-                    if (null != button)
-                    {
-                        if ("DONE" == button.Text)
-                        {
-                            button.Text = LocalizedResources.ControlResources.DateTimePickerDoneText;
-                            button.Click += OnDoneButtonClick;
-                        }
-                        else if ("CANCEL" == button.Text)
-                        {
-                            button.Text = LocalizedResources.ControlResources.DateTimePickerCancelText;
-                            button.Click += OnCancelButtonClick;
-                        }
-                    }
-                }
-            }
+            OnOrientationChanged(this, new OrientationChangedEventArgs(Orientation));
 
             // Add a projection for each list item and turn it to -90
             // (rotationX) so it is hidden.
@@ -138,12 +119,12 @@ namespace Microsoft.Phone.Controls
             }
             headerProjection.RotationX = -90;
 
-            Picker.Opacity = 1;
+            PickerContainer.Opacity = 1;
 
             Dispatcher.BeginInvoke(() =>
-                {
-                    IsOpen = true;
-                });
+            {
+                IsOpen = true;
+            });
         }
 
         private void OnUnloaded(object sender, RoutedEventArgs e)
@@ -205,48 +186,12 @@ namespace Microsoft.Phone.Controls
 
             Picker.DataContext = Items;
 
-            Picker.SelectionMode = SelectionMode;
-
             if (null != FullModeItemTemplate)
             {
                 Picker.ItemTemplate = FullModeItemTemplate;
             }
 
-            if (SelectionMode == SelectionMode.Single)
-            {
-                ApplicationBar.IsVisible = false;
-
-                Picker.SelectedItem = SelectedItem;
-            }
-            else
-            {
-                ApplicationBar.IsVisible = true;
-                Picker.ItemContainerStyle = (Style)Resources["ListBoxItemCheckedStyle"];
-
-                foreach (object item in Items)
-                {
-                    if (null != SelectedItems && SelectedItems.Contains(item))
-                    {
-                        Picker.SelectedItems.Add(item);
-                    }
-                }
-            }
-        }
-
-        private void OnDoneButtonClick(object sender, EventArgs e)
-        {
-            // Commit the value and close
-            SelectedItem = Picker.SelectedItem;
-            SelectedItems = Picker.SelectedItems;
-            ClosePickerPage();
-        }
-
-        private void OnCancelButtonClick(object sender, EventArgs e)
-        {
-            // Close without committing a value
-            SelectedItem = null;
-            SelectedItems = null;
-            ClosePickerPage();
+            Picker.SelectedItem = SelectedItem;
         }
 
         /// <summary>
@@ -263,7 +208,6 @@ namespace Microsoft.Phone.Controls
             // Cancel back action so we can play the Close state animation (then go back)
             e.Cancel = true;
             SelectedItem = null;
-            SelectedItems = null;
             ClosePickerPage();
         }
 
@@ -272,7 +216,7 @@ namespace Microsoft.Phone.Controls
             // Prevent user from selecting an item as the picker is closing,
             // disabling the control would cause the UI to change so instead
             // it's hidden from hittesting.
-            Picker.IsHitTestVisible = false;
+            PickerContainer.IsHitTestVisible = false;
 
             IsOpen = false;
         }
@@ -300,7 +244,7 @@ namespace Microsoft.Phone.Controls
             base.OnNavigatedFrom(e);
 
             // Save Value if navigating away from application
-            if (e.Uri.IsExternalNavigation())
+            if (!e.IsNavigationInitiator)
             {
                 State[StateKey_Value] = StateKey_Value;
             }
@@ -320,8 +264,8 @@ namespace Microsoft.Phone.Controls
                 {
                     case PageOrientation.Portrait:
                     case PageOrientation.PortraitUp:
-                        HeaderTitle.Margin = new Thickness(24, 12, 12, 12);
-                        Picker.Margin = new Thickness(24, 12, 0, 0);
+                        HeaderTitle.Margin = new Thickness(23, 16, 0, 27);
+                        PickerContainer.Margin = new Thickness(24, 12, 0, 0);
 
                         transitionElement.Mode = (_lastOrientation == PageOrientation.LandscapeLeft) ?
                         RotateTransitionMode.In90Counterclockwise : RotateTransitionMode.In90Clockwise;
@@ -329,20 +273,25 @@ namespace Microsoft.Phone.Controls
                         break;
                     case PageOrientation.Landscape:
                     case PageOrientation.LandscapeLeft:
-                        HeaderTitle.Margin = new Thickness(24, 24, 0, 0);
-                        Picker.Margin = new Thickness(24, 24, 0, 0);
+                        HeaderTitle.Margin = new Thickness(23, 32, 0, 0);
+                        PickerContainer.Margin = new Thickness(24, 24, 0, 0);
 
                         transitionElement.Mode = (_lastOrientation == PageOrientation.LandscapeRight) ?
                         RotateTransitionMode.In180Counterclockwise : RotateTransitionMode.In90Clockwise;
                         break;
                     case PageOrientation.LandscapeRight:
-                        HeaderTitle.Margin = new Thickness(24, 24, 0, 0);
-                        Picker.Margin = new Thickness(24, 24, 0, 0);
+                        HeaderTitle.Margin = new Thickness(95, 32, 0, 0);
+                        PickerContainer.Margin = new Thickness(96, 24, 0, 0);
 
                         transitionElement.Mode = (_lastOrientation == PageOrientation.PortraitUp) ?
                         RotateTransitionMode.In90Counterclockwise : RotateTransitionMode.In180Clockwise;
                         break;
                 }
+            }
+
+            if (newOrientation == _lastOrientation)
+            {
+                return;
             }
 
             PhoneApplicationPage phoneApplicationPage = (PhoneApplicationPage)(((PhoneApplicationFrame)Application.Current.RootVisual)).Content;
@@ -363,11 +312,7 @@ namespace Microsoft.Phone.Controls
                 // If the Picker is scrolling stop it from moving, this is both
                 // consistant with Metro and allows for attaching the animations
                 // to the correct, in view items.
-                ScrollViewer scrollViewer = Picker.GetVisualChildren().OfType<ScrollViewer>().FirstOrDefault();
-                if (scrollViewer != null)
-                {
-                    scrollViewer.ScrollToVerticalOffset(scrollViewer.VerticalOffset);
-                }
+                ScrollViewer.ScrollToVerticalOffset(ScrollViewer.VerticalOffset);
 
                 if (!IsOpen)
                 {
@@ -382,7 +327,7 @@ namespace Microsoft.Phone.Controls
                 for (int i = 0; i < _itemsToAnimate.Count; i++)
                 {
                     FrameworkElement element = (FrameworkElement)_itemsToAnimate[i].Target;
-                    Storyboard board = AnimationForElement(element, i + 1);
+                    Storyboard board = AnimationForElement(element, i / 4 + 1);
                     mainBoard.Children.Add(board);
                 }
 
@@ -431,15 +376,13 @@ namespace Microsoft.Phone.Controls
 
         private void OnPickerTapped(object sender, System.Windows.Input.GestureEventArgs e)
         {
-            // We listen to the tap event because SelectionChanged does not fire if the user picks the already selected item.
-
-            // Only close the page in Single Selection mode.
-            if (SelectionMode == SelectionMode.Single)
+            if (((FrameworkElement)e.OriginalSource).DataContext == Picker.DataContext)
             {
-                // Commit the value and close
-                SelectedItem = Picker.SelectedItem;
-                ClosePickerPage();
+                return;
             }
+
+            SelectedItem = Picker.SelectedItem;
+            ClosePickerPage();
         }
     }
 }

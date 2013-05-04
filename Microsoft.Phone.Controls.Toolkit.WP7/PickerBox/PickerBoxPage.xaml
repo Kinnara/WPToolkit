@@ -6,7 +6,7 @@
 -->
 
 <phone:PhoneApplicationPage 
-    x:Class="Microsoft.Phone.Controls.ListPickerPage"
+    x:Class="Microsoft.Phone.Controls.PickerBoxPage"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
@@ -87,15 +87,20 @@
             <RowDefinition Height="Auto"/>
             <RowDefinition/>
         </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
 
         <!-- Header Title -->
         <TextBlock
             x:Name="HeaderTitle"
             Grid.Row="0"
+            Grid.Column="1"
             FontFamily="{StaticResource PhoneFontFamilySemiBold}"
             FontSize="{StaticResource PhoneFontSizeMedium}"
             Foreground="{StaticResource PhoneForegroundBrush}"
-            Margin="24 12 12 12">
+            Margin="24 16 0 15">
             <TextBlock.Projection>
                 <PlaneProjection RotationX="-90"/>
             </TextBlock.Projection>
@@ -105,11 +110,14 @@
         <ListBox
             x:Name="Picker"
             Grid.Row="1"
+            Grid.Column="1"
             ItemsSource="{Binding}"
             Opacity="0"
             toolkit:TiltEffect.IsTiltEnabled="True"
-            Margin="24 12 0 0" 
+            Margin="24 24 0 0" 
             Tap="OnPickerTapped"/>
+
+        <Rectangle x:Name="ApplicationBarPlaceholder" Width="72" Grid.RowSpan="2"/>
     </Grid>
 
     <phone:PhoneApplicationPage.ApplicationBar>

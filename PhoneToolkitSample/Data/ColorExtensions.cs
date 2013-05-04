@@ -17,16 +17,26 @@ namespace PhoneToolkitSample.Data
         /// <summary>
         /// An array of all the names of the accent colors.
         /// </summary>
-        private static string[] _accentColors = { "magenta", 
-                                                  "purple",
+        private static string[] _accentColors = { "lime", 
+                                                  "green",
+                                                  "emerald", 
                                                   "teal", 
-                                                  "lime", 
-                                                  "brown", 
-                                                  "pink", 
-                                                  "mango",
-                                                  "blue",
+                                                  "cyan", 
+                                                  "cobalt", 
+                                                  "indigo",
+                                                  "violet",
+                                                  "pink",
+                                                  "magenta",
+                                                  "crimson",
                                                   "red",
-                                                  "green" };
+                                                  "orange",
+                                                  "amber",
+                                                  "yellow",
+                                                  "brown",
+                                                  "olive",
+                                                  "steel",
+                                                  "mauve",
+                                                  "taupe" };
 
 
         /// <summary>

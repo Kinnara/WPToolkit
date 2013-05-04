@@ -77,7 +77,8 @@
                     <HyperlinkButton Content="Toolkit on CodePlex" 
                                      NavigateUri="http://silverlight.codeplex.com/"
                                      TargetName="_self"
-                                     Foreground="{StaticResource PhoneAccentBrush}" />
+                                     Foreground="{StaticResource PhoneAccentBrush}"
+                                     toolkit:TiltEffect.SuppressTilt="True" />
                 </StackPanel>
             </ScrollViewer>
         </Grid>

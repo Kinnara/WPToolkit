@@ -27,7 +27,7 @@ namespace System.Windows.Controls
         /// <param name="parent">The parent framework element.</param>
         /// <param name="applyTemplates">Specifies whether to apply templates on the traversed framework elements</param>
         /// <returns>The first logical child of the framework element of the specified type.</returns>
-        internal static T GetFirstLogicalChildByType<T>(this FrameworkElement parent, bool applyTemplates)
+        public static T GetFirstLogicalChildByType<T>(this FrameworkElement parent, bool applyTemplates)
             where T : FrameworkElement
         {
             Debug.Assert(parent != null, "The parent cannot be null.");
@@ -71,7 +71,7 @@ namespace System.Windows.Controls
         /// <param name="applyTemplates">Specifies whether to apply templates on the traversed framework elements</param>
         /// <returns>The logical children of the framework element of the specified type.</returns>
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification="File is linked to projects that target previous platforms that require this method.")]
-        internal static IEnumerable<T> GetLogicalChildrenByType<T>(this FrameworkElement parent, bool applyTemplates)
+        public static IEnumerable<T> GetLogicalChildrenByType<T>(this FrameworkElement parent, bool applyTemplates)
                 where T : FrameworkElement
         {
             Debug.Assert(parent != null, "The parent cannot be null.");
@@ -117,7 +117,7 @@ namespace System.Windows.Controls
         /// <returns>
         /// The first parent of the framework element of the specified type.
         /// </returns>
-        internal static T GetParentByType<T>(this FrameworkElement element)
+        public static T GetParentByType<T>(this FrameworkElement element)
             where T : FrameworkElement
         {
             Debug.Assert(element != null, "The element cannot be null.");

@@ -19,10 +19,5 @@ namespace Microsoft.Phone.Controls
         /// Expanded mode; all items are visible on the original page.
         /// </summary>
         Expanded,
-
-        /// <summary>
-        /// Full mode; all items are visible in a separate Popup.
-        /// </summary>
-        Full,
     };
 }

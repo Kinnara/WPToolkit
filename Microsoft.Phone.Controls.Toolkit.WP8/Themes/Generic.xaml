@@ -506,6 +506,7 @@
         <Setter Property="Background" Value="Transparent"/>
         <Setter Property="BorderThickness" Value="{StaticResource PhoneBorderThickness}"/>
         <Setter Property="Foreground" Value="{StaticResource PhoneForegroundBrush}"/>
+        <Setter Property="FontSize" Value="{StaticResource PhoneFontSizeMediumLarge}"/>
         <Setter Property="HorizontalContentAlignment" Value="Left"/>
         <Setter Property="PickerPageUri" Value="/Microsoft.Phone.Controls.Toolkit;component/DateTimePickers/DatePickerPage.xaml"/>
         <!-- For RTL, the pattern needs to be reversed -->
@@ -518,6 +519,7 @@
                             Content="{TemplateBinding Header}"
                             ContentTemplate="{TemplateBinding HeaderTemplate}"
                             Foreground="{StaticResource PhoneTextMidContrastBrush}"
+                            FontSize="{StaticResource PhoneFontSizeNormal}"
                             HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
                             Margin="12,0,12,-4"/>
                         <Button
@@ -526,7 +528,9 @@
                             Background="{TemplateBinding Background}"
                             BorderThickness="{TemplateBinding BorderThickness}"
                             FontFamily="{TemplateBinding FontFamily}"
+                            FontSize="{TemplateBinding FontSize}"
                             Foreground="{TemplateBinding Foreground}"
+                            Padding="10,3,10,5"
                             Height="72"
                             HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"/>
                     </StackPanel>
@@ -539,6 +543,7 @@
         <Setter Property="Background" Value="Transparent"/>
         <Setter Property="BorderThickness" Value="{StaticResource PhoneBorderThickness}"/>
         <Setter Property="Foreground" Value="{StaticResource PhoneForegroundBrush}"/>
+        <Setter Property="FontSize" Value="{StaticResource PhoneFontSizeMediumLarge}"/>
         <Setter Property="HorizontalContentAlignment" Value="Left"/>
         <Setter Property="PickerPageUri" Value="/Microsoft.Phone.Controls.Toolkit;component/DateTimePickers/TimePickerPage.xaml"/>
         <!-- Ideally, the short time pattern 't' would be correct. However, it does not respect
@@ -553,6 +558,7 @@
                             Content="{TemplateBinding Header}"
                             ContentTemplate="{TemplateBinding HeaderTemplate}"
                             Foreground="{StaticResource PhoneTextMidContrastBrush}"
+                            FontSize="{StaticResource PhoneFontSizeNormal}"
                             HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
                             Margin="12,0,12,-4"/>
                         <Button
@@ -561,7 +567,9 @@
                             Background="{TemplateBinding Background}"
                             BorderThickness="{TemplateBinding BorderThickness}"
                             FontFamily="{TemplateBinding FontFamily}"
+                            FontSize="{TemplateBinding FontSize}"
                             Foreground="{TemplateBinding Foreground}"
+                            Padding="10,3,10,5"
                             Height="72"
                             HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"/>
                     </StackPanel>
@@ -577,13 +585,11 @@
         <Setter Property="BorderThickness" Value="{StaticResource PhoneBorderThickness}"/>
         <Setter Property="FontSize" Value="{StaticResource PhoneFontSizeMediumLarge}"/>
         <Setter Property="HorizontalContentAlignment" Value="Left"/>
-        <Setter Property="Margin" Value="{StaticResource PhoneTouchTargetOverhang}"/>
-        <Setter Property="PickerPageUri" Value="/Microsoft.Phone.Controls.Toolkit;component/ListPicker/ListPickerPage.xaml"/>
 
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="controls:ListPicker">
-                    <StackPanel>
+                    <StackPanel Margin="0,0,0,26">
                         <VisualStateManager.VisualStateGroups>
                             <VisualStateGroup x:Name="PickerStates">
                                 <VisualState x:Name="Normal"/>
@@ -598,7 +604,7 @@
                                                 KeyTime="0"/>
                                         </ObjectAnimationUsingKeyFrames>
                                         <ObjectAnimationUsingKeyFrames
-                                            Storyboard.TargetName="Border"
+                                            Storyboard.TargetName="PickerBackground"
                                             Storyboard.TargetProperty="Background"
                                             Duration="0">
                                             <DiscreteObjectKeyFrame
@@ -606,7 +612,7 @@
                                                 KeyTime="0"/>
                                         </ObjectAnimationUsingKeyFrames>
                                         <ObjectAnimationUsingKeyFrames
-                                            Storyboard.TargetName="Border"
+                                            Storyboard.TargetName="PickerBackground"
                                             Storyboard.TargetProperty="BorderBrush"
                                             Duration="0">
                                             <DiscreteObjectKeyFrame
@@ -618,7 +624,15 @@
                                 <VisualState x:Name="Disabled">
                                     <Storyboard>
                                         <ObjectAnimationUsingKeyFrames
-                                            Storyboard.TargetName="Border"
+                                            Storyboard.TargetName="HeaderContainer"
+                                            Storyboard.TargetProperty="Foreground"
+                                            Duration="0">
+                                            <DiscreteObjectKeyFrame
+                                                Value="{StaticResource PhoneDisabledBrush}"
+                                                KeyTime="0"/>
+                                        </ObjectAnimationUsingKeyFrames>
+                                        <ObjectAnimationUsingKeyFrames
+                                            Storyboard.TargetName="PickerBackground"
                                             Storyboard.TargetProperty="Background"
                                             Duration="0">
                                             <DiscreteObjectKeyFrame
@@ -626,7 +640,7 @@
                                                 KeyTime="0"/>
                                         </ObjectAnimationUsingKeyFrames>
                                         <ObjectAnimationUsingKeyFrames
-                                            Storyboard.TargetName="Border"
+                                            Storyboard.TargetName="PickerBackground"
                                             Storyboard.TargetProperty="BorderBrush"
                                             Duration="0">
                                             <DiscreteObjectKeyFrame
@@ -646,22 +660,23 @@
                             </VisualStateGroup>
                         </VisualStateManager.VisualStateGroups>
                         <ContentControl
+                            x:Name="HeaderContainer"
                             Content="{TemplateBinding Header}"
                             ContentTemplate="{TemplateBinding HeaderTemplate}"
                             Foreground="{StaticResource PhoneTextMidContrastBrush}"
                             FontSize="{StaticResource PhoneFontSizeNormal}"
                             HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
-                            Margin="0 0 0 8"/>
-                        <Grid>
-                            <Border x:Name="Border"
+                            Margin="11 -8 0 -5"/>
+                        <Border x:Name="Border" Background="Transparent">
+                            <Border x:Name="PickerBackground"
                                     Background="{TemplateBinding Background}"
                                     BorderBrush="{TemplateBinding BorderBrush}"
-                                    BorderThickness="{TemplateBinding BorderThickness}">
+                                    BorderThickness="{TemplateBinding BorderThickness}"
+                                    Margin="{StaticResource PhoneTouchTargetOverhang}">
                                 <UserControl x:Name="UserControl" Foreground="{TemplateBinding Foreground}">
                                     <StackPanel>
-                                        <TextBlock x:Name="MultipleSelectionModeSummary" Margin="8 2 8 6" />
                                         <Canvas x:Name="ItemsPresenterHost" MinHeight="42">
-                                            <ItemsPresenter x:Name="ItemsPresenter">
+                                            <ItemsPresenter x:Name="ItemsPresenter" IsHitTestVisible="False">
                                                 <ItemsPresenter.RenderTransform>
                                                     <TranslateTransform x:Name="ItemsPresenterTranslateTransform"/>
                                                 </ItemsPresenter.RenderTransform>
@@ -670,7 +685,7 @@
                                     </StackPanel>
                                 </UserControl>
                             </Border>
-                        </Grid>
+                        </Border>
                     </StackPanel>
                 </ControlTemplate>
             </Setter.Value>
@@ -680,7 +695,7 @@
     <Style TargetType="controls:ListPickerItem">
         <Setter Property="Background" Value="Transparent"/>
         <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
-        <Setter Property="Padding" Value="8 12 8 16"/>
+        <Setter Property="Padding" Value="7 12 0 16"/>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="controls:ListPickerItem">
@@ -710,6 +725,41 @@
                             HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
                             Margin="{TemplateBinding Padding}"/> <!--Foreground="{TemplateBinding Foreground}"-->
                     </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style TargetType="controls:PickerBox">
+        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="BorderThickness" Value="{StaticResource PhoneBorderThickness}"/>
+        <Setter Property="FontSize" Value="{StaticResource PhoneFontSizeMediumLarge}"/>
+        <Setter Property="Foreground" Value="{StaticResource PhoneForegroundBrush}"/>
+        <Setter Property="HorizontalContentAlignment" Value="Left"/>
+        <Setter Property="PickerPageUri" Value="/Microsoft.Phone.Controls.Toolkit;component/PickerBox/PickerBoxPage.xaml"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="controls:PickerBox">
+                    <StackPanel Margin="0,0,0,26">
+                        <ContentControl
+                            Content="{TemplateBinding Header}"
+                            ContentTemplate="{TemplateBinding HeaderTemplate}"
+                            Foreground="{StaticResource PhoneTextMidContrastBrush}"
+                            FontSize="{StaticResource PhoneFontSizeNormal}"
+                            HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
+                            Margin="11,-8,0,-5"/>
+                        <Button
+                            x:Name="Button"
+                            ContentTemplate="{TemplateBinding ItemTemplate}"
+                            Background="{TemplateBinding Background}"
+                            BorderThickness="{TemplateBinding BorderThickness}"
+                            FontFamily="{TemplateBinding FontFamily}"
+                            FontSize="{TemplateBinding FontSize}"
+                            Foreground="{TemplateBinding Foreground}"
+                            Padding="7,3,0,5"
+                            Height="72"
+                            HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"/>
+                    </StackPanel>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
