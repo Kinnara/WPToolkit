@@ -47,7 +47,7 @@
               toolkit:TiltEffect.IsTiltEnabled="True"
               Opacity="0"
               Margin="24 12 0 0">
-            <ScrollViewer x:Name="ScrollViewer" Margin="-12 0 0 0">
+            <toolkit:PhoneScrollViewer x:Name="ScrollViewer" Margin="-12 0 0 0">
                 <ListBox
                     x:Name="Picker"
                     ItemsSource="{Binding}"
@@ -61,7 +61,7 @@
                         </ItemsPanelTemplate>
                     </ListBox.ItemsPanel>
                 </ListBox>
-            </ScrollViewer>
+            </toolkit:PhoneScrollViewer>
         </Grid>
     </Grid>
 

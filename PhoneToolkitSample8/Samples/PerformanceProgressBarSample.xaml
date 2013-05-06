@@ -20,7 +20,8 @@
     SupportedOrientations="PortraitOrLandscape" Orientation="Portrait"
     mc:Ignorable="d" d:DesignHeight="768" d:DesignWidth="480"
     shell:SystemTray.IsVisible="True"
-    toolkit:TiltEffect.IsTiltEnabled="True">
+    toolkit:TiltEffect.IsTiltEnabled="True"
+    OrientationChanged="OnOrientationChanged">
 
     <Grid Background="Transparent">
         <Grid.RowDefinitions>
@@ -28,13 +29,18 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
-        <StackPanel Grid.Row="0" Margin="12,17,0,28">
+        <StackPanel x:Name="PortraitTitlePanel" Grid.Row="0" Margin="12,17,0,28">
             <TextBlock Text="TOOLKIT SAMPLES" Style="{StaticResource PhoneTextNormalStyle}"/>
             <TextBlock Text="progress bar" Margin="9,-7,0,0" Style="{StaticResource PhoneTextTitle1Style}"/>
         </StackPanel>
 
-        <ScrollViewer Grid.Row="1" Margin="12,0,12,0">
-            <StackPanel>
+        <toolkit:PhoneScrollViewer Grid.Row="1">
+            <StackPanel Margin="12,0,12,0">
+                <StackPanel x:Name="LandscapeTitlePanel" Grid.Row="0" Margin="0,25,-12,28" Visibility="Collapsed">
+                    <TextBlock Text="TOOLKIT SAMPLES" Style="{StaticResource PhoneTextNormalStyle}"/>
+                    <TextBlock Text="progress bar" Margin="9,-7,0,0" Style="{StaticResource PhoneTextTitle1Style}"/>
+                </StackPanel>
+
                 <TextBlock
                     TextWrapping="Wrap"
                     Style="{StaticResource PhoneTextNormalStyle}"
@@ -68,14 +74,41 @@
                     Text="Press the button to block the UI thread for 4 seconds."/>
 
             </StackPanel>
-        </ScrollViewer>
+        </toolkit:PhoneScrollViewer>
 
         <ProgressBar
+            Grid.RowSpan="2"
             VerticalAlignment="Top"
             Background="{x:Null}"
             Margin="0,10,0,0"
             x:Name="_standardProgressBar"
             Foreground="Red"/>
+
+        <VisualStateManager.VisualStateGroups>
+            <VisualStateGroup x:Name="OrientationStates">
+                <VisualState x:Name="PortraitUp"/>
+                <VisualState x:Name="LandscapeLeft">
+                    <Storyboard>
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="PortraitTitlePanel" Storyboard.TargetProperty="Visibility">
+                            <DiscreteObjectKeyFrame KeyTime="0" Value="Collapsed" />
+                        </ObjectAnimationUsingKeyFrames>
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="LandscapeTitlePanel" Storyboard.TargetProperty="Visibility">
+                            <DiscreteObjectKeyFrame KeyTime="0" Value="Visible" />
+                        </ObjectAnimationUsingKeyFrames>
+                    </Storyboard>
+                </VisualState>
+                <VisualState x:Name="LandscapeRight">
+                    <Storyboard>
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="PortraitTitlePanel" Storyboard.TargetProperty="Visibility">
+                            <DiscreteObjectKeyFrame KeyTime="0" Value="Collapsed" />
+                        </ObjectAnimationUsingKeyFrames>
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="LandscapeTitlePanel" Storyboard.TargetProperty="Visibility">
+                            <DiscreteObjectKeyFrame KeyTime="0" Value="Visible" />
+                        </ObjectAnimationUsingKeyFrames>
+                    </Storyboard>
+                </VisualState>
+            </VisualStateGroup>
+        </VisualStateManager.VisualStateGroups>
     </Grid>
 
 </phone:PhoneApplicationPage>

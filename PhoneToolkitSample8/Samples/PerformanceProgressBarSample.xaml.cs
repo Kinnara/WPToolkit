@@ -18,6 +18,8 @@ namespace PhoneToolkitSample.Samples
         {
             InitializeComponent();
 
+            UpdateOrientationState(false);
+
             MessageBox.Show(
 @"The PerformanceProgressBar is obsolete in Windows Phone 8, as the built-in progress bar control now animates off of the UI thread.
 
@@ -47,5 +49,14 @@ This sample demonstrates the usage of either the progress indicator or the progr
             _progressIndicator.IsIndeterminate = false;
         }
 
+        private void OnOrientationChanged(object sender, OrientationChangedEventArgs e)
+        {
+            UpdateOrientationState(true);
+        }
+
+        private void UpdateOrientationState(bool useTransitions)
+        {
+            VisualStateManager.GoToState(this, Orientation.ToString(), useTransitions);
+        }
     }
 }
