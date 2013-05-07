@@ -204,6 +204,13 @@
                                 Header="transitions"
                                 Content="Beautifully animate between pages"/>
                         </HyperlinkButton>
+                        <HyperlinkButton NavigateUri="/Samples/WaitCursorSample.xaml"
+                                         Style="{StaticResource HyperlinkEmptyStyle}">
+                            <localControls:HeaderedContentControl
+                                Style="{StaticResource MultilineHyperlinkStyle}"
+                                Header="waitcursor"
+                                Content="takes over and dims the screen"/>
+                        </HyperlinkButton>
                         <HyperlinkButton NavigateUri="/Samples/WrapPanelSample.xaml"
                                          Style="{StaticResource HyperlinkEmptyStyle}">
                             <localControls:HeaderedContentControl

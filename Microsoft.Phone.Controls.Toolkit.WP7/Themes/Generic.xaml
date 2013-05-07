@@ -898,10 +898,6 @@
                         Padding="{TemplateBinding Padding}">
                         <VisualStateManager.VisualStateGroups>
                             <VisualStateGroup x:Name="VisibilityStates">
-                                <VisualStateGroup.Transitions>
-                                    <VisualTransition GeneratedDuration="0:0:0.25" To="Normal"/>
-                                    <VisualTransition GeneratedDuration="0:0:0.75" To="Hidden"/>
-                                </VisualStateGroup.Transitions>
                                 <VisualState x:Name="Normal"/>
                                 <VisualState x:Name="Hidden">
                                     <Storyboard>
@@ -2066,6 +2062,47 @@
                             StrokeThickness="{TemplateBinding StrokeThickness}"
                             Stretch="Fill"
                             Data="F1 M 5.0,0.0 L 6.1,3.5 L 9.8,3.5 L 6.8,5.6 L 7.9,9.0 L 5.0,6.9 L 2.1,9.1 L 3.2,5.6 L 0.2,3.5 L 3.9,3.5 L 5.0,0.0 Z" />
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style TargetType="controls:WaitCursorControl">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="controls:WaitCursorControl">
+                    <Border x:Name="LayoutRoot" Background="{TemplateBinding Background}">
+                        <VisualStateManager.VisualStateGroups>
+                            <VisualStateGroup x:Name="VisibilityStates">
+                                <VisualStateGroup.Transitions>
+                                    <VisualTransition GeneratedDuration="0:0:0.42" To="Normal">
+                                        <VisualTransition.GeneratedEasingFunction>
+                                            <ExponentialEase EasingMode="EaseInOut"/>
+                                        </VisualTransition.GeneratedEasingFunction>
+                                    </VisualTransition>
+                                    <VisualTransition GeneratedDuration="0:0:0.42" To="Hidden">
+                                        <VisualTransition.GeneratedEasingFunction>
+                                            <ExponentialEase EasingMode="EaseInOut"/>
+                                        </VisualTransition.GeneratedEasingFunction>
+                                    </VisualTransition>
+                                </VisualStateGroup.Transitions>
+                                <VisualState x:Name="Normal"/>
+                                <VisualState x:Name="Hidden">
+                                    <Storyboard>
+                                        <DoubleAnimation Storyboard.TargetName="LayoutRoot" Storyboard.TargetProperty="Opacity" To="0" Duration="0"/>
+                                    </Storyboard>
+                                </VisualState>
+                            </VisualStateGroup>
+                        </VisualStateManager.VisualStateGroups>
+                        <StackPanel VerticalAlignment="Center">
+                            <controls:PerformanceProgressBar x:Name="ProgressBar" IsIndeterminate="True" Padding="0" Margin="-12,40,0,9"/>
+                            <TextBlock Text="{TemplateBinding Text}"
+                                       FontFamily="{StaticResource PhoneFontFamilyNormal}"
+                                       FontSize="{StaticResource PhoneFontSizeMedium}"
+                                       Height="31"
+                                       HorizontalAlignment="Center"/>
+                        </StackPanel>
+                    </Border>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>

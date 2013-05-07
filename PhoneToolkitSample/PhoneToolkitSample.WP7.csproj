@@ -170,6 +170,9 @@
     <Compile Include="Samples\TurnstileFeatherEffectSample2.xaml.cs">
       <DependentUpon>TurnstileFeatherEffectSample2.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Samples\WaitCursorSample.xaml.cs">
+      <DependentUpon>WaitCursorSample.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Samples\WrapPanelSample.xaml.cs">
       <DependentUpon>WrapPanelSample.xaml</DependentUpon>
     </Compile>
@@ -287,6 +290,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Samples\TurnstileFeatherEffectSample2.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Samples\WaitCursorSample.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

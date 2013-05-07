@@ -302,6 +302,15 @@
     <Compile Include="..\Microsoft.Phone.Controls.Toolkit\Primitives\TiltUserControl.cs">
       <Link>Primitives\TiltUserControl.cs</Link>
     </Compile>
+    <Compile Include="..\Microsoft.Phone.Controls.Toolkit\WaitCursor\WaitCursor.cs">
+      <Link>WaitCursor\WaitCursor.cs</Link>
+    </Compile>
+    <Compile Include="..\Microsoft.Phone.Controls.Toolkit\WaitCursor\WaitCursorControl.cs">
+      <Link>WaitCursor\WaitCursorControl.cs</Link>
+    </Compile>
+    <Compile Include="..\Microsoft.Phone.Controls.Toolkit\WaitCursor\WaitCursorService.cs">
+      <Link>WaitCursor\WaitCursorService.cs</Link>
+    </Compile>
     <Compile Include="Input\GestureListenerStatic.cs" />
     <Compile Include="..\Microsoft.Phone.Controls.Toolkit\Input\GestureHelperEventArgs.cs">
       <Link>Input\GestureHelperEventArgs.cs</Link>
