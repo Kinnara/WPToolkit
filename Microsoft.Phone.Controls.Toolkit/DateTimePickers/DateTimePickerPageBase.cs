@@ -121,8 +121,14 @@ namespace Microsoft.Phone.Controls.Primitives
                 }
             }
 
-            // Play the Open state
-            VisualStateManager.GoToState(this, OpenVisibilityStateName, true);
+            ApplyOrientation();
+
+            Opacity = 0;
+            AnimationHelper.InvokeOnSecondRendering(() =>
+            {
+                // Play the Open state
+                VisualStateManager.GoToState(this, OpenVisibilityStateName, true);
+            });
         }
 
         private void OnDataSourceSelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -173,6 +179,7 @@ namespace Microsoft.Phone.Controls.Primitives
 
             // Cancel back action so we can play the Close state animation (then go back)
             e.Cancel = true;
+            _value = null;
             ClosePickerPage();
         }
 
@@ -302,9 +309,26 @@ namespace Microsoft.Phone.Controls.Primitives
         }
 
         /// <summary>
+        /// Handles changes to the page's Orientation property.
+        /// </summary>
+        /// <param name="e">Event arguments.</param>
+        protected override void OnOrientationChanged(OrientationChangedEventArgs e)
+        {
+            if (null == e)
+            {
+                throw new ArgumentNullException("e");
+            }
+
+            base.OnOrientationChanged(e);
+            ApplyOrientation();
+        }
+
+        /// <summary>
         /// Sets the selectors and title flow direction.
         /// </summary>
         /// <param name="flowDirection">Flow direction to set.</param>
         internal abstract void SetFlowDirection(FlowDirection flowDirection);
+
+        internal abstract void ApplyOrientation();
     }
 }

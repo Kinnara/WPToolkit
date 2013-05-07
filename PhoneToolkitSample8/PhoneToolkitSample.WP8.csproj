@@ -601,7 +601,6 @@
     </Content>
     <Content Include="Images\app_bar_me_icon.png" />
     <Content Include="Images\maps.appbar.directions.dark.png" />
-    <Content Include="SplashScreenImage.jpg" />
     <Content Include="Toolkit.Content\ApplicationBar.Upload.png" />
   </ItemGroup>
   <ItemGroup>

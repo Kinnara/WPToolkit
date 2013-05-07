@@ -19,7 +19,10 @@
     FontSize="{StaticResource PhoneFontSizeNormal}"
     Foreground="{StaticResource PhoneForegroundBrush}"
     SupportedOrientations="PortraitOrLandscape" Orientation="Portrait"
-    mc:Ignorable="d" d:DesignHeight="728" d:DesignWidth="480">
+    mc:Ignorable="d" d:DesignHeight="728" d:DesignWidth="480"
+    shell:SystemTray.IsVisible="True"
+    shell:SystemTray.BackgroundColor="{StaticResource PhoneChromeColor}"
+    x:Name="Root">
 
     <primitives:DateTimePickerPageBase.Resources>
         <controls:DateTimePickerResources x:Key="DateTimePickerResources"/>
@@ -33,13 +36,18 @@
                         <DoubleAnimation
                             Storyboard.TargetName="PlaneProjection"
                             Storyboard.TargetProperty="RotationX"
-                            From="-45"
+                            From="-30"
                             To="0"
                             Duration="0:0:0.35">
                             <DoubleAnimation.EasingFunction>
                                 <ExponentialEase EasingMode="EaseOut" Exponent="6"/>
                             </DoubleAnimation.EasingFunction>
                         </DoubleAnimation>
+                        <DoubleAnimationUsingKeyFrames
+                            Storyboard.TargetName="Root"
+                            Storyboard.TargetProperty="Opacity">
+                            <EasingDoubleKeyFrame KeyTime="0" Value="1"/>
+                        </DoubleAnimationUsingKeyFrames>
                     </Storyboard>
                 </VisualState>
                 <VisualState x:Name="Closed">
@@ -47,12 +55,20 @@
                         <DoubleAnimation
                             Storyboard.TargetName="PlaneProjection"
                             Storyboard.TargetProperty="RotationX"
-                            To="90"
+                            From="0"
+                            To="30"
                             Duration="0:0:0.25">
                             <DoubleAnimation.EasingFunction>
                                 <ExponentialEase EasingMode="EaseIn" Exponent="15"/>
                             </DoubleAnimation.EasingFunction>
                         </DoubleAnimation>
+                        <DoubleAnimationUsingKeyFrames
+                            Storyboard.TargetName="Root"
+                            Storyboard.TargetProperty="Opacity">
+                            <EasingDoubleKeyFrame KeyTime="0" Value="1"/>
+                            <EasingDoubleKeyFrame KeyTime="0:0:0.24" Value="1"/>
+                            <EasingDoubleKeyFrame KeyTime="0:0:0.25" Value="0"/>
+                        </DoubleAnimationUsingKeyFrames>
                     </Storyboard>
                 </VisualState>
             </VisualStateGroup>
@@ -66,11 +82,11 @@
             <RowDefinition/>
         </Grid.RowDefinitions>
 
-        <!-- SystemTray placeholder -->
+        <!-- Landscape placeholder -->
         <Rectangle
-            x:Name="SystemTrayPlaceholder"
+            x:Name="LandscapePlaceholder"
             Grid.Row="0"
-            Height="32"/>
+            Height="8"/>
         <!-- Title -->
         <TextBlock
             x:Name="HeaderTitle"

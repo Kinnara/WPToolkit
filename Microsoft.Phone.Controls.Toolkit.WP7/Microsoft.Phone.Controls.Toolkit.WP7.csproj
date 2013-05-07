@@ -93,6 +93,9 @@
     <Compile Include="..\Microsoft.Phone.Controls.Toolkit\AutoCompleteBox\SelectorSelectionAdapter.cs">
       <Link>AutoCompleteBox\SelectorSelectionAdapter.cs</Link>
     </Compile>
+    <Compile Include="..\Microsoft.Phone.Controls.Toolkit\Common\AnimationHelper.cs">
+      <Link>Common\AnimationHelper.cs</Link>
+    </Compile>
     <Compile Include="..\Microsoft.Phone.Controls.Toolkit\Common\BindingEvaluator.cs">
       <Link>Common\BindingEvaluator.cs</Link>
     </Compile>

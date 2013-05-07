@@ -53,23 +53,6 @@ namespace Microsoft.Phone.Controls
         }
 
         /// <summary>
-        /// Handles changes to the page's Orientation property.
-        /// </summary>
-        /// <param name="e">Event arguments.</param>
-        protected override void OnOrientationChanged(OrientationChangedEventArgs e)
-        {
-            if (null == e)
-            {
-                throw new ArgumentNullException("e");
-            }
-
-            base.OnOrientationChanged(e);
-            SystemTrayPlaceholder.Visibility = (0 != (PageOrientation.Portrait & e.Orientation)) ?
-                Visibility.Visible :
-                Visibility.Collapsed;
-        }
-
-        /// <summary>
         /// Sets the selectors and title flow direction.
         /// </summary>
         /// <param name="flowDirection">Flow direction to set.</param>
@@ -80,6 +63,13 @@ namespace Microsoft.Phone.Controls
             PrimarySelector.FlowDirection = flowDirection;
             SecondarySelector.FlowDirection = flowDirection;
             TertiarySelector.FlowDirection = flowDirection;
+        }
+
+        internal override void ApplyOrientation()
+        {
+            LandscapePlaceholder.Visibility = (0 != (PageOrientation.Landscape & Orientation)) ?
+                Visibility.Visible :
+                Visibility.Collapsed;
         }
     }
 }
