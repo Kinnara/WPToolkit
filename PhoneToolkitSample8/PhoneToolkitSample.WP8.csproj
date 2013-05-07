@@ -568,29 +568,8 @@
     <Content Include="..\PhoneToolkitSample\Images\Venice.jpg">
       <Link>Images\Venice.jpg</Link>
     </Content>
-    <Content Include="..\PhoneToolkitSample\Toolkit.Content\ApplicationBar.Cancel.png">
-      <Link>Toolkit.Content\ApplicationBar.Cancel.png</Link>
-    </Content>
-    <Content Include="..\PhoneToolkitSample\Toolkit.Content\ApplicationBar.Check.png">
-      <Link>Toolkit.Content\ApplicationBar.Check.png</Link>
-    </Content>
-    <Content Include="..\PhoneToolkitSample\Toolkit.Content\ApplicationBar.Delete.png">
-      <Link>Toolkit.Content\ApplicationBar.Delete.png</Link>
-    </Content>
-    <Content Include="..\PhoneToolkitSample\Toolkit.Content\ApplicationBar.Select.png">
-      <Link>Toolkit.Content\ApplicationBar.Select.png</Link>
-    </Content>
     <Content Include="Assets\AlignmentGrid.png" />
     <Content Include="Assets\ApplicationIcon.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Assets\Tiles\FlipCycleTileLarge.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Assets\Tiles\FlipCycleTileMedium.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Assets\Tiles\FlipCycleTileSmall.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Assets\Tiles\IconicTileMediumLarge.png">
@@ -601,6 +580,10 @@
     </Content>
     <Content Include="Images\app_bar_me_icon.png" />
     <Content Include="Images\maps.appbar.directions.dark.png" />
+    <Content Include="Toolkit.Content\ApplicationBar.Cancel.png" />
+    <Content Include="Toolkit.Content\ApplicationBar.Check.png" />
+    <Content Include="Toolkit.Content\ApplicationBar.Delete.png" />
+    <Content Include="Toolkit.Content\ApplicationBar.Select.png" />
     <Content Include="Toolkit.Content\ApplicationBar.Upload.png" />
   </ItemGroup>
   <ItemGroup>

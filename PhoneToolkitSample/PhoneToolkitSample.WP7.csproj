@@ -335,7 +335,6 @@
     <Content Include="Images\SteakSandwich.jpg" />
     <Content Include="Images\Venice.jpg" />
     <Content Include="Images\Search.png" />
-    <Content Include="SplashScreenImage.jpg" />
     <Content Include="Toolkit.Content\ApplicationBar.Delete.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
