@@ -209,7 +209,7 @@
                             <localControls:HeaderedContentControl
                                 Style="{StaticResource MultilineHyperlinkStyle}"
                                 Header="waitcursor"
-                                Content="takes over and dims the screen"/>
+                                Content="Takes over and dims the screen"/>
                         </HyperlinkButton>
                         <HyperlinkButton NavigateUri="/Samples/WrapPanelSample.xaml"
                                          Style="{StaticResource HyperlinkEmptyStyle}">

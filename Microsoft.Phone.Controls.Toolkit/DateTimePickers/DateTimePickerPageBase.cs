@@ -79,26 +79,6 @@ namespace Microsoft.Phone.Controls.Primitives
                 column++;
             }
 
-            // Hook up to storyboard(s)
-            FrameworkElement templateRoot = VisualTreeHelper.GetChild(this, 0) as FrameworkElement;
-            if (null != templateRoot)
-            {
-                foreach (VisualStateGroup group in VisualStateManager.GetVisualStateGroups(templateRoot))
-                {
-                    if (VisibilityGroupName == group.Name)
-                    {
-                        foreach (VisualState state in group.States)
-                        {
-                            if ((ClosedVisibilityStateName == state.Name) && (null != state.Storyboard))
-                            {
-                                _closedStoryboard = state.Storyboard;
-                                _closedStoryboard.Completed += OnClosedStoryboardCompleted;
-                            }
-                        }
-                    }
-                }
-            }
-
             // Customize the ApplicationBar Buttons by providing the right text
             if (null != ApplicationBar)
             {
@@ -123,7 +103,7 @@ namespace Microsoft.Phone.Controls.Primitives
 
             ApplyOrientation();
 
-            Opacity = 0;
+            VisualStateManager.GoToState(this, ClosedVisibilityStateName, false);
             AnimationHelper.InvokeOnSecondRendering(() =>
             {
                 // Play the Open state
@@ -185,6 +165,29 @@ namespace Microsoft.Phone.Controls.Primitives
 
         private void ClosePickerPage()
         {
+            if (null == _closedStoryboard)
+            {
+                // Hook up to storyboard(s)
+                FrameworkElement templateRoot = VisualTreeHelper.GetChild(this, 0) as FrameworkElement;
+                if (null != templateRoot)
+                {
+                    foreach (VisualStateGroup group in VisualStateManager.GetVisualStateGroups(templateRoot))
+                    {
+                        if (VisibilityGroupName == group.Name)
+                        {
+                            foreach (VisualState state in group.States)
+                            {
+                                if ((ClosedVisibilityStateName == state.Name) && (null != state.Storyboard))
+                                {
+                                    _closedStoryboard = state.Storyboard;
+                                    _closedStoryboard.Completed += OnClosedStoryboardCompleted;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+
             // Play the Close state (if available)
             if (null != _closedStoryboard)
             {
