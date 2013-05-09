@@ -36,7 +36,7 @@ namespace Microsoft.Phone.Controls
         /// <summary>
         /// Width of the Menu in Landscape
         /// </summary>
-        private const double LandscapeWidth = 480;
+        private const double LandscapeWidth = 486;
 
         /// <summary>
         /// Width of the system tray in Landscape Mode
@@ -157,6 +157,10 @@ namespace Microsoft.Phone.Controls
         /// Whether the opening animation is reversed (bottom to top or right to left).
         /// </summary>
         private bool _reversed;
+
+        private BindingExpressionBase _dataContextBindingExpression;
+
+        private Transform _originalPageTransform;
 
         /// <summary>
         /// Gets or sets the owning object for the ContextMenu.
@@ -510,7 +514,7 @@ namespace Microsoft.Phone.Controls
 
             SolidColorBrush backgroundBrush;
             SolidColorBrush borderBrush;
-            if (DesignerProperties.IsInDesignTool || Resources.IsDarkThemeActive())
+            if (DesignerProperties.IsInDesignTool || Application.Current.Resources.IsDarkThemeActive())
             {
                 backgroundBrush = new SolidColorBrush(Colors.White);
                 borderBrush = new SolidColorBrush(Colors.Black);
@@ -637,51 +641,6 @@ namespace Microsoft.Phone.Controls
         }
 
         /// <summary>
-        /// Called when the left mouse button is pressed.
-        /// </summary>
-        /// <param name="e">The event data for the MouseLeftButtonDown event.</param>
-        protected override void OnMouseLeftButtonDown(MouseButtonEventArgs e)
-        {
-            if (e == null)
-            {
-                throw new ArgumentNullException("e");
-            }
-
-            e.Handled = true;
-            base.OnMouseLeftButtonDown(e);
-        }
-
-        /// <summary>
-        /// Responds to the KeyDown event.
-        /// </summary>
-        /// <param name="e">The event data for the KeyDown event.</param>
-        protected override void OnKeyDown(KeyEventArgs e)
-        {
-            if (e == null)
-            {
-                throw new ArgumentNullException("e");
-            }
-
-            switch (e.Key)
-            {
-                case Key.Up:
-                    FocusNextItem(false);
-                    e.Handled = true;
-                    break;
-                case Key.Down:
-                    FocusNextItem(true);
-                    e.Handled = true;
-                    break;
-                case Key.Escape:
-                    ClosePopup();
-                    e.Handled = true;
-                    break;
-                // case Key.Apps: // Key.Apps not defined by Silverlight 4
-            }
-            base.OnKeyDown(e);
-        }
-
-        /// <summary>
         /// Handles the LayoutUpdated event to capture Application.Current.RootVisual.
         /// </summary>
         /// <param name="sender">Source of the event.</param>
@@ -805,6 +764,7 @@ namespace Microsoft.Phone.Controls
             {
                 _rootVisual.ManipulationCompleted -= OnRootVisualManipulationCompleted;
                 _rootVisual.OrientationChanged -= OnEventThatClosesContextMenu;
+                _rootVisual.Navigated -= OnEventThatClosesContextMenu;
             }
             if (_page != null)
             {
@@ -866,37 +826,11 @@ namespace Microsoft.Phone.Controls
 
                     _rootVisual.OrientationChanged -= OnEventThatClosesContextMenu;
                     _rootVisual.OrientationChanged += OnEventThatClosesContextMenu;
-                }
-            }
-        }
 
-        /// <summary>
-        /// Sets focus to the next item in the ContextMenu.
-        /// </summary>
-        /// <param name="down">True to move the focus down; false to move it up.</param>
-        private void FocusNextItem(bool down)
-        {
-            int count = Items.Count;
-            int startingIndex = down ? -1 : count;
-            MenuItem focusedMenuItem = FocusManager.GetFocusedElement() as MenuItem;
-            if (null != focusedMenuItem && (this == focusedMenuItem.ParentMenuBase))
-            {
-                startingIndex = ItemContainerGenerator.IndexFromContainer(focusedMenuItem);
-            }
-            int index = startingIndex;
-            do
-            {
-                index = (index + count + (down ? 1 : -1)) % count;
-                MenuItem container = ItemContainerGenerator.ContainerFromIndex(index) as MenuItem;
-                if (null != container)
-                {
-                    if (container.IsEnabled && container.Focus())
-                    {
-                        break;
-                    }
+                    _rootVisual.Navigated -= OnEventThatClosesContextMenu;
+                    _rootVisual.Navigated += OnEventThatClosesContextMenu;
                 }
             }
-            while (index != startingIndex);
         }
 
         /// <summary>
@@ -1061,18 +995,33 @@ namespace Microsoft.Phone.Controls
                     }
                 }
                 else
-                {                    
+                {
+                    Width = LandscapeWidth;
+
                     if (PositionIsOnScreenRight(y))
                     {
-                        Width = (SystemTray.IsVisible) ? LandscapeWidth - SystemTrayLandscapeWidth : LandscapeWidth;
-                        x = (SystemTray.IsVisible) ? SystemTrayLandscapeWidth : 0;
+                        x = 0;
                         _reversed = true;
                     }
                     else
                     {
-                        Width = (null != _page.ApplicationBar && _page.ApplicationBar.IsVisible) ? LandscapeWidth - ApplicationBarLandscapeWidth : LandscapeWidth;
-                        x = bounds.Width - Width + ((SystemTray.IsVisible) ? SystemTrayLandscapeWidth : 0);
+                        x = bounds.Width - Width;
                         _reversed = false;
+                    }
+
+                    if (_rootVisual.Orientation == PageOrientation.LandscapeLeft)
+                    {
+                        if (SystemTray.IsVisible)
+                        {
+                            x += SystemTrayLandscapeWidth;
+                        }
+                    }
+                    else
+                    {
+                        if (null != _page.ApplicationBar && _page.ApplicationBar.IsVisible)
+                        {
+                            x += ApplicationBarLandscapeWidth;
+                        }
                     }
 
                     if (null != _innerGrid)
@@ -1128,45 +1077,31 @@ namespace Microsoft.Phone.Controls
             _overlay = new Canvas { Background = new SolidColorBrush(Colors.Transparent) };
             _overlay.MouseLeftButtonUp += OnOverlayMouseButtonUp;
 
-            if (IsZoomEnabled && (null != _rootVisual))
+            if (IsZoomEnabled && (null != _rootVisual) && (null != _page))
             {
                 // Capture effective width/height
                 double width = portrait ? _rootVisual.ActualWidth : _rootVisual.ActualHeight;
                 double height = portrait ? _rootVisual.ActualHeight : _rootVisual.ActualWidth;
 
-                // Create a layer for the background brush
-                UIElement backgroundLayer = new Rectangle
-                {
-                    Width = width,
-                    Height = height,
-                    Fill = (Brush)Application.Current.Resources["PhoneBackgroundBrush"],
-                    CacheMode = new BitmapCache(),
-                };
-                _overlay.Children.Insert(0, backgroundLayer);
-
-                // Hide the owner for the snapshot we will take
-                FrameworkElement ownerElement = _owner as FrameworkElement;
-                if (null != ownerElement)
-                {
-                    ownerElement.Opacity = 0;
-                }
-
-                // Create a layer for the page content
-                WriteableBitmap writeableBitmap = new WriteableBitmap((int)width, (int)height);
-                writeableBitmap.Render(_rootVisual, null);
-                writeableBitmap.Invalidate();
+                Point scaleTransformCenter = SafeTransformToVisual(_rootVisual, _page).Transform(new Point(width / 2, height / 2));
                 Transform scaleTransform = new ScaleTransform
                 {
-                    CenterX = width / 2,
-                    CenterY = height / 2,
+                    CenterX = scaleTransformCenter.X,
+                    CenterY = scaleTransformCenter.Y,
                 };
-                UIElement contentLayer = new Image
+
+                _originalPageTransform = _page.RenderTransform;
+                if (_originalPageTransform == null)
                 {
-                    Source = writeableBitmap,
-                    RenderTransform = scaleTransform,
-                    CacheMode = new BitmapCache(),
-                };
-                _overlay.Children.Insert(1, contentLayer);
+                    _page.RenderTransform = scaleTransform;
+                }
+                else
+                {
+                    TransformGroup transformGroup = new TransformGroup();
+                    transformGroup.Children.Add(_originalPageTransform);
+                    transformGroup.Children.Add(scaleTransform);
+                    _page.RenderTransform = transformGroup;
+                }
 
                 // Create a layer for the background brush
                 UIElement backgroundFadeLayer = new Rectangle
@@ -1177,15 +1112,14 @@ namespace Microsoft.Phone.Controls
                     Opacity = 0,
                     CacheMode = new BitmapCache(),
                 };
-                _overlay.Children.Insert(2, backgroundFadeLayer);
+                _overlay.Children.Add(backgroundFadeLayer);
 
 
                 // Create a layer for the owner element and its background
-                
+
+                FrameworkElement ownerElement = _owner as FrameworkElement;
                 if (null != ownerElement)
                 {
-                    ((FrameworkElement)Owner).Opacity = 1;
-
                     // If the owner's flow direction is right-to-left, then (0, 0) is situated at the
                     // top-right corner of the element instead of its top-left corner.
                     // We need for the translated point to be in the top-left corner since we want these elements
@@ -1203,18 +1137,21 @@ namespace Microsoft.Phone.Controls
                     };
                     Canvas.SetLeft(elementBackground, point.X);
                     Canvas.SetTop(elementBackground, point.Y);
-                    _overlay.Children.Insert(3, elementBackground);
+                    _overlay.Children.Add(elementBackground);
 
                     // Create a layer for the element
                     UIElement element = new Image { Source = new WriteableBitmap(ownerElement, null) };
                     Canvas.SetLeft(element, point.X);
                     Canvas.SetTop(element, point.Y);
-                    _overlay.Children.Insert(4, element);
+                    _overlay.Children.Add(element);
+
+                    // Hide the owner
+                    ownerElement.Opacity = 0;
                 }
 
                 // Prepare for scale animation
                 double from = 1;
-                double to = 0.94;
+                double to = 0.95;
                 TimeSpan timespan = TimeSpan.FromSeconds(0.42);
                 IEasingFunction easingFunction = new ExponentialEase { EasingMode = EasingMode.EaseInOut };
                 _backgroundResizeStoryboard = new Storyboard();
@@ -1290,10 +1227,24 @@ namespace Microsoft.Phone.Controls
 
             UpdateContextMenuPlacement();
 
+            FrameworkElement dataContextSource = Owner as FrameworkElement ?? _rootVisual;
             if (ReadLocalValue(DataContextProperty) == DependencyProperty.UnsetValue)
             {
-                DependencyObject dataContextSource = Owner ?? _rootVisual;
-                SetBinding(DataContextProperty, new Binding("DataContext") { Source = dataContextSource });
+                SetDataContextBinding(dataContextSource);
+            }
+            else if (_dataContextBindingExpression != null)
+            {
+                if (_dataContextBindingExpression == GetBindingExpression(DataContextProperty))
+                {
+                    if (DataContext != dataContextSource.DataContext)
+                    {
+                        SetDataContextBinding(dataContextSource);
+                    }
+                }
+                else
+                {
+                    _dataContextBindingExpression = null;
+                }
             }
 
             _popup.IsOpen = true;
@@ -1323,6 +1274,8 @@ namespace Microsoft.Phone.Controls
                 // Capture member variables for delegate closure
                 Popup popup = _popup;
                 Panel overlay = _overlay;
+                PhoneApplicationPage page = _page;
+                FrameworkElement ownerElement = _owner as FrameworkElement;
                 _backgroundResizeStoryboard.Completed += delegate
                 {
                     // Clear/close popup and overlay
@@ -1334,6 +1287,15 @@ namespace Microsoft.Phone.Controls
                     if (null != overlay)
                     {
                         overlay.Children.Clear();
+                    }
+                    if (null != page)
+                    {
+                        page.RenderTransform = _originalPageTransform;
+                        _originalPageTransform = null;
+                    }
+                    if (null != ownerElement)
+                    {
+                        ownerElement.Opacity = 1;
                     }
                 };
 
@@ -1378,6 +1340,11 @@ namespace Microsoft.Phone.Controls
             _settingIsOpen = false;
 
             OnClosed(new RoutedEventArgs());
+        }
+
+        private void SetDataContextBinding(FrameworkElement dataContextSource)
+        {
+            _dataContextBindingExpression = SetBinding(DataContextProperty, new Binding("DataContext") { Source = dataContextSource });
         }
     }
 }

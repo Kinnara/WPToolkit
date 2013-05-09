@@ -89,12 +89,12 @@
                         FontSize="18">
                     <toolkit:ContextMenuService.ContextMenu>
                         <toolkit:ContextMenu>
-                            <toolkit:MenuItem Header="Always-on item" Command="{Binding AlwaysCommand}"/>
-                            <toolkit:MenuItem Header="Intermittent item" Command="{Binding IntermittentCommand}"/>
-                            <toolkit:MenuItem Header="Always-on item with param"
+                            <toolkit:MenuItem Header="always-on item" Command="{Binding AlwaysCommand}"/>
+                            <toolkit:MenuItem Header="intermittent item" Command="{Binding IntermittentCommand}"/>
+                            <toolkit:MenuItem Header="always-on item with param"
                                               Command="{Binding AlwaysCommand}"
                                               CommandParameter="param1"/>
-                            <toolkit:MenuItem Header="Intermittent item with param"
+                            <toolkit:MenuItem Header="intermittent item with param"
                                               Command="{Binding IntermittentCommand}"
                                               CommandParameter="param2"/>
                             <toolkit:MenuItem Header="option 3" Click="MenuItem_Click"/>

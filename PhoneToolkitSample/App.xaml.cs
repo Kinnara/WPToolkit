@@ -4,6 +4,7 @@
 // All other rights reserved.
 
 using System.Windows;
+using System.Windows.Media;
 using System.Windows.Navigation;
 using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
@@ -46,6 +47,8 @@ namespace PhoneToolkitSample
 
             // Phone-specific initialization
             InitializePhoneApplication();
+
+            InitializeTheme();
 
             TiltEffect.SetIsTiltEnabled(RootFrame, true);
         }
@@ -129,5 +132,10 @@ namespace PhoneToolkitSample
         }
 
         #endregion
+
+        private void InitializeTheme()
+        {
+            ((SolidColorBrush)Resources["PhoneTextBoxEditBackgroundBrush"]).Color = Colors.White;
+        }
     }
 }

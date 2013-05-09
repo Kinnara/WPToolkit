@@ -42,7 +42,7 @@ namespace PhoneApp1
                 for (int j = 0; j < menuItemCount; j++)
                 {
                     MenuItem mi = new MenuItem();
-                    mi.Header = "Menu# " + j;
+                    mi.Header = "menu# " + j;
                     cm.Items.Add(mi);
                 }
                 ContextMenuService.SetContextMenu(item, cm);

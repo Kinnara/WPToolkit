@@ -38,7 +38,7 @@ namespace PhoneToolkitSample.Data
             { "olive",   0xFF6D8764.ToSolidColorBrush() },
             { "steel",   0xFF647687.ToSolidColorBrush() },
             { "mauve",   0xFF76608A.ToSolidColorBrush() },
-            { "taupe",   0xFF7A3B3F.ToSolidColorBrush() },
+            { "taupe",   0xFF87794E.ToSolidColorBrush() },
         };
 
         /// <summary>

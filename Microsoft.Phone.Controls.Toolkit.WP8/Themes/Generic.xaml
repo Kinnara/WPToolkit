@@ -222,7 +222,14 @@
     </Style>
 
     <Style TargetType="controls:ContextMenu">
-        <Setter Property="Padding" Value="0 18 0 28"/>
+        <Setter Property="Padding" Value="0 20 0 22"/>
+        <Setter Property="ItemsPanel">
+            <Setter.Value>
+                <ItemsPanelTemplate>
+                    <controls:ContextMenuPanel/>
+                </ItemsPanelTemplate>
+            </Setter.Value>
+        </Setter>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="controls:ContextMenu">
@@ -377,7 +384,8 @@
         <Setter Property="Foreground" Value="{StaticResource PhoneBackgroundBrush}"/>
         <Setter Property="FontFamily" Value="{StaticResource PhoneFontFamilySemiLight}"/>
         <Setter Property="FontSize" Value="{StaticResource PhoneFontSizeLarge}"/>
-        <Setter Property="Padding" Value="25 10 25 10"/>
+        <Setter Property="Padding" Value="0 7 25 14"/>
+        <Setter Property="Margin" Value="23 0 0 0"/>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="controls:MenuItem">

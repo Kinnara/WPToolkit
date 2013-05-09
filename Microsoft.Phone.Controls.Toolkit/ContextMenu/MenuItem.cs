@@ -19,8 +19,6 @@ namespace Microsoft.Phone.Controls
     /// <QualityBand>Preview</QualityBand>
     [TemplateVisualState(Name = "Normal", GroupName = "CommonStates")]
     [TemplateVisualState(Name = "Disabled", GroupName = "CommonStates")]
-    [TemplateVisualState(Name = "Unfocused", GroupName = "FocusStates")]
-    [TemplateVisualState(Name = "Focused", GroupName = "FocusStates")]
     [StyleTypedProperty(Property = "ItemContainerStyle", StyleTargetType = typeof(MenuItem))]
     public class MenuItem : HeaderedItemsControl // , ICommandSource // ICommandSource not defined by Silverlight 4
     {
@@ -28,11 +26,6 @@ namespace Microsoft.Phone.Controls
         /// Occurs when a MenuItem is clicked.
         /// </summary>
         public event RoutedEventHandler Click;
-
-        /// <summary>
-        /// Stores a value indicating whether this element has logical focus.
-        /// </summary>
-        private bool _isFocused;
 
         /// <summary>
         /// Gets or sets a reference to the MenuBase parent.
@@ -144,58 +137,13 @@ namespace Microsoft.Phone.Controls
         }
 
         /// <summary>
-        /// Invoked whenever an unhandled GotFocus event reaches this element in its route.
+        /// Responds to the Tap event.
         /// </summary>
-        /// <param name="e">A RoutedEventArgs that contains event data.</param>
-        protected override void OnGotFocus(RoutedEventArgs e)
+        /// <param name="e">The event data for the Tap event.</param>
+        protected override void OnTap(System.Windows.Input.GestureEventArgs e)
         {
-            base.OnGotFocus(e);
-            _isFocused = true;
-            ChangeVisualState(true);
-        }
+            base.OnTap(e);
 
-        /// <summary>
-        /// Raises the LostFocus routed event by using the event data that is provided.
-        /// </summary>
-        /// <param name="e">A RoutedEventArgs that contains event data.</param>
-        protected override void OnLostFocus(RoutedEventArgs e)
-        {
-            base.OnLostFocus(e);
-            _isFocused = false;
-            ChangeVisualState(true);
-        }
-
-        /// <summary>
-        /// Called whenever the mouse enters a MenuItem.
-        /// </summary>
-        /// <param name="e">The event data for the MouseEnter event.</param>
-        protected override void OnMouseEnter(MouseEventArgs e)
-        {
-            base.OnMouseEnter(e);
-            Focus();
-            ChangeVisualState(true);
-        }
-
-        /// <summary>
-        /// Called whenever the mouse leaves a MenuItem.
-        /// </summary>
-        /// <param name="e">The event data for the MouseLeave event.</param>
-        protected override void OnMouseLeave(MouseEventArgs e)
-        {
-            base.OnMouseLeave(e);
-            if (null != ParentMenuBase)
-            {
-                ParentMenuBase.Focus();
-            }
-            ChangeVisualState(true);
-        }
-
-        /// <summary>
-        /// Called when the left mouse button is released.
-        /// </summary>
-        /// <param name="e">The event data for the MouseLeftButtonUp event.</param>
-        protected override void OnMouseLeftButtonUp(MouseButtonEventArgs e)
-        {
             if (e == null)
             {
                 throw new ArgumentNullException("e");
@@ -207,26 +155,7 @@ namespace Microsoft.Phone.Controls
                 e.Handled = true;
             }
 
-            base.OnMouseLeftButtonUp(e);
-        }
-
-        /// <summary>
-        /// Responds to the KeyDown event.
-        /// </summary>
-        /// <param name="e">The event data for the KeyDown event.</param>
-        protected override void OnKeyDown(KeyEventArgs e)
-        {
-            if (e == null)
-            {
-                throw new ArgumentNullException("e");
-            }
-
-            if (!e.Handled && (Key.Enter == e.Key))
-            {
-                OnClick();
-                e.Handled = true;
-            }
-            base.OnKeyDown(e);
+            base.OnTap(e);
         }
 
         /// <summary>
@@ -322,15 +251,6 @@ namespace Microsoft.Phone.Controls
             else
             {
                 VisualStateManager.GoToState(this, "Normal", useTransitions);
-            }
-
-            if (_isFocused && IsEnabled)
-            {
-                VisualStateManager.GoToState(this, "Focused", useTransitions);
-            }
-            else
-            {
-                VisualStateManager.GoToState(this, "Unfocused", useTransitions);
             }
         }
     }
