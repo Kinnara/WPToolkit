@@ -595,7 +595,7 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="controls:ListPicker">
-                    <StackPanel Margin="0,0,0,26">
+                    <StackPanel>
                         <VisualStateManager.VisualStateGroups>
                             <VisualStateGroup x:Name="PickerStates">
                                 <VisualState x:Name="Normal"/>
@@ -738,7 +738,7 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="controls:PickerBox">
-                    <StackPanel Margin="0,0,0,26">
+                    <StackPanel>
                         <ContentControl
                             Content="{TemplateBinding Header}"
                             ContentTemplate="{TemplateBinding HeaderTemplate}"
@@ -1919,33 +1919,37 @@
                                 <ColumnDefinition Width="*"/>
                             </Grid.ColumnDefinitions>
                             <StackPanel 
-                                Grid.ColumnSpan="2" 
-                                Margin="0,0,0,18">
+                                Grid.ColumnSpan="2">
                                 <TextBlock 
                                     x:Name="TitleTextBlock"
                                     Text="{TemplateBinding Title}" 
                                     Foreground="{TemplateBinding Foreground}"
                                     Visibility="Collapsed"
-                                    Margin="24,16,24,-6"
-                                    FontFamily="{StaticResource PhoneFontFamilySemiBold}"/>
+                                    Margin="24,13,24,-10"
+                                    FontFamily="{StaticResource PhoneFontFamilySemiBold}"
+                                    FontSize="{StaticResource PhoneFontSizeMedium}"/>
                                 <TextBlock 
                                     x:Name="CaptionTextBlock"
                                     Text="{TemplateBinding Caption}"
                                     Foreground="{TemplateBinding Foreground}"
                                     Visibility="Collapsed"
-                                    Margin="24,8,24,0"
+                                    Margin="24,12,24,12"
                                     FontSize="{StaticResource PhoneFontSizeLarge}"                                    
                                     FontFamily="{StaticResource PhoneFontFamilySemiBold}"
+                                    LineHeight="40"
+                                    LineStackingStrategy="BlockLineHeight"
                                     TextWrapping="Wrap"
                                     HorizontalAlignment="Left"/>
                                 <TextBlock 
                                     x:Name="MessageTextBlock"
                                     Text="{TemplateBinding Message}"
                                     Foreground="{TemplateBinding Foreground}"
-                                    Margin="24,11,24,0"
+                                    Margin="24,15,24,31"
                                     Visibility="Collapsed"
                                     FontSize="{StaticResource PhoneFontSizeMedium}"
                                     FontFamily="{StaticResource PhoneFontFamilySemiLight}"                                                                        
+                                    LineHeight="26.667"
+                                    LineStackingStrategy="BlockLineHeight"
                                     TextWrapping="Wrap"
                                     HorizontalAlignment="Left"/>
                                 <ContentPresenter Margin="12,0,0,0"/>

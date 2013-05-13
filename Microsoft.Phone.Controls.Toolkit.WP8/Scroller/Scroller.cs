@@ -9,13 +9,13 @@ namespace Microsoft.Phone.Controls
     /// Represents a scrollable area that can contain other visible elements.
     /// </summary>
     [TemplatePart(Name = ElementViewportControlName, Type = typeof(ViewportControl))]
-    [TemplatePart(Name = ElementContentElementName, Type = typeof(ContentPresenter))]
+    [TemplatePart(Name = ElementContentElementName, Type = typeof(ScrollerContentPresenter))]
     [TemplatePart(Name = ElementVerticalScrollBarName, Type = typeof(ScrollBar))]
     [TemplateVisualState(GroupName = ScrollGroup, Name = ScrollingState)]
     [TemplateVisualState(GroupName = ScrollGroup, Name = NotScrollingState)]
     [TemplateVisualState(GroupName = ScrollHintGroup, Name = ScrollHintVisibleState)]
     [TemplateVisualState(GroupName = ScrollHintGroup, Name = ScrollHintHiddenState)]
-    public sealed class PhoneScrollViewer : ContentControl
+    public sealed class Scroller : ContentControl
     {
         private const string ElementViewportControlName = "ViewportControl";
         private const string ElementContentElementName = "ContentElement";
@@ -31,20 +31,20 @@ namespace Microsoft.Phone.Controls
         private const string ScrollHintHiddenState = "ScrollHintHidden";
 
         private ViewportControl _container;
-        private ContentPresenter _contentElement;
+        private ScrollerContentPresenter _contentElement;
         private ScrollBar _horizontalScroll;
         private ScrollBar _verticalScroll;
 
         private VisualStateGroup _scrollHintStates;
 
-        private bool _isVisible;
+        private bool _loaded;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="T:Microsoft.Phone.Controls.PhoneScrollViewer"/> class.
+        /// Initializes a new instance of the <see cref="T:Microsoft.Phone.Controls.Scroller"/> class.
         /// </summary>
-        public PhoneScrollViewer()
+        public Scroller()
         {
-            DefaultStyleKey = typeof(PhoneScrollViewer);
+            DefaultStyleKey = typeof(Scroller);
 
             Loaded += OnLoaded;
             Unloaded += OnUnloaded;
@@ -69,17 +69,17 @@ namespace Microsoft.Phone.Controls
         }
 
         /// <summary>
-        /// Identifies the <see cref="P:Microsoft.Phone.Controls.PhoneScrollViewer.HorizontalScrollBarVisibility"/> dependency property.
+        /// Identifies the <see cref="P:Microsoft.Phone.Controls.Scroller.HorizontalScrollBarVisibility"/> dependency property.
         /// </summary>
         /// 
         /// <returns>
-        /// The identifier for the <see cref="P:Microsoft.Phone.Controls.PhoneScrollViewer.HorizontalScrollBarVisibility"/> dependency property.
+        /// The identifier for the <see cref="P:Microsoft.Phone.Controls.Scroller.HorizontalScrollBarVisibility"/> dependency property.
         /// </returns>
         public static readonly DependencyProperty HorizontalScrollBarVisibilityProperty = DependencyProperty.Register(
             "HorizontalScrollBarVisibility",
             typeof(ScrollBarVisibility),
-            typeof(PhoneScrollViewer),
-            new PropertyMetadata((d, e) => ((PhoneScrollViewer)d).OnHorizontalScrollBarVisibilityChanged(e)));
+            typeof(Scroller),
+            new PropertyMetadata((d, e) => ((Scroller)d).OnHorizontalScrollBarVisibilityChanged(e)));
 
         private void OnHorizontalScrollBarVisibilityChanged(DependencyPropertyChangedEventArgs e)
         {
@@ -105,17 +105,17 @@ namespace Microsoft.Phone.Controls
         }
 
         /// <summary>
-        /// Identifies the <see cref="P:Microsoft.Phone.Controls.PhoneScrollViewer.VerticalScrollBarVisibility"/> dependency property.
+        /// Identifies the <see cref="P:Microsoft.Phone.Controls.Scroller.VerticalScrollBarVisibility"/> dependency property.
         /// </summary>
         /// 
         /// <returns>
-        /// The identifier for the <see cref="P:Microsoft.Phone.Controls.PhoneScrollViewer.VerticalScrollBarVisibility"/> dependency property.
+        /// The identifier for the <see cref="P:Microsoft.Phone.Controls.Scroller.VerticalScrollBarVisibility"/> dependency property.
         /// </returns>
         public static readonly DependencyProperty VerticalScrollBarVisibilityProperty = DependencyProperty.Register(
             "VerticalScrollBarVisibility",
             typeof(ScrollBarVisibility),
-            typeof(PhoneScrollViewer),
-            new PropertyMetadata((d, e) => ((PhoneScrollViewer)d).OnVerticalScrollBarVisibilityChanged(e)));
+            typeof(Scroller),
+            new PropertyMetadata((d, e) => ((Scroller)d).OnVerticalScrollBarVisibilityChanged(e)));
 
         private void OnVerticalScrollBarVisibilityChanged(DependencyPropertyChangedEventArgs e)
         {
@@ -141,17 +141,17 @@ namespace Microsoft.Phone.Controls
         }
 
         /// <summary>
-        /// Identifies the <see cref="P:Microsoft.Phone.Controls.PhoneScrollViewer.ComputedHorizontalScrollBarVisibility"/> dependency property.
+        /// Identifies the <see cref="P:Microsoft.Phone.Controls.Scroller.ComputedHorizontalScrollBarVisibility"/> dependency property.
         /// </summary>
         /// 
         /// <returns>
-        /// The identifier for the <see cref="P:Microsoft.Phone.Controls.PhoneScrollViewer.ComputedHorizontalScrollBarVisibility"/> dependency property.
+        /// The identifier for the <see cref="P:Microsoft.Phone.Controls.Scroller.ComputedHorizontalScrollBarVisibility"/> dependency property.
         /// </returns>
         public static readonly DependencyProperty ComputedHorizontalScrollBarVisibilityProperty = DependencyProperty.Register(
             "ComputedHorizontalScrollBarVisibility",
             typeof(Visibility),
-            typeof(PhoneScrollViewer),
-            new PropertyMetadata((d, e) => ((PhoneScrollViewer)d).OnComputedHorizontalScrollBarVisibilityChanged(e)));
+            typeof(Scroller),
+            new PropertyMetadata((d, e) => ((Scroller)d).OnComputedHorizontalScrollBarVisibilityChanged(e)));
 
         private void OnComputedHorizontalScrollBarVisibilityChanged(DependencyPropertyChangedEventArgs e)
         {
@@ -190,17 +190,17 @@ namespace Microsoft.Phone.Controls
         }
 
         /// <summary>
-        /// Identifies the <see cref="P:Microsoft.Phone.Controls.PhoneScrollViewer.ComputedVerticalScrollBarVisibility"/> dependency property.
+        /// Identifies the <see cref="P:Microsoft.Phone.Controls.Scroller.ComputedVerticalScrollBarVisibility"/> dependency property.
         /// </summary>
         /// 
         /// <returns>
-        /// The identifier for the <see cref="P:Microsoft.Phone.Controls.PhoneScrollViewer.ComputedVerticalScrollBarVisibility"/> dependency property.
+        /// The identifier for the <see cref="P:Microsoft.Phone.Controls.Scroller.ComputedVerticalScrollBarVisibility"/> dependency property.
         /// </returns>
         public static readonly DependencyProperty ComputedVerticalScrollBarVisibilityProperty = DependencyProperty.Register(
             "ComputedVerticalScrollBarVisibility",
             typeof(Visibility),
-            typeof(PhoneScrollViewer),
-            new PropertyMetadata((d, e) => ((PhoneScrollViewer)d).OnComputedVerticalScrollBarVisibilityChanged(e)));
+            typeof(Scroller),
+            new PropertyMetadata((d, e) => ((Scroller)d).OnComputedVerticalScrollBarVisibilityChanged(e)));
 
         private void OnComputedVerticalScrollBarVisibilityChanged(DependencyPropertyChangedEventArgs e)
         {
@@ -226,11 +226,11 @@ namespace Microsoft.Phone.Controls
         #region public double ExtentWidth
 
         /// <summary>
-        /// Gets the horizontal size of all the content for display in the <see cref="T:Microsoft.Phone.Controls.PhoneScrollViewer"/>.
+        /// Gets the horizontal size of all the content for display in the <see cref="T:Microsoft.Phone.Controls.Scroller"/>.
         /// </summary>
         /// 
         /// <returns>
-        /// The horizontal size of all the content for display in the <see cref="T:Microsoft.Phone.Controls.PhoneScrollViewer"/>.
+        /// The horizontal size of all the content for display in the <see cref="T:Microsoft.Phone.Controls.Scroller"/>.
         /// </returns>
         public double ExtentWidth
         {
@@ -239,17 +239,17 @@ namespace Microsoft.Phone.Controls
         }
 
         /// <summary>
-        /// Identifier for the <see cref="P:Microsoft.Phone.Controls.PhoneScrollViewer.ExtentWidth"/> dependency property.
+        /// Identifier for the <see cref="P:Microsoft.Phone.Controls.Scroller.ExtentWidth"/> dependency property.
         /// </summary>
         /// 
         /// <returns>
-        /// The identifier for the <see cref="P:Microsoft.Phone.Controls.PhoneScrollViewer.ExtentWidth"/> dependency property.
+        /// The identifier for the <see cref="P:Microsoft.Phone.Controls.Scroller.ExtentWidth"/> dependency property.
         /// </returns>
         public static readonly DependencyProperty ExtentWidthProperty = DependencyProperty.Register(
             "ExtentWidth",
             typeof(double),
-            typeof(PhoneScrollViewer),
-            new PropertyMetadata((d, e) => ((PhoneScrollViewer)d).OnExtentWidthChanged(e)));
+            typeof(Scroller),
+            new PropertyMetadata((d, e) => ((Scroller)d).OnExtentWidthChanged(e)));
 
         private void OnExtentWidthChanged(DependencyPropertyChangedEventArgs e)
         {
@@ -261,11 +261,11 @@ namespace Microsoft.Phone.Controls
         #region public double ExtentHeight
 
         /// <summary>
-        /// Gets the vertical size of all the content for display in the <see cref="T:Microsoft.Phone.Controls.PhoneScrollViewer"/>.
+        /// Gets the vertical size of all the content for display in the <see cref="T:Microsoft.Phone.Controls.Scroller"/>.
         /// </summary>
         /// 
         /// <returns>
-        /// The vertical size of all the content for display in the <see cref="T:Microsoft.Phone.Controls.PhoneScrollViewer"/>.
+        /// The vertical size of all the content for display in the <see cref="T:Microsoft.Phone.Controls.Scroller"/>.
         /// </returns>
         public double ExtentHeight
         {
@@ -274,17 +274,17 @@ namespace Microsoft.Phone.Controls
         }
 
         /// <summary>
-        /// Identifier for the <see cref="P:Microsoft.Phone.Controls.PhoneScrollViewer.ExtentHeight"/> dependency property.
+        /// Identifier for the <see cref="P:Microsoft.Phone.Controls.Scroller.ExtentHeight"/> dependency property.
         /// </summary>
         /// 
         /// <returns>
-        /// The identifier for the <see cref="P:Microsoft.Phone.Controls.PhoneScrollViewer.ExtentHeight"/> dependency property.
+        /// The identifier for the <see cref="P:Microsoft.Phone.Controls.Scroller.ExtentHeight"/> dependency property.
         /// </returns>
         public static readonly DependencyProperty ExtentHeightProperty = DependencyProperty.Register(
             "ExtentHeight",
             typeof(double),
-            typeof(PhoneScrollViewer),
-            new PropertyMetadata((d, e) => ((PhoneScrollViewer)d).OnExtentHeightChanged(e)));
+            typeof(Scroller),
+            new PropertyMetadata((d, e) => ((Scroller)d).OnExtentHeightChanged(e)));
 
         private void OnExtentHeightChanged(DependencyPropertyChangedEventArgs e)
         {
@@ -309,17 +309,17 @@ namespace Microsoft.Phone.Controls
         }
 
         /// <summary>
-        /// Identifies the <see cref="P:Microsoft.Phone.Controls.PhoneScrollViewer.ScrollableWidth"/> dependency property.
+        /// Identifies the <see cref="P:Microsoft.Phone.Controls.Scroller.ScrollableWidth"/> dependency property.
         /// </summary>
         /// 
         /// <returns>
-        /// The identifier for the <see cref="P:Microsoft.Phone.Controls.PhoneScrollViewer.ScrollableWidth"/> dependency property.
+        /// The identifier for the <see cref="P:Microsoft.Phone.Controls.Scroller.ScrollableWidth"/> dependency property.
         /// </returns>
         public static readonly DependencyProperty ScrollableWidthProperty = DependencyProperty.Register(
             "ScrollableWidth",
             typeof(double),
-            typeof(PhoneScrollViewer),
-            new PropertyMetadata((d, e) => ((PhoneScrollViewer)d).OnScrollableWidthChanged(e)));
+            typeof(Scroller),
+            new PropertyMetadata((d, e) => ((Scroller)d).OnScrollableWidthChanged(e)));
 
         private void OnScrollableWidthChanged(DependencyPropertyChangedEventArgs e)
         {
@@ -349,17 +349,17 @@ namespace Microsoft.Phone.Controls
         }
 
         /// <summary>
-        /// Identifies the <see cref="P:Microsoft.Phone.Controls.PhoneScrollViewer.ScrollableHeight"/> dependency property.
+        /// Identifies the <see cref="P:Microsoft.Phone.Controls.Scroller.ScrollableHeight"/> dependency property.
         /// </summary>
         /// 
         /// <returns>
-        /// The identifier for the <see cref="P:Microsoft.Phone.Controls.PhoneScrollViewer.ScrollableHeight"/> dependency property.
+        /// The identifier for the <see cref="P:Microsoft.Phone.Controls.Scroller.ScrollableHeight"/> dependency property.
         /// </returns>
         public static readonly DependencyProperty ScrollableHeightProperty = DependencyProperty.Register(
             "ScrollableHeight",
             typeof(double),
-            typeof(PhoneScrollViewer),
-            new PropertyMetadata((d, e) => ((PhoneScrollViewer)d).OnScrollableHeightChanged(e)));
+            typeof(Scroller),
+            new PropertyMetadata((d, e) => ((Scroller)d).OnScrollableHeightChanged(e)));
 
         private void OnScrollableHeightChanged(DependencyPropertyChangedEventArgs e)
         {
@@ -389,17 +389,17 @@ namespace Microsoft.Phone.Controls
         }
 
         /// <summary>
-        /// Identifies the <see cref="P:Microsoft.Phone.Controls.PhoneScrollViewer.ViewportWidth"/> dependency property.
+        /// Identifies the <see cref="P:Microsoft.Phone.Controls.Scroller.ViewportWidth"/> dependency property.
         /// </summary>
         /// 
         /// <returns>
-        /// The identifier for the <see cref="P:Microsoft.Phone.Controls.PhoneScrollViewer.ViewportWidth"/> dependency property.
+        /// The identifier for the <see cref="P:Microsoft.Phone.Controls.Scroller.ViewportWidth"/> dependency property.
         /// </returns>
         public static readonly DependencyProperty ViewportWidthProperty = DependencyProperty.Register(
             "ViewportWidth",
             typeof(double),
-            typeof(PhoneScrollViewer),
-            new PropertyMetadata((d, e) => ((PhoneScrollViewer)d).OnViewportWidthChanged(e)));
+            typeof(Scroller),
+            new PropertyMetadata((d, e) => ((Scroller)d).OnViewportWidthChanged(e)));
 
         private void OnViewportWidthChanged(DependencyPropertyChangedEventArgs e)
         {
@@ -424,17 +424,17 @@ namespace Microsoft.Phone.Controls
         }
 
         /// <summary>
-        /// Identifies the <see cref="P:Microsoft.Phone.Controls.PhoneScrollViewer.ViewportHeight"/> dependency property.
+        /// Identifies the <see cref="P:Microsoft.Phone.Controls.Scroller.ViewportHeight"/> dependency property.
         /// </summary>
         /// 
         /// <returns>
-        /// The identifier for the <see cref="P:Microsoft.Phone.Controls.PhoneScrollViewer.ViewportHeight"/> dependency property.
+        /// The identifier for the <see cref="P:Microsoft.Phone.Controls.Scroller.ViewportHeight"/> dependency property.
         /// </returns>
         public static readonly DependencyProperty ViewportHeightProperty = DependencyProperty.Register(
             "ViewportHeight",
             typeof(double),
-            typeof(PhoneScrollViewer),
-            new PropertyMetadata((d, e) => ((PhoneScrollViewer)d).OnViewportHeightChanged(e)));
+            typeof(Scroller),
+            new PropertyMetadata((d, e) => ((Scroller)d).OnViewportHeightChanged(e)));
 
         private void OnViewportHeightChanged(DependencyPropertyChangedEventArgs e)
         {
@@ -459,17 +459,17 @@ namespace Microsoft.Phone.Controls
         }
 
         /// <summary>
-        /// Identifies the <see cref="P:Microsoft.Phone.Controls.PhoneScrollViewer.HorizontalOffset"/> dependency property.
+        /// Identifies the <see cref="P:Microsoft.Phone.Controls.Scroller.HorizontalOffset"/> dependency property.
         /// </summary>
         /// 
         /// <returns>
-        /// The identifier for the <see cref="P:Microsoft.Phone.Controls.PhoneScrollViewer.HorizontalOffset"/> dependency property.
+        /// The identifier for the <see cref="P:Microsoft.Phone.Controls.Scroller.HorizontalOffset"/> dependency property.
         /// </returns>
         public static readonly DependencyProperty HorizontalOffsetProperty = DependencyProperty.Register(
             "HorizontalOffset",
             typeof(double),
-            typeof(PhoneScrollViewer),
-            new PropertyMetadata((d, e) => ((PhoneScrollViewer)d).OnHorizontalOffsetChanged(e)));
+            typeof(Scroller),
+            new PropertyMetadata((d, e) => ((Scroller)d).OnHorizontalOffsetChanged(e)));
 
         private void OnHorizontalOffsetChanged(DependencyPropertyChangedEventArgs e)
         {
@@ -497,17 +497,17 @@ namespace Microsoft.Phone.Controls
         }
 
         /// <summary>
-        /// Identifies the <see cref="P:Microsoft.Phone.Controls.PhoneScrollViewer.VerticalOffset"/> dependency property.
+        /// Identifies the <see cref="P:Microsoft.Phone.Controls.Scroller.VerticalOffset"/> dependency property.
         /// </summary>
         /// 
         /// <returns>
-        /// The identifier for the <see cref="P:Microsoft.Phone.Controls.PhoneScrollViewer.VerticalOffset"/> dependency property.
+        /// The identifier for the <see cref="P:Microsoft.Phone.Controls.Scroller.VerticalOffset"/> dependency property.
         /// </returns>
         public static readonly DependencyProperty VerticalOffsetProperty = DependencyProperty.Register(
             "VerticalOffset",
             typeof(double),
-            typeof(PhoneScrollViewer),
-            new PropertyMetadata((d, e) => ((PhoneScrollViewer)d).OnVerticalOffsetChanged(e)));
+            typeof(Scroller),
+            new PropertyMetadata((d, e) => ((Scroller)d).OnVerticalOffsetChanged(e)));
 
         private void OnVerticalOffsetChanged(DependencyPropertyChangedEventArgs e)
         {
@@ -520,7 +520,7 @@ namespace Microsoft.Phone.Controls
         #endregion
 
         /// <summary>
-        /// Builds the visual tree for the <see cref="T:Microsoft.Phone.Controls.PhoneScrollViewer"/> control when a new template is applied.
+        /// Builds the visual tree for the <see cref="T:Microsoft.Phone.Controls.Scroller"/> control when a new template is applied.
         /// </summary>
         public override void OnApplyTemplate()
         {
@@ -535,6 +535,7 @@ namespace Microsoft.Phone.Controls
             if (_contentElement != null)
             {
                 _contentElement.SizeChanged -= OnContentElementSizeChanged;
+                _contentElement.ScrollOwner = null;
             }
 
             if (_scrollHintStates != null)
@@ -543,7 +544,7 @@ namespace Microsoft.Phone.Controls
             }
 
             _container = GetTemplateChild(ElementViewportControlName) as ViewportControl;
-            _contentElement = GetTemplateChild(ElementContentElementName) as ContentPresenter;
+            _contentElement = GetTemplateChild(ElementContentElementName) as ScrollerContentPresenter;
             _horizontalScroll = GetTemplateChild(ElementHorizontalScrollBarName) as ScrollBar;
             _verticalScroll = GetTemplateChild(ElementVerticalScrollBarName) as ScrollBar;
             _scrollHintStates = GetTemplateChild(ScrollHintGroup) as VisualStateGroup;
@@ -564,6 +565,7 @@ namespace Microsoft.Phone.Controls
             if (_contentElement != null)
             {
                 _contentElement.SizeChanged += OnContentElementSizeChanged;
+                _contentElement.ScrollOwner = this;
             }
 
             if (_scrollHintStates != null)
@@ -571,14 +573,11 @@ namespace Microsoft.Phone.Controls
                 _scrollHintStates.CurrentStateChanged += OnScrollHintStateChanged;
             }
 
-            UpdateContentElementSize();
-            UpdateContainerBounds();
-
             UpdateContainerManipulationLockMode();
         }
 
         /// <summary>
-        /// Scrolls the content that is within the <see cref="T:Microsoft.Phone.Controls.PhoneScrollViewer"/> to the specified horizontal offset position.
+        /// Scrolls the content that is within the <see cref="T:Microsoft.Phone.Controls.Scroller"/> to the specified horizontal offset position.
         /// </summary>
         /// <param name="offset">The position that the content scrolls to.</param>
         public void ScrollToHorizontalOffset(double offset)
@@ -590,7 +589,7 @@ namespace Microsoft.Phone.Controls
         }
 
         /// <summary>
-        /// Scrolls the content that is within the <see cref="T:Microsoft.Phone.Controls.PhoneScrollViewer"/> to the specified vertical offset position.
+        /// Scrolls the content that is within the <see cref="T:Microsoft.Phone.Controls.Scroller"/> to the specified vertical offset position.
         /// </summary>
         /// <param name="offset">The position that the content scrolls to.</param>
         public void ScrollToVerticalOffset(double offset)
@@ -603,14 +602,14 @@ namespace Microsoft.Phone.Controls
 
         private void OnLoaded(object sender, RoutedEventArgs e)
         {
-            _isVisible = true;
+            _loaded = true;
 
             QueueShowScrollHint();
         }
 
         private void OnUnloaded(object sender, RoutedEventArgs e)
         {
-            _isVisible = false;
+            _loaded = false;
         }
 
         private void OnContainerManipulationStateChanged(object sender, ManipulationStateChangedEventArgs e)
@@ -662,7 +661,7 @@ namespace Microsoft.Phone.Controls
         {
             Dispatcher.BeginInvoke(() =>
             {
-                if (_isVisible && (ComputedHorizontalScrollBarVisibility == Visibility.Visible || ComputedVerticalScrollBarVisibility == Visibility.Visible))
+                if (_loaded && (ComputedHorizontalScrollBarVisibility == Visibility.Visible || ComputedVerticalScrollBarVisibility == Visibility.Visible))
                 {
                     GoToState(ScrollHintVisibleState, true);
                 }

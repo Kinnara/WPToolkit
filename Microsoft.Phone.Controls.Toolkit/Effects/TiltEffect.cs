@@ -266,6 +266,14 @@ namespace Microsoft.Phone.Controls
 
         #region Core tilt logic
 
+        internal static void EndCurrentTiltEffect(bool playReturnAnimation)
+        {
+            if (currentTiltElement != null)
+            {
+                EndTiltEffect(currentTiltElement, playReturnAnimation);
+            }
+        }
+
         /// <summary>
         /// Checks if the manipulation should cause a tilt, and if so starts the 
         /// tilt effect.
@@ -608,7 +616,7 @@ namespace Microsoft.Phone.Controls
         /// Ends the tilt effect by playing the animation.
         /// </summary>
         /// <param name="element">The element being tilted.</param>
-        private static void EndTiltEffect(FrameworkElement element)
+        private static void EndTiltEffect(FrameworkElement element, bool playReturnAnimation = true)
         {
             if (element != null)
             {
@@ -619,9 +627,16 @@ namespace Microsoft.Phone.Controls
             if (tiltReturnStoryboard != null)
             {
                 wasPauseAnimation = false;
-                if (tiltReturnStoryboard.GetCurrentState() != ClockState.Active)
+                if (playReturnAnimation)
                 {
-                    tiltReturnStoryboard.Begin();
+                    if (tiltReturnStoryboard.GetCurrentState() != ClockState.Active)
+                    {
+                        tiltReturnStoryboard.Begin();
+                    }
+                }
+                else
+                {
+                    StopTiltReturnStoryboardAndCleanup();
                 }
             }
             else

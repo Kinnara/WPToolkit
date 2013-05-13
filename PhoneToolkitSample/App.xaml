@@ -11,6 +11,9 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
     xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
+    xmlns:controls="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls"
+    xmlns:controlsPrimitives="clr-namespace:Microsoft.Phone.Controls.Primitives;assembly=Microsoft.Phone.Controls"
+    xmlns:toolkit="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit"
     xmlns:localControls="clr-namespace:PhoneToolkitSample.LocalControls;assembly=PhoneToolkitSample"
     xmlns:sys="clr-namespace:System;assembly=mscorlib">
 
@@ -107,6 +110,46 @@
                 </Setter.Value>
             </Setter>
         </Style>
+
+        <sys:Double x:Key="PivotTitleFontSize">22.667</sys:Double>
+
+        <Style x:Key="PivotTitleStyle" TargetType="ContentControl">
+            <Setter Property="FontFamily" Value="{StaticResource PhoneFontFamilySemiBold}"/>
+            <Setter Property="FontSize" Value="{StaticResource PivotTitleFontSize}"/>
+        </Style>
+
+        <Style x:Key="PivotStyle" TargetType="controls:Pivot">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="controls:Pivot">
+                        <Grid HorizontalAlignment="{TemplateBinding HorizontalAlignment}"
+                              VerticalAlignment="{TemplateBinding VerticalAlignment}">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="*"/>
+                            </Grid.RowDefinitions>
+                            <Grid
+                                Grid.RowSpan="3"
+                                Background="{TemplateBinding Background}"/>
+                            <ContentControl HorizontalAlignment="Left" Style="{StaticResource PivotTitleStyle}"
+                                Content="{TemplateBinding Title}"
+                                Margin="24,16,0,-10"
+                                ContentTemplate="{TemplateBinding TitleTemplate}"/>
+                            <controlsPrimitives:PivotHeadersControl
+                                Grid.Row="1"
+                                x:Name="HeadersListElement"/>
+                            <ItemsPresenter
+                                Grid.Row="2"
+                                Margin="{TemplateBinding Padding}"
+                                x:Name="PivotItemPresenter"/>
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style TargetType="controls:Pivot" BasedOn="{StaticResource PivotStyle}"/>
+        <Style TargetType="toolkit:LockablePivot" BasedOn="{StaticResource PivotStyle}"/>
     </Application.Resources>
 
     <Application.ApplicationLifetimeObjects>

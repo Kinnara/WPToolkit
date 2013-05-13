@@ -16,6 +16,7 @@ using System.Windows.Media;
 using System.Windows.Media.Animation;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using System.Windows.Threading;
 using Microsoft.Phone.Controls.Primitives;
 using Microsoft.Phone.Shell;
 
@@ -162,6 +163,10 @@ namespace Microsoft.Phone.Controls
 
         private Transform _originalPageTransform;
 
+        private DispatcherTimer _holdTimer;
+
+        private MouseButtonEventArgs _ownerMouseLeftButtonDownEventArgs;
+
         /// <summary>
         /// Gets or sets the owning object for the ContextMenu.
         /// </summary>
@@ -175,11 +180,15 @@ namespace Microsoft.Phone.Controls
                     FrameworkElement ownerFrameworkElement = _owner as FrameworkElement;
                     if (null != ownerFrameworkElement)
                     {
-                        ownerFrameworkElement.Hold -= OnOwnerHold;
+                        ownerFrameworkElement.RemoveHandler(MouseLeftButtonDownEvent, new MouseButtonEventHandler(OnOwnerMouseLeftButtonDown));
+                        ownerFrameworkElement.ManipulationDelta -= OnOwnerManipulationDelta;
+                        ownerFrameworkElement.RemoveHandler(MouseLeftButtonUpEvent, new MouseButtonEventHandler(OnOwnerMouseLeftButtonUp));
                         ownerFrameworkElement.Loaded -= OnOwnerLoaded;
                         ownerFrameworkElement.Unloaded -= OnOwnerUnloaded;
 
                         OnOwnerUnloaded(null, null);
+
+                        StopHoldTimer();
                     }
                 }
                 _owner = value;
@@ -188,7 +197,9 @@ namespace Microsoft.Phone.Controls
                     FrameworkElement ownerFrameworkElement = _owner as FrameworkElement;
                     if (null != ownerFrameworkElement)
                     {
-                        ownerFrameworkElement.Hold += OnOwnerHold;
+                        ownerFrameworkElement.AddHandler(MouseLeftButtonDownEvent, new MouseButtonEventHandler(OnOwnerMouseLeftButtonDown), true);
+                        ownerFrameworkElement.ManipulationDelta += OnOwnerManipulationDelta;
+                        ownerFrameworkElement.AddHandler(MouseLeftButtonUpEvent, new MouseButtonEventHandler(OnOwnerMouseLeftButtonUp), true);
                         ownerFrameworkElement.Loaded += OnOwnerLoaded;
                         ownerFrameworkElement.Unloaded += OnOwnerUnloaded;
 
@@ -427,6 +438,9 @@ namespace Microsoft.Phone.Controls
             DefaultStyleKey = typeof(ContextMenu);
 
             _openingStoryboard = new List<Storyboard>();
+
+            _holdTimer = new DispatcherTimer { Interval = TimeSpan.FromSeconds(0.6) };
+            _holdTimer.Tick += OnHoldTimerTick;
 
             if (null == Application.Current.RootVisual)
             {
@@ -670,18 +684,46 @@ namespace Microsoft.Phone.Controls
             }
         }
 
+        private void OnHoldTimerTick(object sender, EventArgs e)
+        {
+            MouseButtonEventArgs ownerMouseLeftButtonDownEventArgs = _ownerMouseLeftButtonDownEventArgs;
+
+            StopHoldTimer();
+
+            if (!IsOpen && ownerMouseLeftButtonDownEventArgs != null)
+            {
+                OpenPopup(ownerMouseLeftButtonDownEventArgs.GetPosition(null));
+            }
+        }
+
         /// <summary>
-        /// Handles the Hold event for the owning element.
+        /// Handles the MouseLeftButtonDown event for the owning element.
         /// </summary>
         /// <param name="sender">Source of the event.</param>
         /// <param name="e">Event arguments.</param>
-        private void OnOwnerHold(object sender, System.Windows.Input.GestureEventArgs e)
+        private void OnOwnerMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-            if (!IsOpen)
-            {
-                OpenPopup(e.GetPosition(null));
-                e.Handled = true;
-            }
+            StartHoldTimer(e);
+        }
+
+        /// <summary>
+        /// Handles the ManipulationDelta event for the owning element.
+        /// </summary>
+        /// <param name="sender">Source of the event.</param>
+        /// <param name="e">Event arguments.</param>
+        private void OnOwnerManipulationDelta(object sender, ManipulationDeltaEventArgs e)
+        {
+            StopHoldTimer();
+        }
+
+        /// <summary>
+        /// Handles the MouseLeftButtonUp event for the owning element.
+        /// </summary>
+        /// <param name="sender">Source of the event.</param>
+        /// <param name="e">Event arguments.</param>
+        private void OnOwnerMouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+        {
+            StopHoldTimer();
         }
 
         /// <summary>
@@ -1079,6 +1121,8 @@ namespace Microsoft.Phone.Controls
 
             if (IsZoomEnabled && (null != _rootVisual) && (null != _page))
             {
+                TiltEffect.EndCurrentTiltEffect(false);
+
                 // Capture effective width/height
                 double width = portrait ? _rootVisual.ActualWidth : _rootVisual.ActualHeight;
                 double height = portrait ? _rootVisual.ActualHeight : _rootVisual.ActualWidth;
@@ -1175,6 +1219,10 @@ namespace Microsoft.Phone.Controls
                     Storyboard.SetTargetProperty(animationFade, new PropertyPath(Rectangle.OpacityProperty));
                     _backgroundResizeStoryboard.Children.Add(animationFade);
                 }
+            }
+            else
+            {
+                TiltEffect.EndCurrentTiltEffect(true);
             }
 
             // Create transforms for handling rotation
@@ -1345,6 +1393,18 @@ namespace Microsoft.Phone.Controls
         private void SetDataContextBinding(FrameworkElement dataContextSource)
         {
             _dataContextBindingExpression = SetBinding(DataContextProperty, new Binding("DataContext") { Source = dataContextSource });
+        }
+
+        private void StartHoldTimer(MouseButtonEventArgs e)
+        {
+            _ownerMouseLeftButtonDownEventArgs = e;
+            _holdTimer.Start();
+        }
+
+        private void StopHoldTimer()
+        {
+            _holdTimer.Stop();
+            _ownerMouseLeftButtonDownEventArgs = null;
         }
     }
 }

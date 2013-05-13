@@ -597,7 +597,7 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="controls:ListPicker">
-                    <StackPanel Margin="0,0,0,26">
+                    <StackPanel>
                         <VisualStateManager.VisualStateGroups>
                             <VisualStateGroup x:Name="PickerStates">
                                 <VisualState x:Name="Normal"/>
@@ -748,7 +748,7 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="controls:PickerBox">
-                    <StackPanel Margin="0,0,0,26">
+                    <StackPanel>
                         <ContentControl
                             Content="{TemplateBinding Header}"
                             ContentTemplate="{TemplateBinding HeaderTemplate}"
@@ -1530,33 +1530,37 @@
                                 <ColumnDefinition Width="*"/>
                             </Grid.ColumnDefinitions>
                             <StackPanel 
-                                Grid.ColumnSpan="2" 
-                                Margin="0,0,0,18">
+                                Grid.ColumnSpan="2">
                                 <TextBlock 
                                     x:Name="TitleTextBlock"
                                     Text="{TemplateBinding Title}" 
                                     Foreground="{TemplateBinding Foreground}"
                                     Visibility="Collapsed"
-                                    Margin="24,16,24,-6"
-                                    FontFamily="{StaticResource PhoneFontFamilySemiBold}"/>
+                                    Margin="24,13,24,-10"
+                                    FontFamily="{StaticResource PhoneFontFamilySemiBold}"
+                                    FontSize="{StaticResource PhoneFontSizeMedium}"/>
                                 <TextBlock 
                                     x:Name="CaptionTextBlock"
                                     Text="{TemplateBinding Caption}"
                                     Foreground="{TemplateBinding Foreground}"
                                     Visibility="Collapsed"
-                                    Margin="24,8,24,0"
+                                    Margin="24,12,24,12"
                                     FontSize="{StaticResource PhoneFontSizeLarge}"                                    
                                     FontFamily="{StaticResource PhoneFontFamilySemiBold}"
+                                    LineHeight="40"
+                                    LineStackingStrategy="BlockLineHeight"
                                     TextWrapping="Wrap"
                                     HorizontalAlignment="Left"/>
                                 <TextBlock 
                                     x:Name="MessageTextBlock"
                                     Text="{TemplateBinding Message}"
                                     Foreground="{TemplateBinding Foreground}"
-                                    Margin="24,11,24,0"
+                                    Margin="24,15,24,31"
                                     Visibility="Collapsed"
                                     FontSize="{StaticResource PhoneFontSizeMedium}"
                                     FontFamily="{StaticResource PhoneFontFamilySemiLight}"                                                                        
+                                    LineHeight="26.667"
+                                    LineStackingStrategy="BlockLineHeight"
                                     TextWrapping="Wrap"
                                     HorizontalAlignment="Left"/>
                                 <ContentPresenter Margin="12,0,0,0"/>
@@ -2194,7 +2198,7 @@
         </Setter>
     </Style>
 
-    <Style TargetType="controls:PhoneScrollViewer">
+    <Style TargetType="controls:Scroller">
         <Setter Property="VerticalScrollBarVisibility" Value="Auto"/>
         <Setter Property="HorizontalScrollBarVisibility" Value="Disabled"/>
         <Setter Property="Background" Value="Transparent"/>
@@ -2203,7 +2207,7 @@
         <Setter Property="BorderBrush" Value="Transparent"/>
         <Setter Property="Template">
             <Setter.Value>
-                <ControlTemplate TargetType="controls:PhoneScrollViewer">
+                <ControlTemplate TargetType="controls:Scroller">
                     <Border BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}">
                         <VisualStateManager.VisualStateGroups>
                             <VisualStateGroup x:Name="ScrollStates">
@@ -2244,9 +2248,7 @@
                         </VisualStateManager.VisualStateGroups>
                         <Grid Margin="{TemplateBinding Padding}">
                             <ViewportControl x:Name="ViewportControl" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch">
-                                <Canvas>
-                                    <ContentPresenter x:Name="ContentElement"/>
-                                </Canvas>
+                                <controls:ScrollerContentPresenter x:Name="ContentElement"/>
                             </ViewportControl>
                             <ScrollBar x:Name="VerticalScrollBar" IsHitTestVisible="False" Opacity="0" Margin="0,0,1,0" HorizontalAlignment="Right" VerticalAlignment="Stretch" Visibility="{TemplateBinding ComputedVerticalScrollBarVisibility}" IsTabStop="False" Maximum="{TemplateBinding ScrollableHeight}" Minimum="0" Value="{TemplateBinding VerticalOffset}" Orientation="Vertical" ViewportSize="{TemplateBinding ViewportHeight}" />
                             <ScrollBar x:Name="HorizontalScrollBar" IsHitTestVisible="False" Opacity="0" Margin="0,0,0,1" HorizontalAlignment="Stretch" VerticalAlignment="Bottom" Visibility="{TemplateBinding ComputedHorizontalScrollBarVisibility}" IsTabStop="False" Maximum="{TemplateBinding ScrollableWidth}" Minimum="0" Value="{TemplateBinding HorizontalOffset}" Orientation="Horizontal" ViewportSize="{TemplateBinding ViewportWidth}" />

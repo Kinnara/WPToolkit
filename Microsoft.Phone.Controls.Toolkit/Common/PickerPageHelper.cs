@@ -24,7 +24,7 @@ namespace Microsoft.Phone.Controls
         /// </summary>
         private bool _hasPickerPageOpen;
 
-        public PickerPageHelper(Control picker, Action<T> onOpening, Action close, Action<T> onClosed)
+        public PickerPageHelper(Control picker, Action<T> onOpening, Action<T> onClosed, Action closeOverride = null)
         {
             if (picker == null)
             {
@@ -33,8 +33,8 @@ namespace Microsoft.Phone.Controls
 
             _picker = picker;
             _onOpening = onOpening;
-            _close = close;
             _onClosed = onClosed;
+            _close = closeOverride ?? ClosePickerPage;
 
             _picker.Unloaded += OnPickerUnloaded;
         }
@@ -121,10 +121,7 @@ namespace Microsoft.Phone.Controls
             if (e.Content == _frameContentWhenOpened)
             {
                 // Navigation to original page; close the picker page
-                if (_close != null)
-                {
-                    _close();
-                }
+                _close();
             }
             else if (null == _pickerPage && _hasPickerPageOpen)
             {
@@ -132,6 +129,16 @@ namespace Microsoft.Phone.Controls
                 _pickerPage = e.Content as T;
                 if (null != _pickerPage)
                 {
+                    PhoneApplicationPage pickerPageAsPhoneApplicationPage = _pickerPage as PhoneApplicationPage;
+                    if (pickerPageAsPhoneApplicationPage != null)
+                    {
+                        PhoneApplicationPage frameContentWhenOpenedAsPhoneApplicationPage = _frameContentWhenOpened as PhoneApplicationPage;
+                        if (frameContentWhenOpenedAsPhoneApplicationPage != null)
+                        {
+                            pickerPageAsPhoneApplicationPage.SupportedOrientations = frameContentWhenOpenedAsPhoneApplicationPage.SupportedOrientations;
+                        }
+                    }
+
                     if (_onOpening != null)
                     {
                         _onOpening(_pickerPage);
@@ -143,10 +150,7 @@ namespace Microsoft.Phone.Controls
         private void OnFrameNavigationStoppedOrFailed(object sender, EventArgs e)
         {
             // Abort
-            if (_close != null)
-            {
-                _close();
-            }
+            _close();
         }
 
         private void OnPickerUnloaded(object sender, RoutedEventArgs e)

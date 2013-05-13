@@ -399,7 +399,7 @@ namespace Microsoft.Phone.Controls
 
             Loaded += OnLoaded;
 
-            _pickerPageHelper = new PickerPageHelper<IPickerBoxPage>(this, OnPickerPageOpening, ClosePickerPage, OnPickerPageClosed);
+            _pickerPageHelper = new PickerPageHelper<IPickerBoxPage>(this, OnPickerPageOpening, OnPickerPageClosed, ClosePickerPage);
         }
 
         private void OnLoaded(object sender, RoutedEventArgs e)

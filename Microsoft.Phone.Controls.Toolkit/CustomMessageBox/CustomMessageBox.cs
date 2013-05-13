@@ -394,12 +394,10 @@ namespace Microsoft.Phone.Controls
             if ((bool)e.NewValue)
             {
                 target.VerticalAlignment = VerticalAlignment.Stretch;
-                target.Margin = new Thickness(0, 0, 0, -12);
             }
             else
             {
                 target.VerticalAlignment = VerticalAlignment.Top;
-                target.ClearValue(FrameworkElement.MarginProperty);
             }
         }
 
@@ -523,7 +521,7 @@ namespace Microsoft.Phone.Controls
                 }
                 else
                 {
-                    SystemTray.BackgroundColor = (Color)Application.Current.Resources["PhoneChromeColor"];
+                    SystemTray.BackgroundColor = ((SolidColorBrush)Application.Current.Resources["PhoneChromeBrush"]).Color;
                 }
 
                 if (SystemTray.Opacity < 1)

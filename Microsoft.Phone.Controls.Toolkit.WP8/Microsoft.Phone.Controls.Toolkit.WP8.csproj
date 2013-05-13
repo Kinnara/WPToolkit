@@ -499,7 +499,8 @@
     <Compile Include="DateTimePickers\TimePickerPage.xaml.cs">
       <DependentUpon>TimePickerPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="PhoneScrollViewer\PhoneScrollViewer.cs" />
+    <Compile Include="Scroller\Scroller.cs" />
+    <Compile Include="Scroller\ScrollerContentPresenter.cs" />
     <Compile Include="PickerBox\PickerBoxPage.xaml.cs">
       <DependentUpon>PickerBoxPage.xaml</DependentUpon>
     </Compile>

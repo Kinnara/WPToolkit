@@ -64,9 +64,8 @@ namespace PhoneToolkitSample.Samples
             HyperlinkButton hyperlinkButton = new HyperlinkButton()
             {
                 Content = "Privacy Statement",
-                Margin = new Thickness(0, 28, 0, 8),
                 HorizontalAlignment = HorizontalAlignment.Left,
-                NavigateUri = new Uri("http://silverlight.codeplex.com/", UriKind.Absolute)
+                NavigateUri = new Uri("http://phone.codeplex.com/", UriKind.Absolute)
             };
 
             CustomMessageBox messageBox = new CustomMessageBox()
@@ -110,7 +109,7 @@ namespace PhoneToolkitSample.Samples
             CheckBox checkBox = new CheckBox()
             {
                 Content = "Do not ask me again",
-                Margin = new Thickness(0, 14, 0, -2)
+                Margin = new Thickness(0, 24, 0, 20)
             };
 
             TiltEffect.SetIsTiltEnabled(checkBox, true);
@@ -166,14 +165,14 @@ namespace PhoneToolkitSample.Samples
         {
             ListPicker listPicker = new ListPicker()
             {
-                Header = "Snooze for:",
+                Header = "Snooze for",
                 ItemsSource = new string[] { "5 minutes", "10 minutes", "1 hour", "4 hours", "1 day" },
-                Margin = new Thickness(0, 42, 12, 18)
+                Margin = new Thickness(0, 30, 12, 24)
             };
 
             CustomMessageBox messageBox = new CustomMessageBox()
             {
-                Title = "Calendar",
+                Title = "CALENDAR",
                 Caption = "Annual Company Product Fair 2012",
                 Message = "Soccer Fields" + Environment.NewLine + "May 4, 2012 4:30-6:30 PM",
                 Content = listPicker,
@@ -225,6 +224,14 @@ namespace PhoneToolkitSample.Samples
                 RightButtonContent = "read it",
                 IsFullScreen = true, // Pivots should always be full-screen.
                 Margin = new Thickness()
+            };
+
+            messageBox.Dismissing += (s1, e1) =>
+            {
+                if (e1.Result == CustomMessageBoxResult.RightButton)
+                {
+                    e1.Cancel = true;
+                }
             };
 
             messageBox.Dismissed += (s1, e1) =>

@@ -47,13 +47,14 @@
     <!--Resources-->
     <phone:PhoneApplicationPage.Resources>
         <DataTemplate x:Key="PivotContentTemplate">
-            <controls:Pivot Margin="-12,0,0,0" Title="WHAT CAN I SAY?" Height="672">
+            <controls:Pivot Margin="-12,0,0,0" Title="WHAT CAN I SAY?" Height="684" TextOptions.TextHintingMode="Animated">
                 <controls:PivotItem Header="call" FontFamily="{StaticResource PhoneFontFamilySemiLight}" FontSize="32">
                     <StackPanel Margin="12,0,0,0">
                         <TextBlock Text="Call anyone in your contacts list." 
-                                   FontSize="30" Margin="0,0,0,20" TextWrapping="Wrap"/>
+                                   FontSize="32" Margin="0,7,0,22" TextWrapping="Wrap"
+                                   LineHeight="34.667" LineStackingStrategy="BlockLineHeight"/>
                         <TextBlock Text="Try saying" Foreground="{StaticResource PhoneSubtleBrush}" 
-                                   FontSize="{StaticResource PhoneFontSizeMedium}" Margin="0,0,0,8"/>
+                                   FontSize="{StaticResource PhoneFontSizeMedium}" Margin="0,0,0,7"/>
                         <TextBlock FontSize="32" Margin="0,0,0,12">
                             <Run>&quot;</Run><Run Foreground="{StaticResource PhoneAccentBrush}">Call</Run>
                             <Run>Bryce&quot;</Run>
@@ -78,9 +79,10 @@
                 <controls:PivotItem Header="find" FontFamily="{StaticResource PhoneFontFamilySemiLight}" FontSize="32">
                     <StackPanel Margin="12,0,0,0">
                         <TextBlock Text="Find what you're looking for with Bing." 
-                                   FontSize="30" Margin="0,0,0,20" TextWrapping="Wrap"/>
+                                   FontSize="32" Margin="0,7,0,22" TextWrapping="Wrap"
+                                   LineHeight="34.667" LineStackingStrategy="BlockLineHeight"/>
                         <TextBlock Text="Try saying" Foreground="{StaticResource PhoneSubtleBrush}" 
-                                   FontSize="{StaticResource PhoneFontSizeMedium}" Margin="0,0,0,8"/>
+                                   FontSize="{StaticResource PhoneFontSizeMedium}" Margin="0,0,0,7"/>
                         <TextBlock Margin="0,0,0,12">
                             <Run>&quot;</Run><Run Foreground="{StaticResource PhoneAccentBrush}">Find</Run>
                             <Run>Coffee in Seattle&quot;</Run>
@@ -98,9 +100,10 @@
                 <controls:PivotItem Header="open" FontFamily="{StaticResource PhoneFontFamilySemiLight}" FontSize="32">
                     <StackPanel Margin="12,0,0,0">
                         <TextBlock Text="Start any application you've installed." 
-                                   FontSize="30" Margin="0,0,0,20" TextWrapping="Wrap"/>
+                                   FontSize="32" Margin="0,7,0,22" TextWrapping="Wrap"
+                                   LineHeight="34.667" LineStackingStrategy="BlockLineHeight"/>
                         <TextBlock Text="Try saying" Foreground="{StaticResource PhoneSubtleBrush}" 
-                                   FontSize="{StaticResource PhoneFontSizeMedium}" Margin="0,0,0,8"/>
+                                   FontSize="{StaticResource PhoneFontSizeMedium}" Margin="0,0,0,7"/>
                         <TextBlock Margin="0,0,0,12">
                             <Run>&quot;</Run><Run Foreground="{StaticResource PhoneAccentBrush}">Open</Run>
                             <Run>Maps&quot;</Run>
@@ -122,9 +125,10 @@
                 <controls:PivotItem Header="text" FontFamily="{StaticResource PhoneFontFamilySemiLight}" FontSize="32">
                     <StackPanel Margin="12,0,0,0">
                         <TextBlock Text="Text your friends without even looking at the screen." 
-                                   FontSize="30" Margin="0,0,0,20" TextWrapping="Wrap"/>
+                                   FontSize="32" Margin="0,7,0,22" TextWrapping="Wrap"
+                                   LineHeight="34.667" LineStackingStrategy="BlockLineHeight"/>
                         <TextBlock Text="Try saying" Foreground="{StaticResource PhoneSubtleBrush}" 
-                                   FontSize="{StaticResource PhoneFontSizeMedium}" Margin="0,0,0,8"/>
+                                   FontSize="{StaticResource PhoneFontSizeMedium}" Margin="0,0,0,7"/>
                         <TextBlock Margin="0,0,0,12">
                             <Run>&quot;</Run><Run Foreground="{StaticResource PhoneAccentBrush}">Text</Run>
                             <Run>Jane&quot;</Run>

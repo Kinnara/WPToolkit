@@ -34,7 +34,7 @@
             <TextBlock Text="progress bar" Margin="9,-7,0,0" Style="{StaticResource PhoneTextTitle1Style}"/>
         </StackPanel>
 
-        <toolkit:PhoneScrollViewer Grid.Row="1">
+        <toolkit:Scroller Grid.Row="1">
             <StackPanel Margin="12,0,12,0">
                 <StackPanel x:Name="LandscapeTitlePanel" Grid.Row="0" Margin="0,25,-12,28" Visibility="Collapsed">
                     <TextBlock Text="TOOLKIT SAMPLES" Style="{StaticResource PhoneTextNormalStyle}"/>
@@ -74,7 +74,7 @@
                     Text="Press the button to block the UI thread for 4 seconds."/>
 
             </StackPanel>
-        </toolkit:PhoneScrollViewer>
+        </toolkit:Scroller>
 
         <ProgressBar
             Grid.RowSpan="2"

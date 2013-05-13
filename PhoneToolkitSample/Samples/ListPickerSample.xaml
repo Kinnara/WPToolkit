@@ -43,6 +43,18 @@
             </toolkit:NavigationOutTransition.Forward>
         </toolkit:NavigationOutTransition>
     </toolkit:TransitionService.NavigationOutTransition>
+    
+    <phone:PhoneApplicationPage.Resources>
+        <Style TargetType="toolkit:ListPicker">
+            <Setter Property="Margin" Value="0,0,0,26"/>
+        </Style>
+        <Style TargetType="toolkit:PickerBox">
+            <Setter Property="Margin" Value="0,0,0,26"/>
+        </Style>
+        <Style TargetType="toolkit:RecurringDaysPicker">
+            <Setter Property="Margin" Value="0,0,0,26"/>
+        </Style>
+    </phone:PhoneApplicationPage.Resources>
 
     <Grid Background="Transparent">
         <Grid.Resources>

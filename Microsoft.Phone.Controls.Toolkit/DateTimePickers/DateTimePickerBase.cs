@@ -24,11 +24,7 @@ namespace Microsoft.Phone.Controls
         private const string ButtonPartName = "DateTimeButton";
 
         private ButtonBase _dateButtonPart;
-        private PhoneApplicationFrame _frame;
-        private object _frameContentWhenOpened;
-        private NavigationInTransition _savedNavigationInTransition;
-        private NavigationOutTransition _savedNavigationOutTransition;
-        private IDateTimePickerPage _dateTimePickerPage;
+        private PickerPageHelper<IDateTimePickerPage> _pickerPageHelper;
 
         /// <summary>
         /// Event that is invoked when the Value property changes.
@@ -171,6 +167,7 @@ namespace Microsoft.Phone.Controls
         /// </summary>
         public DateTimePickerBase()
         {
+            _pickerPageHelper = new PickerPageHelper<IDateTimePickerPage>(this, OnPickerPageOpening, OnPickerPageClosed);
         }
 
         /// <summary>
@@ -215,7 +212,7 @@ namespace Microsoft.Phone.Controls
 
         private void OnDateButtonClick(object sender, RoutedEventArgs e)
         {
-            OpenPickerPage();
+            _pickerPageHelper.OpenPickerPage(PickerPageUri);
         }
 
         private void UpdateValueString()
@@ -223,100 +220,23 @@ namespace Microsoft.Phone.Controls
             ValueString = string.Format(CultureInfo.CurrentCulture, ValueStringFormat ?? ValueStringFormatFallback, Value);
         }
 
-        private void OpenPickerPage()
+        private void OnPickerPageOpening(IDateTimePickerPage pickerPage)
         {
-            if (null == PickerPageUri)
+            pickerPage.Value = Value.GetValueOrDefault(DateTime.Now);
+
+            var page = pickerPage as DateTimePickerPageBase;
+            if (null != page)
             {
-                throw new ArgumentException("PickerPageUri property must not be null.");
-            }
-
-            if (null == _frame)
-            {
-                // Hook up to necessary events and navigate
-                _frame = Application.Current.RootVisual as PhoneApplicationFrame;
-                if (null != _frame)
-                {
-                    _frameContentWhenOpened = _frame.Content;
-
-                    // Save and clear host page transitions for the upcoming "popup" navigation
-                    UIElement frameContentWhenOpenedAsUIElement = _frameContentWhenOpened as UIElement;
-                    if (null != frameContentWhenOpenedAsUIElement)
-                    {
-                        _savedNavigationInTransition = TransitionService.GetNavigationInTransition(frameContentWhenOpenedAsUIElement);
-                        TransitionService.SetNavigationInTransition(frameContentWhenOpenedAsUIElement, null);
-                        _savedNavigationOutTransition = TransitionService.GetNavigationOutTransition(frameContentWhenOpenedAsUIElement);
-                        TransitionService.SetNavigationOutTransition(frameContentWhenOpenedAsUIElement, null);
-                    }
-
-                    _frame.Navigated += OnFrameNavigated;
-                    _frame.NavigationStopped += OnFrameNavigationStoppedOrFailed;
-                    _frame.NavigationFailed += OnFrameNavigationStoppedOrFailed;
-
-                    _frame.Navigate(PickerPageUri);
-                }
-            }
-
-        }
-
-        private void ClosePickerPage()
-        {
-            // Unhook from events
-            if (null != _frame)
-            {
-                _frame.Navigated -= OnFrameNavigated;
-                _frame.NavigationStopped -= OnFrameNavigationStoppedOrFailed;
-                _frame.NavigationFailed -= OnFrameNavigationStoppedOrFailed;
-
-                // Restore host page transitions for the completed "popup" navigation
-                UIElement frameContentWhenOpenedAsUIElement = _frameContentWhenOpened as UIElement;
-                if (null != frameContentWhenOpenedAsUIElement)
-                {
-                    TransitionService.SetNavigationInTransition(frameContentWhenOpenedAsUIElement, _savedNavigationInTransition);
-                    _savedNavigationInTransition = null;
-                    TransitionService.SetNavigationOutTransition(frameContentWhenOpenedAsUIElement, _savedNavigationOutTransition);
-                    _savedNavigationOutTransition = null;
-                }
-
-                _frame = null;
-                _frameContentWhenOpened = null;
-            }
-            // Commit the value if available
-            if (null != _dateTimePickerPage)
-            {
-                if(_dateTimePickerPage.Value.HasValue)
-                {
-                    Value = _dateTimePickerPage.Value.Value;
-                }
-                _dateTimePickerPage = null;
+                page.SetFlowDirection(this.FlowDirection);
             }
         }
 
-        private void OnFrameNavigated(object sender, NavigationEventArgs e)
+        private void OnPickerPageClosed(IDateTimePickerPage pickerPage)
         {
-            if (e.Content == _frameContentWhenOpened)
+            if (pickerPage.Value.HasValue)
             {
-                // Navigation to original page; close the picker page
-                ClosePickerPage();
+                Value = pickerPage.Value.Value;
             }
-            else if (null == _dateTimePickerPage)
-            {
-                // Navigation to a new page; capture it and push the value in
-                var page = e.Content as DateTimePickerPageBase;
-                
-                if (null != page)
-                {
-                    _dateTimePickerPage = page;
-                    _dateTimePickerPage.Value = Value.GetValueOrDefault(DateTime.Now);
-
-                    page.SetFlowDirection(this.FlowDirection);
-                }
-            }
-        }
-
-        private void OnFrameNavigationStoppedOrFailed(object sender, EventArgs e)
-        {
-            // Abort
-            ClosePickerPage();
         }
     }
 }
