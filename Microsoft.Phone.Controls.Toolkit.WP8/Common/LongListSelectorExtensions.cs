@@ -85,6 +85,8 @@ namespace Microsoft.Phone.Controls
                 .OfType<ContentPresenter>()
                 .Concat(itemsPanel.Children.OfType<ContentPresenter>())
                 .OrderBy(c => Canvas.GetTop(c))
+                .Select(c => c.GetFirstLogicalChildByType<FrameworkElement>(false))
+                .OfType<FrameworkElement>()
                 .ToList();
 
             for (index = 0; index < containers.Count; index++)

@@ -109,5 +109,27 @@ namespace Microsoft.Phone.Controls
           
             element.SetBinding(prop, new Binding(propertyName) { Source = element });  
         }  
+
+        public static FlowDirection GetUsefulFlowDirection(this FrameworkElement element)
+        {
+            if (element.ReadLocalValue(FrameworkElement.FlowDirectionProperty) == DependencyProperty.UnsetValue)
+            {
+                PhoneApplicationFrame frame = Application.Current.RootVisual as PhoneApplicationFrame;
+
+                if (frame != null)
+                {
+                    PhoneApplicationPage page = frame.Content as PhoneApplicationPage;
+
+                    if (page != null)
+                    {
+                        return page.FlowDirection;
+                    }
+
+                    return frame.FlowDirection;
+                }
+            }
+
+            return element.FlowDirection;
+        }
     }
 }

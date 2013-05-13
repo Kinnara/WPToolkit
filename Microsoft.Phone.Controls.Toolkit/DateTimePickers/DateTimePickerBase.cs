@@ -227,7 +227,7 @@ namespace Microsoft.Phone.Controls
             var page = pickerPage as DateTimePickerPageBase;
             if (null != page)
             {
-                page.SetFlowDirection(this.FlowDirection);
+                page.SetFlowDirection(this.GetUsefulFlowDirection());
             }
         }
 

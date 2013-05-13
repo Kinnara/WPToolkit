@@ -74,6 +74,10 @@ namespace Microsoft.Phone.Controls
         /// </summary>
         private static bool _manipulatedStarted;
 
+#if !WP7
+        private static bool _waitingForSelectionChanged;
+#endif
+
         /// <summary>
         /// Private manager that represents a correlation between Pivots
         /// and the number of indexed elements it contains.
@@ -207,7 +211,11 @@ namespace Microsoft.Phone.Controls
                     // Attach event handlers to the parent Pivot.
                     newPivot.SelectionChanged += Pivot_SelectionChanged;
                     newPivot.ManipulationStarted += Pivot_ManipulationStarted;
+#if WP7
                     newPivot.ManipulationCompleted += Pivot_ManipulationCompleted;
+#else
+                    newPivot.AddHandler(UIElement.ManipulationCompletedEvent, new EventHandler<ManipulationCompletedEventArgs>(Pivot_ManipulationCompleted), true);
+#endif
 
                     _pivotsToElementCounters.Add(newPivot, 1);
                 }
@@ -227,7 +235,11 @@ namespace Microsoft.Phone.Controls
                         // Dettach event handlers from the parent Pivot.
                         oldPivot.SelectionChanged -= Pivot_SelectionChanged;
                         oldPivot.ManipulationStarted -= Pivot_ManipulationStarted;
+#if WP7
                         oldPivot.ManipulationCompleted -= Pivot_ManipulationCompleted;
+#else
+                        oldPivot.RemoveHandler(UIElement.ManipulationCompletedEvent, new EventHandler<ManipulationCompletedEventArgs>(Pivot_ManipulationCompleted));
+#endif
 
                         _pivotsToElementCounters.Remove(oldPivot);
                     }
@@ -473,6 +485,10 @@ namespace Microsoft.Phone.Controls
                         if (IsOnScreen(target))
                         {
                             bool fromRight = (e.TotalManipulation.Translation.X <= 0);
+                            if (target.GetUsefulFlowDirection() == FlowDirection.RightToLeft)
+                            {
+                                fromRight = !fromRight;
+                            }
                             ComposeStoryboard(target, fromRight, ref storyboard);
                         }
                     }
@@ -485,8 +501,22 @@ namespace Microsoft.Phone.Controls
 
                 storyboard.Begin();
             }
+#if !WP7
+            else if (_manipulatedStarted)
+            {
+                if (!_waitingForSelectionChanged)
+                {
+                    _waitingForSelectionChanged = true;
+                    Deployment.Current.Dispatcher.BeginInvoke(() => Pivot_ManipulationCompleted(sender, e));
+                    return;
+                }
+            }
+#endif
 
             _selectionChanged = _manipulatedStarted = false;
+#if !WP7
+            _waitingForSelectionChanged = false;
+#endif
         }
 
         /// <summary>

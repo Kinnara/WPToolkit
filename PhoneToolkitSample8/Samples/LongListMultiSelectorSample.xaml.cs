@@ -30,12 +30,36 @@ namespace PhoneToolkitSample.Samples
 
         Dictionary<object, PivotCallbacks> _callbacks;
 
+        NavigationInTransition _turnstileNavigationInTransition = new NavigationInTransition
+        {
+            Backward = new TurnstileTransition { Mode = TurnstileTransitionMode.BackwardIn },
+            Forward = new TurnstileTransition { Mode = TurnstileTransitionMode.ForwardIn }
+        };
+        NavigationOutTransition _turnstileNavigationOutTransition = new NavigationOutTransition
+        {
+            Backward = new TurnstileTransition { Mode = TurnstileTransitionMode.BackwardOut },
+            Forward = new TurnstileTransition { Mode = TurnstileTransitionMode.ForwardOut }
+        };
+
+        NavigationInTransition _turnstileFeatherNavigationInTransition = new NavigationInTransition
+        {
+            Backward = new TurnstileFeatherTransition { Mode = TurnstileFeatherTransitionMode.BackwardIn },
+            Forward = new TurnstileFeatherTransition { Mode = TurnstileFeatherTransitionMode.ForwardIn }
+        };
+        NavigationOutTransition _turnstileFeatherNavigationOutTransition = new NavigationOutTransition
+        {
+            Backward = new TurnstileFeatherTransition { Mode = TurnstileFeatherTransitionMode.BackwardOut },
+            Forward = new TurnstileFeatherTransition { Mode = TurnstileFeatherTransitionMode.ForwardOut }
+        };
+
         /// <summary>
         /// Initializes the dictionary of delegates to call when each pivot is selected
         /// </summary>
         public LongListMultiSelectorSample()
         {
             InitializeComponent();
+
+            UpdateTransitions();
 
             this.Loaded += LongListMultiSelectorSample_Loaded;
 
@@ -87,6 +111,8 @@ This sample and the sample code demonstrates how to use the new LongListMultiSel
         /// <param name="e"></param>
         private void OnPivotSelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            UpdateTransitions();
+
             PivotCallbacks callbacks;
             if (_callbacks.TryGetValue(SamplePivot.SelectedItem, out callbacks) && (callbacks.OnActivated != null))
             {
@@ -129,6 +155,22 @@ This sample and the sample code demonstrates how to use the new LongListMultiSel
             while (ApplicationBar.MenuItems.Count > 0)
             {
                 ApplicationBar.MenuItems.RemoveAt(0);
+            }
+        }
+
+        void UpdateTransitions()
+        {
+            object selectedItem = SamplePivot.SelectedItem;
+
+            if (selectedItem == null || selectedItem == MultiselectLbxItem || selectedItem == BuddiesPivotItem)
+            {
+                TransitionService.SetNavigationInTransition(this, _turnstileFeatherNavigationInTransition);
+                TransitionService.SetNavigationOutTransition(this, _turnstileFeatherNavigationOutTransition);
+            }
+            else
+            {
+                TransitionService.SetNavigationInTransition(this, _turnstileNavigationInTransition);
+                TransitionService.SetNavigationOutTransition(this, _turnstileNavigationOutTransition);
             }
         }
 

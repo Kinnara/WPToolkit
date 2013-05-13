@@ -144,34 +144,14 @@
 
     </phone:PhoneApplicationPage.Resources>
 
-    <toolkit:TransitionService.NavigationInTransition>
-        <toolkit:NavigationInTransition>
-            <toolkit:NavigationInTransition.Backward>
-                <toolkit:TurnstileTransition Mode="BackwardIn"/>
-            </toolkit:NavigationInTransition.Backward>
-            <toolkit:NavigationInTransition.Forward>
-                <toolkit:TurnstileTransition Mode="ForwardIn"/>
-            </toolkit:NavigationInTransition.Forward>
-        </toolkit:NavigationInTransition>
-    </toolkit:TransitionService.NavigationInTransition>
-    <toolkit:TransitionService.NavigationOutTransition>
-        <toolkit:NavigationOutTransition>
-            <toolkit:NavigationOutTransition.Backward>
-                <toolkit:TurnstileTransition Mode="BackwardOut"/>
-            </toolkit:NavigationOutTransition.Backward>
-            <toolkit:NavigationOutTransition.Forward>
-                <toolkit:TurnstileTransition Mode="ForwardOut"/>
-            </toolkit:NavigationOutTransition.Forward>
-        </toolkit:NavigationOutTransition>
-    </toolkit:TransitionService.NavigationOutTransition>
-
     <Grid x:Name="LayoutRoot" Background="Transparent">
         <!--Pivot Control-->
         <phone:Pivot Title="LONGLISTMULTISELECTOR SAMPLE"
                      x:Name="SamplePivot"
-                     SelectionChanged="OnPivotSelectionChanged">
+                     SelectionChanged="OnPivotSelectionChanged"
+                     toolkit:TurnstileFeatherEffect.FeatheringIndex="0">
 
-            <phone:PivotItem x:Name="MultiselectLbxItem" Header="multiselect lbx">
+            <phone:PivotItem x:Name="MultiselectLbxItem" Header="multiselect lbx" Padding="0,0,0,72">
                 <toolkit:LongListMultiSelector x:Name="EmailList" 
                                                 Margin="-12,0"
                                                 ItemsSource="{StaticResource EmailCollection}"
@@ -180,7 +160,8 @@
                                                 IsSelectionEnabledChanged="OnEmailListIsSelectionEnabledChanged"
                                                 ItemRealized="OnEmailListItemRealized"
                                                 ItemTemplate="{StaticResource EmailItemTemplate}"
-                                                ItemInfoTemplate="{StaticResource EmailItemInfoTemplate}">
+                                                ItemInfoTemplate="{StaticResource EmailItemInfoTemplate}"
+                                                toolkit:TurnstileFeatherEffect.FeatheringIndex="2">
                     <toolkit:LongListMultiSelector.ListFooter>
                         <Rectangle Height="95"/>
                     </toolkit:LongListMultiSelector.ListFooter>
@@ -197,10 +178,11 @@
                                                 JumpListStyle="{StaticResource BuddiesJumpListStyle}"
                                                 GroupHeaderTemplate="{StaticResource BuddiesGroupHeaderTemplate}"
                                                 ItemTemplate="{StaticResource BuddiesItemTemplate}"
+                                                toolkit:TurnstileFeatherEffect.FeatheringIndex="2"
             />
             </phone:PivotItem>
 
-            <phone:PivotItem x:Name="GridModeItem" Header="grid mode">
+            <phone:PivotItem x:Name="GridModeItem" Header="grid mode" Padding="0,0,0,72">
                 <toolkit:LongListMultiSelector x:Name="GridSelector"
                                                Margin="-12,0"
                                                ItemsSource="{StaticResource PicturesAlbum}"
@@ -266,7 +248,7 @@
     </Grid>
 
     <phone:PhoneApplicationPage.ApplicationBar>
-        <shell:ApplicationBar IsVisible="False" IsMenuEnabled="True">
+        <shell:ApplicationBar IsVisible="False" IsMenuEnabled="True" Opacity="0.999">
         </shell:ApplicationBar>
     </phone:PhoneApplicationPage.ApplicationBar>
 

@@ -1119,6 +1119,12 @@ namespace Microsoft.Phone.Controls
             _overlay = new Canvas { Background = new SolidColorBrush(Colors.Transparent) };
             _overlay.MouseLeftButtonUp += OnOverlayMouseButtonUp;
 
+            FrameworkElement ownerElement = _owner as FrameworkElement;
+            if (ReadLocalValue(FlowDirectionProperty) == DependencyProperty.UnsetValue)
+            {
+                FlowDirection = null != ownerElement ? ownerElement.GetUsefulFlowDirection() : this.GetUsefulFlowDirection();
+            }
+
             if (IsZoomEnabled && (null != _rootVisual) && (null != _page))
             {
                 TiltEffect.EndCurrentTiltEffect(false);
@@ -1161,7 +1167,6 @@ namespace Microsoft.Phone.Controls
 
                 // Create a layer for the owner element and its background
 
-                FrameworkElement ownerElement = _owner as FrameworkElement;
                 if (null != ownerElement)
                 {
                     // If the owner's flow direction is right-to-left, then (0, 0) is situated at the
@@ -1169,7 +1174,7 @@ namespace Microsoft.Phone.Controls
                     // We need for the translated point to be in the top-left corner since we want these elements
                     // to be drawn on top of the owner's position from left to right,
                     // so to achieve that, we'll translate (0, ActualWidth) instead if its flow direction is right-to-left.
-                    Point point = SafeTransformToVisual(ownerElement, _rootVisual).Transform(new Point(ownerElement.FlowDirection == System.Windows.FlowDirection.RightToLeft ? ownerElement.ActualWidth : 0, 0));
+                    Point point = SafeTransformToVisual(ownerElement, _rootVisual).Transform(new Point(FlowDirection == System.Windows.FlowDirection.RightToLeft ? ownerElement.ActualWidth : 0, 0));
 
                     // Create a layer for the element's background
                     UIElement elementBackground = new Rectangle

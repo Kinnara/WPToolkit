@@ -566,7 +566,7 @@ namespace Microsoft.Phone.Controls
         private void OnPickerPageOpening(IPickerBoxPage pickerPage)
         {
             // Sets the flow direction.
-            pickerPage.FlowDirection = this.FlowDirection;
+            pickerPage.FlowDirection = this.GetUsefulFlowDirection();
 
             // Set up the list picker page with the necesarry fields.
             if (null != FullModeHeader)

@@ -622,9 +622,13 @@ namespace Microsoft.Phone.Controls
                 {
                     continue;
                 }
-         
+
                 ListBox listBox = r.Target as ListBox;
                 LongListSelector longListSelector = r.Target as LongListSelector;
+#if !WP7
+                LongListMultiSelector longListMultiSelector = r.Target as LongListMultiSelector;
+                ListView listView = r.Target as ListView;
+#endif
                 Pivot pivot = r.Target as Pivot;
 
                 if (listBox != null)
@@ -635,13 +639,27 @@ namespace Microsoft.Phone.Controls
                 else if (longListSelector != null)
                 {
                     // If the target is a LongListSelector, feather its items individually.
+#if WP7
                     ListBox child = TemplatedVisualTreeExtensions.GetFirstLogicalChildByType<ListBox>(longListSelector, false);
 
                     if (child != null)
                     {
                         ItemsControlExtensions.GetItemsInViewPort(child, targets);
                     }
+#else
+                    LongListSelectorExtensions.GetItemsInViewPort(longListSelector, targets);
+#endif
                 }
+#if !WP7
+                else if (longListMultiSelector != null)
+                {
+                    LongListSelectorExtensions.GetItemsInViewPort(longListMultiSelector, targets);
+                }
+                else if (listView != null)
+                {
+                    LongListSelectorExtensions.GetItemsInViewPort(listView, targets);
+                }
+#endif
                 else if (pivot != null)
                 {
                     // If the target is a Pivot, feather the title and the headers individually.
@@ -829,6 +847,23 @@ namespace Microsoft.Phone.Controls
                 }
             }
 
+#if !WP7
+            if (!isParentTransparent)
+            {
+                Pivot pivot = ancestors.OfType<Pivot>().FirstOrDefault();
+                if (pivot != null && pivot.SelectedItem != null)
+                {
+                    FrameworkElement selectedItemContainer = pivot.ItemContainerGenerator.ContainerFromItem(pivot.SelectedItem) as FrameworkElement;
+                    if (selectedItemContainer != null)
+                    {
+                        if (!ancestors.Contains(selectedItemContainer))
+                        {
+                            return false;
+                        }
+                    }
+                }
+            }
+#endif
             return (bounds.Bottom > 0) && (bounds.Top < height) 
                 && (bounds.Right > 0) && (bounds.Left < width) 
                 && !isParentTransparent;

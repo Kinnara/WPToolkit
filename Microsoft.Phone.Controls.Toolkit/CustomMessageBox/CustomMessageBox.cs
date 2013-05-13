@@ -572,6 +572,11 @@ namespace Microsoft.Phone.Controls
             _container = new Grid();
             _container.Children.Add(overlay);
 
+            if (ReadLocalValue(FlowDirectionProperty) == DependencyProperty.UnsetValue)
+            {
+                FlowDirection = this.GetUsefulFlowDirection();
+            }
+
             // Insert the message box.
             _container.Children.Add(this);
 
@@ -767,6 +772,7 @@ namespace Microsoft.Phone.Controls
             if (SystemTray.IsVisible && _popup != null)
             {
                 PageOrientation orientation = GetPageOrientation();
+                bool leftToRight = FlowDirection == FlowDirection.LeftToRight;
 
                 switch (orientation)
                 {
@@ -777,11 +783,11 @@ namespace Microsoft.Phone.Controls
                         break;
                     case PageOrientation.LandscapeLeft:
                         _popup.HorizontalOffset = 0.0;
-                        _popup.VerticalOffset = _systemTrayWidthInLandscape;
+                        _popup.VerticalOffset = leftToRight ? _systemTrayWidthInLandscape : 0.0;
                         break;
                     case PageOrientation.LandscapeRight:
                         _popup.HorizontalOffset = 0.0;
-                        _popup.VerticalOffset = 0.0;
+                        _popup.VerticalOffset = leftToRight ? 0.0 : _systemTrayWidthInLandscape;
                         break;
                 }
             }

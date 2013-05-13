@@ -616,6 +616,7 @@ namespace Microsoft.Phone.Controls
         /// Ends the tilt effect by playing the animation.
         /// </summary>
         /// <param name="element">The element being tilted.</param>
+        /// <param name="playReturnAnimation">Specifies whether to play the ruturn animation.</param>
         private static void EndTiltEffect(FrameworkElement element, bool playReturnAnimation = true)
         {
             if (element != null)
