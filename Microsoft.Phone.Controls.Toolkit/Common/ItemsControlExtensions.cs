@@ -79,11 +79,11 @@ namespace Microsoft.Phone.Controls
                 return;
             }
 
-            ScrollViewer scrollHost = VisualTreeHelper.GetChild(list, 0) as ScrollViewer;
+            ItemsPresenter itemsPresenter = list.GetFirstLogicalChildByType<ItemsPresenter>(false);
 
             list.UpdateLayout();
 
-            if (scrollHost == null)
+            if (itemsPresenter == null)
             {
                 return;
             }
@@ -96,7 +96,7 @@ namespace Microsoft.Phone.Controls
                     itemTransform = null;
                     try
                     {
-                        itemTransform = container.TransformToVisual(scrollHost);
+                        itemTransform = container.TransformToVisual(itemsPresenter);
                     }
                     catch (ArgumentException)
                     {
@@ -121,7 +121,7 @@ namespace Microsoft.Phone.Controls
                 itemTransform = null;
                 try
                 {
-                    itemTransform = container.TransformToVisual(scrollHost);
+                    itemTransform = container.TransformToVisual(itemsPresenter);
                 }
                 catch (ArgumentException)
                 {
@@ -131,7 +131,7 @@ namespace Microsoft.Phone.Controls
 
                 boundingBox = new Rect(itemTransform.Transform(new Point()), itemTransform.Transform(new Point(container.ActualWidth, container.ActualHeight)));
 
-                if (boundingBox.Top < scrollHost.ActualHeight)
+                if (boundingBox.Top < itemsPresenter.ActualHeight)
                 {
                     items.Add(new WeakReference(container));
                 }

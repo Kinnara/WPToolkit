@@ -1947,7 +1947,7 @@
                                     Margin="24,15,24,31"
                                     Visibility="Collapsed"
                                     FontSize="{StaticResource PhoneFontSizeMedium}"
-                                    FontFamily="{StaticResource PhoneFontFamilySemiLight}"                                                                        
+                                    FontFamily="{StaticResource PhoneFontFamilyNormal}"                                                                        
                                     LineHeight="26.667"
                                     LineStackingStrategy="BlockLineHeight"
                                     TextWrapping="Wrap"

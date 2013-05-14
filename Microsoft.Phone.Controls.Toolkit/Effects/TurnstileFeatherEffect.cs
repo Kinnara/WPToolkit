@@ -623,18 +623,35 @@ namespace Microsoft.Phone.Controls
                     continue;
                 }
 
-                ListBox listBox = r.Target as ListBox;
+                Pivot pivot = r.Target as Pivot;
+                ItemsControl itemsControl = r.Target as ItemsControl;
                 LongListSelector longListSelector = r.Target as LongListSelector;
 #if !WP7
                 LongListMultiSelector longListMultiSelector = r.Target as LongListMultiSelector;
                 ListView listView = r.Target as ListView;
 #endif
-                Pivot pivot = r.Target as Pivot;
 
-                if (listBox != null)
+                if (pivot != null)
                 {
-                    // If the target is a ListBox, feather its items individually.
-                    ItemsControlExtensions.GetItemsInViewPort(listBox, targets);
+                    // If the target is a Pivot, feather the title and the headers individually.
+                    ContentPresenter title = TemplatedVisualTreeExtensions.GetFirstLogicalChildByType<ContentPresenter>(pivot, false);
+
+                    if (title != null)
+                    {
+                        targets.Add(new WeakReference(title));
+                    }
+
+                    PivotHeadersControl headers = TemplatedVisualTreeExtensions.GetFirstLogicalChildByType<PivotHeadersControl>(pivot, false);
+
+                    if (headers != null)
+                    {
+                        targets.Add(new WeakReference(headers));
+                    }
+                }
+                else if (itemsControl != null)
+                {
+                    // If the target is an ItemsControl, feather its items individually.
+                    ItemsControlExtensions.GetItemsInViewPort(itemsControl, targets);
                 }
                 else if (longListSelector != null)
                 {
@@ -653,30 +670,15 @@ namespace Microsoft.Phone.Controls
 #if !WP7
                 else if (longListMultiSelector != null)
                 {
+                    // If the target is a LongListMultiSelector, feather its items individually.
                     LongListSelectorExtensions.GetItemsInViewPort(longListMultiSelector, targets);
                 }
                 else if (listView != null)
                 {
+                    // If the target is a ListView, feather its items individually.
                     LongListSelectorExtensions.GetItemsInViewPort(listView, targets);
                 }
 #endif
-                else if (pivot != null)
-                {
-                    // If the target is a Pivot, feather the title and the headers individually.
-                    ContentPresenter title = TemplatedVisualTreeExtensions.GetFirstLogicalChildByType<ContentPresenter>(pivot, false);
-
-                    if (title != null)
-                    {
-                        targets.Add(new WeakReference(title));
-                    }
-
-                    PivotHeadersControl headers = TemplatedVisualTreeExtensions.GetFirstLogicalChildByType<PivotHeadersControl>(pivot, false);
-
-                    if (headers != null)
-                    {
-                        targets.Add(new WeakReference(headers));
-                    }
-                }
                 else
                 {
                     // Else, feather the target as a whole.
@@ -816,8 +818,8 @@ namespace Microsoft.Phone.Controls
             }
 
             GeneralTransform generalTransform;
-            double height = root.ActualHeight;
-            double width = root.ActualWidth;
+            double height = root.GetUsefulHeight();
+            double width = root.GetUsefulWidth();
 
             try
             {
