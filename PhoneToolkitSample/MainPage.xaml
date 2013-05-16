@@ -69,154 +69,154 @@
                             <localControls:HeaderedContentControl
                                 Style="{StaticResource MultilineHyperlinkStyle}"
                                 Header="autocompletebox"
-                                Content="Completion of text based on items"/>
+                                Content="completion of text based on items"/>
                         </HyperlinkButton>
                         <HyperlinkButton NavigateUri="/Samples/ContextMenuSample.xaml"
                                          Style="{StaticResource HyperlinkEmptyStyle}">
                             <localControls:HeaderedContentControl
                                 Style="{StaticResource MultilineHyperlinkStyle}"
                                 Header="contextmenu"
-                                Content="Tap &amp; hold menu options control"/>
+                                Content="tap &amp; hold menu options control"/>
                         </HyperlinkButton>
                         <HyperlinkButton NavigateUri="/Samples/CustomMessageBoxSample.xaml"
                                          Style="{StaticResource HyperlinkEmptyStyle}">
                             <localControls:HeaderedContentControl
                                 Style="{StaticResource MultilineHyperlinkStyle}"
                                 Header="custommessagebox"
-                                Content="A modular dialog box to display notifications"/>
+                                Content="a modular dialog box to display notifications"/>
                         </HyperlinkButton>
                         <HyperlinkButton NavigateUri="/Samples/DateTimeConvertersSample.xaml"
                                          Style="{StaticResource HyperlinkEmptyStyle}">
                             <localControls:HeaderedContentControl
                                 Style="{StaticResource MultilineHyperlinkStyle}"
                                 Header="date+time converters"
-                                Content="Localized time display for data binding"/>
+                                Content="localized time display for data binding"/>
                         </HyperlinkButton>
                         <HyperlinkButton NavigateUri="/Samples/DateTimePickerSample.xaml"
                                          Style="{StaticResource HyperlinkEmptyStyle}">
                             <localControls:HeaderedContentControl
                                 Style="{StaticResource MultilineHyperlinkStyle}"
                                 Header="date &amp; time pickers"
-                                Content="Controls to select dates or times"/>
+                                Content="controls to select dates or times"/>
                         </HyperlinkButton>
                         <HyperlinkButton NavigateUri="/Samples/ExpanderViewSample.xaml"
                                          Style="{StaticResource HyperlinkEmptyStyle}">
                             <localControls:HeaderedContentControl
                                 Style="{StaticResource MultilineHyperlinkStyle}"
                                 Header="expanderview"
-                                Content="Shows sub-items similar to the new email app"/>
+                                Content="shows sub-items similar to the new email app"/>
                         </HyperlinkButton>
                         <HyperlinkButton NavigateUri="/Samples/FeatheredTransitionsSample1.xaml"
                                          Style="{StaticResource HyperlinkEmptyStyle}">
                             <localControls:HeaderedContentControl
                                 Style="{StaticResource MultilineHyperlinkStyle}"
                                 Header="featheredtransitions"
-                                Content="Animate multiple elements between pages"/>
+                                Content="animate multiple elements between pages"/>
                         </HyperlinkButton>
                         <HyperlinkButton NavigateUri="/Samples/GestureSample.xaml"
                                          Style="{StaticResource HyperlinkEmptyStyle}">
                             <localControls:HeaderedContentControl
                                 Style="{StaticResource MultilineHyperlinkStyle}"
                                 Header="gestures"
-                                Content="A gesture service for tap pinch, etc."/>
+                                Content="a gesture service for tap pinch, etc."/>
                         </HyperlinkButton>
                         <HyperlinkButton NavigateUri="/Samples/HubTileSample.xaml"
                                          Style="{StaticResource HyperlinkEmptyStyle}">
                             <localControls:HeaderedContentControl
                                 Style="{StaticResource MultilineHyperlinkStyle}"
                                 Header="hubtile"
-                                Content="Tile control that is animated and alive"/>
+                                Content="tile control that is animated and alive"/>
                         </HyperlinkButton>
                         <HyperlinkButton NavigateUri="/Samples/ListPickerSample.xaml"
                                          Style="{StaticResource HyperlinkEmptyStyle}">
                             <localControls:HeaderedContentControl
                                 Style="{StaticResource MultilineHyperlinkStyle}"
                                 Header="listpicker"
-                                Content="Select from a few items inline or many"/>
+                                Content="select from a few items inline or many"/>
                         </HyperlinkButton>
                         <HyperlinkButton NavigateUri="/Samples/LockablePivotSample.xaml"
                                          Style="{StaticResource HyperlinkEmptyStyle}">
                             <localControls:HeaderedContentControl
                                 Style="{StaticResource MultilineHyperlinkStyle}"
                                 Header="lockablepivot"
-                                Content="A Pivot that allows disabling navigation"/>
+                                Content="a Pivot that allows disabling navigation"/>
                         </HyperlinkButton>
                         <HyperlinkButton NavigateUri="/Samples/LongListSelectorSample.xaml"
                                          Style="{StaticResource HyperlinkEmptyStyle}">
                             <localControls:HeaderedContentControl
                                 Style="{StaticResource MultilineHyperlinkStyle}"
                                 Header="longlistselector"
-                                Content="A grouping items control with great performance"/>
+                                Content="a grouping items control with great performance"/>
                         </HyperlinkButton>
                         <HyperlinkButton NavigateUri="/Samples/MultiselectListSample.xaml"
                                          Style="{StaticResource HyperlinkEmptyStyle}">
                             <localControls:HeaderedContentControl
                                 Style="{StaticResource MultilineHyperlinkStyle}"
                                 Header="multiselectlist"
-                                Content="Support multiple selection in a list"/>
+                                Content="support multiple selection in a list"/>
                         </HyperlinkButton>
                         <HyperlinkButton NavigateUri="/Samples/PerformanceProgressBarSample.xaml"
                                          Style="{StaticResource HyperlinkEmptyStyle}">
                             <localControls:HeaderedContentControl
                                 Style="{StaticResource MultilineHyperlinkStyle}"
                                 Header="performanceprogressbar"
-                                Content="Show indeterminate progress in style"/>
+                                Content="show indeterminate progress in style"/>
                         </HyperlinkButton>
                         <HyperlinkButton NavigateUri="/Samples/PhoneTextBoxSample.xaml"
                                          Style="{StaticResource HyperlinkEmptyStyle}">
                             <localControls:HeaderedContentControl
                                 Style="{StaticResource MultilineHyperlinkStyle}"
                                 Header="phonetextbox"
-                                Content="Add new features to the TextBox"/>
+                                Content="add new features to the TextBox"/>
                         </HyperlinkButton>
                         <HyperlinkButton NavigateUri="/Samples/RatingControlSample.xaml"
                                          Style="{StaticResource HyperlinkEmptyStyle}">
                             <localControls:HeaderedContentControl
                                 Style="{StaticResource MultilineHyperlinkStyle}"
                                 Header="ratingcontrol"
-                                Content="Simple control for star-based rating"/>
+                                Content="simple control for star-based rating"/>
                         </HyperlinkButton>
                         <HyperlinkButton NavigateUri="/Samples/SlideInEffectSample.xaml"
                                          Style="{StaticResource HyperlinkEmptyStyle}">
                             <localControls:HeaderedContentControl
                                 Style="{StaticResource MultilineHyperlinkStyle}"
                                 Header="slideineffect"
-                                Content="Make elements responsive to PivotItem sliding"/>
+                                Content="make elements responsive to PivotItem sliding"/>
                         </HyperlinkButton>
                         <HyperlinkButton NavigateUri="/Samples/ToggleSwitchSample.xaml"
                                          Style="{StaticResource HyperlinkEmptyStyle}">
                             <localControls:HeaderedContentControl
                                 Style="{StaticResource MultilineHyperlinkStyle}"
                                 Header="toggleswitch"
-                                Content="Offer a touch control for on/off choices"/>
+                                Content="offer a touch control for on/off choices"/>
                         </HyperlinkButton>
                         <HyperlinkButton NavigateUri="/Samples/TiltEffectSample.xaml"
                                          Style="{StaticResource HyperlinkEmptyStyle}">
                             <localControls:HeaderedContentControl
                                 Style="{StaticResource MultilineHyperlinkStyle}"
                                 Header="tilteffect"
-                                Content="Make buttons visually responsive to touch"/>
+                                Content="make buttons visually responsive to touch"/>
                         </HyperlinkButton>
                         <HyperlinkButton NavigateUri="/Samples/TransitionsSample.xaml"
                                          Style="{StaticResource HyperlinkEmptyStyle}">
                             <localControls:HeaderedContentControl
                                 Style="{StaticResource MultilineHyperlinkStyle}"
                                 Header="transitions"
-                                Content="Beautifully animate between pages"/>
+                                Content="beautifully animate between pages"/>
                         </HyperlinkButton>
                         <HyperlinkButton NavigateUri="/Samples/WaitCursorSample.xaml"
                                          Style="{StaticResource HyperlinkEmptyStyle}">
                             <localControls:HeaderedContentControl
                                 Style="{StaticResource MultilineHyperlinkStyle}"
                                 Header="waitcursor"
-                                Content="Takes over and dims the screen"/>
+                                Content="takes over and dims the screen"/>
                         </HyperlinkButton>
                         <HyperlinkButton NavigateUri="/Samples/WrapPanelSample.xaml"
                                          Style="{StaticResource HyperlinkEmptyStyle}">
                             <localControls:HeaderedContentControl
                                 Style="{StaticResource MultilineHyperlinkStyle}"
                                 Header="wrappanel"
-                                Content="A non-virtualized wrapping control"/>
+                                Content="a non-virtualized wrapping control"/>
                         </HyperlinkButton>
                     </StackPanel>
                     <Rectangle Height="40"/>

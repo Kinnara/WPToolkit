@@ -64,7 +64,7 @@
                        TextWrapping="Wrap"
                        Text="The TiltEffect uses an attached property that can be placed on a container to allow tiltable items to enjoy that effect."/>
             
-            <Button Content="Touch this button"/>
+            <Button Content="touch this button"/>
             
             <TextBlock Style="{StaticResource PhoneTextNormalStyle}"
                        TextWrapping="Wrap"

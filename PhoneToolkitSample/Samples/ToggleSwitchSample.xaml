@@ -57,23 +57,27 @@
                        Style="{StaticResource PhoneTextTitle1Style}"/>
         </StackPanel>
 
-        <StackPanel x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0">
-            <toolkit:ToggleSwitch Header="Wi Fi networking"/>
+        <StackPanel x:Name="ContentPanel" Grid.Row="1" Margin="12,10,12,0">
+            <toolkit:ToggleSwitch Header="Wi-Fi networking"/>
             <toolkit:ToggleSwitch Header="Set automatically"/>
-            <toolkit:ToggleSwitch Header="5:45 AM">
+            <toolkit:ToggleSwitch Header="5:45 AM" FontFamily="{StaticResource PhoneFontFamilyNormal}" Padding="0,0,0,30">
                 <toolkit:ToggleSwitch.HeaderTemplate>
                     <DataTemplate>
-                        <ContentControl FontSize="{StaticResource PhoneFontSizeLarge}" Foreground="{StaticResource PhoneForegroundBrush}" Content="{Binding}"/>
+                        <ContentControl FontFamily="{StaticResource PhoneFontFamilySemiLight}"
+                                        FontSize="{StaticResource PhoneFontSizeLarge}"
+                                        Foreground="{StaticResource PhoneForegroundBrush}"
+                                        Margin="-1,-10,0,-8"
+                                        Content="{Binding}"/>
                     </DataTemplate>
                 </toolkit:ToggleSwitch.HeaderTemplate>
                 <toolkit:ToggleSwitch.ContentTemplate>
                     <DataTemplate>
-                        <StackPanel>
-                            <StackPanel Orientation="Horizontal">
-                                <TextBlock Text="Alarm: " FontSize="{StaticResource PhoneFontSizeSmall}"/>
+                        <StackPanel Margin="0,-3,0,-10">
+                            <StackPanel Orientation="Horizontal" Margin="0,3,0,-5">
                                 <ContentControl HorizontalAlignment="Left" FontSize="{StaticResource PhoneFontSizeSmall}" Content="{Binding}"/>
+                                <TextBlock Text=":  Alarm" FontSize="{StaticResource PhoneFontSizeSmall}"/>
                             </StackPanel>
-                            <TextBlock Text="every schoolday" FontSize="{StaticResource PhoneFontSizeSmall}" Foreground="{StaticResource PhoneSubtleBrush}"/>
+                            <TextBlock Text="every schoolday" FontSize="{StaticResource PhoneFontSizeSmall}" Foreground="{StaticResource PhoneSubtleBrush}" Margin="0,3,0,-5"/>
                         </StackPanel>
                     </DataTemplate>
                 </toolkit:ToggleSwitch.ContentTemplate>

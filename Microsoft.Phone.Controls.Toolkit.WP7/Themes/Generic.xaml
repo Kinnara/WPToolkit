@@ -11,7 +11,22 @@
     xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
     xmlns:controls="clr-namespace:Microsoft.Phone.Controls"
     xmlns:primitives="clr-namespace:Microsoft.Phone.Controls.Primitives">
-    
+
+    <DataTemplate x:Key="ControlHeaderTemplate">
+        <TextBlock Text="{Binding}"
+                   FontFamily="{StaticResource PhoneFontFamilyNormal}"
+                   FontSize="{StaticResource PhoneFontSizeNormal}"
+                   Foreground="{StaticResource PhoneSubtleBrush}"
+                   LineHeight="23.333"
+                   LineStackingStrategy="BlockLineHeight"
+                   Margin="0,-9,0,0"
+                   TextWrapping="Wrap">
+            <TextBlock.RenderTransform>
+                <TranslateTransform X="-1" Y="4"/>
+            </TextBlock.RenderTransform>
+        </TextBlock>
+    </DataTemplate>
+
     <Style TargetType="primitives:ToggleSwitchButton">
         <Setter Property="Background" Value="{StaticResource PhoneBackgroundBrush}"/>
         <Setter Property="IsTabStop" Value="False"/>
@@ -31,21 +46,18 @@
                                 <VisualState x:Name="Normal"/>
                                 <VisualState x:Name="Disabled">
                                     <Storyboard>
-                                        <ColorAnimation
-                                            Storyboard.TargetName="SwitchBottom"
-                                            Storyboard.TargetProperty="(Grid.Background).(SolidColorBrush.Color)"
-                                            Duration="0"
-                                            To="{StaticResource PhoneForegroundColor}"/>
-                                        <ColorAnimation
-                                            Storyboard.TargetName="ThumbCenter"
-                                            Storyboard.TargetProperty="(Border.Background).(SolidColorBrush.Color)"
-                                            Duration="0"
-                                            To="{StaticResource PhoneForegroundColor}"/>
-                                        <DoubleAnimation
-                                            Storyboard.TargetName="Root"
-                                            Storyboard.TargetProperty="Opacity"
-                                            Duration="0"
-                                            To="0.3"/>
+                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="SwitchBottom" Storyboard.TargetProperty="Background">
+                                            <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource PhoneDisabledBrush}" />
+                                        </ObjectAnimationUsingKeyFrames>
+                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="OuterBorder" Storyboard.TargetProperty="BorderBrush">
+                                            <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource PhoneDisabledBrush}" />
+                                        </ObjectAnimationUsingKeyFrames>
+                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="ThumbCenter" Storyboard.TargetProperty="Background">
+                                            <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource PhoneDisabledBrush}" />
+                                        </ObjectAnimationUsingKeyFrames>
+                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="ThumbCenter" Storyboard.TargetProperty="BorderBrush">
+                                            <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource PhoneDisabledBrush}" />
+                                        </ObjectAnimationUsingKeyFrames>
                                     </Storyboard>
                                 </VisualState>
                             </VisualStateGroup>
@@ -107,12 +119,14 @@
                                             <TranslateTransform x:Name="BackgroundTranslation"/>
                                         </Rectangle.RenderTransform>
                                     </Rectangle>
-                                    <Border BorderBrush="{StaticResource PhoneForegroundBrush}" BorderThickness="3">
+                                    <Border BorderBrush="{StaticResource PhoneBackgroundBrush}" BorderThickness="3"/>
+                                    <Border x:Name="OuterBorder" BorderBrush="{StaticResource PhoneForegroundBrush}" BorderThickness="3">
                                         <Border BorderBrush="{StaticResource PhoneBackgroundBrush}" BorderThickness="4"/>
                                     </Border>
                                 </Grid>
                                 <Border
                                     x:Name="SwitchThumb"
+                                    Background="{StaticResource PhoneBackgroundBrush}"
                                     BorderBrush="{StaticResource PhoneBackgroundBrush}"
                                     BorderThickness="4,0"
                                     Margin="-4,0"
@@ -138,10 +152,11 @@
 
     <Style TargetType="controls:ToggleSwitch">
         <Setter Property="Background" Value="{StaticResource PhoneBackgroundBrush}"/>
-        <Setter Property="FontFamily" Value="{StaticResource PhoneFontFamilyLight}"/>
+        <Setter Property="FontFamily" Value="{StaticResource PhoneFontFamilySemiLight}"/>
         <Setter Property="FontSize" Value="{StaticResource PhoneFontSizeLarge}"/>
         <Setter Property="Foreground" Value="{StaticResource PhoneForegroundBrush}"/>
         <Setter Property="IsTabStop" Value="False"/>
+        <Setter Property="HeaderTemplate" Value="{StaticResource ControlHeaderTemplate}"/>
         <Setter Property="HorizontalContentAlignment" Value="Left"/>
         <Setter Property="SwitchForeground" Value="{StaticResource PhoneAccentBrush}"/>
         <Setter Property="VerticalContentAlignment" Value="Top"/>
@@ -158,21 +173,17 @@
                                 <VisualState x:Name="Normal"/>
                                 <VisualState x:Name="Disabled">
                                     <Storyboard>
-                                        <DoubleAnimation
-                                            Storyboard.TargetName="Header"
-                                            Storyboard.TargetProperty="Opacity"
-                                            Duration="0"
-                                            To="0.3"/>
-                                        <DoubleAnimation
-                                            Storyboard.TargetName="Content"
-                                            Storyboard.TargetProperty="Opacity"
-                                            Duration="0"
-                                            To="0.3"/>
+                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="Header" Storyboard.TargetProperty="Foreground">
+                                            <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource PhoneDisabledBrush}" />
+                                        </ObjectAnimationUsingKeyFrames>
+                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="Content" Storyboard.TargetProperty="Foreground">
+                                            <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource PhoneDisabledBrush}" />
+                                        </ObjectAnimationUsingKeyFrames>
                                     </Storyboard>
                                 </VisualState>
                             </VisualStateGroup>
                         </VisualStateManager.VisualStateGroups>
-                        <Grid Margin="12,5,36,42">
+                        <Grid Margin="12,0,12,36">
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="Auto"/>
                                 <RowDefinition Height="Auto"/>
@@ -190,9 +201,8 @@
                                 Foreground="{StaticResource PhoneSubtleBrush}"
                                 HorizontalAlignment="Left"
                                 IsTabStop="False"
-                                Margin="-1,0,0,0"
                                 Opacity="{TemplateBinding Opacity}"
-                                VerticalAlignment="Bottom"/>
+                                VerticalAlignment="Top"/>
                             <ContentControl
                                 x:Name="Content"
                                 Grid.Row="1"
@@ -200,7 +210,7 @@
                                 ContentTemplate="{TemplateBinding ContentTemplate}"
                                 HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
                                 IsTabStop="False"
-                                Margin="-1,1,0,-7"
+                                Margin="-1,6,0,-8"
                                 Opacity="{TemplateBinding Opacity}"
                                 VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
                             <primitives:ToggleSwitchButton
@@ -208,7 +218,7 @@
                                 Grid.RowSpan="2"
                                 Grid.Column="1"
                                 Background="{TemplateBinding Background}"
-                                Margin="-22,-29,-24,-28"
+                                Margin="23,-36,-23,-30"
                                 Opacity="{TemplateBinding Opacity}"
                                 SwitchForeground="{TemplateBinding SwitchForeground}"
                                 VerticalAlignment="Bottom"/>

@@ -15,10 +15,31 @@
     mc:Ignorable="d" d:DesignHeight="768" d:DesignWidth="480"
     shell:SystemTray.IsVisible="True">
 
+    <toolkit:TransitionService.NavigationInTransition>
+        <toolkit:NavigationInTransition>
+            <toolkit:NavigationInTransition.Backward>
+                <toolkit:TurnstileTransition Mode="BackwardIn"/>
+            </toolkit:NavigationInTransition.Backward>
+            <toolkit:NavigationInTransition.Forward>
+                <toolkit:TurnstileTransition Mode="ForwardIn"/>
+            </toolkit:NavigationInTransition.Forward>
+        </toolkit:NavigationInTransition>
+    </toolkit:TransitionService.NavigationInTransition>
+    <toolkit:TransitionService.NavigationOutTransition>
+        <toolkit:NavigationOutTransition>
+            <toolkit:NavigationOutTransition.Backward>
+                <toolkit:TurnstileTransition Mode="BackwardOut"/>
+            </toolkit:NavigationOutTransition.Backward>
+            <toolkit:NavigationOutTransition.Forward>
+                <toolkit:TurnstileTransition Mode="ForwardOut"/>
+            </toolkit:NavigationOutTransition.Forward>
+        </toolkit:NavigationOutTransition>
+    </toolkit:TransitionService.NavigationOutTransition>
+
     <!--LayoutRoot is the root grid where all page content is placed-->
     <Grid x:Name="LayoutRoot" Background="Transparent">
         <!--Pivot Control-->
-        <phone:Pivot Title="LockablePivot" Name="pivot" Margin="0,0,0,90">
+        <phone:Pivot Title="LOCKABLEPIVOT" Name="pivot" Margin="0,0,0,90">
             <controls:PivotItem Header="one">
                 <StackPanel>
                     <Slider Height="84" HorizontalAlignment="Left" Margin="5,0,0,0" Name="slider1" VerticalAlignment="Top" Width="440" IsEnabled="false" />
@@ -31,8 +52,8 @@
             </controls:PivotItem>
 
             <controls:PivotItem Header="two">
-                <ScrollViewer>
-                    <TextBlock Name="textBlock1" TextWrapping="Wrap" FontSize="30" />
+                <ScrollViewer Margin="-12,0">
+                    <TextBlock Name="textBlock1" TextWrapping="Wrap" FontSize="30" Margin="24,0" />
                 </ScrollViewer>
             </controls:PivotItem>
 
