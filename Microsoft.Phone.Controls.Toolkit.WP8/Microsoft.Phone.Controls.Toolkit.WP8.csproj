@@ -281,6 +281,9 @@
     <Compile Include="..\Microsoft.Phone.Controls.Toolkit\CustomMessageBox\DismissedEventArgs.cs">
       <Link>CustomMessageBox\DismissedEventArgs.cs</Link>
     </Compile>
+    <Compile Include="..\Microsoft.Phone.Controls.Toolkit\PhoneSlider\PhoneSlider.cs">
+      <Link>PhoneSlider\PhoneSlider.cs</Link>
+    </Compile>
     <Compile Include="..\Microsoft.Phone.Controls.Toolkit\PhoneTextBox\PhoneTextBox.cs">
       <Link>PhoneTextBox\PhoneTextBox.cs</Link>
     </Compile>
@@ -313,6 +316,9 @@
     </Compile>
     <Compile Include="..\Microsoft.Phone.Controls.Toolkit\PickerBox\PickerBoxMode.cs">
       <Link>PickerBox\PickerBoxMode.cs</Link>
+    </Compile>
+    <Compile Include="..\Microsoft.Phone.Controls.Toolkit\Primitives\TickBar.cs">
+      <Link>Primitives\TickBar.cs</Link>
     </Compile>
     <Compile Include="..\Microsoft.Phone.Controls.Toolkit\Primitives\TiltUserControl.cs">
       <Link>Primitives\TiltUserControl.cs</Link>

@@ -162,6 +162,13 @@
                                 Header="performanceprogressbar"
                                 Content="show indeterminate progress in style"/>
                         </HyperlinkButton>
+                        <HyperlinkButton NavigateUri="/Samples/PhoneSliderSample.xaml"
+                                         Style="{StaticResource HyperlinkEmptyStyle}">
+                            <localControls:HeaderedContentControl
+                                Style="{StaticResource MultilineHyperlinkStyle}"
+                                Header="phoneslider"
+                                Content="add new features to the Slider"/>
+                        </HyperlinkButton>
                         <HyperlinkButton NavigateUri="/Samples/PhoneTextBoxSample.xaml"
                                          Style="{StaticResource HyperlinkEmptyStyle}">
                             <localControls:HeaderedContentControl

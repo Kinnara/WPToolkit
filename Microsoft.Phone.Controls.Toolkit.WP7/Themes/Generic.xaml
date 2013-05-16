@@ -12,6 +12,10 @@
     xmlns:controls="clr-namespace:Microsoft.Phone.Controls"
     xmlns:primitives="clr-namespace:Microsoft.Phone.Controls.Primitives">
 
+    <ControlTemplate x:Key="PhoneSimpleRepeatButton" TargetType="RepeatButton">
+        <Rectangle Fill="Transparent" />
+    </ControlTemplate>
+
     <DataTemplate x:Key="ControlHeaderTemplate">
         <TextBlock Text="{Binding}"
                    FontFamily="{StaticResource PhoneFontFamilyNormal}"
@@ -2125,6 +2129,95 @@
                                        HorizontalAlignment="Center"/>
                         </StackPanel>
                     </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style TargetType="primitives:TickBar">
+        <Setter Property="Fill" Value="{StaticResource PhoneBackgroundBrush}"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="primitives:TickBar">
+                    <Canvas/>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style TargetType="controls:PhoneSlider">
+        <Setter Property="BorderThickness" Value="0"/>
+        <Setter Property="BorderBrush" Value="Transparent"/>
+        <Setter Property="Maximum" Value="10"/>
+        <Setter Property="Minimum" Value="0"/>
+        <Setter Property="Value" Value="0"/>
+        <Setter Property="Background" Value="{StaticResource PhoneContrastBackgroundBrush}"/>
+        <Setter Property="Foreground" Value="{StaticResource PhoneAccentBrush}"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="controls:PhoneSlider">
+                    <Grid Background="Transparent">
+                        <VisualStateManager.VisualStateGroups>
+                            <VisualStateGroup x:Name="CommonStates">
+                                <VisualState x:Name="Normal"/>
+                                <VisualState x:Name="MouseOver"/>
+                                <VisualState x:Name="Disabled">
+                                    <Storyboard>
+                                        <DoubleAnimation Duration="0" Storyboard.TargetName="HorizontalTrack" Storyboard.TargetProperty="Opacity" To="0.1" />
+                                        <DoubleAnimation Duration="0" Storyboard.TargetName="VerticalTrack" Storyboard.TargetProperty="Opacity" To="0.1" />
+                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="HorizontalFill" Storyboard.TargetProperty="Fill">
+                                            <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource PhoneDisabledBrush}" />
+                                        </ObjectAnimationUsingKeyFrames>
+                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="VerticalFill" Storyboard.TargetProperty="Fill">
+                                            <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource PhoneDisabledBrush}" />
+                                        </ObjectAnimationUsingKeyFrames>
+                                    </Storyboard>
+                                </VisualState>
+                            </VisualStateGroup>
+                        </VisualStateManager.VisualStateGroups>
+                        <Grid x:Name="HorizontalTemplate" Margin="{StaticResource PhoneHorizontalMargin}">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="12"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <Rectangle x:Name="HorizontalFill" Fill="{TemplateBinding Foreground}" Height="12" IsHitTestVisible="False" Margin="0,22,0,50"/>
+                            <Rectangle x:Name="HorizontalTrack" Fill="{TemplateBinding Background}" Height="12" IsHitTestVisible="False" Margin="0,22,0,50" Opacity="0.2" Grid.Column="2" />
+                            <primitives:TickBar Height="12" IsHitTestVisible="False" Margin="0,22,0,50" Grid.ColumnSpan="3"/>
+                            <RepeatButton x:Name="HorizontalTrackLargeChangeDecreaseRepeatButton" IsTabStop="False" Template="{StaticResource PhoneSimpleRepeatButton}" />
+                            <RepeatButton x:Name="HorizontalTrackLargeChangeIncreaseRepeatButton" IsTabStop="False"  Grid.Column="2" Template="{StaticResource PhoneSimpleRepeatButton}" />
+                            <Thumb x:Name="HorizontalThumb" Width="12" Height="12" Grid.Column="1" Margin="0,22,0,50">
+                                <Thumb.Template>
+                                    <ControlTemplate>
+                                        <Canvas Width="12" Height="12" Background="{StaticResource PhoneForegroundBrush}">
+                                            <Rectangle Width="60" Height="84" Canvas.Left="-24" Canvas.Top="-22" IsHitTestVisible="True" Fill="Transparent"/>
+                                        </Canvas>
+                                    </ControlTemplate>
+                                </Thumb.Template>
+                            </Thumb>
+                        </Grid>
+                        <Grid x:Name="VerticalTemplate" Margin="{StaticResource PhoneVerticalMargin}">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="12"/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+                            <Rectangle x:Name="VerticalFill" Fill="{TemplateBinding Foreground}" Width="12" IsHitTestVisible="False" Margin="18,0,18,0" Grid.Row="2"/>
+                            <Rectangle x:Name="VerticalTrack" Fill="{TemplateBinding Background}" Width="12" IsHitTestVisible="False" Margin="18,0,18,0" Opacity="0.2"/>
+                            <primitives:TickBar Width="12" IsHitTestVisible="False" Margin="18,0,18,0" Grid.RowSpan="3"/>
+                            <RepeatButton x:Name="VerticalTrackLargeChangeIncreaseRepeatButton" IsTabStop="False" Grid.Row="2" Template="{StaticResource PhoneSimpleRepeatButton}"/>
+                            <RepeatButton x:Name="VerticalTrackLargeChangeDecreaseRepeatButton" IsTabStop="False" Template="{StaticResource PhoneSimpleRepeatButton}"/>
+                            <Thumb x:Name="VerticalThumb" Height="12" Width="12" Margin="18,0" Grid.Row="1">
+                                <Thumb.Template>
+                                    <ControlTemplate>
+                                        <Canvas Width="12" Height="12" Background="{StaticResource PhoneForegroundBrush}">
+                                            <Rectangle Width="48" Height="72" Canvas.Left="-18" Canvas.Top="-30" IsHitTestVisible="True" Fill="Transparent"/>
+                                        </Canvas>
+                                    </ControlTemplate>
+                                </Thumb.Template>
+                            </Thumb>
+                        </Grid>
+                    </Grid>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
