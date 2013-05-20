@@ -162,6 +162,13 @@
                                 Header="performanceprogressbar"
                                 Content="show indeterminate progress in style"/>
                         </HyperlinkButton>
+                        <HyperlinkButton NavigateUri="/Samples/PhonePasswordBoxSample.xaml"
+                                         Style="{StaticResource HyperlinkEmptyStyle}">
+                            <localControls:HeaderedContentControl
+                                Style="{StaticResource MultilineHyperlinkStyle}"
+                                Header="phonepasswordbox"
+                                Content="add new features to the PasswordBox"/>
+                        </HyperlinkButton>
                         <HyperlinkButton NavigateUri="/Samples/PhoneSliderSample.xaml"
                                          Style="{StaticResource HyperlinkEmptyStyle}">
                             <localControls:HeaderedContentControl

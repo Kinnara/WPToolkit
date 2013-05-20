@@ -100,7 +100,7 @@ namespace Microsoft.Phone.Controls.Primitives
             set { SetValue(MaximumProperty, value); }
         }
 
-        public static readonly DependencyProperty MaximumProperty = DependencyProperty.Register(
+        private static readonly DependencyProperty MaximumProperty = DependencyProperty.Register(
             MaximumPropertyName,
             typeof(double),
             typeof(TickBar),

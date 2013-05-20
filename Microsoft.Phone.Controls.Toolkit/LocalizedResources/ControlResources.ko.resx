@@ -281,4 +281,8 @@
     <value>켜짐</value>
     <comment>Default text for "On" for ToggleSwitch.</comment>
   </data>
+  <data name="ShowPassword" xml:space="preserve">
+    <value>비밀번호 표시</value>
+    <comment>Default text for the "Show password" check box used by PhonePasswordBox.</comment>
+  </data>
 </root>

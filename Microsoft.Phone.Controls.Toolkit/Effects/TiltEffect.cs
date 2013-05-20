@@ -3,6 +3,7 @@
 // Please see http://go.microsoft.com/fwlink/?LinkID=131993 for details.
 // All other rights reserved.
 
+using Microsoft.Phone.Controls.Primitives;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
@@ -125,7 +126,8 @@ namespace Microsoft.Phone.Controls
                 typeof(ListPickerItem),
                 typeof(MenuItem),
                 typeof(LongListSelector),
-                typeof(HubTile)
+                typeof(HubTile),
+                typeof(PhonePasswordBoxCheckBox)
             };
         }
 

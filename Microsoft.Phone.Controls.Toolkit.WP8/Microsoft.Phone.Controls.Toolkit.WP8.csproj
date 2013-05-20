@@ -170,6 +170,9 @@
     <Compile Include="..\Microsoft.Phone.Controls.Toolkit\Common\SafeRaise.cs">
       <Link>Common\SafeRaise.cs</Link>
     </Compile>
+    <Compile Include="..\Microsoft.Phone.Controls.Toolkit\Common\SingleDataTemplateSelector.cs">
+      <Link>Common\SingleDataTemplateSelector.cs</Link>
+    </Compile>
     <Compile Include="..\Microsoft.Phone.Controls.Toolkit\Common\TemplatedVisualTreeExtensions.cs">
       <Link>Common\TemplatedVisualTreeExtensions.cs</Link>
     </Compile>
@@ -214,6 +217,9 @@
     </Compile>
     <Compile Include="..\Microsoft.Phone.Controls.Toolkit\CustomMessageBox\DismissingEventArgs.cs">
       <Link>CustomMessageBox\DismissingEventArgs.cs</Link>
+    </Compile>
+    <Compile Include="..\Microsoft.Phone.Controls.Toolkit\Data\DataTemplateSelector.cs">
+      <Link>Data\DataTemplateSelector.cs</Link>
     </Compile>
     <Compile Include="..\Microsoft.Phone.Controls.Toolkit\Data\HierarchicalDataTemplate.cs">
       <Link>Data\HierarchicalDataTemplate.cs</Link>
@@ -281,6 +287,12 @@
     <Compile Include="..\Microsoft.Phone.Controls.Toolkit\CustomMessageBox\DismissedEventArgs.cs">
       <Link>CustomMessageBox\DismissedEventArgs.cs</Link>
     </Compile>
+    <Compile Include="..\Microsoft.Phone.Controls.Toolkit\PhoneContentControl\PhoneContentControl.cs">
+      <Link>PhoneContentControl\PhoneContentControl.cs</Link>
+    </Compile>
+    <Compile Include="..\Microsoft.Phone.Controls.Toolkit\PhonePasswordBox\PhonePasswordBox.cs">
+      <Link>PhonePasswordBox\PhonePasswordBox.cs</Link>
+    </Compile>
     <Compile Include="..\Microsoft.Phone.Controls.Toolkit\PhoneSlider\PhoneSlider.cs">
       <Link>PhoneSlider\PhoneSlider.cs</Link>
     </Compile>
@@ -316,6 +328,9 @@
     </Compile>
     <Compile Include="..\Microsoft.Phone.Controls.Toolkit\PickerBox\PickerBoxMode.cs">
       <Link>PickerBox\PickerBoxMode.cs</Link>
+    </Compile>
+    <Compile Include="..\Microsoft.Phone.Controls.Toolkit\Primitives\PhonePasswordBoxCheckBox.cs">
+      <Link>Primitives\PhonePasswordBoxCheckBox.cs</Link>
     </Compile>
     <Compile Include="..\Microsoft.Phone.Controls.Toolkit\Primitives\TickBar.cs">
       <Link>Primitives\TickBar.cs</Link>

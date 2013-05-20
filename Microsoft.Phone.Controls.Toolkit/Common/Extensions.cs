@@ -6,6 +6,7 @@
 using System;
 using System.Windows;
 using System.Windows.Data;
+using System.Windows.Input;
 using System.Windows.Media;
 
 namespace Microsoft.Phone.Controls
@@ -130,6 +131,33 @@ namespace Microsoft.Phone.Controls
             }
 
             return element.FlowDirection;
+        }
+
+        public static bool HasFocus(this FrameworkElement frameworkElement)
+        {
+            DependencyObject focused = FocusManager.GetFocusedElement() as DependencyObject;
+            while (focused != null)
+            {
+                if (object.ReferenceEquals(focused, frameworkElement))
+                {
+                    return true;
+                }
+
+                // This helps deal with popups that may not be in the same 
+                // visual tree
+                DependencyObject parent = VisualTreeHelper.GetParent(focused);
+                if (parent == null)
+                {
+                    // Try the logical parent.
+                    FrameworkElement element = focused as FrameworkElement;
+                    if (element != null)
+                    {
+                        parent = element.Parent;
+                    }
+                }
+                focused = parent;
+            }
+            return false;
         }
     }
 }

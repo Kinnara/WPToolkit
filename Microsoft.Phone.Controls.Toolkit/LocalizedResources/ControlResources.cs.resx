@@ -281,4 +281,8 @@
     <value>Zapnuto</value>
     <comment>Default text for "On" for ToggleSwitch.</comment>
   </data>
+  <data name="ShowPassword" xml:space="preserve">
+    <value>Zobrazit heslo</value>
+    <comment>Default text for the "Show password" check box used by PhonePasswordBox.</comment>
+  </data>
 </root>

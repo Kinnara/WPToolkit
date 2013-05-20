@@ -224,6 +224,10 @@
       <Link>Samples\PersonDetail.xaml.cs</Link>
       <DependentUpon>PersonDetail.xaml</DependentUpon>
     </Compile>
+    <Compile Include="..\PhoneToolkitSample\Samples\PhonePasswordBoxSample.xaml.cs">
+      <Link>Samples\PhonePasswordBoxSample.xaml.cs</Link>
+      <DependentUpon>PhonePasswordBoxSample.xaml</DependentUpon>
+    </Compile>
     <Compile Include="..\PhoneToolkitSample\Samples\PhoneSliderSample.xaml.cs">
       <Link>Samples\PhoneSliderSample.xaml.cs</Link>
       <DependentUpon>PhoneSliderSample.xaml</DependentUpon>
@@ -379,6 +383,11 @@
     </Page>
     <Page Include="..\PhoneToolkitSample\Samples\PersonDetail.xaml">
       <Link>Samples\PersonDetail.xaml</Link>
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="..\PhoneToolkitSample\Samples\PhonePasswordBoxSample.xaml">
+      <Link>Samples\PhonePasswordBoxSample.xaml</Link>
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
