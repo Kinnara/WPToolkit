@@ -53,16 +53,18 @@
             <TextBlock Text="date &amp; time pickers" Style="{StaticResource PivotHeaderTextStyle}"/>
         </StackPanel>
 
-        <StackPanel x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0">
-            <toolkit:DatePicker Header="Select date" Margin="0,0,0,26" ValueChanged="DatePicker_ValueChanged"/>
-            <toolkit:TimePicker Header="Select time" Margin="0,0,0,26" ValueChanged="TimePicker_ValueChanged"/>
-            <TextBlock Text="note" Style="{StaticResource PhoneTextLargeStyle}"/>
-            <TextBlock TextWrapping="Wrap" Style="{StaticResource PhoneTextNormalStyle}">
-                <TextBlock.Text>
-                    To see the correct ApplicationBar icons in the DatePicker and TimePicker, you will need to create a folder in the root of your project called "Toolkit.Content" and put the icons in there. You can copy them from this project. They must be named "ApplicationBar.Cancel.png" and "ApplicationBar.Check.png", and the build action must be "Content".
-                </TextBlock.Text>
-            </TextBlock>
-        </StackPanel>
+        <ScrollViewer Grid.Row="1">
+            <StackPanel x:Name="ContentPanel" Margin="12,10,12,95">
+                <toolkit:DatePicker Header="Select date" Margin="0,0,0,26" ValueChanged="DatePicker_ValueChanged"/>
+                <toolkit:TimePicker Header="Select time" Margin="0,0,0,26" ValueChanged="TimePicker_ValueChanged"/>
+                <TextBlock Text="note" Style="{StaticResource PhoneTextLargeStyle}"/>
+                <TextBlock TextWrapping="Wrap" Style="{StaticResource PhoneTextNormalStyle}">
+                    <TextBlock.Text>
+                        To see the correct ApplicationBar icons in the DatePicker and TimePicker, you will need to create a folder in the root of your project called "Toolkit.Content" and put the icons in there. You can copy them from this project. They must be named "ApplicationBar.Cancel.png" and "ApplicationBar.Check.png", and the build action must be "Content".
+                    </TextBlock.Text>
+                </TextBlock>
+            </StackPanel>
+        </ScrollViewer>
     </Grid>
 
 </phone:PhoneApplicationPage>

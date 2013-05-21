@@ -534,13 +534,13 @@
             <Setter.Value>
                 <ControlTemplate TargetType="controls:DatePicker">
                     <StackPanel>
-                        <ContentControl
+                        <controls:PhoneContentControl
                             Content="{TemplateBinding Header}"
                             ContentTemplate="{TemplateBinding HeaderTemplate}"
+                            ContentTemplateSelector="{StaticResource ControlHeaderTemplateSelector}"
                             Foreground="{StaticResource PhoneTextMidContrastBrush}"
-                            FontSize="{StaticResource PhoneFontSizeNormal}"
                             HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
-                            Margin="12,0,12,-4"/>
+                            Margin="{StaticResource PhoneHorizontalMargin}"/>
                         <Button
                             x:Name="DateTimeButton"
                             Content="{TemplateBinding ValueString}"
@@ -573,13 +573,13 @@
             <Setter.Value>
                 <ControlTemplate TargetType="controls:TimePicker">
                     <StackPanel>
-                        <ContentControl
+                        <controls:PhoneContentControl
                             Content="{TemplateBinding Header}"
                             ContentTemplate="{TemplateBinding HeaderTemplate}"
+                            ContentTemplateSelector="{StaticResource ControlHeaderTemplateSelector}"
                             Foreground="{StaticResource PhoneTextMidContrastBrush}"
-                            FontSize="{StaticResource PhoneFontSizeNormal}"
                             HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
-                            Margin="12,0,12,-4"/>
+                            Margin="{StaticResource PhoneHorizontalMargin}"/>
                         <Button
                             x:Name="DateTimeButton"
                             Content="{TemplateBinding ValueString}"
@@ -678,14 +678,15 @@
                                 </VisualState>
                             </VisualStateGroup>
                         </VisualStateManager.VisualStateGroups>
-                        <ContentControl
+                        <controls:PhoneContentControl
                             x:Name="Header"
                             Content="{TemplateBinding Header}"
                             ContentTemplate="{TemplateBinding HeaderTemplate}"
+                            ContentTemplateSelector="{StaticResource ControlHeaderTemplateSelector}"
                             Foreground="{StaticResource PhoneTextMidContrastBrush}"
                             FontSize="{StaticResource PhoneFontSizeNormal}"
                             HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
-                            Margin="11 -8 0 -5"/>
+                            Margin="{StaticResource PhoneHorizontalMargin}"/>
                         <Border x:Name="Border" Background="Transparent">
                             <Border x:Name="PickerBackground"
                                     Background="{TemplateBinding Background}"
@@ -760,13 +761,14 @@
             <Setter.Value>
                 <ControlTemplate TargetType="controls:PickerBox">
                     <StackPanel>
-                        <ContentControl
+                        <controls:PhoneContentControl
                             Content="{TemplateBinding Header}"
                             ContentTemplate="{TemplateBinding HeaderTemplate}"
+                            ContentTemplateSelector="{StaticResource ControlHeaderTemplateSelector}"
                             Foreground="{StaticResource PhoneTextMidContrastBrush}"
                             FontSize="{StaticResource PhoneFontSizeNormal}"
                             HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
-                            Margin="11,-8,0,-5"/>
+                            Margin="{StaticResource PhoneHorizontalMargin}"/>
                         <Button
                             x:Name="Button"
                             ContentTemplate="{TemplateBinding ItemTemplate}"
