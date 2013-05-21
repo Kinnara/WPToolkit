@@ -124,7 +124,7 @@
         </Style>
     </phone:PhoneApplicationPage.Resources>
 
-    <Grid x:Name="LayoutRoot" Background="Transparent">
+    <Grid x:Name="LayoutRoot" Background="Transparent" Margin="0,32,0,0">
         <controls:Pivot Title="LONGLISTSELECTOR SAMPLES"
                         toolkit:TurnstileFeatherEffect.FeatheringIndex="0">
             <controls:PivotItem Header="buddies">

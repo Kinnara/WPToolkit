@@ -116,6 +116,9 @@
     <Compile Include="Samples\FeatheredTransitionsSample2.xaml.cs">
       <DependentUpon>FeatheredTransitionsSample2.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Samples\ImageButtonSample.xaml.cs">
+      <DependentUpon>ImageButtonSample.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Samples\PhonePasswordBoxSample.xaml.cs">
       <DependentUpon>PhonePasswordBoxSample.xaml</DependentUpon>
     </Compile>
@@ -220,6 +223,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Samples\FeatheredTransitionsSample2.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Samples\ImageButtonSample.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -343,6 +350,7 @@
     <Content Include="Images\Neuschwanstein.jpg" />
     <Content Include="Images\Paris.jpg" />
     <Content Include="Images\Person.jpg" />
+    <Content Include="Images\phone.listitem.dark.rest.png" />
     <Content Include="Images\Pretzel.jpg" />
     <Content Include="Images\Seattle.jpg" />
     <Content Include="Images\Shrimp.jpg" />

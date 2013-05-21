@@ -52,9 +52,11 @@
         </Grid.RowDefinitions>
 
         <!--TitlePanel contains the name of the application and page title-->
-        <StackPanel x:Name="TitlePanel" Grid.Row="0" Margin="12,17,0,28">
-            <TextBlock Text="TOOLKIT SAMPLES" Style="{StaticResource PhoneTextNormalStyle}"/>
-            <TextBlock Text="tilt effect" Margin="9,-7,0,0" Style="{StaticResource PhoneTextTitle1Style}"/>
+        <StackPanel Grid.Row="0">
+            <TextBlock Text="{StaticResource ApplicationTitle}" 
+                       Style="{StaticResource PivotTitleTextStyle}"/>
+            <TextBlock Text="tilt effect" 
+                       Style="{StaticResource PivotHeaderTextStyle}"/>
         </StackPanel>
 
         <StackPanel

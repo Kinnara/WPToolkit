@@ -51,14 +51,13 @@
         </Grid.RowDefinitions>
 
         <!--TitlePanel-->
-        <StackPanel Grid.Row="0" Margin="12,17,0,28">
+        <StackPanel Grid.Row="0">
             <TextBlock Text="{StaticResource ApplicationTitle}"
-                       Style="{StaticResource PhoneTextNormalStyle}"/>
-            <TextBlock Text="blank page" 
-                       Margin="9,-7,0,0" 
-                       Style="{StaticResource PhoneTextTitle1Style}"/>
+                       Style="{StaticResource PivotTitleTextStyle}"/>
+            <TextBlock Text="blank page"
+                       Style="{StaticResource PivotHeaderTextStyle}"/>
         </StackPanel>
-        
+
         <!--ContentPanel-->
         <Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0">
             <StackPanel Margin="12,0,0,0">

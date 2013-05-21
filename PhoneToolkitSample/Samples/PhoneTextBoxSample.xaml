@@ -50,30 +50,26 @@
         </Grid.RowDefinitions>
 
         <!--TitlePanel contains the name of the application and page title-->
-        <StackPanel Grid.Row="0" Margin="12,17,0,28">
+        <StackPanel Grid.Row="0">
             <TextBlock Text="{StaticResource ApplicationTitle}"
-                       Style="{StaticResource PhoneTextNormalStyle}"/>
+                       Style="{StaticResource PivotTitleTextStyle}"/>
             <TextBlock Text="phonetextbox" 
-                       Margin="9,-7,0,0" 
-                       Style="{StaticResource PhoneTextTitle1Style}"/>
+                       Style="{StaticResource PivotHeaderTextStyle}"/>
         </StackPanel>
         
         <!--ContentPanel - place additional content here-->
         <Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0">
             <ScrollViewer Margin="0, 0, -12, 0">
-                <StackPanel Orientation="Vertical">
-                    <toolkit:PhoneTextBox Hint="First Name" />
-                    <toolkit:PhoneTextBox Hint="Last Name"
+                <StackPanel Orientation="Vertical" Margin="0,0,12,0">
+                    <toolkit:PhoneTextBox PlaceholderText="First Name" />
+                    <toolkit:PhoneTextBox PlaceholderText="Last Name"
                                          MaxLength="40"
                                          LengthIndicatorVisible="True" 
                                          LengthIndicatorThreshold="10" />
-                    <toolkit:PhoneTextBox Hint="Subject"
+                    <toolkit:PhoneTextBox PlaceholderText="Subject"
                                           MaxLength="200"
                                           LengthIndicatorVisible="True"
                                           InputScope="Text"/>
-                    <TextBlock Text="Message"
-                           Foreground="{StaticResource PhoneSubtleBrush}"
-                           Margin="12, 0,0,0"/>
                     <!-- Note: the following allows for the user to enter more than 
                         500 characters, but the length indicator displays the
                         number of characters entered out of 500, even if the length
@@ -82,11 +78,12 @@
                                          DisplayedMaxLength="500"
                                          LengthIndicatorVisible="True"
                                          TextWrapping="Wrap" 
-                                         AcceptsReturn="True" />
+                                         AcceptsReturn="True"
+                                         Header="Message" />
 
                     <TextBlock Text="Action Icon"
                            Style="{StaticResource PhoneTextGroupHeaderStyle}" />
-                    <toolkit:PhoneTextBox Hint="Search" 
+                    <toolkit:PhoneTextBox PlaceholderText="Search" 
                                          ActionIcon="/Images/Search.png"
                                          ActionIconTapped="Search_ActionIconTapped"/>
                     <toolkit:PhoneTextBox ActionIcon="/Images/Search.png"

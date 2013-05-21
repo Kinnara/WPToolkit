@@ -59,9 +59,9 @@
             <controls:Pivot.TitleTemplate>
                 <DataTemplate>
                     <StackPanel>
-                        <StackPanel Grid.Row="0" Margin="-12,-2,0,0">
-                            <TextBlock Text="{StaticResource ApplicationTitle}" Style="{StaticResource PhoneTextNormalStyle}"/>
-                            <TextBlock Text="Turnstile Feather Example" Margin="12,-4,0,0" Style="{StaticResource PhoneTextSubtleStyle}"/>
+                        <StackPanel Grid.Row="0" Margin="-12,0,0,0">
+                            <TextBlock Text="{StaticResource ApplicationTitle}" Margin="12,0,0,0" Style="{StaticResource PivotTitleTextStyle}"/>
+                            <TextBlock Text="Turnstile Feather Example" Margin="12,-5,0,2" Style="{StaticResource PhoneTextSubtleStyle}"/>
                         </StackPanel>
                     </StackPanel>
                 </DataTemplate>

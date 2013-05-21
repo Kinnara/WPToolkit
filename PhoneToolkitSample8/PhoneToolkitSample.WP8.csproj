@@ -208,6 +208,10 @@
       <Link>Samples\HubTileSample.xaml.cs</Link>
       <DependentUpon>HubTileSample.xaml</DependentUpon>
     </Compile>
+    <Compile Include="..\PhoneToolkitSample\Samples\ImageButtonSample.xaml.cs">
+      <Link>Samples\ImageButtonSample.xaml.cs</Link>
+      <DependentUpon>ImageButtonSample.xaml</DependentUpon>
+    </Compile>
     <Compile Include="..\PhoneToolkitSample\Samples\ListPickerSample.xaml.cs">
       <Link>Samples\ListPickerSample.xaml.cs</Link>
       <DependentUpon>ListPickerSample.xaml</DependentUpon>
@@ -363,6 +367,11 @@
     </Page>
     <Page Include="..\PhoneToolkitSample\Samples\HubTileSample.xaml">
       <Link>Samples\HubTileSample.xaml</Link>
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="..\PhoneToolkitSample\Samples\ImageButtonSample.xaml">
+      <Link>Samples\ImageButtonSample.xaml</Link>
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -568,6 +577,9 @@
     <Content Include="..\PhoneToolkitSample\Images\Person.jpg">
       <Link>Images\Person.jpg</Link>
     </Content>
+    <Content Include="..\PhoneToolkitSample\Images\phone.listitem.dark.rest.png">
+      <Link>Images\phone.listitem.dark.rest.png</Link>
+    </Content>
     <Content Include="..\PhoneToolkitSample\Images\Pretzel.jpg">
       <Link>Images\Pretzel.jpg</Link>
     </Content>
@@ -619,9 +631,7 @@
   <ItemGroup>
     <Reference Include="Microsoft.Phone.Controls, Version=8.0.0.0, Culture=neutral, PublicKeyToken=24eec0d8c86cda1e, processorArchitecture=MSIL" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Samples\icons\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\$(TargetFrameworkIdentifier)\$(TargetFrameworkVersion)\Microsoft.$(TargetFrameworkIdentifier).$(TargetFrameworkVersion).Overrides.targets" />
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\$(TargetFrameworkIdentifier)\$(TargetFrameworkVersion)\Microsoft.$(TargetFrameworkIdentifier).CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it.

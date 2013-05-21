@@ -10,7 +10,7 @@ using System.Windows.Media;
 namespace Microsoft.Phone.Controls
 {
     /// <summary>
-    /// An extended password box for Windows Phone which implements header, hint text, and a 
+    /// An extended password box for Windows Phone which implements header, placeholder text, and a 
     /// show password check box.
     /// </summary>
     [TemplateVisualState(Name = VisualStates.StateNormal, GroupName = VisualStates.GroupCommon)]
@@ -27,6 +27,7 @@ namespace Microsoft.Phone.Controls
 
         private PasswordBox _passwordBox;
         private TextBox _textBox;
+        private FrameworkElement _placeholderTextElement;
         private PhonePasswordBoxCheckBox _showPasswordCheckBox;
 
         private bool _suppressSelectAll;
@@ -44,6 +45,11 @@ namespace Microsoft.Phone.Controls
         /// Main text box.
         /// </summary>
         private const string TextBoxName = "TextBox";
+
+        /// <summary>
+        /// Placeholder Text.
+        /// </summary>
+        private const string PlaceholderTextElementName = "PlaceholderTextElement";
 
         /// <summary>
         /// Show password check box.
@@ -436,64 +442,50 @@ namespace Microsoft.Phone.Controls
 
         #endregion
 
-        #region Hint
+        #region PlaceholderText
         /// <summary>
-        /// Identifies the Hint DependencyProperty.
+        /// The placeholder text in the password box when the password box doesn't have the input focus and the user hasn't entered any characters.
         /// </summary>
-        public static readonly DependencyProperty HintProperty =
-            DependencyProperty.Register("Hint", typeof(string), typeof(PhonePasswordBox), null);
-
-        /// <summary>
-        /// Gets or sets the Hint
-        /// </summary>
-        public string Hint
+        /// <value>
+        /// The placeholder text to display in the password box.
+        /// </value>
+        public string PlaceholderText
         {
-            get { return base.GetValue(HintProperty) as string; }
-            set { base.SetValue(HintProperty, value); }
+            get { return (string)GetValue(PlaceholderTextProperty); }
+            set { SetValue(PlaceholderTextProperty, value); }
         }
 
         /// <summary>
-        /// Identifies the HintStyle DependencyProperty.
+        /// Identifies the
+        /// <see cref="P:Microsoft.Phone.Controls.PhonePasswordBox.PlaceholderText" />
+        /// dependency property.
         /// </summary>
-        public static readonly DependencyProperty HintStyleProperty =
-            DependencyProperty.Register("HintStyle", typeof(Style), typeof(PhonePasswordBox), null);
+        /// <value>
+        /// The identifier for the
+        /// <see cref="P:Microsoft.Phone.Controls.PhonePasswordBox.PlaceholderText" />
+        /// dependency property.
+        /// </value>
+        public static readonly DependencyProperty PlaceholderTextProperty = DependencyProperty.Register(
+            "PlaceholderText",
+            typeof(string),
+            typeof(PhonePasswordBox),
+            new PropertyMetadata(string.Empty));
 
         /// <summary>
-        /// Gets or sets the Hint style
+        /// Determines if the PlaceholderText should be shown or not based on if there is content in the PhonePasswordBox.
         /// </summary>
-        public Style HintStyle
+        private void UpdatePlaceholderTextVisibility()
         {
-            get { return base.GetValue(HintStyleProperty) as Style; }
-            set { base.SetValue(HintStyleProperty, value); }
-        }
-
-        /// <summary>
-        /// Identifies the ActualHintVisibility DependencyProperty
-        /// </summary>
-        public static readonly DependencyProperty ActualHintVisibilityProperty =
-            DependencyProperty.Register("ActualHintVisibility", typeof(Visibility), typeof(PhonePasswordBox), null);
-
-        /// <summary>
-        /// Gets or sets whether the hint is actually visible.
-        /// </summary>
-        public Visibility ActualHintVisibility
-        {
-            get { return (Visibility)base.GetValue(ActualHintVisibilityProperty); }
-            set { base.SetValue(ActualHintVisibilityProperty, value); }
-        }
-
-        /// <summary>
-        /// Determines if the Hint should be shown or not based on if there is content in the PhonePasswordBox.
-        /// </summary>
-        private void UpdateHintVisibility()
-        {
-            if (string.IsNullOrEmpty(Password))
+            if (_placeholderTextElement != null)
             {
-                ActualHintVisibility = Visibility.Visible;
-            }
-            else
-            {
-                ActualHintVisibility = Visibility.Collapsed;
+                if (string.IsNullOrEmpty(Password))
+                {
+                    _placeholderTextElement.Visibility = Visibility.Visible;
+                }
+                else
+                {
+                    _placeholderTextElement.Visibility = Visibility.Collapsed;
+                }
             }
         }
 
@@ -642,6 +634,7 @@ namespace Microsoft.Phone.Controls
 
             _passwordBox = GetTemplateChild(PasswordBoxName) as PasswordBox;
             _textBox = GetTemplateChild(TextBoxName) as TextBox;
+            _placeholderTextElement = GetTemplateChild(PlaceholderTextElementName) as FrameworkElement;
             _showPasswordCheckBox = GetTemplateChild(ShowPasswordCheckBoxName) as PhonePasswordBoxCheckBox;
 
             if (_passwordBox != null)
@@ -665,7 +658,7 @@ namespace Microsoft.Phone.Controls
             UpdateEditBoxesFontSource();
             UpdateEditBoxesInteractivity();
             UpdateEditBoxesValue();
-            UpdateHintVisibility();
+            UpdatePlaceholderTextVisibility();
             OnAllowShowPasswordChanged();
 
             ChangeVisualState(false);
@@ -694,7 +687,7 @@ namespace Microsoft.Phone.Controls
         /// that contains the event data.</param>
         protected override void OnLostFocus(RoutedEventArgs e)
         {
-            UpdateHintVisibility();
+            UpdatePlaceholderTextVisibility();
             base.OnLostFocus(e);
         }
 
@@ -702,7 +695,10 @@ namespace Microsoft.Phone.Controls
         {
             UpdateEditBoxesInteractivity();
 
-            ActualHintVisibility = Visibility.Collapsed;
+            if (_placeholderTextElement != null)
+            {
+                _placeholderTextElement.Visibility = Visibility.Collapsed;
+            }
 
             if (_suppressSelectAll)
             {

@@ -45,18 +45,22 @@
         </toolkit:NavigationOutTransition>
     </toolkit:TransitionService.NavigationOutTransition>
 
-    <Grid x:Name="LayoutRoot" Background="Transparent">
+    <Grid x:Name="LayoutRoot" Background="Transparent" Margin="0,32,0,0">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
-        <StackPanel x:Name="TitlePanel" Grid.Row="0" Margin="12,17,0,28">
-            <TextBlock Text="{Binding FullName}" Style="{StaticResource PhoneTextNormalStyle}"/>
-            <TextBlock Text="status" Margin="9,-7,0,0" Style="{StaticResource PhoneTextTitle1Style}"/>
+        <StackPanel x:Name="TitlePanel" Grid.Row="0">
+            <TextBlock Text="{Binding FullName}" Style="{StaticResource PivotTitleTextStyle}"/>
+            <TextBlock Text="status" Style="{StaticResource PivotHeaderTextStyle}"/>
         </StackPanel>
 
-        <StackPanel x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0">
+        <Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
             <Grid Margin="{StaticResource PhoneTouchTargetOverhang}">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="Auto"/>
@@ -76,10 +80,10 @@
                     </StackPanel>
                 </StackPanel>
             </Grid>
-            <ScrollViewer>
-                <TextBlock x:Name="quote" Style="{StaticResource PhoneTextNormalStyle}" TextWrapping="Wrap"/>
+            <ScrollViewer Grid.Row="1" Margin="-12,0">
+                <TextBlock x:Name="quote" Style="{StaticResource PhoneTextNormalStyle}" TextWrapping="Wrap" Margin="24,0"/>
             </ScrollViewer>
-        </StackPanel>
+        </Grid>
     </Grid>
  
 </phone:PhoneApplicationPage>

@@ -16,7 +16,7 @@ using System.Diagnostics.CodeAnalysis;
 namespace Microsoft.Phone.Controls
 {
     /// <summary>
-    /// An extended TextBox for Windows Phone which implements hint text, an action icon, and a 
+    /// An extended TextBox for Windows Phone which implements header, placeholder text, an action icon, and a 
     /// length indicator.
     /// </summary>
     /// <QualityBand>Experimental</QualityBand>
@@ -27,24 +27,18 @@ namespace Microsoft.Phone.Controls
     [TemplateVisualState(Name = ReadOnlyState, GroupName = CommonStates)]
     [TemplateVisualState(Name = FocusedState, GroupName = FocusStates)]
     [TemplateVisualState(Name = UnfocusedState, GroupName = FocusStates)]
-    [TemplatePart(Name = TextBoxName, Type = typeof(TextBox))]
-    [TemplatePart(Name = HintContentName, Type = typeof(ContentControl))]
+    [TemplatePart(Name = PlaceholderTextElementName, Type = typeof(FrameworkElement))]
     [TemplatePart(Name = LengthIndicatorName, Type = typeof(TextBlock))]
     public class PhoneTextBox : TextBox
     {
 
         #region PhoneTextBox Properties & Variables
         private Grid RootGrid;
-        private TextBox TextBox;
+        private Border MainBorder;
         private TextBlock MeasurementTextBlock; // Used to measure the height of the TextBox to determine if the action icon is being overlapped.
 
-        private Brush ForegroundBrushInactive = (Brush)Application.Current.Resources["PhoneTextBoxReadOnlyBrush"];
-
-        private Brush ForegroundBrushEdit;
-
-        // Hint Private Variables.
-        private ContentControl HintContent;
-        private Border HintBorder;
+        // Placeholder Text Private Variables.
+        private FrameworkElement PlaceholderTextElement;
 
         // Length Indicator Private Variables.
         private TextBlock LengthIndicator;
@@ -67,19 +61,14 @@ namespace Microsoft.Phone.Controls
         private const string RootGridName = "RootGrid";
 
         /// <summary>
-        /// Main text box.
+        /// Main border.
         /// </summary>
-        private const string TextBoxName = "Text";
+        private const string MainBorderName = "MainBorder";
 
         /// <summary>
-        /// Hint Content.
+        /// Placeholder Text.
         /// </summary>
-        private const string HintContentName = "HintContent";
-
-        /// <summary>
-        /// Hint border.
-        /// </summary>
-        private const string HintBorderName = "HintBorder";
+        private const string PlaceholderTextElementName = "PlaceholderTextElement";
 
         /// <summary>
         /// Length indicator name.
@@ -154,104 +143,128 @@ namespace Microsoft.Phone.Controls
         private const string UnfocusedState = "Unfocused";
         #endregion
 
-        #region Hint
-        /// <summary>
-        /// Identifies the Hint DependencyProperty.
-        /// </summary>
-        public static readonly DependencyProperty HintProperty =
-            DependencyProperty.Register("Hint", typeof(string), typeof(PhoneTextBox), new PropertyMetadata(
-                    new PropertyChangedCallback(OnHintPropertyChanged)
-                )
-            );
+        #region Header
 
         /// <summary>
-        /// Gets or sets the Hint
+        /// Gets or sets the content for the header of the control.
         /// </summary>
-        public string Hint
+        /// <value>
+        /// The content for the header of the control. The default value is
+        /// null.
+        /// </value>
+        public object Header
         {
-            get { return base.GetValue(HintProperty) as string; }
-            set { base.SetValue(HintProperty, value); }
+            get { return (object)GetValue(HeaderProperty); }
+            set { SetValue(HeaderProperty, value); }
         }
 
         /// <summary>
-        /// Identifies the HintStyle DependencyProperty.
+        /// Identifies the
+        /// <see cref="P:Microsoft.Phone.Controls.PhoneTextBox.Header" />
+        /// dependency property.
         /// </summary>
-        public static readonly DependencyProperty HintStyleProperty =
-            DependencyProperty.Register("HintStyle", typeof(Style), typeof(PhoneTextBox), null);
+        /// <value>
+        /// The identifier for the
+        /// <see cref="P:Microsoft.Phone.Controls.PhoneTextBox.Header" />
+        /// dependency property.
+        /// </value>
+        public static readonly DependencyProperty HeaderProperty = DependencyProperty.Register(
+            "Header",
+            typeof(object),
+            typeof(PhoneTextBox),
+            null);
 
         /// <summary>
-        /// Gets or sets the Hint style
+        /// Gets or sets the template that is used to display the content of the
+        /// control's header.
         /// </summary>
-        public Style HintStyle
+        /// <value>
+        /// The template that is used to display the content of the control's
+        /// header. The default is null.
+        /// </value>
+        public DataTemplate HeaderTemplate
         {
-            get { return base.GetValue(HintStyleProperty) as Style; }
-            set { base.SetValue(HintStyleProperty, value); }
+            get { return (DataTemplate)GetValue(HeaderTemplateProperty); }
+            set { SetValue(HeaderTemplateProperty, value); }
         }
 
         /// <summary>
-        /// Identifies the HintVisibility DependencyProperty
+        /// Identifies the
+        /// <see cref="P:Microsoft.Phone.Controls.PhoneTextBox.HeaderTemplate" />
+        /// dependency property.
         /// </summary>
-        public static readonly DependencyProperty ActualHintVisibilityProperty =
-            DependencyProperty.Register("ActualHintVisibility", typeof(Visibility), typeof(PhoneTextBox), null);
+        /// <value>
+        /// The identifier for the
+        /// <see cref="P:Microsoft.Phone.Controls.PhoneTextBox.HeaderTemplate" />
+        /// dependency property.
+        /// </value>
+        public static readonly DependencyProperty HeaderTemplateProperty = DependencyProperty.Register(
+            "HeaderTemplate",
+            typeof(DataTemplate),
+            typeof(PhoneTextBox),
+            null);
 
+        #endregion
+
+        #region Placeholder Text
         /// <summary>
-        /// Gets or sets whether the hint is actually visible.
+        /// The placeholder text in the text box when the text box doesn't have the input focus and the user hasn't entered any characters.
         /// </summary>
-        public Visibility ActualHintVisibility
+        /// <value>
+        /// The placeholder text to display in the text box.
+        /// </value>
+        public string PlaceholderText
         {
-            get { return (Visibility)base.GetValue(ActualHintVisibilityProperty); }
-            set { base.SetValue(ActualHintVisibilityProperty, value); }
+            get { return (string)GetValue(PlaceholderTextProperty); }
+            set { SetValue(PlaceholderTextProperty, value); }
         }
 
+        /// <summary>
+        /// Identifies the
+        /// <see cref="P:Microsoft.Phone.Controls.PhoneTextBox.PlaceholderText" />
+        /// dependency property.
+        /// </summary>
+        /// <value>
+        /// The identifier for the
+        /// <see cref="P:Microsoft.Phone.Controls.PhoneTextBox.PlaceholderText" />
+        /// dependency property.
+        /// </value>
+        public static readonly DependencyProperty PlaceholderTextProperty = DependencyProperty.Register(
+            "PlaceholderText",
+            typeof(string),
+            typeof(PhoneTextBox),
+            new PropertyMetadata(string.Empty));
 
         /// <summary>
-        /// When the Hint is changed, check if it needs to be hidden or shown.
+        /// Determines if the PlaceholderText should be shown or not based on if there is content in the TextBox.
         /// </summary>
-        /// <param name="sender">Sending PhoneTextBox.</param>
-        /// <param name="args">DependencyPropertyChangedEvent Arguments.</param>
-        private static void OnHintPropertyChanged(DependencyObject sender, DependencyPropertyChangedEventArgs args)
+        private void UpdatePlaceholderTextVisibility()
         {
-            PhoneTextBox phoneTextBox = sender as PhoneTextBox;
-
-            if (phoneTextBox != null && phoneTextBox.HintContent != null)
-            {
-                phoneTextBox.UpdateHintVisibility();
-            }
-        }
-
-
-        /// <summary>
-        /// Determines if the Hint should be shown or not based on if there is content in the TextBox.
-        /// </summary>
-        private void UpdateHintVisibility()
-        {
-            if (HintContent != null)
+            if (PlaceholderTextElement != null)
             {
                 if (string.IsNullOrEmpty(Text))
                 {
-                    ActualHintVisibility = Visibility.Visible;
-                    Foreground = ForegroundBrushInactive;
+                    PlaceholderTextElement.Visibility = Visibility.Visible;
                 }
                 else
                 {
-                    ActualHintVisibility = Visibility.Collapsed;
-                    Foreground = ForegroundBrushEdit;
+                    PlaceholderTextElement.Visibility = Visibility.Collapsed;
                 }
             }
         }
 
         /// <summary>
-        /// Override the Blur/LostFocus event to show the Hint if needed.
+        /// Override the Blur/LostFocus event to show the PlaceholderText if needed.
         /// </summary>
         /// <param name="e">Event arguments.</param>
         protected override void OnLostFocus(RoutedEventArgs e)
         {
-            UpdateHintVisibility();
+            UpdatePlaceholderTextVisibility();
             base.OnLostFocus(e);
         }
 
         /// <summary>
-        /// Override the Focus event to hide the Hint.
+        /// Override the Focus event to hide the PlaceholderText.
         /// </summary>
         /// <param name="e">Event arguments.</param>
         protected override void OnGotFocus(RoutedEventArgs e)
@@ -266,11 +279,9 @@ namespace Microsoft.Phone.Controls
                 return;
             }
 
-            Foreground = ForegroundBrushEdit;
-
-            if (HintContent != null)
+            if (PlaceholderTextElement != null)
             {
-                ActualHintVisibility = Visibility.Collapsed;
+                PlaceholderTextElement.Visibility = Visibility.Collapsed;
             }
 
             base.OnGotFocus(e);
@@ -455,15 +466,18 @@ namespace Microsoft.Phone.Controls
                 if (ActionIcon == null || (HidesActionItemWhenEmpty && string.IsNullOrEmpty(Text)))
                 {
                     ActionIconBorder.Visibility = Visibility.Collapsed;
-                    HintBorder.Padding = new Thickness(0);
+                    if (MainBorder != null)
+                    {
+                        MainBorder.Padding = new Thickness(0);
+                    }
                 }
                 else
                 {
                     ActionIconBorder.Visibility = Visibility.Visible;
 
-                    if (TextWrapping != System.Windows.TextWrapping.Wrap)
+                    if (MainBorder != null && TextWrapping != System.Windows.TextWrapping.Wrap)
                     {
-                        HintBorder.Padding = new Thickness(0, 0, 48, 0);
+                        MainBorder.Padding = new Thickness(0, 0, 48, 0);
                     }
                 }
             }
@@ -510,39 +524,31 @@ namespace Microsoft.Phone.Controls
         public PhoneTextBox()
         {
             DefaultStyleKey = typeof(PhoneTextBox);
+            TextChanged += OnTextChanged;
         }
 
         /// <summary>
-        /// Applies the template and checks to see if the Hint should be shown
+        /// Applies the template and checks to see if the PlaceholderText should be shown
         /// when the page is first loaded.
         /// </summary>
         public override void OnApplyTemplate()
         {
             base.OnApplyTemplate();
 
-            if (TextBox != null)
-            {
-                TextBox.TextChanged -= OnTextChanged;
-            }
-
             if (ActionIconBorder != null)
             {
-                ActionIconBorder.MouseLeftButtonDown -= OnActionIconTapped;
+                ActionIconBorder.Tap -= OnActionIconTapped;
             }
 
             RootGrid = GetTemplateChild(RootGridName) as Grid;
-            TextBox = GetTemplateChild(TextBoxName) as TextBox;
             
-            // Getting the foreground color to save for later.
-            ForegroundBrushEdit = Foreground;
+            // Getting template children for the placeholder text.
+            PlaceholderTextElement = GetTemplateChild(PlaceholderTextElementName) as FrameworkElement;
+            MainBorder = GetTemplateChild(MainBorderName) as Border;
 
-            // Getting template children for the hint text.
-            HintContent = GetTemplateChild(HintContentName) as ContentControl;
-            HintBorder = GetTemplateChild(HintBorderName) as Border;
-
-            if (HintContent != null)
+            if (PlaceholderTextElement != null)
             {
-                UpdateHintVisibility();
+                UpdatePlaceholderTextVisibility();
             }
             
             // Getting template children for the length indicator.
@@ -556,14 +562,9 @@ namespace Microsoft.Phone.Controls
                 UpdateLengthIndicatorVisibility();
             }
 
-            if (TextBox != null)
-            {
-                TextBox.TextChanged += OnTextChanged;
-            }
-
             if (ActionIconBorder != null)
             {
-                ActionIconBorder.MouseLeftButtonDown += OnActionIconTapped;
+                ActionIconBorder.Tap += OnActionIconTapped;
                 UpdateActionIconVisibility(); // Add back the padding if needed.
             }
 
@@ -582,7 +583,7 @@ namespace Microsoft.Phone.Controls
         {
             UpdateLengthIndicatorVisibility();
             UpdateActionIconVisibility();
-            UpdateHintVisibility();
+            UpdatePlaceholderTextVisibility();
             ResizeTextBox();
         }
     }

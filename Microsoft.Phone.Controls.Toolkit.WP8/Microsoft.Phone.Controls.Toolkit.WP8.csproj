@@ -287,6 +287,9 @@
     <Compile Include="..\Microsoft.Phone.Controls.Toolkit\CustomMessageBox\DismissedEventArgs.cs">
       <Link>CustomMessageBox\DismissedEventArgs.cs</Link>
     </Compile>
+    <Compile Include="..\Microsoft.Phone.Controls.Toolkit\ImageButton\ImageButton.cs">
+      <Link>ImageButton\ImageButton.cs</Link>
+    </Compile>
     <Compile Include="..\Microsoft.Phone.Controls.Toolkit\PhoneContentControl\PhoneContentControl.cs">
       <Link>PhoneContentControl\PhoneContentControl.cs</Link>
     </Compile>

@@ -58,6 +58,19 @@ namespace Microsoft.Phone.Controls
         #endregion
 
         /// <summary>
+        /// Gets the actual data template that is used to display the content of the <see cref="T:Microsoft.Phone.Controls.PhoneContentControl"/>.
+        /// </summary>
+        /// 
+        /// <returns>
+        /// The actual data template that is used to display the content of the <see cref="T:Microsoft.Phone.Controls.PhoneContentControl"/>.
+        /// </returns>
+        public DataTemplate ActualContentTemplate
+        {
+            get { return (DataTemplate)GetValue(ActualContentTemplateProperty); }
+            private set { SetValue(ActualContentTemplateProperty, value); }
+        }
+
+        /// <summary>
         /// Identifies the ActualContentTemplate dependency property.
         /// </summary>
         /// 
@@ -108,7 +121,7 @@ namespace Microsoft.Phone.Controls
                 }
             }
 
-            SetValue(ActualContentTemplateProperty, template);
+            ActualContentTemplate = template;
         }
     }
 }

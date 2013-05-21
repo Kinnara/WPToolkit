@@ -65,13 +65,13 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
-        <StackPanel Grid.Row="0" Margin="12,17,0,28">
-            <TextBlock Text="{StaticResource ApplicationTitle}" Style="{StaticResource PhoneTextNormalStyle}"/>
-            <TextBlock Text="list picker" Margin="9,-7,0,0" Style="{StaticResource PhoneTextTitle1Style}"/>
+        <StackPanel Grid.Row="0">
+            <TextBlock Text="{StaticResource ApplicationTitle}" Style="{StaticResource PivotTitleTextStyle}"/>
+            <TextBlock Text="list picker" Style="{StaticResource PivotHeaderTextStyle}"/>
         </StackPanel>
 
         <ScrollViewer Grid.Row="1">
-            <StackPanel Margin="12,0,12,0">
+            <StackPanel Margin="12,10,12,95">
                 
                 <!-- 
                     ListPicker does not support its items set directly to a UIElement.

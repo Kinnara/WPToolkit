@@ -50,9 +50,9 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
-        <StackPanel Grid.Row="0" Margin="12,17,0,28">
-            <TextBlock Text="{StaticResource ApplicationTitle}" Style="{StaticResource PhoneTextNormalStyle}"/>
-            <TextBlock Text="samples" Margin="9,-7,0,0" Style="{StaticResource PhoneTextTitle1Style}"/>
+        <StackPanel Grid.Row="0">
+            <TextBlock Text="{StaticResource ApplicationTitle}" Style="{StaticResource PivotTitleTextStyle}"/>
+            <TextBlock Text="samples" Style="{StaticResource PivotHeaderTextStyle}"/>
         </StackPanel>
 
         <Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0">
@@ -127,6 +127,13 @@
                                 Header="hubtile"
                                 Content="tile control that is animated and alive"/>
                         </HyperlinkButton>
+                        <HyperlinkButton NavigateUri="/Samples/ImageButtonSample.xaml"
+                                         Style="{StaticResource HyperlinkEmptyStyle}">
+                            <localControls:HeaderedContentControl
+                                Style="{StaticResource MultilineHyperlinkStyle}"
+                                Header="imagebutton"
+                                Content="button control which has an image as its content"/>
+                        </HyperlinkButton>
                         <HyperlinkButton NavigateUri="/Samples/ListPickerSample.xaml"
                                          Style="{StaticResource HyperlinkEmptyStyle}">
                             <localControls:HeaderedContentControl
@@ -167,21 +174,21 @@
                             <localControls:HeaderedContentControl
                                 Style="{StaticResource MultilineHyperlinkStyle}"
                                 Header="phonepasswordbox"
-                                Content="add new features to the PasswordBox"/>
+                                Content="add new features to the passwordxox"/>
                         </HyperlinkButton>
                         <HyperlinkButton NavigateUri="/Samples/PhoneSliderSample.xaml"
                                          Style="{StaticResource HyperlinkEmptyStyle}">
                             <localControls:HeaderedContentControl
                                 Style="{StaticResource MultilineHyperlinkStyle}"
                                 Header="phoneslider"
-                                Content="add new features to the Slider"/>
+                                Content="add new features to the slider"/>
                         </HyperlinkButton>
                         <HyperlinkButton NavigateUri="/Samples/PhoneTextBoxSample.xaml"
                                          Style="{StaticResource HyperlinkEmptyStyle}">
                             <localControls:HeaderedContentControl
                                 Style="{StaticResource MultilineHyperlinkStyle}"
                                 Header="phonetextbox"
-                                Content="add new features to the TextBox"/>
+                                Content="add new features to the textbox"/>
                         </HyperlinkButton>
                         <HyperlinkButton NavigateUri="/Samples/RatingControlSample.xaml"
                                          Style="{StaticResource HyperlinkEmptyStyle}">
@@ -195,7 +202,7 @@
                             <localControls:HeaderedContentControl
                                 Style="{StaticResource MultilineHyperlinkStyle}"
                                 Header="slideineffect"
-                                Content="make elements responsive to PivotItem sliding"/>
+                                Content="make elements responsive to pivotitem sliding"/>
                         </HyperlinkButton>
                         <HyperlinkButton NavigateUri="/Samples/ToggleSwitchSample.xaml"
                                          Style="{StaticResource HyperlinkEmptyStyle}">

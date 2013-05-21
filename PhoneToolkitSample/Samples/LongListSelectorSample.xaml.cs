@@ -158,6 +158,7 @@ namespace PhoneToolkitSample.Samples
             if (person != null)
             {
                 NavigationService.Navigate(new Uri("/Samples/PersonDetail.xaml?ID=" + person.ID, UriKind.Relative));
+                buddies.SelectedItem = null;
             }
         }   
     }

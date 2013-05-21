@@ -48,16 +48,14 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
-        <StackPanel Grid.Row="0" Margin="12,17,0,28">
-            <TextBlock Text="{StaticResource ApplicationTitle}" Style="{StaticResource PhoneTextNormalStyle}"/>
-            <TextBlock Text="date &amp; time pickers" Margin="9,-7,0,0" Style="{StaticResource PhoneTextTitle1Style}"/>
+        <StackPanel Grid.Row="0">
+            <TextBlock Text="{StaticResource ApplicationTitle}" Style="{StaticResource PivotTitleTextStyle}"/>
+            <TextBlock Text="date &amp; time pickers" Style="{StaticResource PivotHeaderTextStyle}"/>
         </StackPanel>
 
         <StackPanel x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0">
-            <TextBlock Text="select date" Style="{StaticResource PhoneTextNormalStyle}"/>
-            <toolkit:DatePicker ValueChanged="DatePicker_ValueChanged"/>
-            <TextBlock Text="select time" Style="{StaticResource PhoneTextNormalStyle}"/>
-            <toolkit:TimePicker ValueChanged="TimePicker_ValueChanged"/>
+            <toolkit:DatePicker Header="Select date" Margin="0,0,0,26" ValueChanged="DatePicker_ValueChanged"/>
+            <toolkit:TimePicker Header="Select time" Margin="0,0,0,26" ValueChanged="TimePicker_ValueChanged"/>
             <TextBlock Text="note" Style="{StaticResource PhoneTextLargeStyle}"/>
             <TextBlock TextWrapping="Wrap" Style="{StaticResource PhoneTextNormalStyle}">
                 <TextBlock.Text>

@@ -168,6 +168,17 @@
             </Setter>
         </Style>
 
+        <Style x:Key="PivotTitleTextStyle" TargetType="TextBlock" BasedOn="{StaticResource PhoneTextBlockBase}">
+            <Setter Property="FontFamily" Value="{StaticResource PhoneFontFamilySemiBold}"/>
+            <Setter Property="FontSize" Value="{StaticResource PivotTitleFontSize}"/>
+            <Setter Property="Margin" Value="24,16,0,-10"/>
+        </Style>
+
+        <Style x:Key="PivotHeaderTextStyle" TargetType="TextBlock" BasedOn="{StaticResource PhoneTextBlockBase}">
+            <Setter Property="FontFamily" Value="{StaticResource PhoneFontFamilySemiLight}"/>
+            <Setter Property="FontSize" Value="{StaticResource PivotHeaderFontSize}"/>
+            <Setter Property="Margin" Value="21,0,0,28"/>
+        </Style>
     </Application.Resources>
 
     <Application.ApplicationLifetimeObjects>

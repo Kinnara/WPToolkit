@@ -13,7 +13,7 @@
     FontSize="{StaticResource PhoneFontSizeNormal}"
     Foreground="{StaticResource PhoneForegroundBrush}"
     SupportedOrientations="PortraitOrLandscape" Orientation="Portrait"
-    shell:SystemTray.IsVisible="True" Margin="0,1,0,-1"
+    shell:SystemTray.IsVisible="True"
     toolkit:TiltEffect.IsTiltEnabled="True">
 
     <toolkit:TransitionService.NavigationInTransition>
@@ -64,18 +64,14 @@
          -->
 
         <!--TitlePanel contains the name of the application and page title-->
-        <StackPanel x:Name="TitlePanel" Grid.Row="0" Margin="12,17,0,12">
-            <TextBlock x:Name="ApplicationTitle" Text="{StaticResource ApplicationTitle}" Style="{StaticResource PhoneTextNormalStyle}"/>
+        <StackPanel x:Name="TitlePanel" Grid.Row="0">
+            <TextBlock x:Name="ApplicationTitle" Text="{StaticResource ApplicationTitle}" Style="{StaticResource PivotTitleTextStyle}"/>
+            <TextBlock x:Name="PageTitle" Text="samples" Style="{StaticResource PivotHeaderTextStyle}"/>
         </StackPanel>
 
         <!--ContentPanel - place additional content here-->
         <Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0">
             <phone:LongListSelector x:Name="lls" Margin="0,0,-12,0">
-                <phone:LongListSelector.ListHeaderTemplate>
-                    <DataTemplate>
-                        <TextBlock x:Name="PageTitle" Text="samples" Margin="9,-7,0,12" Style="{StaticResource PhoneTextTitle1Style}" toolkit:TiltEffect.SuppressTilt="True" />
-                    </DataTemplate>
-                </phone:LongListSelector.ListHeaderTemplate>
                 <phone:LongListSelector.ItemTemplate>
                     <DataTemplate>
                         <HyperlinkButton NavigateUri="{Binding Url}" Style="{StaticResource HyperlinkEmptyStyle}">

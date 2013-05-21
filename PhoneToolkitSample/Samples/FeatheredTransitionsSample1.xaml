@@ -51,12 +51,11 @@
         </Grid.RowDefinitions>
 
         <!--TitlePanel-->
-        <StackPanel Grid.Row="0" Margin="12,17,0,28">
+        <StackPanel Grid.Row="0">
             <TextBlock Text="{StaticResource ApplicationTitle}"
-                       Style="{StaticResource PhoneTextNormalStyle}"/>
-            <TextBlock Text="featheredtransitions" 
-                       Margin="9,-7,0,0" 
-                       Style="{StaticResource PhoneTextTitle1Style}"/>
+                       Style="{StaticResource PivotTitleTextStyle}"/>
+            <TextBlock Text="featheredtransitions"
+                       Style="{StaticResource PivotHeaderTextStyle}"/>
         </StackPanel>
 
         <!--ContentPanel-->
