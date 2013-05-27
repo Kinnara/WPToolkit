@@ -133,6 +133,9 @@
     <value>Cannot set read-only property SearchText.</value>
     <comment>Exception thrown when the SearchText property is improperly set.</comment>
   </data>
+  <data name="FlipView_NotAllowedItemsPanel" xml:space="preserve">
+    <value>The Panel you are using for the Control is not allowed as an ItemsPanel for the Control.</value>
+  </data>
   <data name="InvalidDateTimeArgument" xml:space="preserve">
     <value>Invalid type. Argument must be of the type System.DateTime.</value>
     <comment>Exception thrown when a DateTime converter receives a non-DateTime argument.</comment>

@@ -204,6 +204,10 @@
       <Link>Samples\FeatheredTransitionsSample2.xaml.cs</Link>
       <DependentUpon>FeatheredTransitionsSample2.xaml</DependentUpon>
     </Compile>
+    <Compile Include="..\PhoneToolkitSample\Samples\FlipViewSample.xaml.cs">
+      <Link>Samples\FlipViewSample.xaml.cs</Link>
+      <DependentUpon>FlipViewSample.xaml</DependentUpon>
+    </Compile>
     <Compile Include="..\PhoneToolkitSample\Samples\HubTileSample.xaml.cs">
       <Link>Samples\HubTileSample.xaml.cs</Link>
       <DependentUpon>HubTileSample.xaml</DependentUpon>
@@ -362,6 +366,11 @@
     </Page>
     <Page Include="..\PhoneToolkitSample\Samples\FeatheredTransitionsSample2.xaml">
       <Link>Samples\FeatheredTransitionsSample2.xaml</Link>
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="..\PhoneToolkitSample\Samples\FlipViewSample.xaml">
+      <Link>Samples\FlipViewSample.xaml</Link>
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

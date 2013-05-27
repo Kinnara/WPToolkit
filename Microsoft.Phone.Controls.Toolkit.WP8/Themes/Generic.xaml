@@ -14,6 +14,10 @@
     xmlns:controls="clr-namespace:Microsoft.Phone.Controls"
     xmlns:primitives="clr-namespace:Microsoft.Phone.Controls.Primitives">
 
+    <ControlTemplate x:Key="PhoneSimpleThumb" TargetType="Thumb">
+        <Rectangle Fill="Transparent" />
+    </ControlTemplate>
+
     <DataTemplate x:Key="ControlHeaderTemplate">
         <TextBlock Text="{Binding}"
                    FontFamily="{StaticResource PhoneFontFamilyNormal}"
@@ -2693,6 +2697,55 @@
                             </Rectangle.OpacityMask>
                         </Rectangle>
                     </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style TargetType="controls:FlipViewItem">
+        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+        <Setter Property="VerticalContentAlignment" Value="Stretch"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="controls:FlipViewItem">
+                    <Border Background="{TemplateBinding Background}"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}">
+                        <ContentPresenter Content="{TemplateBinding Content}"
+                                          ContentTemplate="{TemplateBinding ContentTemplate}"
+                                          Margin="{TemplateBinding Padding}"
+                                          HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                          VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style TargetType="controls:FlipView">
+        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="BorderThickness" Value="0"/>
+        <Setter Property="ItemsPanel">
+            <Setter.Value>
+                <ItemsPanelTemplate>
+                    <VirtualizingStackPanel Orientation="Horizontal"/>
+                </ItemsPanelTemplate>
+            </Setter.Value>
+        </Setter>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="controls:FlipView">
+                    <Border Background="{TemplateBinding Background}" 
+                            BorderBrush="{TemplateBinding BorderBrush}" 
+                            BorderThickness="{TemplateBinding BorderThickness}" >
+                        <ScrollViewer x:Name="ScrollViewer"
+                                      HorizontalScrollBarVisibility="Disabled"
+                                      VerticalScrollBarVisibility="Disabled"
+                                      Padding="{TemplateBinding Padding}">
+                            <ItemsPresenter x:Name="ItemsPresenter"/>
+                        </ScrollViewer>
+                    </Border>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>

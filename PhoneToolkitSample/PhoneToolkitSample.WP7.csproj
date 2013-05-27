@@ -116,6 +116,9 @@
     <Compile Include="Samples\FeatheredTransitionsSample2.xaml.cs">
       <DependentUpon>FeatheredTransitionsSample2.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Samples\FlipViewSample.xaml.cs">
+      <DependentUpon>FlipViewSample.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Samples\ImageButtonSample.xaml.cs">
       <DependentUpon>ImageButtonSample.xaml</DependentUpon>
     </Compile>
@@ -223,6 +226,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Samples\FeatheredTransitionsSample2.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Samples\FlipViewSample.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

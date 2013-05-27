@@ -34,6 +34,7 @@ namespace PhoneToolkitSample8
                 new SampleItem("/Samples/DateTimePickerSample.xaml","date & time pickers","controls to select dates or times" ),
                 new SampleItem("/Samples/ExpanderViewSample.xaml","expanderview","shows sub-items similar to the new email app" ),
                 new SampleItem("/Samples/FeatheredTransitionsSample1.xaml","featheredtransitions","animate multiple elements between pages" ),
+                new SampleItem("/Samples/FlipViewSample.xaml","flipview","lets people flip through items one at a time" ),
                 new SampleItem("/Samples/GestureSample.xaml","gestures*","a gesture service for tap pinch, etc." ),
                 new SampleItem("/Samples/HubTileSample.xaml","hubtile","tile control that is animated and alive" ),
                 new SampleItem("/Samples/ImageButtonSample.xaml","imagebutton","button control which has an image as its content" ),

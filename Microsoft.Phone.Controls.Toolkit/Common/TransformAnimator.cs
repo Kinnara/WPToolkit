@@ -8,13 +8,14 @@ using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
 
 namespace Microsoft.Phone.Controls
 {
     /// <summary>
-    /// A utility for animating a horizontal translation value.
+    /// A utility for animating a horizontal or vertical translation value.
     /// </summary>
     internal sealed class TransformAnimator
     {
@@ -22,6 +23,11 @@ namespace Microsoft.Phone.Controls
         /// Single static instance of a PropertyPath with string path "X".
         /// </summary>
         private static readonly PropertyPath TranslateXPropertyPath = new PropertyPath("X");
+
+        /// <summary>
+        /// Single static instance of a PropertyPath with string path "Y".
+        /// </summary>
+        private static readonly PropertyPath TranslateYPropertyPath = new PropertyPath("Y");
 
         /// <summary>
         /// The Storyboard instance for the animation.
@@ -45,18 +51,25 @@ namespace Microsoft.Phone.Controls
         private Action _oneTimeAction;
 
         /// <summary>
+        /// The orientation.
+        /// </summary>
+        private Orientation _orientation;
+
+        /// <summary>
         /// Initializes a new instance of the TransformAnimator class.
         /// </summary>
         /// <param name="translateTransform">TranslateTransform instance.</param>
-        public TransformAnimator(TranslateTransform translateTransform)
+        /// <param name="orientation">Orientation.</param>
+        public TransformAnimator(TranslateTransform translateTransform, Orientation orientation = Orientation.Horizontal)
         {
             Debug.Assert(translateTransform != null);
             _transform = translateTransform;
+            _orientation = orientation;
 
             _sbRunning.Completed += OnCompleted;
             _sbRunning.Children.Add(_daRunning);
             Storyboard.SetTarget(_daRunning, _transform);
-            Storyboard.SetTargetProperty(_daRunning, TranslateXPropertyPath);
+            Storyboard.SetTargetProperty(_daRunning, _orientation == Orientation.Horizontal ? TranslateXPropertyPath : TranslateYPropertyPath);
         }
 
         /// <summary>
@@ -150,19 +163,20 @@ namespace Microsoft.Phone.Controls
         /// verify that a translate transform is present.
         /// </summary>
         /// <param name="targetElement">The target element.</param>
+        /// <param name="orientation">The orientation.</param>
         /// <param name="animator">The animator reference.</param>
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "Keeping the public API available.")]
-        public static void EnsureAnimator(FrameworkElement targetElement, ref TransformAnimator animator)
+        public static void EnsureAnimator(FrameworkElement targetElement, ref TransformAnimator animator, Orientation orientation = Orientation.Horizontal)
         {
-            if (animator == null)
+            if (animator == null || animator._orientation != orientation)
             {
                 TranslateTransform transform = TransformAnimator.GetTranslateTransform(targetElement);
                 if (transform != null)
                 {
-                    animator = new TransformAnimator(transform);
+                    animator = new TransformAnimator(transform, orientation);
                 }
             }
-            if (animator == null)
+            if (animator == null || animator._orientation != orientation)
             {
                 throw new InvalidOperationException("The animation system could not be prepared for the target element.");
             }

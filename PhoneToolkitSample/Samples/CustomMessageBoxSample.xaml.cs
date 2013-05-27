@@ -109,7 +109,7 @@ namespace PhoneToolkitSample.Samples
             CheckBox checkBox = new CheckBox()
             {
                 Content = "Do not ask me again",
-                Margin = new Thickness(0, 24, 0, 20)
+                Margin = new Thickness(0, -16, 0, 16)
             };
 
             TiltEffect.SetIsTiltEnabled(checkBox, true);
