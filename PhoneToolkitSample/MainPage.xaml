@@ -113,6 +113,13 @@
                                 Header="featheredtransitions"
                                 Content="animate multiple elements between pages"/>
                         </HyperlinkButton>
+                        <HyperlinkButton NavigateUri="/Samples/FlipViewSample.xaml"
+                                         Style="{StaticResource HyperlinkEmptyStyle}">
+                            <localControls:HeaderedContentControl
+                                Style="{StaticResource MultilineHyperlinkStyle}"
+                                Header="flipview"
+                                Content="lets people flip through items one at a time"/>
+                        </HyperlinkButton>
                         <HyperlinkButton NavigateUri="/Samples/GestureSample.xaml"
                                          Style="{StaticResource HyperlinkEmptyStyle}">
                             <localControls:HeaderedContentControl
