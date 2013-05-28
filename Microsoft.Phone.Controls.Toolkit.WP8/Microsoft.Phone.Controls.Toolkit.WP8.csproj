@@ -179,9 +179,6 @@
     <Compile Include="..\Microsoft.Phone.Controls.Toolkit\Common\TimeTypeConverter.cs">
       <Link>Common\TimeTypeConverter.cs</Link>
     </Compile>
-    <Compile Include="..\Microsoft.Phone.Controls.Toolkit\Common\TransformAnimator.cs">
-      <Link>Common\TransformAnimator.cs</Link>
-    </Compile>
     <Compile Include="..\Microsoft.Phone.Controls.Toolkit\Common\TypeConverters.cs">
       <Link>Common\TypeConverters.cs</Link>
     </Compile>
