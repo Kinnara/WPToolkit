@@ -139,7 +139,13 @@ namespace Microsoft.Phone.Controls
         private Color _systemTrayColor;
 
         /// <summary>
-        /// Called when the message is being dismissing.
+        /// Whether the message box is currently in the process of being 
+        /// dismissed.
+        /// </summary>
+        private bool _isBeingDismissed = false;
+
+        /// <summary>
+        /// Called when the message box is about to be dismissed.
         /// </summary>
         public event EventHandler<DismissingEventArgs> Dismissing;
 
@@ -374,7 +380,7 @@ namespace Microsoft.Phone.Controls
         /// Identifies the IsFullScreen dependency property.
         /// </summary>
         public static readonly DependencyProperty IsFullScreenProperty =
-            DependencyProperty.Register("IsFullScreen", typeof(bool), typeof(CustomMessageBox), new PropertyMetadata(false, OnIsFullScreenPropertyChanged));
+            DependencyProperty.Register("IsFullScreen", typeof(bool), typeof(CustomMessageBox), new PropertyMetadata(false, OnIsFullScreenPropertyChanged));        
 
         /// <summary>
         /// Modifies the vertical alignment of the message box depending
@@ -601,6 +607,13 @@ namespace Microsoft.Phone.Controls
         /// </param>
         private void Dismiss(CustomMessageBoxResult source, bool useTransition)
         {
+            // Ensure only a single Dismiss is being handled at a time
+            if (_isBeingDismissed)
+            {
+                return;
+            }
+            _isBeingDismissed = true;
+
             // Handle the dismissing event.
             var handlerDismissing = Dismissing;
             if (handlerDismissing != null)
@@ -610,6 +623,7 @@ namespace Microsoft.Phone.Controls
 
                 if (args.Cancel)
                 {
+                    _isBeingDismissed = false;
                     return;
                 }
             }
@@ -643,7 +657,9 @@ namespace Microsoft.Phone.Controls
             else
             {
                 ClosePopup(restoreOriginalValues);
-            }    
+            }
+
+            _isBeingDismissed = false;
         }
 
         /// <summary>
@@ -652,8 +668,11 @@ namespace Microsoft.Phone.Controls
         private void ClosePopup(bool restoreOriginalValues)
         {
             // Remove the popup.
-            _popup.IsOpen = false;
-            _popup = null;
+            if (_popup != null)
+            {
+                _popup.IsOpen = false;
+                _popup = null;
+            }
 
             // If there is no other message box displayed.  
             if (restoreOriginalValues)
