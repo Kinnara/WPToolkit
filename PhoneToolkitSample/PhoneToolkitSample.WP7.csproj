@@ -164,6 +164,9 @@
     <Compile Include="Samples\RatingControlSample.xaml.cs">
       <DependentUpon>RatingControlSample.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Samples\StartViewSample.xaml.cs">
+      <DependentUpon>StartViewSample.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Samples\SlideInEffectSample.xaml.cs">
       <DependentUpon>SlideInEffectSample.xaml</DependentUpon>
     </Compile>
@@ -297,6 +300,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Samples\StartViewSample.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Samples\SlideInEffectSample.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -361,6 +368,8 @@
     <Content Include="Images\Pretzel.jpg" />
     <Content Include="Images\Seattle.jpg" />
     <Content Include="Images\Shrimp.jpg" />
+    <Content Include="Images\start.arrownext.dark.rest.png" />
+    <Content Include="Images\start.search.rest.png" />
     <Content Include="Images\SteakSandwich.jpg" />
     <Content Include="Images\Venice.jpg" />
     <Content Include="Images\Search.png" />

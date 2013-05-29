@@ -2751,4 +2751,43 @@
             </Setter.Value>
         </Setter>
     </Style>
+
+    <Style TargetType="controls:StartViewItem">
+        <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+        <Setter Property="VerticalContentAlignment" Value="Stretch"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="controls:StartViewItem">
+                    <Border Margin="{StaticResource PhoneHorizontalMargin}" Background="{TemplateBinding Background}">
+                        <ContentPresenter Content="{TemplateBinding Content}" Margin="{TemplateBinding Padding}" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style TargetType="controls:StartView">
+        <Setter Property="ItemsPanel">
+            <Setter.Value>
+                <ItemsPanelTemplate>
+                    <primitives:StartViewPanel/>
+                </ItemsPanelTemplate>
+            </Setter.Value>
+        </Setter>
+        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="controls:StartView">
+                    <Border Background="{TemplateBinding Background}">
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
+                            <StackPanel.RenderTransform>
+                                <TranslateTransform x:Name="PanningTransform"/>
+                            </StackPanel.RenderTransform>
+                            <ItemsPresenter CacheMode="BitmapCache"/>
+                        </StackPanel>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
 </ResourceDictionary>

@@ -975,21 +975,20 @@ namespace Microsoft.Phone.Controls
 
             int selectedIndex = SelectedIndex;
             object selectedItem = SelectedItem;
-            if (selectedItem == null)
+
+            if (_initializingData.InitialIndex != selectedIndex)
             {
-                if (_initializingData.InitialIndex != selectedIndex)
-                {
-                    SelectedIndex = _initializingData.InitialIndex;
-                    _initializingData = null;
-                    SelectedIndex = selectedIndex;
-                }
-                else if (!ReferenceEquals(_initializingData.InitialItem, selectedItem))
-                {
-                    SelectedItem = _initializingData.InitialItem;
-                    _initializingData = null;
-                    SelectedItem = selectedItem;
-                }
+                SelectedIndex = _initializingData.InitialIndex;
+                _initializingData = null;
+                SelectedIndex = selectedIndex;
             }
+            else if (!ReferenceEquals(_initializingData.InitialItem, selectedItem))
+            {
+                SelectedItem = _initializingData.InitialItem;
+                _initializingData = null;
+                SelectedItem = selectedItem;
+            }
+
             _initializingData = null;
         }
 

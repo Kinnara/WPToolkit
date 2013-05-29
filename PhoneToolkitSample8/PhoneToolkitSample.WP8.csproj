@@ -252,6 +252,10 @@
       <Link>Samples\SlideInEffectSample.xaml.cs</Link>
       <DependentUpon>SlideInEffectSample.xaml</DependentUpon>
     </Compile>
+    <Compile Include="..\PhoneToolkitSample\Samples\StartViewSample.xaml.cs">
+      <Link>Samples\StartViewSample.xaml.cs</Link>
+      <DependentUpon>StartViewSample.xaml</DependentUpon>
+    </Compile>
     <Compile Include="..\PhoneToolkitSample\Samples\TiltEffectSample.xaml.cs">
       <Link>Samples\TiltEffectSample.xaml.cs</Link>
       <DependentUpon>TiltEffectSample.xaml</DependentUpon>
@@ -429,6 +433,11 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="..\PhoneToolkitSample\Samples\StartViewSample.xaml">
+      <Link>Samples\StartViewSample.xaml</Link>
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="..\PhoneToolkitSample\Samples\TiltEffectSample.xaml">
       <Link>Samples\TiltEffectSample.xaml</Link>
       <Generator>MSBuild:Compile</Generator>
@@ -600,6 +609,12 @@
     </Content>
     <Content Include="..\PhoneToolkitSample\Images\Shrimp.jpg">
       <Link>Images\Shrimp.jpg</Link>
+    </Content>
+    <Content Include="..\PhoneToolkitSample\Images\start.arrownext.dark.rest.png">
+      <Link>Images\start.arrownext.dark.rest.png</Link>
+    </Content>
+    <Content Include="..\PhoneToolkitSample\Images\start.search.rest.png">
+      <Link>Images\start.search.rest.png</Link>
     </Content>
     <Content Include="..\PhoneToolkitSample\Images\SteakSandwich.jpg">
       <Link>Images\SteakSandwich.jpg</Link>

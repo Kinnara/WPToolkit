@@ -50,6 +50,7 @@ namespace PhoneToolkitSample8
                 new SampleItem("/Samples/PhoneTextBoxSample.xaml","phonetextbox","add new features to the textbox" ),
                 new SampleItem("/Samples/RatingControlSample.xaml","ratingcontrol","simple control for star-based rating" ),
                 new SampleItem("/Samples/SlideInEffectSample.xaml","slideineffect","make elements responsive to pivotitem sliding" ),
+                new SampleItem("/Samples/StartViewSample.xaml","startview","panoramic view similar to the start screen" ),
                 new SampleItem("/Samples/ToggleSwitchSample.xaml","toggleswitch","offer a touch control for on/off choices" ),
                 new SampleItem("/Samples/TiltEffectSample.xaml","tilteffect","make buttons visually responsive to touch" ),
                 new SampleItem("/Samples/TransitionsSample.xaml","transitions","beautifully animate between pages" ),

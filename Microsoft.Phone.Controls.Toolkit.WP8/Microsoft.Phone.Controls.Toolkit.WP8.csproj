@@ -179,6 +179,9 @@
     <Compile Include="..\Microsoft.Phone.Controls.Toolkit\Common\TimeTypeConverter.cs">
       <Link>Common\TimeTypeConverter.cs</Link>
     </Compile>
+    <Compile Include="..\Microsoft.Phone.Controls.Toolkit\Common\TransformAnimator.cs">
+      <Link>Common\TransformAnimator.cs</Link>
+    </Compile>
     <Compile Include="..\Microsoft.Phone.Controls.Toolkit\Common\TypeConverters.cs">
       <Link>Common\TypeConverters.cs</Link>
     </Compile>
@@ -293,6 +296,30 @@
     <Compile Include="..\Microsoft.Phone.Controls.Toolkit\FlipView\FlipViewItem.cs">
       <Link>FlipView\FlipViewItem.cs</Link>
     </Compile>
+    <Compile Include="..\Microsoft.Phone.Controls.Toolkit\Gestures\DragEventArgs.cs">
+      <Link>Gestures\DragEventArgs.cs</Link>
+    </Compile>
+    <Compile Include="..\Microsoft.Phone.Controls.Toolkit\Gestures\FlickEventArgs.cs">
+      <Link>Gestures\FlickEventArgs.cs</Link>
+    </Compile>
+    <Compile Include="..\Microsoft.Phone.Controls.Toolkit\Gestures\GestureEventArgs.cs">
+      <Link>Gestures\GestureEventArgs.cs</Link>
+    </Compile>
+    <Compile Include="..\Microsoft.Phone.Controls.Toolkit\Gestures\GestureHelper.cs">
+      <Link>Gestures\GestureHelper.cs</Link>
+    </Compile>
+    <Compile Include="..\Microsoft.Phone.Controls.Toolkit\Gestures\InputBaseArgs.cs">
+      <Link>Gestures\InputBaseArgs.cs</Link>
+    </Compile>
+    <Compile Include="..\Microsoft.Phone.Controls.Toolkit\Gestures\InputCompletedArgs.cs">
+      <Link>Gestures\InputCompletedArgs.cs</Link>
+    </Compile>
+    <Compile Include="..\Microsoft.Phone.Controls.Toolkit\Gestures\InputDeltaArgs.cs">
+      <Link>Gestures\InputDeltaArgs.cs</Link>
+    </Compile>
+    <Compile Include="..\Microsoft.Phone.Controls.Toolkit\Gestures\ManipulationGestureHelper.cs">
+      <Link>Gestures\ManipulationGestureHelper.cs</Link>
+    </Compile>
     <Compile Include="..\Microsoft.Phone.Controls.Toolkit\ImageButton\ImageButton.cs">
       <Link>ImageButton\ImageButton.cs</Link>
     </Compile>
@@ -341,11 +368,20 @@
     <Compile Include="..\Microsoft.Phone.Controls.Toolkit\Primitives\PhonePasswordBoxCheckBox.cs">
       <Link>Primitives\PhonePasswordBoxCheckBox.cs</Link>
     </Compile>
+    <Compile Include="..\Microsoft.Phone.Controls.Toolkit\Primitives\StartViewPanel.cs">
+      <Link>Primitives\StartViewPanel.cs</Link>
+    </Compile>
     <Compile Include="..\Microsoft.Phone.Controls.Toolkit\Primitives\TickBar.cs">
       <Link>Primitives\TickBar.cs</Link>
     </Compile>
     <Compile Include="..\Microsoft.Phone.Controls.Toolkit\Primitives\TiltUserControl.cs">
       <Link>Primitives\TiltUserControl.cs</Link>
+    </Compile>
+    <Compile Include="..\Microsoft.Phone.Controls.Toolkit\StartView\StartView.cs">
+      <Link>StartView\StartView.cs</Link>
+    </Compile>
+    <Compile Include="..\Microsoft.Phone.Controls.Toolkit\StartView\StartViewItem.cs">
+      <Link>StartView\StartViewItem.cs</Link>
     </Compile>
     <Compile Include="..\Microsoft.Phone.Controls.Toolkit\WaitCursor\WaitCursor.cs">
       <Link>WaitCursor\WaitCursor.cs</Link>
@@ -929,6 +965,9 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Resource>
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.Phone.Controls, Version=8.0.0.0, Culture=neutral, PublicKeyToken=24eec0d8c86cda1e, processorArchitecture=MSIL" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\$(TargetFrameworkIdentifier)\$(TargetFrameworkVersion)\Microsoft.$(TargetFrameworkIdentifier).$(TargetFrameworkVersion).Overrides.targets" />

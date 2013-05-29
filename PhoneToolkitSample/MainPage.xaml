@@ -211,6 +211,13 @@
                                 Header="slideineffect"
                                 Content="make elements responsive to pivotitem sliding"/>
                         </HyperlinkButton>
+                        <HyperlinkButton NavigateUri="/Samples/StartViewSample.xaml" 
+                                         Style="{StaticResource HyperlinkEmptyStyle}">
+                            <localControls:HeaderedContentControl
+                                Style="{StaticResource MultilineHyperlinkStyle}"
+                                Header="startview"
+                                Content="panoramic view similar to the start screen"/>
+                        </HyperlinkButton>
                         <HyperlinkButton NavigateUri="/Samples/ToggleSwitchSample.xaml"
                                          Style="{StaticResource HyperlinkEmptyStyle}">
                             <localControls:HeaderedContentControl
