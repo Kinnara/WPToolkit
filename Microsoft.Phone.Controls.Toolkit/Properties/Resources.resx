@@ -180,6 +180,9 @@
     <value>The type was unexpected.</value>
     <comment>OffOnConverter exception.</comment>
   </data>
+  <data name="VariableSizedWrapGrid_MeasureOverride_ItemWidthAndItemHeightMustBeSet" xml:space="preserve">
+    <value>ItemWidth and ItemHeight must be set.</value>
+  </data>
   <data name="WrapPanel_OnItemHeightOrWidthPropertyChanged_InvalidValue" xml:space="preserve">
     <value>Invalid length value '{0}'.</value>
     <comment>Exception thrown when the ItemWith or ItemHeight properties are provided an invalid value.</comment>

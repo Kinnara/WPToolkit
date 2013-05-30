@@ -239,6 +239,13 @@
                                 Header="transitions"
                                 Content="beautifully animate between pages"/>
                         </HyperlinkButton>
+                        <HyperlinkButton NavigateUri="/Samples/VariableSizedWrapGridSample.xaml" 
+                                         Style="{StaticResource HyperlinkEmptyStyle}">
+                            <localControls:HeaderedContentControl
+                                Style="{StaticResource MultilineHyperlinkStyle}"
+                                Header="variablesizedwrapgrid"
+                                Content="each tile/cell can be variable size"/>
+                        </HyperlinkButton>
                         <HyperlinkButton NavigateUri="/Samples/WaitCursorSample.xaml"
                                          Style="{StaticResource HyperlinkEmptyStyle}">
                             <localControls:HeaderedContentControl

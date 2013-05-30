@@ -383,6 +383,9 @@
     <Compile Include="..\Microsoft.Phone.Controls.Toolkit\StartView\StartViewItem.cs">
       <Link>StartView\StartViewItem.cs</Link>
     </Compile>
+    <Compile Include="..\Microsoft.Phone.Controls.Toolkit\VariableSizedWrapGrid\VariableSizedWrapGrid.cs">
+      <Link>VariableSizedWrapGrid\VariableSizedWrapGrid.cs</Link>
+    </Compile>
     <Compile Include="..\Microsoft.Phone.Controls.Toolkit\WaitCursor\WaitCursor.cs">
       <Link>WaitCursor\WaitCursor.cs</Link>
     </Compile>

@@ -205,6 +205,15 @@ namespace Microsoft.Phone.Controls.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to ItemWidth and ItemHeight must be set..
+        /// </summary>
+        internal static string VariableSizedWrapGrid_MeasureOverride_ItemWidthAndItemHeightMustBeSet {
+            get {
+                return ResourceManager.GetString("VariableSizedWrapGrid_MeasureOverride_ItemWidthAndItemHeightMustBeSet", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Invalid length value &apos;{0}&apos;..
         /// </summary>
         internal static string WrapPanel_OnItemHeightOrWidthPropertyChanged_InvalidValue {

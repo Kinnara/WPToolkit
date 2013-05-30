@@ -276,6 +276,10 @@
       <Link>Samples\TurnstileFeatherEffectSample2.xaml.cs</Link>
       <DependentUpon>TurnstileFeatherEffectSample2.xaml</DependentUpon>
     </Compile>
+    <Compile Include="..\PhoneToolkitSample\Samples\VariableSizedWrapGridSample.xaml.cs">
+      <Link>Samples\VariableSizedWrapGridSample.xaml.cs</Link>
+      <DependentUpon>VariableSizedWrapGridSample.xaml</DependentUpon>
+    </Compile>
     <Compile Include="..\PhoneToolkitSample\Samples\WaitCursorSample.xaml.cs">
       <Link>Samples\WaitCursorSample.xaml.cs</Link>
       <DependentUpon>WaitCursorSample.xaml</DependentUpon>
@@ -460,6 +464,11 @@
     </Page>
     <Page Include="..\PhoneToolkitSample\Samples\TurnstileFeatherEffectSample2.xaml">
       <Link>Samples\TurnstileFeatherEffectSample2.xaml</Link>
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="..\PhoneToolkitSample\Samples\VariableSizedWrapGridSample.xaml">
+      <Link>Samples\VariableSizedWrapGridSample.xaml</Link>
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

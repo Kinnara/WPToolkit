@@ -54,6 +54,7 @@ namespace PhoneToolkitSample8
                 new SampleItem("/Samples/ToggleSwitchSample.xaml","toggleswitch","offer a touch control for on/off choices" ),
                 new SampleItem("/Samples/TiltEffectSample.xaml","tilteffect","make buttons visually responsive to touch" ),
                 new SampleItem("/Samples/TransitionsSample.xaml","transitions","beautifully animate between pages" ),
+                new SampleItem("/Samples/VariableSizedWrapGridSample.xaml","variablesizedwrapgrid","each tile/cell can be variable size" ),
                 new SampleItem("/Samples/WaitCursorSample.xaml","waitcursor","takes over and dims the screen" ),
                 new SampleItem("/Samples/WrapPanelSample.xaml","wrappanel","a non-virtualized wrapping control" ) 
             };
