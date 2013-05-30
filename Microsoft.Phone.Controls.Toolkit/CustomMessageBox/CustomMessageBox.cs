@@ -144,7 +144,13 @@ namespace Microsoft.Phone.Controls
         private double _systemTrayOpacity;
 
         /// <summary>
-        /// Called when the message is being dismissing.
+        /// Whether the message box is currently in the process of being 
+        /// dismissed.
+        /// </summary>
+        private bool _isBeingDismissed = false;
+
+        /// <summary>
+        /// Called when the message box is about to be dismissed.
         /// </summary>
         public event EventHandler<DismissingEventArgs> Dismissing;
 
@@ -620,6 +626,13 @@ namespace Microsoft.Phone.Controls
         /// </param>
         private void Dismiss(CustomMessageBoxResult source, bool useTransition)
         {
+            // Ensure only a single Dismiss is being handled at a time
+            if (_isBeingDismissed)
+            {
+                return;
+            }
+            _isBeingDismissed = true;
+
             // Handle the dismissing event.
             var handlerDismissing = Dismissing;
             if (handlerDismissing != null)
@@ -629,6 +642,7 @@ namespace Microsoft.Phone.Controls
 
                 if (args.Cancel)
                 {
+                    _isBeingDismissed = false;
                     return;
                 }
             }
@@ -655,6 +669,8 @@ namespace Microsoft.Phone.Controls
             {
                 ClosePopup(restoreOriginalValues, source);
             }    
+
+            _isBeingDismissed = false;
         }
 
         /// <summary>
@@ -663,8 +679,11 @@ namespace Microsoft.Phone.Controls
         private void ClosePopup(bool restoreOriginalValues, CustomMessageBoxResult source)
         {
             // Remove the popup.
-            _popup.IsOpen = false;
-            _popup = null;
+            if (_popup != null)
+            {
+                _popup.IsOpen = false;
+                _popup = null;
+            }
 
             // If there is no other message box displayed.  
             if (restoreOriginalValues)
@@ -705,7 +724,7 @@ namespace Microsoft.Phone.Controls
             {
                 DismissedEventArgs args = new DismissedEventArgs(source);
                 handlerDismissed(this, args);
-            }
+        }
         }
 
         /// <summary>
