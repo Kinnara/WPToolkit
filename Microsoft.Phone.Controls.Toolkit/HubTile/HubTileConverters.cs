@@ -90,7 +90,7 @@ namespace Microsoft.Phone.Controls
 
             double multiplier;
 
-            if (parameter == null || double.TryParse(parameter.ToString(), out multiplier) == false)
+            if (parameter == null || double.TryParse(parameter.ToString(), NumberStyles.Any, CultureInfo.InvariantCulture, out multiplier) == false)
             {
                 multiplier = 1;
             }
@@ -140,7 +140,7 @@ namespace Microsoft.Phone.Controls
 
             double multiplier;
 
-            if (parameter == null || double.TryParse(parameter.ToString(), out multiplier) == false)
+            if (parameter == null || double.TryParse(parameter.ToString(), NumberStyles.Any, CultureInfo.InvariantCulture, out multiplier) == false)
             {
                 multiplier = 1;
             }

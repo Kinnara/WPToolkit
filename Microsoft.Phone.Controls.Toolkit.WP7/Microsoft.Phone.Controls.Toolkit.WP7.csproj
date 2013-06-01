@@ -291,9 +291,6 @@
     <Compile Include="..\Microsoft.Phone.Controls.Toolkit\Input\GestureHelperEventArgs.cs">
       <Link>Input\GestureHelperEventArgs.cs</Link>
     </Compile>
-    <Compile Include="..\Microsoft.Phone.Controls.Toolkit\Input\GestureService.cs">
-      <Link>Input\GestureService.cs</Link>
-    </Compile>
     <Compile Include="..\Microsoft.Phone.Controls.Toolkit\ListPicker\ExpansionMode.cs">
       <Link>ListPicker\ExpansionMode.cs</Link>
     </Compile>
@@ -486,6 +483,7 @@
     <Compile Include="..\Microsoft.Phone.Controls.Toolkit\ProgressBar\RelativeAnimatingContentControl.cs">
       <Link>ProgressBar\RelativeAnimatingContentControl.cs</Link>
     </Compile>
+    <Compile Include="Input\GestureService.cs" />
     <Compile Include="ListPicker\ListPickerPage.xaml.cs">
       <DependentUpon>ListPickerPage.xaml</DependentUpon>
     </Compile>
