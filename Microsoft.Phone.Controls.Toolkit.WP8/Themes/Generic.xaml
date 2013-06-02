@@ -1393,7 +1393,7 @@
                                                 </DiscreteObjectKeyFrame.Value>
                                             </DiscreteObjectKeyFrame>
                                         </ObjectAnimationUsingKeyFrames>
-                                        
+
                                         <ObjectAnimationUsingKeyFrames Storyboard.TargetName="RootGrid"
                                                                        Storyboard.TargetProperty="Margin">
                                             <DiscreteObjectKeyFrame KeyTime="0:0:0"
@@ -1430,7 +1430,7 @@
                                             <DiscreteObjectKeyFrame KeyTime="0:0:0"
                                                                     Value="0, 0, 0, 0" />
                                         </ObjectAnimationUsingKeyFrames>
-                                        
+
                                         <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Opacity" Storyboard.TargetName="LengthIndicator">
                                             <DiscreteObjectKeyFrame KeyTime="0:0:0.350" Value="0"/>
                                         </ObjectAnimationUsingKeyFrames>
@@ -1484,16 +1484,16 @@
                             <TextBlock x:Name="PlaceholderTextElement"
                                        Text="{TemplateBinding PlaceholderText}"
                                        Foreground="{StaticResource PhoneTextBoxReadOnlyBrush}"
-                                                HorizontalAlignment="Left"
+                                       HorizontalAlignment="Left"
                                        VerticalAlignment="Top"
-                                                Margin="{StaticResource PhoneTextBoxInnerMargin}"
+                                       Margin="{StaticResource PhoneTextBoxInnerMargin}"
                                        Padding="{TemplateBinding Padding}"/>
                         </Border>
                         <Border x:Name="ReadonlyBorder"
                                 Visibility="Collapsed"
                                 Background="Transparent"
                                 BorderBrush="{StaticResource PhoneDisabledBrush}"
-                                BorderThickness="{TemplateBinding BorderThickness}" 
+                                BorderThickness="{TemplateBinding BorderThickness}"
                                 Margin="{StaticResource PhoneTouchTargetOverhang}"
                                 Grid.Row="1" />
                         <Border Background="Transparent"
@@ -1513,16 +1513,16 @@
                             VerticalAlignment="Bottom"
                             Margin="0,0,-12,0"
                             Grid.Row="1">
-                        <Border x:Name="ActionIconBorder"
+                            <Border x:Name="ActionIconBorder"
                                     Width="96"
-                                Height="72"
+                                    Height="72"
                                     Background="Transparent">
-                            <Image x:Name="ActionIcon"
-                                    Height="26"
+                                <Image x:Name="ActionIcon"
+                                        Height="26"
                                         HorizontalAlignment="Right"
                                         Margin="0,0,36,0"
-                                    Source="{TemplateBinding ActionIcon}"/>
-                        </Border>
+                                        Source="{TemplateBinding ActionIcon}"/>
+                            </Border>
                         </primitives:TiltUserControl>
 
                         <TextBlock x:Name="MeasurementTextBlock"
@@ -1989,17 +1989,17 @@
                             </VisualStateManager.VisualStateGroups>
                             <primitives:TiltUserControl controls:TiltEffect.SuppressTilt="False">
                                 <Grid HorizontalAlignment="Stretch" Background="Transparent">
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="*"/>
-                                    <ColumnDefinition Width="Auto"/>
-                                </Grid.ColumnDefinitions>
-                                <Grid Grid.Column="0" HorizontalAlignment="Stretch" primitives:ClipToBounds.IsEnabled="True">
-                                    <ContentPresenter x:Name="Presenter">
-                                        <ContentPresenter.RenderTransform>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="Auto"/>
+                                    </Grid.ColumnDefinitions>
+                                    <Grid Grid.Column="0" HorizontalAlignment="Stretch" primitives:ClipToBounds.IsEnabled="True">
+                                        <ContentPresenter x:Name="Presenter">
+                                            <ContentPresenter.RenderTransform>
                                                 <CompositeTransform/>
-                                        </ContentPresenter.RenderTransform>
-                                    </ContentPresenter>
-                                </Grid>
+                                            </ContentPresenter.RenderTransform>
+                                        </ContentPresenter>
+                                    </Grid>
                                     <ContentControl x:Name="InfoPresenter" Grid.Column="1" 
                                                     VerticalAlignment="Top"
                                                     Content="{TemplateBinding ContentInfo}"
@@ -2009,14 +2009,14 @@
                                 </Grid>
                             </primitives:TiltUserControl>
                             <Rectangle x:Name="InnerHintPanel" Width="38"
-                                           Height="{TemplateBinding HintPanelHeight}"
-                                           HorizontalAlignment="Left"
-                                           Fill="Transparent"
-                                           StrokeThickness="0">
-                                    <Rectangle.RenderTransform>
+                                       Height="{TemplateBinding HintPanelHeight}"
+                                       HorizontalAlignment="Left"
+                                       Fill="Transparent"
+                                       StrokeThickness="0">
+                                <Rectangle.RenderTransform>
                                     <CompositeTransform TranslateX="20"/>
-                                    </Rectangle.RenderTransform>
-                                </Rectangle>
+                                </Rectangle.RenderTransform>
+                            </Rectangle>
                             <Rectangle x:Name="OuterHintPanel" Width="20"
                                        HorizontalAlignment="Left"
                                        Height="{TemplateBinding HintPanelHeight}"
@@ -2025,10 +2025,10 @@
                             <CheckBox x:Name="SelectBox" Margin="{TemplateBinding SelectBoxMargin}" Visibility="Collapsed"
                                       IsChecked="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=IsSelected, Mode=TwoWay}"
                                       controls:TiltEffect.SuppressTilt="False">
-                                    <CheckBox.RenderTransform>
-                                        <CompositeTransform TranslateX="-58"/>
-                                    </CheckBox.RenderTransform>
-                                </CheckBox>
+                                <CheckBox.RenderTransform>
+                                    <CompositeTransform TranslateX="-58"/>
+                                </CheckBox.RenderTransform>
+                            </CheckBox>
                         </Grid>
                     </ControlTemplate>
                 </Setter.Value>
@@ -2791,3 +2791,4 @@
         </Setter>
     </Style>
 </ResourceDictionary>
+
