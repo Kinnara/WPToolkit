@@ -7,6 +7,7 @@ using System;
 using System.Collections.Specialized;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Input;
 using System.Windows.Media;
 using Microsoft.Phone.Controls.Primitives;
 
@@ -38,7 +39,6 @@ namespace Microsoft.Phone.Controls
         internal const string ItemContainerStyleName = "ItemContainerStyle";
 
         private bool _isLocked   = false;
-        private bool _isUpdating = false;
 
         #region public bool IsLocked
         /// <summary>
@@ -85,10 +85,8 @@ namespace Microsoft.Phone.Controls
             public PivotHeaderItem headerItem;
         }
 
-        private PivotItem[]           _savedItems     = null;
         private HeaderAnimationInfo[] _animInfo       = null;
         private PivotHeadersControl   _header         = null;
-        private int                   _savedIndex;
         
         private static Duration _animTime =
             new Duration(TimeSpan.FromMilliseconds(200));
@@ -109,21 +107,60 @@ namespace Microsoft.Phone.Controls
         /// <param name="e">Information about the change.</param>
         protected override void OnItemsChanged(NotifyCollectionChangedEventArgs e)
         {
-            if (!_isUpdating)
+            if (_isLocked)
             {
-                if (_isLocked)
-                {
-                    throw new System.InvalidOperationException(
-                        "Pivot Items cannot be modified when locked"
-                        );
-                }
-
-                // Items have been changed, so animation information
-                // will need to be recreated.
-                _animInfo = null;
-
-                base.OnItemsChanged(e);
+                throw new System.InvalidOperationException(
+                    "Pivot Items cannot be modified when locked"
+                    );
             }
+
+            // Items have been changed, so animation information
+            // will need to be recreated.
+            _animInfo = null;
+
+            base.OnItemsChanged(e);
+        }
+
+        /// <summary>
+        /// Called when the ManipulationStarted event occurs.
+        /// </summary>
+        /// <param name="e">Event data for the event.</param>
+        protected override void OnManipulationStarted(ManipulationStartedEventArgs e)
+        {
+            if (_isLocked)
+            {
+                e.Handled = true;
+            }
+
+            base.OnManipulationStarted(e);
+        }
+
+        /// <summary>
+        /// Called when the ManipulationDelta event occurs.
+        /// </summary>
+        /// <param name="e">Event data for the event.</param>
+        protected override void OnManipulationDelta(ManipulationDeltaEventArgs e)
+        {
+            if (_isLocked)
+            {
+                e.Handled = true;
+            }
+
+            base.OnManipulationDelta(e);
+        }
+
+        /// <summary>
+        /// Called when the ManipulationCompleted event occurs.
+        /// </summary>
+        /// <param name="e">Event data for the event.</param>
+        protected override void OnManipulationCompleted(ManipulationCompletedEventArgs e)
+        {
+            if (_isLocked)
+            {
+                e.Handled = true;
+            }
+
+            base.OnManipulationCompleted(e);
         }
 
         private PivotHeadersControl FindHeader(UIElement start)
@@ -164,22 +201,15 @@ namespace Microsoft.Phone.Controls
         private void OnIsLockedChanged(bool newValue)
         {
             _isLocked = newValue;
-            _isUpdating = true;
 
             if (_isLocked)
             {
-                _savedIndex = SelectedIndex;
-
                 FadeOutHeaders();
-                SaveAndRemoveItems();
             }
             else
             {
-                RestoreItems();
                 FadeInHeaders();
             }
-
-            _isUpdating = false;
         }
 
         // We create and store the animation information for the current
@@ -218,37 +248,6 @@ namespace Microsoft.Phone.Controls
             }
         }
 
-        private void SaveAndRemoveItems()
-        {
-            _savedItems = new PivotItem[Items.Count];
-            Items.CopyTo(_savedItems, 0);
-
-            for (int i = Items.Count - 1; i > _savedIndex; i--)
-            {
-                Items.RemoveAt(i);
-            }
-
-            for (int i = 0; i < _savedIndex; i++)
-            {
-                Items.RemoveAt(0);
-            }
-        }
-
-        private void RestoreItems()
-        {
-            for (int i = 0; i < _savedIndex; i++)
-            {
-                Items.Insert(i, _savedItems[i]);
-            }
-
-            for (int i = _savedIndex + 1; i < _savedItems.Length; i++)
-            {
-                Items.Add(_savedItems[i]);
-            }
-
-            _savedItems = null;
-        }
-       
         private void FadeOutHeaders()
         {
             if (_header == null)

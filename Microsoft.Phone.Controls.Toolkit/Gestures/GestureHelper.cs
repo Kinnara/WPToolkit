@@ -61,7 +61,7 @@ namespace Microsoft.Phone.Gestures
             GestureEventArgs e = new GestureEventArgs();
             _gestureSource = new WeakReference(args.Source);
             _gestureOrigin = args.Origin;
-            _dragLock = GestureHelper.DragLock.Unset;
+            _dragLock = DragLock.Unset;
             _dragging = false;
             RaiseGestureStart(e);
         }
@@ -77,10 +77,10 @@ namespace Microsoft.Phone.Gestures
 
                 _dragging = true;
 
-                if (_dragLock == GestureHelper.DragLock.Unset)
+                if (_dragLock == DragLock.Unset)
                 {
                     double angle = GestureHelper.AngleFromVector(args.CumulativeTranslation.X, args.CumulativeTranslation.Y) % 180;
-                    _dragLock = angle <= 45 || angle >= 135 ? GestureHelper.DragLock.Horizontal : GestureHelper.DragLock.Vertical;
+                    _dragLock = angle <= 45 || angle >= 135 ? DragLock.Horizontal : DragLock.Vertical;
                 }
             }
 
@@ -109,7 +109,7 @@ namespace Microsoft.Phone.Gestures
         protected void NotifyUp(InputCompletedArgs args)
         {
             EventArgs e = EventArgs.Empty;
-            _dragLock = GestureHelper.DragLock.Unset;
+            _dragLock = DragLock.Unset;
             _dragging = false;
 
             if (args.IsInertial)

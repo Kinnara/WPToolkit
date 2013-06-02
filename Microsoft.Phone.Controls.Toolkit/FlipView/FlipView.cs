@@ -933,12 +933,12 @@ namespace Microsoft.Phone.Controls
 
         private static double AngleFromVector(double x, double y)
         {
-            double atan2 = Math.Atan2(y, x);
-            if (atan2 < 0)
+            double num = Math.Atan2(y, x);
+            if (num < 0)
             {
-                atan2 = 2 * Math.PI + atan2;
+                num = 2 * Math.PI + num;
             }
-            return atan2 * 360 / (2 * Math.PI);
+            return num * 360 / (2 * Math.PI);
         }
 
         private static bool AreValuesEqual(object o1, object o2)
