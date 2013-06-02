@@ -387,9 +387,6 @@
     <Compile Include="..\Microsoft.Phone.Controls.Toolkit\Input\GestureHelperEventArgs.cs">
       <Link>Input\GestureHelperEventArgs.cs</Link>
     </Compile>
-    <Compile Include="..\Microsoft.Phone.Controls.Toolkit\Input\GestureService.cs">
-      <Link>Input\GestureService.cs</Link>
-    </Compile>
     <Compile Include="..\Microsoft.Phone.Controls.Toolkit\LocalizedResources\ControlResources.cs.Designer.cs">
       <Link>LocalizedResources\ControlResources.cs.Designer.cs</Link>
       <AutoGen>True</AutoGen>
@@ -579,6 +576,7 @@
     <Compile Include="..\Microsoft.Phone.Controls.Toolkit\ProgressBar\RelativeAnimatingContentControl.cs">
       <Link>ProgressBar\RelativeAnimatingContentControl.cs</Link>
     </Compile>
+    <Compile Include="Input\GestureService.cs" />
     <Compile Include="PickerBox\PickerBoxPage.xaml.cs">
       <DependentUpon>PickerBoxPage.xaml</DependentUpon>
     </Compile>

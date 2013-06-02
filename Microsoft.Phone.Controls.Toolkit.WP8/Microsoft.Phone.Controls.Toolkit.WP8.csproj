@@ -397,9 +397,6 @@
     </Compile>
     <Compile Include="Common\LongListSelectorExtensions.cs" />
     <Compile Include="Input\GestureListenerStatic.cs" />
-    <Compile Include="..\Microsoft.Phone.Controls.Toolkit\Input\GestureService.cs">
-      <Link>Input\GestureService.cs</Link>
-    </Compile>
     <Compile Include="..\Microsoft.Phone.Controls.Toolkit\LocalizedResources\ControlResources.cs.Designer.cs">
       <Link>LocalizedResources\ControlResources.cs.Designer.cs</Link>
       <AutoGen>True</AutoGen>
@@ -568,6 +565,7 @@
     <Compile Include="DateTimePickers\TimePickerPage.xaml.cs">
       <DependentUpon>TimePickerPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Input\GestureService.cs" />
     <Compile Include="Scroller\Scroller.cs" />
     <Compile Include="Scroller\ScrollerContentPresenter.cs" />
     <Compile Include="PickerBox\PickerBoxPage.xaml.cs">

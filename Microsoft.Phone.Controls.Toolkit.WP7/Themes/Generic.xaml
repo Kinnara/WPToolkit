@@ -11,7 +11,7 @@
     xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
     xmlns:controls="clr-namespace:Microsoft.Phone.Controls"
     xmlns:primitives="clr-namespace:Microsoft.Phone.Controls.Primitives">
-
+    
     <ControlTemplate x:Key="PhoneDisabledTextBoxTemplate" TargetType="TextBox">
         <ContentControl x:Name="ContentElement" BorderThickness="0" Padding="{TemplateBinding Padding}" Margin="{StaticResource PhoneTextBoxInnerMargin}"
                         HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" />
@@ -1800,7 +1800,7 @@
                                                 </DiscreteObjectKeyFrame.Value>
                                             </DiscreteObjectKeyFrame>
                                         </ObjectAnimationUsingKeyFrames>
-
+                                        
                                         <ObjectAnimationUsingKeyFrames Storyboard.TargetName="RootGrid"
                                                                        Storyboard.TargetProperty="Margin">
                                             <DiscreteObjectKeyFrame KeyTime="0:0:0"
@@ -1837,7 +1837,7 @@
                                             <DiscreteObjectKeyFrame KeyTime="0:0:0"
                                                                     Value="0, 0, 0, 0" />
                                         </ObjectAnimationUsingKeyFrames>
-
+                                        
                                         <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Opacity" Storyboard.TargetName="LengthIndicator">
                                             <DiscreteObjectKeyFrame KeyTime="0:0:0.350" Value="0"/>
                                         </ObjectAnimationUsingKeyFrames>
@@ -1892,7 +1892,7 @@
                                 <TextBlock x:Name="PlaceholderTextElement"
                                            Text="{TemplateBinding PlaceholderText}"
                                            Foreground="{StaticResource PhoneTextBoxReadOnlyBrush}"
-                                           HorizontalAlignment="Left"
+                                                HorizontalAlignment="Left"
                                            VerticalAlignment="Top"
                                            Margin="{StaticResource PhoneTextBoxInnerMargin}"
                                            Padding="{TemplateBinding Padding}"/>
@@ -1938,16 +1938,16 @@
                             VerticalAlignment="Bottom"
                             Margin="0,0,-12,0"
                             Grid.Row="1">
-                            <Border x:Name="ActionIconBorder"
+                        <Border x:Name="ActionIconBorder"
                                     Width="96"
-                                    Height="72"
+                                Height="72"
                                     Background="Transparent">
-                                <Image x:Name="ActionIcon"
-                                        Height="26"
+                            <Image x:Name="ActionIcon"
+                                    Height="26"
                                         HorizontalAlignment="Right"
                                         Margin="0,0,36,0"
-                                        Source="{TemplateBinding ActionIcon}"/>
-                            </Border>
+                                    Source="{TemplateBinding ActionIcon}"/>
+                        </Border>
                         </primitives:TiltUserControl>
 
                         <TextBlock x:Name="MeasurementTextBlock"

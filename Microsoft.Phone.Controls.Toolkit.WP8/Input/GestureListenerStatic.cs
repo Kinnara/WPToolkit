@@ -9,8 +9,6 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Threading;
-using Microsoft.Xna.Framework.Input.Touch;
 
 namespace Microsoft.Phone.Controls
 {
@@ -19,314 +17,342 @@ namespace Microsoft.Phone.Controls
     /// XAML's event-driven model, rather than XNA's loop/polling model, and it also takes care of the hit testing
     /// and event routing.
     /// </summary>
+    [System.Obsolete("GestureListener is obsolete beginning in Windows Phone 8, as the built-in manipulation and gesture events on UIElement now have functional parity with it.")]
     public partial class GestureListener
     {
-        private static DispatcherTimer _timer;
-
-        private static bool _isInTouch; 
-        
-        private static List<UIElement> _elements;
-
-        private static Point _gestureOrigin;
-        private static bool _gestureOriginChanged;
-        private static Nullable<Orientation> _gestureOrientation;
-
-        private static Point _cumulativeDelta;
-        private static Point _cumulativeDelta2;
-
-        private static Point _finalVelocity;
-
-        private static Point _pinchOrigin;
-        private static Point _pinchOrigin2;
-
-        private static Point _lastSamplePosition;
-        private static Point _lastSamplePosition2;
-
-        private static bool _isPinching;
-        private static bool _flicked;
-        private static bool _isDragging;
-
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification="Need static ctor for more than instantiation")]
-        static GestureListener()
+        private enum GestureState
         {
-            Touch.FrameReported += OnTouchFrameReported; 
-            
-            TouchPanel.EnabledGestures =
-                GestureType.Tap |
-                GestureType.DoubleTap |
-                GestureType.Hold |
-                GestureType.FreeDrag |
-                GestureType.DragComplete |
-                GestureType.Flick |
-                GestureType.Pinch |
-                GestureType.PinchComplete;
-
-            _timer = new DispatcherTimer() { Interval = TimeSpan.FromMilliseconds(100) };
-            _timer.Tick += OnTimerTick;
+            None,
+            Hold,
+            Undetermined,
+            Drag,
+            Pinch,
         }
 
-        /// <summary>
-        /// Handle touch events.
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private static void OnTouchFrameReported(object sender, TouchFrameEventArgs e)
-        {
-            bool newIsInTouch = false;
-            Point gestureOrigin = new Point(0, 0);
+        private static bool _isInitialized = false;
+        private static Point _gestureOrigin;
+        private static bool _gestureChanged = false;
+        private static List<UIElement> _elements;
+        private static GestureState _state = GestureState.None;
+        private static ManipulationDeltaEventArgs _previousDelta = null;
 
-            foreach (TouchPoint point in e.GetTouchPoints(null))
+
+        internal static void Initialize(DependencyObject o)
+        {
+            var gestureSensitiveElement = o as FrameworkElement;
+            if (!_isInitialized && gestureSensitiveElement != null)
             {
-                if (point.Action != TouchAction.Up)
+                // We need to add event handlers to the application root visual, but it may not
+                // be available yet. If that's the case, defer initialization until the visual
+                // tree is loaded.
+                if (Application.Current.RootVisual == null)
                 {
-                    gestureOrigin = point.Position;
-                    newIsInTouch = true;
-                    break;
+                    gestureSensitiveElement.Loaded += OnGestureSensitiveElementLoaded;
+                }
+                else
+                {
+                    Initialize();
+                }
+            }
+        }
+
+        private static void OnGestureSensitiveElementLoaded(object sender, RoutedEventArgs e)
+        {
+            Initialize();
+            (sender as FrameworkElement).Loaded -= OnGestureSensitiveElementLoaded;
+        }
+
+        private static void Initialize()
+        {
+            var root = Application.Current.RootVisual;
+            System.Diagnostics.Debug.Assert(root != null);
+            root.AddHandler(UIElement.TapEvent, new EventHandler<System.Windows.Input.GestureEventArgs>(OnTap), true);
+            root.AddHandler(UIElement.DoubleTapEvent, new EventHandler<System.Windows.Input.GestureEventArgs>(OnDoubleTap), true);
+            root.AddHandler(UIElement.HoldEvent, new EventHandler<System.Windows.Input.GestureEventArgs>(OnHold), true);
+            root.AddHandler(UIElement.ManipulationStartedEvent, new EventHandler<System.Windows.Input.ManipulationStartedEventArgs>(OnManipulationStarted), true);
+            root.AddHandler(UIElement.ManipulationDeltaEvent, new EventHandler<System.Windows.Input.ManipulationDeltaEventArgs>(OnManipulationDelta), true);
+            root.AddHandler(UIElement.ManipulationCompletedEvent, new EventHandler<System.Windows.Input.ManipulationCompletedEventArgs>(OnManipulationCompleted), true);
+            _isInitialized = true;
+        }
+
+        private static void OnTap(object sender, System.Windows.Input.GestureEventArgs e)
+        {
+            var touchPoint = e.GetPosition(Application.Current.RootVisual);
+            touchPoint = GetInverseTransform(true).Transform(touchPoint);
+            RaiseGestureEvent((handler) => handler.Tap, () => new Microsoft.Phone.Controls.GestureEventArgs(_gestureOrigin, touchPoint), false);
+            OnGestureComplete(touchPoint, touchPoint);
+        }
+
+        private static void OnDoubleTap(object sender, System.Windows.Input.GestureEventArgs e)
+        {
+            var touchPoint = e.GetPosition(Application.Current.RootVisual);
+            touchPoint = GetInverseTransform(true).Transform(touchPoint);
+            RaiseGestureEvent((handler) => handler.DoubleTap, () => new Microsoft.Phone.Controls.GestureEventArgs(_gestureOrigin, touchPoint), false);
+            OnGestureComplete(touchPoint, touchPoint);
+        }
+
+        private static void OnHold(object sender, System.Windows.Input.GestureEventArgs e)
+        {
+            _state = GestureState.Hold;
+            var touchPoint = e.GetPosition(Application.Current.RootVisual);
+            touchPoint = GetInverseTransform(true).Transform(touchPoint);
+            RaiseGestureEvent((handler) => handler.Hold, () => new Microsoft.Phone.Controls.GestureEventArgs(_gestureOrigin, touchPoint), false);
+        }
+
+        private static void OnManipulationStarted(object sender, ManipulationStartedEventArgs e)
+        {
+            
+            OnGestureBegin(GetInverseTransform(true, e.ManipulationContainer).Transform(e.ManipulationOrigin));
+        }
+
+        private static void OnManipulationDelta(object sender, ManipulationDeltaEventArgs e)
+        {
+            var oldState = _state;
+            var wasGestureChanged = _gestureChanged;
+            _state = e.PinchManipulation == null ? GestureState.Drag : GestureState.Pinch;
+
+            var transformToRoot = GetInverseTransform(true, e.ManipulationContainer);
+
+            if (_state == GestureState.Drag)
+            {
+                var deltaTransform = GetInverseTransform(false, e.ManipulationContainer);
+                var totalTranslation = deltaTransform.Transform(e.CumulativeManipulation.Translation);
+                var deltaTranslation = deltaTransform.Transform(e.DeltaManipulation.Translation);
+                Orientation orientation = GetOrientation(totalTranslation.X, totalTranslation.Y);
+
+                if (wasGestureChanged)
+                {
+                    OnGestureBegin(transformToRoot.Transform(e.ManipulationOrigin));
+
+                    // Fire the deferred DragStarted
+                    RaiseGestureEvent(
+                        (handler) => handler.DragStarted,
+                        () => new Microsoft.Phone.Controls.DragStartedGestureEventArgs(_gestureOrigin, orientation),
+                        true);
+                }
+
+                if (oldState == GestureState.Drag)
+                {
+                    // Continue the drag
+                    var currentPoint = new Point(_gestureOrigin.X + totalTranslation.X, _gestureOrigin.Y + totalTranslation.Y);
+                    RaiseGestureEvent(
+                        (handler) => handler.DragDelta,
+                        () => new Microsoft.Phone.Controls.DragDeltaGestureEventArgs(_gestureOrigin, currentPoint, deltaTranslation, orientation),
+                        false);
+                }
+
+                else
+                {
+                    if (oldState == GestureState.Pinch)
+                    {
+                        // End the pinch
+                        OnPinchCompleted(_previousDelta);
+                        // Transitioning from a pinch to a drag. 
+                        _gestureChanged = true;
+
+                        // Note that we are deferring the DragStarted event until the next 
+                        // ManipulationDelta is received. 
+                        // We want to fire a DragStarted event now, but the ManipulationOrigin
+                        // for the first ManipulationDelta after a pinch is completed always corresponds 
+                        // to the primary touch point from the previous pinch, even if it was the 
+                        // secondary touch point that remains on the screen.
+                        // Since the pinch is now completed, but we haven't been able to determine
+                        // the drag origin, we'll go back to the Undetermined state.
+                        _state = GestureState.Undetermined;
+                    }
+                    else
+                    {
+                        RaiseGestureEvent(
+                           (handler) => handler.DragStarted,
+                           () => new Microsoft.Phone.Controls.DragStartedGestureEventArgs(_gestureOrigin, orientation),
+                           true);
+                    }
+                    
+                }
+            }
+            else // _state is GestureState.Pinch
+            {
+                var originalPrimary = transformToRoot.Transform(e.PinchManipulation.Original.PrimaryContact);
+                var originalSecondary = transformToRoot.Transform(e.PinchManipulation.Original.SecondaryContact);
+                var currentPrimary = transformToRoot.Transform(e.PinchManipulation.Current.PrimaryContact);
+                var currentSecondary = transformToRoot.Transform(e.PinchManipulation.Current.SecondaryContact);
+
+                if (wasGestureChanged)
+                {
+                    OnGestureBegin(originalPrimary);
+                }
+
+                if (oldState == GestureState.Pinch)
+                {
+                    // Continue the pinch
+                    RaiseGestureEvent(
+                        (handler) => handler.PinchDelta,
+                        () => new Microsoft.Phone.Controls.PinchGestureEventArgs(originalPrimary, originalSecondary, currentPrimary, currentSecondary),
+                        false);
+                }
+                else
+                {
+                    if (oldState == GestureState.Drag)
+                    {
+                        // End the drag
+                        OnDragCompleted(_previousDelta);
+                        // Transitioning from a drag to a pinch
+                        _gestureChanged = true;
+                    }
+
+                    // Start the pinch
+                    RaiseGestureEvent(
+                        (handler) => handler.PinchStarted,
+                        () => new Microsoft.Phone.Controls.PinchStartedGestureEventArgs(originalPrimary, originalSecondary, currentPrimary, currentSecondary),
+                        true);
                 }
             }
 
-            if (!_isInTouch && newIsInTouch)
+            _previousDelta = e;
+        }
+
+        private static void OnManipulationCompleted(object sender, ManipulationCompletedEventArgs e)
+        {
+            if (_state == GestureState.Drag)
             {
-                // The user was not in the middle of a gesture, but one has started.
-                _gestureOrigin = gestureOrigin;
-                TouchStart();
+                OnDragCompleted(_previousDelta, e);
             }
-            else if (_isInTouch && !newIsInTouch)
+            else if (_state == GestureState.Pinch)
             {
-                // The user was in the middle of a gesture, but there are no active 
-                // touch points anymore.
-                TouchComplete();
+                System.Diagnostics.Debug.Assert(_previousDelta.PinchManipulation != null);
+                OnPinchCompleted(_previousDelta, true);
             }
-            else if (_isInTouch)
+            else if (_state == GestureState.Hold)
             {
-                // The state has not changed, and the user was in the middle of a gesture.
-                TouchDelta();
+                var deltaTransform = GetInverseTransform(false, e.ManipulationContainer);
+                var totalTranslation = deltaTransform.Transform(e.TotalManipulation.Translation);
+                var currentPoint = new Point(_gestureOrigin.X + totalTranslation.X, _gestureOrigin.Y + totalTranslation.Y);
+                OnGestureComplete(_gestureOrigin, currentPoint);
+            }
+        }
+
+        private static void OnPinchCompleted(ManipulationDeltaEventArgs lastPinchInfo, bool gestureCompleted = false)
+        {
+            var transformToRoot = GetInverseTransform(true, lastPinchInfo.ManipulationContainer);
+            var originalPrimary = transformToRoot.Transform(_previousDelta.PinchManipulation.Original.PrimaryContact);
+            var currentPrimary = transformToRoot.Transform(_previousDelta.PinchManipulation.Current.PrimaryContact);
+            RaiseGestureEvent(
+                    (handler) => handler.PinchCompleted,
+                    () => new Microsoft.Phone.Controls.PinchGestureEventArgs(
+                        originalPrimary,
+                        transformToRoot.Transform(_previousDelta.PinchManipulation.Original.SecondaryContact),
+                        currentPrimary,
+                        transformToRoot.Transform(_previousDelta.PinchManipulation.Current.SecondaryContact)),
+                    false);
+
+            if (gestureCompleted)
+            {
+                OnGestureComplete(originalPrimary, currentPrimary);
+            }
+        }
+
+        private static void OnDragCompleted(ManipulationDeltaEventArgs lastDragInfo, ManipulationCompletedEventArgs completedInfo = null)
+        {
+            GeneralTransform deltaTransform = null;
+            Point releasePoint;
+            Point totalTranslation;
+            Point finalVelocity;
+            Orientation orientation = Orientation.Horizontal;
+            bool gestureCompleted = false;
+
+            releasePoint = totalTranslation = finalVelocity = new Point();
+
+            if (completedInfo != null)
+            {
+                gestureCompleted = true;
+                deltaTransform = GetInverseTransform(false, completedInfo.ManipulationContainer);
+                totalTranslation = deltaTransform.Transform(completedInfo.TotalManipulation.Translation);
+                finalVelocity = deltaTransform.Transform(completedInfo.FinalVelocities.LinearVelocity);
+
+                if (completedInfo.IsInertial)
+                {
+                    RaiseGestureEvent(
+                        (handler) => handler.Flick,
+                        () => new Microsoft.Phone.Controls.FlickGestureEventArgs(
+                            _gestureOrigin,
+                            finalVelocity),
+                        true);
+                }
             }
             else
             {
-                // Possible error condition? The user was not in the middle of a 
-                // gesture, but a Touch.FrameReported event was received with no
-                // active touch points. We should poll the TouchPanel just to be 
-                // safe, but do so in such a way that resets the state.
-                TouchStart();
+                deltaTransform = GetInverseTransform(false, lastDragInfo.ManipulationContainer);
+                totalTranslation = deltaTransform.Transform(lastDragInfo.CumulativeManipulation.Translation);
+                finalVelocity = deltaTransform.Transform(lastDragInfo.Velocities.LinearVelocity);
             }
 
-            _isInTouch = newIsInTouch;
-        }
+            releasePoint = new Point(_gestureOrigin.X + totalTranslation.X, _gestureOrigin.Y + totalTranslation.Y);
+            orientation = GetOrientation(totalTranslation.X, totalTranslation.Y);
 
-        /// <summary>
-        /// A touch has started.
-        /// </summary>
-        private static void TouchStart()
-        {
-            _cumulativeDelta.X = _cumulativeDelta.Y = _cumulativeDelta2.X = _cumulativeDelta2.Y = 0;
-            _finalVelocity.X = _finalVelocity.Y = 0;
-            _isDragging = _flicked = false;
-            _elements = new List<UIElement>(VisualTreeHelper.FindElementsInHostCoordinates(_gestureOrigin, Application.Current.RootVisual));
-            _gestureOriginChanged = false;
-            
-            RaiseGestureEvent((helper) => helper.GestureBegin, () => new GestureEventArgs(_gestureOrigin, _gestureOrigin), false);
-            
-            ProcessTouchPanelEvents();
-            _timer.Start();
-        }
 
-        /// <summary>
-        /// A touch is continuing...
-        /// </summary>
-        private static void TouchDelta()
-        {
-            ProcessTouchPanelEvents();
-        }
+            RaiseGestureEvent(
+                (handler) => handler.DragCompleted,
+                () => new Microsoft.Phone.Controls.DragCompletedGestureEventArgs(
+                    _gestureOrigin,
+                    releasePoint,
+                    totalTranslation,
+                    orientation,
+                    finalVelocity),
+                false);
 
-        /// <summary>
-        /// A touch has ended.
-        /// </summary>
-        private static void TouchComplete()
-        {
-            ProcessTouchPanelEvents();
-            
-            RaiseGestureEvent((helper) => helper.GestureCompleted, () => new GestureEventArgs(_gestureOrigin, _lastSamplePosition), false);
-
-            _elements = null;
-            _gestureOrientation = null;
-            _timer.Stop();
-        }
-
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes", Justification="Issue manifests as a varity of exceptions.")]
-        static void OnTimerTick(object sender, EventArgs e)
-        {
-            try
+            if (gestureCompleted)
             {
-                ProcessTouchPanelEvents();
-            }
-            catch
-            {
-                // In certain rare conditions TouchPanel.IsGestureAvailable will
-                // throw an exception due to an internal race condition in XNA.
-                // The exception can be ignored and the next call to the method
-                // will succeed.
-            }            
-        }
-
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Maintainability", "CA1505:AvoidUnmaintainableCode"), System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Maintainability", "CA1502:AvoidExcessiveComplexity")]
-        private static void ProcessTouchPanelEvents()
-        {
-            Point delta = new Point(0, 0);
-
-            GeneralTransform deltaTransform = null;
-
-            while (TouchPanel.IsGestureAvailable)
-            {
-                GestureSample sample = TouchPanel.ReadGesture();
-
-                Point samplePosition = sample.Position.ToPoint();
-                Point samplePosition2 = sample.Position2.ToPoint();
-
-                Point sampleDelta = sample.Delta.ToPoint();
-                GetTranslatedDelta(ref deltaTransform, ref sampleDelta, ref _cumulativeDelta, sample.GestureType != GestureType.Flick);
-                Point sampleDelta2 = sample.Delta2.ToPoint();
-                GetTranslatedDelta(ref deltaTransform, ref sampleDelta2, ref _cumulativeDelta2, sample.GestureType != GestureType.Flick);
-
-                // Example: if a drag becomes a pinch, or vice-versa, we want to change the elements receiving the event
-                if (_elements == null || _gestureOriginChanged)
-                {
-                    _gestureOrigin = samplePosition;
-                    _elements = new List<UIElement>(VisualTreeHelper.FindElementsInHostCoordinates(_gestureOrigin, Application.Current.RootVisual));
-                    _gestureOriginChanged = false;
-                }
-
-                if (!_gestureOrientation.HasValue && (sampleDelta.X != 0 || sampleDelta.Y != 0))
-                {
-                    _gestureOrientation = Math.Abs(sampleDelta.X) >= Math.Abs(sampleDelta.Y) ? Orientation.Horizontal : Orientation.Vertical;
-                }
-
-                switch (sample.GestureType)
-                {
-                    case GestureType.Tap:
-                        RaiseGestureEvent((helper) => helper.Tap, () => new GestureEventArgs(_gestureOrigin, samplePosition), false);
-                        break;
-
-                    case GestureType.DoubleTap:
-                        RaiseGestureEvent((helper) => helper.DoubleTap, () => new GestureEventArgs(_gestureOrigin, samplePosition), false);
-                        break;
-
-                    case GestureType.Hold:
-                        RaiseGestureEvent((helper) => helper.Hold, () => new GestureEventArgs(_gestureOrigin, samplePosition), false);
-                        break;
-
-                    case GestureType.FreeDrag:
-                        if (sampleDelta.X != 0 || sampleDelta.Y != 0)
-                        {
-                            if (!_isDragging)
-                            {
-                                RaiseGestureEvent((helper) => helper.DragStarted, () => new DragStartedGestureEventArgs(_gestureOrigin, _gestureOrientation.Value), true);
-                                _isDragging = true;
-                            }
-
-                            delta.X += sampleDelta.X;
-                            delta.Y += sampleDelta.Y;
-                            _lastSamplePosition = samplePosition;
-                        }
-                        break;
-
-                    case GestureType.DragComplete:
-                        if (!_flicked)
-                        {
-                            if (delta.X != 0 || delta.Y != 0)
-                            {
-                                // raise drag
-                                RaiseGestureEvent((helper) => helper.DragDelta, () => new DragDeltaGestureEventArgs(_gestureOrigin, samplePosition, delta, _gestureOrientation.Value), false);
-                                delta.X = delta.Y = 0;
-                            }
-                        }
-
-                        if (_isDragging)
-                        {
-                            RaiseGestureEvent((helper) => helper.DragCompleted, () => new DragCompletedGestureEventArgs(_gestureOrigin, _lastSamplePosition, _cumulativeDelta, _gestureOrientation.Value, _finalVelocity), false);
-                            delta.X = delta.Y = 0;
-                        }
-
-                        _cumulativeDelta.X = _cumulativeDelta.Y = 0;
-                        _flicked = _isDragging = false;
-                        _gestureOriginChanged = true;
-                        break;
-
-                    case GestureType.Flick:
-                        // Do not raise any additional drag events that may be queued.
-                        _flicked = true;
-                        _finalVelocity = sampleDelta;
-                        RaiseGestureEvent((helper) => helper.Flick, () => new FlickGestureEventArgs(_gestureOrigin, sampleDelta), true);
-                        break;
-
-                    case GestureType.Pinch:
-                        {
-                            if (!_isPinching)
-                            {
-                                _isPinching = true;
-                                _pinchOrigin = samplePosition;
-                                _pinchOrigin2 = samplePosition2;
-                                RaiseGestureEvent((helper) => helper.PinchStarted, () => new PinchStartedGestureEventArgs(_pinchOrigin, _pinchOrigin2, _pinchOrigin, _pinchOrigin2), true);
-                            }
-
-                            _lastSamplePosition = samplePosition;
-                            _lastSamplePosition2 = samplePosition2;
-                            RaiseGestureEvent((helper) => helper.PinchDelta, () => new PinchGestureEventArgs(_pinchOrigin, _pinchOrigin2, samplePosition, samplePosition2), false);
-                        }
-                        break;
-
-                    case GestureType.PinchComplete:
-                        _isPinching = false;
-                        RaiseGestureEvent((helper) => helper.PinchCompleted, () => new PinchGestureEventArgs(_pinchOrigin, _pinchOrigin2, _lastSamplePosition, _lastSamplePosition2), false);
-                        _cumulativeDelta.X = _cumulativeDelta.Y = _cumulativeDelta2.X = _cumulativeDelta2.Y = 0;
-                        _gestureOriginChanged = true;                        
-                        break;
-                }
-            }
-
-            if (!_flicked && (delta.X != 0 || delta.Y != 0))
-            {
-                RaiseGestureEvent((helper) => helper.DragDelta, () => new DragDeltaGestureEventArgs(_gestureOrigin, _lastSamplePosition, delta, _gestureOrientation.Value), false);
+                OnGestureComplete(_gestureOrigin, releasePoint);
             }
         }
 
-        private static void GetTranslatedDelta(
-            ref GeneralTransform deltaTransform, 
-            ref Point sampleDelta, 
-            ref Point cumulativeDelta, 
-            bool addToCumulative)
+        private static void OnGestureBegin(Point touchPoint)
         {
-            if (sampleDelta.X != 0 || sampleDelta.Y != 0)
+            _gestureChanged = false;
+            _gestureOrigin = touchPoint;
+            _elements = new List<UIElement>(VisualTreeHelper.FindElementsInHostCoordinates(touchPoint, Application.Current.RootVisual));
+
+            if (_state == GestureState.None)
             {
-                if (deltaTransform == null && Application.Current.RootVisual != null)
-                {
-                    deltaTransform = GetInverseRootTransformNoOffset();
-                }
-                if (deltaTransform != null)
-                {
-                    sampleDelta = deltaTransform.Transform(sampleDelta);
-                    if (addToCumulative)
-                    {
-                        cumulativeDelta.X += sampleDelta.X;
-                        cumulativeDelta.Y += sampleDelta.Y;
-                    }
-                }
+                // The GestureBegin event should only be raised if there were no fingers on the screen previously.
+                _state = GestureState.Undetermined;
+                RaiseGestureEvent(
+                    (handler) => handler.GestureBegin, 
+                    () => new Microsoft.Phone.Controls.GestureEventArgs(touchPoint, touchPoint), 
+                    false);
             }
         }
 
-        private static GeneralTransform GetInverseRootTransformNoOffset()
+        private static void OnGestureComplete(Point gestureOrigin, Point releasePoint)
         {
-            GeneralTransform transform = Application.Current.RootVisual.TransformToVisual(null).Inverse;
+            _state = GestureState.None;
+            _previousDelta = null;
 
-            MatrixTransform matrixTransform = transform as MatrixTransform;
-            if (matrixTransform != null)
+            RaiseGestureEvent((handler) => handler.GestureCompleted, () => new Microsoft.Phone.Controls.GestureEventArgs(gestureOrigin, releasePoint), false);
+        }
+
+        private static GeneralTransform GetInverseTransform(bool includeOffset, UIElement target = null)
+        {
+            GeneralTransform transform = Application.Current.RootVisual.TransformToVisual(target).Inverse;
+
+            if (!includeOffset)
             {
-                Matrix matrix = matrixTransform.Matrix; 
-                matrix.OffsetX = matrix.OffsetY = 0;
-                matrixTransform.Matrix = matrix;
+                MatrixTransform matrixTransform = transform as MatrixTransform;
+                if (matrixTransform != null)
+                {
+                    Matrix matrix = matrixTransform.Matrix;
+                    matrix.OffsetX = matrix.OffsetY = 0;
+                    matrixTransform.Matrix = matrix;
+                }
             }
 
             return transform;
+        }
+
+        private static Orientation GetOrientation(double x, double y)
+        {
+            return Math.Abs(x) >= Math.Abs(y) ? 
+                System.Windows.Controls.Orientation.Horizontal : System.Windows.Controls.Orientation.Vertical;
         }
 
         /// <summary>
@@ -337,7 +363,10 @@ namespace Microsoft.Phone.Controls
         /// <param name="eventGetter">Gets the specific event to raise.</param>
         /// <param name="argsGetter">Lazy creator function for the event args.</param>
         /// <param name="releaseMouseCapture">Indicates whether the mouse capture should be released </param>
-        private static void RaiseGestureEvent<T>(Func<GestureListener, EventHandler<T>> eventGetter, Func<T> argsGetter, bool releaseMouseCapture) where T : GestureEventArgs
+        private static void RaiseGestureEvent<T>(
+            Func<GestureListener, EventHandler<T>> eventGetter, 
+            Func<T> argsGetter, bool releaseMouseCapture) 
+                where T : GestureEventArgs
         {
             T args = null;
 
