@@ -724,7 +724,7 @@ namespace Microsoft.Phone.Controls
             {
                 DismissedEventArgs args = new DismissedEventArgs(source);
                 handlerDismissed(this, args);
-        }
+            }
         }
 
         /// <summary>
