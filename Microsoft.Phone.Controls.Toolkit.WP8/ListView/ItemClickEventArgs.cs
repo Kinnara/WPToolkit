@@ -1,10 +1,12 @@
-﻿using System.Windows;
+﻿using System.Diagnostics.CodeAnalysis;
+using System.Windows;
 
 namespace Microsoft.Phone.Controls
 {
     /// <summary>
     /// Represents the method that will handle an <see cref="E:Microsoft.Phone.Controls.ListView.ItemClick"/> event.
     /// </summary>
+    [SuppressMessage("Microsoft.Design", "CA1003:UseGenericEventHandlerInstances")]
     public delegate void ItemClickEventHandler(object sender, ItemClickEventArgs e);
 
     /// <summary>

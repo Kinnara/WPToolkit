@@ -46,7 +46,7 @@ namespace Microsoft.Phone.Controls
 
         internal object Item { get; set; }
 
-        internal void OnIsSelectedChanged(bool oldValue, bool newValue)
+        internal void OnIsSelectedChanged(bool newValue)
         {
             if (ParentFlipView != null)
             {

@@ -1,6 +1,7 @@
 ﻿using Microsoft.Phone.Controls.LocalizedResources;
 using Microsoft.Phone.Controls.Primitives;
 using System;
+using System.Diagnostics.CodeAnalysis;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -109,6 +110,7 @@ namespace Microsoft.Phone.Controls
         /// A string representing the password currently held by the <see cref="T:Microsoft.Phone.Controls.PhonePasswordBox"/>.The default value is <see cref="F:System.String.Empty"/>.
         /// </returns>
         /// <exception cref="T:System.ArgumentNullException">The property is set to a null value.</exception>
+        [SuppressMessage("Microsoft.Usage", "CA2208:InstantiateArgumentExceptionsCorrectly")]
         public string Password
         {
             get { return (string)GetValue(PasswordProperty); }
@@ -229,6 +231,7 @@ namespace Microsoft.Phone.Controls
         /// An integer specifying the maximum length, in character, for passwords to be handled by this <see cref="T:Microsoft.Phone.Controls.PhonePasswordBox"/>. A value of zero (0) means no limit.The default value is 0 (no length limit).
         /// </returns>
         /// <exception cref="T:System.ArgumentOutOfRangeException">The property is set to a negative value.</exception>
+        [SuppressMessage("Microsoft.Usage", "CA2208:InstantiateArgumentExceptionsCorrectly")]
         public int MaxLength
         {
             get { return (int)GetValue(MaxLengthProperty); }

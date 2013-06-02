@@ -35,11 +35,11 @@ namespace Microsoft.Phone.Controls
         }
 
         /// <summary>
-        /// Identifies the ContentTemplateSelector dependency property.
+        /// Identifies the <see cref="P:Microsoft.Phone.Controls.PhoneContentControl.ContentTemplateSelector"/> dependency property.
         /// </summary>
         /// 
         /// <returns>
-        /// The identifier for the ContentTemplateSelector dependency property.
+        /// The identifier for the <see cref="P:Microsoft.Phone.Controls.PhoneContentControl.ContentTemplateSelector"/> dependency property.
         /// </returns>
         public static readonly DependencyProperty ContentTemplateSelectorProperty = DependencyProperty.Register(
             "ContentTemplateSelector",
@@ -53,6 +53,8 @@ namespace Microsoft.Phone.Controls
             {
                 EnsureTemplate();
             }
+
+            OnContentTemplateSelectorChanged((DataTemplateSelector)e.OldValue, (DataTemplateSelector)e.NewValue);
         }
 
         #endregion
@@ -71,11 +73,11 @@ namespace Microsoft.Phone.Controls
         }
 
         /// <summary>
-        /// Identifies the ActualContentTemplate dependency property.
+        /// Identifies the <see cref="P:Microsoft.Phone.Controls.PhoneContentControl.ActualContentTemplate"/> dependency property.
         /// </summary>
         /// 
         /// <returns>
-        /// The identifier for the ActualContentTemplate dependency property.
+        /// The identifier for the <see cref="P:Microsoft.Phone.Controls.PhoneContentControl.ActualContentTemplate"/> dependency property.
         /// </returns>
         public static readonly DependencyProperty ActualContentTemplateProperty = DependencyProperty.Register(
             "ActualContentTemplate",
@@ -92,6 +94,8 @@ namespace Microsoft.Phone.Controls
         private void OnContentTemplateShadowChanged(DependencyPropertyChangedEventArgs e)
         {
             EnsureTemplate();
+
+            OnContentTemplateChanged((DataTemplate)e.OldValue, (DataTemplate)e.NewValue);
         }
 
         /// <summary>
@@ -107,6 +111,24 @@ namespace Microsoft.Phone.Controls
             {
                 EnsureTemplate();
             }
+        }
+
+        /// <summary>
+        /// Called when the <see cref="P:System.Windows.Controls.ContentControl.ContentTemplate"/> property changes.
+        /// </summary>
+        /// <param name="oldContentTemplate">The old value of the <see cref="P:System.Windows.Controls.ContentControl.ContentTemplate"/> property.</param>
+        /// <param name="newContentTemplate">The new value of the <see cref="P:System.Windows.Controls.ContentControl.ContentTemplate"/> property.</param>
+        protected virtual void OnContentTemplateChanged(DataTemplate oldContentTemplate, DataTemplate newContentTemplate)
+        {
+        }
+
+        /// <summary>
+        /// Called when the <see cref="P:Microsoft.Phone.Controls.PhoneContentControl.ContentTemplateSelector"/> property changes.
+        /// </summary>
+        /// <param name="oldContentTemplateSelector">The old value of the <see cref="P:Microsoft.Phone.Controls.PhoneContentControl.ContentTemplateSelector"/> property.</param>
+        /// <param name="newContentTemplateSelector">The new value of the <see cref="P:Microsoft.Phone.Controls.PhoneContentControl.ContentTemplateSelector"/> property.</param>
+        protected virtual void OnContentTemplateSelectorChanged(DataTemplateSelector oldContentTemplateSelector, DataTemplateSelector newContentTemplateSelector)
+        {
         }
 
         private void EnsureTemplate()

@@ -126,6 +126,7 @@ namespace Microsoft.Phone.Controls
             ((PickerBox)o).OnSelectedIndexChanged((int)e.OldValue, (int)e.NewValue);
         }
 
+        [SuppressMessage("Microsoft.Usage", "CA1801:ReviewUnusedParameters", MessageId = "oldValue")]
         [SuppressMessage("Microsoft.Naming", "CA2204:Literals should be spelled correctly", MessageId = "SelectedIndex", Justification = "Property name.")]
         private void OnSelectedIndexChanged(int oldValue, int newValue)
         {
@@ -320,10 +321,10 @@ namespace Microsoft.Phone.Controls
 
         private static void OnSelectionModeChanged(DependencyObject o, DependencyPropertyChangedEventArgs e)
         {
-            ((PickerBox)o).OnSelectionModeChanged((SelectionMode)e.NewValue);
+            ((PickerBox)o).OnSelectionModeChanged();
         }
 
-        private void OnSelectionModeChanged(SelectionMode newValue)
+        private void OnSelectionModeChanged()
         {
             UpdateButtonContent();
         }
@@ -441,7 +442,7 @@ namespace Microsoft.Phone.Controls
                 _deferredSelectedItem = null;
             }
 
-            OnSelectionModeChanged(SelectionMode);
+            OnSelectionModeChanged();
             OnSelectedItemsChanged(SelectedItems, SelectedItems);
         }
 

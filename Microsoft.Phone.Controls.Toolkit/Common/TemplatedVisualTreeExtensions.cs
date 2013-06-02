@@ -5,6 +5,7 @@
 
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Windows.Media;
 
@@ -117,6 +118,7 @@ namespace System.Windows.Controls
         /// <returns>
         /// The first parent of the framework element of the specified type.
         /// </returns>
+        [SuppressMessage("Microsoft.Design", "CA1011:ConsiderPassingBaseTypesAsParameters")]
         public static T GetParentByType<T>(this FrameworkElement element)
             where T : FrameworkElement
         {

@@ -49,9 +49,9 @@ namespace Microsoft.Phone.Controls
             "ImageSource",
             typeof(ImageSource),
             typeof(ImageButton),
-            new PropertyMetadata((d, e) => ((ImageButton)d).OnImageSourceChanged(e)));
+            new PropertyMetadata((d, e) => ((ImageButton)d).OnImageSourceChanged()));
 
-        private void OnImageSourceChanged(DependencyPropertyChangedEventArgs e)
+        private void OnImageSourceChanged()
         {
             UpdateImageBrush();
         }

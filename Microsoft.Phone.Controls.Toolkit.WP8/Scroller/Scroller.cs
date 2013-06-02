@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics.CodeAnalysis;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
@@ -15,6 +16,7 @@ namespace Microsoft.Phone.Controls
     [TemplateVisualState(GroupName = ScrollGroup, Name = NotScrollingState)]
     [TemplateVisualState(GroupName = ScrollHintGroup, Name = ScrollHintVisibleState)]
     [TemplateVisualState(GroupName = ScrollHintGroup, Name = ScrollHintHiddenState)]
+    [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Scroller")]
     public sealed class Scroller : ContentControl
     {
         private const string ElementViewportControlName = "ViewportControl";
@@ -79,9 +81,9 @@ namespace Microsoft.Phone.Controls
             "HorizontalScrollBarVisibility",
             typeof(ScrollBarVisibility),
             typeof(Scroller),
-            new PropertyMetadata((d, e) => ((Scroller)d).OnHorizontalScrollBarVisibilityChanged(e)));
+            new PropertyMetadata((d, e) => ((Scroller)d).OnHorizontalScrollBarVisibilityChanged()));
 
-        private void OnHorizontalScrollBarVisibilityChanged(DependencyPropertyChangedEventArgs e)
+        private void OnHorizontalScrollBarVisibilityChanged()
         {
             UpdateContainerManipulationLockMode();
             UpdateComputedHorizontalScrollBarVisibility();
@@ -115,9 +117,9 @@ namespace Microsoft.Phone.Controls
             "VerticalScrollBarVisibility",
             typeof(ScrollBarVisibility),
             typeof(Scroller),
-            new PropertyMetadata((d, e) => ((Scroller)d).OnVerticalScrollBarVisibilityChanged(e)));
+            new PropertyMetadata((d, e) => ((Scroller)d).OnVerticalScrollBarVisibilityChanged()));
 
-        private void OnVerticalScrollBarVisibilityChanged(DependencyPropertyChangedEventArgs e)
+        private void OnVerticalScrollBarVisibilityChanged()
         {
             UpdateContainerManipulationLockMode();
             UpdateComputedVerticalScrollBarVisibility();
@@ -151,9 +153,9 @@ namespace Microsoft.Phone.Controls
             "ComputedHorizontalScrollBarVisibility",
             typeof(Visibility),
             typeof(Scroller),
-            new PropertyMetadata((d, e) => ((Scroller)d).OnComputedHorizontalScrollBarVisibilityChanged(e)));
+            new PropertyMetadata((d, e) => ((Scroller)d).OnComputedHorizontalScrollBarVisibilityChanged()));
 
-        private void OnComputedHorizontalScrollBarVisibilityChanged(DependencyPropertyChangedEventArgs e)
+        private void OnComputedHorizontalScrollBarVisibilityChanged()
         {
             if (ComputedHorizontalScrollBarVisibility == Visibility.Visible)
             {
@@ -200,9 +202,9 @@ namespace Microsoft.Phone.Controls
             "ComputedVerticalScrollBarVisibility",
             typeof(Visibility),
             typeof(Scroller),
-            new PropertyMetadata((d, e) => ((Scroller)d).OnComputedVerticalScrollBarVisibilityChanged(e)));
+            new PropertyMetadata((d, e) => ((Scroller)d).OnComputedVerticalScrollBarVisibilityChanged()));
 
-        private void OnComputedVerticalScrollBarVisibilityChanged(DependencyPropertyChangedEventArgs e)
+        private void OnComputedVerticalScrollBarVisibilityChanged()
         {
             if (ComputedVerticalScrollBarVisibility == Visibility.Visible)
             {
@@ -249,9 +251,9 @@ namespace Microsoft.Phone.Controls
             "ExtentWidth",
             typeof(double),
             typeof(Scroller),
-            new PropertyMetadata((d, e) => ((Scroller)d).OnExtentWidthChanged(e)));
+            new PropertyMetadata((d, e) => ((Scroller)d).OnExtentWidthChanged()));
 
-        private void OnExtentWidthChanged(DependencyPropertyChangedEventArgs e)
+        private void OnExtentWidthChanged()
         {
             UpdateScrollableWidth();
         }
@@ -284,9 +286,9 @@ namespace Microsoft.Phone.Controls
             "ExtentHeight",
             typeof(double),
             typeof(Scroller),
-            new PropertyMetadata((d, e) => ((Scroller)d).OnExtentHeightChanged(e)));
+            new PropertyMetadata((d, e) => ((Scroller)d).OnExtentHeightChanged()));
 
-        private void OnExtentHeightChanged(DependencyPropertyChangedEventArgs e)
+        private void OnExtentHeightChanged()
         {
             UpdateScrollableHeight();
         }
@@ -319,9 +321,9 @@ namespace Microsoft.Phone.Controls
             "ScrollableWidth",
             typeof(double),
             typeof(Scroller),
-            new PropertyMetadata((d, e) => ((Scroller)d).OnScrollableWidthChanged(e)));
+            new PropertyMetadata((d, e) => ((Scroller)d).OnScrollableWidthChanged()));
 
-        private void OnScrollableWidthChanged(DependencyPropertyChangedEventArgs e)
+        private void OnScrollableWidthChanged()
         {
             UpdateComputedHorizontalScrollBarVisibility();
         }
@@ -359,9 +361,9 @@ namespace Microsoft.Phone.Controls
             "ScrollableHeight",
             typeof(double),
             typeof(Scroller),
-            new PropertyMetadata((d, e) => ((Scroller)d).OnScrollableHeightChanged(e)));
+            new PropertyMetadata((d, e) => ((Scroller)d).OnScrollableHeightChanged()));
 
-        private void OnScrollableHeightChanged(DependencyPropertyChangedEventArgs e)
+        private void OnScrollableHeightChanged()
         {
             UpdateComputedVerticalScrollBarVisibility();
         }
@@ -399,9 +401,9 @@ namespace Microsoft.Phone.Controls
             "ViewportWidth",
             typeof(double),
             typeof(Scroller),
-            new PropertyMetadata((d, e) => ((Scroller)d).OnViewportWidthChanged(e)));
+            new PropertyMetadata((d, e) => ((Scroller)d).OnViewportWidthChanged()));
 
-        private void OnViewportWidthChanged(DependencyPropertyChangedEventArgs e)
+        private void OnViewportWidthChanged()
         {
             UpdateScrollableWidth();
         }
@@ -434,9 +436,9 @@ namespace Microsoft.Phone.Controls
             "ViewportHeight",
             typeof(double),
             typeof(Scroller),
-            new PropertyMetadata((d, e) => ((Scroller)d).OnViewportHeightChanged(e)));
+            new PropertyMetadata((d, e) => ((Scroller)d).OnViewportHeightChanged()));
 
-        private void OnViewportHeightChanged(DependencyPropertyChangedEventArgs e)
+        private void OnViewportHeightChanged()
         {
             UpdateScrollableHeight();
         }

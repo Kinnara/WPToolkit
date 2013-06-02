@@ -43,7 +43,7 @@ namespace Microsoft.Phone.Controls
         {
             if (null == pickerPageUri)
             {
-                throw new ArgumentException("pickerPageUri");
+                throw new ArgumentNullException("pickerPageUri");
             }
 
             if (null == _frame)

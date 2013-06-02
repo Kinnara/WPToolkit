@@ -31,14 +31,11 @@ namespace Microsoft.Phone.Controls
             UIElementCollection children = Children;
             Size layoutSlotSize = availableSize;
 
-            double logicalVisibleSpace, childLogicalSize;
-
             //
             // Initialize child sizing and iterator data
             // Allow children as much size as they want along the stack. 
             //
             layoutSlotSize.Height = Double.PositiveInfinity;
-            logicalVisibleSpace = availableSize.Height;
 
             //
             //  Iterate through children. 
@@ -57,7 +54,6 @@ namespace Microsoft.Phone.Controls
                 // Accumulate child size. 
                 stackDesiredSize.Width = Math.Max(stackDesiredSize.Width, childDesiredSize.Width);
                 stackDesiredSize.Height += childDesiredSize.Height;
-                childLogicalSize = childDesiredSize.Height;
             }
 
             if ((_rootVisual != null || PhoneHelper.TryGetPhoneApplicationFrame(out _rootVisual)))

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics.CodeAnalysis;
 using System.Windows;
 using System.Windows.Media;
 using System.Windows.Navigation;
@@ -23,6 +24,7 @@ namespace Microsoft.Phone.Controls
         /// The wait cursor on the current application page.
         /// </returns>
         /// <param name="element">The page for which to get the <see cref="P:Microsoft.Phone.Controls.WaitCursor"/> attached property.</param>
+        [SuppressMessage("Microsoft.Design", "CA1011:ConsiderPassingBaseTypesAsParameters")]
         public static WaitCursor GetWaitCursor(PhoneApplicationPage element)
         {
             if (element == null)
@@ -38,6 +40,7 @@ namespace Microsoft.Phone.Controls
         /// </summary>
         /// <param name="element">The page for which to set the <see cref="P:Microsoft.Phone.Controls.WaitCursor"/> attached property.</param>
         /// <param name="waitCursor">The wait cursor to set.</param>
+        [SuppressMessage("Microsoft.Design", "CA1011:ConsiderPassingBaseTypesAsParameters")]
         public static void SetWaitCursor(PhoneApplicationPage element, WaitCursor waitCursor)
         {
             if (element == null)
@@ -65,6 +68,7 @@ namespace Microsoft.Phone.Controls
         /// The wait cursor on the current application page.
         /// </returns>
         /// <exception cref="T:System.InvalidOperationException">There is no active <see cref="T:Microsoft.Phone.Controls.PhoneApplicationPage"/> object.</exception>
+        [SuppressMessage("Microsoft.Naming", "CA1721:PropertyNamesShouldNotMatchGetMethods")]
         public static WaitCursor WaitCursor
         {
             get

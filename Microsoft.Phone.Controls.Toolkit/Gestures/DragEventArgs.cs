@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using System.Diagnostics.CodeAnalysis;
+using System.Windows;
 
 namespace Microsoft.Phone.Gestures
 {
@@ -17,6 +18,7 @@ namespace Microsoft.Phone.Gestures
             }
         }
 
+        [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
         public bool IsTouchComplete { get; private set; }
 
         public Point DeltaDistance { get; private set; }

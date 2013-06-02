@@ -3,6 +3,7 @@ using Microsoft.Phone.Gestures;
 using System;
 using System.Collections.Specialized;
 using System.ComponentModel;
+using System.Diagnostics.CodeAnalysis;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
@@ -48,7 +49,7 @@ namespace Microsoft.Phone.Controls
             DefaultStyleKey = typeof(StartView);
 
             GestureHelper gestureHelper = GestureHelper.Create(this, true);
-            gestureHelper.GestureStart += (sender, args) => GestureStart(args);
+            gestureHelper.GestureStart += (sender, args) => GestureStart();
             gestureHelper.HorizontalDrag += (sender, args) => HorizontalDrag(args);
             gestureHelper.Flick += (sender, args) => Flick(args);
             gestureHelper.GestureEnd += (sender, args) => GestureEnd();
@@ -279,7 +280,7 @@ namespace Microsoft.Phone.Controls
             }
         }
 
-        private void GestureStart(Microsoft.Phone.Gestures.GestureEventArgs args)
+        private void GestureStart()
         {
             _targetOffset = ActualOffset;
             _flickDirection = 0;
@@ -476,6 +477,7 @@ namespace Microsoft.Phone.Controls
             }
         }
 
+        [SuppressMessage("Microsoft.Usage", "CA2208:InstantiateArgumentExceptionsCorrectly")]
         private void OnSelectedIndexChanged(DependencyPropertyChangedEventArgs args)
         {
             if (IsInit)

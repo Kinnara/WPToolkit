@@ -36,14 +36,9 @@ namespace Microsoft.Phone.Controls
             "IsVisible",
             typeof(bool),
             typeof(WaitCursor),
-            new PropertyMetadata(OnIsVisibleChanged));
+            new PropertyMetadata((d, e) => ((WaitCursor)d).OnIsVisibleChanged()));
 
-        private static void OnIsVisibleChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
-        {
-            ((WaitCursor)d).OnIsVisibleChanged(e);
-        }
-
-        private void OnIsVisibleChanged(DependencyPropertyChangedEventArgs e)
+        private void OnIsVisibleChanged()
         {
             if (DesignerProperties.IsInDesignTool)
             {

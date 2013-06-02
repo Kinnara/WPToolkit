@@ -5,6 +5,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
@@ -26,6 +27,7 @@ namespace Microsoft.Phone.Controls
         /// <returns>
         /// A list of weak references to the items in the view port.
         /// </returns>
+        [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", MessageId = "ViewPort")]
         public static IList<WeakReference> GetItemsInViewPort(Control list)
         {
             IList<WeakReference> viewPortItems = new List<WeakReference>();
@@ -47,8 +49,20 @@ namespace Microsoft.Phone.Controls
         /// The list of weak references where the items in 
         /// the view port will be added.
         /// </param>
+        [SuppressMessage("Microsoft.Design", "CA1011:ConsiderPassingBaseTypesAsParameters")]
+        [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", MessageId = "ViewPort")]
         public static void GetItemsInViewPort(Control list, IList<WeakReference> items)
         {
+            if (list == null)
+            {
+                throw new ArgumentNullException("list");
+            }
+
+            if (items == null)
+            {
+                throw new ArgumentNullException("items");
+            }
+
             int index;
             FrameworkElement container;
             GeneralTransform itemTransform;

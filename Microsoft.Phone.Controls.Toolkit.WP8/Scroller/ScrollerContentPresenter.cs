@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics.CodeAnalysis;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
@@ -8,6 +9,7 @@ namespace Microsoft.Phone.Controls
     /// <summary>
     /// Displays the content of a <see cref="T:Microsoft.Phone.Controls.Scroller"/> control.
     /// </summary>
+    [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Scroller")]
     public sealed class ScrollerContentPresenter : ContentPresenter
     {
         internal Scroller ScrollOwner { get; set; }

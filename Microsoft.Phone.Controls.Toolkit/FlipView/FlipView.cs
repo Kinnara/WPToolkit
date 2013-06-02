@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.ComponentModel;
+using System.Diagnostics.CodeAnalysis;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -87,6 +88,7 @@ namespace Microsoft.Phone.Controls
             typeof(FlipView),
             new PropertyMetadata(-1, (d, e) => ((FlipView)d).OnSelectedIndexChanged((int)e.OldValue, (int)e.NewValue)));
 
+        [SuppressMessage("Microsoft.Usage", "CA2208:InstantiateArgumentExceptionsCorrectly")]
         private void OnSelectedIndexChanged(int oldIndex, int newIndex)
         {
             if (_updatingSelection || IsInit)
@@ -165,7 +167,7 @@ namespace Microsoft.Phone.Controls
             FlipViewItem container = d as FlipViewItem;
             if (container != null)
             {
-                container.OnIsSelectedChanged((bool)e.OldValue, (bool)e.NewValue);
+                container.OnIsSelectedChanged((bool)e.NewValue);
             }
         }
 
@@ -271,6 +273,7 @@ namespace Microsoft.Phone.Controls
         /// Provides handling for the <see cref="E:System.Windows.Controls.ItemContainerGenerator.ItemsChanged"/> event.
         /// </summary>
         /// <param name="e">A <see cref="T:System.Collections.Specialized.NotifyCollectionChangedEventArgs"/> that contains the event data.</param>
+        [SuppressMessage("Microsoft.Design", "CA1062:Validate arguments of public methods", MessageId = "0")]
         protected override void OnItemsChanged(NotifyCollectionChangedEventArgs e)
         {
             base.OnItemsChanged(e);
@@ -484,7 +487,7 @@ namespace Microsoft.Phone.Controls
             }
         }
 
-        private void OnSelectionChanged(int oldIndex, int newIndex, object oldValue, object newValue)
+        private void OnSelectionChanged()
         {
             if (_animating)
             {
@@ -543,7 +546,7 @@ namespace Microsoft.Phone.Controls
 
                 SelectedIndex = newSelectedIndex;
                 SelectedItem = newSelectedItem;
-                OnSelectionChanged(oldSelectedIndex, SelectedIndex, oldSelectedItem, SelectedItem);
+                OnSelectionChanged();
 
                 if (!AreValuesEqual(oldSelectedItem, newSelectedItem))
                 {
@@ -850,8 +853,6 @@ namespace Microsoft.Phone.Controls
 
         private void NavigateByIndexChange(int indexDelta)
         {
-            bool horizontal = Orientation == Orientation.Horizontal;
-
             if (_animating)
             {
                 GoTo(CalculateContentDestination(_animationHint.Value), ZeroDuration);
@@ -1018,6 +1019,7 @@ namespace Microsoft.Phone.Controls
                 Storyboard.SetTargetProperty(_daRunning, _orientation == Orientation.Horizontal ? TranslateXPropertyPath : TranslateYPropertyPath);
             }
 
+            [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
             public double CurrentOffset
             {
                 get { return _orientation == Orientation.Horizontal ? _transform.TranslateX : _transform.TranslateY; }
@@ -1033,11 +1035,13 @@ namespace Microsoft.Phone.Controls
                 GoTo(targetOffset, duration, null, null);
             }
 
+            [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
             public void GoTo(double targetOffset, Duration duration, Action completionAction)
             {
                 GoTo(targetOffset, duration, null, completionAction);
             }
 
+            [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
             public void GoTo(double targetOffset, Duration duration, IEasingFunction easingFunction)
             {
                 GoTo(targetOffset, duration, easingFunction, null);

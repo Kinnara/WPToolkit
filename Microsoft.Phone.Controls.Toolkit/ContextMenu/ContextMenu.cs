@@ -1091,6 +1091,7 @@ namespace Microsoft.Phone.Controls
         /// Opens the Popup.
         /// </summary>
         /// <param name="position">Position to place the Popup.</param>
+        [SuppressMessage("Microsoft.Maintainability", "CA1502:AvoidExcessiveComplexity", Justification = "Code flow is reasonably clear.")]
         [SuppressMessage("Microsoft.Maintainability", "CA1506:AvoidExcessiveClassCoupling", Justification = "Code flow is reasonably clear.")]
         private void OpenPopup(Point position)
         {

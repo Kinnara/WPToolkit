@@ -325,9 +325,9 @@ namespace Microsoft.Phone.Controls
             ItemContainerStyleName,
             typeof(Style),
             typeof(ListView),
-            new PropertyMetadata(null, (d, e) => ((ListView)d).OnItemContainerStyleChanged(e)));
+            new PropertyMetadata(null, (d, e) => ((ListView)d).OnItemContainerStyleChanged()));
 
-        private void OnItemContainerStyleChanged(DependencyPropertyChangedEventArgs e)
+        private void OnItemContainerStyleChanged()
         {
             ApplyLiveItems(ApplyItemContainerStyle);
         }
@@ -373,9 +373,9 @@ namespace Microsoft.Phone.Controls
             "LayoutMode",
             typeof(LongListSelectorLayoutMode),
             typeof(ListView),
-            new PropertyMetadata(LongListSelectorLayoutMode.List, (d, e) => ((ListView)d).OnLayoutModeChanged(e)));
+            new PropertyMetadata(LongListSelectorLayoutMode.List, (d, e) => ((ListView)d).OnLayoutModeChanged()));
 
-        private void OnLayoutModeChanged(DependencyPropertyChangedEventArgs e)
+        private void OnLayoutModeChanged()
         {
             if (_selector != null)
             {
@@ -570,9 +570,9 @@ namespace Microsoft.Phone.Controls
             "IsItemClickEnabled",
             typeof(bool),
             typeof(ListView),
-            new PropertyMetadata(true, (d, e) => ((ListView)d).OnIsItemClickEnabledChanged(e)));
+            new PropertyMetadata(true, (d, e) => ((ListView)d).OnIsItemClickEnabledChanged()));
 
-        private void OnIsItemClickEnabledChanged(DependencyPropertyChangedEventArgs e)
+        private void OnIsItemClickEnabledChanged()
         {
             if (SelectedItem != null)
             {

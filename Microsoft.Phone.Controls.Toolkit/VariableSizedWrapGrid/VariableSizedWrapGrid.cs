@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
 using System.Windows;
 using System.Windows.Controls;
@@ -122,9 +123,9 @@ namespace Microsoft.Phone.Controls
             "MaximumRowsOrColumns",
             typeof(int),
             typeof(VariableSizedWrapGrid),
-            new PropertyMetadata(-1, (d, e) => ((VariableSizedWrapGrid)d).OnMaximumRowsOrColumnsChanged(e)));
+            new PropertyMetadata(-1, (d, e) => ((VariableSizedWrapGrid)d).InvalidateMeasure()));
 
-        private void OnMaximumRowsOrColumnsChanged(DependencyPropertyChangedEventArgs e)
+        private void OnMaximumRowsOrColumnsChanged()
         {
             InvalidateMeasure();
         }
@@ -159,6 +160,7 @@ namespace Microsoft.Phone.Controls
             typeof(VariableSizedWrapGrid),
             new PropertyMetadata(Orientation.Horizontal, (d, e) => ((VariableSizedWrapGrid)d).OnOrientationChanged(e)));
 
+        [SuppressMessage("Microsoft.Usage", "CA2208:InstantiateArgumentExceptionsCorrectly", Justification = "Almost always set from the CLR property.")]
         private void OnOrientationChanged(DependencyPropertyChangedEventArgs e)
         {
             Orientation value = (Orientation)e.NewValue;
@@ -201,6 +203,8 @@ namespace Microsoft.Phone.Controls
         /// The obtained value.
         /// </returns>
         /// <param name="element">The target element.</param>
+        [SuppressMessage("Microsoft.Design", "CA1011:ConsiderPassingBaseTypesAsParameters")]
+        [SuppressMessage("Microsoft.Design", "CA1062:Validate arguments of public methods", MessageId = "0", Justification = "Standard pattern.")]
         public static int GetRowSpan(UIElement element)
         {
             return (int)element.GetValue(RowSpanProperty);
@@ -211,6 +215,8 @@ namespace Microsoft.Phone.Controls
         /// </summary>
         /// <param name="element">The target element.</param>
         /// <param name="value">The value to set.</param>
+        [SuppressMessage("Microsoft.Design", "CA1011:ConsiderPassingBaseTypesAsParameters")]
+        [SuppressMessage("Microsoft.Design", "CA1062:Validate arguments of public methods", MessageId = "0", Justification = "Standard pattern.")]
         public static void SetRowSpan(UIElement element, int value)
         {
             element.SetValue(RowSpanProperty, value);
@@ -241,6 +247,8 @@ namespace Microsoft.Phone.Controls
         /// The obtained value.
         /// </returns>
         /// <param name="element">The target element.</param>
+        [SuppressMessage("Microsoft.Design", "CA1011:ConsiderPassingBaseTypesAsParameters")]
+        [SuppressMessage("Microsoft.Design", "CA1062:Validate arguments of public methods", MessageId = "0", Justification = "Standard pattern.")]
         public static int GetColumnSpan(UIElement element)
         {
             return (int)element.GetValue(ColumnSpanProperty);
@@ -251,6 +259,8 @@ namespace Microsoft.Phone.Controls
         /// </summary>
         /// <param name="element">The target element.</param>
         /// <param name="value">The value to set.</param>
+        [SuppressMessage("Microsoft.Design", "CA1011:ConsiderPassingBaseTypesAsParameters")]
+        [SuppressMessage("Microsoft.Design", "CA1062:Validate arguments of public methods", MessageId = "0", Justification = "Standard pattern.")]
         public static void SetColumnSpan(UIElement element, int value)
         {
             element.SetValue(ColumnSpanProperty, value);
@@ -415,6 +425,7 @@ namespace Microsoft.Phone.Controls
             return finalSize;
         }
 
+        [SuppressMessage("Microsoft.Usage", "CA2208:InstantiateArgumentExceptionsCorrectly", Justification = "Almost always set from the CLR property.")]
         private void OnItemWidthOrHeightChanged(DependencyPropertyChangedEventArgs e)
         {
             double value = (double)e.NewValue;

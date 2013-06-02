@@ -73,6 +73,7 @@ namespace Microsoft.Phone.Controls
         /// </summary>
         /// <param name="targetOffset">The target offset value.</param>
         /// <param name="duration">The duration for the animation.</param>
+        [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "Keeping the public API available.")]
         public void GoTo(double targetOffset, Duration duration)
         {
             GoTo(targetOffset, duration, null, null);
@@ -173,6 +174,7 @@ namespace Microsoft.Phone.Controls
         /// </summary>
         /// <param name="container">The container.</param>
         /// <returns>Returns the TranslateTransform reference.</returns>
+        [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "Keeping the public API available.")]
         public static TranslateTransform GetTranslateTransform(UIElement container)
         {
             if (container == null)

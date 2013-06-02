@@ -85,7 +85,6 @@ namespace Microsoft.Phone.Controls.Primitives
             int childHeight = (int)Math.Min(availableSize.Height, Owner.ViewportHeight);
             Size childSize = new Size(childWidth, childHeight);
 
-            int count = Children.Count;
             _visibleChildren.Clear();
 
             foreach (StartViewItem child in Children)
@@ -119,7 +118,7 @@ namespace Microsoft.Phone.Controls.Primitives
             {
                 StartViewItem child = _visibleChildren[index];
                 finalRect.X = child.StartPosition = (int)x;
-                _itemStops.Add(new ItemStop(child, index, child.StartPosition));
+                _itemStops.Add(new ItemStop(child, child.StartPosition));
                 finalRect.Width = Owner.ViewportWidth;
                 child.ItemWidth = (int)finalRect.Width;
                 child.Arrange(finalRect);
@@ -356,23 +355,13 @@ namespace Microsoft.Phone.Controls.Primitives
             Owner = owner;
         }
 
-        internal void NotifyDefaultItemChanged()
-        {
-            InvalidateMeasure();
-            InvalidateArrange();
-            UpdateLayout();
-        }
-
         internal class ItemStop
         {
-            public ItemStop(StartViewItem item, int index, int position)
+            public ItemStop(StartViewItem item, int position)
             {
                 Item = item;
-                Index = index;
                 Position = position;
             }
-
-            public int Index { get; private set; }
 
             public int Position { get; private set; }
 

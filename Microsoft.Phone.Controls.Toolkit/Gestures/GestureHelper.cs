@@ -1,5 +1,6 @@
 ﻿using Microsoft.Phone.Controls;
 using System;
+using System.Diagnostics.CodeAnalysis;
 using System.Windows;
 using System.Windows.Media;
 
@@ -20,6 +21,7 @@ namespace Microsoft.Phone.Gestures
             ShouldHandleAllDrags = shouldHandleAllDrags;
         }
 
+        [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
         protected bool ShouldHandleAllDrags { get; private set; }
 
         protected UIElement Target { get; private set; }
@@ -34,6 +36,7 @@ namespace Microsoft.Phone.Gestures
 
         public event EventHandler<DragEventArgs> VerticalDrag;
 
+        [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
         public static GestureHelper Create(UIElement target)
         {
             return GestureHelper.Create(target, true);

@@ -55,9 +55,9 @@ namespace Microsoft.Phone.Controls
             "IsSelected",
             typeof(bool),
             typeof(ListViewItem),
-            new PropertyMetadata(false, (d, e) => ((ListViewItem)d).OnIsSelectedChanged(e)));
+            new PropertyMetadata(false, (d, e) => ((ListViewItem)d).OnIsSelectedChanged()));
 
-        private void OnIsSelectedChanged(DependencyPropertyChangedEventArgs e)
+        private void OnIsSelectedChanged()
         {
             ChangeVisualState();
         }

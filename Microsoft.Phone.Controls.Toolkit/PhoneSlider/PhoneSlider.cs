@@ -66,9 +66,9 @@ namespace Microsoft.Phone.Controls
             "TickFrequency",
             typeof(double),
             typeof(PhoneSlider),
-            new PropertyMetadata(0.0, (d, e) => ((PhoneSlider)d).OnTickFrequencyChanged(e)));
+            new PropertyMetadata(0.0, OnTickFrequencyChanged));
 
-        private void OnTickFrequencyChanged(DependencyPropertyChangedEventArgs e)
+        private static void OnTickFrequencyChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
             if (!IsValidChange(e.NewValue))
             {
