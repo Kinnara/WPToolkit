@@ -1261,6 +1261,8 @@ namespace Microsoft.Phone.Controls
                 _rootVisual.SizeChanged += OnContextMenuOrRootVisualSizeChanged;
             }
 
+            UpdateContextMenuPlacement();
+
             FrameworkElement dataContextSource = Owner as FrameworkElement ?? _rootVisual;
             if (ReadLocalValue(DataContextProperty) == DependencyProperty.UnsetValue)
             {
