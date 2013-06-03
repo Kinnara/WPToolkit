@@ -33,7 +33,7 @@ namespace Microsoft.Phone.Controls
     [TemplateVisualState(GroupName = PickerStatesGroupName, Name = PickerStatesNormalStateName)]
     [TemplateVisualState(GroupName = PickerStatesGroupName, Name = PickerStatesHighlightedStateName)]
     [TemplateVisualState(GroupName = PickerStatesGroupName, Name = PickerStatesDisabledStateName)]
-    public class ListPicker : ItemsControl
+    public class ListPicker : TemplatedItemsControl<ListPickerItem>
     {
         private const string ItemsPresenterPartName = "ItemsPresenter";
         private const string ItemsPresenterTranslateTransformPartName = "ItemsPresenterTranslateTransform";
@@ -542,25 +542,6 @@ namespace Microsoft.Phone.Controls
             }
 
             OnSelectedItemsChanged(SelectedItems, SelectedItems);
-        }
-
-        /// <summary>
-        /// Determines if the specified item is (or is eligible to be) its own item container.
-        /// </summary>
-        /// <param name="item">The specified item.</param>
-        /// <returns>True if the item is its own item container; otherwise, false.</returns>
-        protected override bool IsItemItsOwnContainerOverride(object item)
-        {
-            return item is ListPickerItem;
-        }
-
-        /// <summary>
-        /// Creates or identifies the element used to display a specified item.
-        /// </summary>
-        /// <returns>A container corresponding to a specified item.</returns>
-        protected override DependencyObject GetContainerForItemOverride()
-        {
-            return new ListPickerItem();
         }
 
         /// <summary>

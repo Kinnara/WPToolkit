@@ -14,8 +14,8 @@ namespace Microsoft.Phone.Controls
     /// <summary>
     /// Creates a panoramic view of items that can be panned side-to-side, similar to the Start screen.
     /// </summary>
-    [StyleTypedProperty(Property = "ItemContainerStyle", StyleTargetType = typeof(StartViewItem))]
     [TemplatePart(Name = PanningTransformName, Type = typeof(TranslateTransform))]
+    [StyleTypedProperty(Property = "ItemContainerStyle", StyleTargetType = typeof(StartViewItem))]
     public class StartView : TemplatedItemsControl<StartViewItem>, ISupportInitialize
     {
         internal static readonly Duration Immediately = TimeSpan.Zero;
@@ -75,6 +75,19 @@ namespace Microsoft.Phone.Controls
         private int ActualOffset
         {
             get { return PanningTransform == null ? 0 : (int)PanningTransform.X; }
+        }
+
+        private int SelectionOffset
+        {
+            get
+            {
+                StartViewItem container = GetContainer(SelectedItem);
+                if (container != null)
+                {
+                    return -container.StartPosition;
+                }
+                return 0;
+            }
         }
 
         private bool IsInit
@@ -356,7 +369,7 @@ namespace Microsoft.Phone.Controls
                 StartViewPanel.ItemStop current;
                 StartViewPanel.ItemStop next;
 
-                Panel.GetStops(ActualOffset, ItemsWidth, out previous, out current, out next);
+                Panel.GetStops(SelectionOffset, ItemsWidth, out previous, out current, out next);
 
                 if (previous == current && current == next && next == null ||
                     _flickDirection < 0 && next == null ||
@@ -469,11 +482,7 @@ namespace Microsoft.Phone.Controls
 
             if (!_suppressAnimation)
             {
-                StartViewItem container = GetContainer(SelectedItem);
-                if (container != null)
-                {
-                    GoTo(-container.StartPosition, _loaded ? DefaultDuration : Immediately);
-                }
+                GoTo(SelectionOffset, _loaded ? DefaultDuration : Immediately);
             }
         }
 

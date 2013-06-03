@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Phone.Controls.Primitives;
+using System;
 using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.ComponentModel;
@@ -16,7 +17,8 @@ namespace Microsoft.Phone.Controls
     /// </summary>
     [TemplatePart(Name = ElementScrollViewerName, Type = typeof(ScrollViewer))]
     [TemplatePart(Name = ElementItemsPresenterName, Type = typeof(ItemsPresenter))]
-    public class FlipView : ItemsControl, ISupportInitialize
+    [StyleTypedProperty(Property = "ItemContainerStyle", StyleTargetType = typeof(FlipViewItem))]
+    public class FlipView : TemplatedItemsControl<FlipViewItem>, ISupportInitialize
     {
         private const string ElementScrollViewerName = "ScrollViewer";
         private const string ElementItemsPresenterName = "ItemsPresenter";
@@ -371,31 +373,6 @@ namespace Microsoft.Phone.Controls
             }
 
             UpdateSelection(oldSelectedIndex, newSelectedIndex, oldSelectedItem, newSelectedItem);
-        }
-
-        /// <summary>
-        /// Determines if the specified item is (or is eligible to be) its own item container.
-        /// </summary>
-        /// 
-        /// <returns>
-        /// true if the item is its own item container; otherwise, false.
-        /// </returns>
-        /// <param name="item">The specified item.</param>
-        protected override bool IsItemItsOwnContainerOverride(object item)
-        {
-            return item is FlipViewItem;
-        }
-
-        /// <summary>
-        /// Creates or identifies the element used to display a specified item.
-        /// </summary>
-        /// 
-        /// <returns>
-        /// A <see cref="T:Microsoft.Phone.Controls.FlipViewItem"/> corresponding to a specified item.
-        /// </returns>
-        protected override DependencyObject GetContainerForItemOverride()
-        {
-            return new FlipViewItem();
         }
 
         /// <summary>
