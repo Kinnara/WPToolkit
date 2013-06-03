@@ -6,6 +6,7 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using System.Windows;
 using System.Windows.Controls;
@@ -159,6 +160,11 @@ namespace Microsoft.Phone.Controls
         private bool _reversed;
 
         /// <summary>
+        /// System background brush.
+        /// </summary>
+        private Brush _backgroundBrush = (Brush)Application.Current.Resources["PhoneBackgroundBrush"];
+
+        /// <summary>
         /// Gets or sets the owning object for the ContextMenu.
         /// </summary>
         public DependencyObject Owner
@@ -172,7 +178,6 @@ namespace Microsoft.Phone.Controls
                     if (null != ownerFrameworkElement)
                     {
                         ownerFrameworkElement.Hold -= OnOwnerHold;
-                        ownerFrameworkElement.Loaded -= OnOwnerLoaded;
                         ownerFrameworkElement.Unloaded -= OnOwnerUnloaded;
 
                         OnOwnerUnloaded(null, null);
@@ -185,20 +190,7 @@ namespace Microsoft.Phone.Controls
                     if (null != ownerFrameworkElement)
                     {
                         ownerFrameworkElement.Hold += OnOwnerHold;
-                        ownerFrameworkElement.Loaded += OnOwnerLoaded;
                         ownerFrameworkElement.Unloaded += OnOwnerUnloaded;
-
-                        // Owner *may* already be live and have fired its Loaded event - hook up manually if necessary
-                        DependencyObject parent = ownerFrameworkElement;
-                        while (parent != null)
-                        {
-                            parent = VisualTreeHelper.GetParent(parent);
-                            if ((null != parent) && (parent == _rootVisual))
-                            {
-                                OnOwnerLoaded(null, null);
-                                break;
-                            }
-                        }
                     }
                 }
             }
@@ -348,8 +340,6 @@ namespace Microsoft.Phone.Controls
         /// <param name="e">Event arguments.</param>
         protected virtual void OnOpened(RoutedEventArgs e)
         {
-            UpdateContextMenuPlacement();
-
             // Handles initial open (where OnOpened is called before OnApplyTemplate)
             SetRenderTransform();
             UpdateVisualStates(true);
@@ -773,28 +763,6 @@ namespace Microsoft.Phone.Controls
         }
 
         /// <summary>
-        /// Handles the Loaded event of the Owner.
-        /// </summary>
-        /// <param name="sender">Source of the event.</param>
-        /// <param name="e">Event arguments.</param>
-        private void OnOwnerLoaded(object sender, RoutedEventArgs e)
-        {
-            if (null == _page) // Don't want to attach to BackKeyPress twice
-            {
-                InitializeRootVisual();
-                if (null != _rootVisual)
-                {
-                    _page = _rootVisual.Content as PhoneApplicationPage;
-                    if (_page != null)
-                    {
-                        _page.BackKeyPress += OnPageBackKeyPress;
-                        SetBinding(ApplicationBarMirrorProperty, new Binding { Source = _page, Path = new PropertyPath("ApplicationBar") });
-                    }
-                }
-            }
-        }
-
-        /// <summary>
         /// Handles the Unloaded event of the Owner.
         /// </summary>
         /// <param name="sender">Source of the event.</param>
@@ -805,12 +773,6 @@ namespace Microsoft.Phone.Controls
             {
                 _rootVisual.ManipulationCompleted -= OnRootVisualManipulationCompleted;
                 _rootVisual.OrientationChanged -= OnEventThatClosesContextMenu;
-            }
-            if (_page != null)
-            {
-                _page.BackKeyPress -= OnPageBackKeyPress;
-                ClearValue(ApplicationBarMirrorProperty);
-                _page = null;
             }
         }
 
@@ -866,6 +828,23 @@ namespace Microsoft.Phone.Controls
 
                     _rootVisual.OrientationChanged -= OnEventThatClosesContextMenu;
                     _rootVisual.OrientationChanged += OnEventThatClosesContextMenu;
+                }
+            }
+        }
+
+        /// <summary>
+        /// Attaches the ContxtMenu's BackKeyPress handler to properly enfore 
+        /// dismissal on back key press.
+        /// </summary>
+        private void InitializePage()
+        {
+            if (null != _rootVisual)
+            {
+                _page = _rootVisual.Content as PhoneApplicationPage;
+                if (_page != null)
+                {
+                    _page.BackKeyPress += OnPageBackKeyPress;
+                    SetBinding(ApplicationBarMirrorProperty, new Binding { Source = _page, Path = new PropertyPath("ApplicationBar") });
                 }
             }
         }
@@ -1000,6 +979,8 @@ namespace Microsoft.Phone.Controls
         /// </summary>
         private void UpdateContextMenuPlacement()
         {
+            Debug.Assert(_page != null, "page should not be null");
+
             if ((null != _rootVisual) && (null != _overlay))
             {
                 Point p = new Point(_popupAlignmentPoint.X, _popupAlignmentPoint.Y);
@@ -1106,6 +1087,7 @@ namespace Microsoft.Phone.Controls
             _popupAlignmentPoint = position;
 
             InitializeRootVisual();
+            InitializePage();
 
             bool portrait = _rootVisual.Orientation.IsPortrait();
 
@@ -1139,7 +1121,7 @@ namespace Microsoft.Phone.Controls
                 {
                     Width = width,
                     Height = height,
-                    Fill = (Brush)Application.Current.Resources["PhoneBackgroundBrush"],
+                    Fill = _backgroundBrush,
                     CacheMode = new BitmapCache(),
                 };
                 _overlay.Children.Insert(0, backgroundLayer);
@@ -1173,7 +1155,7 @@ namespace Microsoft.Phone.Controls
                 {
                     Width = width,
                     Height = height,
-                    Fill = (Brush)Application.Current.Resources["PhoneBackgroundBrush"],
+                    Fill = _backgroundBrush,
                     Opacity = 0,
                     CacheMode = new BitmapCache(),
                 };
@@ -1288,8 +1270,6 @@ namespace Microsoft.Phone.Controls
                 _rootVisual.SizeChanged += OnContextMenuOrRootVisualSizeChanged;
             }
 
-            UpdateContextMenuPlacement();
-
             if (ReadLocalValue(DataContextProperty) == DependencyProperty.UnsetValue)
             {
                 DependencyObject dataContextSource = Owner ?? _rootVisual;
@@ -1371,6 +1351,14 @@ namespace Microsoft.Phone.Controls
                 button.Click -= OnEventThatClosesContextMenu;
             }
             _applicationBarIconButtons.Clear();
+
+            // Remove BackKeyPress handler from page
+            if (_page != null)
+            {
+                _page.BackKeyPress -= OnPageBackKeyPress;
+                ClearValue(ApplicationBarMirrorProperty);
+                _page = null;
+            }
 
             // Update IsOpen
             _settingIsOpen = true;

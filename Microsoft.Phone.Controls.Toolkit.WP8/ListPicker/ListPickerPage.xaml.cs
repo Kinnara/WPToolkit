@@ -125,6 +125,21 @@ namespace Microsoft.Phone.Controls
                 }
             }
 
+            // Scroll the selected item into view, needs to be done before the
+            // animations are setup because the animations are only attached to
+            // the items in view.
+            if (SelectionMode == SelectionMode.Single)
+            {
+                Picker.ScrollIntoView(SelectedItem);
+            }
+            else
+            {
+                if (SelectedItems.Count > 0)
+                {
+                    Picker.ScrollIntoView(SelectedItems[0]);
+                }
+            }
+
             // Add a projection for each list item and turn it to -90
             // (rotationX) so it is hidden.
             SetupListItems(-90);

@@ -377,7 +377,7 @@
         <Setter Property="Foreground" Value="{StaticResource PhoneBackgroundBrush}"/>
         <Setter Property="FontFamily" Value="{StaticResource PhoneFontFamilySemiLight}"/>
         <Setter Property="FontSize" Value="{StaticResource PhoneFontSizeLarge}"/>
-        <Setter Property="Padding" Value="25 10 25 10"/>
+        <Setter Property="Padding" Value="25 10 0 10"/>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="controls:MenuItem">
@@ -446,7 +446,7 @@
             <Setter.Value>
                 <ControlTemplate>
                     <Border x:Name="root" CacheMode="BitmapCache" Background="Transparent" Padding="{TemplateBinding Padding}">
-                        
+
                         <VisualStateManager.VisualStateGroups>
                             <VisualStateGroup x:Name="CommonStates">
 
