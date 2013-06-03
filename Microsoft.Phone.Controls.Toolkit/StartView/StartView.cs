@@ -29,6 +29,7 @@ namespace Microsoft.Phone.Controls
         private readonly IEasingFunction _easingFunction = new ExponentialEase { Exponent = 5 };
 
         private int _cumulativeDragDelta;
+        private int _effectiveDragDelta;
         private int _flickDirection;
         private int _targetOffset;
         private bool _dragged;
@@ -298,6 +299,7 @@ namespace Microsoft.Phone.Controls
             _targetOffset = ActualOffset;
             _flickDirection = 0;
             _cumulativeDragDelta = 0;
+            _effectiveDragDelta = 0;
             _dragged = false;
         }
 
@@ -306,11 +308,14 @@ namespace Microsoft.Phone.Controls
             if (_flickDirection == 0)
             {
                 _cumulativeDragDelta = (int)args.CumulativeDistance.X;
+                _effectiveDragDelta += (int)args.DeltaDistance.X;
                 _targetOffset += (int)args.DeltaDistance.X;
                 if (Math.Abs(_cumulativeDragDelta) <= ViewportWidth)
                 {
-                    if (_cumulativeDragDelta > 0 && SelectedIndex == 0 || _cumulativeDragDelta < 0 && SelectedIndex == Items.Count - 1)
+                    if (_effectiveDragDelta > 0 && SelectedIndex == 0 || _effectiveDragDelta < 0 && SelectedIndex == Items.Count - 1)
                     {
+                        _effectiveDragDelta = 0;
+                        _targetOffset = ActualOffset;
                         return;
                     }
 
@@ -371,10 +376,18 @@ namespace Microsoft.Phone.Controls
 
                 Panel.GetStops(SelectionOffset, ItemsWidth, out previous, out current, out next);
 
-                if (previous == current && current == next && next == null ||
-                    _flickDirection < 0 && next == null ||
-                    _flickDirection > 0 && previous == null)
+                if (previous == current && current == next && next == null)
                 {
+                    return;
+                }
+
+                if (_flickDirection < 0 && next == null || _flickDirection > 0 && previous == null)
+                {
+                    if (current != null)
+                    {
+                        GoTo(-current.Position, Immediately);
+                    }
+
                     return;
                 }
 
