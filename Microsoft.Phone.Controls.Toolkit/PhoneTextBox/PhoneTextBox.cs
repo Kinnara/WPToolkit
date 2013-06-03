@@ -52,6 +52,8 @@ namespace Microsoft.Phone.Controls
         //Temporarily ignore focus?
         private bool _ignoreFocus = false;
 
+        private bool IsFocused { get; set; }
+
         #endregion
 
         #region Constants
@@ -242,7 +244,7 @@ namespace Microsoft.Phone.Controls
         {
             if (PlaceholderTextElement != null)
             {
-                if (string.IsNullOrEmpty(Text))
+                if (!IsFocused && string.IsNullOrEmpty(Text))
                 {
                     PlaceholderTextElement.Visibility = Visibility.Visible;
                 }
@@ -259,6 +261,7 @@ namespace Microsoft.Phone.Controls
         /// <param name="e">Event arguments.</param>
         protected override void OnLostFocus(RoutedEventArgs e)
         {
+            IsFocused = false;
             UpdatePlaceholderTextVisibility();
             base.OnLostFocus(e);
         }
@@ -278,6 +281,8 @@ namespace Microsoft.Phone.Controls
 
                 return;
             }
+
+            IsFocused = true;
 
             if (PlaceholderTextElement != null)
             {

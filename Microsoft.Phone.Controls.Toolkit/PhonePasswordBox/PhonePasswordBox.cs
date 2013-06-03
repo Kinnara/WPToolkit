@@ -33,6 +33,8 @@ namespace Microsoft.Phone.Controls
 
         private bool _suppressSelectAll;
 
+        private bool IsFocused { get; set; }
+
         #endregion
 
         #region Constants
@@ -148,6 +150,11 @@ namespace Microsoft.Phone.Controls
             }
 
             UpdateEditBoxesValue();
+
+            if (!IsFocused)
+            {
+                UpdatePlaceholderTextVisibility();
+            }
 
             RaisePasswordChanged();
         }
@@ -481,7 +488,7 @@ namespace Microsoft.Phone.Controls
         {
             if (_placeholderTextElement != null)
             {
-                if (string.IsNullOrEmpty(Password))
+                if (!IsFocused && string.IsNullOrEmpty(Password))
                 {
                     _placeholderTextElement.Visibility = Visibility.Visible;
                 }
@@ -690,12 +697,15 @@ namespace Microsoft.Phone.Controls
         /// that contains the event data.</param>
         protected override void OnLostFocus(RoutedEventArgs e)
         {
+            IsFocused = false;
             UpdatePlaceholderTextVisibility();
             base.OnLostFocus(e);
         }
 
         private void OnEditBoxGotFocus(object sender, RoutedEventArgs e)
         {
+            IsFocused = true;
+
             UpdateEditBoxesInteractivity();
 
             if (_placeholderTextElement != null)
