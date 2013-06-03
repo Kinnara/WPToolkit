@@ -362,11 +362,15 @@
     <Compile Include="..\Microsoft.Phone.Controls.Toolkit\PickerBox\PickerBox.cs">
       <Link>PickerBox\PickerBox.cs</Link>
     </Compile>
-    <Compile Include="..\Microsoft.Phone.Controls.Toolkit\PickerBox\PickerBoxMode.cs">
-      <Link>PickerBox\PickerBoxMode.cs</Link>
+    <Compile Include="..\Microsoft.Phone.Controls.Toolkit\PickerBox\PickerBoxPage.xaml.cs">
+      <Link>PickerBox\PickerBoxPage.xaml.cs</Link>
+      <DependentUpon>PickerBoxPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="..\Microsoft.Phone.Controls.Toolkit\Primitives\PhonePasswordBoxCheckBox.cs">
       <Link>Primitives\PhonePasswordBoxCheckBox.cs</Link>
+    </Compile>
+    <Compile Include="..\Microsoft.Phone.Controls.Toolkit\Primitives\PickerBoxListBox.cs">
+      <Link>Primitives\PickerBoxListBox.cs</Link>
     </Compile>
     <Compile Include="..\Microsoft.Phone.Controls.Toolkit\Primitives\StartViewPanel.cs">
       <Link>Primitives\StartViewPanel.cs</Link>
@@ -535,9 +539,6 @@
     <Compile Include="..\Microsoft.Phone.Controls.Toolkit\ListPicker\ListPickerItem.cs">
       <Link>ListPicker\ListPickerItem.cs</Link>
     </Compile>
-    <Compile Include="..\Microsoft.Phone.Controls.Toolkit\ListPicker\ListPickerMode.cs">
-      <Link>ListPicker\ListPickerMode.cs</Link>
-    </Compile>
     <Compile Include="..\Microsoft.Phone.Controls.Toolkit\Primitives\ClipToBounds.cs">
       <Link>Primitives\ClipToBounds.cs</Link>
     </Compile>
@@ -568,9 +569,6 @@
     <Compile Include="Input\GestureService.cs" />
     <Compile Include="Scroller\Scroller.cs" />
     <Compile Include="Scroller\ScrollerContentPresenter.cs" />
-    <Compile Include="PickerBox\PickerBoxPage.xaml.cs">
-      <DependentUpon>PickerBoxPage.xaml</DependentUpon>
-    </Compile>
     <Compile Include="ListView\ItemClickEventArgs.cs" />
     <Compile Include="ListView\ListView.cs" />
     <Compile Include="ListView\ListViewItem.cs" />
@@ -696,6 +694,11 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Page Include="..\Microsoft.Phone.Controls.Toolkit\PickerBox\PickerBoxPage.xaml">
+      <Link>PickerBox\PickerBoxPage.xaml</Link>
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="DateTimePickers\DatePickerPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -703,10 +706,6 @@
     <Page Include="DateTimePickers\TimePickerPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="PickerBox\PickerBoxPage.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
     </Page>
     <Page Include="Themes\Generic.xaml">
       <SubType>Designer</SubType>

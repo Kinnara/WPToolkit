@@ -26,15 +26,14 @@ namespace Microsoft.Phone.Controls
     /// </summary>
     /// <QualityBand>Preview</QualityBand>
     [TemplatePart(Name = ButtonPartName, Type = typeof(ButtonBase))]
-    [TemplateVisualState(GroupName = PickerStatesGroupName, Name = PickerStatesNormalStateName)]
-    [TemplateVisualState(GroupName = PickerStatesGroupName, Name = PickerStatesDisabledStateName)]
+    [TemplateVisualState(GroupName = VisualStates.GroupCommon, Name = VisualStates.StateNormal)]
+    [TemplateVisualState(GroupName = VisualStates.GroupCommon, Name = VisualStates.StateDisabled)]
+    [StyleTypedProperty(Property = FullModeItemContainerStylePropertyName, StyleTargetType = typeof(ListBoxItem))]
     public class PickerBox : ItemsControl
     {
         private const string ButtonPartName = "Button";
 
-        private const string PickerStatesGroupName = "PickerStates";
-        private const string PickerStatesNormalStateName = "Normal";
-        private const string PickerStatesDisabledStateName = "Disabled";
+        private const string FullModeItemContainerStylePropertyName = "FullModeItemContainerStyle";
 
         private ButtonBase _buttonPart;
         private bool _updatingSelection;
@@ -42,6 +41,8 @@ namespace Microsoft.Phone.Controls
         private object _deferredSelectedItem = null;
 
         private PickerPageHelper<IPickerBoxPage> _pickerPageHelper;
+
+        private Binding _selectedValueBinding;
 
         /// <summary>
         /// Event that is raised when the selection changes.
@@ -66,33 +67,28 @@ namespace Microsoft.Phone.Controls
         public static readonly DependencyProperty SummaryForSelectedItemsDelegateProperty =
             DependencyProperty.Register("SummaryForSelectedItemsDelegate", typeof(Func<IList, string>), typeof(PickerBox), null);
 
-        /// <summary>
-        /// Gets or sets the PickerBoxMode (ex: Normal/Expanded/Full).
-        /// </summary>
-        public PickerBoxMode PickerBoxMode
+        private bool IsOpen
         {
-            get { return (PickerBoxMode)GetValue(PickerBoxModeProperty); }
-            private set { SetValue(PickerBoxModeProperty, value); }
+            get { return (bool)GetValue(IsOpenProperty); }
+            set { SetValue(IsOpenProperty, value); }
         }
 
-        /// <summary>
-        /// Identifies the PickerBoxMode DependencyProperty.
-        /// </summary>
-        public static readonly DependencyProperty PickerBoxModeProperty =
-            DependencyProperty.Register("PickerBoxMode", typeof(PickerBoxMode), typeof(PickerBox), new PropertyMetadata(PickerBoxMode.Normal, OnPickerBoxModeChanged));
+        private static readonly DependencyProperty IsOpenProperty =
+            DependencyProperty.Register("IsOpen", typeof(bool), typeof(PickerBox), new PropertyMetadata(OnIsOpenChanged));
 
-        private static void OnPickerBoxModeChanged(DependencyObject o, DependencyPropertyChangedEventArgs e)
+        private static void OnIsOpenChanged(DependencyObject o, DependencyPropertyChangedEventArgs e)
         {
-            ((PickerBox)o).OnPickerBoxModeChanged((PickerBoxMode)e.OldValue, (PickerBoxMode)e.NewValue);
+            ((PickerBox)o).OnIsOpenChanged((bool)e.OldValue, (bool)e.NewValue);
         }
 
-        private void OnPickerBoxModeChanged(PickerBoxMode oldValue, PickerBoxMode newValue)
+        private void OnIsOpenChanged(bool oldValue, bool newValue)
         {
-            if (PickerBoxMode.Full == oldValue)
+            if (oldValue)
             {
                 _pickerPageHelper.ClosePickerPage();
             }
-            if (PickerBoxMode.Full == newValue)
+
+            if (newValue)
             {
                 _pickerPageHelper.OpenPickerPage(PickerPageUri);
             }
@@ -206,10 +202,10 @@ namespace Microsoft.Phone.Controls
                 _updatingSelection = false;
             }
 
-            // Switch to Normal mode or size for current item
-            if (PickerBoxMode.Normal != PickerBoxMode)
+            // Switch to Normal mode
+            if (IsOpen)
             {
-                PickerBoxMode = PickerBoxMode.Normal;
+                IsOpen = false;
             }
 
             // Fire SelectionChanged event
@@ -225,7 +221,7 @@ namespace Microsoft.Phone.Controls
         }
 
         /// <summary>
-        /// Gets or sets the DataTemplate used to display each item when PickerBoxMode is set to Full.
+        /// Gets or sets the DataTemplate used to display each item in full mode.
         /// </summary>
         public DataTemplate FullModeItemTemplate
         {
@@ -238,6 +234,21 @@ namespace Microsoft.Phone.Controls
         /// </summary>
         public static readonly DependencyProperty FullModeItemTemplateProperty =
             DependencyProperty.Register("FullModeItemTemplate", typeof(DataTemplate), typeof(PickerBox), null);
+
+        /// <summary>
+        /// Gets or sets the style that is used when rendering the item containers in full mode.
+        /// </summary>
+        public Style FullModeItemContainerStyle
+        {
+            get { return (Style)GetValue(FullModeItemContainerStyleProperty); }
+            set { SetValue(FullModeItemContainerStyleProperty, value); }
+        }
+
+        /// <summary>
+        /// Identifies the FullModeItemContainerStyle DependencyProperty.
+        /// </summary>
+        public static readonly DependencyProperty FullModeItemContainerStyleProperty =
+            DependencyProperty.Register("FullModeItemContainerStyle", typeof(Style), typeof(PickerBox), null);
 
         /// <summary>
         /// Gets or sets the header of the control.
@@ -270,7 +281,7 @@ namespace Microsoft.Phone.Controls
             DependencyProperty.Register("HeaderTemplate", typeof(DataTemplate), typeof(PickerBox), null);
 
         /// <summary>
-        /// Gets or sets the header to use when PickerBoxMode is set to Full.
+        /// Gets or sets the header to use in full mode.
         /// </summary>
         public object FullModeHeader
         {
@@ -389,6 +400,21 @@ namespace Microsoft.Phone.Controls
             }
         }
 
+        private static readonly DependencyProperty DisplayMemberPathShadowProperty = DependencyProperty.Register(
+            "DisplayMemberPathShadow",
+            typeof(string),
+            typeof(PickerBox),
+            new PropertyMetadata((d, e) => ((PickerBox)d).OnDisplayMemberPathShadowChanged()));
+
+        private void OnDisplayMemberPathShadowChanged()
+        {
+            if (_selectedValueBinding != null)
+            {
+                _selectedValueBinding = null;
+                UpdateButtonContent();
+            }
+        }
+
         /// <summary>
         /// Initializes a new instance of the PickerBox class.
         /// </summary>
@@ -401,11 +427,13 @@ namespace Microsoft.Phone.Controls
             Loaded += OnLoaded;
 
             _pickerPageHelper = new PickerPageHelper<IPickerBoxPage>(this, OnPickerPageOpening, OnPickerPageClosed, ClosePickerPage);
+
+            SetBinding(DisplayMemberPathShadowProperty, new Binding("DisplayMemberPath") { Source = this });
         }
 
         private void OnLoaded(object sender, RoutedEventArgs e)
         {
-            UpdateVisualStates (true);
+            UpdateVisualStates(false);
         }
 
         /// <summary>
@@ -444,6 +472,8 @@ namespace Microsoft.Phone.Controls
 
             OnSelectionModeChanged();
             OnSelectedItemsChanged(SelectedItems, SelectedItems);
+
+            UpdateVisualStates(false);
         }
 
         /// <summary>
@@ -467,7 +497,7 @@ namespace Microsoft.Phone.Controls
             {
                 // No items; select nothing
                 SelectedIndex = -1;
-                PickerBoxMode = PickerBoxMode.Normal;
+                IsOpen = false;
             }
             else if (Items.Count <= SelectedIndex)
             {
@@ -499,9 +529,9 @@ namespace Microsoft.Phone.Controls
         public bool Open()
         {
             // On interaction, switch to Full mode
-            if ((PickerBoxMode.Normal == PickerBoxMode))
+            if (!IsOpen)
             {
-                PickerBoxMode = PickerBoxMode.Full;
+                IsOpen = true;
                 return true;
             }
 
@@ -512,11 +542,11 @@ namespace Microsoft.Phone.Controls
         {
             if (!IsEnabled)
             {
-                VisualStateManager.GoToState(this, PickerStatesDisabledStateName, useTransitions);
+                VisualStateManager.GoToState(this, VisualStates.StateDisabled, useTransitions);
             }
             else
             {
-                VisualStateManager.GoToState(this, PickerStatesNormalStateName, useTransitions);
+                VisualStateManager.GoToState(this, VisualStates.StateNormal, useTransitions);
             }
         }
 
@@ -579,7 +609,9 @@ namespace Microsoft.Phone.Controls
                 pickerPage.HeaderText = (string)Header;
             }
 
-            pickerPage.FullModeItemTemplate = FullModeItemTemplate;
+            pickerPage.ItemTemplate = FullModeItemTemplate;
+            pickerPage.ItemContainerStyle = FullModeItemContainerStyle;
+            pickerPage.DisplayMemberPath = DisplayMemberPath;
 
             pickerPage.Items.Clear();
             if (null != Items)
@@ -611,7 +643,7 @@ namespace Microsoft.Phone.Controls
 
         private void ClosePickerPage()
         {
-            PickerBoxMode = PickerBoxMode.Normal;
+            IsOpen = false;
         }
 
         private void OnPickerPageClosed(IPickerBoxPage pickerPage)
@@ -637,10 +669,27 @@ namespace Microsoft.Phone.Controls
             {
                 if (SelectionMode == SelectionMode.Single)
                 {
-                    _buttonPart.Content = SelectedItem;
+                    if (_selectedValueBinding != null)
+                    {
+                        BindingExpression be = _buttonPart.ReadLocalValue(ButtonBase.ContentProperty) as BindingExpression;
+                        if (be != null && be.ParentBinding == _selectedValueBinding)
+                        {
+                            return;
+                        }
+                    }
+
+                    _selectedValueBinding = new Binding { Source = this };
+                    string path = "SelectedItem";
+                    if (DisplayMemberPath != null)
+                    {
+                        path += "." + DisplayMemberPath;
+                    }
+                    _selectedValueBinding.Path = new PropertyPath(path);
+                    _buttonPart.SetBinding(ButtonBase.ContentProperty, _selectedValueBinding);
                 }
                 else
                 {
+                    _selectedValueBinding = null;
                     UpdateSummary(SelectedItems);
                 }
             }

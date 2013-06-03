@@ -58,7 +58,17 @@ namespace Microsoft.Phone.Controls
         /// <summary>
         /// Gets or sets the item template
         /// </summary>
-        public DataTemplate FullModeItemTemplate { get; set; }
+        public DataTemplate ItemTemplate { get; set; }
+
+        /// <summary>
+        /// Gets or sets the item container style
+        /// </summary>
+        public Style ItemContainerStyle { get; set; }
+
+        /// <summary>
+        /// Gets or sets the name or path of the property that is displayed for each data item.
+        /// </summary>
+        public string DisplayMemberPath { get; set; }
 
         /// <summary>
         /// Whether the picker page is open or not.
@@ -199,6 +209,7 @@ namespace Microsoft.Phone.Controls
                 // Back out from picker page for consistency with behavior of core pickers in this scenario
                 if (NavigationService.CanGoBack)
                 {
+                    Visibility = Visibility.Collapsed;
                     NavigationService.GoBack();
                     return;
                 }
@@ -214,9 +225,18 @@ namespace Microsoft.Phone.Controls
 
             Picker.SelectionMode = SelectionMode;
 
-            if (null != FullModeItemTemplate)
+            if (null != ItemTemplate)
             {
-                Picker.ItemTemplate = FullModeItemTemplate;
+                Picker.ItemTemplate = ItemTemplate;
+            }
+            else if (null != DisplayMemberPath)
+            {
+                Picker.DisplayMemberPath = DisplayMemberPath;
+            }
+
+            if (null != ItemContainerStyle)
+            {
+                Picker.ItemContainerStyle = ItemContainerStyle;
             }
 
             if (SelectionMode == SelectionMode.Single)
@@ -228,7 +248,11 @@ namespace Microsoft.Phone.Controls
             else
             {
                 ApplicationBar.IsVisible = true;
-                Picker.ItemContainerStyle = (Style)Resources["ListBoxItemCheckedStyle"];
+
+                if (Picker.ItemContainerStyle == null)
+                {
+                    Picker.ItemContainerStyle = (Style)Resources["ListBoxItemCheckedStyle"];
+                }
 
                 foreach (object item in Items)
                 {

@@ -350,11 +350,15 @@
     <Compile Include="..\Microsoft.Phone.Controls.Toolkit\PickerBox\PickerBox.cs">
       <Link>PickerBox\PickerBox.cs</Link>
     </Compile>
-    <Compile Include="..\Microsoft.Phone.Controls.Toolkit\PickerBox\PickerBoxMode.cs">
-      <Link>PickerBox\PickerBoxMode.cs</Link>
+    <Compile Include="..\Microsoft.Phone.Controls.Toolkit\PickerBox\PickerBoxPage.xaml.cs">
+      <Link>PickerBox\PickerBoxPage.xaml.cs</Link>
+      <DependentUpon>PickerBoxPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="..\Microsoft.Phone.Controls.Toolkit\Primitives\PhonePasswordBoxCheckBox.cs">
       <Link>Primitives\PhonePasswordBoxCheckBox.cs</Link>
+    </Compile>
+    <Compile Include="..\Microsoft.Phone.Controls.Toolkit\Primitives\PickerBoxListBox.cs">
+      <Link>Primitives\PickerBoxListBox.cs</Link>
     </Compile>
     <Compile Include="..\Microsoft.Phone.Controls.Toolkit\Primitives\StartViewPanel.cs">
       <Link>Primitives\StartViewPanel.cs</Link>
@@ -534,9 +538,6 @@
     <Compile Include="..\Microsoft.Phone.Controls.Toolkit\ListPicker\ListPickerItem.cs">
       <Link>ListPicker\ListPickerItem.cs</Link>
     </Compile>
-    <Compile Include="..\Microsoft.Phone.Controls.Toolkit\ListPicker\ListPickerMode.cs">
-      <Link>ListPicker\ListPickerMode.cs</Link>
-    </Compile>
     <Compile Include="..\Microsoft.Phone.Controls.Toolkit\LongListSelector\TemplatedListBox.cs">
       <Link>LongListSelector\TemplatedListBox.cs</Link>
     </Compile>
@@ -577,9 +578,6 @@
       <Link>ProgressBar\RelativeAnimatingContentControl.cs</Link>
     </Compile>
     <Compile Include="Input\GestureService.cs" />
-    <Compile Include="PickerBox\PickerBoxPage.xaml.cs">
-      <DependentUpon>PickerBoxPage.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="..\Microsoft.Phone.Controls.Toolkit\RatingControl\Rating.cs">
       <Link>RatingControl\Rating.cs</Link>
@@ -689,7 +687,8 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="PickerBox\PickerBoxPage.xaml">
+    <Page Include="..\Microsoft.Phone.Controls.Toolkit\PickerBox\PickerBoxPage.xaml">
+      <Link>PickerBox\PickerBoxPage.xaml</Link>
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

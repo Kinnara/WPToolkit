@@ -71,16 +71,7 @@
                 <RowDefinition/>
             </Grid.RowDefinitions>
 
-            <toolkit:PickerBox x:Name="OrientationPicker" Header="Orientation" Margin="0,10,0,26">
-                <toolkit:PickerBox.FullModeItemTemplate>
-                    <DataTemplate>
-                        <TextBlock Text="{Binding}"
-                                   FontFamily="{StaticResource PhoneFontFamilySemiLight}"
-                                   FontSize="37.333"
-                                   Margin="-1,-4,0,37"/>
-                    </DataTemplate>
-                </toolkit:PickerBox.FullModeItemTemplate>
-            </toolkit:PickerBox>
+            <toolkit:PickerBox x:Name="OrientationPicker" Header="Orientation" Margin="0,10,0,26"/>
 
             <toolkit:FlipView x:Name="HorizontalFlipView"
                               ItemTemplate="{StaticResource ItemTemplate}"

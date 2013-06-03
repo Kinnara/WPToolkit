@@ -19,6 +19,8 @@ namespace Microsoft.Phone.Controls
     /// Represents a base class for controls that allow the user to choose a date/time.
     /// </summary>
     [TemplatePart(Name = ButtonPartName, Type = typeof(ButtonBase))]
+    [TemplateVisualState(Name = VisualStates.StateNormal, GroupName = VisualStates.GroupCommon)]
+    [TemplateVisualState(Name = VisualStates.StateDisabled, GroupName = VisualStates.GroupCommon)]
     public class DateTimePickerBase : Control
     {
         private const string ButtonPartName = "DateTimeButton";
@@ -168,6 +170,9 @@ namespace Microsoft.Phone.Controls
         public DateTimePickerBase()
         {
             _pickerPageHelper = new PickerPageHelper<IDateTimePickerPage>(this, OnPickerPageOpening, OnPickerPageClosed);
+
+            Loaded += OnLoaded;
+            IsEnabledChanged += OnIsEnabledChanged;
         }
 
         /// <summary>
@@ -189,6 +194,8 @@ namespace Microsoft.Phone.Controls
             {
                 _dateButtonPart.Click += OnDateButtonClick;
             }
+
+            UpdateVisualState(false);
         }
 
         /// <summary>
@@ -218,6 +225,28 @@ namespace Microsoft.Phone.Controls
         private void UpdateValueString()
         {
             ValueString = string.Format(CultureInfo.CurrentCulture, ValueStringFormat ?? ValueStringFormatFallback, Value);
+        }
+
+        private void UpdateVisualState(bool useTransitions)
+        {
+            if (!IsEnabled)
+            {
+                VisualStateManager.GoToState(this, VisualStates.StateDisabled, useTransitions);
+            }
+            else
+            {
+                VisualStateManager.GoToState(this, VisualStates.StateNormal, useTransitions);
+            }
+        }
+
+        private void OnLoaded(object sender, RoutedEventArgs e)
+        {
+            UpdateVisualState(false);
+        }
+
+        private void OnIsEnabledChanged(object sender, DependencyPropertyChangedEventArgs e)
+        {
+            UpdateVisualState(true);
         }
 
         private void OnPickerPageOpening(IDateTimePickerPage pickerPage)

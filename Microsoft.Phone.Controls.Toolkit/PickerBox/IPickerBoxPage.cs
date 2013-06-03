@@ -42,7 +42,17 @@ namespace Microsoft.Phone.Controls.Primitives
         /// <summary>
         /// Gets or sets the item template
         /// </summary>
-        DataTemplate FullModeItemTemplate { get; set; }
+        DataTemplate ItemTemplate { get; set; }
+
+        /// <summary>
+        /// Gets or sets the item container style
+        /// </summary>
+        Style ItemContainerStyle { get; set; }
+
+        /// <summary>
+        /// Gets or sets the name or path of the property that is displayed for each data item.
+        /// </summary>
+        string DisplayMemberPath { get; set; }
 
         /// <summary>
         /// Gets or sets the direction that text and other user interface elements flow

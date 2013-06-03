@@ -89,14 +89,6 @@
                     <sys:String>dark</sys:String>
                     <sys:String>light</sys:String>
                     <sys:String>dazzle</sys:String>
-                    <toolkit:PickerBox.FullModeItemTemplate>
-                        <DataTemplate>
-                            <TextBlock Text="{Binding}"
-                                       FontFamily="{StaticResource PhoneFontFamilySemiLight}"
-                                       FontSize="37.333"
-                                       Margin="-1,-4,0,37"/>
-                        </DataTemplate>
-                    </toolkit:PickerBox.FullModeItemTemplate>
                 </toolkit:PickerBox>
 
 
@@ -108,23 +100,23 @@
                                 Header="Accent color" 
                                 FullModeHeader="ACCENTS" 
                                 CacheMode="BitmapCache"
-                                Visibility="Collapsed"
-                                x:Name="AccentColorWP7">
+                                x:Name="AccentColorList"
+                                Visibility="Collapsed">
                     <toolkit:PickerBox.ItemTemplate>
                         <DataTemplate>
                             <StackPanel Orientation="Horizontal">
-                                <Rectangle Fill="{Binding Converter={StaticResource ColorNameToBrushConverter}}" Width="25" Height="25" Margin="-1 2 0 0"/>
-                                <TextBlock Text="{Binding}" Margin="17 0 0 0"/>
+                                <Rectangle Fill="{Binding Converter={StaticResource ColorNameToBrushConverter}}" Width="26" Height="26" Margin="1 4 0 0"/>
+                                <TextBlock Text="{Binding}" Margin="7 0 0 0"/>
                             </StackPanel>
                         </DataTemplate>
                     </toolkit:PickerBox.ItemTemplate>
                     <toolkit:PickerBox.FullModeItemTemplate>
                         <DataTemplate>
-                            <StackPanel Orientation="Horizontal" Margin="0 21 0 20">
+                            <StackPanel Orientation="Horizontal" Margin="24 10 0 30">
                                 <Rectangle Fill="{Binding Converter={StaticResource ColorNameToBrushConverter}}" Width="43" Height="43"/>
                                 <TextBlock Text="{Binding}"
-                                       Margin="16 0 0 0"
-                                       FontSize="43"
+                                       Margin="17 -4 0 0"
+                                       FontSize="37.333"
                                        FontFamily="{StaticResource PhoneFontFamilySemiLight}"/>
                             </StackPanel>
                         </DataTemplate>
@@ -136,7 +128,7 @@
                                 FullModeHeader="ACCENTS" 
                                 CacheMode="BitmapCache"
                                 PickerPageUri="/Samples/AccentColorPickerPage.xaml"
-                                x:Name="AccentColor">
+                                x:Name="AccentColorGrid">
                     <toolkit:PickerBox.ItemTemplate>
                         <DataTemplate>
                             <StackPanel Orientation="Horizontal">
@@ -178,19 +170,7 @@
                     <sys:String>dazzle</sys:String>
                 </toolkit:ListPicker>
 
-                <toolkit:PickerBox x:Name="RegionList" Header="System Locale">
-                    <toolkit:PickerBox.FullModeItemTemplate>
-                        <DataTemplate>
-                            <TextBlock Text="{Binding}"
-                                       FontFamily="{StaticResource PhoneFontFamilySemiLight}"
-                                       FontSize="37.333"
-                                       LineHeight="40"
-                                       LineStackingStrategy="BlockLineHeight"
-                                       TextWrapping="Wrap"
-                                       Margin="-1,4,0,39"/>
-                        </DataTemplate>
-                    </toolkit:PickerBox.FullModeItemTemplate>
-                </toolkit:PickerBox>
+                <toolkit:PickerBox x:Name="RegionList" Header="System Locale"/>
             </StackPanel>
         </ScrollViewer>
     </Grid>

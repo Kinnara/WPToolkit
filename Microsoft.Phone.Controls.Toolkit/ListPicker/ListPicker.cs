@@ -73,28 +73,28 @@ namespace Microsoft.Phone.Controls
         public event SelectionChangedEventHandler SelectionChanged;
 
         /// <summary>
-        /// Gets or sets the ListPickerMode (ex: Normal/Expanded/Full).
+        /// Gets or sets the flag that indicates whether the ListPicker is expanded.
         /// </summary>
-        public ListPickerMode ListPickerMode
+        public bool IsExpanded
         {
-            get { return (ListPickerMode)GetValue(ListPickerModeProperty); }
-            private set { SetValue(ListPickerModeProperty, value); }
+            get { return (bool)GetValue(IsExpandedProperty); }
+            private set { SetValue(IsExpandedProperty, value); }
         }
 
         /// <summary>
-        /// Identifies the ListPickerMode DependencyProperty.
+        /// Identifies the IsExpanded DependencyProperty.
         /// </summary>
-        public static readonly DependencyProperty ListPickerModeProperty =
-            DependencyProperty.Register("ListPickerMode", typeof(ListPickerMode), typeof(ListPicker), new PropertyMetadata(ListPickerMode.Normal, OnListPickerModeChanged));
+        public static readonly DependencyProperty IsExpandedProperty =
+            DependencyProperty.Register("IsExpanded", typeof(bool), typeof(ListPicker), new PropertyMetadata(OnIsExpandedChanged));
 
-        private static void OnListPickerModeChanged(DependencyObject o, DependencyPropertyChangedEventArgs e)
+        private static void OnIsExpandedChanged(DependencyObject o, DependencyPropertyChangedEventArgs e)
         {
-            ((ListPicker)o).OnListPickerModeChanged((ListPickerMode)e.OldValue, (ListPickerMode)e.NewValue);
+            ((ListPicker)o).OnIsExpandedChanged((bool)e.OldValue, (bool)e.NewValue);
         }
 
-        private void OnListPickerModeChanged(ListPickerMode oldValue, ListPickerMode newValue)
+        private void OnIsExpandedChanged(bool oldValue, bool newValue)
         {
-            if ((ListPickerMode.Expanded == oldValue))
+            if (oldValue)
             {
                 if (null != _root)
                 {
@@ -120,7 +120,7 @@ namespace Microsoft.Phone.Controls
                 }
             }
 
-            if (ListPickerMode.Expanded == newValue)
+            if (newValue)
             {
                 if (null == _root)
                 {
@@ -157,7 +157,7 @@ namespace Microsoft.Phone.Controls
             }
 
             SizeForAppropriateView(true);
-            IsHighlighted = (ListPickerMode.Expanded == newValue);
+            IsHighlighted = newValue;
         }
 
 
@@ -320,9 +320,9 @@ namespace Microsoft.Phone.Controls
             }
 
             // Switch to Normal mode or size for current item
-            if (ListPickerMode.Normal != ListPickerMode)
+            if (IsExpanded)
             {
-                ListPickerMode = ListPickerMode.Normal;
+                IsExpanded = false;
             }
             else
             {
@@ -620,7 +620,7 @@ namespace Microsoft.Phone.Controls
             {
                 // No items; select nothing
                 SelectedIndex = -1;
-                ListPickerMode = ListPickerMode.Normal;
+                IsExpanded = false;
             }
             else if (Items.Count <= SelectedIndex)
             {
@@ -676,7 +676,7 @@ namespace Microsoft.Phone.Controls
                 throw new ArgumentNullException("e");
             }
 
-            if (ListPickerMode == ListPickerMode.Normal)
+            if (!IsExpanded)
             {
                 if (!IsEnabled)
                 {
@@ -707,7 +707,7 @@ namespace Microsoft.Phone.Controls
 
             base.OnManipulationStarted(e);
 
-            if (ListPickerMode == ListPickerMode.Normal)
+            if (!IsExpanded)
             {
                 if (!IsEnabled)
                 {
@@ -742,7 +742,7 @@ namespace Microsoft.Phone.Controls
 
             base.OnManipulationDelta(e);
 
-            if (ListPickerMode == ListPickerMode.Normal)
+            if (!IsExpanded)
             {
                 if (!IsEnabled)
                 {
@@ -783,7 +783,7 @@ namespace Microsoft.Phone.Controls
                 return;
             }
 
-            if (ListPickerMode == ListPickerMode.Normal)
+            if (!IsExpanded)
             {
                 // Style box to look unselected
                 IsHighlighted = false;
@@ -797,9 +797,9 @@ namespace Microsoft.Phone.Controls
         public bool Open()
         {
             // On interaction, switch to Expanded mode
-            if ((ListPickerMode.Normal == ListPickerMode))
+            if (!IsExpanded)
             {
-                ListPickerMode = ListPickerMode.Expanded;
+                IsExpanded = true;
                 return true;
             }
 
@@ -856,20 +856,19 @@ namespace Microsoft.Phone.Controls
         private void OnPageBackKeyPress(object sender, CancelEventArgs e)
         {
             // Revert to Normal mode
-            ListPickerMode = ListPickerMode.Normal;
+            IsExpanded = false;
             e.Cancel = true;
         }
 
         private void SizeForAppropriateView(bool animate)
         {
-            switch (ListPickerMode)
+            if (!IsExpanded)
             {
-                case ListPickerMode.Normal:
-                    SizeForNormalMode(animate);
-                    break;
-                case ListPickerMode.Expanded:
-                    SizeForExpandedMode();
-                    break;
+                SizeForNormalMode(animate);
+            }
+            else
+            {
+                SizeForExpandedMode();
             }
 
             // Play the height/translation animations
@@ -946,7 +945,7 @@ namespace Microsoft.Phone.Controls
 
         private void OnRootTap(object sender, System.Windows.Input.GestureEventArgs e)
         {
-            if (ListPickerMode.Expanded == ListPickerMode)
+            if (IsExpanded)
             {
                 // Manipulation outside an Expanded ListPicker reverts to Normal mode
                 DependencyObject element = e.OriginalSource as DependencyObject;
@@ -959,26 +958,26 @@ namespace Microsoft.Phone.Controls
                     }
                     element = VisualTreeHelper.GetParent(element);
                 }
-                ListPickerMode = ListPickerMode.Normal;
+                IsExpanded = false;
             }
         }
 
         private void OnFrameNavigated(object sender, NavigationEventArgs e)
         {
-            if (ListPickerMode.Expanded == ListPickerMode)
+            if (IsExpanded)
             {
-                ListPickerMode = ListPickerMode.Normal;
+                IsExpanded = false;
             }
         }
 
         private void OnContainerTap(object sender, System.Windows.Input.GestureEventArgs e)
         {
-            if (ListPickerMode.Expanded == ListPickerMode)
+            if (IsExpanded)
             {
                 // Manipulation of a container selects the item and reverts to Normal mode
                 ContentControl container = (ContentControl)sender;
                 SelectedItem = ItemContainerGenerator.ItemFromContainer(container);
-                ListPickerMode = ListPickerMode.Normal;
+                IsExpanded = false;
                 e.Handled = true;
             }
         }

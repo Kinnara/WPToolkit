@@ -306,6 +306,7 @@ namespace Microsoft.Phone.Controls.Primitives
                 // Back out from picker page for consistency with behavior of core pickers in this scenario
                 if (NavigationService.CanGoBack)
                 {
+                    Visibility = Visibility.Collapsed;
                     NavigationService.GoBack();
                 }
             }

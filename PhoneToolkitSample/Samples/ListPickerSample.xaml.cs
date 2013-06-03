@@ -135,8 +135,8 @@ namespace PhoneToolkitSample.Samples
             RegionList.ItemsSource = _regions;
 
 #if WP7
-            AccentColor.Visibility = System.Windows.Visibility.Collapsed;
-            AccentColorWP7.Visibility = System.Windows.Visibility.Visible;
+            AccentColorGrid.Visibility = System.Windows.Visibility.Collapsed;
+            AccentColorList.Visibility = System.Windows.Visibility.Visible;
 #endif
         }
 

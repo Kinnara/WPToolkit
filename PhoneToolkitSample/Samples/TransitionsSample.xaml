@@ -44,9 +44,6 @@
     </toolkit:TransitionService.NavigationOutTransition>
 
     <phone:PhoneApplicationPage.Resources>
-        <DataTemplate x:Key="FullTemplate">
-            <TextBlock Text="{Binding}" Style="{StaticResource PhoneTextLargeStyle}" Margin="12,12"/>
-        </DataTemplate>
         <local:EnumConverter x:Key="EnumConverter"/>
     </phone:PhoneApplicationPage.Resources>
     <Grid x:Name="LayoutRoot" Background="Transparent">
@@ -75,13 +72,11 @@
                     SelectedIndex="4"
                     SelectionChanged="FamilySelectionChanged"
                     Header="Transition family"
-                    FullModeHeader="Transition family"
-                    FullModeItemTemplate="{StaticResource FullTemplate}"/>
+                    FullModeHeader="Transition family"/>
                 <toolkit:PickerBox
                     x:Name="Mode"
                     CacheMode="BitmapCache"
                     FullModeHeader="Transition mode"
-                    FullModeItemTemplate="{StaticResource FullTemplate}"
                     Header="Transition mode"
                     ItemsSource="{Binding ElementName=Family, Path=SelectedItem, Converter={StaticResource EnumConverter}}"/>
             </StackPanel>

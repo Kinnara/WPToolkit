@@ -183,7 +183,7 @@ namespace PhoneToolkitSample.Samples
 
             messageBox.Dismissing += (s1, e1) =>
                 {
-                    if (listPicker.ListPickerMode == ListPickerMode.Expanded)
+                    if (listPicker.IsExpanded)
                     {
                         e1.Cancel = true;
                     }
