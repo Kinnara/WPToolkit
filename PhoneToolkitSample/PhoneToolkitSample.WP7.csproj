@@ -355,6 +355,18 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="..\PhoneToolkitSample8\Toolkit.Content\ApplicationBar.Cancel.png">
+      <Link>Toolkit.Content\ApplicationBar.Cancel.png</Link>
+    </Content>
+    <Content Include="..\PhoneToolkitSample8\Toolkit.Content\ApplicationBar.Check.png">
+      <Link>Toolkit.Content\ApplicationBar.Check.png</Link>
+    </Content>
+    <Content Include="..\PhoneToolkitSample8\Toolkit.Content\ApplicationBar.Delete.png">
+      <Link>Toolkit.Content\ApplicationBar.Delete.png</Link>
+    </Content>
+    <Content Include="..\PhoneToolkitSample8\Toolkit.Content\ApplicationBar.Select.png">
+      <Link>Toolkit.Content\ApplicationBar.Select.png</Link>
+    </Content>
     <Content Include="ApplicationIcon.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -380,14 +392,6 @@
     <Content Include="Images\SteakSandwich.jpg" />
     <Content Include="Images\Venice.jpg" />
     <Content Include="Images\Search.png" />
-    <Content Include="Toolkit.Content\ApplicationBar.Delete.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Toolkit.Content\ApplicationBar.Select.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Toolkit.Content\ApplicationBar.Cancel.png" />
-    <Content Include="Toolkit.Content\ApplicationBar.Check.png" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Microsoft.Phone.Controls.Toolkit.WP7\Microsoft.Phone.Controls.Toolkit.WP7.csproj">
