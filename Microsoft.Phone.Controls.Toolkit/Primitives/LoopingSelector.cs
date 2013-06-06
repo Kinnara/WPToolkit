@@ -64,6 +64,9 @@ namespace Microsoft.Phone.Controls.Primitives
         // Specify whether or not the user is dragging with his finger.
         private bool _isDragging;
 
+        // Always updated at the end of OnIsExpandedChanged.
+        private bool _actualIsExpanded = false;
+
 #if WP8
         private bool _changeStateAfterAnimation;
 #endif
@@ -215,6 +218,8 @@ namespace Microsoft.Phone.Controls.Primitives
                 picker._state = picker.IsExpanded ? State.Expanded : State.Normal;
             }
 
+            picker._actualIsExpanded = picker.IsExpanded;
+
             var listeners = picker.IsExpandedChanged;
             if (listeners != null)
             {
@@ -336,7 +341,13 @@ namespace Microsoft.Phone.Controls.Primitives
                     Point flickEndPoint = PhysicsConstants.GetStopPoint(velocity);
                     IEasingFunction flickEase = PhysicsConstants.GetEasingFunction(flickDuration);
 
-                    AnimatePanel(new Duration(TimeSpan.FromSeconds(flickDuration)), flickEase, _panningTransform.Y + flickEndPoint.Y);
+                    double endPoint = _panningTransform.Y + flickEndPoint.Y;
+                    double adjustedEndPoint = Math.Round(endPoint / ActualItemHeight) * ActualItemHeight;
+
+                    flickDuration *= adjustedEndPoint / endPoint;
+
+                    AnimatePanel(new Duration(TimeSpan.FromSeconds(flickDuration)), flickEase, adjustedEndPoint);
+
 #if WP8
                     _changeStateAfterAnimation = false;
 #endif
@@ -832,12 +843,14 @@ namespace Microsoft.Phone.Controls.Primitives
             if (!reuse)
             {
                 wrapper.ApplyTemplate();
+                wrapper.SetState(LoopingSelectorItem.State.Normal, false);
             }
 
             // Item should be visible if this control is expanded.
             if (IsExpanded)
             {
-                wrapper.SetState(LoopingSelectorItem.State.Expanded, false);
+                // Uses transitions only when going from normal to expanded state.
+                wrapper.SetState(LoopingSelectorItem.State.Expanded, !_actualIsExpanded);
             }
 
             return wrapper;

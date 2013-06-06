@@ -2,6 +2,7 @@
 // This source is subject to the Microsoft Public License (Ms-PL).
 // Please see http://go.microsoft.com/fwlink/?LinkID=131993 for details.
 // All other rights reserved.
+
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -730,6 +731,8 @@ namespace Microsoft.Phone.Controls
                 {
                     if (item.IsSelected)
                     {
+                        // Check if the item is already in the SelectedItems
+                        // collection, otherwise a double-add will happen.
                         if (!SelectedItems.Contains(content))
                         {
                             SelectedItems.Add(content);

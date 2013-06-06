@@ -70,21 +70,18 @@ namespace Microsoft.Phone.Controls.Primitives
         /// <param name="useTransitions">Flag indicating that transitions should be used when going to the new state.</param>
         internal void SetState(State newState, bool useTransitions)
         {
-            if (_state != newState)
+            _state = newState;
+            switch (_state)
             {
-                _state = newState;
-                switch (_state)
-                {
-                    case State.Normal:
-                        VisualStateManager.GoToState(this, NormalStateName, useTransitions);
-                        break;
-                    case State.Expanded:
-                        VisualStateManager.GoToState(this, ExpandedStateName, useTransitions);
-                        break;
-                    case State.Selected:
-                        VisualStateManager.GoToState(this, SelectedStateName, useTransitions);
-                        break;
-                }
+                case State.Normal:
+                    VisualStateManager.GoToState(this, NormalStateName, useTransitions);
+                    break;
+                case State.Expanded:
+                    VisualStateManager.GoToState(this, ExpandedStateName, useTransitions);
+                    break;
+                case State.Selected:
+                    VisualStateManager.GoToState(this, SelectedStateName, useTransitions);
+                    break;
             }
         }
 
