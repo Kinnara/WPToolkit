@@ -450,15 +450,16 @@
                         <VisualStateManager.VisualStateGroups>
                             <VisualStateGroup x:Name="CommonStates">
 
-                                <VisualState x:Name="Normal">
-                                    <Storyboard>
-                                        <DoubleAnimation Storyboard.TargetName="border" Storyboard.TargetProperty="Opacity" To="0" Duration="0:00:00.33"/>
-                                    </Storyboard>
-                                </VisualState>
+                                <VisualStateGroup.Transitions>
+                                    <VisualTransition From="Normal" To="Expanded" GeneratedDuration="0:0:0.33" />
+                                    <VisualTransition From="Expanded" To="Normal" GeneratedDuration="0:0:0.33" />
+                                </VisualStateGroup.Transitions>
+
+                                <VisualState x:Name="Normal" />
 
                                 <VisualState x:Name="Expanded">
                                     <Storyboard>
-                                        <DoubleAnimation Storyboard.TargetName="border" Storyboard.TargetProperty="Opacity" To="1" Duration="0:00:00.33"/>
+                                        <DoubleAnimation Storyboard.TargetName="border" Storyboard.TargetProperty="Opacity" To="0.8" Duration="0"/>
                                     </Storyboard>
                                 </VisualState>
 

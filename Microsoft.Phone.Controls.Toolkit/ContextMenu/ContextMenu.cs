@@ -500,7 +500,7 @@ namespace Microsoft.Phone.Controls
 
             SolidColorBrush backgroundBrush;
             SolidColorBrush borderBrush;
-            if (DesignerProperties.IsInDesignTool || Resources.IsDarkThemeActive())
+            if (DesignerProperties.IsInDesignTool || Application.Current.Resources.IsDarkThemeActive())
             {
                 backgroundBrush = new SolidColorBrush(Colors.White);
                 borderBrush = new SolidColorBrush(Colors.Black);

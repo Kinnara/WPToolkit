@@ -2,6 +2,7 @@
 // This source is subject to the Microsoft Public License (Ms-PL).
 // Please see http://go.microsoft.com/fwlink/?LinkID=131993 for details.
 // All other rights reserved.
+
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -711,7 +712,12 @@ namespace Microsoft.Phone.Controls
                 {
                     if (item.IsSelected)
                     {
-                        SelectedItems.Add(content);
+                        // Check if the item is already in the SelectedItems
+                        // collection, otherwise a double-add will happen.
+                        if (!SelectedItems.Contains(content))
+                        {
+                            SelectedItems.Add(content);
+                        }
                     }
                     else
                     {
@@ -905,6 +911,18 @@ namespace Microsoft.Phone.Controls
                 }
             });
             return ret;
+        }
+
+        /// <summary>
+        /// Scrolls to a specified item in the Microsoft.Phone.Controls.LongListSelector.
+        /// </summary>
+        /// <param name="item">The list item to scroll to.</param>
+        public void ScrollTo(object item)
+        {
+            if (_innerSelector != null)
+            {
+                _innerSelector.ScrollTo(item);
+            }
         }
 
         /// <summary>
