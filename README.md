@@ -1,28 +1,27 @@
-Windows Phone toolkit customized by Kinnara
-===========================================
+# Windows Phone Toolkit Customized by Kinnara
 
 Contains fixes, improvements, and more controls.
 
-Some of the New Controls
+## Some of the New Controls
 ------------------------
 
-**FlipView**
+**FlipView**  
 Lets people flip through items one at a time. Similar to the WinRT FlipView.
 
-**ImageButton**
+**ImageButton**  
 Button control which has an image as its content.
 
-**PhonePasswordBox**
+**PhonePasswordBox**  
 An extended password box which implements header, placeholder text, and a show password check box.
 
-**PhoneSlider**
+**PhoneSlider**  
 An extended Slider which implements tick marks and snap points.
 
-**StartView**
+**StartView**  
 Panoramic view similar to the start screen.
 
-**VariableSizedWrapGrid**
+**VariableSizedWrapGrid**  
 Provides a grid-style layout panel where each tile/cell can be variable size based on content. Similar to the WinRT VariableSizedWrapGrid.
 
-**WaitCursor**
+**WaitCursor**  
 The wait cursor is a blocking visual animation typically reserved for cases where the application cannot continue until an event is satisfied.
