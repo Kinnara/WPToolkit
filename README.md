@@ -3,7 +3,6 @@
 Contains fixes, improvements, and more controls.
 
 ## Some of the New Controls
-------------------------
 
 **FlipView**  
 Lets people flip through items one at a time. Similar to the WinRT FlipView.
