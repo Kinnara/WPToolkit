@@ -91,6 +91,14 @@ namespace Microsoft.Phone.Controls
         private static bool wasPauseAnimation = false;
 
         /// <summary>
+        /// Gets the control that is currently being tilted.
+        /// </summary>
+        internal static FrameworkElement CurrentTiltElement
+        {
+            get { return currentTiltElement; }
+        }
+
+        /// <summary>
         /// Whether to use a slightly more accurate (but slightly slower) tilt 
         /// animation easing function.
         /// </summary>

@@ -498,6 +498,11 @@ namespace Microsoft.Phone.Controls
         {
             _ignoreFocus = true;
 
+            if (TiltEffect.CurrentTiltElement == ActionIconBorder)
+            {
+                TiltEffect.EndCurrentTiltEffect(true);
+            }
+
             var handler = ActionIconTapped;
 
             if (handler != null)
