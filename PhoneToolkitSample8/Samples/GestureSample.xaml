@@ -53,26 +53,26 @@
             <TextBlock Text="gestures" Margin="9,-7,0,0" Style="{StaticResource PhoneTextTitle1Style}"/>
         </StackPanel>
 
-        <!--
-        Unlike in the WP7 toolkit sample, these event handlers need to be on the containing grid,
-        rather than on the element itself, because calculations for these events are done within
-        the coordinate space of the element, rather than screen coordinate space, which will create
-        incorrect values compared to the user's expectations when the element has been scaled or rotated.
-          -->
-        <Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0" Background="Transparent"
-                Tap="OnTap" DoubleTap="OnDoubleTap" Hold="OnHold"
-                ManipulationStarted="OnManipulationStarted" ManipulationDelta="OnManipulationDelta" ManipulationCompleted="OnManipulationCompleted">
-            <StackPanel>
+        <Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0" Background="Transparent">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <StackPanel Grid.Row="0">
                 <TextBlock Text="Tap to center" Style="{StaticResource PhoneTextNormalStyle}"/>
                 <TextBlock Text="Tap and hold to reset" Style="{StaticResource PhoneTextNormalStyle}"/>
                 <TextBlock Text="Touch and move to drag" Style="{StaticResource PhoneTextNormalStyle}"/>
                 <TextBlock Text="Pinch (touch with two fingers) to scale and rotate" Style="{StaticResource PhoneTextNormalStyle}" TextWrapping="Wrap"/>
                 <TextBlock Text="Flick (drag and release the touch while still moving) will show flick data on bottom of screen." Style="{StaticResource PhoneTextNormalStyle}" TextWrapping="Wrap"/>
             </StackPanel>
-            <TextBlock x:Name="flickData" Text="Flick:" Style="{StaticResource PhoneTextNormalStyle}" VerticalAlignment="Bottom"/>
-            <Border x:Name="border" Width="300" Height="200" BorderBrush="{StaticResource PhoneForegroundBrush}" BorderThickness="4,16,4,4" Background="{StaticResource PhoneAccentBrush}" RenderTransformOrigin="0.5,0.5" Opacity=".5" CacheMode="BitmapCache" IsHitTestVisible="False">
+            <TextBlock Grid.Row="2" x:Name="flickData" Text="Flick:" Style="{StaticResource PhoneTextNormalStyle}" VerticalAlignment="Bottom"/>
+            <Border x:Name="border" Grid.Row="1" Width="300" Height="200" BorderBrush="{StaticResource PhoneForegroundBrush}" BorderThickness="4,16,4,4" 
+                    Background="{StaticResource PhoneAccentBrush}" Opacity="0.5" CacheMode="BitmapCache" RenderTransformOrigin="0.5,0.5"
+                    Tap="OnTap" DoubleTap="OnDoubleTap" Hold="OnHold" 
+                    ManipulationStarted="OnManipulationStarted" ManipulationDelta="OnManipulationDelta" ManipulationCompleted="OnManipulationCompleted">
                 <Border.RenderTransform>
-                    <CompositeTransform x:Name="transform"/>
+                    <CompositeTransform x:Name="transform" />
                 </Border.RenderTransform>
             </Border>
         </Grid>

@@ -24,7 +24,6 @@ namespace Windows.Devices.Geolocation
         /// </summary>
         /// <param name="geocoordinate">A <see cref="Geocoordinate"/> to create a <see cref="GeoCoordinate"/> from.</param>
         /// <returns>Returns <see cref="GeoCoordinate"/></returns>
-        [SecuritySafeCritical]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "geocoordinate", Justification = "Geocoordinate is a valid word in the Windows.Devices.Geolocation namespace")]
         public static GeoCoordinate ToGeoCoordinate(this Geocoordinate geocoordinate)
         {

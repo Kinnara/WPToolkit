@@ -8,11 +8,24 @@ using System.Windows.Navigation;
 using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
 using System.Diagnostics;
+using System.Globalization;
+using System.Windows.Markup;
+using PhoneToolkitSample.Resources;
 
 namespace PhoneToolkitSample
 {
     public partial class App : Application
     {
+        /// <summary>
+        /// Get or set UICulture/language for the sample app
+        /// </summary>
+        public static CultureInfo UICultureOverride { get; set; }
+
+        /// <summary>
+        /// Get or set regional format for the sample app
+        /// </summary>
+        public static CultureInfo RegionalCultureOverride { get; set; }
+
         /// <summary>
         /// Provides easy access to the root frame of the Phone Application.
         /// </summary>
@@ -46,7 +59,47 @@ namespace PhoneToolkitSample
 
             // Phone-specific initialization
             InitializePhoneApplication();
+
+            // Language display initialization
+            InitializeLanguage();
         }
+
+       
+        private void InitializeLanguage()
+        {
+            try
+            {               
+
+                // Set the font to match the display language defined by the
+                // ResourceLanguage resource string for each supported language.
+                //
+                // Fall back to the font of the neutral language if the Display
+                // language of the phone is not supported.
+                //
+                // If a compiler error is hit then ResourceLanguage is missing from
+                // the resource file.
+                RootFrame.Language = XmlLanguage.GetLanguage(AppResources.ResourceLanguage);
+
+                App.UICultureOverride = new CultureInfo(AppResources.ResourceLanguage);
+                App.RegionalCultureOverride = new CultureInfo(AppResources.ResourceLanguage);
+                
+            }
+            catch
+            {
+                // If an exception is caught here it is most likely due to either
+                // ResourceLangauge not being correctly set to a supported language
+                // code or ResourceFlowDirection is set to a value other than LeftToRight
+                // or RightToLeft.
+
+                if (Debugger.IsAttached)
+                {
+                    Debugger.Break();
+                }
+
+                throw;
+            }
+        }
+        
 
         // Code to execute when the application is launching (eg, from Start)
         // This code will not execute when the application is reactivated

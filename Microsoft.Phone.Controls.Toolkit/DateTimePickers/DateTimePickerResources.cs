@@ -3,7 +3,9 @@
 // Please see http://go.microsoft.com/fwlink/?LinkID=131993 for details.
 // All other rights reserved.
 
+
 using System.Diagnostics.CodeAnalysis;
+using Microsoft.Phone.Controls.LocalizedResources;
 
 namespace Microsoft.Phone.Controls
 {
@@ -16,11 +18,11 @@ namespace Microsoft.Phone.Controls
         /// <summary>
         /// Gets the localized DatePicker title string.
         /// </summary>
-        public static string DatePickerTitle { get { return LocalizedResources.ControlResources.DatePickerTitle; } }
+        public static string DatePickerTitle { get { return ControlResources.DatePickerTitle; } }
 
         /// <summary>
         /// Gets the localized TimePicker title string.
         /// </summary>
-        public static string TimePickerTitle { get { return LocalizedResources.ControlResources.TimePickerTitle; } }
+        public static string TimePickerTitle { get { return ControlResources.TimePickerTitle; } }
     }
 }

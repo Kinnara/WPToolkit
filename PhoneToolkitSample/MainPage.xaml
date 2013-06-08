@@ -217,4 +217,12 @@
             </ScrollViewer>
         </Grid>
     </Grid>
+
+    <phone:PhoneApplicationPage.ApplicationBar>
+        <shell:ApplicationBar IsVisible="True">
+            <shell:ApplicationBarIconButton 
+                IconUri="/Images/ApplicationBar.settings.png" Text="Settings"
+                         IsEnabled="True" Click="ApplicationBarIconSettingsButton_Click"/>
+        </shell:ApplicationBar>
+    </phone:PhoneApplicationPage.ApplicationBar>
 </phone:PhoneApplicationPage>

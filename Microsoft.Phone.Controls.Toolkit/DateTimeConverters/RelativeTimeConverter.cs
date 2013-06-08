@@ -3,6 +3,7 @@
 // Please see http://go.microsoft.com/fwlink/?LinkID=131993 for details.
 // All other rights reserved.
 
+
 using System;
 using System.Globalization;
 using System.Windows.Data;
@@ -159,46 +160,47 @@ namespace Microsoft.Phone.Controls
                 return string.Format(CultureInfo.CurrentUICulture, resources[3], units.ToString(ControlResources.Culture));
             }
         }
-
+        
         /// <summary>
-        /// Returns a localized text string for the day of week.
+        /// Returns a localized text string for the "ast" + "day of week as {0}".
         /// </summary>
-        /// <param name="dow">Day of week.</param>
+        /// <param name="dow">Last Day of week.</param>
         /// <returns>Localized text string.</returns>
-        private static string GetDayOfWeek(DayOfWeek dow)
+        private static string GetLastDayOfWeek(DayOfWeek dow)
         {
             string result;
 
             switch (dow)
             {
                 case DayOfWeek.Monday:
-                    result = ControlResources.Monday;
+                    result = ControlResources.last_Monday;
                     break;
                 case DayOfWeek.Tuesday:
-                    result = ControlResources.Tuesday;
+                    result = ControlResources.last_Tuesday;
                     break;
                 case DayOfWeek.Wednesday:
-                    result = ControlResources.Wednesday;
+                    result = ControlResources.last_Wednesday;
                     break;
                 case DayOfWeek.Thursday:
-                    result = ControlResources.Thursday;
+                    result = ControlResources.last_Thursday;
                     break;
                 case DayOfWeek.Friday:
-                    result = ControlResources.Friday;
+                    result = ControlResources.last_Friday;
                     break;
                 case DayOfWeek.Saturday:
-                    result = ControlResources.Saturday;
+                    result = ControlResources.last_Saturday;
                     break;
                 case DayOfWeek.Sunday:
-                    result = ControlResources.Sunday;
+                    result = ControlResources.last_Sunday;
                     break;
                 default:
-                    result = ControlResources.Sunday;
+                    result = ControlResources.last_Sunday;
                     break;
             }
 
             return result;
         }
+
 
         /// <summary>
         /// Returns a localized text string to express "on {0}"
@@ -208,14 +210,37 @@ namespace Microsoft.Phone.Controls
         /// <returns>Localized text string.</returns>
         private static string GetOnDayOfWeek(DayOfWeek dow)
         {
-            if (dow == DayOfWeek.Tuesday)
+            string result;
+
+            switch (dow)
             {
-                return string.Format(CultureInfo.CurrentUICulture, ControlResources.OnDayOfWeek_Tuesday, GetDayOfWeek(dow));
+                case DayOfWeek.Monday:
+                    result = ControlResources.on_Monday;
+                    break;
+                case DayOfWeek.Tuesday:
+                    result = ControlResources.on_Tuesday;
+                    break;
+                case DayOfWeek.Wednesday:
+                    result = ControlResources.on_Wednesday;
+                    break;
+                case DayOfWeek.Thursday:
+                    result = ControlResources.on_Thursday;
+                    break;
+                case DayOfWeek.Friday:
+                    result = ControlResources.on_Friday;
+                    break;
+                case DayOfWeek.Saturday:
+                    result = ControlResources.on_Saturday;
+                    break;
+                case DayOfWeek.Sunday:
+                    result = ControlResources.on_Sunday;
+                    break;
+                default:
+                    result = ControlResources.on_Sunday;
+                    break;
             }
-            else
-            {
-                return string.Format(CultureInfo.CurrentUICulture, ControlResources.OnDayOfWeek_Other, GetDayOfWeek(dow));
-            }
+
+            return result;            
         }
 
         /// <summary>
@@ -295,7 +320,7 @@ namespace Microsoft.Phone.Controls
             else if (difference.TotalSeconds >= (5 * Day))
             {
                 // "last <dayofweek>"    
-                result = string.Format(CultureInfo.CurrentUICulture, ControlResources.LastDayOfWeek, GetDayOfWeek(given.DayOfWeek));
+                result = GetLastDayOfWeek(given.DayOfWeek);
             }
             else if (difference.TotalSeconds >= Day)
             {

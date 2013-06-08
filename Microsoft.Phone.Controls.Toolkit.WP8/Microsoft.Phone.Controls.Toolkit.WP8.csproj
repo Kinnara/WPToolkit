@@ -20,6 +20,10 @@
     <ThrowErrorsInValidation>true</ThrowErrorsInValidation>
     <SignAssembly>True</SignAssembly>
     <AssemblyOriginatorKeyFile>..\PhoneToolkit.snk</AssemblyOriginatorKeyFile>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -89,6 +93,12 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="..\Microsoft.Phone.Controls.Toolkit.Localization\LocalizedResources\ControlResources.Designer.cs">
+      <Link>LocalizedResources\ControlResources.Designer.cs</Link>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ControlResources.resx</DependentUpon>
+    </Compile>
     <Compile Include="..\Microsoft.Phone.Controls.Toolkit\AutoCompleteBox\AutoCompleteBox.cs">
       <Link>AutoCompleteBox\AutoCompleteBox.cs</Link>
     </Compile>
@@ -296,141 +306,11 @@
     <Compile Include="..\Microsoft.Phone.Controls.Toolkit\Input\GestureHelperEventArgs.cs">
       <Link>Input\GestureHelperEventArgs.cs</Link>
     </Compile>
+    <Compile Include="Common\LongListSelectorExtensions.cs" />
     <Compile Include="Input\GestureListenerStatic.cs" />
+    <Compile Include="Input\GestureService.cs" />
     <Compile Include="..\Microsoft.Phone.Controls.Toolkit\ListPicker\ExpansionMode.cs">
       <Link>ListPicker\ExpansionMode.cs</Link>
-    </Compile>
-    <Compile Include="..\Microsoft.Phone.Controls.Toolkit\LocalizedResources\ControlResources.cs.Designer.cs">
-      <Link>LocalizedResources\ControlResources.cs.Designer.cs</Link>
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>ControlResources.cs.resx</DependentUpon>
-    </Compile>
-    <Compile Include="..\Microsoft.Phone.Controls.Toolkit\LocalizedResources\ControlResources.da.Designer.cs">
-      <Link>LocalizedResources\ControlResources.da.Designer.cs</Link>
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>ControlResources.da.resx</DependentUpon>
-    </Compile>
-    <Compile Include="..\Microsoft.Phone.Controls.Toolkit\LocalizedResources\ControlResources.de-DE.Designer.cs">
-      <Link>LocalizedResources\ControlResources.de-DE.Designer.cs</Link>
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>ControlResources.de-DE.resx</DependentUpon>
-    </Compile>
-    <Compile Include="..\Microsoft.Phone.Controls.Toolkit\LocalizedResources\ControlResources.Designer.cs">
-      <Link>LocalizedResources\ControlResources.Designer.cs</Link>
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>ControlResources.resx</DependentUpon>
-    </Compile>
-    <Compile Include="..\Microsoft.Phone.Controls.Toolkit\LocalizedResources\ControlResources.el.Designer.cs">
-      <Link>LocalizedResources\ControlResources.el.Designer.cs</Link>
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>ControlResources.el.resx</DependentUpon>
-    </Compile>
-    <Compile Include="..\Microsoft.Phone.Controls.Toolkit\LocalizedResources\ControlResources.en-GB.Designer.cs">
-      <Link>LocalizedResources\ControlResources.en-GB.Designer.cs</Link>
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>ControlResources.en-GB.resx</DependentUpon>
-    </Compile>
-    <Compile Include="..\Microsoft.Phone.Controls.Toolkit\LocalizedResources\ControlResources.es-ES.Designer.cs">
-      <Link>LocalizedResources\ControlResources.es-ES.Designer.cs</Link>
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>ControlResources.es-ES.resx</DependentUpon>
-    </Compile>
-    <Compile Include="..\Microsoft.Phone.Controls.Toolkit\LocalizedResources\ControlResources.fi.Designer.cs">
-      <Link>LocalizedResources\ControlResources.fi.Designer.cs</Link>
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>ControlResources.fi.resx</DependentUpon>
-    </Compile>
-    <Compile Include="..\Microsoft.Phone.Controls.Toolkit\LocalizedResources\ControlResources.fr-FR.Designer.cs">
-      <Link>LocalizedResources\ControlResources.fr-FR.Designer.cs</Link>
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>ControlResources.fr-FR.resx</DependentUpon>
-    </Compile>
-    <Compile Include="..\Microsoft.Phone.Controls.Toolkit\LocalizedResources\ControlResources.hu.Designer.cs">
-      <Link>LocalizedResources\ControlResources.hu.Designer.cs</Link>
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>ControlResources.hu.resx</DependentUpon>
-    </Compile>
-    <Compile Include="..\Microsoft.Phone.Controls.Toolkit\LocalizedResources\ControlResources.it-IT.Designer.cs">
-      <Link>LocalizedResources\ControlResources.it-IT.Designer.cs</Link>
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>ControlResources.it-IT.resx</DependentUpon>
-    </Compile>
-    <Compile Include="..\Microsoft.Phone.Controls.Toolkit\LocalizedResources\ControlResources.ja.Designer.cs">
-      <Link>LocalizedResources\ControlResources.ja.Designer.cs</Link>
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>ControlResources.ja.resx</DependentUpon>
-    </Compile>
-    <Compile Include="..\Microsoft.Phone.Controls.Toolkit\LocalizedResources\ControlResources.ko.Designer.cs">
-      <Link>LocalizedResources\ControlResources.ko.Designer.cs</Link>
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>ControlResources.ko.resx</DependentUpon>
-    </Compile>
-    <Compile Include="..\Microsoft.Phone.Controls.Toolkit\LocalizedResources\ControlResources.nb-NO.Designer.cs">
-      <Link>LocalizedResources\ControlResources.nb-NO.Designer.cs</Link>
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>ControlResources.nb-NO.resx</DependentUpon>
-    </Compile>
-    <Compile Include="..\Microsoft.Phone.Controls.Toolkit\LocalizedResources\ControlResources.nl-NL.Designer.cs">
-      <Link>LocalizedResources\ControlResources.nl-NL.Designer.cs</Link>
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>ControlResources.nl-NL.resx</DependentUpon>
-    </Compile>
-    <Compile Include="..\Microsoft.Phone.Controls.Toolkit\LocalizedResources\ControlResources.pl.Designer.cs">
-      <Link>LocalizedResources\ControlResources.pl.Designer.cs</Link>
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>ControlResources.pl.resx</DependentUpon>
-    </Compile>
-    <Compile Include="..\Microsoft.Phone.Controls.Toolkit\LocalizedResources\ControlResources.pt-BR.Designer.cs">
-      <Link>LocalizedResources\ControlResources.pt-BR.Designer.cs</Link>
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>ControlResources.pt-BR.resx</DependentUpon>
-    </Compile>
-    <Compile Include="..\Microsoft.Phone.Controls.Toolkit\LocalizedResources\ControlResources.pt-PT.Designer.cs">
-      <Link>LocalizedResources\ControlResources.pt-PT.Designer.cs</Link>
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>ControlResources.pt-PT.resx</DependentUpon>
-    </Compile>
-    <Compile Include="..\Microsoft.Phone.Controls.Toolkit\LocalizedResources\ControlResources.ru.Designer.cs">
-      <Link>LocalizedResources\ControlResources.ru.Designer.cs</Link>
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>ControlResources.ru.resx</DependentUpon>
-    </Compile>
-    <Compile Include="..\Microsoft.Phone.Controls.Toolkit\LocalizedResources\ControlResources.sv-SE.Designer.cs">
-      <Link>LocalizedResources\ControlResources.sv-SE.Designer.cs</Link>
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>ControlResources.sv-SE.resx</DependentUpon>
-    </Compile>
-    <Compile Include="..\Microsoft.Phone.Controls.Toolkit\LocalizedResources\ControlResources.zh-CN.Designer.cs">
-      <Link>LocalizedResources\ControlResources.zh-CN.Designer.cs</Link>
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>ControlResources.zh-CN.resx</DependentUpon>
-    </Compile>
-    <Compile Include="..\Microsoft.Phone.Controls.Toolkit\LocalizedResources\ControlResources.zh-TW.Designer.cs">
-      <Link>LocalizedResources\ControlResources.zh-TW.Designer.cs</Link>
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>ControlResources.zh-TW.resx</DependentUpon>
     </Compile>
     <Compile Include="..\Microsoft.Phone.Controls.Toolkit\ListPicker\ListPicker.cs">
       <Link>ListPicker\ListPicker.cs</Link>
@@ -477,7 +357,6 @@
     <Compile Include="DateTimePickers\TimePickerPage.xaml.cs">
       <DependentUpon>TimePickerPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Input\GestureService.cs" />
     <Compile Include="ListPicker\ListPickerPage.xaml.cs">
       <DependentUpon>ListPickerPage.xaml</DependentUpon>
     </Compile>
@@ -601,6 +480,8 @@
     <Compile Include="..\Microsoft.Phone.Controls.Toolkit\WrapPanel\WrapPanel.cs">
       <Link>WrapPanel\WrapPanel.cs</Link>
     </Compile>
+    <Compile Include="SpeechTextBox\SpeechRecognizedEventArgs.cs" />
+    <Compile Include="SpeechTextBox\SpeechTextBox.cs" />
   </ItemGroup>
   <ItemGroup>
     <Page Include="DateTimePickers\DatePickerPage.xaml">
@@ -621,115 +502,164 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="..\Microsoft.Phone.Controls.Toolkit\LocalizedResources\ControlResources.cs.resx">
-      <Link>LocalizedResources\ControlResources.cs.resx</Link>
-      <Generator>PublicResXFileCodeGenerator</Generator>
-      <LastGenOutput>ControlResources.cs.Designer.cs</LastGenOutput>
+    <EmbeddedResource Include="..\Microsoft.Phone.Controls.Toolkit.Localization\LocalizedResources\ControlResources.ar-SA.resx">
+      <Link>LocalizedResources\ControlResources.ar-SA.resx</Link>
     </EmbeddedResource>
-    <EmbeddedResource Include="..\Microsoft.Phone.Controls.Toolkit\LocalizedResources\ControlResources.da.resx">
-      <Link>LocalizedResources\ControlResources.da.resx</Link>
-      <Generator>PublicResXFileCodeGenerator</Generator>
-      <LastGenOutput>ControlResources.da.Designer.cs</LastGenOutput>
+    <EmbeddedResource Include="..\Microsoft.Phone.Controls.Toolkit.Localization\LocalizedResources\ControlResources.az-Latn-AZ.resx">
+      <Link>LocalizedResources\ControlResources.az-Latn-AZ.resx</Link>
     </EmbeddedResource>
-    <EmbeddedResource Include="..\Microsoft.Phone.Controls.Toolkit\LocalizedResources\ControlResources.de-DE.resx">
+    <EmbeddedResource Include="..\Microsoft.Phone.Controls.Toolkit.Localization\LocalizedResources\ControlResources.be-BY.resx">
+      <Link>LocalizedResources\ControlResources.be-BY.resx</Link>
+    </EmbeddedResource>
+    <EmbeddedResource Include="..\Microsoft.Phone.Controls.Toolkit.Localization\LocalizedResources\ControlResources.bg-BG.resx">
+      <Link>LocalizedResources\ControlResources.bg-BG.resx</Link>
+    </EmbeddedResource>
+    <EmbeddedResource Include="..\Microsoft.Phone.Controls.Toolkit.Localization\LocalizedResources\ControlResources.ca-ES.resx">
+      <Link>LocalizedResources\ControlResources.ca-ES.resx</Link>
+    </EmbeddedResource>
+    <EmbeddedResource Include="..\Microsoft.Phone.Controls.Toolkit.Localization\LocalizedResources\ControlResources.cs-CZ.resx">
+      <Link>LocalizedResources\ControlResources.cs-CZ.resx</Link>
+    </EmbeddedResource>
+    <EmbeddedResource Include="..\Microsoft.Phone.Controls.Toolkit.Localization\LocalizedResources\ControlResources.da-DK.resx">
+      <Link>LocalizedResources\ControlResources.da-DK.resx</Link>
+    </EmbeddedResource>
+    <EmbeddedResource Include="..\Microsoft.Phone.Controls.Toolkit.Localization\LocalizedResources\ControlResources.de-DE.resx">
       <Link>LocalizedResources\ControlResources.de-DE.resx</Link>
-      <Generator>PublicResXFileCodeGenerator</Generator>
-      <LastGenOutput>ControlResources.de-DE.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Include="..\Microsoft.Phone.Controls.Toolkit\LocalizedResources\ControlResources.el.resx">
-      <Link>LocalizedResources\ControlResources.el.resx</Link>
-      <Generator>PublicResXFileCodeGenerator</Generator>
-      <LastGenOutput>ControlResources.el.Designer.cs</LastGenOutput>
+    <EmbeddedResource Include="..\Microsoft.Phone.Controls.Toolkit.Localization\LocalizedResources\ControlResources.el-GR.resx">
+      <Link>LocalizedResources\ControlResources.el-GR.resx</Link>
     </EmbeddedResource>
-    <EmbeddedResource Include="..\Microsoft.Phone.Controls.Toolkit\LocalizedResources\ControlResources.en-GB.resx">
+    <EmbeddedResource Include="..\Microsoft.Phone.Controls.Toolkit.Localization\LocalizedResources\ControlResources.en-GB.resx">
       <Link>LocalizedResources\ControlResources.en-GB.resx</Link>
-      <Generator>PublicResXFileCodeGenerator</Generator>
-      <LastGenOutput>ControlResources.en-GB.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Include="..\Microsoft.Phone.Controls.Toolkit\LocalizedResources\ControlResources.es-ES.resx">
+    <EmbeddedResource Include="..\Microsoft.Phone.Controls.Toolkit.Localization\LocalizedResources\ControlResources.es-ES.resx">
       <Link>LocalizedResources\ControlResources.es-ES.resx</Link>
-      <Generator>PublicResXFileCodeGenerator</Generator>
-      <LastGenOutput>ControlResources.es-ES.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Include="..\Microsoft.Phone.Controls.Toolkit\LocalizedResources\ControlResources.fi.resx">
-      <Link>LocalizedResources\ControlResources.fi.resx</Link>
-      <Generator>PublicResXFileCodeGenerator</Generator>
-      <LastGenOutput>ControlResources.fi.Designer.cs</LastGenOutput>
+    <EmbeddedResource Include="..\Microsoft.Phone.Controls.Toolkit.Localization\LocalizedResources\ControlResources.es-MX.resx">
+      <Link>LocalizedResources\ControlResources.es-MX.resx</Link>
     </EmbeddedResource>
-    <EmbeddedResource Include="..\Microsoft.Phone.Controls.Toolkit\LocalizedResources\ControlResources.fr-FR.resx">
+    <EmbeddedResource Include="..\Microsoft.Phone.Controls.Toolkit.Localization\LocalizedResources\ControlResources.et-EE.resx">
+      <Link>LocalizedResources\ControlResources.et-EE.resx</Link>
+    </EmbeddedResource>
+    <EmbeddedResource Include="..\Microsoft.Phone.Controls.Toolkit.Localization\LocalizedResources\ControlResources.fa-IR.resx">
+      <Link>LocalizedResources\ControlResources.fa-IR.resx</Link>
+    </EmbeddedResource>
+    <EmbeddedResource Include="..\Microsoft.Phone.Controls.Toolkit.Localization\LocalizedResources\ControlResources.fi-FI.resx">
+      <Link>LocalizedResources\ControlResources.fi-FI.resx</Link>
+    </EmbeddedResource>
+    <EmbeddedResource Include="..\Microsoft.Phone.Controls.Toolkit.Localization\LocalizedResources\ControlResources.fil-PH.resx">
+      <Link>LocalizedResources\ControlResources.fil-PH.resx</Link>
+    </EmbeddedResource>
+    <EmbeddedResource Include="..\Microsoft.Phone.Controls.Toolkit.Localization\LocalizedResources\ControlResources.fr-CA.resx">
+      <Link>LocalizedResources\ControlResources.fr-CA.resx</Link>
+    </EmbeddedResource>
+    <EmbeddedResource Include="..\Microsoft.Phone.Controls.Toolkit.Localization\LocalizedResources\ControlResources.fr-FR.resx">
       <Link>LocalizedResources\ControlResources.fr-FR.resx</Link>
-      <Generator>PublicResXFileCodeGenerator</Generator>
-      <LastGenOutput>ControlResources.fr-FR.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Include="..\Microsoft.Phone.Controls.Toolkit\LocalizedResources\ControlResources.hu.resx">
-      <Link>LocalizedResources\ControlResources.hu.resx</Link>
-      <Generator>PublicResXFileCodeGenerator</Generator>
-      <LastGenOutput>ControlResources.hu.Designer.cs</LastGenOutput>
+    <EmbeddedResource Include="..\Microsoft.Phone.Controls.Toolkit.Localization\LocalizedResources\ControlResources.he-IL.resx">
+      <Link>LocalizedResources\ControlResources.he-IL.resx</Link>
     </EmbeddedResource>
-    <EmbeddedResource Include="..\Microsoft.Phone.Controls.Toolkit\LocalizedResources\ControlResources.it-IT.resx">
+    <EmbeddedResource Include="..\Microsoft.Phone.Controls.Toolkit.Localization\LocalizedResources\ControlResources.hi-IN.resx">
+      <Link>LocalizedResources\ControlResources.hi-IN.resx</Link>
+      <LastGenOutput>ControlResources.hi-IN.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="..\Microsoft.Phone.Controls.Toolkit.Localization\LocalizedResources\ControlResources.hr-HR.resx">
+      <Link>LocalizedResources\ControlResources.hr-HR.resx</Link>
+    </EmbeddedResource>
+    <EmbeddedResource Include="..\Microsoft.Phone.Controls.Toolkit.Localization\LocalizedResources\ControlResources.hu-HU.resx">
+      <Link>LocalizedResources\ControlResources.hu-HU.resx</Link>
+    </EmbeddedResource>
+    <EmbeddedResource Include="..\Microsoft.Phone.Controls.Toolkit.Localization\LocalizedResources\ControlResources.id-ID.resx">
+      <Link>LocalizedResources\ControlResources.id-ID.resx</Link>
+    </EmbeddedResource>
+    <EmbeddedResource Include="..\Microsoft.Phone.Controls.Toolkit.Localization\LocalizedResources\ControlResources.it-IT.resx">
       <Link>LocalizedResources\ControlResources.it-IT.resx</Link>
-      <Generator>PublicResXFileCodeGenerator</Generator>
-      <LastGenOutput>ControlResources.it-IT.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Include="..\Microsoft.Phone.Controls.Toolkit\LocalizedResources\ControlResources.ja.resx">
-      <Link>LocalizedResources\ControlResources.ja.resx</Link>
-      <Generator>PublicResXFileCodeGenerator</Generator>
-      <LastGenOutput>ControlResources.ja.Designer.cs</LastGenOutput>
+    <EmbeddedResource Include="..\Microsoft.Phone.Controls.Toolkit.Localization\LocalizedResources\ControlResources.ja-JP.resx">
+      <Link>LocalizedResources\ControlResources.ja-JP.resx</Link>
     </EmbeddedResource>
-    <EmbeddedResource Include="..\Microsoft.Phone.Controls.Toolkit\LocalizedResources\ControlResources.ko.resx">
-      <Link>LocalizedResources\ControlResources.ko.resx</Link>
-      <Generator>PublicResXFileCodeGenerator</Generator>
-      <LastGenOutput>ControlResources.ko.Designer.cs</LastGenOutput>
+    <EmbeddedResource Include="..\Microsoft.Phone.Controls.Toolkit.Localization\LocalizedResources\ControlResources.kk-KZ.resx">
+      <Link>LocalizedResources\ControlResources.kk-KZ.resx</Link>
     </EmbeddedResource>
-    <EmbeddedResource Include="..\Microsoft.Phone.Controls.Toolkit\LocalizedResources\ControlResources.nb-NO.resx">
+    <EmbeddedResource Include="..\Microsoft.Phone.Controls.Toolkit.Localization\LocalizedResources\ControlResources.ko-KR.resx">
+      <Link>LocalizedResources\ControlResources.ko-KR.resx</Link>
+    </EmbeddedResource>
+    <EmbeddedResource Include="..\Microsoft.Phone.Controls.Toolkit.Localization\LocalizedResources\ControlResources.lt-LT.resx">
+      <Link>LocalizedResources\ControlResources.lt-LT.resx</Link>
+    </EmbeddedResource>
+    <EmbeddedResource Include="..\Microsoft.Phone.Controls.Toolkit.Localization\LocalizedResources\ControlResources.lv-LV.resx">
+      <Link>LocalizedResources\ControlResources.lv-LV.resx</Link>
+    </EmbeddedResource>
+    <EmbeddedResource Include="..\Microsoft.Phone.Controls.Toolkit.Localization\LocalizedResources\ControlResources.mk-MK.resx">
+      <Link>LocalizedResources\ControlResources.mk-MK.resx</Link>
+    </EmbeddedResource>
+    <EmbeddedResource Include="..\Microsoft.Phone.Controls.Toolkit.Localization\LocalizedResources\ControlResources.ms-MY.resx">
+      <Link>LocalizedResources\ControlResources.ms-MY.resx</Link>
+    </EmbeddedResource>
+    <EmbeddedResource Include="..\Microsoft.Phone.Controls.Toolkit.Localization\LocalizedResources\ControlResources.nb-NO.resx">
       <Link>LocalizedResources\ControlResources.nb-NO.resx</Link>
-      <Generator>PublicResXFileCodeGenerator</Generator>
-      <LastGenOutput>ControlResources.nb-NO.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Include="..\Microsoft.Phone.Controls.Toolkit\LocalizedResources\ControlResources.nl-NL.resx">
+    <EmbeddedResource Include="..\Microsoft.Phone.Controls.Toolkit.Localization\LocalizedResources\ControlResources.nl-NL.resx">
       <Link>LocalizedResources\ControlResources.nl-NL.resx</Link>
-      <Generator>PublicResXFileCodeGenerator</Generator>
-      <LastGenOutput>ControlResources.nl-NL.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Include="..\Microsoft.Phone.Controls.Toolkit\LocalizedResources\ControlResources.pl.resx">
-      <Link>LocalizedResources\ControlResources.pl.resx</Link>
-      <Generator>PublicResXFileCodeGenerator</Generator>
-      <LastGenOutput>ControlResources.pl.Designer.cs</LastGenOutput>
+    <EmbeddedResource Include="..\Microsoft.Phone.Controls.Toolkit.Localization\LocalizedResources\ControlResources.pl-PL.resx">
+      <Link>LocalizedResources\ControlResources.pl-PL.resx</Link>
     </EmbeddedResource>
-    <EmbeddedResource Include="..\Microsoft.Phone.Controls.Toolkit\LocalizedResources\ControlResources.pt-BR.resx">
+    <EmbeddedResource Include="..\Microsoft.Phone.Controls.Toolkit.Localization\LocalizedResources\ControlResources.pt-BR.resx">
       <Link>LocalizedResources\ControlResources.pt-BR.resx</Link>
-      <Generator>PublicResXFileCodeGenerator</Generator>
-      <LastGenOutput>ControlResources.pt-BR.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Include="..\Microsoft.Phone.Controls.Toolkit\LocalizedResources\ControlResources.pt-PT.resx">
+    <EmbeddedResource Include="..\Microsoft.Phone.Controls.Toolkit.Localization\LocalizedResources\ControlResources.pt-PT.resx">
       <Link>LocalizedResources\ControlResources.pt-PT.resx</Link>
-      <Generator>PublicResXFileCodeGenerator</Generator>
-      <LastGenOutput>ControlResources.pt-PT.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Include="..\Microsoft.Phone.Controls.Toolkit\LocalizedResources\ControlResources.resx">
+    <EmbeddedResource Include="..\Microsoft.Phone.Controls.Toolkit.Localization\LocalizedResources\ControlResources.qps-ploc.resx">
+      <Link>LocalizedResources\ControlResources.qps-ploc.resx</Link>
+    </EmbeddedResource>
+    <EmbeddedResource Include="..\Microsoft.Phone.Controls.Toolkit.Localization\LocalizedResources\ControlResources.resx">
       <Link>LocalizedResources\ControlResources.resx</Link>
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>ControlResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Include="..\Microsoft.Phone.Controls.Toolkit\LocalizedResources\ControlResources.ru.resx">
-      <Link>LocalizedResources\ControlResources.ru.resx</Link>
-      <Generator>PublicResXFileCodeGenerator</Generator>
-      <LastGenOutput>ControlResources.ru.Designer.cs</LastGenOutput>
+    <EmbeddedResource Include="..\Microsoft.Phone.Controls.Toolkit.Localization\LocalizedResources\ControlResources.ro-RO.resx">
+      <Link>LocalizedResources\ControlResources.ro-RO.resx</Link>
     </EmbeddedResource>
-    <EmbeddedResource Include="..\Microsoft.Phone.Controls.Toolkit\LocalizedResources\ControlResources.sv-SE.resx">
+    <EmbeddedResource Include="..\Microsoft.Phone.Controls.Toolkit.Localization\LocalizedResources\ControlResources.ru-RU.resx">
+      <Link>LocalizedResources\ControlResources.ru-RU.resx</Link>
+    </EmbeddedResource>
+    <EmbeddedResource Include="..\Microsoft.Phone.Controls.Toolkit.Localization\LocalizedResources\ControlResources.sk-SK.resx">
+      <Link>LocalizedResources\ControlResources.sk-SK.resx</Link>
+    </EmbeddedResource>
+    <EmbeddedResource Include="..\Microsoft.Phone.Controls.Toolkit.Localization\LocalizedResources\ControlResources.sl-SI.resx">
+      <Link>LocalizedResources\ControlResources.sl-SI.resx</Link>
+    </EmbeddedResource>
+    <EmbeddedResource Include="..\Microsoft.Phone.Controls.Toolkit.Localization\LocalizedResources\ControlResources.sq-AL.resx">
+      <Link>LocalizedResources\ControlResources.sq-AL.resx</Link>
+    </EmbeddedResource>
+    <EmbeddedResource Include="..\Microsoft.Phone.Controls.Toolkit.Localization\LocalizedResources\ControlResources.sr-Latn-CS.resx">
+      <Link>LocalizedResources\ControlResources.sr-Latn-CS.resx</Link>
+    </EmbeddedResource>
+    <EmbeddedResource Include="..\Microsoft.Phone.Controls.Toolkit.Localization\LocalizedResources\ControlResources.sv-SE.resx">
       <Link>LocalizedResources\ControlResources.sv-SE.resx</Link>
-      <Generator>PublicResXFileCodeGenerator</Generator>
-      <LastGenOutput>ControlResources.sv-SE.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Include="..\Microsoft.Phone.Controls.Toolkit\LocalizedResources\ControlResources.zh-CN.resx">
+    <EmbeddedResource Include="..\Microsoft.Phone.Controls.Toolkit.Localization\LocalizedResources\ControlResources.th-TH.resx">
+      <Link>LocalizedResources\ControlResources.th-TH.resx</Link>
+    </EmbeddedResource>
+    <EmbeddedResource Include="..\Microsoft.Phone.Controls.Toolkit.Localization\LocalizedResources\ControlResources.tr-TR.resx">
+      <Link>LocalizedResources\ControlResources.tr-TR.resx</Link>
+    </EmbeddedResource>
+    <EmbeddedResource Include="..\Microsoft.Phone.Controls.Toolkit.Localization\LocalizedResources\ControlResources.uk-UA.resx">
+      <Link>LocalizedResources\ControlResources.uk-UA.resx</Link>
+    </EmbeddedResource>
+    <EmbeddedResource Include="..\Microsoft.Phone.Controls.Toolkit.Localization\LocalizedResources\ControlResources.uz-Latn-UZ.resx">
+      <Link>LocalizedResources\ControlResources.uz-Latn-UZ.resx</Link>
+    </EmbeddedResource>
+    <EmbeddedResource Include="..\Microsoft.Phone.Controls.Toolkit.Localization\LocalizedResources\ControlResources.vi-VN.resx">
+      <Link>LocalizedResources\ControlResources.vi-VN.resx</Link>
+    </EmbeddedResource>
+    <EmbeddedResource Include="..\Microsoft.Phone.Controls.Toolkit.Localization\LocalizedResources\ControlResources.zh-CN.resx">
       <Link>LocalizedResources\ControlResources.zh-CN.resx</Link>
-      <Generator>PublicResXFileCodeGenerator</Generator>
-      <LastGenOutput>ControlResources.zh-CN.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Include="..\Microsoft.Phone.Controls.Toolkit\LocalizedResources\ControlResources.zh-TW.resx">
+    <EmbeddedResource Include="..\Microsoft.Phone.Controls.Toolkit.Localization\LocalizedResources\ControlResources.zh-TW.resx">
       <Link>LocalizedResources\ControlResources.zh-TW.resx</Link>
-      <Generator>PublicResXFileCodeGenerator</Generator>
-      <LastGenOutput>ControlResources.zh-TW.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="..\Microsoft.Phone.Controls.Toolkit\Properties\Resources.resx">
       <Link>Properties\Resources.resx</Link>
@@ -874,7 +804,11 @@
       <Generator>MSBuild:Compile</Generator>
     </Resource>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Resource Include="Images\microphone.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+  </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\$(TargetFrameworkIdentifier)\$(TargetFrameworkVersion)\Microsoft.$(TargetFrameworkIdentifier).$(TargetFrameworkVersion).Overrides.targets" />
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\$(TargetFrameworkIdentifier)\$(TargetFrameworkVersion)\Microsoft.$(TargetFrameworkIdentifier).CSharp.targets" />
   <ProjectExtensions />

@@ -15,6 +15,7 @@ using System.Windows.Media;
 using System.Windows.Media.Animation;
 using System.Windows.Navigation;
 using Microsoft.Phone.Shell;
+using Microsoft.Phone.Controls.LocalizedResources;
 
 namespace Microsoft.Phone.Controls
 {
@@ -113,12 +114,12 @@ namespace Microsoft.Phone.Controls
                     {
                         if ("DONE" == button.Text)
                         {
-                            button.Text = LocalizedResources.ControlResources.DateTimePickerDoneText;
+                            button.Text = ControlResources.DateTimePickerDoneText;
                             button.Click += OnDoneButtonClick;
                         }
                         else if ("CANCEL" == button.Text)
                         {
-                            button.Text = LocalizedResources.ControlResources.DateTimePickerCancelText;
+                            button.Text = ControlResources.DateTimePickerCancelText;
                             button.Click += OnCancelButtonClick;
                         }
                     }

@@ -4,14 +4,11 @@
 // All other rights reserved.
 
 using System;
+using System.Diagnostics.CodeAnalysis;
+using System.Globalization;
 using System.Windows;
-using Microsoft.Phone.Controls;
 using System.Windows.Controls;
 using System.Windows.Media;
-using System.Windows.Media.Animation;
-using System.Windows.Shapes;
-using System.Globalization;
-using System.Diagnostics.CodeAnalysis;
 
 namespace Microsoft.Phone.Controls
 {
@@ -34,29 +31,32 @@ namespace Microsoft.Phone.Controls
     {
 
         #region PhoneTextBox Properties & Variables
-        private Grid RootGrid;
-        private TextBox TextBox;
-        private TextBlock MeasurementTextBlock; // Used to measure the height of the TextBox to determine if the action icon is being overlapped.
+        private Grid _rootGrid;
+        private TextBox _textBox;
 
-        private Brush ForegroundBrushInactive = (Brush)Application.Current.Resources["PhoneTextBoxReadOnlyBrush"];
+        // Used to measure the height of the TextBox to determine if the action icon is being overlapped.
+        private TextBlock _measurementTextBlock; 
 
-        private Brush ForegroundBrushEdit;
+        private Brush _foregroundBrushInactive = (Brush)Application.Current.Resources["PhoneTextBoxReadOnlyBrush"];
+        private Brush _foregroundBrushEdit;
 
         // Hint Private Variables.
-        private ContentControl HintContent;
-        private Border HintBorder;
+        private ContentControl _hintContent;
+        private Border _hintBorder;
 
         // Length Indicator Private Variables.
-        private TextBlock LengthIndicator;
-
-        // Action Icon Private Variables.
-        private Border ActionIconBorder;
+        private TextBlock _lengthIndicator;
 
         // Ignore flags for the dependency properties.
         private bool _ignorePropertyChange = false;
 
         //Temporarily ignore focus?
         private bool _ignoreFocus = false;
+
+        /// <summary>
+        /// Border for PhoneTextBox action icon
+        /// </summary>
+        protected Border ActionIconBorder { get; set; }
 
         #endregion
 
@@ -213,7 +213,7 @@ namespace Microsoft.Phone.Controls
         {
             PhoneTextBox phoneTextBox = sender as PhoneTextBox;
 
-            if (phoneTextBox != null && phoneTextBox.HintContent != null)
+            if (phoneTextBox != null && phoneTextBox._hintContent != null)
             {
                 phoneTextBox.UpdateHintVisibility();
             }
@@ -225,17 +225,17 @@ namespace Microsoft.Phone.Controls
         /// </summary>
         private void UpdateHintVisibility()
         {
-            if (HintContent != null)
+            if (_hintContent != null)
             {
                 if (string.IsNullOrEmpty(Text))
                 {
                     ActualHintVisibility = Visibility.Visible;
-                    Foreground = ForegroundBrushInactive;
+                    Foreground = _foregroundBrushInactive;
                 }
                 else
                 {
                     ActualHintVisibility = Visibility.Collapsed;
-                    Foreground = ForegroundBrushEdit;
+                    Foreground = _foregroundBrushEdit;
                 }
             }
         }
@@ -266,9 +266,9 @@ namespace Microsoft.Phone.Controls
                 return;
             }
 
-            Foreground = ForegroundBrushEdit;
+            Foreground = _foregroundBrushEdit;
 
-            if (HintContent != null)
+            if (_hintContent != null)
             {
                 ActualHintVisibility = Visibility.Collapsed;
             }
@@ -371,7 +371,7 @@ namespace Microsoft.Phone.Controls
             Justification = "At this time the length indicator is not culture-specific or retrieved from the resources.")]
         private void UpdateLengthIndicatorVisibility()
         {
-            if (RootGrid == null || LengthIndicator == null)
+            if (_rootGrid == null || _lengthIndicator == null)
             {
                 return;
             }
@@ -380,7 +380,7 @@ namespace Microsoft.Phone.Controls
             if (LengthIndicatorVisible)
             {
                 // The current implementation is culture invariant.
-                LengthIndicator.Text = String.Format(
+                _lengthIndicator.Text = String.Format(
                     CultureInfo.InvariantCulture,
                     "{0}/{1}", Text.Length, 
                     ((DisplayedMaxLength > 0) ? DisplayedMaxLength : MaxLength));
@@ -455,7 +455,7 @@ namespace Microsoft.Phone.Controls
                 if (ActionIcon == null || (HidesActionItemWhenEmpty && string.IsNullOrEmpty(Text)))
                 {
                     ActionIconBorder.Visibility = Visibility.Collapsed;
-                    HintBorder.Padding = new Thickness(0);
+                    _hintBorder.Padding = new Thickness(0);
                 }
                 else
                 {
@@ -463,7 +463,7 @@ namespace Microsoft.Phone.Controls
 
                     if (TextWrapping != System.Windows.TextWrapping.Wrap)
                     {
-                        HintBorder.Padding = new Thickness(0, 0, 48, 0);
+                        _hintBorder.Padding = new Thickness(0, 0, 48, 0);
                     }
                 }
             }
@@ -490,13 +490,13 @@ namespace Microsoft.Phone.Controls
         {
             if (ActionIcon == null || TextWrapping != System.Windows.TextWrapping.Wrap) { return; }
 
-            MeasurementTextBlock.Width = ActualWidth;
+            _measurementTextBlock.Width = ActualWidth;
 
-            if (MeasurementTextBlock.ActualHeight > ActualHeight - 72)
+            if (_measurementTextBlock.ActualHeight > ActualHeight - 72)
             {
                 Height = ActualHeight + 72;
             }
-            else if (ActualHeight > MeasurementTextBlock.ActualHeight + 144)
+            else if (ActualHeight > _measurementTextBlock.ActualHeight + 144)
             {
                 Height = ActualHeight - 72;
             }
@@ -520,9 +520,9 @@ namespace Microsoft.Phone.Controls
         {
             base.OnApplyTemplate();
 
-            if (TextBox != null)
+            if (_textBox != null)
             {
-                TextBox.TextChanged -= OnTextChanged;
+                _textBox.TextChanged -= OnTextChanged;
             }
 
             if (ActionIconBorder != null)
@@ -530,35 +530,35 @@ namespace Microsoft.Phone.Controls
                 ActionIconBorder.MouseLeftButtonDown -= OnActionIconTapped;
             }
 
-            RootGrid = GetTemplateChild(RootGridName) as Grid;
-            TextBox = GetTemplateChild(TextBoxName) as TextBox;
+            _rootGrid = GetTemplateChild(RootGridName) as Grid;
+            _textBox = GetTemplateChild(TextBoxName) as TextBox;
             
             // Getting the foreground color to save for later.
-            ForegroundBrushEdit = Foreground;
+            _foregroundBrushEdit = Foreground;
 
             // Getting template children for the hint text.
-            HintContent = GetTemplateChild(HintContentName) as ContentControl;
-            HintBorder = GetTemplateChild(HintBorderName) as Border;
+            _hintContent = GetTemplateChild(HintContentName) as ContentControl;
+            _hintBorder = GetTemplateChild(HintBorderName) as Border;
 
-            if (HintContent != null)
+            if (_hintContent != null)
             {
                 UpdateHintVisibility();
             }
             
             // Getting template children for the length indicator.
-            LengthIndicator = GetTemplateChild(LengthIndicatorName) as TextBlock;
+            _lengthIndicator = GetTemplateChild(LengthIndicatorName) as TextBlock;
             
             // Getting template child for the action icon
             ActionIconBorder = GetTemplateChild(ActionIconBorderName) as Border;
 
-            if (RootGrid != null && LengthIndicator != null)
+            if (_rootGrid != null && _lengthIndicator != null)
             {
                 UpdateLengthIndicatorVisibility();
             }
 
-            if (TextBox != null)
+            if (_textBox != null)
             {
-                TextBox.TextChanged += OnTextChanged;
+                _textBox.TextChanged += OnTextChanged;
             }
 
             if (ActionIconBorder != null)
@@ -569,7 +569,7 @@ namespace Microsoft.Phone.Controls
 
             
             // Get template child for the action icon measurement text block.
-            MeasurementTextBlock = GetTemplateChild(MeasurementTextBlockName) as TextBlock;
+            _measurementTextBlock = GetTemplateChild(MeasurementTextBlockName) as TextBlock;
         }
 
         /// <summary>

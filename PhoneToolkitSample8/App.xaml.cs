@@ -7,6 +7,8 @@ using System.Windows.Navigation;
 using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
 using PhoneToolkitSample.Resources;
+using System.Globalization;
+using System.Threading;
 
 namespace PhoneToolkitSample8
 {
@@ -17,6 +19,16 @@ namespace PhoneToolkitSample8
         /// </summary>
         /// <returns>The root frame of the Phone Application.</returns>
         public static PhoneApplicationFrame RootFrame { get; private set; }
+        
+        /// <summary>
+        /// Get or set UICulture/language for the sample app
+        /// </summary>
+        public static CultureInfo UICultureOverride { get; set; }
+
+        /// <summary>
+        /// Get or set regional format for the sample app
+        /// </summary>
+        public  static CultureInfo RegionalCultureOverride { get; set; }
 
         /// <summary>
         /// Constructor for the Application object.
@@ -184,7 +196,8 @@ namespace PhoneToolkitSample8
         private void InitializeLanguage()
         {
             try
-            {
+            {               
+
                 // Set the font to match the display language defined by the
                 // ResourceLanguage resource string for each supported language.
                 //
@@ -194,6 +207,9 @@ namespace PhoneToolkitSample8
                 // If a compiler error is hit then ResourceLanguage is missing from
                 // the resource file.
                 RootFrame.Language = XmlLanguage.GetLanguage(AppResources.ResourceLanguage);
+
+                App.UICultureOverride = new CultureInfo(AppResources.ResourceLanguage);
+                App.RegionalCultureOverride = new CultureInfo(AppResources.ResourceLanguage);
 
                 // Set the FlowDirection of all elements under the root frame based
                 // on the ResourceFlowDirection resource string for each

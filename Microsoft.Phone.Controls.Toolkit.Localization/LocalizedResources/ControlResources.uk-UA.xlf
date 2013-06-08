@@ -1,0 +1,237 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="urn:oasis:names:tc:xliff:document:1.2 xliff-core-1.2-transitional.xsd">
+  <file datatype="xml" source-language="en-US" target-language="uk-UA" original="ControlResources.resx" tool-id="MultilingualAppToolkit" product-name="Microsoft.Phone.Controls.Toolkit.Localization" product-version="8.0.1.0" build-num="1">
+    <header>
+      <tool tool-id="MultilingualAppToolkit" tool-name="Multilingual App Toolkit" tool-version="1.2.2017.0" tool-company="Microsoft" />
+    </header>
+    <body>
+      <group id="Resx">
+        <trans-unit id="Resx/AboutAMinuteAgo" translate="yes" xml:space="preserve">
+          <source>about a minute ago</source>
+          <target state="translated" state-qualifier="exact-match">близько хвилини тому</target>
+          <note from="MultilingualBuild" priority="2" annotates="source">Default text for "about a minute ago" as used by the RelativeTimeConverter.</note>
+        </trans-unit>
+        <trans-unit id="Resx/AboutAMonthAgo" translate="yes" xml:space="preserve">
+          <source>about a month ago</source>
+          <target state="translated" state-qualifier="exact-match">близько місяця тому</target>
+          <note from="MultilingualBuild" priority="2" annotates="source">Default text for "about a month ago" as used by the RelativeTimeConverter.</note>
+        </trans-unit>
+        <trans-unit id="Resx/AboutAnHourAgo" translate="yes" xml:space="preserve">
+          <source>about an hour ago</source>
+          <target state="translated" state-qualifier="exact-match">близько години тому</target>
+          <note from="MultilingualBuild" priority="2" annotates="source">Default text for "about an hour ago" as used by the RelativeTimeConverter.</note>
+        </trans-unit>
+        <trans-unit id="Resx/AboutAWeekAgo" translate="yes" xml:space="preserve">
+          <source>about a week ago</source>
+          <target state="translated" state-qualifier="exact-match">близько тижня тому</target>
+          <note from="MultilingualBuild" priority="2" annotates="source">Default text for "about a week ago" as used by the RelativeTimeConverter.</note>
+        </trans-unit>
+        <trans-unit id="Resx/AlarmRepeatsOn" translate="yes" xml:space="preserve">
+          <source>ALARM REPEATS ON</source>
+          <target state="translated" state-qualifier="exact-match">ДНІ ПОВТОРІВ</target>
+          <note from="MultilingualBuild" priority="2" annotates="source">Default title for recurring day ListPicker.</note>
+        </trans-unit>
+        <trans-unit id="Resx/DatePickerTitle" translate="yes" xml:space="preserve">
+          <source>CHOOSE DATE</source>
+          <target state="translated" state-qualifier="exact-match">ВИБІР ДАТИ</target>
+          <note from="MultilingualBuild" priority="2" annotates="source">Default title for DatePicker.</note>
+        </trans-unit>
+        <trans-unit id="Resx/DateTimePickerCancelText" translate="yes" xml:space="preserve">
+          <source>cancel</source>
+          <target state="translated" state-qualifier="exact-match">скасувати</target>
+          <note from="MultilingualBuild" priority="2" annotates="source">Default text for the "cancel" ApplicationBar button used by DatePicker/TimePicker.</note>
+        </trans-unit>
+        <trans-unit id="Resx/DateTimePickerDoneText" translate="yes" xml:space="preserve">
+          <source>done</source>
+          <target state="translated" state-qualifier="exact-match">готово</target>
+          <note from="MultilingualBuild" priority="2" annotates="source">Default text for the "done" ApplicationBar button used by DatePicker/TimePicker.</note>
+        </trans-unit>
+        <trans-unit id="Resx/OverAYearAgo" translate="yes" xml:space="preserve">
+          <source>over a year ago</source>
+          <target state="translated" state-qualifier="exact-match">понад рік тому</target>
+          <note from="MultilingualBuild" priority="2" annotates="source">Default text for "over a year ago" as used by the RelativeTimeConverter.</note>
+        </trans-unit>
+        <trans-unit id="Resx/RepeatsEveryDay" translate="yes" xml:space="preserve">
+          <source>every day</source>
+          <target state="translated" state-qualifier="exact-match">щодня</target>
+          <note from="MultilingualBuild" priority="2" annotates="source">Default text for the recurring day ListPicker when an alarm repeats daily.</note>
+        </trans-unit>
+        <trans-unit id="Resx/RepeatsOnlyOnce" translate="yes" xml:space="preserve">
+          <source>only once</source>
+          <target state="translated" state-qualifier="exact-match">один раз</target>
+          <note from="MultilingualBuild" priority="2" annotates="source">Default text for the recurring day ListPicker when an alarm is not recurring.</note>
+        </trans-unit>
+        <trans-unit id="Resx/RepeatsOnWeekdays" translate="yes" xml:space="preserve">
+          <source>weekdays</source>
+          <target state="translated" state-qualifier="exact-match">у будні дні</target>
+          <note from="MultilingualBuild" priority="2" annotates="source">Default text for the recurring day ListPicker when an alarm repeats on weekdays.</note>
+        </trans-unit>
+        <trans-unit id="Resx/RepeatsOnWeekends" translate="yes" xml:space="preserve">
+          <source>weekends</source>
+          <target state="translated" state-qualifier="exact-match">у вихідні</target>
+          <note from="MultilingualBuild" priority="2" annotates="source">Default text for the recurring day ListPicker when an alarm repeats on weekends.</note>
+        </trans-unit>
+        <trans-unit id="Resx/TimePickerTitle" translate="yes" xml:space="preserve">
+          <source>CHOOSE TIME</source>
+          <target state="translated" state-qualifier="exact-match">ВИБІР ЧАСУ</target>
+          <note from="MultilingualBuild" priority="2" annotates="source">Default title for TimePicker.</note>
+        </trans-unit>
+        <trans-unit id="Resx/XHoursAgo_2To4" translate="yes" xml:space="preserve">
+          <source>{0} hours ago</source>
+          <target state="translated" state-qualifier="exact-match">{0} годину тому</target>
+          <note from="MultilingualBuild" priority="2" annotates="source">Default text for "{0} hours ago" as used by the RelativeTimeConverter,  where {0} is 2, 3 or 4.</note>
+        </trans-unit>
+        <trans-unit id="Resx/XHoursAgo_EndsIn1Not11" translate="yes" xml:space="preserve">
+          <source>{0} hours ago</source>
+          <target state="translated" state-qualifier="exact-match">{0} годину тому</target>
+          <note from="MultilingualBuild" priority="2" annotates="source">Default text for "{0} hours ago" as used by the RelativeTimeConverter, where {0} is a number that ends in 1 but doesn't end in 11.</note>
+        </trans-unit>
+        <trans-unit id="Resx/XHoursAgo_EndsIn2To4Not12To14" translate="yes" xml:space="preserve">
+          <source>{0} hours ago</source>
+          <target state="translated" state-qualifier="exact-match">{0} годину тому</target>
+          <note from="MultilingualBuild" priority="2" annotates="source">Default text for "{0} hours ago" as used by the RelativeTimeConverter, where {0} is a number that ends in 2, 3 or 4, but doesn't end in 12, 13 or 14.</note>
+        </trans-unit>
+        <trans-unit id="Resx/XHoursAgo_Other" translate="yes" xml:space="preserve">
+          <source>{0} hours ago</source>
+          <target state="translated" state-qualifier="exact-match">{0} годину тому</target>
+          <note from="MultilingualBuild" priority="2" annotates="source">Default text for "{0} hours ago" as used by the RelativeTimeConverter, where {0} is a number not considered in any of the other exceptions, i.e. a number that ends in 0 or 5 to 9.</note>
+        </trans-unit>
+        <trans-unit id="Resx/XMinutesAgo_2To4" translate="yes" xml:space="preserve">
+          <source>{0} minutes ago</source>
+          <target state="translated" state-qualifier="exact-match">{0} хвилину тому</target>
+          <note from="MultilingualBuild" priority="2" annotates="source">Default text for "{0} minutes ago" as used by the RelativeTimeConverter, where {0} is 2, 3 or 4.</note>
+        </trans-unit>
+        <trans-unit id="Resx/XMinutesAgo_EndsIn1Not11" translate="yes" xml:space="preserve">
+          <source>{0} minutes ago</source>
+          <target state="translated" state-qualifier="exact-match">{0} хвилину тому</target>
+          <note from="MultilingualBuild" priority="2" annotates="source">Default text for "{0} minutes ago" as used by the RelativeTimeConverter, where {0} is a number that ends in 1 but doesn't end in 11.</note>
+        </trans-unit>
+        <trans-unit id="Resx/XMinutesAgo_EndsIn2To4Not12To14" translate="yes" xml:space="preserve">
+          <source>{0} minutes ago</source>
+          <target state="translated" state-qualifier="exact-match">{0} хвилину тому</target>
+          <note from="MultilingualBuild" priority="2" annotates="source">Default text for "{0} minutes ago" as used by the RelativeTimeConverter, where {0} is a number that ends in 2, 3 or 4, but doesn't end in 12, 13 or 14.</note>
+        </trans-unit>
+        <trans-unit id="Resx/XMinutesAgo_Other" translate="yes" xml:space="preserve">
+          <source>{0} minutes ago</source>
+          <target state="translated" state-qualifier="exact-match">{0} хвилину тому</target>
+          <note from="MultilingualBuild" priority="2" annotates="source">Default text for "{0} minutes ago" as used by the RelativeTimeConverter, where {0} is a number not considered in any of the other exceptions, i.e. a number that ends in 0 or 5 to 9.</note>
+        </trans-unit>
+        <trans-unit id="Resx/XMonthsAgo_2To4" translate="yes" xml:space="preserve">
+          <source>{0} months ago</source>
+          <target state="translated" state-qualifier="exact-match">{0} місяць тому</target>
+          <note from="MultilingualBuild" priority="2" annotates="source">Default text for "{0} months ago" as used by the RelativeTimeConverter, where {0} is 2, 3 or 4.</note>
+        </trans-unit>
+        <trans-unit id="Resx/XMonthsAgo_5To12" translate="yes" xml:space="preserve">
+          <source>{0} months ago</source>
+          <target state="translated" state-qualifier="exact-match">{0} місяць тому</target>
+          <note from="MultilingualBuild" priority="2" annotates="source">Default text for "{0} months ago" as used by the RelativeTimeConverter, where {0} is a number from 5 to 12.</note>
+        </trans-unit>
+        <trans-unit id="Resx/XSecondsAgo_2To4" translate="yes" xml:space="preserve">
+          <source>{0} seconds ago</source>
+          <target state="translated" state-qualifier="exact-match">{0} секунду тому</target>
+          <note from="MultilingualBuild" priority="2" annotates="source">Default text for "{0} seconds ago" as used by the RelativeTimeConverter,  where {0} is 2, 3 or 4.</note>
+        </trans-unit>
+        <trans-unit id="Resx/XSecondsAgo_EndsIn1Not11" translate="yes" xml:space="preserve">
+          <source>{0} seconds ago</source>
+          <target state="translated" state-qualifier="exact-match">{0} секунду тому</target>
+          <note from="MultilingualBuild" priority="2" annotates="source">Default text for "{0} seconds ago" as used by the RelativeTimeConverter, where {0} is a number that ends in 1 but doesn't end in 11.</note>
+        </trans-unit>
+        <trans-unit id="Resx/XSecondsAgo_EndsIn2To4Not12To14" translate="yes" xml:space="preserve">
+          <source>{0} seconds ago</source>
+          <target state="translated" state-qualifier="exact-match">{0} секунду тому</target>
+          <note from="MultilingualBuild" priority="2" annotates="source">Default text for "{0} seconds ago" as used by the RelativeTimeConverter, where {0} is a number that ends in 2, 3 or 4, but doesn't end in 12, 13 or 14.</note>
+        </trans-unit>
+        <trans-unit id="Resx/XSecondsAgo_Other" translate="yes" xml:space="preserve">
+          <source>{0} seconds ago</source>
+          <target state="translated" state-qualifier="exact-match">{0} секунду тому</target>
+          <note from="MultilingualBuild" priority="2" annotates="source">Default text for "{0} seconds ago" as used by the RelativeTimeConverter, where {0} is a number not considered in any of the other exceptions, i.e. a number that ends in 0 or 5 to 9.</note>
+        </trans-unit>
+        <trans-unit id="Resx/XWeeksAgo_2To4" translate="yes" xml:space="preserve">
+          <source>{0} weeks ago</source>
+          <target state="translated" state-qualifier="exact-match">{0} тиждень тому</target>
+          <note from="MultilingualBuild" priority="2" annotates="source">Default text for "{0} weeks ago" as used by the RelativeTimeConverter, where {0} is 2, 3 or 4.</note>
+        </trans-unit>
+        <trans-unit id="Resx/Off" translate="yes" xml:space="preserve">
+          <source>Off</source>
+          <target state="translated" state-qualifier="exact-match">Вимкнуто</target>
+          <note from="MultilingualBuild" priority="2" annotates="source">Default text for "Off" for ToggleSwitch.</note>
+        </trans-unit>
+        <trans-unit id="Resx/On" translate="yes" xml:space="preserve">
+          <source>On</source>
+          <target state="translated" state-qualifier="exact-match">Увімкнуто</target>
+          <note from="MultilingualBuild" priority="2" annotates="source">Default text for "On" for ToggleSwitch.</note>
+        </trans-unit>
+        <trans-unit id="Resx/last Friday" translate="yes" xml:space="preserve">
+          <source>last Friday</source>
+          <target state="translated" state-qualifier="exact-match">минулої п’ятниці</target>
+          <note from="MultilingualBuild" priority="2" annotates="source">Default text for "last Friday" as used by RelativeTimeConverter</note>
+        </trans-unit>
+        <trans-unit id="Resx/last Monday" translate="yes" xml:space="preserve">
+          <source>last Monday</source>
+          <target state="translated" state-qualifier="exact-match">минулого понеділка</target>
+          <note from="MultilingualBuild" priority="2" annotates="source">Default text for "last Monday" as used by RelativeTimeConverter</note>
+        </trans-unit>
+        <trans-unit id="Resx/last Saturday" translate="yes" xml:space="preserve">
+          <source>last Saturday</source>
+          <target state="translated" state-qualifier="exact-match">минулої суботи</target>
+          <note from="MultilingualBuild" priority="2" annotates="source">Default text for "last Saturday" as used by RelativeTimeConverter</note>
+        </trans-unit>
+        <trans-unit id="Resx/last Sunday" translate="yes" xml:space="preserve">
+          <source>last Sunday</source>
+          <target state="translated" state-qualifier="exact-match">минулої неділі</target>
+          <note from="MultilingualBuild" priority="2" annotates="source">Default text for "last Sunday" as used by RelativeTimeConverter</note>
+        </trans-unit>
+        <trans-unit id="Resx/last Thursday" translate="yes" xml:space="preserve">
+          <source>last Thursday</source>
+          <target state="translated" state-qualifier="exact-match">минулого четверга</target>
+          <note from="MultilingualBuild" priority="2" annotates="source">Default text for "last Thursday" as used by RelativeTimeConverter</note>
+        </trans-unit>
+        <trans-unit id="Resx/last Tuesday" translate="yes" xml:space="preserve">
+          <source>last Tuesday</source>
+          <target state="translated" state-qualifier="exact-match">минулого вівторка</target>
+          <note from="MultilingualBuild" priority="2" annotates="source">Default text for "last Tuesday" as used by RelativeTimeConverter</note>
+        </trans-unit>
+        <trans-unit id="Resx/last Wednesday" translate="yes" xml:space="preserve">
+          <source>last Wednesday</source>
+          <target state="translated" state-qualifier="exact-match">минулої середи</target>
+          <note from="MultilingualBuild" priority="2" annotates="source">Default text for "last Wednesday" as used by RelativeTimeConverter</note>
+        </trans-unit>
+        <trans-unit id="Resx/on Friday" translate="yes" xml:space="preserve">
+          <source>on Friday</source>
+          <target state="translated" state-qualifier="exact-match">у п’ятницю</target>
+          <note from="MultilingualBuild" priority="2" annotates="source">Default text for "on Friday" as used by RelativeTimeConverter</note>
+        </trans-unit>
+        <trans-unit id="Resx/on Monday" translate="yes" xml:space="preserve">
+          <source>on Monday</source>
+          <target state="translated" state-qualifier="exact-match">у понеділок</target>
+          <note from="MultilingualBuild" priority="2" annotates="source">Default text for "on Monday" as used by RelativeTimeConverter</note>
+        </trans-unit>
+        <trans-unit id="Resx/on Saturday" translate="yes" xml:space="preserve">
+          <source>on Saturday</source>
+          <target state="translated" state-qualifier="exact-match">у суботу</target>
+          <note from="MultilingualBuild" priority="2" annotates="source">Default text for "on Saturday" as used by RelativeTimeConverter</note>
+        </trans-unit>
+        <trans-unit id="Resx/on Sunday" translate="yes" xml:space="preserve">
+          <source>on Sunday</source>
+          <target state="translated" state-qualifier="exact-match">у неділю</target>
+          <note from="MultilingualBuild" priority="2" annotates="source">Default text for "on Sunday" as used by RelativeTimeConverter</note>
+        </trans-unit>
+        <trans-unit id="Resx/on Thursday" translate="yes" xml:space="preserve">
+          <source>on Thursday</source>
+          <target state="translated" state-qualifier="exact-match">у четвер</target>
+          <note from="MultilingualBuild" priority="2" annotates="source">Default text for "on Thursday" as used by RelativeTimeConverter</note>
+        </trans-unit>
+        <trans-unit id="Resx/on Tuesday" translate="yes" xml:space="preserve">
+          <source>on Tuesday</source>
+          <target state="translated" state-qualifier="exact-match">у вівторок</target>
+          <note from="MultilingualBuild" priority="2" annotates="source">Default text for "on Tuesday" as used by RelativeTimeConverter</note>
+        </trans-unit>
+        <trans-unit id="Resx/on Wednesday" translate="yes" xml:space="preserve">
+          <source>on Wednesday</source>
+          <target state="translated" state-qualifier="exact-match">у середу</target>
+          <note from="MultilingualBuild" priority="2" annotates="source">Default text for "on Wednesday" as used by RelativeTimeConverter</note>
+        </trans-unit>
+      </group>
+    </body>
+  </file>
+</xliff>

@@ -634,6 +634,7 @@ namespace Microsoft.Phone.Controls
                 }
                 else if (longListSelector != null)
                 {
+#if WP7
                     // If the target is a LongListSelector, feather its items individually.
                     ListBox child = TemplatedVisualTreeExtensions.GetFirstLogicalChildByType<ListBox>(longListSelector, false);
 
@@ -641,6 +642,9 @@ namespace Microsoft.Phone.Controls
                     {
                         ItemsControlExtensions.GetItemsInViewPort(child, targets);
                     }
+#else
+                    LongListSelectorExtensions.GetItemsInViewPort(longListSelector, targets);
+#endif
                 }
                 else if (pivot != null)
                 {
