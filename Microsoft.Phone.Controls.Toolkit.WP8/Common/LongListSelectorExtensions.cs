@@ -5,7 +5,6 @@
 
 using System;
 using System.Collections.Generic;
-using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
@@ -20,53 +19,20 @@ namespace Microsoft.Phone.Controls
     public static class LongListSelectorExtensions
     {
         /// <summary>
-        /// Gets the items that are currently in the view port
-        /// of an Control.
-        /// </summary>
-        /// <param name="list">The Control to search on.</param>
-        /// <returns>
-        /// A list of weak references to the items in the view port.
-        /// </returns>
-        [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", MessageId = "ViewPort")]
-        public static IList<WeakReference> GetItemsInViewPort(Control list)
-        {
-            IList<WeakReference> viewPortItems = new List<WeakReference>();
-
-            GetItemsInViewPort(list, viewPortItems);
-
-            return viewPortItems;
-        }
-
-        /// <summary>
-        /// Gets the items that are currently in the view port
-        /// of an Control and adds them
+        /// Gets the items that are currently in the viewport
+        /// of a LongListSelector and adds them
         /// into a list of weak references.
         /// </summary>
         /// <param name="list">
-        /// The Control to search on.
+        /// The LongListSelector instance to search on.
         /// </param>
         /// <param name="items">
         /// The list of weak references where the items in 
-        /// the view port will be added.
+        /// the viewport will be added.
         /// </param>
-        [SuppressMessage("Microsoft.Design", "CA1011:ConsiderPassingBaseTypesAsParameters")]
-        [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", MessageId = "ViewPort")]
-        public static void GetItemsInViewPort(Control list, IList<WeakReference> items)
+        public static void GetItemsInViewPort(LongListSelector list, IList<WeakReference> items)
         {
-            if (list == null)
-            {
-                throw new ArgumentNullException("list");
-            }
-
-            if (items == null)
-            {
-                throw new ArgumentNullException("items");
-            }
-
-            int index;
-            FrameworkElement container;
-            GeneralTransform itemTransform;
-            Rect boundingBox;
+            DependencyObject child = list;
 
             if (VisualTreeHelper.GetChildrenCount(list) == 0)
             {
@@ -74,89 +40,76 @@ namespace Microsoft.Phone.Controls
                 return;
             }
 
-            var scrollHost = list.GetFirstLogicalChildByType<ViewportControl>(false);
-
             list.UpdateLayout();
 
-            if (scrollHost == null)
+            do
             {
-                return;
-            }
+                child = VisualTreeHelper.GetChild(child, 0);
+            } while (VisualTreeHelper.GetChildrenCount(child) > 0 && !(child is Canvas));
 
-            var contentPanel = scrollHost.Content as Canvas;
-            if (contentPanel == null || contentPanel.Children.Count == 0)
+            if (child is Canvas &&
+                VisualTreeHelper.GetChildrenCount(child) > 0 &&
+                VisualTreeHelper.GetChild(child, 0) is Canvas)
             {
-                return;
-            }
+                Canvas headersPanel = (Canvas)child;
+                Canvas itemsPanel = (Canvas)VisualTreeHelper.GetChild(child, 0);
+                var itemsInList = new List<KeyValuePair<double, FrameworkElement>>();
 
-            var itemsPanel = contentPanel.Children[0] as Canvas;
-            if (itemsPanel == null)
-            {
-                return;
-            }
+                AddVisibileContainers(list, itemsPanel, itemsInList, /* selectContent = */ false);
+                AddVisibileContainers(list, headersPanel, itemsInList, /* selectContent = */ true);
 
-            var containers = contentPanel.Children
-                .OfType<ContentPresenter>()
-                .Concat(itemsPanel.Children.OfType<ContentPresenter>())
-                .OrderBy(c => Canvas.GetTop(c))
-                .Select(c => c.GetFirstLogicalChildByType<FrameworkElement>(false))
-                .OfType<FrameworkElement>()
-                .ToList();
-
-            for (index = 0; index < containers.Count; index++)
-            {
-                container = containers[index];
-                if (container != null)
+                foreach (var pair in itemsInList.OrderBy(selector => selector.Key))
                 {
-                    itemTransform = null;
+                    items.Add(new WeakReference(pair.Value));
+                }
+            }
+        }
+
+        /// <summary>
+        /// Retrieves the visible containers in a LongListSelector and adds them to <paramref name="items"/>.
+        /// </summary>
+        /// <param name="list">LongListSelector that contains the items.</param>
+        /// <param name="itemsPanel">Direct parent of the items.</param>
+        /// <param name="items">List to populate with the containers currently in the viewport</param>
+        /// <param name="selectContent">
+        ///     Specifies whether to return the container or its content.
+        ///     For headers, we can't apply projections on the container directly (or everything will go blank), 
+        ///     so we will apply them on the content instead.
+        /// </param>
+        private static void AddVisibileContainers(LongListSelector list, Canvas itemsPanel, List<KeyValuePair<double, FrameworkElement>> items, bool selectContent)
+        {
+            foreach (DependencyObject obj in VisualTreeExtensions.GetVisualChildren(itemsPanel))
+            {
+                ContentPresenter container = obj as ContentPresenter;
+                if (container != null &&
+                    (!selectContent ||
+                    (VisualTreeHelper.GetChildrenCount(container) == 1 &&
+                     VisualTreeHelper.GetChild(container, 0) is FrameworkElement)))
+                {
+                    GeneralTransform itemTransform = null;
                     try
                     {
-                        itemTransform = container.TransformToVisual(scrollHost);
+                        itemTransform = container.TransformToVisual(list);
                     }
                     catch (ArgumentException)
                     {
                         // Ignore failures when not in the visual tree
-                        return;
-                    }
-
-                    boundingBox = new Rect(itemTransform.Transform(new Point()), itemTransform.Transform(new Point(container.ActualWidth, container.ActualHeight)));
-
-                    if (boundingBox.Bottom > 0)
-                    {
-                        items.Add(new WeakReference(container));
-                        index++;
                         break;
                     }
+
+                    Rect boundingBox = new Rect(itemTransform.Transform(new Point()), itemTransform.Transform(new Point(container.ActualWidth, container.ActualHeight)));
+
+                    if (boundingBox.Bottom > 0 && boundingBox.Top < list.ActualHeight)
+                    {
+                        items.Add(
+                            new KeyValuePair<double, FrameworkElement>(
+                                boundingBox.Top,
+                                selectContent
+                                ? (FrameworkElement)VisualTreeHelper.GetChild(container, 0)
+                                : container));
+                    }
                 }
             }
-
-            for (; index < containers.Count; index++)
-            {
-                container = containers[index];
-                itemTransform = null;
-                try
-                {
-                    itemTransform = container.TransformToVisual(scrollHost);
-                }
-                catch (ArgumentException)
-                {
-                    // Ignore failures when not in the visual tree
-                    return;
-                }
-
-                boundingBox = new Rect(itemTransform.Transform(new Point()), itemTransform.Transform(new Point(container.ActualWidth, container.ActualHeight)));
-
-                if (boundingBox.Top < scrollHost.ActualHeight)
-                {
-                    items.Add(new WeakReference(container));
-                }
-                else
-                {
-                    break;
-                }
-            }
-
-            return;
         }
     }
 }

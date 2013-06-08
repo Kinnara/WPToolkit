@@ -48,6 +48,7 @@ namespace PhoneToolkitSample8
                 new SampleItem("/Samples/PhonePasswordBoxSample.xaml","phonepasswordbox","add new features to the passwordbox" ),
                 new SampleItem("/Samples/PhoneSliderSample.xaml","phoneslider","add new features to the slider" ),
                 new SampleItem("/Samples/PhoneTextBoxSample.xaml","phonetextbox","add new features to the textbox" ),
+                new SampleItem("/Samples/SpeechTextBoxSample.xaml","speechtextbox","a speech-enabled phonetextbox" ),
                 new SampleItem("/Samples/RatingControlSample.xaml","ratingcontrol","simple control for star-based rating" ),
                 new SampleItem("/Samples/SlideInEffectSample.xaml","slideineffect","make elements responsive to pivotitem sliding" ),
                 new SampleItem("/Samples/StartViewSample.xaml","startview","panoramic view similar to the start screen" ),
@@ -58,6 +59,11 @@ namespace PhoneToolkitSample8
                 new SampleItem("/Samples/WaitCursorSample.xaml","waitcursor","takes over and dims the screen" ),
                 new SampleItem("/Samples/WrapPanelSample.xaml","wrappanel","a non-virtualized wrapping control" ) 
             };
+        }
+
+        private void ApplicationBarIconSettingsButton_Click(object sender, EventArgs e)
+        {
+            NavigationService.Navigate(new Uri("/Settings.xaml", UriKind.RelativeOrAbsolute));
         }   
     }
 

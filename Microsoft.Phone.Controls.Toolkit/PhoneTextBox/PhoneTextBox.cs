@@ -4,14 +4,11 @@
 // All other rights reserved.
 
 using System;
+using System.Diagnostics.CodeAnalysis;
+using System.Globalization;
 using System.Windows;
-using Microsoft.Phone.Controls;
 using System.Windows.Controls;
 using System.Windows.Media;
-using System.Windows.Media.Animation;
-using System.Windows.Shapes;
-using System.Globalization;
-using System.Diagnostics.CodeAnalysis;
 
 namespace Microsoft.Phone.Controls
 {
@@ -33,24 +30,28 @@ namespace Microsoft.Phone.Controls
     {
 
         #region PhoneTextBox Properties & Variables
-        private Grid RootGrid;
-        private Border MainBorder;
-        private TextBlock MeasurementTextBlock; // Used to measure the height of the TextBox to determine if the action icon is being overlapped.
+        private Grid _rootGrid;
+        private Border _mainBorder;
+
+        // Used to measure the height of the TextBox to determine if the action icon is being overlapped. 
+        private TextBlock _measurementTextBlock;
 
         // Placeholder Text Private Variables.
-        private FrameworkElement PlaceholderTextElement;
+        private FrameworkElement _placeholderTextElement;
 
         // Length Indicator Private Variables.
-        private TextBlock LengthIndicator;
-
-        // Action Icon Private Variables.
-        private Border ActionIconBorder;
+        private TextBlock _lengthIndicator;
 
         // Ignore flags for the dependency properties.
         private bool _ignorePropertyChange = false;
 
         //Temporarily ignore focus?
         private bool _ignoreFocus = false;
+
+        /// <summary>
+        /// Border for PhoneTextBox action icon
+        /// </summary>
+        protected Border ActionIconBorder { get; set; }
 
         private bool IsFocused { get; set; }
 
@@ -242,15 +243,15 @@ namespace Microsoft.Phone.Controls
         /// </summary>
         private void UpdatePlaceholderTextVisibility()
         {
-            if (PlaceholderTextElement != null)
+            if (_placeholderTextElement != null)
             {
                 if (!IsFocused && string.IsNullOrEmpty(Text))
                 {
-                    PlaceholderTextElement.Visibility = Visibility.Visible;
+                    _placeholderTextElement.Visibility = Visibility.Visible;
                 }
                 else
                 {
-                    PlaceholderTextElement.Visibility = Visibility.Collapsed;
+                    _placeholderTextElement.Visibility = Visibility.Collapsed;
                 }
             }
         }
@@ -284,9 +285,9 @@ namespace Microsoft.Phone.Controls
 
             IsFocused = true;
 
-            if (PlaceholderTextElement != null)
+            if (_placeholderTextElement != null)
             {
-                PlaceholderTextElement.Visibility = Visibility.Collapsed;
+                _placeholderTextElement.Visibility = Visibility.Collapsed;
             }
 
             base.OnGotFocus(e);
@@ -387,7 +388,7 @@ namespace Microsoft.Phone.Controls
             Justification = "At this time the length indicator is not culture-specific or retrieved from the resources.")]
         private void UpdateLengthIndicatorVisibility()
         {
-            if (RootGrid == null || LengthIndicator == null)
+            if (_rootGrid == null || _lengthIndicator == null)
             {
                 return;
             }
@@ -396,7 +397,7 @@ namespace Microsoft.Phone.Controls
             if (LengthIndicatorVisible)
             {
                 // The current implementation is culture invariant.
-                LengthIndicator.Text = String.Format(
+                _lengthIndicator.Text = String.Format(
                     CultureInfo.InvariantCulture,
                     "{0}/{1}", Text.Length, 
                     ((DisplayedMaxLength > 0) ? DisplayedMaxLength : MaxLength));
@@ -471,18 +472,18 @@ namespace Microsoft.Phone.Controls
                 if (ActionIcon == null || (HidesActionItemWhenEmpty && string.IsNullOrEmpty(Text)))
                 {
                     ActionIconBorder.Visibility = Visibility.Collapsed;
-                    if (MainBorder != null)
+                    if (_mainBorder != null)
                     {
-                        MainBorder.Padding = new Thickness(0);
+                        _mainBorder.Padding = new Thickness(0);
                     }
                 }
                 else
                 {
                     ActionIconBorder.Visibility = Visibility.Visible;
 
-                    if (MainBorder != null && TextWrapping != System.Windows.TextWrapping.Wrap)
+                    if (_mainBorder != null && TextWrapping != System.Windows.TextWrapping.Wrap)
                     {
-                        MainBorder.Padding = new Thickness(0, 0, 48, 0);
+                        _mainBorder.Padding = new Thickness(0, 0, 48, 0);
                     }
                 }
             }
@@ -509,13 +510,13 @@ namespace Microsoft.Phone.Controls
         {
             if (ActionIcon == null || TextWrapping != System.Windows.TextWrapping.Wrap) { return; }
 
-            MeasurementTextBlock.Width = ActualWidth;
+            _measurementTextBlock.Width = ActualWidth;
 
-            if (MeasurementTextBlock.ActualHeight > ActualHeight - 72)
+            if (_measurementTextBlock.ActualHeight > ActualHeight - 72)
             {
                 Height = ActualHeight + 72;
             }
-            else if (ActualHeight > MeasurementTextBlock.ActualHeight + 144)
+            else if (ActualHeight > _measurementTextBlock.ActualHeight + 144)
             {
                 Height = ActualHeight - 72;
             }
@@ -545,24 +546,24 @@ namespace Microsoft.Phone.Controls
                 ActionIconBorder.Tap -= OnActionIconTapped;
             }
 
-            RootGrid = GetTemplateChild(RootGridName) as Grid;
+            _rootGrid = GetTemplateChild(RootGridName) as Grid;
             
             // Getting template children for the placeholder text.
-            PlaceholderTextElement = GetTemplateChild(PlaceholderTextElementName) as FrameworkElement;
-            MainBorder = GetTemplateChild(MainBorderName) as Border;
+            _placeholderTextElement = GetTemplateChild(PlaceholderTextElementName) as FrameworkElement;
+            _mainBorder = GetTemplateChild(MainBorderName) as Border;
 
-            if (PlaceholderTextElement != null)
+            if (_placeholderTextElement != null)
             {
                 UpdatePlaceholderTextVisibility();
             }
             
             // Getting template children for the length indicator.
-            LengthIndicator = GetTemplateChild(LengthIndicatorName) as TextBlock;
+            _lengthIndicator = GetTemplateChild(LengthIndicatorName) as TextBlock;
             
             // Getting template child for the action icon
             ActionIconBorder = GetTemplateChild(ActionIconBorderName) as Border;
 
-            if (RootGrid != null && LengthIndicator != null)
+            if (_rootGrid != null && _lengthIndicator != null)
             {
                 UpdateLengthIndicatorVisibility();
             }
@@ -575,7 +576,7 @@ namespace Microsoft.Phone.Controls
 
             
             // Get template child for the action icon measurement text block.
-            MeasurementTextBlock = GetTemplateChild(MeasurementTextBlockName) as TextBlock;
+            _measurementTextBlock = GetTemplateChild(MeasurementTextBlockName) as TextBlock;
         }
 
         /// <summary>

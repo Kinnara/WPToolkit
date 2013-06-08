@@ -627,8 +627,10 @@ namespace Microsoft.Phone.Controls
                 ItemsControl itemsControl = r.Target as ItemsControl;
                 LongListSelector longListSelector = r.Target as LongListSelector;
 #if !WP7
-                LongListMultiSelector longListMultiSelector = r.Target as LongListMultiSelector;
-                ListView listView = r.Target as ListView;
+                if (target is LongListMultiSelector || target is ListView)
+                {
+                    longListSelector = target.GetFirstLogicalChildByType<LongListSelector>(false);
+                }
 #endif
 
                 if (pivot != null)
@@ -667,18 +669,6 @@ namespace Microsoft.Phone.Controls
                     LongListSelectorExtensions.GetItemsInViewPort(longListSelector, targets);
 #endif
                 }
-#if !WP7
-                else if (longListMultiSelector != null)
-                {
-                    // If the target is a LongListMultiSelector, feather its items individually.
-                    LongListSelectorExtensions.GetItemsInViewPort(longListMultiSelector, targets);
-                }
-                else if (listView != null)
-                {
-                    // If the target is a ListView, feather its items individually.
-                    LongListSelectorExtensions.GetItemsInViewPort(listView, targets);
-                }
-#endif
                 else
                 {
                     // Else, feather the target as a whole.

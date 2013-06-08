@@ -62,6 +62,7 @@ namespace Microsoft.Phone.Controls
         /// </summary>
         private static readonly PropertyPath XPropertyPath = new PropertyPath("X");
 
+#if WP7
         /// <summary>
         /// Identifies whether there was a SelectionChanged event
         /// triggered by a pivot.
@@ -73,11 +74,8 @@ namespace Microsoft.Phone.Controls
         /// triggered by a pivot.
         /// </summary>
         private static bool _manipulatedStarted;
-
-#if !WP7
-        private static bool _waitingForSelectionChanged;
 #endif
-
+        
         /// <summary>
         /// Private manager that represents a correlation between Pivots
         /// and the number of indexed elements it contains.
@@ -210,13 +208,10 @@ namespace Microsoft.Phone.Controls
                 {
                     // Attach event handlers to the parent Pivot.
                     newPivot.SelectionChanged += Pivot_SelectionChanged;
-                    newPivot.ManipulationStarted += Pivot_ManipulationStarted;
 #if WP7
+                    newPivot.ManipulationStarted += Pivot_ManipulationStarted;
                     newPivot.ManipulationCompleted += Pivot_ManipulationCompleted;
-#else
-                    newPivot.AddHandler(UIElement.ManipulationCompletedEvent, new EventHandler<ManipulationCompletedEventArgs>(Pivot_ManipulationCompleted), true);
 #endif
-
                     _pivotsToElementCounters.Add(newPivot, 1);
                 }
                 else
@@ -234,13 +229,10 @@ namespace Microsoft.Phone.Controls
                     {
                         // Dettach event handlers from the parent Pivot.
                         oldPivot.SelectionChanged -= Pivot_SelectionChanged;
-                        oldPivot.ManipulationStarted -= Pivot_ManipulationStarted;
 #if WP7
+                        oldPivot.ManipulationStarted -= Pivot_ManipulationStarted;
                         oldPivot.ManipulationCompleted -= Pivot_ManipulationCompleted;
-#else
-                        oldPivot.RemoveHandler(UIElement.ManipulationCompletedEvent, new EventHandler<ManipulationCompletedEventArgs>(Pivot_ManipulationCompleted));
 #endif
-
                         _pivotsToElementCounters.Remove(oldPivot);
                     }
                 }
@@ -439,9 +431,61 @@ namespace Microsoft.Phone.Controls
         /// <param name="e">The event information.</param>
         private static void Pivot_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+#if WP7
             _selectionChanged = true;
+#else
+            Pivot pivot = (Pivot)sender;
+            PivotItem pivotItem = pivot.ItemContainerGenerator.ContainerFromItem(pivot.SelectedItem) as PivotItem;
+            
+            if (pivotItem == null)
+            {
+                return;
+            }
+
+            List<FrameworkElement> elements;
+
+            if(!_pivotItemsToElements.TryGetValue(pivotItem, out elements))
+            {
+                return;
+            }
+
+            DependencyObject parent = pivotItem;
+            do
+            {
+                parent = VisualTreeHelper.GetParent(parent);
+            } while (parent != null & !(parent is ItemsPresenter));
+
+            if (parent != null)
+            {
+                ItemsPresenter ip = (ItemsPresenter)parent;
+
+                if (ip.RenderTransform is TranslateTransform)
+                {
+                    Storyboard storyboard = new Storyboard();
+                    foreach (FrameworkElement target in elements)
+                    {
+                        if (target != null)
+                        {
+                            if (IsOnScreen(target))
+                            {
+                                bool fromRight = ((TranslateTransform)ip.RenderTransform).X <= 0;
+                                ComposeStoryboard(target, fromRight, ref storyboard);
+                            }
+                        }
+                    }
+
+                    storyboard.Completed += (s1, e1) =>
+                    {
+                        storyboard.Stop();
+                    };
+
+                    storyboard.Begin();
+                }
+            }
+#endif
         }
 
+#if WP7
         /// <summary>
         /// Sets a flag indicating that a ManipulationStarted event ocurred.
         /// </summary>
@@ -471,7 +515,7 @@ namespace Microsoft.Phone.Controls
 
                 List<FrameworkElement> elements;
 
-                if(!_pivotItemsToElements.TryGetValue(pivotItem, out elements))
+                if (!_pivotItemsToElements.TryGetValue(pivotItem, out elements))
                 {
                     return;
                 }
@@ -485,10 +529,6 @@ namespace Microsoft.Phone.Controls
                         if (IsOnScreen(target))
                         {
                             bool fromRight = (e.TotalManipulation.Translation.X <= 0);
-                            if (target.GetUsefulFlowDirection() == FlowDirection.RightToLeft)
-                            {
-                                fromRight = !fromRight;
-                            }
                             ComposeStoryboard(target, fromRight, ref storyboard);
                         }
                     }
@@ -501,23 +541,10 @@ namespace Microsoft.Phone.Controls
 
                 storyboard.Begin();
             }
-#if !WP7
-            else if (_manipulatedStarted)
-            {
-                if (!_waitingForSelectionChanged)
-                {
-                    _waitingForSelectionChanged = true;
-                    Deployment.Current.Dispatcher.BeginInvoke(() => Pivot_ManipulationCompleted(sender, e));
-                    return;
-                }
-            }
-#endif
 
             _selectionChanged = _manipulatedStarted = false;
-#if !WP7
-            _waitingForSelectionChanged = false;
-#endif
         }
+#endif
 
         /// <summary>
         /// Subscribes an element to the private managers.

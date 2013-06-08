@@ -16,5 +16,9 @@ namespace PhoneToolkitSample
         {
             InitializeComponent();
         }
+        private void ApplicationBarIconSettingsButton_Click(object sender, EventArgs e)
+        {
+            NavigationService.Navigate(new Uri("/Settings.xaml", UriKind.RelativeOrAbsolute));
+        }   
     }
 }
