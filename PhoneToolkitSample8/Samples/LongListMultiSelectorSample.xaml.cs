@@ -366,16 +366,14 @@ This sample and the sample code demonstrates how to use the new LongListMultiSel
             }
         }
 
-
-
         /// <summary>
-        /// Tap on an item : depending on the selection state, either unselect it or consider it as read
+        /// Tap on an item : consider it as read
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void OnItemContentTap(object sender, System.Windows.Input.GestureEventArgs e)
+        private void OnItemContentTap(object sender, ItemClickEventArgs e)
         {
-            EmailObject item = ((FrameworkElement)sender).DataContext as EmailObject;
+            EmailObject item = e.ClickedItem as EmailObject;
             if (item != null)
             {
                 item.Unread = false;
@@ -531,13 +529,9 @@ This sample and the sample code demonstrates how to use the new LongListMultiSel
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void OnPictureItemTap(object sender, System.Windows.Input.GestureEventArgs e)
+        private void OnPictureItemTap(object sender, ItemClickEventArgs e)
         {
-            FrameworkElement fe = sender as FrameworkElement;
-            if (fe != null)
-            {
-                CurrentPicture = fe.DataContext as Picture;
-            }
+            CurrentPicture = e.ClickedItem as Picture;
         }
         #endregion
 

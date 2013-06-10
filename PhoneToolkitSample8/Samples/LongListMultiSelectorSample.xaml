@@ -27,7 +27,7 @@
         <data:UnreadToBrushConverter x:Key="UnreadToBrushConverter"/>
         <data:EmailCollection x:Key="EmailCollection"/>
         <DataTemplate x:Key="EmailItemTemplate">
-            <StackPanel Margin="24,0,0,18" Tap="OnItemContentTap" >
+            <StackPanel Margin="24,0,0,18">
                 <TextBlock Text="{Binding Sender}" 
                                        Margin="0,0,0,-5"
                                        FontSize="37.333" 
@@ -115,7 +115,7 @@
         <!-- Resources for Pictures LongListMultiSelector -->
         <data:PicturesAlbum x:Key="PicturesAlbum"/>
         <DataTemplate x:Key="PictureItemTemplate">
-            <Grid Tap="OnPictureItemTap">
+            <Grid>
                 <Image Source="{Binding Url}" Stretch="UniformToFill"/>
                 <TextBlock Text="{Binding City}" VerticalAlignment="Bottom" HorizontalAlignment="Left"
                            FontFamily="{StaticResource PhoneFontFamilySemiBold}" Foreground="White" Margin="12,0,0,8"/>
@@ -159,6 +159,7 @@
                                                 SelectionChanged="OnEmailListSelectionChanged"
                                                 IsSelectionEnabledChanged="OnEmailListIsSelectionEnabledChanged"
                                                 ItemRealized="OnEmailListItemRealized"
+                                                ItemClick="OnItemContentTap"
                                                 ItemTemplate="{StaticResource EmailItemTemplate}"
                                                 ItemInfoTemplate="{StaticResource EmailItemInfoTemplate}"
                                                 toolkit:TurnstileFeatherEffect.FeatheringIndex="2">
@@ -193,6 +194,7 @@
                                                ItemTemplate="{StaticResource PictureItemTemplate}"
                                                IsSelectionEnabledChanged="OnGridSelectorIsSelectionEnabledChanged"
                                                SelectionChanged="OnGridSelectorSelectionChanged"
+                                               ItemClick="OnPictureItemTap"
                 />
             </phone:PivotItem>
 

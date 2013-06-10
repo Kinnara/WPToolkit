@@ -2031,7 +2031,7 @@
                                 </VisualStateGroup>
                             </VisualStateManager.VisualStateGroups>
                             <primitives:TiltUserControl controls:TiltEffect.SuppressTilt="False">
-                                <Grid HorizontalAlignment="Stretch" Background="Transparent">
+                                <Grid x:Name="ContentPanel" HorizontalAlignment="Stretch" Background="Transparent">
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition Width="*"/>
                                         <ColumnDefinition Width="Auto"/>
@@ -2048,7 +2048,7 @@
                                                     Content="{TemplateBinding ContentInfo}"
                                                     ContentTemplate="{TemplateBinding ContentInfoTemplate}"/>
                                     <Grid x:Name="OuterCover" IsHitTestVisible="True"
-                                          Visibility="Collapsed" Background="Transparent"/>
+                                          Visibility="Collapsed" Background="Transparent" Grid.ColumnSpan="2"/>
                                 </Grid>
                             </primitives:TiltUserControl>
                             <Rectangle x:Name="InnerHintPanel" Width="38"

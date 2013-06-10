@@ -449,6 +449,11 @@ namespace Microsoft.Phone.Controls
         /// Occurs when the selection mode is opened or closed.
         /// </summary>
         public event DependencyPropertyChangedEventHandler IsSelectionEnabledChanged;
+
+        /// <summary>
+        /// Occurs when an item receives an interaction.
+        /// </summary>
+        public event ItemClickEventHandler ItemClick;
         #endregion
 
         /// <summary>
@@ -630,6 +635,8 @@ namespace Microsoft.Phone.Controls
                         llItem.IsSelectedChanged -= OnLongListMultiSelectorItemIsSelectedChanged;
                         llItem.ClearValue(TiltEffect.SuppressTiltProperty);
 
+                        llItem.Click -= OnLongListMultiSelectorItemClick;
+
                         _realizedItems.Remove(llItem.WR);
                     }
                 }
@@ -706,6 +713,8 @@ namespace Microsoft.Phone.Controls
                             TiltEffect.SetSuppressTilt(llItem, true);
                         }
 
+                        llItem.Click += OnLongListMultiSelectorItemClick;
+
                         _realizedItems.Add(llItem.WR);
                     }
                 }
@@ -742,6 +751,18 @@ namespace Microsoft.Phone.Controls
                     {
                         SelectedItems.Remove(content);
                     }
+                }
+            }
+        }
+
+        void OnLongListMultiSelectorItemClick(object sender, EventArgs e)
+        {
+            LongListMultiSelectorItem item = sender as LongListMultiSelectorItem;
+            if (item != null)
+            {
+                if (ItemClick != null)
+                {
+                    ItemClick(this, new ItemClickEventArgs(item.Content));
                 }
             }
         }

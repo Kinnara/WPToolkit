@@ -4,13 +4,13 @@ using System.Windows;
 namespace Microsoft.Phone.Controls
 {
     /// <summary>
-    /// Represents the method that will handle an <see cref="E:Microsoft.Phone.Controls.ListView.ItemClick"/> event.
+    /// Represents the method that will handle an ItemClick event.
     /// </summary>
-    [SuppressMessage("Microsoft.Design", "CA1003:UseGenericEventHandlerInstances")]
+    [SuppressMessage("Microsoft.Design", "CA1003:UseGenericEventHandlerInstances", Justification = "Consistency with WinRT")]
     public delegate void ItemClickEventHandler(object sender, ItemClickEventArgs e);
 
     /// <summary>
-    /// Provides event data for the <see cref="E:Microsoft.Phone.Controls.ListView.ItemClick"/> event.
+    /// Provides event data for the ItemClick event.
     /// </summary>
     public sealed class ItemClickEventArgs : RoutedEventArgs
     {

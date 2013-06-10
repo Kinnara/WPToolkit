@@ -19,6 +19,7 @@ namespace Microsoft.Phone.Controls
     [TemplateVisualState(Name = ExposedStateName, GroupName = ManipulationStatesName)]
     [TemplateVisualState(Name = SelectedStateName, GroupName = SelectionStatesName)]
     [TemplateVisualState(Name = UnselectedStateName, GroupName = SelectionStatesName)]
+    [TemplatePart(Name = ContentPanelName, Type = typeof(FrameworkElement))]
     [TemplatePart(Name = ContentContainerName, Type = typeof(ContentControl))]
     [TemplatePart(Name = OuterHintPanelName, Type = typeof(Rectangle))]
     [TemplatePart(Name = InnerHintPanelName, Type = typeof(Rectangle))]
@@ -38,6 +39,7 @@ namespace Microsoft.Phone.Controls
 
         internal enum State { Opened, Exposed, Closed, Selected, Unselected }
 
+        private const string ContentPanelName = "ContentPanel";
         private const string ContentContainerName = "ContentContainer";
         private const string OuterHintPanelName = "OuterHintPanel";
         private const string InnerHintPanelName = "InnerHintPanel";
@@ -48,6 +50,8 @@ namespace Microsoft.Phone.Controls
         /// Limit for the manipulation delta in the Y-axis.
         /// </summary>
         private const double _translationYLimit = 0.4;
+
+        FrameworkElement _clickElement = null;
 
         /// <summary>
         /// Outer Hint Panel template part.
@@ -205,6 +209,8 @@ namespace Microsoft.Phone.Controls
         /// Triggered when the IsSelected property has changed
         /// </summary>
         public event EventHandler IsSelectedChanged;
+
+        internal event EventHandler Click;
         #endregion
 
         /// <summary>
@@ -222,6 +228,10 @@ namespace Microsoft.Phone.Controls
         public override void OnApplyTemplate()
         {
             base.OnApplyTemplate();
+            if (_clickElement != null)
+            {
+                _clickElement.Tap -= OnClickElementTap;
+            }
             if (_outerHintPanel != null)
             {
                 _outerHintPanel.ManipulationStarted -= OnSelectPanelManipulationStarted;
@@ -239,6 +249,11 @@ namespace Microsoft.Phone.Controls
                 _outerCover.Tap -= OnCoverTap;
             }
 
+            _clickElement = GetTemplateChild(ContentPanelName) as FrameworkElement ?? GetTemplateChild(ContentContainerName) as FrameworkElement;
+            if (_clickElement != null)
+            {
+                _clickElement.Tap += OnClickElementTap;
+            }
             _outerHintPanel = GetTemplateChild(OuterHintPanelName) as Rectangle;
             if (_outerHintPanel != null)
             {
@@ -276,6 +291,14 @@ namespace Microsoft.Phone.Controls
             }
         }
 
+        void OnClickElementTap(object sender, System.Windows.Input.GestureEventArgs e)
+        {
+            if (Click != null)
+            {
+                Click(this, EventArgs.Empty);
+            }
+        }
+
         /// <summary>
         /// Tap on the cover grid : switch the selected state
         /// </summary>
@@ -284,6 +307,7 @@ namespace Microsoft.Phone.Controls
         void OnCoverTap(object sender, System.Windows.Input.GestureEventArgs e)
         {
             IsSelected = !IsSelected;
+            e.Handled = true;
         }
 
         /// <summary>

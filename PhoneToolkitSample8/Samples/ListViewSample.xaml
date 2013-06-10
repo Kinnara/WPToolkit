@@ -59,12 +59,7 @@
         <controls:Pivot Title="{StaticResource ApplicationTitle}">
             <controls:PivotItem Header="listview">
                 <Grid>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition/>
-                    </Grid.RowDefinitions>
                     <toolkit:ListView x:Name="List"
-                                      Grid.Row="1"
                                       Margin="0,0,-12,0"
                                       ItemsSource="{StaticResource People}"
                                       IncrementalLoadingThreshold="1"
