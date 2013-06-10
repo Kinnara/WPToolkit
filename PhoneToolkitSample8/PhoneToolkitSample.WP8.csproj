@@ -550,56 +550,8 @@ ar-SA;az-Latn-AZ;be-BY;bg-BG;ca-ES;cs-CZ;da-DK;de-DE;el-GR;en-GB;en-US;es-ES;es-
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="..\PhoneToolkitSample\Data\AccentColorNameToBrush.vb">
-      <Link>Data\AccentColorNameToBrush.vb</Link>
-    </Content>
-    <Content Include="..\PhoneToolkitSample\Data\AllPeople.vb">
-      <Link>Data\AllPeople.vb</Link>
-    </Content>
-    <Content Include="..\PhoneToolkitSample\Data\ColorExtensions.vb">
-      <Link>Data\ColorExtensions.vb</Link>
-    </Content>
-    <Content Include="..\PhoneToolkitSample\Data\GroupToBackgroundBrushValueConverter.vb">
-      <Link>Data\GroupToBackgroundBrushValueConverter.vb</Link>
-    </Content>
-    <Content Include="..\PhoneToolkitSample\Data\GroupToBrushValueConverter.vb">
-      <Link>Data\GroupToBrushValueConverter.vb</Link>
-    </Content>
-    <Content Include="..\PhoneToolkitSample\Data\GroupToForegroundBrushValueConverter.vb">
-      <Link>Data\GroupToForegroundBrushValueConverter.vb</Link>
-    </Content>
     <Content Include="..\PhoneToolkitSample\Data\loremipsum.txt">
       <Link>Data\loremipsum.txt</Link>
-    </Content>
-    <Content Include="..\PhoneToolkitSample\Data\LoremIpsum.vb">
-      <Link>Data\LoremIpsum.vb</Link>
-    </Content>
-    <Content Include="..\PhoneToolkitSample\Data\LoremIpsumWebsites.vb">
-      <Link>Data\LoremIpsumWebsites.vb</Link>
-    </Content>
-    <Content Include="..\PhoneToolkitSample\Data\Movie.vb">
-      <Link>Data\Movie.vb</Link>
-    </Content>
-    <Content Include="..\PhoneToolkitSample\Data\MoviesByCategory.vb">
-      <Link>Data\MoviesByCategory.vb</Link>
-    </Content>
-    <Content Include="..\PhoneToolkitSample\Data\MoviesInCategory.vb">
-      <Link>Data\MoviesInCategory.vb</Link>
-    </Content>
-    <Content Include="..\PhoneToolkitSample\Data\PeopleByFirstName.vb">
-      <Link>Data\PeopleByFirstName.vb</Link>
-    </Content>
-    <Content Include="..\PhoneToolkitSample\Data\PeopleInGroup.vb">
-      <Link>Data\PeopleInGroup.vb</Link>
-    </Content>
-    <Content Include="..\PhoneToolkitSample\Data\Person.vb">
-      <Link>Data\Person.vb</Link>
-    </Content>
-    <Content Include="..\PhoneToolkitSample\Data\RandomPeople.vb">
-      <Link>Data\RandomPeople.vb</Link>
-    </Content>
-    <Content Include="..\PhoneToolkitSample\Data\Tuple.vb">
-      <Link>Data\Tuple.vb</Link>
     </Content>
     <Content Include="..\PhoneToolkitSample\Images\Beignets.jpg">
       <Link>Images\Beignets.jpg</Link>
