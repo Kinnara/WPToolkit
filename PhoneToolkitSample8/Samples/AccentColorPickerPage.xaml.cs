@@ -3,21 +3,18 @@
 // Please see http://go.microsoft.com/fwlink/?LinkID=131993 for details.
 // All other rights reserved.
 
+using Microsoft.Phone.Controls;
+using Microsoft.Phone.Controls.Primitives;
 using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Globalization;
-using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
 using System.Windows.Navigation;
-using Microsoft.Phone.Controls.Primitives;
-using Microsoft.Phone.Shell;
-using System.Windows.Controls.Primitives;
-using Microsoft.Phone.Controls;
 
 namespace PhoneToolkitSample.Samples
 {
