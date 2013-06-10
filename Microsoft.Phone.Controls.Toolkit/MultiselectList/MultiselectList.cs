@@ -67,7 +67,7 @@ namespace Microsoft.Phone.Controls
 
             if ((bool)e.NewValue)
             {
-                target.OpenSelection();
+                target.TriggerSelection(SelectionEnabledState.Opened);
             }
             else
             {
@@ -101,7 +101,7 @@ namespace Microsoft.Phone.Controls
                     target.OnSelectionChanged(removedItems, new object[0]);
                 }
 
-                target.CloseSelection();
+                target.TriggerSelection(SelectionEnabledState.Closed);
             }
 
             var handler = target.IsSelectionEnabledChanged;
@@ -191,17 +191,17 @@ namespace Microsoft.Phone.Controls
 
         /// <summary>
         /// Triggers the visual state changes and visual transitions
-        /// to open the list into selection mode.
+        /// to open or close the list to/from selection mode.
         /// </summary>
-        private void OpenSelection()
+        private void TriggerSelection(SelectionEnabledState state)
         {
-            IList<WeakReference> items = ItemsControlExtensions.GetItemsInViewPort(this);
+            IList<WeakReference> items = this.GetItemsInViewPort();
 
             //Only animate the containers in the view port.
             foreach (var i in items)
             {
                 MultiselectItem item = (MultiselectItem)(((WeakReference)i).Target);
-                item.State = SelectionEnabledState.Opened;
+                item.State = state;
                 item.UpdateVisualState(true);
             }
 
@@ -212,37 +212,7 @@ namespace Microsoft.Phone.Controls
                     MultiselectItem item = (MultiselectItem)ItemContainerGenerator.ContainerFromIndex(j);
                     if (item != null)
                     {
-                        item.State = SelectionEnabledState.Opened;
-                        item.UpdateVisualState(false);
-                    }
-                }
-            });
-        }
-
-        /// <summary>
-        /// Triggers the visual state changes and visual transitions
-        /// to close the list out of selection mode.
-        /// </summary>
-        private void CloseSelection()
-        {
-            IList<WeakReference> items = ItemsControlExtensions.GetItemsInViewPort(this);
-
-            //Only animate the containers in the view port.
-            foreach (var i in items)
-            {
-                MultiselectItem item = (MultiselectItem)(((WeakReference)i).Target);
-                item.State = SelectionEnabledState.Closed;
-                item.UpdateVisualState(true);
-            }
-
-            Dispatcher.BeginInvoke(() =>
-            {
-                for (int j = 0; j < this.Items.Count; j++)
-                {
-                    MultiselectItem item = (MultiselectItem)ItemContainerGenerator.ContainerFromIndex(j);
-                    if (item != null)
-                    {
-                        item.State = SelectionEnabledState.Closed;
+                        item.State = state;
                         item.UpdateVisualState(false);
                     }
                 }

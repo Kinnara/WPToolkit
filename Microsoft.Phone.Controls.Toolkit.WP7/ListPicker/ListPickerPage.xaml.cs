@@ -168,7 +168,7 @@ namespace Microsoft.Phone.Controls
 
         private void SetupListItems(double degree)
         {
-            _itemsToAnimate = ItemsControlExtensions.GetItemsInViewPort(Picker);
+            _itemsToAnimate = Picker.GetItemsInViewPort();
 
             for (int i = 0; i < _itemsToAnimate.Count; i++)
             {

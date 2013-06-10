@@ -2,7 +2,9 @@
 // This source is subject to the Microsoft Public License (Ms-PL).
 // Please see http://go.microsoft.com/fwlink/?LinkID=131993 for details.
 // All other rights reserved.
+
 using System;
+using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Shapes;
@@ -357,33 +359,15 @@ namespace Microsoft.Phone.Controls
         }
 
         /// <summary>
-        /// Finds the LongListMultiSelector to which the LongListMultiSelectorItem belongs
-        /// </summary>
-        /// <param name="item"></param>
-        /// <returns></returns>
-        protected static LongListMultiSelector FindContainer(DependencyObject item)
-        {
-            while (item != null)
-            {
-                item = System.Windows.Media.VisualTreeHelper.GetParent(item);
-                LongListMultiSelector llms = item as LongListMultiSelector;
-                if (llms != null)
-                {
-                    return llms;
-                }
-            }
-            return null;
-        }
-
-        /// <summary>
         /// Called when content is changed. This is a good place to get the style (which depends on the LLMS layout)
-        /// because the controll template has not yet been expanded
+        /// because the control template has not yet been expanded.
         /// </summary>
         /// <param name="oldContent"></param>
         /// <param name="newContent"></param>
         protected override void OnContentChanged(object oldContent, object newContent)
         {
-            LongListMultiSelector llms = FindContainer(this);
+            // Finds the LongListMultiSelector to which the LongListMultiSelectorItem belongs
+            LongListMultiSelector llms = this.GetParentByType<LongListMultiSelector>();
             if (llms != null)
             {
                 llms.ConfigureItem(this);

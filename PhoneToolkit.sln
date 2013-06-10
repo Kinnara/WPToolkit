@@ -18,32 +18,6 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Microsoft.Phone.Controls.Toolkit.Localization", "Microsoft.Phone.Controls.Toolkit.Localization\Microsoft.Phone.Controls.Toolkit.Localization.csproj", "{05FA6951-722D-4EA0-82A9-4C81792E2992}"
 EndProject
 Global
-	GlobalSection(TeamFoundationVersionControl) = preSolution
-		SccNumberOfProjects = 6
-		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
-		SccTeamFoundationServer = http://vstfdevdiv:8080/devdiv
-		SccLocalPath0 = .
-		SccProjectUniqueName1 = PhoneToolkitSample8\\PhoneToolkitSample.WP8.csproj
-		SccProjectTopLevelParentUniqueName1 = PhoneToolkit.sln
-		SccProjectName1 = PhoneToolkitSample8
-		SccLocalPath1 = PhoneToolkitSample8
-		SccProjectUniqueName2 = PhoneToolkitSample\\PhoneToolkitSample.WP7.csproj
-		SccProjectTopLevelParentUniqueName2 = PhoneToolkit.sln
-		SccProjectName2 = PhoneToolkitSample
-		SccLocalPath2 = PhoneToolkitSample
-		SccProjectUniqueName3 = Microsoft.Phone.Controls.Toolkit.WP7\\Microsoft.Phone.Controls.Toolkit.WP7.csproj
-		SccProjectTopLevelParentUniqueName3 = PhoneToolkit.sln
-		SccProjectName3 = Microsoft.Phone.Controls.Toolkit.WP7
-		SccLocalPath3 = Microsoft.Phone.Controls.Toolkit.WP7
-		SccProjectUniqueName4 = Microsoft.Phone.Controls.Toolkit.WP8\\Microsoft.Phone.Controls.Toolkit.WP8.csproj
-		SccProjectTopLevelParentUniqueName4 = PhoneToolkit.sln
-		SccProjectName4 = Microsoft.Phone.Controls.Toolkit.WP8
-		SccLocalPath4 = Microsoft.Phone.Controls.Toolkit.WP8
-		SccProjectUniqueName5 = Microsoft.Phone.Controls.Toolkit.Localization\\Microsoft.Phone.Controls.Toolkit.Localization.csproj
-		SccProjectTopLevelParentUniqueName5 = PhoneToolkit.sln
-		SccProjectName5 = Microsoft.Phone.Controls.Toolkit.Localization
-		SccLocalPath5 = Microsoft.Phone.Controls.Toolkit.Localization
-	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Debug|ARM = Debug|ARM

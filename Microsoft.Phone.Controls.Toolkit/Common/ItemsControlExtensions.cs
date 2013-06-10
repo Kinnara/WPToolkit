@@ -17,27 +17,6 @@ namespace Microsoft.Phone.Controls
     internal static class ItemsControlExtensions
     {
         /// <summary>
-        /// Gets the parent ItemsControl.
-        /// </summary>
-        /// <typeparam name="T">The type of ItemsControl.</typeparam>
-        /// <param name="element">The dependency object </param>
-        /// <returns>
-        /// The parent ItemsControl or null if there is not.
-        /// </returns>
-        public static T GetParentItemsControl<T>(DependencyObject element) 
-            where T : ItemsControl
-        {
-            var parent = VisualTreeHelper.GetParent(element);
-
-            while (!(parent is T) && (parent != null))
-            {
-                parent = VisualTreeHelper.GetParent(parent as DependencyObject);
-            }
-
-            return (T)parent;
-        }
-
-        /// <summary>
         /// Gets the items that are currently in the view port
         /// of an ItemsControl with a ScrollViewer.
         /// </summary>
@@ -45,7 +24,7 @@ namespace Microsoft.Phone.Controls
         /// <returns>
         /// A list of weak references to the items in the view port.
         /// </returns>
-        public static IList<WeakReference> GetItemsInViewPort(ItemsControl list)
+        public static IList<WeakReference> GetItemsInViewPort(this ItemsControl list)
         {
             IList<WeakReference> viewPortItems = new List<WeakReference>();
 
@@ -66,7 +45,7 @@ namespace Microsoft.Phone.Controls
         /// The list of weak references where the items in 
         /// the view port will be added.
         /// </param>
-        public static void GetItemsInViewPort(ItemsControl list, IList<WeakReference> items)
+        public static void GetItemsInViewPort(this ItemsControl list, IList<WeakReference> items)
         {
             int index;
             FrameworkElement container;

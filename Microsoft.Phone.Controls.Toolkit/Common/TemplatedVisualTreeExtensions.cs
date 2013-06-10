@@ -104,41 +104,5 @@ namespace System.Windows.Controls
             }
         }
         #endregion
-
-        #region GetParentByType<T>(...)
-        /// <summary>
-        /// The first parent of the framework element of the specified type 
-        /// that is found while traversing the visual tree upwards.
-        /// </summary>
-        /// <typeparam name="T">
-        /// The element type of the dependency object.
-        /// </typeparam>
-        /// <param name="element">The framework element.</param>
-        /// <returns>
-        /// The first parent of the framework element of the specified type.
-        /// </returns>
-        internal static T GetParentByType<T>(this FrameworkElement element)
-            where T : FrameworkElement
-        {
-            Debug.Assert(element != null, "The element cannot be null.");
-
-            T result = null;
-            DependencyObject parent = VisualTreeHelper.GetParent(element);
-
-            while (parent != null)
-            {
-                result = parent as T;
-
-                if (result != null)
-                {
-                    return result;
-                }
-
-                parent = VisualTreeHelper.GetParent(parent);
-            }
-
-            return null;
-        }
-        #endregion
     }
 }
