@@ -10,6 +10,9 @@ Lets people flip through items one at a time. Similar to the WinRT FlipView.
 **ImageButton**  
 Button control which has an image as its content.
 
+**ListView**  
+Long list selector with incremental loading and more.
+
 **PhonePasswordBox**  
 An extended password box which implements header, placeholder text, and a show password check box.
 
