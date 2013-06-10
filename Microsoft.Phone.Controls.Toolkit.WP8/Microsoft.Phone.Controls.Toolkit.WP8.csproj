@@ -406,9 +406,10 @@
       <Link>WaitCursor\WaitCursorService.cs</Link>
     </Compile>
     <Compile Include="Common\LongListSelectorExtensions.cs" />
+    <Compile Include="Data\StyleSelector.cs" />
     <Compile Include="Input\GestureListenerStatic.cs" />
     <Compile Include="Input\GestureService.cs" />
-	<Compile Include="..\Microsoft.Phone.Controls.Toolkit\ListPicker\ListPicker.cs">
+    <Compile Include="..\Microsoft.Phone.Controls.Toolkit\ListPicker\ListPicker.cs">
       <Link>ListPicker\ListPicker.cs</Link>
     </Compile>
     <Compile Include="..\Microsoft.Phone.Controls.Toolkit\ListPicker\ListPickerItem.cs">
@@ -441,6 +442,9 @@
     <Compile Include="DateTimePickers\TimePickerPage.xaml.cs">
       <DependentUpon>TimePickerPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="ListView\IncrementalLoadingTrigger.cs" />
+    <Compile Include="ListView\ISupportIncrementalLoading.cs" />
+    <Compile Include="ListView\LoadMoreItemsResult.cs" />
     <Compile Include="Scroller\Scroller.cs" />
     <Compile Include="Scroller\ScrollerContentPresenter.cs" />
     <Compile Include="ListView\ItemClickEventArgs.cs" />

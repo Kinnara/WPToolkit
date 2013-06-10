@@ -3,19 +3,10 @@
 // Please see http://go.microsoft.com/fwlink/?LinkID=131993 for details.
 // All other rights reserved.
 
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Animation;
-using System.Windows.Shapes;
 using Microsoft.Phone.Controls;
+using Microsoft.Phone.Shell;
 using PhoneToolkitSample.Data;
+using System;
 using System.Windows.Navigation;
 
 namespace PhoneToolkitSample.Samples
@@ -26,9 +17,14 @@ namespace PhoneToolkitSample.Samples
         {
             InitializeComponent();
 
+#if !WP7
+            ClearValue(SystemTray.OpacityProperty);
+            LayoutRoot.ClearValue(MarginProperty);
+#endif
+
             quote.Text = 
-                LoremIpsum.GetParagraph(4) + System.Environment.NewLine + System.Environment.NewLine + 
-                LoremIpsum.GetParagraph(8) + System.Environment.NewLine + System.Environment.NewLine + 
+                LoremIpsum.GetParagraph(4) + Environment.NewLine + Environment.NewLine + 
+                LoremIpsum.GetParagraph(8) + Environment.NewLine + Environment.NewLine + 
                 LoremIpsum.GetParagraph(6);
         }
 

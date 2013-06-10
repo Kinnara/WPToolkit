@@ -293,9 +293,11 @@ ar-SA;az-Latn-AZ;be-BY;bg-BG;ca-ES;cs-CZ;da-DK;de-DE;el-GR;en-GB;en-US;es-ES;es-
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
     <Compile Include="Data\AlphaKeyGroup.cs" />
+    <Compile Include="Data\IncrementalLoadingPeople.cs" />
     <Compile Include="Data\Maps\MapsViewModel.cs" />
     <Compile Include="Data\Maps\Store.cs" />
     <Compile Include="Data\Maps\StoreList.cs" />
+    <Compile Include="Data\PeopleStyleSelector.cs" />
     <Compile Include="Data\PicturesAlbum.cs" />
     <Compile Include="LocalizedStrings.cs" />
     <Compile Include="MainPage.xaml.cs">
@@ -312,6 +314,9 @@ ar-SA;az-Latn-AZ;be-BY;bg-BG;ca-ES;cs-CZ;da-DK;de-DE;el-GR;en-GB;en-US;es-ES;es-
     </Compile>
     <Compile Include="Samples\GestureSample.xaml.cs">
       <DependentUpon>GestureSample.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Samples\ListViewSample.xaml.cs">
+      <DependentUpon>ListViewSample.xaml</DependentUpon>
     </Compile>
     <Compile Include="Samples\LockablePivotSample.xaml.cs">
       <DependentUpon>LockablePivotSample.xaml</DependentUpon>
@@ -500,6 +505,10 @@ ar-SA;az-Latn-AZ;be-BY;bg-BG;ca-ES;cs-CZ;da-DK;de-DE;el-GR;en-GB;en-US;es-ES;es-
     <Page Include="Samples\GestureSample.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Samples\ListViewSample.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Samples\LockablePivotSample.xaml">
       <Generator>MSBuild:Compile</Generator>

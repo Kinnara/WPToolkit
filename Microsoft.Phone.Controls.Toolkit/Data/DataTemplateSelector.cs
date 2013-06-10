@@ -1,30 +1,22 @@
 ﻿using System.Windows;
 
-namespace Microsoft.Phone.Controls
+namespace System.Windows.Controls
 {
     /// <summary>
-    /// Enables custom template selection logic at the application level.
+    /// Provides a way to choose a <see cref="T:System.Windows.DataTemplate"/> based on the data object and the data-bound element.
     /// </summary>
     public class DataTemplateSelector
     {
         /// <summary>
-        /// Returns a specific DataTemplate for a given item or container.
+        /// When overridden in a derived class, returns a <see cref="T:System.Windows.DataTemplate"/> based on custom logic.
         /// </summary>
-        /// <param name="item">The item to return a template for.</param>
-        /// <param name="container">The parent container for the templated item.</param>
-        /// <returns>The template to use for the given item and/or container.</returns>
-        public DataTemplate SelectTemplate(object item, DependencyObject container)
-        {
-            return SelectTemplateCore(item, container);
-        }
-
-        /// <summary>
-        /// When implemented by a derived class, returns a specific DataTemplate for a given item or container.
-        /// </summary>
-        /// <param name="item">The item to return a template for.</param>
-        /// <param name="container">The parent container for the templated item.</param>
-        /// <returns>The template to use for the given item and/or container.</returns>
-        protected virtual DataTemplate SelectTemplateCore(object item, DependencyObject container)
+        /// 
+        /// <returns>
+        /// Returns a <see cref="T:System.Windows.DataTemplate"/> or null. The default value is null.
+        /// </returns>
+        /// <param name="item">The data object for which to select the template.</param>
+        /// <param name="container">The data-bound object.</param>
+        public virtual DataTemplate SelectTemplate(object item, DependencyObject container)
         {
             return null;
         }

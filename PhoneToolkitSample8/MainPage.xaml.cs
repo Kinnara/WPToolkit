@@ -39,6 +39,7 @@ namespace PhoneToolkitSample8
                 new SampleItem("/Samples/HubTileSample.xaml","hubtile","tile control that is animated and alive" ),
                 new SampleItem("/Samples/ImageButtonSample.xaml","imagebutton","button control which has an image as its content" ),
                 new SampleItem("/Samples/ListPickerSample.xaml","listpicker","select from a few items inline or many" ),
+                new SampleItem("/Samples/ListViewSample.xaml","listview","list control with incremental loading and more" ),
                 new SampleItem("/Samples/LockablePivotSample.xaml","lockablepivot*","a pivot that allows disabling navigation" ),
                 new SampleItem("/Samples/LongListMultiSelectorSample.xaml","longlistmultiselector","long list selector with multiple selection" ),
                 new SampleItem("/Samples/LongListSelectorSample.xaml","longlistselector*","a grouping items control with great performance" ),

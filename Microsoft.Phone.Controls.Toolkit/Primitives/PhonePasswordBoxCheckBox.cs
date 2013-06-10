@@ -156,7 +156,7 @@ namespace Microsoft.Phone.Controls.Primitives
         /// </summary>
         /// <param name="e">The event data. </param>
         /// <exception cref="T:System.ArgumentNullException"><paramref name="e"/> is null.</exception>
-        [SuppressMessage("Microsoft.Design", "CA1062:Validate arguments of public methods", MessageId = "0")]
+        [SuppressMessage("Microsoft.Design", "CA1062:Validate arguments of public methods", MessageId = "0", Justification = "Standard pattern.")]
         protected override void OnMouseLeftButtonDown(MouseButtonEventArgs e)
         {
             base.OnMouseLeftButtonDown(e);
@@ -196,7 +196,7 @@ namespace Microsoft.Phone.Controls.Primitives
         /// </summary>
         /// <param name="e">The event data.</param>
         /// <exception cref="T:System.ArgumentNullException"><paramref name="e"/> is null.</exception>
-        [SuppressMessage("Microsoft.Design", "CA1062:Validate arguments of public methods", MessageId = "0")]
+        [SuppressMessage("Microsoft.Design", "CA1062:Validate arguments of public methods", MessageId = "0", Justification = "Standard pattern.")]
         protected override void OnMouseLeftButtonUp(MouseButtonEventArgs e)
         {
             base.OnMouseLeftButtonUp(e);
@@ -239,7 +239,7 @@ namespace Microsoft.Phone.Controls.Primitives
         /// </summary>
         /// <param name="e">The event data.</param>
         /// <exception cref="T:System.ArgumentNullException"><paramref name="e"/> is null.</exception>
-        [SuppressMessage("Microsoft.Design", "CA1062:Validate arguments of public methods", MessageId = "0")]
+        [SuppressMessage("Microsoft.Design", "CA1062:Validate arguments of public methods", MessageId = "0", Justification = "Standard pattern.")]
         protected override void OnMouseMove(MouseEventArgs e)
         {
             base.OnMouseMove(e);

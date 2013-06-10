@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using System.Diagnostics.CodeAnalysis;
+using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
 
@@ -42,6 +43,7 @@ namespace Microsoft.Phone.Controls.Primitives
         /// <returns>
         /// The template that specifies the visualization of the data objects. The default is null.
         /// </returns>
+        [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Multi")]
         public DataTemplate DefaultMultiSelectionItemTemplate
         {
             get { return (DataTemplate)GetValue(DefaultMultiSelectionItemTemplateProperty); }
@@ -55,6 +57,7 @@ namespace Microsoft.Phone.Controls.Primitives
         /// <returns>
         /// The identifier for the DefaultMultiSelectionItemTemplate dependency property.
         /// </returns>
+        [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Multi")]
         public static readonly DependencyProperty DefaultMultiSelectionItemTemplateProperty = DependencyProperty.Register(
             "DefaultMultiSelectionItemTemplate",
             typeof(DataTemplate),

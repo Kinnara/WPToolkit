@@ -5,6 +5,7 @@
 
 using System;
 using System.Collections.Specialized;
+using System.Diagnostics.CodeAnalysis;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -125,6 +126,7 @@ namespace Microsoft.Phone.Controls
         /// Called when the ManipulationStarted event occurs.
         /// </summary>
         /// <param name="e">Event data for the event.</param>
+        [SuppressMessage("Microsoft.Design", "CA1062:Validate arguments of public methods", MessageId = "0", Justification = "Standard pattern.")]
         protected override void OnManipulationStarted(ManipulationStartedEventArgs e)
         {
             if (_isLocked)
@@ -139,6 +141,7 @@ namespace Microsoft.Phone.Controls
         /// Called when the ManipulationDelta event occurs.
         /// </summary>
         /// <param name="e">Event data for the event.</param>
+        [SuppressMessage("Microsoft.Design", "CA1062:Validate arguments of public methods", MessageId = "0", Justification = "Standard pattern.")]
         protected override void OnManipulationDelta(ManipulationDeltaEventArgs e)
         {
             if (_isLocked)
@@ -153,6 +156,7 @@ namespace Microsoft.Phone.Controls
         /// Called when the ManipulationCompleted event occurs.
         /// </summary>
         /// <param name="e">Event data for the event.</param>
+        [SuppressMessage("Microsoft.Design", "CA1062:Validate arguments of public methods", MessageId = "0", Justification = "Standard pattern.")]
         protected override void OnManipulationCompleted(ManipulationCompletedEventArgs e)
         {
             if (_isLocked)

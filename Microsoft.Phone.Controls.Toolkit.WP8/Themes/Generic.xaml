@@ -2272,7 +2272,7 @@
                             </phone:LongListSelector.Template>
                             <phone:LongListSelector.ItemTemplate>
                                 <DataTemplate>
-                                    <controls:ListViewItem x:Name="LLSItem" Content="{Binding}"/>
+                                    <controls:ListViewItem Content="{Binding}"/>
                                 </DataTemplate>
                             </phone:LongListSelector.ItemTemplate>
                         </phone:LongListSelector>
