@@ -449,16 +449,10 @@ namespace Microsoft.Phone.Controls
                 return;
             }
 
-            DependencyObject parent = pivotItem;
-            do
+            // Find the root ItemsPresenter
+            ItemsPresenter ip = pivotItem.GetParentByType<ItemsPresenter>();
+            if (ip != null)
             {
-                parent = VisualTreeHelper.GetParent(parent);
-            } while (parent != null & !(parent is ItemsPresenter));
-
-            if (parent != null)
-            {
-                ItemsPresenter ip = (ItemsPresenter)parent;
-
                 if (ip.RenderTransform is TranslateTransform)
                 {
                     Storyboard storyboard = new Storyboard();
@@ -572,7 +566,7 @@ namespace Microsoft.Phone.Controls
                         pivotItem = iTemp;
                     }
 
-                    parent = VisualTreeHelper.GetParent(parent as DependencyObject);
+                    parent = VisualTreeHelper.GetParent(parent);
                 }
 
                 if (parent == null || pivotItem == null)

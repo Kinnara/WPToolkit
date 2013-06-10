@@ -89,11 +89,6 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>ControlResources.resx</DependentUpon>
     </Compile>
-    <Compile Include="LocalizedResources\ControlResources.hi-IN.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>ControlResources.hi-IN.resx</DependentUpon>
-    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -218,8 +213,6 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>ControlResources.hi-IN.xlf</DependentUpon>
       <culture>hi-IN</culture>
-      <Generator>PublicResXFileCodeGenerator</Generator>
-      <LastGenOutput>ControlResources.hi-IN.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="LocalizedResources\ControlResources.hr-HR.resx">
       <AutoGen>True</AutoGen>

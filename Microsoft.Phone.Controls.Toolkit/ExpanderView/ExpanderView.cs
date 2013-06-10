@@ -429,11 +429,7 @@ namespace Microsoft.Phone.Controls
         {
             if (_presenter != null)
             {
-                UIElement parent = VisualTreeHelper.GetParent(_presenter) as UIElement;
-                while (!(parent is ExpanderView))
-                {
-                    parent = VisualTreeHelper.GetParent(parent) as UIElement;
-                }
+                ExpanderView parent = _presenter.GetParentByType<ExpanderView>();
                 GeneralTransform gt = parent.TransformToVisual(_presenter);
                 Point childToParentCoordinates = gt.Transform(new Point(0, 0));
                 _presenter.Width = parent.RenderSize.Width + childToParentCoordinates.X;

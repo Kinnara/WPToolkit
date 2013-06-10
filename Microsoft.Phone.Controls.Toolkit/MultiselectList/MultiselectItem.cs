@@ -348,7 +348,7 @@ namespace Microsoft.Phone.Controls
         /// </summary>
         public override void OnApplyTemplate()
         {
-            _parent = ItemsControlExtensions.GetParentItemsControl<MultiselectList>(this);
+            _parent = this.GetParentByType<MultiselectList>();                
 
             if (_innerHintPanel != null)
             {

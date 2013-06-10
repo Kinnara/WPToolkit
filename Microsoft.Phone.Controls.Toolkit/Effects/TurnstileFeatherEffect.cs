@@ -636,14 +636,14 @@ namespace Microsoft.Phone.Controls
                 if (pivot != null)
                 {
                     // If the target is a Pivot, feather the title and the headers individually.
-                    ContentPresenter title = TemplatedVisualTreeExtensions.GetFirstLogicalChildByType<ContentPresenter>(pivot, false);
+                    ContentPresenter title = pivot.GetFirstLogicalChildByType<ContentPresenter>(false);
 
                     if (title != null)
                     {
                         targets.Add(new WeakReference(title));
                     }
 
-                    PivotHeadersControl headers = TemplatedVisualTreeExtensions.GetFirstLogicalChildByType<PivotHeadersControl>(pivot, false);
+                    PivotHeadersControl headers = pivot.GetFirstLogicalChildByType<PivotHeadersControl>(false);
 
                     if (headers != null)
                     {
@@ -653,20 +653,20 @@ namespace Microsoft.Phone.Controls
                 else if (itemsControl != null)
                 {
                     // If the target is an ItemsControl, feather its items individually.
-                    ItemsControlExtensions.GetItemsInViewPort(itemsControl, targets);
+                    itemsControl.GetItemsInViewPort(targets);
                 }
                 else if (longListSelector != null)
                 {
                     // If the target is a LongListSelector, feather its items individually.
 #if WP7
-                    ListBox child = TemplatedVisualTreeExtensions.GetFirstLogicalChildByType<ListBox>(longListSelector, false);
+                    ListBox child = longListSelector.GetFirstLogicalChildByType<ListBox>(false);
 
                     if (child != null)
                     {
-                        ItemsControlExtensions.GetItemsInViewPort(child, targets);
+                        child.GetItemsInViewPort(targets);
                     }
 #else
-                    LongListSelectorExtensions.GetItemsInViewPort(longListSelector, targets);
+                    longListSelector.GetItemsInViewPort(targets);
 #endif
                 }
                 else
@@ -688,8 +688,7 @@ namespace Microsoft.Phone.Controls
             if (!TurnstileFeatherEffect.GetIsSubscribed(target))
             {
                 // Find the parent page.
-                PhoneApplicationPage page = TemplatedVisualTreeExtensions.GetParentByType<PhoneApplicationPage>(target);
-
+                PhoneApplicationPage page = target.GetParentByType<PhoneApplicationPage>();
                 if (page == null)
                 {
                     return;

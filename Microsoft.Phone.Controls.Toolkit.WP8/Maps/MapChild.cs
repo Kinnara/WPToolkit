@@ -161,7 +161,7 @@ namespace Microsoft.Phone.Maps.Toolkit
 
             mapOverlayItem = (MapOverlayItem)mapOverlay.Content;
 
-            targetObject = VisualTreeExtensions.GetVisualChildren(mapOverlayItem).FirstOrDefault();
+            targetObject = mapOverlayItem.GetVisualChildren().FirstOrDefault();
 
             if (targetObject == null)
             {
@@ -227,7 +227,7 @@ namespace Microsoft.Phone.Maps.Toolkit
 
             mapOverlayItem = (MapOverlayItem)mapOverlay.Content;
 
-            targetObject = VisualTreeExtensions.GetVisualChildren(mapOverlayItem).FirstOrDefault();
+            targetObject = mapOverlayItem.GetVisualChildren().FirstOrDefault();
 
             // In some cases, the MapOverlay was not presented in the UI.
             // Bindings are create when the MapOverlay is presented in the, so
