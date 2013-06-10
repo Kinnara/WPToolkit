@@ -22,7 +22,7 @@ namespace PhoneToolkitSample.Samples
         /// </summary>
         /// <param name="sender">The event sender.</param>
         /// <param name="e">The event information.</param>
-        private void BasicMessageBox_Click(object sender, RoutedEventArgs e)
+        private async void BasicMessageBox_Click(object sender, RoutedEventArgs e)
         {
             CustomMessageBox messageBox = new CustomMessageBox()
             {                
@@ -33,25 +33,20 @@ namespace PhoneToolkitSample.Samples
                 IsFullScreen = (bool)FullScreenCheckBox.IsChecked
             };
 
-            messageBox.Dismissed += (s1, e1) =>
-                {
-                    switch (e1.Result)
-                    {
-                        case CustomMessageBoxResult.LeftButton:
-                            // Do something.
-                            break;
-                        case CustomMessageBoxResult.RightButton:
-                            // Do something.
-                            break;
-                        case CustomMessageBoxResult.None:
-                            // Do something.
-                            break;
-                        default:
-                            break;
-                    }
-                };
-
-            messageBox.Show();
+            switch (await messageBox.ShowAsync())
+            {
+                case CustomMessageBoxResult.LeftButton:
+                    // Do something.
+                    break;
+                case CustomMessageBoxResult.RightButton:
+                    // Do something.
+                    break;
+                case CustomMessageBoxResult.None:
+                    // Do something.
+                    break;
+                default:
+                    break;
+            }
         }
 
         /// <summary>
@@ -59,7 +54,7 @@ namespace PhoneToolkitSample.Samples
         /// </summary>
         /// <param name="sender">The event sender.</param>
         /// <param name="e">The event information.</param>
-        private void MessageBoxWithHyperlinkButton_Click(object sender, RoutedEventArgs e)
+        private async void MessageBoxWithHyperlinkButton_Click(object sender, RoutedEventArgs e)
         {
             HyperlinkButton hyperlinkButton = new HyperlinkButton()
             {
@@ -78,25 +73,20 @@ namespace PhoneToolkitSample.Samples
                 IsFullScreen = (bool)FullScreenCheckBox.IsChecked
             };
 
-            messageBox.Dismissed += (s1, e1) =>
-                {
-                    switch (e1.Result)
-                    {
-                        case CustomMessageBoxResult.LeftButton:
-                            // Do something.
-                            break;
-                        case CustomMessageBoxResult.RightButton:
-                            // Do something.
-                            break;
-                        case CustomMessageBoxResult.None:
-                            // Do something.
-                            break;
-                        default:
-                            break;
-                    }
-                };
-
-            messageBox.Show();            
+            switch (await messageBox.ShowAsync())
+            {
+                case CustomMessageBoxResult.LeftButton:
+                    // Do something.
+                    break;
+                case CustomMessageBoxResult.RightButton:
+                    // Do something.
+                    break;
+                case CustomMessageBoxResult.None:
+                    // Do something.
+                    break;
+                default:
+                    break;
+            }
         }
 
         /// <summary>
@@ -104,7 +94,7 @@ namespace PhoneToolkitSample.Samples
         /// </summary>
         /// <param name="sender">The event sender.</param>
         /// <param name="e">The event information.</param>
-        private void MessageBoxWithCheckBox_Click(object sender, RoutedEventArgs e)
+        private async void MessageBoxWithCheckBox_Click(object sender, RoutedEventArgs e)
         {
             CheckBox checkBox = new CheckBox()
             {
@@ -127,33 +117,28 @@ namespace PhoneToolkitSample.Samples
                 IsFullScreen = (bool)FullScreenCheckBox.IsChecked
             };
 
-            messageBox.Dismissed += (s1, e1) =>
-                {
-                    switch (e1.Result)
+            switch (await messageBox.ShowAsync())
+            {
+                case CustomMessageBoxResult.LeftButton:
+                    // Launch Marketplace review task.
+                    // Do not ask again.
+                    break;
+                case CustomMessageBoxResult.RightButton:
+                case CustomMessageBoxResult.None:
+                    if ((bool)checkBox.IsChecked)
                     {
-                        case CustomMessageBoxResult.LeftButton:
-                            // Launch Marketplace review task.
-                            // Do not ask again.
-                            break;
-                        case CustomMessageBoxResult.RightButton:   
-                        case CustomMessageBoxResult.None:
-                            if ((bool)checkBox.IsChecked)
-                            {
-                                // Do not launch Marketplace review task.
-                                // Do not ask again.
-                            }
-                            else
-                            {
-                                // Do not launch Marketplace review task.
-                                // Ask again later.
-                            }
-                            break;
-                        default:
-                            break;
+                        // Do not launch Marketplace review task.
+                        // Do not ask again.
                     }
-                };
-
-            messageBox.Show();  
+                    else
+                    {
+                        // Do not launch Marketplace review task.
+                        // Ask again later.
+                    }
+                    break;
+                default:
+                    break;
+            }
         }
 
         /// <summary>
@@ -161,7 +146,7 @@ namespace PhoneToolkitSample.Samples
         /// </summary>
         /// <param name="sender">The event sender.</param>
         /// <param name="e">The event information.</param>
-        private void MessageBoxWithListPicker_Click(object sender, RoutedEventArgs e)
+        private async void MessageBoxWithListPicker_Click(object sender, RoutedEventArgs e)
         {
             ListPicker listPicker = new ListPicker()
             {
@@ -189,23 +174,18 @@ namespace PhoneToolkitSample.Samples
                     }
                 };
 
-            messageBox.Dismissed += (s2, e2) =>
-                {
-                    switch (e2.Result)
-                    {
-                        case CustomMessageBoxResult.LeftButton:
-                            // Do something.
-                            break;
-                        case CustomMessageBoxResult.RightButton:
-                        case CustomMessageBoxResult.None:
-                            // Do something.
-                            break;
-                        default:
-                            break;
-                    }
-                };
-
-            messageBox.Show(); 
+            switch (await messageBox.ShowAsync())
+            {
+                case CustomMessageBoxResult.LeftButton:
+                    // Do something.
+                    break;
+                case CustomMessageBoxResult.RightButton:
+                case CustomMessageBoxResult.None:
+                    // Do something.
+                    break;
+                default:
+                    break;
+            }
         }
 
         /// <summary>
@@ -215,7 +195,7 @@ namespace PhoneToolkitSample.Samples
         /// </summary>
         /// <param name="sender">The event sender.</param>
         /// <param name="e">The event information.</param>
-        private void MessageBoxWithPivot_Click(object sender, RoutedEventArgs e)
+        private async void MessageBoxWithPivot_Click(object sender, RoutedEventArgs e)
         {
             CustomMessageBox messageBox = new CustomMessageBox()
             {
@@ -234,25 +214,20 @@ namespace PhoneToolkitSample.Samples
                 }
             };
 
-            messageBox.Dismissed += (s1, e1) =>
+            switch (await messageBox.ShowAsync())
             {
-                switch (e1.Result)
-                {
-                    case CustomMessageBoxResult.LeftButton:
-                        // Do something.
-                        break;
-                    case CustomMessageBoxResult.RightButton:
-                        // Do something.
-                        break;
-                    case CustomMessageBoxResult.None:
-                        // Do something.
-                        break;
-                    default:
-                        break;
-                }
-            };
-
-            messageBox.Show();
+                case CustomMessageBoxResult.LeftButton:
+                    // Do something.
+                    break;
+                case CustomMessageBoxResult.RightButton:
+                    // Do something.
+                    break;
+                case CustomMessageBoxResult.None:
+                    // Do something.
+                    break;
+                default:
+                    break;
+            }
         }
     }
 }

@@ -4,6 +4,7 @@
 // All other rights reserved.
 
 using System;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
@@ -604,6 +605,34 @@ namespace Microsoft.Phone.Controls
             {
                 _frame.Navigating += OnNavigating;
             }
+        }
+
+        /// <summary>
+        /// Reveals the message box by inserting it into a popup and opening it, asynchronously.
+        /// </summary>
+        /// <returns>A Task that contains the result.</returns>
+        public Task<CustomMessageBoxResult> ShowAsync()
+        {
+            var tcs = new TaskCompletionSource<CustomMessageBoxResult>();
+
+            EventHandler<DismissedEventArgs> onDismissed = null;
+            onDismissed = (sender, e) =>
+            {
+                Dismissed -= onDismissed;
+                tcs.TrySetResult(e.Result);
+            };
+            Dismissed += onDismissed;
+
+            try
+            {
+                Show();
+            }
+            catch (Exception e)
+            {
+                tcs.TrySetException(e);
+            }
+
+            return tcs.Task;
         }
 
         /// <summary>
