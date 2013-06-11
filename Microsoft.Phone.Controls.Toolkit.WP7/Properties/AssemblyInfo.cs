@@ -22,8 +22,8 @@ using System.Windows.Markup;
 
 [assembly: Guid("c3074b8e-8b70-4c3a-8a8b-e0cc41a244ae")]
 
-[assembly: AssemblyVersion("7.0.1.0")]
-[assembly: AssemblyFileVersion("7.0.1.0")]
+[assembly: AssemblyVersion("7.0.0.0")]
+[assembly: AssemblyFileVersion("4.0.1.0")]
 
 [assembly: CLSCompliant(false)] // IApplicationBar is not CLS-compliant, but its use matches the type of the platform's PhoneApplicationPage.ApplicationBar property
 [assembly: NeutralResourcesLanguage("en-US")]
