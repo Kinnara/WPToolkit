@@ -9,7 +9,7 @@ using Microsoft.Phone.Controls;
 
 namespace PhoneToolkitSample.Samples
 {
-    public partial class LockablePivotSample : PhoneApplicationPage
+    public partial class LockablePivotSample : BasePage
     {
         public LockablePivotSample()
         {

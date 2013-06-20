@@ -30,6 +30,7 @@ namespace Microsoft.Phone.Controls
     [TemplatePart(Name = ItemsPresenterPartName, Type = typeof(ItemsPresenter))]
     [TemplatePart(Name = ItemsPresenterTranslateTransformPartName, Type = typeof(TranslateTransform))]
     [TemplatePart(Name = ItemsPresenterHostPartName, Type = typeof(Canvas))]
+    [TemplatePart(Name = ButtonPartName, Type = typeof(ButtonBase))]
     [TemplateVisualState(GroupName = PickerStatesGroupName, Name = PickerStatesNormalStateName)]
     [TemplateVisualState(GroupName = PickerStatesGroupName, Name = PickerStatesHighlightedStateName)]
     [TemplateVisualState(GroupName = PickerStatesGroupName, Name = PickerStatesDisabledStateName)]
@@ -38,7 +39,7 @@ namespace Microsoft.Phone.Controls
         private const string ItemsPresenterPartName = "ItemsPresenter";
         private const string ItemsPresenterTranslateTransformPartName = "ItemsPresenterTranslateTransform";
         private const string ItemsPresenterHostPartName = "ItemsPresenterHost";
-        private const string BorderPartName = "Border";
+        private const string ButtonPartName = "Button";
 
         private const string PickerStatesGroupName = "PickerStates";
         private const string PickerStatesNormalStateName = "Normal";
@@ -49,6 +50,8 @@ namespace Microsoft.Phone.Controls
         /// In Mango, the size of list pickers in expanded mode was given extra offset.
         /// </summary>
         private const double NormalModeOffset = 10;
+
+        private static readonly Duration AnimationDuration = TimeSpan.FromSeconds(0.25);
 
         private readonly DoubleAnimation _heightAnimation = new DoubleAnimation();
         private readonly DoubleAnimation _translateAnimation = new DoubleAnimation();
@@ -61,11 +64,10 @@ namespace Microsoft.Phone.Controls
         private Canvas _itemsPresenterHostPart;
         private ItemsPresenter _itemsPresenterPart;
         private TranslateTransform _itemsPresenterTranslateTransformPart;
+        private ButtonBase _buttonPart;
         private bool _updatingSelection;
         private int _deferredSelectedIndex = -1;
         private object _deferredSelectedItem = null;
-
-        private Border _border;
 
         /// <summary>
         /// Event that is raised when the selection changes.
@@ -154,6 +156,13 @@ namespace Microsoft.Phone.Controls
                 {
                     _itemsPresenterPart.IsHitTestVisible = true;
                 }
+
+                TiltEffect.UpdateCurrentTiltEffectReturnAnimationDuration(null, AnimationDuration);
+            }
+
+            if (null != _buttonPart)
+            {
+                TiltEffect.SetSuppressTilt(_buttonPart, newValue);
             }
 
             SizeForAppropriateView(true);
@@ -194,13 +203,20 @@ namespace Microsoft.Phone.Controls
         }
 
 
-        /// <summary>
-        /// Enabled property changed
-        /// </summary>
-        private static void OnIsEnabledChanged(DependencyObject o, DependencyPropertyChangedEventArgs e)
+        private static readonly DependencyProperty IsPressedProperty = DependencyProperty.Register(
+            "IsPressed",
+            typeof(bool),
+            typeof(ListPicker),
+            new PropertyMetadata((d, e) => ((ListPicker)d).OnIsPressedChanged(e)));
+
+        private void OnIsPressedChanged(DependencyPropertyChangedEventArgs e)
         {
-            (o as ListPicker).OnIsEnabledChanged();
+            if (!IsExpanded)
+            {
+                IsHighlighted = (bool)e.NewValue;
+            }
         }
+
 
         /// <summary>
         /// Enabled property changed
@@ -369,31 +385,6 @@ namespace Microsoft.Phone.Controls
         public static readonly DependencyProperty HeaderTemplateProperty =
             DependencyProperty.Register("HeaderTemplate", typeof(DataTemplate), typeof(ListPicker), null);
 
-        /// <summary>
-        /// Gets the selected items.
-        /// </summary>
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly", Justification="Want to allow this to be bound to.")]
-        public IList SelectedItems
-        {
-            get { return (IList)GetValue(SelectedItemsProperty); }
-            set { SetValue(SelectedItemsProperty, value); }
-        }
-
-        /// <summary>
-        /// Identifies the SelectedItems DependencyProperty.
-        /// </summary>
-        public static readonly DependencyProperty SelectedItemsProperty = DependencyProperty.Register(
-            "SelectedItems",
-            typeof(IList),
-            typeof(ListPicker),
-            new PropertyMetadata(OnSelectedItemsChanged)
-            );
-
-        private static void OnSelectedItemsChanged(DependencyObject o, DependencyPropertyChangedEventArgs e)
-        {
-            ((ListPicker)o).OnSelectedItemsChanged((IList)e.OldValue, (IList)e.NewValue);
-        }
-
         private void OnSelectedItemsChanged(IList oldValue, IList newValue)
         {
             // Fire SelectionChanged event
@@ -438,14 +429,14 @@ namespace Microsoft.Phone.Controls
             Storyboard.SetTargetProperty(_translateAnimation, new PropertyPath(TranslateTransform.YProperty));
 
             // Would be nice if these values were customizable (ex: as DependencyProperties or in Template as VSM states)
-            Duration duration = TimeSpan.FromSeconds(0.2);
+            Duration duration = AnimationDuration;
             _heightAnimation.Duration = duration;
             _translateAnimation.Duration = duration;
             IEasingFunction easingFunction = new ExponentialEase { EasingMode = EasingMode.EaseInOut, Exponent = 4 };
             _heightAnimation.EasingFunction = easingFunction;
             _translateAnimation.EasingFunction = easingFunction;
 
-            this.RegisterNotification("IsEnabled", OnIsEnabledChanged);
+            IsEnabledChanged += delegate { OnIsEnabledChanged(); };
 
             Loaded += OnLoaded;
             Unloaded += OnUnloaded;
@@ -482,6 +473,11 @@ namespace Microsoft.Phone.Controls
             {
                 _itemsPresenterHostParent.SizeChanged -= OnItemsPresenterHostParentSizeChanged;
             }
+            if (null != _buttonPart)
+            {
+                _buttonPart.Click -= OnButtonClick;
+                ClearValue(IsPressedProperty);
+            }
             _storyboard.Stop();
 
             base.OnApplyTemplate();
@@ -491,7 +487,7 @@ namespace Microsoft.Phone.Controls
             _itemsPresenterTranslateTransformPart = GetTemplateChild(ItemsPresenterTranslateTransformPartName) as TranslateTransform;
             _itemsPresenterHostPart = GetTemplateChild(ItemsPresenterHostPartName) as Canvas;
             _itemsPresenterHostParent = (null != _itemsPresenterHostPart) ? _itemsPresenterHostPart.Parent as FrameworkElement : null;
-            _border = GetTemplateChild(BorderPartName) as Border;
+            _buttonPart = GetTemplateChild(ButtonPartName) as ButtonBase;
 
             if (null != _itemsPresenterHostParent)
             {
@@ -527,6 +523,11 @@ namespace Microsoft.Phone.Controls
                     _storyboard.Children.Remove(_translateAnimation);
                 }
             }
+            if (null != _buttonPart)
+            {
+                _buttonPart.Click += OnButtonClick;
+                SetBinding(IsPressedProperty, new Binding("IsPressed") { Source = _buttonPart });
+            }
 
 
             // Commit deferred SelectedIndex (if any)
@@ -540,8 +541,6 @@ namespace Microsoft.Phone.Controls
                 SelectedItem = _deferredSelectedItem;
                 _deferredSelectedItem = null;
             }
-
-            OnSelectedItemsChanged(SelectedItems, SelectedItems);
         }
 
         /// <summary>
@@ -629,148 +628,6 @@ namespace Microsoft.Phone.Controls
             Dispatcher.BeginInvoke(() => SizeForAppropriateView(false));
         }
 
-        private bool IsValidManipulation(object OriginalSource, Point p)
-        {
-            DependencyObject element = OriginalSource as DependencyObject;
-
-            while (null != element)
-            {
-                if (_itemsPresenterHostPart == element || _border == element)
-                {
-                    double Padding = 11.0;
-                    return (p.X > 0 && p.Y > 0 - Padding && p.X < _border.RenderSize.Width && p.Y < _border.RenderSize.Height + Padding);
-                }
-
-                element = VisualTreeHelper.GetParent(element);
-            }
-            return false;
-        }
-
-        /// <summary>
-        /// Handles the tap event.
-        /// </summary>
-        /// <param name="e">Event args</param>
-        protected override void OnTap(System.Windows.Input.GestureEventArgs e)
-        {
-            if (null == e)
-            {
-                throw new ArgumentNullException("e");
-            }
-
-            if (!IsExpanded)
-            {
-                if (!IsEnabled)
-                {
-                    e.Handled = true;
-                    return;
-                }
-
-                Point p = e.GetPosition((UIElement)e.OriginalSource);
-                if (IsValidManipulation(e.OriginalSource, p))
-                {
-                    if (Open())
-                    {
-                        e.Handled = true;
-                    }
-                }
-            }
-        }
-        /// <summary>
-        /// Called when the ManipulationStarted event occurs.
-        /// </summary>
-        /// <param name="e">Event data for the event.</param>
-        protected override void OnManipulationStarted(ManipulationStartedEventArgs e)
-        {
-            if (null == e)
-            {
-                throw new ArgumentNullException("e");
-            }
-
-            base.OnManipulationStarted(e);
-
-            if (!IsExpanded)
-            {
-                if (!IsEnabled)
-                {
-                    e.Complete();
-                    return;
-                }
-
-                Point p = e.ManipulationOrigin;
-
-                if (e.OriginalSource != e.ManipulationContainer)
-                {
-                    p = e.ManipulationContainer.TransformToVisual((UIElement)e.OriginalSource).Transform(p);
-                }
-
-                if (IsValidManipulation(e.OriginalSource, p))
-                {
-                    IsHighlighted = true;
-                }
-            }
-        }
-
-        /// <summary>
-        /// Called when the ManipulationDelta event occurs.
-        /// </summary>
-        /// <param name="e">Event data for the event.</param>
-        protected override void OnManipulationDelta(ManipulationDeltaEventArgs e)
-        {
-            if (null == e)
-            {
-                throw new ArgumentNullException("e");
-            }
-
-            base.OnManipulationDelta(e);
-
-            if (!IsExpanded)
-            {
-                if (!IsEnabled)
-                {
-                    e.Complete();
-                    return;
-                }
-
-                Point p = e.ManipulationOrigin;
-
-                if (e.OriginalSource != e.ManipulationContainer)
-                {
-                    p = e.ManipulationContainer.TransformToVisual((UIElement)e.OriginalSource).Transform(p);
-                }
-
-                if (!IsValidManipulation(e.OriginalSource, p))
-                {
-                    IsHighlighted = false;
-                    e.Complete();
-                }
-            }
-        }
-
-        /// <summary>
-        /// Called when the ManipulationCompleted event occurs.
-        /// </summary>
-        /// <param name="e">Event data for the event.</param>
-        protected override void OnManipulationCompleted(ManipulationCompletedEventArgs e)
-        {
-            if (null == e)
-            {
-                throw new ArgumentNullException("e");
-            }
-
-            base.OnManipulationCompleted(e);
-
-            if (!IsEnabled)
-            {
-                return;
-            }
-
-            if (!IsExpanded)
-            {
-                // Style box to look unselected
-                IsHighlighted = false;
-            }
-        }
-
         /// <summary>
         /// Opens the picker for selection into Expanded mode.
         /// </summary>
@@ -785,6 +642,11 @@ namespace Microsoft.Phone.Controls
             }
 
             return false;
+        }
+
+        private void OnButtonClick(object sender, RoutedEventArgs e)
+        {
+            Open();
         }
 
         private void OnItemsPresenterHostParentSizeChanged(object sender, SizeChangedEventArgs e)
@@ -930,7 +792,7 @@ namespace Microsoft.Phone.Controls
             {
                 // Manipulation outside an Expanded ListPicker reverts to Normal mode
                 DependencyObject element = e.OriginalSource as DependencyObject;
-                DependencyObject cancelElement = (DependencyObject)_border ?? (DependencyObject)this;
+                DependencyObject cancelElement = this;
                 while (null != element)
                 {
                     if (cancelElement == element)

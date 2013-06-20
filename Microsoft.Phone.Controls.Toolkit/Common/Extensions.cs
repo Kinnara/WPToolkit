@@ -5,8 +5,6 @@
 
 using System;
 using System.Windows;
-using System.Windows.Data;
-using System.Windows.Input;
 using System.Windows.Media;
 
 namespace Microsoft.Phone.Controls
@@ -93,23 +91,6 @@ namespace Microsoft.Phone.Controls
         {
             return (ExternalAddress == uri.ToString());
         }
-
-        /// <summary>
-        /// Registers a property changed callback for a given property.
-        /// </summary>
-        /// <param name="element">The element registering the notification</param>
-        /// <param name="propertyName">Property name to register</param>
-        /// <param name="callback">Callback function</param>
-        /// <remarks>This allows a child to be notified of when a property declared in its parent is changed.</remarks>
-        public static void RegisterNotification(this FrameworkElement element, string propertyName, PropertyChangedCallback callback)  
-        {
-            DependencyProperty prop = DependencyProperty.RegisterAttached("Notification" + propertyName,  
-                                                                          typeof(object),
-                                                                          typeof(FrameworkElement),  
-                                                                          new PropertyMetadata(callback));  
-          
-            element.SetBinding(prop, new Binding(propertyName) { Source = element });  
-        }  
 
         public static FlowDirection GetUsefulFlowDirection(this FrameworkElement element)
         {

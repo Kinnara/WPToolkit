@@ -9,30 +9,16 @@ using System.Globalization;
 using System.Windows;
 using System.Windows.Data;
 using Microsoft.Phone.Controls;
+using PhoneToolkitSample.Data;
 
 namespace PhoneToolkitSample.Samples
 {
-    public partial class TransitionsSample : PhoneApplicationPage
+    public partial class TransitionsSample : BasePage
     {
         public TransitionsSample()
         {
-            DataContext = this;
+            DataContext = new TransitionsSampleViewModel();
             InitializeComponent();
-        }
-
-        public IList<string> Families
-        {
-            get
-            {
-                return new List<string>
-                {
-                    "Roll",
-                    "Rotate",
-                    "Slide",
-                    "Swivel",
-                    "Turnstile"
-                };
-            }
         }
 
         private RotateTransition RotateTransitionElement(string mode)
@@ -106,6 +92,48 @@ namespace PhoneToolkitSample.Samples
         {
             string family = (string)Family.SelectedItem;
             Mode.Visibility = family.Equals("Roll") ? Visibility.Collapsed : Visibility.Visible;
+        }
+    }
+
+    public class TransitionsSampleViewModel : BindableBase
+    {
+        private IList<string> _families = new List<string>
+        {
+            "Roll",
+            "Rotate",
+            "Slide",
+            "Swivel",
+            "Turnstile"
+        };
+        public IList<string> Families
+        {
+            get { return _families; }
+        }
+
+        public string Family
+        {
+            get { return Families[FamilyIndex]; }
+        }
+
+        private int _familyIndex = 4;
+        public int FamilyIndex
+        {
+            get { return _familyIndex; }
+            set
+            {
+                if (SetProperty(ref _familyIndex, value))
+                {
+                    OnPropertyChanged("Family");
+                    ModeIndex = Family.Equals("Roll") ? -1 : 0;
+                }
+            }
+        }
+
+        private int _modeIndex;
+        public int ModeIndex
+        {
+            get { return _modeIndex; }
+            set { SetProperty(ref _modeIndex, value); }
         }
     }
 

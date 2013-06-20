@@ -10,7 +10,7 @@ using PhoneToolkitSample.Data;
 
 namespace PhoneToolkitSample.Samples
 {
-    public partial class LockablePivotSample : PhoneApplicationPage
+    public partial class LockablePivotSample : BasePage
     {
         private Slider[] sliders;
         public LockablePivotSample()

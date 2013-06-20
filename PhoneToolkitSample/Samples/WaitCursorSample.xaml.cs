@@ -5,7 +5,7 @@ using System.Windows.Threading;
 
 namespace PhoneToolkitSample.Samples
 {
-    public partial class WaitCursorSample : PhoneApplicationPage
+    public partial class WaitCursorSample : BasePage
     {
         public WaitCursorSample()
         {

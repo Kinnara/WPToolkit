@@ -7,19 +7,20 @@ using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
 using PhoneToolkitSample.Data;
 using System;
+using System.Windows;
 using System.Windows.Navigation;
 
 namespace PhoneToolkitSample.Samples
 {
-    public partial class PersonDetail : PhoneApplicationPage
+    public partial class PersonDetail : BasePage
     {
         public PersonDetail()
         {
             InitializeComponent();
 
-#if !WP7
-            ClearValue(SystemTray.OpacityProperty);
-            LayoutRoot.ClearValue(MarginProperty);
+#if WP7
+            SystemTray.SetOpacity(this, 0);
+            Margin = new Thickness(0, 32, 0, 0);
 #endif
 
             quote.Text = 

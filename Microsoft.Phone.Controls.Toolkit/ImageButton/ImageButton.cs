@@ -58,6 +58,36 @@ namespace Microsoft.Phone.Controls
 
         #endregion
 
+        #region public CornerRadius CornerRadius
+
+        /// <summary>
+        /// Gets or sets the radius for the corners of the button.
+        /// </summary>
+        /// 
+        /// <returns>
+        /// The degree to which the corners are rounded.
+        /// </returns>
+        public CornerRadius CornerRadius
+        {
+            get { return (CornerRadius)GetValue(CornerRadiusProperty); }
+            set { SetValue(CornerRadiusProperty, value); }
+        }
+
+        /// <summary>
+        /// Identifies the <see cref="P:Microsoft.Phone.Controls.ImageButton.CornerRadius"/> dependency property.
+        /// </summary>
+        /// 
+        /// <returns>
+        /// The identifier for the <see cref="P:Microsoft.Phone.Controls.ImageButton.CornerRadius"/> dependency property.
+        /// </returns>
+        public static readonly DependencyProperty CornerRadiusProperty = DependencyProperty.Register(
+            "CornerRadius",
+            typeof(CornerRadius),
+            typeof(ImageButton),
+            null);
+
+        #endregion
+
         /// <summary>
         /// Builds the visual tree for the
         /// <see cref="T:Microsoft.Phone.Controls.ImageButton" /> control

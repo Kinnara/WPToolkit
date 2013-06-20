@@ -11,11 +11,12 @@ using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
 using Microsoft.Phone.Controls;
+using Microsoft.Phone.Shell;
 using PhoneToolkitSample.Data;
 
 namespace PhoneToolkitSample.Samples
 {
-    public partial class LongListSelectorSample : PhoneApplicationPage
+    public partial class LongListSelectorSample : BasePage
     {
         private LongListSelector currentSelector;
 

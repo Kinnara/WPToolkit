@@ -13,7 +13,7 @@ using PhoneToolkitSample8;
 
 namespace PhoneToolkitSample
 {
-    public partial class Settings : PhoneApplicationPage
+    public partial class Settings : BasePage
     {
         List<string> _UICultureList, _RegionalCultureList;
         public Settings()

@@ -5,7 +5,7 @@ using System.Windows;
 
 namespace PhoneToolkitSample.Samples
 {
-    public partial class StartViewSample : PhoneApplicationPage
+    public partial class StartViewSample : BasePage
     {
         public StartViewSample()
         {

@@ -26,6 +26,8 @@ namespace Microsoft.Phone.Controls
         public ListPickerItem()
         {
             DefaultStyleKey = typeof(ListPickerItem);
+
+            TiltEffect.SetSuppressTilt(this, false);
         }
 
         /// <summary>

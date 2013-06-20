@@ -9,7 +9,7 @@ using Microsoft.Phone.Controls;
 
 namespace PhoneToolkitSample.Samples
 {
-    public partial class PhoneTextBoxSample : PhoneApplicationPage
+    public partial class PhoneTextBoxSample : BasePage
     {
         public PhoneTextBoxSample()
         {

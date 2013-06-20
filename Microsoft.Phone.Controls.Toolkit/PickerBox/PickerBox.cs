@@ -1,9 +1,4 @@
-﻿// (c) Copyright Microsoft Corporation.
-// This source is subject to the Microsoft Public License (Ms-PL).
-// Please see http://go.microsoft.com/fwlink/?LinkID=131993 for details.
-// All other rights reserved.
-
-using System;
+﻿using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Collections.Specialized;
@@ -24,30 +19,21 @@ namespace Microsoft.Phone.Controls
     /// <summary>
     /// Picker box is a versatile control that can be used to select either a single item or multiple items.
     /// </summary>
-    /// <QualityBand>Preview</QualityBand>
     [TemplatePart(Name = ButtonPartName, Type = typeof(ButtonBase))]
     [TemplateVisualState(GroupName = VisualStates.GroupCommon, Name = VisualStates.StateNormal)]
     [TemplateVisualState(GroupName = VisualStates.GroupCommon, Name = VisualStates.StateDisabled)]
     [StyleTypedProperty(Property = FullModeItemContainerStylePropertyName, StyleTargetType = typeof(ListBoxItem))]
-    public class PickerBox : ItemsControl
+    public class PickerBox : SimpleSelector
     {
         private const string ButtonPartName = "Button";
 
         private const string FullModeItemContainerStylePropertyName = "FullModeItemContainerStyle";
 
         private ButtonBase _buttonPart;
-        private bool _updatingSelection;
-        private int _deferredSelectedIndex = -1;
-        private object _deferredSelectedItem = null;
 
         private PickerPageHelper<IPickerBoxPage> _pickerPageHelper;
 
         private Binding _selectedValueBinding;
-
-        /// <summary>
-        /// Event that is raised when the selection changes.
-        /// </summary>
-        public event SelectionChangedEventHandler SelectionChanged;
 
         /// <summary>
         /// Gets or sets the delegate, which is called to summarize a list of selections into a string.
@@ -102,120 +88,15 @@ namespace Microsoft.Phone.Controls
             UpdateVisualStates(true);
         }
 
-        /// <summary>
-        /// Gets or sets the index of the selected item.
-        /// </summary>
-        public int SelectedIndex
+        internal override void OnSelectionChanged(SelectionChangedEventArgs e)
         {
-            get { return (int)GetValue(SelectedIndexProperty); }
-            set { SetValue(SelectedIndexProperty, value); }
-        }
-
-        /// <summary>
-        /// Identifies the SelectedIndex DependencyProperty.
-        /// </summary>
-        public static readonly DependencyProperty SelectedIndexProperty =
-            DependencyProperty.Register("SelectedIndex", typeof(int), typeof(PickerBox), new PropertyMetadata(-1, OnSelectedIndexChanged));
-
-        private static void OnSelectedIndexChanged(DependencyObject o, DependencyPropertyChangedEventArgs e)
-        {
-            ((PickerBox)o).OnSelectedIndexChanged((int)e.OldValue, (int)e.NewValue);
-        }
-
-        [SuppressMessage("Microsoft.Usage", "CA1801:ReviewUnusedParameters", MessageId = "oldValue")]
-        [SuppressMessage("Microsoft.Naming", "CA2204:Literals should be spelled correctly", MessageId = "SelectedIndex", Justification = "Property name.")]
-        private void OnSelectedIndexChanged(int oldValue, int newValue)
-        {
-            // Validate new value
-            if ((Items.Count <= newValue) ||
-                ((0 < Items.Count) && (newValue < 0)) ||
-                ((0 == Items.Count) && (newValue != -1)))
-            {
-                if ((null == Template) && (0 <= newValue))
-                {
-                    // Can't set the value now; remember it for later
-                    _deferredSelectedIndex = newValue;
-                    return;
-                }
-                throw new InvalidOperationException(Properties.Resources.InvalidSelectedIndex);
-            }
-
-            // Synchronize SelectedItem property
-            if (!_updatingSelection)
-            {
-                _updatingSelection = true;
-                SelectedItem = (-1 != newValue) ? Items[newValue] : null;
-                _updatingSelection = false;
-            }
-        }
-
-        /// <summary>
-        /// Gets or sets the selected item.
-        /// </summary>
-        public object SelectedItem
-        {
-            get { return (object)GetValue(SelectedItemProperty); }
-            set { SetValue(SelectedItemProperty, value); }
-        }
-
-        /// <summary>
-        /// Identifies the SelectedItem DependencyProperty.
-        /// </summary>
-        public static readonly DependencyProperty SelectedItemProperty =
-            DependencyProperty.Register("SelectedItem", typeof(object), typeof(PickerBox), new PropertyMetadata(null, OnSelectedItemChanged));
-
-        private static void OnSelectedItemChanged(DependencyObject o, DependencyPropertyChangedEventArgs e)
-        {
-            ((PickerBox)o).OnSelectedItemChanged(e.OldValue, e.NewValue);
-        }
-
-        [SuppressMessage("Microsoft.Naming", "CA2204:Literals should be spelled correctly", MessageId = "SelectedItem", Justification = "Property name.")]
-        private void OnSelectedItemChanged(object oldValue, object newValue)
-        {
-            if (newValue != null && (null == Items || Items.Count == 0))
-            {
-                if (null == Template)
-                {
-                    // Can't set the value now; remember it for later
-                    _deferredSelectedItem = newValue;
-                    return;
-                }
-                else
-                {
-                    throw new InvalidOperationException(Properties.Resources.InvalidSelectedItem);
-                }
-            }
-
-            // Validate new value
-            int newValueIndex = (null != newValue) ? Items.IndexOf(newValue) : -1;
-
-            if ((-1 == newValueIndex) && (0 < Items.Count))
-            {
-                throw new InvalidOperationException(Properties.Resources.InvalidSelectedItem);
-            }
-
-            // Synchronize SelectedIndex property
-            if (!_updatingSelection)
-            {
-                _updatingSelection = true;
-                SelectedIndex = newValueIndex;
-                _updatingSelection = false;
-            }
-
             // Switch to Normal mode
             if (IsOpen)
             {
                 IsOpen = false;
             }
 
-            // Fire SelectionChanged event
-            var handler = SelectionChanged;
-            if (null != handler)
-            {
-                IList removedItems = (null == oldValue) ? new object[0] : new object[] { oldValue };
-                IList addedItems = (null == newValue) ? new object[0] : new object[] { newValue };
-                handler(this, new SelectionChangedEventArgs(removedItems, addedItems));
-            }
+            base.OnSelectionChanged(e);
 
             UpdateButtonContent();
         }
@@ -249,6 +130,21 @@ namespace Microsoft.Phone.Controls
         /// </summary>
         public static readonly DependencyProperty FullModeItemContainerStyleProperty =
             DependencyProperty.Register("FullModeItemContainerStyle", typeof(Style), typeof(PickerBox), null);
+
+        /// <summary>
+        /// Gets or sets the name or path of the property that is displayed for each data item in full mode.
+        /// </summary>
+        public string FullModeDisplayMemberPath
+        {
+            get { return (string)GetValue(FullModeDisplayMemberPathProperty); }
+            set { SetValue(FullModeDisplayMemberPathProperty, value); }
+        }
+
+        /// <summary>
+        /// Identifies the FullModeDisplayMemberPath DependencyProperty.
+        /// </summary>
+        public static readonly DependencyProperty FullModeDisplayMemberPathProperty =
+            DependencyProperty.Register("FullModeDisplayMemberPath", typeof(string), typeof(PickerBox), null);
 
         /// <summary>
         /// Gets or sets the header of the control.
@@ -337,67 +233,25 @@ namespace Microsoft.Phone.Controls
 
         private void OnSelectionModeChanged()
         {
+            if (SelectionMode == SelectionMode.Single && SelectedIndex != -1)
+            {
+                _selectionChanger.SelectJustThisItem(SelectedIndex, SelectedIndex);
+            }
+
             UpdateButtonContent();
         }
 
         /// <summary>
         /// Gets the selected items.
         /// </summary>
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly", Justification="Want to allow this to be bound to.")]
         public IList SelectedItems
         {
-            get { return (IList)GetValue(SelectedItemsProperty); }
-            set { SetValue(SelectedItemsProperty, value); }
+            get { return SelectedItemsImpl; }
         }
 
-        /// <summary>
-        /// Identifies the SelectedItems DependencyProperty.
-        /// </summary>
-        public static readonly DependencyProperty SelectedItemsProperty = DependencyProperty.Register(
-            "SelectedItems",
-            typeof(IList),
-            typeof(PickerBox),
-            new PropertyMetadata(OnSelectedItemsChanged)
-            );
-
-        private static void OnSelectedItemsChanged(DependencyObject o, DependencyPropertyChangedEventArgs e)
+        internal override bool CanSelectMultiple
         {
-            ((PickerBox)o).OnSelectedItemsChanged((IList)e.OldValue, (IList)e.NewValue);
-        }
-
-        private void OnSelectedItemsChanged(IList oldValue, IList newValue)
-        {
-            UpdateSummary(newValue);
-
-            // Fire SelectionChanged event
-            var handler = SelectionChanged;
-            if (null != handler)
-            {
-                IList removedItems = new List<object>();
-                if (null != oldValue)
-                {
-                    foreach (object o in oldValue)
-                    {
-                        if (null == newValue || !newValue.Contains(o))
-                        {
-                            removedItems.Add(o);
-                        }
-                    }
-                }
-                IList addedItems = new List<object>();
-                if (null != newValue)
-                {
-                    foreach (object o in newValue)
-                    {
-                        if (null == oldValue || !oldValue.Contains(o))
-                        {
-                            addedItems.Add(o);
-                        }
-                    }
-                }
-
-                handler(this, new SelectionChangedEventArgs(removedItems, addedItems));
-            }
+            get { return SelectionMode != SelectionMode.Single; }
         }
 
         private static readonly DependencyProperty DisplayMemberPathShadowProperty = DependencyProperty.Register(
@@ -447,6 +301,7 @@ namespace Microsoft.Phone.Controls
             if (null != _buttonPart)
             {
                 _buttonPart.Click -= OnButtonClick;
+                _buttonPart.ClearValue(ButtonBase.ContentProperty);
             }
 
             base.OnApplyTemplate();
@@ -456,22 +311,8 @@ namespace Microsoft.Phone.Controls
             if (null != _buttonPart)
             {
                 _buttonPart.Click += OnButtonClick;
+                UpdateButtonContent();
             }
-
-            // Commit deferred SelectedIndex (if any)
-            if (-1 != _deferredSelectedIndex)
-            {
-                SelectedIndex = _deferredSelectedIndex;
-                _deferredSelectedIndex = -1;
-            }
-            if (null != _deferredSelectedItem)
-            {
-                SelectedItem = _deferredSelectedItem;
-                _deferredSelectedItem = null;
-            }
-
-            OnSelectionModeChanged();
-            OnSelectedItemsChanged(SelectedItems, SelectedItems);
 
             UpdateVisualStates(false);
         }
@@ -484,41 +325,10 @@ namespace Microsoft.Phone.Controls
         {
             base.OnItemsChanged(e);
 
-            if ((0 < Items.Count) && (null == SelectedItem))
+            if (0 == Items.Count)
             {
-                // Nothing selected (and no pending Binding); select the first item
-                if ((null == GetBindingExpression(SelectedIndexProperty)) &&
-                    (null == GetBindingExpression(SelectedItemProperty)))
-                {
-                    SelectedIndex = 0;
-                }
-            }
-            else if (0 == Items.Count)
-            {
-                // No items; select nothing
-                SelectedIndex = -1;
+                // No items
                 IsOpen = false;
-            }
-            else if (Items.Count <= SelectedIndex)
-            {
-                // Selected item no longer present; select the last item
-                SelectedIndex = Items.Count - 1;
-            }
-            else
-            {
-                // Re-synchronize SelectedIndex with SelectedItem if necessary
-                if (!object.Equals(Items[SelectedIndex], SelectedItem))
-                {
-                    int selectedItemIndex = Items.IndexOf(SelectedItem);
-                    if (-1 == selectedItemIndex)
-                    {
-                        SelectedItem = Items[0];
-                    }
-                    else
-                    {
-                        SelectedIndex = selectedItemIndex;
-                    }
-                }
             }
         }
 
@@ -611,7 +421,7 @@ namespace Microsoft.Phone.Controls
 
             pickerPage.ItemTemplate = FullModeItemTemplate;
             pickerPage.ItemContainerStyle = FullModeItemContainerStyle;
-            pickerPage.DisplayMemberPath = DisplayMemberPath;
+            pickerPage.DisplayMemberPath = FullModeDisplayMemberPath;
 
             pickerPage.Items.Clear();
             if (null != Items)
@@ -654,7 +464,7 @@ namespace Microsoft.Phone.Controls
             }
             else if ((SelectionMode == SelectionMode.Multiple || SelectionMode == SelectionMode.Extended) && null != pickerPage.SelectedItems)
             {
-                SelectedItems = pickerPage.SelectedItems;
+                SelectRange(pickerPage.SelectedItems);
             }
         }
 

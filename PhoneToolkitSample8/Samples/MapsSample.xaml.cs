@@ -55,7 +55,7 @@ namespace PhoneToolkitSample.Samples
     /// <summary>
     /// Maps sample page
     /// </summary>
-    public partial class MapsSample : PhoneApplicationPage
+    public partial class MapsSample : BasePage
     {
         /// <summary>
         /// Main view model used in this page

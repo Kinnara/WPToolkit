@@ -9,7 +9,7 @@ using Microsoft.Phone.Controls;
 
 namespace PhoneToolkitSample.Samples
 {
-    public partial class FeatheredTransitionsSample1 : PhoneApplicationPage
+    public partial class FeatheredTransitionsSample1 : BasePage
     {
         public FeatheredTransitionsSample1()
         {

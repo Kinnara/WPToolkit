@@ -7,7 +7,7 @@ using Microsoft.Phone.Controls;
 
 namespace PhoneToolkitSample.Samples
 {
-    public partial class AutoCompleteBoxSample : PhoneApplicationPage
+    public partial class AutoCompleteBoxSample : BasePage
     {
         public AutoCompleteBoxSample()
         {

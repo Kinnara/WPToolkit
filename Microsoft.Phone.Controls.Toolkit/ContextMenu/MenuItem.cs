@@ -137,13 +137,11 @@ namespace Microsoft.Phone.Controls
         }
 
         /// <summary>
-        /// Responds to the Tap event.
+        /// Called when the left mouse button is released.
         /// </summary>
-        /// <param name="e">The event data for the Tap event.</param>
-        protected override void OnTap(System.Windows.Input.GestureEventArgs e)
+        /// <param name="e">The event data for the MouseLeftButtonUp event.</param>
+        protected override void OnMouseLeftButtonUp(MouseButtonEventArgs e)
         {
-            base.OnTap(e);
-
             if (e == null)
             {
                 throw new ArgumentNullException("e");
@@ -155,7 +153,7 @@ namespace Microsoft.Phone.Controls
                 e.Handled = true;
             }
 
-            base.OnTap(e);
+            base.OnMouseLeftButtonUp(e);
         }
 
         /// <summary>

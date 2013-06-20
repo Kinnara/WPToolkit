@@ -9,7 +9,7 @@ using Microsoft.Phone.Controls;
 
 namespace PhoneToolkitSample.Samples
 {
-    public partial class GestureSample : PhoneApplicationPage
+    public partial class GestureSample : BasePage
     {
         SolidColorBrush greenBrush = new SolidColorBrush(Colors.Green);
         SolidColorBrush redBrush = new SolidColorBrush(Colors.Red);

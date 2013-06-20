@@ -3,7 +3,7 @@ using System.Windows;
 
 namespace PhoneToolkitSample.Samples
 {
-    public partial class PhoneSliderSample : PhoneApplicationPage
+    public partial class PhoneSliderSample : BasePage
     {
         public PhoneSliderSample()
         {

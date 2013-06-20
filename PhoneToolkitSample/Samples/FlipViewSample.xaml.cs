@@ -4,7 +4,7 @@ using System.Windows.Controls;
 
 namespace PhoneToolkitSample.Samples
 {
-    public partial class FlipViewSample : PhoneApplicationPage
+    public partial class FlipViewSample : BasePage
     {
         public FlipViewSample()
         {
@@ -16,6 +16,7 @@ namespace PhoneToolkitSample.Samples
                 System.Windows.Controls.Orientation.Horizontal,
                 System.Windows.Controls.Orientation.Vertical
             };
+            OrientationPicker.SelectedIndex = 0;
 
             DataContext = ColorExtensions.AccentColors();
         }

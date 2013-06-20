@@ -2,7 +2,7 @@
 
 namespace PhoneToolkitSample.Samples
 {
-    public partial class VariableSizedWrapGridSample : PhoneApplicationPage
+    public partial class VariableSizedWrapGridSample : BasePage
     {
         public VariableSizedWrapGridSample()
         {

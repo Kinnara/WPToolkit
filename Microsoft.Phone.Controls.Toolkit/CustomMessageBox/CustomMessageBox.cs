@@ -4,6 +4,7 @@
 // All other rights reserved.
 
 using System;
+using System.Diagnostics.CodeAnalysis;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -611,6 +612,7 @@ namespace Microsoft.Phone.Controls
         /// Reveals the message box by inserting it into a popup and opening it, asynchronously.
         /// </summary>
         /// <returns>A Task that contains the result.</returns>
+        [SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes")]
         public Task<CustomMessageBoxResult> ShowAsync()
         {
             var tcs = new TaskCompletionSource<CustomMessageBoxResult>();

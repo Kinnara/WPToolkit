@@ -12,7 +12,7 @@ using Microsoft.Phone.Controls;
 
 namespace PhoneToolkitSample.Samples
 {
-    public partial class ContextMenuSample : PhoneApplicationPage
+    public partial class ContextMenuSample : BasePage
     {
         ViewModel _viewModel;
 

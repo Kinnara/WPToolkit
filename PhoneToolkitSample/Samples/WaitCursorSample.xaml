@@ -1,4 +1,4 @@
-﻿<phone:PhoneApplicationPage
+﻿<toolkit:BasePage
     x:Class="PhoneToolkitSample.Samples.WaitCursorSample"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
@@ -7,58 +7,22 @@
     xmlns:toolkit="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    FontFamily="{StaticResource PhoneFontFamilyNormal}"
-    FontSize="{StaticResource PhoneFontSizeNormal}"
-    Foreground="{StaticResource PhoneForegroundBrush}"
-    SupportedOrientations="PortraitOrLandscape" Orientation="Portrait"
+    SupportedOrientations="PortraitOrLandscape"
     mc:Ignorable="d"
-    shell:SystemTray.IsVisible="True">
+    shell:SystemTray.IsVisible="True"
+    Style="{StaticResource PageStyle}">
 
-    <!--Transitions-->
-    <toolkit:TransitionService.NavigationInTransition>
-        <toolkit:NavigationInTransition>
-            <toolkit:NavigationInTransition.Backward>
-                <toolkit:TurnstileTransition Mode="BackwardIn"/>
-            </toolkit:NavigationInTransition.Backward>
-            <toolkit:NavigationInTransition.Forward>
-                <toolkit:TurnstileTransition Mode="ForwardIn"/>
-            </toolkit:NavigationInTransition.Forward>
-        </toolkit:NavigationInTransition>
-    </toolkit:TransitionService.NavigationInTransition>
-    <toolkit:TransitionService.NavigationOutTransition>
-        <toolkit:NavigationOutTransition>
-            <toolkit:NavigationOutTransition.Backward>
-                <toolkit:TurnstileTransition Mode="BackwardOut"/>
-            </toolkit:NavigationOutTransition.Backward>
-            <toolkit:NavigationOutTransition.Forward>
-                <toolkit:TurnstileTransition Mode="ForwardOut"/>
-            </toolkit:NavigationOutTransition.Forward>
-        </toolkit:NavigationOutTransition>
-    </toolkit:TransitionService.NavigationOutTransition>
-
-    <Grid x:Name="LayoutRoot" Background="Transparent">
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="*"/>
-        </Grid.RowDefinitions>
-
-        <StackPanel Grid.Row="0">
-            <TextBlock Text="{StaticResource ApplicationTitle}"
-                       Style="{StaticResource PivotTitleTextStyle}"/>
-            <TextBlock Text="waitcursor" 
-                       Style="{StaticResource PivotHeaderTextStyle}"/>
-        </StackPanel>
-
-        <StackPanel x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0">
+    <toolkit:PageUI Header="waitcursor">
+        <StackPanel x:Name="ContentPanel">
             <TextBlock Text="The wait cursor is a blocking visual animation typically reserved for cases where the application cannot continue until an event is satisfied. Scenarios must minimize any waiting or break in the user task flow as much as possible."
                        Style="{StaticResource PhoneTextNormalStyle}"
                        FontSize="{StaticResource PhoneFontSizeMedium}"
                        TextWrapping="Wrap"
                        Margin="12,2,12,34"/>
-            
+
             <Button x:Name="ShowButton" Content="show" Click="ShowButton_Click"/>
         </StackPanel>
-    </Grid>
+    </toolkit:PageUI>
     
     <phone:PhoneApplicationPage.ApplicationBar>
         <shell:ApplicationBar>
@@ -72,4 +36,4 @@
         <toolkit:WaitCursor x:Name="WaitIndicator" Text="Waiting..."/>
     </toolkit:WaitCursorService.WaitCursor>
 
-</phone:PhoneApplicationPage>
+</toolkit:BasePage>

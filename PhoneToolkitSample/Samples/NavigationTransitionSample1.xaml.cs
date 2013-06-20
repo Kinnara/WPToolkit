@@ -9,7 +9,7 @@ using Microsoft.Phone.Controls;
 
 namespace PhoneToolkitSample.Samples
 {
-    public partial class NavigationTransitionSample1 : PhoneApplicationPage
+    public partial class NavigationTransitionSample1 : BasePage
     {
         public NavigationTransitionSample1()
         {

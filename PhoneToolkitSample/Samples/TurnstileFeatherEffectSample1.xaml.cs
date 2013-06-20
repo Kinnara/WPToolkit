@@ -10,7 +10,7 @@ using PhoneToolkitSample.Data;
 
 namespace PhoneToolkitSample.Samples
 {
-    public partial class TurnstileFeatherEffectSample1 : PhoneApplicationPage
+    public partial class TurnstileFeatherEffectSample1 : BasePage
     {
         private bool _isDataLoaded;
 

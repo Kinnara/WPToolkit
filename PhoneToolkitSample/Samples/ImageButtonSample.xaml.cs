@@ -3,7 +3,7 @@ using System.Windows;
 
 namespace PhoneToolkitSample.Samples
 {
-    public partial class ImageButtonSample : PhoneApplicationPage
+    public partial class ImageButtonSample : BasePage
     {
         public ImageButtonSample()
         {

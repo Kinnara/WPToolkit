@@ -16,7 +16,7 @@ using System.Globalization;
 
 namespace PhoneToolkitSample.Samples
 {
-    public partial class LongListSelectorSample : PhoneApplicationPage
+    public partial class LongListSelectorSample : BasePage
     {
         public List<AlphaKeyGroup<Person>> Buddies { get; private set; }
         public List<AlphaKeyGroup<Movie>> Movies { get; private set; }

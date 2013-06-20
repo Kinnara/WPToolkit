@@ -7,7 +7,7 @@ using Microsoft.Phone.Controls;
 
 namespace PhoneToolkitSample.Samples
 {
-    public partial class ExpanderViewSample : PhoneApplicationPage
+    public partial class ExpanderViewSample : BasePage
     {
         public ExpanderViewSample()
         {

@@ -116,6 +116,9 @@
     <Compile Include="..\Microsoft.Phone.Controls.Toolkit\AutoCompleteBox\SelectorSelectionAdapter.cs">
       <Link>AutoCompleteBox\SelectorSelectionAdapter.cs</Link>
     </Compile>
+    <Compile Include="..\Microsoft.Phone.Controls.Toolkit\BasePage\BasePage.cs">
+      <Link>BasePage\BasePage.cs</Link>
+    </Compile>
     <Compile Include="..\Microsoft.Phone.Controls.Toolkit\Common\AnimationHelper.cs">
       <Link>Common\AnimationHelper.cs</Link>
     </Compile>
@@ -337,6 +340,9 @@
     <Compile Include="..\Microsoft.Phone.Controls.Toolkit\CustomMessageBox\DismissedEventArgs.cs">
       <Link>CustomMessageBox\DismissedEventArgs.cs</Link>
     </Compile>
+    <Compile Include="..\Microsoft.Phone.Controls.Toolkit\PageUI\PageUI.cs">
+      <Link>PageUI\PageUI.cs</Link>
+    </Compile>
     <Compile Include="..\Microsoft.Phone.Controls.Toolkit\PhoneContentControl\PhoneContentControl.cs">
       <Link>PhoneContentControl\PhoneContentControl.cs</Link>
     </Compile>
@@ -377,11 +383,23 @@
       <Link>PickerBox\PickerBoxPage.xaml.cs</Link>
       <DependentUpon>PickerBoxPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="..\Microsoft.Phone.Controls.Toolkit\PickerBox\PickerBoxPageBase.cs">
+      <Link>PickerBox\PickerBoxPageBase.cs</Link>
+    </Compile>
     <Compile Include="..\Microsoft.Phone.Controls.Toolkit\Primitives\PhonePasswordBoxCheckBox.cs">
       <Link>Primitives\PhonePasswordBoxCheckBox.cs</Link>
     </Compile>
-    <Compile Include="..\Microsoft.Phone.Controls.Toolkit\Primitives\PickerBoxListBox.cs">
-      <Link>Primitives\PickerBoxListBox.cs</Link>
+    <Compile Include="..\Microsoft.Phone.Controls.Toolkit\Primitives\PickerBoxList.cs">
+      <Link>Primitives\PickerBoxList.cs</Link>
+    </Compile>
+    <Compile Include="..\Microsoft.Phone.Controls.Toolkit\Primitives\PickerBoxListItem.cs">
+      <Link>Primitives\PickerBoxListItem.cs</Link>
+    </Compile>
+    <Compile Include="..\Microsoft.Phone.Controls.Toolkit\Primitives\SimpleSelector.cs">
+      <Link>Primitives\SimpleSelector.cs</Link>
+    </Compile>
+    <Compile Include="..\Microsoft.Phone.Controls.Toolkit\Primitives\SimpleSelectorItem.cs">
+      <Link>Primitives\SimpleSelectorItem.cs</Link>
     </Compile>
     <Compile Include="..\Microsoft.Phone.Controls.Toolkit\Primitives\StartViewPanel.cs">
       <Link>Primitives\StartViewPanel.cs</Link>

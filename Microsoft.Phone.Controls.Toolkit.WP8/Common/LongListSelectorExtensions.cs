@@ -5,6 +5,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
@@ -28,8 +29,19 @@ namespace Microsoft.Phone.Controls
         /// The list of weak references where the items in 
         /// the viewport will be added.
         /// </param>
+        [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", MessageId = "ViewPort")]
         public static void GetItemsInViewPort(this LongListSelector list, IList<WeakReference> items)
         {
+            if (list == null)
+            {
+                throw new ArgumentNullException("list");
+            }
+
+            if (items == null)
+            {
+                throw new ArgumentNullException("items");
+            }
+
             DependencyObject child = list;
             int childCount;
 

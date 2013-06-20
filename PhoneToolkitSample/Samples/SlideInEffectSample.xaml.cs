@@ -9,7 +9,7 @@ using PhoneToolkitSample.Data;
 
 namespace PhoneToolkitSample.Samples
 {
-    public partial class SlideInEffectSample : PhoneApplicationPage
+    public partial class SlideInEffectSample : BasePage
     {
         private bool _isDataLoaded;
 

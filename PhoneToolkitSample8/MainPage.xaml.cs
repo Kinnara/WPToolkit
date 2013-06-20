@@ -11,7 +11,7 @@ using PhoneToolkitSample.Resources;
 
 namespace PhoneToolkitSample8
 {
-    public partial class MainPage : PhoneApplicationPage
+    public partial class MainPage : BasePage
     {
         private SampleItem[] _samples;
 
@@ -27,6 +27,7 @@ namespace PhoneToolkitSample8
         {
             // These items show up sorted by the second parameter, not the name of the file
             _samples = new SampleItem[] {
+                new SampleItem("/Samples/PickerBoxSample.xaml","pickerbox","select either a single item or multiple items" ),
                 new SampleItem("/Samples/AutoCompleteBoxSample.xaml","autocompletebox","completion of text based on items" ),
                 new SampleItem("/Samples/ContextMenuSample.xaml","contextmenu","tap & hold menu options control" ),
                 new SampleItem("/Samples/CustomMessageBoxSample.xaml","custommessagebox","a modular dialog box to display notifications" ),
@@ -38,7 +39,7 @@ namespace PhoneToolkitSample8
                 new SampleItem("/Samples/GestureSample.xaml","gestures*","a gesture service for tap pinch, etc." ),
                 new SampleItem("/Samples/HubTileSample.xaml","hubtile","tile control that is animated and alive" ),
                 new SampleItem("/Samples/ImageButtonSample.xaml","imagebutton","button control which has an image as its content" ),
-                new SampleItem("/Samples/ListPickerSample.xaml","listpicker","select from a few items inline or many" ),
+                new SampleItem("/Samples/ListPickerSample.xaml","listpicker","pick a single item from a list of potential options" ),
                 new SampleItem("/Samples/ListViewSample.xaml","listview","list control with incremental loading and more" ),
                 new SampleItem("/Samples/LockablePivotSample.xaml","lockablepivot*","a pivot that allows disabling navigation" ),
                 new SampleItem("/Samples/LongListMultiSelectorSample.xaml","longlistmultiselector","long list selector with multiple selection" ),

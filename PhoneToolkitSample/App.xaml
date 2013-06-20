@@ -163,6 +163,185 @@
             <Setter Property="FontSize" Value="{StaticResource PivotHeaderFontSize}"/>
             <Setter Property="Margin" Value="21,0,0,28"/>
         </Style>
+
+        <Style x:Key="ControlHeaderTextStyle" TargetType="TextBlock" BasedOn="{StaticResource PhoneTextSubtleStyle}">
+            <Setter Property="LineHeight" Value="23.333"/>
+            <Setter Property="LineStackingStrategy" Value="BlockLineHeight"/>
+            <Setter Property="Margin" Value="12,-10,0,0"/>
+            <Setter Property="TextWrapping" Value="Wrap"/>
+            <Setter Property="RenderTransform">
+                <Setter.Value>
+                    <TranslateTransform X="-1" Y="5"/>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Thickness x:Key="LandscapeTitleMargin">0,8,0,0</Thickness>
+
+        <Style x:Key="PageStyleBase" TargetType="phone:PhoneApplicationPage">
+            <Setter Property="FontFamily" Value="{StaticResource PhoneFontFamilyNormal}"/>
+            <Setter Property="FontSize" Value="{StaticResource PhoneFontSizeNormal}"/>
+            <Setter Property="Foreground" Value="{StaticResource PhoneForegroundBrush}"/>
+        </Style>
+
+        <Style x:Key="PageStyle" TargetType="phone:PhoneApplicationPage" BasedOn="{StaticResource PageStyleBase}">
+            <Setter Property="toolkit:TransitionService.NavigationInTransition">
+                <Setter.Value>
+                    <toolkit:NavigationInTransition>
+                        <toolkit:NavigationInTransition.Backward>
+                            <toolkit:TurnstileTransition Mode="BackwardIn"/>
+                        </toolkit:NavigationInTransition.Backward>
+                        <toolkit:NavigationInTransition.Forward>
+                            <toolkit:TurnstileTransition Mode="ForwardIn"/>
+                        </toolkit:NavigationInTransition.Forward>
+                    </toolkit:NavigationInTransition>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="toolkit:TransitionService.NavigationOutTransition">
+                <Setter.Value>
+                    <toolkit:NavigationOutTransition>
+                        <toolkit:NavigationOutTransition.Backward>
+                            <toolkit:TurnstileTransition Mode="BackwardOut"/>
+                        </toolkit:NavigationOutTransition.Backward>
+                        <toolkit:NavigationOutTransition.Forward>
+                            <toolkit:TurnstileTransition Mode="ForwardOut"/>
+                        </toolkit:NavigationOutTransition.Forward>
+                    </toolkit:NavigationOutTransition>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style x:Key="TurnstileFeatherPageStyle" TargetType="phone:PhoneApplicationPage" BasedOn="{StaticResource PageStyleBase}">
+            <Setter Property="toolkit:TransitionService.NavigationInTransition">
+                <Setter.Value>
+                    <toolkit:NavigationInTransition>
+                        <toolkit:NavigationInTransition.Backward>
+                            <toolkit:TurnstileFeatherTransition Mode="BackwardIn"/>
+                        </toolkit:NavigationInTransition.Backward>
+                        <toolkit:NavigationInTransition.Forward>
+                            <toolkit:TurnstileFeatherTransition Mode="ForwardIn"/>
+                        </toolkit:NavigationInTransition.Forward>
+                    </toolkit:NavigationInTransition>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="toolkit:TransitionService.NavigationOutTransition">
+                <Setter.Value>
+                    <toolkit:NavigationOutTransition>
+                        <toolkit:NavigationOutTransition.Backward>
+                            <toolkit:TurnstileFeatherTransition Mode="BackwardOut"/>
+                        </toolkit:NavigationOutTransition.Backward>
+                        <toolkit:NavigationOutTransition.Forward>
+                            <toolkit:TurnstileFeatherTransition Mode="ForwardOut"/>
+                        </toolkit:NavigationOutTransition.Forward>
+                    </toolkit:NavigationOutTransition>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style x:Key="PageUIBase" TargetType="toolkit:PageUI">
+            <Setter Property="Title" Value="{StaticResource ApplicationTitle}"/>
+        </Style>
+
+        <Style TargetType="toolkit:PageUI" BasedOn="{StaticResource PageUIBase}">
+            <Setter Property="Title" Value="{StaticResource ApplicationTitle}"/>
+        </Style>
+
+        <Style x:Key="TurnstileFeatherPageUIStyle" TargetType="toolkit:PageUI" BasedOn="{StaticResource PageUIBase}">
+            <Setter Property="TitleStyle">
+                <Setter.Value>
+                    <Style TargetType="ContentControl">
+                        <Setter Property="toolkit:TurnstileFeatherEffect.FeatheringIndex" Value="0"/>
+                    </Style>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="HeaderStyle">
+                <Setter.Value>
+                    <Style TargetType="ContentControl">
+                        <Setter Property="toolkit:TurnstileFeatherEffect.FeatheringIndex" Value="1"/>
+                    </Style>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style x:Key="ScrollablePageUIStyle" TargetType="toolkit:PageUI" BasedOn="{StaticResource PageUIBase}">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="toolkit:PageUI">
+                        <Border x:Name="LayoutRoot" Background="{TemplateBinding Background}" Padding="{TemplateBinding Padding}">
+                            <VisualStateManager.VisualStateGroups>
+                                <VisualStateGroup x:Name="OrientationStates">
+                                    <VisualState x:Name="PortraitUp"/>
+                                    <VisualState x:Name="LandscapeLeft">
+                                        <Storyboard>
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="PortraitTitlePanel" Storyboard.TargetProperty="Visibility">
+                                                <DiscreteObjectKeyFrame KeyTime="0" Value="Collapsed" />
+                                            </ObjectAnimationUsingKeyFrames>
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="LandscapeTitlePanel" Storyboard.TargetProperty="Visibility">
+                                                <DiscreteObjectKeyFrame KeyTime="0" Value="Visible" />
+                                            </ObjectAnimationUsingKeyFrames>
+                                        </Storyboard>
+                                    </VisualState>
+                                    <VisualState x:Name="LandscapeRight">
+                                        <Storyboard>
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="PortraitTitlePanel" Storyboard.TargetProperty="Visibility">
+                                                <DiscreteObjectKeyFrame KeyTime="0" Value="Collapsed" />
+                                            </ObjectAnimationUsingKeyFrames>
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="LandscapeTitlePanel" Storyboard.TargetProperty="Visibility">
+                                                <DiscreteObjectKeyFrame KeyTime="0" Value="Visible" />
+                                            </ObjectAnimationUsingKeyFrames>
+                                        </Storyboard>
+                                    </VisualState>
+                                </VisualStateGroup>
+                            </VisualStateManager.VisualStateGroups>
+
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition/>
+                                </Grid.RowDefinitions>
+
+                                <StackPanel x:Name="PortraitTitlePanel">
+                                    <ContentControl
+                                        Content="{TemplateBinding Title}"
+                                        ContentTemplate="{TemplateBinding TitleTemplate}"
+                                        Style="{TemplateBinding TitleStyle}"
+                                        HorizontalContentAlignment="Stretch"/>
+                                    <ContentControl
+                                        Content="{TemplateBinding Header}"
+                                        ContentTemplate="{TemplateBinding HeaderTemplate}"
+                                        Style="{TemplateBinding HeaderStyle}"
+                                        HorizontalContentAlignment="Stretch"/>
+                                </StackPanel>
+
+                                <ScrollViewer Grid.Row="1">
+                                    <Grid>
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="Auto"/>
+                                            <RowDefinition/>
+                                        </Grid.RowDefinitions>
+
+                                        <StackPanel x:Name="LandscapeTitlePanel" Margin="{StaticResource LandscapeTitleMargin}" Visibility="Collapsed">
+                                            <ContentControl
+                                                Content="{TemplateBinding Title}"
+                                                ContentTemplate="{TemplateBinding TitleTemplate}"
+                                                Style="{TemplateBinding TitleStyle}"
+                                                HorizontalContentAlignment="Stretch"/>
+                                            <ContentControl
+                                                Content="{TemplateBinding Header}"
+                                                ContentTemplate="{TemplateBinding HeaderTemplate}"
+                                                Style="{TemplateBinding HeaderStyle}"
+                                                HorizontalContentAlignment="Stretch"/>
+                                        </StackPanel>
+
+                                        <ContentPresenter Margin="{StaticResource PhoneHorizontalMargin}" Grid.Row="1"/>
+                                    </Grid>
+                                </ScrollViewer>
+                            </Grid>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
     </Application.Resources>
 
     <Application.ApplicationLifetimeObjects>

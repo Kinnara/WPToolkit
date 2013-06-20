@@ -5,7 +5,7 @@
 // All other rights reserved.
 -->
     
-<phone:PhoneApplicationPage 
+<toolkit:BasePage
     x:Class="PhoneToolkitSample.Samples.LongListSelectorSample"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
@@ -18,33 +18,9 @@
     xmlns:local="clr-namespace:PhoneToolkitSample"
     xmlns:data="clr-namespace:PhoneToolkitSample.Data"
     mc:Ignorable="d" d:DesignWidth="480" d:DesignHeight="768"
-    FontFamily="{StaticResource PhoneFontFamilyNormal}"
-    FontSize="{StaticResource PhoneFontSizeNormal}"
-    Foreground="{StaticResource PhoneForegroundBrush}"
-    SupportedOrientations="Portrait"  Orientation="Portrait"
     shell:SystemTray.IsVisible="True"
-    shell:SystemTray.Opacity="0.0">
-
-    <toolkit:TransitionService.NavigationInTransition>
-        <toolkit:NavigationInTransition>
-            <toolkit:NavigationInTransition.Backward>
-                <toolkit:TurnstileFeatherTransition Mode="BackwardIn"/>
-            </toolkit:NavigationInTransition.Backward>
-            <toolkit:NavigationInTransition.Forward>
-                <toolkit:TurnstileFeatherTransition Mode="ForwardIn"/>
-            </toolkit:NavigationInTransition.Forward>
-        </toolkit:NavigationInTransition>
-    </toolkit:TransitionService.NavigationInTransition>
-    <toolkit:TransitionService.NavigationOutTransition>
-        <toolkit:NavigationOutTransition>
-            <toolkit:NavigationOutTransition.Backward>
-                <toolkit:TurnstileFeatherTransition Mode="BackwardOut"/>
-            </toolkit:NavigationOutTransition.Backward>
-            <toolkit:NavigationOutTransition.Forward>
-                <toolkit:TurnstileFeatherTransition Mode="ForwardOut"/>
-            </toolkit:NavigationOutTransition.Forward>
-        </toolkit:NavigationOutTransition>
-    </toolkit:TransitionService.NavigationOutTransition>
+    shell:SystemTray.Opacity="0.0"
+    Style="{StaticResource PageStyle}">
 
     <phone:PhoneApplicationPage.Resources>
         <!-- MOVIE RESOURCES -->
@@ -106,15 +82,13 @@
     </phone:PhoneApplicationPage.Resources>
 
     <Grid x:Name="LayoutRoot" Background="Transparent" Margin="0,32,0,0">
-        <controls:Pivot Title="LONGLISTSELECTOR SAMPLES"
-                        toolkit:TurnstileFeatherEffect.FeatheringIndex="0">
+        <controls:Pivot Title="LONGLISTSELECTOR SAMPLES">
             <controls:PivotItem Header="buddies">
                 <toolkit:LongListSelector x:Name="buddies" Background="Transparent"
                                           Margin="0,-8,0,0"
                                           GroupViewOpened="LongListSelector_GroupViewOpened"
                                           GroupViewClosing="LongListSelector_GroupViewClosing"
-                                          ItemsSource="{StaticResource buddies}"
-                                          toolkit:TurnstileFeatherEffect.FeatheringIndex="2">
+                                          ItemsSource="{StaticResource buddies}">
                     <toolkit:LongListSelector.GroupItemsPanel>
                         <ItemsPanelTemplate>
                             <toolkit:WrapPanel Orientation="Horizontal"/>
@@ -185,8 +159,7 @@
                                           GroupItemTemplate="{StaticResource groupItemHeader}"
                                           ItemTemplate="{StaticResource movieItemTemplate}"
                                           GroupViewOpened="LongListSelector_GroupViewOpened"
-                                          GroupViewClosing="LongListSelector_GroupViewClosing"
-                                          toolkit:TurnstileFeatherEffect.FeatheringIndex="2"/>
+                                          GroupViewClosing="LongListSelector_GroupViewClosing"/>
             </controls:PivotItem>
 
             <controls:PivotItem Header="code">
@@ -197,8 +170,7 @@
                                           GroupItemTemplate="{StaticResource groupItemHeader}"
                                           ItemTemplate="{StaticResource movieItemTemplate}"
                                           GroupViewOpened="LongListSelector_GroupViewOpened"
-                                          GroupViewClosing="LongListSelector_GroupViewClosing"
-                                          toolkit:TurnstileFeatherEffect.FeatheringIndex="2">
+                                          GroupViewClosing="LongListSelector_GroupViewClosing">
 
                     <!-- The group footer template, for groups in the main list -->
                     <toolkit:LongListSelector.GroupFooterTemplate>
@@ -213,4 +185,4 @@
         </controls:Pivot>
     </Grid>
 
-</phone:PhoneApplicationPage>
+</toolkit:BasePage>

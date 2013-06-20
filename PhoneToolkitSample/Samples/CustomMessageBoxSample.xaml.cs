@@ -10,7 +10,7 @@ using Microsoft.Phone.Controls;
 
 namespace PhoneToolkitSample.Samples
 {
-    public partial class CustomMessageBoxSample : PhoneApplicationPage
+    public partial class CustomMessageBoxSample : BasePage
     {
         public CustomMessageBoxSample()
         {

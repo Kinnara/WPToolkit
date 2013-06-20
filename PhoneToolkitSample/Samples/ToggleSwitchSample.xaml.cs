@@ -7,7 +7,7 @@ using Microsoft.Phone.Controls;
 
 namespace PhoneToolkitSample.Samples
 {
-    public partial class ToggleSwitchSample : PhoneApplicationPage
+    public partial class ToggleSwitchSample : BasePage
     {
         public ToggleSwitchSample()
         {

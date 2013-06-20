@@ -5,7 +5,7 @@
 // All other rights reserved.
 -->
     
-<phone:PhoneApplicationPage 
+<toolkit:BasePage
     x:Class="PhoneToolkitSample.Samples.ExpanderViewSample"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
@@ -15,60 +15,20 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:data="clr-namespace:PhoneToolkitSample.Data"
     xmlns:toolkit="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit"
-    FontFamily="{StaticResource PhoneFontFamilyNormal}"
-    FontSize="{StaticResource PhoneFontSizeNormal}"
-    Foreground="{StaticResource PhoneForegroundBrush}"
-    SupportedOrientations="Portrait" Orientation="Portrait"
     mc:Ignorable="d" d:DesignHeight="768" d:DesignWidth="480"
-    shell:SystemTray.IsVisible="True">
+    shell:SystemTray.IsVisible="True"
+    Style="{StaticResource TurnstileFeatherPageStyle}">
 
     <!--Resources-->
     <phone:PhoneApplicationPage.Resources>
         <data:InboxObject x:Key="Inbox"/>
     </phone:PhoneApplicationPage.Resources>
 
-    <!--Transitions-->
-    <toolkit:TransitionService.NavigationInTransition>
-        <toolkit:NavigationInTransition>
-            <toolkit:NavigationInTransition.Backward>
-                <toolkit:TurnstileFeatherTransition Mode="BackwardIn"/>
-            </toolkit:NavigationInTransition.Backward>
-            <toolkit:NavigationInTransition.Forward>
-                <toolkit:TurnstileFeatherTransition Mode="ForwardIn"/>
-            </toolkit:NavigationInTransition.Forward>
-        </toolkit:NavigationInTransition>
-    </toolkit:TransitionService.NavigationInTransition>
-    <toolkit:TransitionService.NavigationOutTransition>
-        <toolkit:NavigationOutTransition>
-            <toolkit:NavigationOutTransition.Backward>
-                <toolkit:TurnstileFeatherTransition Mode="BackwardOut"/>
-            </toolkit:NavigationOutTransition.Backward>
-            <toolkit:NavigationOutTransition.Forward>
-                <toolkit:TurnstileFeatherTransition Mode="ForwardOut"/>
-            </toolkit:NavigationOutTransition.Forward>
-        </toolkit:NavigationOutTransition>
-    </toolkit:TransitionService.NavigationOutTransition>
-
     <!--LayoutRoot-->
-    <Grid x:Name="LayoutRoot" Background="Transparent">
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="*"/>
-        </Grid.RowDefinitions>
-
-        <!--TitlePanel-->
-        <StackPanel Grid.Row="0">
-            <TextBlock Text="{StaticResource ApplicationTitle}"
-                       Style="{StaticResource PivotTitleTextStyle}"
-                       toolkit:TurnstileFeatherEffect.FeatheringIndex="0"/>
-            <TextBlock Text="expanderview"
-                       Style="{StaticResource PivotHeaderTextStyle}"
-                       toolkit:TurnstileFeatherEffect.FeatheringIndex="1"/>
-        </StackPanel>
-
+    <toolkit:PageUI Header="expanderview" Style="{StaticResource TurnstileFeatherPageUIStyle}">
         <!--ContentPanel-->
-        <Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0">
-            <ListBox ItemsSource="{StaticResource Inbox}" Margin="12,0,0,0" toolkit:TurnstileFeatherEffect.FeatheringIndex="2">
+        <Grid x:Name="ContentPanel">
+            <ListBox ItemsSource="{StaticResource Inbox}" Margin="12,0,-12,0" toolkit:TurnstileFeatherEffect.FeatheringIndex="2">
                 <ListBox.ItemContainerStyle>
                     <Style TargetType="ListBoxItem">
                         <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
@@ -87,7 +47,7 @@
                                                 Expander="{Binding}"
                                                 ItemsSource="{Binding}"
                                                 IsNonExpandable="{Binding HasSingleMessage}">
-                            
+
                             <!-- The HeaderTemplate describes the header for an expandable item.
                                  In the sample, it's the TextBlock for "Anne Wallace".-->
                             <toolkit:ExpanderView.HeaderTemplate>
@@ -98,7 +58,7 @@
                                                FontFamily="{StaticResource PhoneFontFamilySemiLight}"/>
                                 </DataTemplate>
                             </toolkit:ExpanderView.HeaderTemplate>
-                            
+
                             <!-- The ExpanderTemplate describes the template to the right of the line 
                                  which represents the first sub-item in the expander view.
                                  In the sample, it's the TextBlock for Anne Wallace's email conversation
@@ -176,6 +136,6 @@
                 </ListBox.ItemTemplate>
             </ListBox>
         </Grid>
-    </Grid>
+    </toolkit:PageUI>
 
-</phone:PhoneApplicationPage>
+</toolkit:BasePage>

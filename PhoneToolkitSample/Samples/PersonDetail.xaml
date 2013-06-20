@@ -5,7 +5,7 @@
 // All other rights reserved.
 -->
     
-<phone:PhoneApplicationPage 
+<toolkit:BasePage
     x:Class="PhoneToolkitSample.Samples.PersonDetail"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
@@ -16,47 +16,12 @@
     xmlns:toolkit="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit"
     xmlns:local="clr-namespace:PhoneToolkitSample"
     xmlns:data="clr-namespace:PhoneToolkitSample.Data"
-    FontFamily="{StaticResource PhoneFontFamilyNormal}"
-    FontSize="{StaticResource PhoneFontSizeNormal}"
-    Foreground="{StaticResource PhoneForegroundBrush}"
-    SupportedOrientations="Portrait" Orientation="Portrait"
     mc:Ignorable="d" d:DesignHeight="768" d:DesignWidth="480"
     shell:SystemTray.IsVisible="True"
-    shell:SystemTray.Opacity="0.0">
+    Style="{StaticResource PageStyle}">
 
-    <toolkit:TransitionService.NavigationInTransition>
-        <toolkit:NavigationInTransition>
-            <toolkit:NavigationInTransition.Backward>
-                <toolkit:TurnstileTransition Mode="BackwardIn"/>
-            </toolkit:NavigationInTransition.Backward>
-            <toolkit:NavigationInTransition.Forward>
-                <toolkit:TurnstileTransition Mode="ForwardIn"/>
-            </toolkit:NavigationInTransition.Forward>
-        </toolkit:NavigationInTransition>
-    </toolkit:TransitionService.NavigationInTransition>
-    <toolkit:TransitionService.NavigationOutTransition>
-        <toolkit:NavigationOutTransition>
-            <toolkit:NavigationOutTransition.Backward>
-                <toolkit:TurnstileTransition Mode="BackwardOut"/>
-            </toolkit:NavigationOutTransition.Backward>
-            <toolkit:NavigationOutTransition.Forward>
-                <toolkit:TurnstileTransition Mode="ForwardOut"/>
-            </toolkit:NavigationOutTransition.Forward>
-        </toolkit:NavigationOutTransition>
-    </toolkit:TransitionService.NavigationOutTransition>
-
-    <Grid x:Name="LayoutRoot" Background="Transparent" Margin="0,32,0,0">
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="*"/>
-        </Grid.RowDefinitions>
-
-        <StackPanel x:Name="TitlePanel" Grid.Row="0">
-            <TextBlock Text="{Binding FullName}" Style="{StaticResource PivotTitleTextStyle}"/>
-            <TextBlock Text="status" Style="{StaticResource PivotHeaderTextStyle}"/>
-        </StackPanel>
-
-        <Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0">
+    <toolkit:PageUI x:Name="LayoutRoot" Title="{Binding FullName}" Header="status">
+        <Grid x:Name="ContentPanel">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition/>
@@ -84,6 +49,6 @@
                 <TextBlock x:Name="quote" Style="{StaticResource PhoneTextNormalStyle}" TextWrapping="Wrap" Margin="24,0"/>
             </ScrollViewer>
         </Grid>
-    </Grid>
+    </toolkit:PageUI>
  
-</phone:PhoneApplicationPage>
+</toolkit:BasePage>

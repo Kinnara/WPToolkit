@@ -11,7 +11,7 @@ using Microsoft.Phone.Controls;
 
 namespace PhoneToolkitSample.Samples
 {
-    public partial class WrapPanelSample : PhoneApplicationPage
+    public partial class WrapPanelSample : BasePage
     {
         Random rnd = new Random();
 

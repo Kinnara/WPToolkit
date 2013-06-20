@@ -1,0 +1,179 @@
+﻿<!--
+// (c) Copyright Microsoft Corporation.
+// This source is subject to the Microsoft Public License (Ms-PL).
+// Please see http://go.microsoft.com/fwlink/?LinkID=131993 for details.
+// All other rights reserved.
+-->
+
+<toolkit:BasePage
+    x:Class="PhoneToolkitSample.Samples.PickerBoxSample"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
+    xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
+    xmlns:sys="clr-namespace:System;assembly=mscorlib"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:toolkit="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit"
+    xmlns:data="clr-namespace:PhoneToolkitSample.Data"
+    SupportedOrientations="PortraitOrLandscape"
+    mc:Ignorable="d" d:DesignHeight="768" d:DesignWidth="480"
+    shell:SystemTray.IsVisible="True"
+    Style="{StaticResource PageStyle}">
+
+    <phone:PhoneApplicationPage.Resources>
+        <Style TargetType="toolkit:PickerBox">
+            <Setter Property="Margin" Value="0,0,0,26"/>
+        </Style>
+        <Style TargetType="toolkit:RecurringDaysPicker">
+            <Setter Property="Margin" Value="0,0,0,26"/>
+        </Style>
+        <data:AccentColorNameToBrush x:Key="ColorNameToBrushConverter" />
+        <data:LockScreenAppCollection x:Key="LockScreenApps"/>
+    </phone:PhoneApplicationPage.Resources>
+
+    <toolkit:PageUI Header="picker box" Style="{StaticResource ScrollablePageUIStyle}">
+        <toolkit:PageUI.Content>
+            <StackPanel Margin="0,10,0,95">
+
+                <!-- 
+                    PickerBox does not support its items set directly to a UIElement.
+                    You should set items to data and use templates to configure the view.
+                    Data can be set like below, by directly setting the Items to a list of strings.
+                    The other option is to use databinding.
+                -->
+                <toolkit:PickerBox Header="Background">
+                    <toolkit:PickerBox.ItemTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding TargetNullValue='choose background'}"/>
+                        </DataTemplate>
+                    </toolkit:PickerBox.ItemTemplate>
+                    <sys:String>photo</sys:String>
+                    <sys:String>Bing</sys:String>
+                </toolkit:PickerBox>
+
+                <toolkit:PickerBox Header="Accent color (list)"
+                                   FullModeHeader="ACCENTS"
+                                   x:Name="AccentColorList">
+                    <toolkit:PickerBox.ItemTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Horizontal">
+                                <Rectangle Fill="{Binding Converter={StaticResource ColorNameToBrushConverter}}" Width="26" Height="26" Margin="1 4 0 0"/>
+                                <TextBlock Text="{Binding}" Margin="7 0 0 0"/>
+                            </StackPanel>
+                        </DataTemplate>
+                    </toolkit:PickerBox.ItemTemplate>
+                    <toolkit:PickerBox.FullModeItemTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Horizontal" Margin="24 10 0 30">
+                                <Rectangle Fill="{Binding Converter={StaticResource ColorNameToBrushConverter}}" Width="43" Height="43"/>
+                                <TextBlock Text="{Binding}"
+                                           Margin="17 2 0 0"
+                                           FontSize="37.333"
+                                           FontFamily="{StaticResource PhoneFontFamilySemiLight}"
+                                           LineHeight="40"
+                                           LineStackingStrategy="BlockLineHeight"
+                                           VerticalAlignment="Top"/>
+                            </StackPanel>
+                        </DataTemplate>
+                    </toolkit:PickerBox.FullModeItemTemplate>
+                </toolkit:PickerBox>
+
+                <toolkit:PickerBox Header="Accent color (grid)"
+                                   FullModeHeader="ACCENTS"
+                                   PickerPageUri="/Samples/AccentColorPickerPage.xaml"
+                                   x:Name="AccentColorGrid">
+                    <toolkit:PickerBox.ItemTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Horizontal">
+                                <Rectangle Fill="{Binding Converter={StaticResource ColorNameToBrushConverter}}" Width="20" Height="20" Margin="1 2 0 0"/>
+                                <TextBlock Text="{Binding}" Margin="13 0 0 0"/>
+                            </StackPanel>
+                        </DataTemplate>
+                    </toolkit:PickerBox.ItemTemplate>
+                    <toolkit:PickerBox.FullModeItemTemplate>
+                        <DataTemplate>
+                            <Border Background="Transparent" Padding="12 0 0 0" Margin="0 0 0 12">
+                                <Rectangle Fill="{Binding Converter={StaticResource ColorNameToBrushConverter}}" Width="99" Height="99"/>
+                            </Border>
+                        </DataTemplate>
+                    </toolkit:PickerBox.FullModeItemTemplate>
+                </toolkit:PickerBox>
+
+                <TextBlock Text="Choose apps to show quick status" Style="{StaticResource ControlHeaderTextStyle}"/>
+                <StackPanel Orientation="Horizontal">
+                    <StackPanel.Resources>
+                        <Style TargetType="toolkit:PickerBox">
+                            <Setter Property="Margin" Value="0,0,8,26"/>
+                            <Setter Property="DisplayMemberPath" Value="IconUri"/>
+                            <Setter Property="FullModeDisplayMemberPath" Value="Name"/>
+                            <Setter Property="FullModeHeader" Value="CHOOSE AN APP"/>
+                            <Setter Property="Template">
+                                <Setter.Value>
+                                    <ControlTemplate TargetType="toolkit:PickerBox">
+                                        <StackPanel>
+                                            <toolkit:ImageButton
+                                                x:Name="Button"
+                                                CornerRadius="0"
+                                                ImageSource="{Binding Content, RelativeSource={RelativeSource Self}}"
+                                                Padding="18"
+                                                Width="84"
+                                                Height="84"/>
+                                        </StackPanel>
+                                    </ControlTemplate>
+                                </Setter.Value>
+                            </Setter>
+                        </Style>
+                    </StackPanel.Resources>
+
+                    <toolkit:PickerBox ItemsSource="{Binding Source={StaticResource LockScreenApps}}" SelectedIndex="3"/>
+                    <toolkit:PickerBox ItemsSource="{Binding Source={StaticResource LockScreenApps}}" SelectedIndex="2"/>
+                    <toolkit:PickerBox ItemsSource="{Binding Source={StaticResource LockScreenApps}}" SelectedIndex="0"/>
+                    <toolkit:PickerBox ItemsSource="{Binding Source={StaticResource LockScreenApps}}" SelectedIndex="0"/>
+                    <toolkit:PickerBox ItemsSource="{Binding Source={StaticResource LockScreenApps}}" SelectedIndex="0"/>
+                </StackPanel>
+
+                <toolkit:PickerBox Header="Print in colors" 
+                                   SelectionMode="Multiple" 
+                                   FullModeHeader="COLORS" 
+                                   x:Name="PrintInColors">
+                    <sys:String>Cyan</sys:String>
+                    <sys:String>Magenta</sys:String>
+                    <sys:String>Yellow</sys:String>
+                    <sys:String>Black</sys:String>
+                </toolkit:PickerBox>
+
+                <toolkit:RecurringDaysPicker Header="Repeats" FullModeHeader="ALARM REPEATS ON"/>
+
+                <toolkit:PickerBox x:Name="RegionList" Header="System Locale"/>
+
+                <toolkit:PickerBox x:Name="AccountPicker"
+                                   FullModeHeader="CHOOSE ACCOUNT"
+                                   Visibility="Collapsed"
+                                   SelectionChanged="AccountPicker_SelectionChanged">
+                    <sys:String>account1@example.com</sys:String>
+                    <sys:String>account2@example.com</sys:String>
+                    <sys:String>account3@example.com</sys:String>
+                </toolkit:PickerBox>
+
+                <toolkit:PickerBox x:Name="StatusPicker"
+                                   FullModeHeader="SET CHAT STATUS"
+                                   SelectedIndex="0"
+                                   Visibility="Collapsed">
+                    <sys:String>available</sys:String>
+                    <sys:String>busy</sys:String>
+                    <sys:String>away</sys:String>
+                    <sys:String>invisible</sys:String>
+                    <sys:String>offline</sys:String>
+                </toolkit:PickerBox>
+            </StackPanel>
+        </toolkit:PageUI.Content>
+    </toolkit:PageUI>
+
+    <phone:PhoneApplicationPage.ApplicationBar>
+        <shell:ApplicationBar IsVisible="False">
+            <shell:ApplicationBarIconButton Text="new" IconUri="/Assets/AppBar/add.png" Click="NewButton_Click"/>
+            <shell:ApplicationBarIconButton Text="status" IconUri="/Assets/AppBar/statuspicker.png" Click="StatusButton_Click"/>
+        </shell:ApplicationBar>
+    </phone:PhoneApplicationPage.ApplicationBar>
+</toolkit:BasePage>

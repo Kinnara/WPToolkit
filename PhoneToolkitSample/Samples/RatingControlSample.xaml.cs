@@ -13,7 +13,7 @@ using Microsoft.Phone.Controls;
 
 namespace PhoneToolkitSample.Samples
 {
-    public partial class RatingControlSample : PhoneApplicationPage
+    public partial class RatingControlSample : BasePage
     {
         public RatingControlSample()
         {

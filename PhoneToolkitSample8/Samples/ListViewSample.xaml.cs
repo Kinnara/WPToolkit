@@ -5,7 +5,7 @@ using System.Windows.Navigation;
 
 namespace PhoneToolkitSample.Samples
 {
-    public partial class ListViewSample : PhoneApplicationPage
+    public partial class ListViewSample : BasePage
     {
         private IncrementalLoadingPeople _people;
 
@@ -16,13 +16,13 @@ namespace PhoneToolkitSample.Samples
             _people = (IncrementalLoadingPeople)Resources["People"];
         }
 
-        protected override void OnNavigatedTo(NavigationEventArgs e)
+        protected override async void OnNavigatedTo(NavigationEventArgs e)
         {
             base.OnNavigatedTo(e);
 
             if (_people.Count == 0)
             {
-                _people.LoadMoreItemsAsync(20);
+                await _people.LoadMoreItemsAsync(20);
             }
         }
 

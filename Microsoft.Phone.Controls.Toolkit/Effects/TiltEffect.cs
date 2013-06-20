@@ -90,6 +90,8 @@ namespace Microsoft.Phone.Controls
         /// </summary>
         private static bool wasPauseAnimation = false;
 
+        private static bool wasTiltReturnAnimationChanged;
+
         /// <summary>
         /// Gets the control that is currently being tilted.
         /// </summary>
@@ -275,6 +277,15 @@ namespace Microsoft.Phone.Controls
         #endregion
 
         #region Core tilt logic
+
+        internal static void UpdateCurrentTiltEffectReturnAnimationDuration(TimeSpan? delay, Duration duration)
+        {
+            if (currentTiltElement != null && tiltReturnStoryboard != null)
+            {
+                UpdateReturnAnimation(delay, duration);
+                wasTiltReturnAnimationChanged = true;
+            }
+        }
 
         internal static void EndCurrentTiltEffect(bool playReturnAnimation)
         {
@@ -587,6 +598,11 @@ namespace Microsoft.Phone.Controls
                 tiltReturnStoryboard.Children.Add(tiltReturnYAnimation);
                 tiltReturnStoryboard.Children.Add(tiltReturnZAnimation);
             }
+            else if (wasTiltReturnAnimationChanged)
+            {
+                UpdateReturnAnimation(TiltReturnAnimationDelay, TiltReturnAnimationDuration);
+                wasTiltReturnAnimationChanged = false;
+            }
 
             Storyboard.SetTarget(tiltReturnXAnimation, element.Projection);
             Storyboard.SetTarget(tiltReturnYAnimation, element.Projection);
@@ -774,6 +790,18 @@ namespace Microsoft.Phone.Controls
             projection.RotationY = angle * xAngleContribution * xDirection;
             projection.RotationX = angle * (1 - xAngleContribution) * yDirection;
             projection.GlobalOffsetZ = -depression;
+        }
+
+        private static void UpdateReturnAnimation(TimeSpan? delay, Duration duration)
+        {
+            if (tiltReturnStoryboard != null)
+            {
+                foreach (Timeline child in tiltReturnStoryboard.Children)
+                {
+                    child.BeginTime = delay;
+                    child.Duration = duration;
+                }
+            }
         }
 
         #endregion

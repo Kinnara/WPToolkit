@@ -7,7 +7,7 @@ using Microsoft.Phone.Controls;
 
 namespace PhoneToolkitSample.Samples
 {
-    public partial class DateTimeConvertersSample : PhoneApplicationPage
+    public partial class DateTimeConvertersSample : BasePage
     {
         public DateTimeConvertersSample()
         {

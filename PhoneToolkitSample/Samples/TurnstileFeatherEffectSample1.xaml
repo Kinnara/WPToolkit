@@ -5,7 +5,7 @@
 // All other rights reserved.
 -->
     
-<phone:PhoneApplicationPage 
+<toolkit:BasePage
     x:Class="PhoneToolkitSample.Samples.TurnstileFeatherEffectSample1"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
@@ -14,54 +14,15 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:toolkit="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit"
-    FontFamily="{StaticResource PhoneFontFamilyNormal}"
-    FontSize="{StaticResource PhoneFontSizeNormal}"
-    Foreground="{StaticResource PhoneForegroundBrush}"
-    SupportedOrientations="PortraitOrLandscape" Orientation="Portrait"
+    SupportedOrientations="PortraitOrLandscape"
     mc:Ignorable="d" d:DesignHeight="768" d:DesignWidth="480"
-    shell:SystemTray.IsVisible="True">
+    shell:SystemTray.IsVisible="True"
+    Style="{StaticResource TurnstileFeatherPageStyle}">
 
-    <!--Transitions-->
-    <toolkit:TransitionService.NavigationInTransition>
-        <toolkit:NavigationInTransition>
-            <toolkit:NavigationInTransition.Backward>
-                <toolkit:TurnstileFeatherTransition Mode="BackwardIn"/>
-            </toolkit:NavigationInTransition.Backward>
-            <toolkit:NavigationInTransition.Forward>
-                <toolkit:TurnstileFeatherTransition Mode="ForwardIn"/>
-            </toolkit:NavigationInTransition.Forward>
-        </toolkit:NavigationInTransition>
-    </toolkit:TransitionService.NavigationInTransition>
-    <toolkit:TransitionService.NavigationOutTransition>
-        <toolkit:NavigationOutTransition>
-            <toolkit:NavigationOutTransition.Backward>
-                <toolkit:TurnstileFeatherTransition Mode="BackwardOut"/>
-            </toolkit:NavigationOutTransition.Backward>
-            <toolkit:NavigationOutTransition.Forward>
-                <toolkit:TurnstileFeatherTransition Mode="ForwardOut"/>
-            </toolkit:NavigationOutTransition.Forward>
-        </toolkit:NavigationOutTransition>
-    </toolkit:TransitionService.NavigationOutTransition>
-    
     <!--LayoutRoot-->
-    <Grid x:Name="LayoutRoot" Background="Transparent">
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="*"/>
-        </Grid.RowDefinitions>
-
-        <!--TitlePanel-->
-        <StackPanel Grid.Row="0">
-            <TextBlock Text="{StaticResource ApplicationTitle}" 
-                       Style="{StaticResource PivotTitleTextStyle}"
-                       toolkit:TurnstileFeatherEffect.FeatheringIndex="0"/>
-            <TextBlock Text="turnstilefeathereffect" 
-                       Style="{StaticResource PivotHeaderTextStyle}"
-                       toolkit:TurnstileFeatherEffect.FeatheringIndex="1"/>
-        </StackPanel>
-
+    <toolkit:PageUI Header="turnstilefeathereffect" Style="{StaticResource TurnstileFeatherPageUIStyle}">
         <!--ContentPanel-->
-        <Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0">
+        <Grid x:Name="ContentPanel">
             <ListBox Margin="0,0,-12,0" ItemsSource="{Binding Items}"
                 toolkit:TiltEffect.IsTiltEnabled="True"     
                 toolkit:TurnstileFeatherEffect.FeatheringIndex="2">
@@ -76,5 +37,5 @@
                 </ListBox.ItemTemplate>
             </ListBox>
         </Grid>
-    </Grid>
-</phone:PhoneApplicationPage>
+    </toolkit:PageUI>
+</toolkit:BasePage>

@@ -5,7 +5,7 @@
 // All other rights reserved.
 -->
 
-<phone:PhoneApplicationPage 
+<toolkit:BasePage
     x:Class="PhoneToolkitSample.MainPage"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
@@ -16,46 +16,12 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d" d:DesignWidth="480" d:DesignHeight="768"
-    FontFamily="{StaticResource PhoneFontFamilyNormal}"
-    FontSize="{StaticResource PhoneFontSizeNormal}"
-    Foreground="{StaticResource PhoneForegroundBrush}"
-    SupportedOrientations="PortraitOrLandscape" Orientation="Portrait"
     shell:SystemTray.IsVisible="True"
-    toolkit:TiltEffect.IsTiltEnabled="True">
+    Style="{StaticResource PageStyle}"
+    Margin="0,0,0,72">
 
-    <toolkit:TransitionService.NavigationInTransition>
-        <toolkit:NavigationInTransition>
-            <toolkit:NavigationInTransition.Backward>
-                <toolkit:TurnstileTransition Mode="BackwardIn"/>
-            </toolkit:NavigationInTransition.Backward>
-            <toolkit:NavigationInTransition.Forward>
-                <toolkit:TurnstileTransition Mode="ForwardIn"/>
-            </toolkit:NavigationInTransition.Forward>
-        </toolkit:NavigationInTransition>
-    </toolkit:TransitionService.NavigationInTransition>
-    <toolkit:TransitionService.NavigationOutTransition>
-        <toolkit:NavigationOutTransition>
-            <toolkit:NavigationOutTransition.Backward>
-                <toolkit:TurnstileTransition Mode="BackwardOut"/>
-            </toolkit:NavigationOutTransition.Backward>
-            <toolkit:NavigationOutTransition.Forward>
-                <toolkit:TurnstileTransition Mode="ForwardOut"/>
-            </toolkit:NavigationOutTransition.Forward>
-        </toolkit:NavigationOutTransition>
-    </toolkit:TransitionService.NavigationOutTransition>
-
-    <Grid x:Name="LayoutRoot" Background="Transparent">
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="*"/>
-        </Grid.RowDefinitions>
-
-        <StackPanel Grid.Row="0">
-            <TextBlock Text="{StaticResource ApplicationTitle}" Style="{StaticResource PivotTitleTextStyle}"/>
-            <TextBlock Text="samples" Style="{StaticResource PivotHeaderTextStyle}"/>
-        </StackPanel>
-
-        <Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0">
+    <toolkit:PageUI Header="samples">
+        <Grid x:Name="ContentPanel">
             <ScrollViewer Margin="0,0,-12,0">
                 <StackPanel>
                     <StackPanel>
@@ -64,6 +30,13 @@
                                 TargetType="HyperlinkButton" 
                                 BasedOn="{StaticResource PhoneButtonBase}"/>
                         </StackPanel.Resources>
+                        <HyperlinkButton NavigateUri="/Samples/PickerBoxSample.xaml" 
+                                         Style="{StaticResource HyperlinkEmptyStyle}">
+                            <localControls:HeaderedContentControl
+                                Style="{StaticResource MultilineHyperlinkStyle}"
+                                Header="pickerbox"
+                                Content="select either a single item or multiple items"/>
+                        </HyperlinkButton>
                         <HyperlinkButton NavigateUri="/Samples/AutoCompleteBoxSample.xaml" 
                                          Style="{StaticResource HyperlinkEmptyStyle}">
                             <localControls:HeaderedContentControl
@@ -146,7 +119,7 @@
                             <localControls:HeaderedContentControl
                                 Style="{StaticResource MultilineHyperlinkStyle}"
                                 Header="listpicker"
-                                Content="select from a few items inline or many"/>
+                                Content="pick a single item from a list of potential options"/>
                         </HyperlinkButton>
                         <HyperlinkButton NavigateUri="/Samples/LockablePivotSample.xaml"
                                          Style="{StaticResource HyperlinkEmptyStyle}">
@@ -265,13 +238,13 @@
                 </StackPanel>
             </ScrollViewer>
         </Grid>
-    </Grid>
+    </toolkit:PageUI>
 
     <phone:PhoneApplicationPage.ApplicationBar>
-        <shell:ApplicationBar IsVisible="True">
+        <shell:ApplicationBar Opacity="0.999">
             <shell:ApplicationBarIconButton 
                 IconUri="/Images/ApplicationBar.settings.png" Text="Settings"
                          IsEnabled="True" Click="ApplicationBarIconSettingsButton_Click"/>
         </shell:ApplicationBar>
     </phone:PhoneApplicationPage.ApplicationBar>
-</phone:PhoneApplicationPage>
+</toolkit:BasePage>

@@ -8,7 +8,7 @@ using Microsoft.Phone.Controls;
 
 namespace PhoneToolkitSample.Samples
 {
-    public partial class HubTileSample : PhoneApplicationPage
+    public partial class HubTileSample : BasePage
     {
         public HubTileSample()
         {

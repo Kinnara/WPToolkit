@@ -17,7 +17,7 @@ using Windows.Phone.Speech.Recognition;
 
 namespace PhoneToolkitSample.Samples
 {
-    public partial class SpeechTextBoxSample : PhoneApplicationPage
+    public partial class SpeechTextBoxSample : BasePage
     {
         public SpeechTextBoxSample()
         {

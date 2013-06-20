@@ -19,7 +19,7 @@ namespace PhoneToolkitSample.Samples
     /// <summary>
     /// Sample code for LongListMultiSelector
     /// </summary>
-    public partial class LongListMultiSelectorSample : PhoneApplicationPage
+    public partial class LongListMultiSelectorSample : BasePage
     {
         class PivotCallbacks
         {

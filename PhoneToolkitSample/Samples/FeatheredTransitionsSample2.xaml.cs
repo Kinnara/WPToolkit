@@ -7,7 +7,7 @@ using Microsoft.Phone.Controls;
 
 namespace PhoneToolkitSample.Samples
 {
-    public partial class FeatheredTransitionsSample2 : PhoneApplicationPage
+    public partial class FeatheredTransitionsSample2 : BasePage
     {
         public FeatheredTransitionsSample2()
         {

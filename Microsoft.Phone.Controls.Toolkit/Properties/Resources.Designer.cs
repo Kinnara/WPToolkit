@@ -178,6 +178,33 @@ namespace Microsoft.Phone.Controls.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Can only change SelectedItems collection in multiple selection modes. Use SelectedItem in single select modes..
+        /// </summary>
+        internal static string Selector_CannotModifySelectedItems {
+            get {
+                return ResourceManager.GetString("Selector_CannotModifySelectedItems", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Range actions on SelectedItems are not permitted..
+        /// </summary>
+        internal static string Selector_RangeActionsNotPermitted {
+            get {
+                return ResourceManager.GetString("Selector_RangeActionsNotPermitted", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Unknown collection action performed..
+        /// </summary>
+        internal static string Selector_UnknownCollectionAction {
+            get {
+                return ResourceManager.GetString("Selector_UnknownCollectionAction", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to &apos;{0}&apos; is unable to convert &apos;{1}&apos; to &apos;{2}&apos;..
         /// </summary>
         internal static string TypeConverters_Convert_CannotConvert {

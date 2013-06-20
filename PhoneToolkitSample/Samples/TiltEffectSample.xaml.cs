@@ -7,7 +7,7 @@ using Microsoft.Phone.Controls;
 
 namespace PhoneToolkitSample.Samples
 {
-    public partial class TiltEffectSample : PhoneApplicationPage
+    public partial class TiltEffectSample : BasePage
     {
         public TiltEffectSample()
         {

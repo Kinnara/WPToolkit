@@ -10,7 +10,7 @@ using Microsoft.Phone.Shell;
 
 namespace PhoneToolkitSample.Samples
 {
-    public partial class PhonePasswordBoxSample : PhoneApplicationPage
+    public partial class PhonePasswordBoxSample : BasePage
     {
         public PhonePasswordBoxSample()
         {

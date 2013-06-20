@@ -641,14 +641,14 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="controls:ListPicker">
-                    <StackPanel>
+                    <StackPanel Background="Transparent">
                         <VisualStateManager.VisualStateGroups>
                             <VisualStateGroup x:Name="PickerStates">
                                 <VisualState x:Name="Normal"/>
                                 <VisualState x:Name="Highlighted">
                                     <Storyboard>
                                         <ObjectAnimationUsingKeyFrames
-                                            Storyboard.TargetName="UserControl"
+                                            Storyboard.TargetName="Button"
                                             Storyboard.TargetProperty="Foreground"
                                             Duration="0">
                                             <DiscreteObjectKeyFrame
@@ -656,7 +656,7 @@
                                                 KeyTime="0"/>
                                         </ObjectAnimationUsingKeyFrames>
                                         <ObjectAnimationUsingKeyFrames
-                                            Storyboard.TargetName="PickerBackground"
+                                            Storyboard.TargetName="ButtonBackground"
                                             Storyboard.TargetProperty="Background"
                                             Duration="0">
                                             <DiscreteObjectKeyFrame
@@ -664,7 +664,7 @@
                                                 KeyTime="0"/>
                                         </ObjectAnimationUsingKeyFrames>
                                         <ObjectAnimationUsingKeyFrames
-                                            Storyboard.TargetName="PickerBackground"
+                                            Storyboard.TargetName="ButtonBackground"
                                             Storyboard.TargetProperty="BorderBrush"
                                             Duration="0">
                                             <DiscreteObjectKeyFrame
@@ -684,7 +684,7 @@
                                                 KeyTime="0"/>
                                         </ObjectAnimationUsingKeyFrames>
                                         <ObjectAnimationUsingKeyFrames
-                                            Storyboard.TargetName="PickerBackground"
+                                            Storyboard.TargetName="ButtonBackground"
                                             Storyboard.TargetProperty="Background"
                                             Duration="0">
                                             <DiscreteObjectKeyFrame
@@ -692,7 +692,7 @@
                                                 KeyTime="0"/>
                                         </ObjectAnimationUsingKeyFrames>
                                         <ObjectAnimationUsingKeyFrames
-                                            Storyboard.TargetName="PickerBackground"
+                                            Storyboard.TargetName="ButtonBackground"
                                             Storyboard.TargetProperty="BorderBrush"
                                             Duration="0">
                                             <DiscreteObjectKeyFrame
@@ -700,7 +700,7 @@
                                                 KeyTime="0"/>
                                         </ObjectAnimationUsingKeyFrames>
                                         <ObjectAnimationUsingKeyFrames
-                                            Storyboard.TargetName="UserControl"
+                                            Storyboard.TargetName="Button"
                                             Storyboard.TargetProperty="Foreground"
                                             Duration="0">
                                             <DiscreteObjectKeyFrame
@@ -720,13 +720,21 @@
                             FontSize="{StaticResource PhoneFontSizeNormal}"
                             HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
                             Margin="{StaticResource PhoneHorizontalMargin}"/>
-                        <Border x:Name="Border" Background="Transparent">
-                            <Border x:Name="PickerBackground"
-                                    Background="{TemplateBinding Background}"
-                                    BorderBrush="{TemplateBinding BorderBrush}"
-                                    BorderThickness="{TemplateBinding BorderThickness}"
-                                    Margin="{StaticResource PhoneTouchTargetOverhang}">
-                                <UserControl x:Name="UserControl" Foreground="{TemplateBinding Foreground}">
+                        <Button x:Name="Button"
+                                Foreground="{TemplateBinding Foreground}"
+                                FontFamily="{TemplateBinding FontFamily}"
+                                FontSize="{TemplateBinding FontSize}">
+                            <Button.Template>
+                                <ControlTemplate TargetType="ButtonBase">
+                                    <ContentPresenter/>
+                                </ControlTemplate>
+                            </Button.Template>
+                            <Grid Background="Transparent">
+                                <Border x:Name="ButtonBackground"
+                                        Background="{TemplateBinding Background}"
+                                        BorderBrush="{TemplateBinding BorderBrush}"
+                                        BorderThickness="{TemplateBinding BorderThickness}"
+                                        Margin="{StaticResource PhoneTouchTargetOverhang}">
                                     <StackPanel>
                                         <Canvas x:Name="ItemsPresenterHost" MinHeight="42">
                                             <ItemsPresenter x:Name="ItemsPresenter" IsHitTestVisible="False">
@@ -736,9 +744,9 @@
                                             </ItemsPresenter>
                                         </Canvas>
                                     </StackPanel>
-                                </UserControl>
-                            </Border>
-                        </Border>
+                                </Border>
+                            </Grid>
+                        </Button>
                     </StackPanel>
                 </ControlTemplate>
             </Setter.Value>
@@ -2699,6 +2707,7 @@
         <Setter Property="Padding" Value="0"/>
         <Setter Property="Width" Value="67"/>
         <Setter Property="Height" Value="67"/>
+        <Setter Property="CornerRadius" Value="1500"/>
 
         <Setter Property="Template">
             <Setter.Value>
@@ -2733,12 +2742,14 @@
                                 </VisualState>
                             </VisualStateGroup>
                         </VisualStateManager.VisualStateGroups>
-                        <Border x:Name="ButtonBackground" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" CornerRadius="1500" Background="{TemplateBinding Background}" Margin="{StaticResource PhoneTouchTargetOverhang}" />
-                        <Rectangle x:Name="Image" Fill="{TemplateBinding Foreground}" Margin="{StaticResource PhoneTouchTargetOverhang}">
-                            <Rectangle.OpacityMask>
-                                <ImageBrush x:Name="ImageBrush" />
-                            </Rectangle.OpacityMask>
-                        </Rectangle>
+                        <Border x:Name="ButtonBackground" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" CornerRadius="{TemplateBinding CornerRadius}" Background="{TemplateBinding Background}" Margin="{StaticResource PhoneTouchTargetOverhang}" />
+                        <Border Padding="{TemplateBinding Padding}">
+                            <Rectangle x:Name="Image" Fill="{TemplateBinding Foreground}" Margin="{StaticResource PhoneTouchTargetOverhang}">
+                                <Rectangle.OpacityMask>
+                                    <ImageBrush x:Name="ImageBrush" />
+                                </Rectangle.OpacityMask>
+                            </Rectangle>
+                        </Border>
                     </Grid>
                 </ControlTemplate>
             </Setter.Value>
@@ -2828,6 +2839,78 @@
                             </StackPanel.RenderTransform>
                             <ItemsPresenter CacheMode="BitmapCache"/>
                         </StackPanel>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <DataTemplate x:Key="PageUITitleTemplate">
+        <TextBlock Text="{Binding}"
+                   FontFamily="{StaticResource PhoneFontFamilySemiBold}"
+                   FontSize="{StaticResource PivotTitleFontSize}"
+                   Margin="24,16,0,39"/>
+    </DataTemplate>
+
+    <DataTemplate x:Key="PageUIHeaderTemplate">
+        <TextBlock Text="{Binding}"
+                   FontFamily="{StaticResource PhoneFontFamilySemiLight}"
+                   FontSize="{StaticResource PivotHeaderFontSize}"
+                   Margin="21,-49,0,28"/>
+    </DataTemplate>
+
+    <Style TargetType="controls:PageUI">
+        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="Foreground" Value="{StaticResource PhoneForegroundBrush}"/>
+        <Setter Property="FontFamily" Value="{StaticResource PhoneFontFamilyNormal}"/>
+        <Setter Property="FontSize" Value="{StaticResource PhoneFontSizeNormal}"/>
+        <Setter Property="TitleTemplate" Value="{StaticResource PageUITitleTemplate}"/>
+        <Setter Property="HeaderTemplate" Value="{StaticResource PageUIHeaderTemplate}"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="controls:PageUI">
+                    <Border x:Name="LayoutRoot" Background="{TemplateBinding Background}" Padding="{TemplateBinding Padding}">
+                        <VisualStateManager.VisualStateGroups>
+                            <VisualStateGroup x:Name="OrientationStates">
+                                <VisualState x:Name="PortraitUp"/>
+                                <VisualState x:Name="LandscapeLeft">
+                                    <Storyboard>
+                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="TitlePanel" Storyboard.TargetProperty="Margin">
+                                            <DiscreteObjectKeyFrame KeyTime="0" Value="0,8,0,0"/>
+                                        </ObjectAnimationUsingKeyFrames>
+                                    </Storyboard>
+                                </VisualState>
+                                <VisualState x:Name="LandscapeRight">
+                                    <Storyboard>
+                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="TitlePanel" Storyboard.TargetProperty="Margin">
+                                            <DiscreteObjectKeyFrame KeyTime="0" Value="0,8,0,0"/>
+                                        </ObjectAnimationUsingKeyFrames>
+                                    </Storyboard>
+                                </VisualState>
+                            </VisualStateGroup>
+                        </VisualStateManager.VisualStateGroups>
+
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition/>
+                            </Grid.RowDefinitions>
+                            
+                            <StackPanel x:Name="TitlePanel">
+                                <ContentControl
+                                    Content="{TemplateBinding Title}"
+                                    ContentTemplate="{TemplateBinding TitleTemplate}"
+                                    Style="{TemplateBinding TitleStyle}"
+                                    HorizontalContentAlignment="Stretch"/>
+                                <ContentControl
+                                    Content="{TemplateBinding Header}"
+                                    ContentTemplate="{TemplateBinding HeaderTemplate}"
+                                    Style="{TemplateBinding HeaderStyle}"
+                                    HorizontalContentAlignment="Stretch"/>
+                            </StackPanel>
+                            
+                            <ContentPresenter Margin="{StaticResource PhoneHorizontalMargin}" Grid.Row="1"/>
+                        </Grid>
                     </Border>
                 </ControlTemplate>
             </Setter.Value>

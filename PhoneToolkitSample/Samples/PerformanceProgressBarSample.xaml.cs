@@ -9,7 +9,7 @@ using Microsoft.Phone.Shell;
 
 namespace PhoneToolkitSample.Samples
 {
-    public partial class PerformanceProgressBarSample : PhoneApplicationPage
+    public partial class PerformanceProgressBarSample : BasePage
     {
         private ProgressIndicator _progressIndicator;
 

@@ -12,7 +12,7 @@ namespace PhoneToolkitSample.Samples
     // in there. You can copy them from this project. They must be named "ApplicationBar.Cancel.png" 
     // and "ApplicationBar.Check.png", and the build action must be "Content".
 
-    public partial class DateTimePickerSample : PhoneApplicationPage
+    public partial class DateTimePickerSample : BasePage
     {
         public DateTimePickerSample()
         {

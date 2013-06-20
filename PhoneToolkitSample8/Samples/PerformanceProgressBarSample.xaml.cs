@@ -10,15 +10,13 @@ using Microsoft.Phone.Shell;
 
 namespace PhoneToolkitSample.Samples
 {
-    public partial class PerformanceProgressBarSample : PhoneApplicationPage
+    public partial class PerformanceProgressBarSample : BasePage
     {
         private ProgressIndicator _progressIndicator;
 
         public PerformanceProgressBarSample()
         {
             InitializeComponent();
-
-            UpdateOrientationState(false);
 
             MessageBox.Show(
 @"The PerformanceProgressBar is obsolete in Windows Phone 8, as the built-in progress bar control now animates off of the UI thread.
@@ -47,16 +45,6 @@ This sample demonstrates the usage of either the progress indicator or the progr
         private void CheckBox_Unchecked(object sender, System.Windows.RoutedEventArgs e)
         {
             _progressIndicator.IsIndeterminate = false;
-        }
-
-        private void OnOrientationChanged(object sender, OrientationChangedEventArgs e)
-        {
-            UpdateOrientationState(true);
-        }
-
-        private void UpdateOrientationState(bool useTransitions)
-        {
-            VisualStateManager.GoToState(this, Orientation.ToString(), useTransitions);
         }
     }
 }

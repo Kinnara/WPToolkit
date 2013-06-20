@@ -14,7 +14,7 @@ using PhoneToolkitSample.Data;
 
 namespace PhoneToolkitSample.Samples
 {
-    public partial class MultiselectListSample : PhoneApplicationPage
+    public partial class MultiselectListSample : BasePage
     {
         ApplicationBarIconButton select;
 

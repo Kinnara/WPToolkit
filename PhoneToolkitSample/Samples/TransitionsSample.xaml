@@ -5,7 +5,7 @@
 // All other rights reserved.
 -->
     
-<phone:PhoneApplicationPage 
+<toolkit:BasePage
     x:Class="PhoneToolkitSample.Samples.TransitionsSample"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
@@ -15,51 +15,16 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:toolkit="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit"
     xmlns:local="clr-namespace:PhoneToolkitSample.Samples"
-    FontFamily="{StaticResource PhoneFontFamilyNormal}"
-    FontSize="{StaticResource PhoneFontSizeNormal}"
-    Foreground="{StaticResource PhoneForegroundBrush}"
-    SupportedOrientations="PortraitOrLandscape" Orientation="Portrait"
+    SupportedOrientations="PortraitOrLandscape"
     mc:Ignorable="d" d:DesignHeight="768" d:DesignWidth="480"
-    shell:SystemTray.IsVisible="True">
-
-    <toolkit:TransitionService.NavigationInTransition>
-        <toolkit:NavigationInTransition>
-            <toolkit:NavigationInTransition.Backward>
-                <toolkit:TurnstileTransition Mode="BackwardIn"/>
-            </toolkit:NavigationInTransition.Backward>
-            <toolkit:NavigationInTransition.Forward>
-                <toolkit:TurnstileTransition Mode="ForwardIn"/>
-            </toolkit:NavigationInTransition.Forward>
-        </toolkit:NavigationInTransition>
-    </toolkit:TransitionService.NavigationInTransition>
-    <toolkit:TransitionService.NavigationOutTransition>
-        <toolkit:NavigationOutTransition>
-            <toolkit:NavigationOutTransition.Backward>
-                <toolkit:TurnstileTransition Mode="BackwardOut"/>
-            </toolkit:NavigationOutTransition.Backward>
-            <toolkit:NavigationOutTransition.Forward>
-                <toolkit:TurnstileTransition Mode="ForwardOut"/>
-            </toolkit:NavigationOutTransition.Forward>
-        </toolkit:NavigationOutTransition>
-    </toolkit:TransitionService.NavigationOutTransition>
+    shell:SystemTray.IsVisible="True"
+    Style="{StaticResource PageStyle}">
 
     <phone:PhoneApplicationPage.Resources>
         <local:EnumConverter x:Key="EnumConverter"/>
     </phone:PhoneApplicationPage.Resources>
-    <Grid x:Name="LayoutRoot" Background="Transparent">
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="*"/>
-        </Grid.RowDefinitions>
-
-        <StackPanel Grid.Row="0">
-            <TextBlock Text="{StaticResource ApplicationTitle}" 
-                       Style="{StaticResource PivotTitleTextStyle}"/>
-            <TextBlock Text="transitions" 
-                       Style="{StaticResource PivotHeaderTextStyle}"/>
-        </StackPanel>
-
-        <Grid Grid.Row="1" Margin="12,0,12,0">
+    <toolkit:PageUI Header="transitions">
+        <Grid x:Name="ContentPanel" Margin="0,10,0,0">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition/>
@@ -69,29 +34,47 @@
                 <toolkit:PickerBox
                     x:Name="Family"
                     ItemsSource="{Binding Families}"
-                    SelectedIndex="4"
+                    SelectedIndex="{Binding FamilyIndex, Mode=TwoWay}"
                     SelectionChanged="FamilySelectionChanged"
                     Header="Transition family"
                     FullModeHeader="Transition family"/>
                 <toolkit:PickerBox
                     x:Name="Mode"
-                    CacheMode="BitmapCache"
                     FullModeHeader="Transition mode"
                     Header="Transition mode"
-                    ItemsSource="{Binding ElementName=Family, Path=SelectedItem, Converter={StaticResource EnumConverter}}"/>
+                    ItemsSource="{Binding Family, Converter={StaticResource EnumConverter}}"
+                    SelectedIndex="{Binding ModeIndex, Mode=TwoWay}"/>
             </StackPanel>
             <Button
                 Grid.Row="1"
-                CacheMode="BitmapCache"
                 Click="See"
                 Content="See the selected transition"
                 VerticalAlignment="Stretch"/>
             <Button
                 Grid.Row="2"
-                CacheMode="BitmapCache"
                 Click="Forward"
                 Content="Turnstile navigation transitions"
                 VerticalAlignment="Stretch"/>
         </Grid>
-    </Grid>
-</phone:PhoneApplicationPage>
+
+        <VisualStateManager.VisualStateGroups>
+            <VisualStateGroup x:Name="OrientationStates">
+                <VisualState x:Name="PortraitUp"/>
+                <VisualState x:Name="LandscapeLeft">
+                    <Storyboard>
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="ContentPanel" Storyboard.TargetProperty="Margin">
+                            <DiscreteObjectKeyFrame KeyTime="0" Value="0,-5,0,0"/>
+                        </ObjectAnimationUsingKeyFrames>
+                    </Storyboard>
+                </VisualState>
+                <VisualState x:Name="LandscapeRight">
+                    <Storyboard>
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="ContentPanel" Storyboard.TargetProperty="Margin">
+                            <DiscreteObjectKeyFrame KeyTime="0" Value="0,-5,0,0"/>
+                        </ObjectAnimationUsingKeyFrames>
+                    </Storyboard>
+                </VisualState>
+            </VisualStateGroup>
+        </VisualStateManager.VisualStateGroups>
+    </toolkit:PageUI>
+</toolkit:BasePage>

@@ -168,6 +168,15 @@
     <value>The RoutedPropertyChangingEvent cannot be canceled!</value>
     <comment>Exception thrown when setting Cancel property while IsCancelable is false.</comment>
   </data>
+  <data name="Selector_CannotModifySelectedItems" xml:space="preserve">
+    <value>Can only change SelectedItems collection in multiple selection modes. Use SelectedItem in single select modes.</value>
+  </data>
+  <data name="Selector_RangeActionsNotPermitted" xml:space="preserve">
+    <value>Range actions on SelectedItems are not permitted.</value>
+  </data>
+  <data name="Selector_UnknownCollectionAction" xml:space="preserve">
+    <value>Unknown collection action performed.</value>
+  </data>
   <data name="TypeConverters_ConvertFrom_CannotConvertFromType" xml:space="preserve">
     <value>'{0}' cannot convert from '{1}'.</value>
     <comment>Exception thrown when a type converter is asked to convert something it cannot.</comment>
