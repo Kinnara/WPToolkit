@@ -42,18 +42,6 @@ namespace Microsoft.Phone.Controls
         private static readonly double _screenHeight = Application.Current.Host.Content.ActualHeight;
 
         /// <summary>
-        /// The height of the system tray in pixels when the page
-        /// is in portrait mode.
-        /// </summary>
-        private const double _systemTrayHeightInPortrait = 32.0;
-
-        /// <summary>
-        /// The width of the system tray in pixels when the page
-        /// is in landscape mode.
-        /// </summary>
-        private const double _systemTrayWidthInLandscape = 72.0;
-
-        /// <summary>
         /// Title text block template part name.
         /// </summary>
         private const string TitleTextBlock = "TitleTextBlock";
@@ -483,7 +471,9 @@ namespace Microsoft.Phone.Controls
             {
                 _rightButton.Click += RightButton_Click;
                 _rightButton.Visibility = GetVisibilityFromObject(RightButtonContent);
-            }            
+            }
+
+            UpdateVisualState();
         }
 
         /// <summary>
@@ -534,7 +524,7 @@ namespace Microsoft.Phone.Controls
 
                 if (SystemTray.Opacity < 1)
                 {
-                    SystemTray.Opacity = 0.999;
+                    SystemTray.Opacity = 0;
                 }
             }
 
@@ -821,26 +811,13 @@ namespace Microsoft.Phone.Controls
             // Set the vertical and horizontal offset of the popup.
             if (SystemTray.IsVisible && _popup != null)
             {
-                PageOrientation orientation = GetPageOrientation();
-                bool leftToRight = FlowDirection == FlowDirection.LeftToRight;
-
-                switch (orientation)
-                {
-                    case PageOrientation.PortraitUp:
-                        _popup.HorizontalOffset = 0.0;
-                        _popup.VerticalOffset = _systemTrayHeightInPortrait;
-                        _container.Height -= _systemTrayHeightInPortrait;
-                        break;
-                    case PageOrientation.LandscapeLeft:
-                        _popup.HorizontalOffset = 0.0;
-                        _popup.VerticalOffset = leftToRight ? _systemTrayWidthInLandscape : 0.0;
-                        break;
-                    case PageOrientation.LandscapeRight:
-                        _popup.HorizontalOffset = 0.0;
-                        _popup.VerticalOffset = leftToRight ? 0.0 : _systemTrayWidthInLandscape;
-                        break;
-                }
+                UpdateVisualState();
             }
+        }
+
+        private void UpdateVisualState()
+        {
+            VisualStateManager.GoToState(this, GetPageOrientation().ToString(), false);
         }
 
         /// <summary>

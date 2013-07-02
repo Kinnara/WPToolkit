@@ -3,6 +3,7 @@ using System.Diagnostics.CodeAnalysis;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
+using System.Windows.Input;
 
 namespace Microsoft.Phone.Controls
 {
@@ -623,6 +624,31 @@ namespace Microsoft.Phone.Controls
             else
             {
                 GoToState(ScrollingState, true);
+
+                if (_container.ManipulationState == ManipulationState.Manipulating)
+                {
+                    if (!CaptureMouse())
+                    {
+                        UIElement focusedElement = FocusManager.GetFocusedElement() as UIElement;
+                        if (focusedElement != null)
+                        {
+                            focusedElement.ReleaseMouseCapture();
+                            if (CaptureMouse())
+                            {
+                                return;
+                            }
+                        }
+
+                        foreach (FrameworkElement child in _container.GetLogicalChildrenBreadthFirst())
+                        {
+                            child.ReleaseMouseCapture();
+                            if (CaptureMouse())
+                            {
+                                break;
+                            }
+                        }
+                    }
+                }
             }
         }
 

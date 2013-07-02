@@ -446,14 +446,16 @@ namespace Microsoft.Phone.Controls
             }
         }
 
-        /// <summary>Gets the animation for the specified element.</summary>
+        /// <summary>
+        /// Gets the animation for the specified element.
+        /// </summary>
         /// <param name="element">The element.</param>
         /// <param name="index">The index of the element.</param>
         /// <returns>The Storyboard for the specified element.</returns>
         protected virtual Storyboard AnimationForElement(FrameworkElement element, int index)
         {
-            double delay = 30;
-            double duration = (IsOpen) ? 350 : 250;
+            double delay = 20;
+            double duration = (IsOpen) ? 300 : 200;
             double from = (IsOpen) ? -45 : 0;
             double to = (IsOpen) ? 0 : 90;
             ExponentialEase ee = new ExponentialEase()

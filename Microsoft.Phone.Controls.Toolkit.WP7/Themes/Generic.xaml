@@ -2044,8 +2044,29 @@
                 <ControlTemplate TargetType="controls:CustomMessageBox">
                     <Grid 
                         Background="{TemplateBinding Background}"
-                        HorizontalAlignment="Stretch">
+                        HorizontalAlignment="Stretch"
+                        controls:TiltEffect.IsTiltEnabled="True">
+                        <VisualStateManager.VisualStateGroups>
+                            <VisualStateGroup x:Name="OrientationStates">
+                                <VisualState x:Name="PortraitUp"/>
+                                <VisualState x:Name="LandscapeLeft">
+                                    <Storyboard>
+                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="MainGrid" Storyboard.TargetProperty="Margin">
+                                            <DiscreteObjectKeyFrame KeyTime="0" Value="72,0,0,0"/>
+                                        </ObjectAnimationUsingKeyFrames>
+                                    </Storyboard>
+                                </VisualState>
+                                <VisualState x:Name="LandscapeRight">
+                                    <Storyboard>
+                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="MainGrid" Storyboard.TargetProperty="Margin">
+                                            <DiscreteObjectKeyFrame KeyTime="0" Value="0,0,72,0"/>
+                                        </ObjectAnimationUsingKeyFrames>
+                                    </Storyboard>
+                                </VisualState>
+                            </VisualStateGroup>
+                        </VisualStateManager.VisualStateGroups>
                         <Grid 
+                            x:Name="MainGrid"
                             Width="480"                                                       
                             HorizontalAlignment="Left">
                             <Grid.RowDefinitions>
@@ -2056,8 +2077,9 @@
                                 <ColumnDefinition Width="*"/>
                                 <ColumnDefinition Width="*"/>
                             </Grid.ColumnDefinitions>
-                            <StackPanel 
-                                Grid.ColumnSpan="2">
+                            <StackPanel
+                                Grid.ColumnSpan="2"
+                                Margin="0,32,0,0">
                                 <TextBlock 
                                     x:Name="TitleTextBlock"
                                     Text="{TemplateBinding Title}" 
@@ -2099,8 +2121,7 @@
                                 IsEnabled="{TemplateBinding IsLeftButtonEnabled}"
                                 Foreground="{Binding Foreground, RelativeSource={RelativeSource TemplatedParent}}"
                                 Margin="12,0,0,12"   
-                                Visibility="Collapsed"                                                            
-                                controls:TiltEffect.IsTiltEnabled="True"/>
+                                Visibility="Collapsed"/>
                             <Button 
                                 x:Name="RightButton"
                                 Grid.Row="1" Grid.Column="1"
@@ -2108,8 +2129,7 @@
                                 IsEnabled="{TemplateBinding IsRightButtonEnabled}"
                                 Foreground="{Binding Foreground, RelativeSource={RelativeSource TemplatedParent}}"
                                 Margin="0,0,12,12"
-                                Visibility="Collapsed"                             
-                                controls:TiltEffect.IsTiltEnabled="True"/>
+                                Visibility="Collapsed"/>
                         </Grid>
                     </Grid>
                 </ControlTemplate>

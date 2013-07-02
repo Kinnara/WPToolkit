@@ -30,13 +30,6 @@
                                 TargetType="HyperlinkButton" 
                                 BasedOn="{StaticResource PhoneButtonBase}"/>
                         </StackPanel.Resources>
-                        <HyperlinkButton NavigateUri="/Samples/PickerBoxSample.xaml" 
-                                         Style="{StaticResource HyperlinkEmptyStyle}">
-                            <localControls:HeaderedContentControl
-                                Style="{StaticResource MultilineHyperlinkStyle}"
-                                Header="pickerbox"
-                                Content="select either a single item or multiple items"/>
-                        </HyperlinkButton>
                         <HyperlinkButton NavigateUri="/Samples/AutoCompleteBoxSample.xaml" 
                                          Style="{StaticResource HyperlinkEmptyStyle}">
                             <localControls:HeaderedContentControl
@@ -169,6 +162,13 @@
                                 Style="{StaticResource MultilineHyperlinkStyle}"
                                 Header="phonetextbox"
                                 Content="add new features to the textbox"/>
+                        </HyperlinkButton>
+                        <HyperlinkButton NavigateUri="/Samples/PickerBoxSample.xaml" 
+                                         Style="{StaticResource HyperlinkEmptyStyle}">
+                            <localControls:HeaderedContentControl
+                                Style="{StaticResource MultilineHyperlinkStyle}"
+                                Header="pickerbox"
+                                Content="select either a single item or multiple items"/>
                         </HyperlinkButton>
                         <HyperlinkButton NavigateUri="/Samples/RatingControlSample.xaml"
                                          Style="{StaticResource HyperlinkEmptyStyle}">

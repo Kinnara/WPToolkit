@@ -63,6 +63,8 @@ namespace PhoneToolkitSample.Samples
                 NavigateUri = new Uri("http://phone.codeplex.com/", UriKind.Absolute)
             };
 
+            TiltEffect.SetSuppressTilt(hyperlinkButton, true);
+
             CustomMessageBox messageBox = new CustomMessageBox()
             {
                 Caption = "Allow this application to access and use your location?",
@@ -101,8 +103,6 @@ namespace PhoneToolkitSample.Samples
                 Content = "Do not ask me again",
                 Margin = new Thickness(0, -16, 0, 16)
             };
-
-            TiltEffect.SetIsTiltEnabled(checkBox, true);
 
             CustomMessageBox messageBox = new CustomMessageBox()
             {

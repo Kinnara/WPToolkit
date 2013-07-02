@@ -597,6 +597,8 @@ namespace Microsoft.Phone.Controls
                 {
                     throw new InvalidOperationException(Properties.Resources.FlipView_NotAllowedItemsPanel);
                 }
+
+                ScrollSelectionIntoView();
             }
         }
 

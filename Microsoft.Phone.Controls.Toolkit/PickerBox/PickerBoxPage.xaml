@@ -21,7 +21,7 @@
     SupportedOrientations="PortraitOrLandscape" Orientation="Portrait"
     mc:Ignorable="d" d:DesignHeight="768" d:DesignWidth="480"
     shell:SystemTray.IsVisible="True"
-    shell:SystemTray.BackgroundColor="{StaticResource PhoneChromeColor}"
+    shell:SystemTray.Opacity="0"
     toolkit:TiltEffect.IsTiltEnabled="True">
 
     <phone:PhoneApplicationPage.Resources>
@@ -76,7 +76,7 @@
     </phone:PhoneApplicationPage.Resources>
 
     <Border Background="{StaticResource PhoneChromeBrush}">
-        <Grid x:Name="MainGrid">
+        <Grid x:Name="MainGrid" Margin="0,32,0,0">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition/>
@@ -131,14 +131,14 @@
                 <VisualState x:Name="LandscapeLeft">
                     <Storyboard>
                         <ObjectAnimationUsingKeyFrames Storyboard.TargetName="MainGrid" Storyboard.TargetProperty="Margin">
-                            <DiscreteObjectKeyFrame KeyTime="0" Value="0,8,0,0"/>
+                            <DiscreteObjectKeyFrame KeyTime="0" Value="72,8,0,0"/>
                         </ObjectAnimationUsingKeyFrames>
                     </Storyboard>
                 </VisualState>
                 <VisualState x:Name="LandscapeRight">
                     <Storyboard>
                         <ObjectAnimationUsingKeyFrames Storyboard.TargetName="MainGrid" Storyboard.TargetProperty="Margin">
-                            <DiscreteObjectKeyFrame KeyTime="0" Value="0,8,0,0"/>
+                            <DiscreteObjectKeyFrame KeyTime="0" Value="0,8,72,0"/>
                         </ObjectAnimationUsingKeyFrames>
                     </Storyboard>
                 </VisualState>

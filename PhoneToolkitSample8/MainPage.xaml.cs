@@ -27,7 +27,6 @@ namespace PhoneToolkitSample8
         {
             // These items show up sorted by the second parameter, not the name of the file
             _samples = new SampleItem[] {
-                new SampleItem("/Samples/PickerBoxSample.xaml","pickerbox","select either a single item or multiple items" ),
                 new SampleItem("/Samples/AutoCompleteBoxSample.xaml","autocompletebox","completion of text based on items" ),
                 new SampleItem("/Samples/ContextMenuSample.xaml","contextmenu","tap & hold menu options control" ),
                 new SampleItem("/Samples/CustomMessageBoxSample.xaml","custommessagebox","a modular dialog box to display notifications" ),
@@ -50,6 +49,7 @@ namespace PhoneToolkitSample8
                 new SampleItem("/Samples/PhonePasswordBoxSample.xaml","phonepasswordbox","add new features to the passwordbox" ),
                 new SampleItem("/Samples/PhoneSliderSample.xaml","phoneslider","add new features to the slider" ),
                 new SampleItem("/Samples/PhoneTextBoxSample.xaml","phonetextbox","add new features to the textbox" ),
+                new SampleItem("/Samples/PickerBoxSample.xaml","pickerbox","select either a single item or multiple items" ),
                 new SampleItem("/Samples/SpeechTextBoxSample.xaml","speechtextbox","a speech-enabled phonetextbox" ),
                 new SampleItem("/Samples/RatingControlSample.xaml","ratingcontrol","simple control for star-based rating" ),
                 new SampleItem("/Samples/SlideInEffectSample.xaml","slideineffect","make elements responsive to pivotitem sliding" ),
