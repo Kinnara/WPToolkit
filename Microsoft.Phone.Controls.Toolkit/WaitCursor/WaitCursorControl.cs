@@ -2,6 +2,7 @@
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
+using System.Windows.Data;
 using System.Windows.Media;
 
 namespace Microsoft.Phone.Controls
@@ -122,11 +123,34 @@ namespace Microsoft.Phone.Controls
 
         #endregion
 
+        #region internal FlowDirection ImplementationRootFlowDirection
+
+        internal FlowDirection ImplementationRootFlowDirection
+        {
+            get { return (FlowDirection)GetValue(ImplementationRootFlowDirectionProperty); }
+            set { SetValue(ImplementationRootFlowDirectionProperty, value); }
+        }
+
+        private static readonly DependencyProperty ImplementationRootFlowDirectionProperty = DependencyProperty.Register(
+            "ImplementationRootFlowDirection",
+            typeof(FlowDirection),
+            typeof(WaitCursorControl),
+            null);
+
+        #endregion
+
+        private FrameworkElement ImplementationRoot { get; set; }
+
         /// <summary>
         /// Builds the visual tree for the <see cref="T:Microsoft.Phone.Controls.WaitCursorControl"/> control when a new template is applied.
         /// </summary>
         public override void OnApplyTemplate()
         {
+            if (ImplementationRoot != null)
+            {
+                ImplementationRoot.ClearValue(FlowDirectionProperty);
+            }
+
             if (_visualStateGroup != null)
             {
                 _visualStateGroup.CurrentStateChanged -= OnVisualStateChanged;
@@ -134,7 +158,14 @@ namespace Microsoft.Phone.Controls
 
             base.OnApplyTemplate();
 
+            ImplementationRoot = VisualStates.GetImplementationRoot(this);
             _visualStateGroup = VisualStates.TryGetVisualStateGroup(this, VisualStateGroupName);
+
+            if (ImplementationRoot != null)
+            {
+                ImplementationRoot.SetBinding(FlowDirectionProperty, new Binding("ImplementationRootFlowDirection") { Source = this });
+            }
+
             if (_visualStateGroup != null)
             {
                 _visualStateGroup.CurrentStateChanged += OnVisualStateChanged;

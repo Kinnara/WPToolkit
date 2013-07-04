@@ -73,13 +73,13 @@ namespace Microsoft.Phone.Controls
         {
             get
             {
-                var activePage = GetActivePage();
+                PhoneApplicationPage activePage = GetActivePage();
                 if (activePage == null) throw new InvalidOperationException();
                 return GetWaitCursor(activePage);
             }
             set
             {
-                var activePage = GetActivePage();
+                PhoneApplicationPage activePage = GetActivePage();
                 if (activePage == null) throw new InvalidOperationException();
                 SetWaitCursor(activePage, value);
             }
@@ -96,7 +96,7 @@ namespace Microsoft.Phone.Controls
 
         internal static PhoneApplicationPage GetActivePage()
         {
-            var frame = Frame;
+            PhoneApplicationFrame frame = Frame;
             if (frame != null)
             {
                 return frame.Content as PhoneApplicationPage;
@@ -106,7 +106,7 @@ namespace Microsoft.Phone.Controls
 
         internal static WaitCursor GetActiveWaitCursor()
         {
-            var activePage = GetActivePage();
+            PhoneApplicationPage activePage = GetActivePage();
             if (activePage != null)
             {
                 return GetWaitCursor(activePage);
@@ -117,13 +117,14 @@ namespace Microsoft.Phone.Controls
         internal static void UpdateControl()
         {
             _control.Language = WaitCursorService.Frame.Language;
+            _control.ImplementationRootFlowDirection = WaitCursorService.Frame.FlowDirection;
 
             bool isVisible = false;
             string text = string.Empty;
             Brush background = null;
             Brush foreground = null;
 
-            var waitCursor = GetActiveWaitCursor();
+            WaitCursor waitCursor = GetActiveWaitCursor();
             if (waitCursor != null)
             {
                 isVisible = waitCursor.IsVisible;

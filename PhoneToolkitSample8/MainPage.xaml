@@ -15,7 +15,12 @@
 
     <toolkit:PageUI Header="samples">
         <Grid>
-            <phone:LongListSelector x:Name="lls" Margin="0,0,-12,0">
+            <phone:LongListSelector x:Name="lls" Margin="-12,0">
+                <phone:LongListSelector.ListHeaderTemplate>
+                    <DataTemplate>
+                        <Rectangle Height="10"/>
+                    </DataTemplate>
+                </phone:LongListSelector.ListHeaderTemplate>
                 <phone:LongListSelector.ItemTemplate>
                     <DataTemplate>
                         <HyperlinkButton NavigateUri="{Binding Url}" Style="{StaticResource HyperlinkEmptyStyle}">
@@ -28,7 +33,7 @@
                 </phone:LongListSelector.ItemTemplate>
                 <phone:LongListSelector.ListFooterTemplate>
                     <DataTemplate>
-                        <Rectangle Height="40"/>
+                        <Rectangle Height="95"/>
                     </DataTemplate>
                 </phone:LongListSelector.ListFooterTemplate>
             </phone:LongListSelector>
