@@ -9,6 +9,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Linq;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
@@ -58,6 +59,11 @@ namespace PhoneToolkitSample.Samples
         public LongListMultiSelectorSample()
         {
             InitializeComponent();
+
+            foreach (PivotItem item in SamplePivot.Items.Skip(1))
+            {
+                ((UIElement)item.Content).Visibility = Visibility.Collapsed;
+            }
 
             UpdateTransitions();
 
@@ -117,6 +123,18 @@ This sample and the sample code demonstrates how to use the new LongListMultiSel
             if (_callbacks.TryGetValue(SamplePivot.SelectedItem, out callbacks) && (callbacks.OnActivated != null))
             {
                 callbacks.OnActivated();
+            }
+        }
+
+        private void OnPivotLoadingPivotItem(object sender, PivotItemEventArgs e)
+        {
+            UIElement content = (UIElement)e.Item.Content;
+            if (content.Visibility != Visibility.Visible)
+            {
+                Dispatcher.BeginInvoke(() =>
+                {
+                    content.Visibility = Visibility.Visible;
+                });
             }
         }
 
@@ -339,6 +357,7 @@ This sample and the sample code demonstrates how to use the new LongListMultiSel
         private void OnEmailListIsSelectionEnabledChanged(object sender, DependencyPropertyChangedEventArgs e)
         {
             SetupEmailApplicationBar();
+            SamplePivot.IsLocked = (bool)e.NewValue;
         }
 
         private void OnEmailListItemRealized(object sender, ItemRealizationEventArgs e)
@@ -404,6 +423,16 @@ This sample and the sample code demonstrates how to use the new LongListMultiSel
                 buddies.IsSelectionEnabled = false;
                 e.Cancel = true;
             }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void OnBuddiesIsSelectionEnabledChanged(object sender, DependencyPropertyChangedEventArgs e)
+        {
+            SamplePivot.IsLocked = (bool)e.NewValue;
         }
         #endregion
 
@@ -497,6 +526,7 @@ This sample and the sample code demonstrates how to use the new LongListMultiSel
         private void OnGridSelectorIsSelectionEnabledChanged(object sender, DependencyPropertyChangedEventArgs e)
         {
             SetupPicturesApplicationBar();
+            SamplePivot.IsLocked = (bool)e.NewValue;
         }
 
         /// <summary>

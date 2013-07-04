@@ -78,6 +78,8 @@ namespace Microsoft.Phone.Controls
         /// </summary>
         bool _isOpened = false;
 
+        ClickHelper _coverClickHelper;
+
         /// <summary>
         /// Weak Reference used by the container
         /// </summary>
@@ -247,6 +249,8 @@ namespace Microsoft.Phone.Controls
             if (_outerCover != null)
             {
                 _outerCover.Tap -= OnCoverTap;
+                _coverClickHelper.Click -= OnCoverClick;
+                _coverClickHelper = null;
             }
 
             _clickElement = GetTemplateChild(ContentPanelName) as FrameworkElement ?? GetTemplateChild(ContentContainerName) as FrameworkElement;
@@ -272,6 +276,8 @@ namespace Microsoft.Phone.Controls
             if (_outerCover != null)
             {
                 _outerCover.Tap += OnCoverTap;
+                _coverClickHelper = ClickHelper.Create(_outerCover);
+                _coverClickHelper.Click += OnCoverClick;
             }
 
             OnHintPanelHeightChanged();
@@ -300,14 +306,23 @@ namespace Microsoft.Phone.Controls
         }
 
         /// <summary>
-        /// Tap on the cover grid : switch the selected state
+        /// Tap on the cover grid
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
         void OnCoverTap(object sender, System.Windows.Input.GestureEventArgs e)
         {
-            IsSelected = !IsSelected;
             e.Handled = true;
+        }
+
+        /// <summary>
+        /// Click on the cover grid : switch the selected state
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        void OnCoverClick(object sender, EventArgs e)
+        {
+            IsSelected = !IsSelected;
         }
 
         /// <summary>

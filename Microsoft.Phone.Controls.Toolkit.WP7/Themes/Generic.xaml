@@ -763,7 +763,8 @@
                             Foreground="{StaticResource PhoneSubtleBrush}"
                             FontSize="{StaticResource PhoneFontSizeNormal}"
                             HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
-                            Margin="{StaticResource PhoneHorizontalMargin}"/>
+                            Margin="{StaticResource PhoneHorizontalMargin}"
+                            CacheMode="BitmapCache"/>
                         <Button x:Name="Button"
                                 Foreground="{TemplateBinding Foreground}"
                                 FontFamily="{TemplateBinding FontFamily}"
@@ -902,7 +903,7 @@
         <Setter Property="ItemTemplate">
             <Setter.Value>
                 <DataTemplate>
-                    <ContentControl Content="{Binding}" Margin="8,7"/>
+                    <ContentControl Content="{Binding}" Margin="7,12,0,20"/>
                 </DataTemplate>
             </Setter.Value>
         </Setter>
@@ -911,7 +912,7 @@
             <Setter.Value>
                 <ControlTemplate TargetType="controls:AutoCompleteBox">
                     <Grid>
-                        <TextBox
+                        <controls:PhoneTextBox
                             x:Name="Text"
                             Background="{TemplateBinding Background}"
                             BorderBrush="{TemplateBinding BorderBrush}"
@@ -924,6 +925,7 @@
                             InputScope="{TemplateBinding InputScope}"
                             Opacity="{TemplateBinding Opacity}"
                             Padding="{TemplateBinding Padding}"
+                            PlaceholderText="{TemplateBinding PlaceholderText}"
                             Style="{TemplateBinding TextBoxStyle}"/>
                         <Popup x:Name="Popup">
                             <ListBox
@@ -940,7 +942,18 @@
                                 ItemContainerStyle="{TemplateBinding ItemContainerStyle}"
                                 ItemTemplate="{TemplateBinding ItemTemplate}"
                                 Opacity="{TemplateBinding Opacity}"
-                                Padding="0,8"/>
+                                controls:TiltEffect.IsTiltEnabled="True">
+                                <ListBox.ItemsPanel>
+                                    <ItemsPanelTemplate>
+                                        <controls:ItemsStackPanel Padding="0,3"/>
+                                    </ItemsPanelTemplate>
+                                </ListBox.ItemsPanel>
+                                <ListBox.Resources>
+                                    <Style TargetType="ScrollBar">
+                                        <Setter Property="Background" Value="#4D000000"/>
+                                    </Style>
+                                </ListBox.Resources>
+                            </ListBox>
                         </Popup>
                     </Grid>
                 </ControlTemplate>
@@ -1564,7 +1577,7 @@
                                     <ColumnDefinition Width="Auto"/>
                                 </Grid.ColumnDefinitions>
                                 <Grid Grid.Column="0" HorizontalAlignment="Stretch" primitives:ClipToBounds.IsEnabled="True">
-                                    <ContentPresenter x:Name="Presenter">
+                                    <ContentPresenter x:Name="Presenter" CacheMode="BitmapCache">
                                         <ContentPresenter.RenderTransform>
                                             <CompositeTransform TranslateX="24"/>
                                         </ContentPresenter.RenderTransform>
@@ -1582,7 +1595,8 @@
                                 <ContentControl x:Name="InfoPresenter" Grid.Column="1" 
                                                 VerticalAlignment="Top"
                                                 Content="{TemplateBinding ContentInfo}"
-                                                ContentTemplate="{TemplateBinding ContentInfoTemplate}"/>
+                                                ContentTemplate="{TemplateBinding ContentInfoTemplate}"
+                                                CacheMode="BitmapCache"/>
                             </Grid>
                             <Rectangle x:Name="OutterHintPanel" Width="24"
                                        HorizontalAlignment="Left"
@@ -1936,6 +1950,7 @@
                                         FontFamily="{StaticResource PhoneFontFamilyNormal}"
                                         FontSize="{StaticResource PhoneFontSizeNormal}"
                                         Opacity="0"
+                                        CacheMode="BitmapCache"
                                         x:Name="LengthIndicator">
                                 <TextBlock.RenderTransform >
                                     <TranslateTransform />
@@ -1962,7 +1977,8 @@
                                                 HorizontalContentAlignment="Stretch"
                                                 Margin="{StaticResource PhoneTextBoxInnerMargin}"
                                                 Padding="{TemplateBinding Padding}" 
-                                                VerticalContentAlignment="Stretch"/>
+                                                VerticalContentAlignment="Stretch"
+                                                CacheMode="BitmapCache"/>
                             </Grid>
                         </Border>
                         <Rectangle x:Name="FocusVisual"
@@ -2327,14 +2343,14 @@
                         </VisualStateManager.VisualStateGroups>
                         <Grid x:Name="HorizontalTemplate" Margin="{StaticResource PhoneHorizontalMargin}">
                             <Rectangle x:Name="HorizontalTrack" Fill="{TemplateBinding Background}" Height="12" IsHitTestVisible="False" Margin="0,22,0,50"/>
-                            <Border x:Name="HorizontalFill" Background="{StaticResource PhoneBackgroundBrush}" Height="12" IsHitTestVisible="False" Margin="0,22,0,50">
+                            <Border x:Name="HorizontalFill" Background="{StaticResource PhoneBackgroundBrush}" Height="12" IsHitTestVisible="False" Margin="0,22,0,50" CacheMode="BitmapCache">
                                 <Border.Clip>
                                     <RectangleGeometry Rect="0, 0, 6, 12" />
                                 </Border.Clip>
                                 <Rectangle x:Name="HorizontalFillFill" Fill="{TemplateBinding Foreground}"/>
                             </Border>
                             <primitives:TickBar Height="12" IsHitTestVisible="False" Margin="0,22,0,50"/>
-                            <Border x:Name="HorizontalCenterElement" HorizontalAlignment="Left" Background="{StaticResource PhoneBackgroundBrush}" Width="12" Height="24" Margin="0,16,0,44">
+                            <Border x:Name="HorizontalCenterElement" HorizontalAlignment="Left" Background="{StaticResource PhoneBackgroundBrush}" Width="12" Height="24" Margin="0,16,0,44" CacheMode="BitmapCache">
                                 <Border.RenderTransform>
                                     <TranslateTransform />
                                 </Border.RenderTransform>
@@ -2343,14 +2359,14 @@
                         </Grid>
                         <Grid x:Name="VerticalTemplate" Margin="{StaticResource PhoneVerticalMargin}">
                             <Rectangle x:Name="VerticalTrack" Fill="{TemplateBinding Background}" Width="12" IsHitTestVisible="False" Margin="18,0,18,0"/>
-                            <Border x:Name="VerticalFill" Background="{StaticResource PhoneBackgroundBrush}" Width="12" IsHitTestVisible="False" Margin="18,0,18,0">
+                            <Border x:Name="VerticalFill" Background="{StaticResource PhoneBackgroundBrush}" Width="12" IsHitTestVisible="False" Margin="18,0,18,0" CacheMode="BitmapCache">
                                 <Border.Clip>
                                     <RectangleGeometry Rect="0, 0, 12, 6" />
                                 </Border.Clip>
                                 <Rectangle x:Name="VerticalFillFill" Fill="{TemplateBinding Foreground}"/>
                             </Border>
                             <primitives:TickBar Width="12" IsHitTestVisible="False" Margin="18,0,18,0"/>
-                            <Border x:Name="VerticalCenterElement" VerticalAlignment="Top" Background="{StaticResource PhoneBackgroundBrush}" Width="24" Height="12" Margin="12,0,12,0">
+                            <Border x:Name="VerticalCenterElement" VerticalAlignment="Top" Background="{StaticResource PhoneBackgroundBrush}" Width="24" Height="12" Margin="12,0,12,0" CacheMode="BitmapCache">
                                 <Border.RenderTransform>
                                     <TranslateTransform />
                                 </Border.RenderTransform>
@@ -2791,7 +2807,7 @@
                                 <RowDefinition/>
                             </Grid.RowDefinitions>
 
-                            <StackPanel x:Name="TitlePanel">
+                            <StackPanel x:Name="TitlePanel" CacheMode="BitmapCache">
                                 <ContentControl
                                     Content="{TemplateBinding Title}"
                                     ContentTemplate="{TemplateBinding TitleTemplate}"

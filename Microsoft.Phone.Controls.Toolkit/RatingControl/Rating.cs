@@ -128,7 +128,13 @@ namespace Microsoft.Phone.Controls
 
             if (_dragBorderElement != null)
             {
+                _dragBorderElement.CacheMode = new BitmapCache();
                 _dragBorderElement.RenderTransform = new TranslateTransform();
+            }
+
+            if (_dragTextBlockElement != null)
+            {
+                _dragTextBlockElement.CacheMode = new BitmapCache();
             }
             VisualStateManager.GoToState(this, "Collapsed", false);
             SynchronizeGrids();

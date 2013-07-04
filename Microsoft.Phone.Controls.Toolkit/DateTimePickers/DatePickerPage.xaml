@@ -5,7 +5,7 @@
 // All other rights reserved.
 -->
 
-    <primitives:DateTimePickerPageBase
+<primitives:DateTimePickerPageBase
     x:Class="Microsoft.Phone.Controls.DatePickerPage"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
@@ -19,13 +19,17 @@
     FontSize="{StaticResource PhoneFontSizeNormal}"
     Foreground="{StaticResource PhoneForegroundBrush}"
     SupportedOrientations="PortraitOrLandscape" Orientation="Portrait"
-    mc:Ignorable="d" d:DesignHeight="728" d:DesignWidth="480"
+    mc:Ignorable="d" d:DesignHeight="800" d:DesignWidth="480"
     shell:SystemTray.IsVisible="True"
-    shell:SystemTray.BackgroundColor="{StaticResource PhoneChromeColor}">
+    shell:SystemTray.Opacity="0">
 
     <primitives:DateTimePickerPageBase.Resources>
-        <controls:DateTimePickerResources x:Key="DateTimePickerResources"/>
-        <ExponentialEase x:Key="Ease" EasingMode="EaseIn"/>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/Microsoft.Phone.Controls.Toolkit;component/DateTimePickers/DatePickerPageResources.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+            <controls:DateTimePickerResources x:Key="DateTimePickerResources"/>
+        </ResourceDictionary>
     </primitives:DateTimePickerPageBase.Resources>
 
     <Grid x:Name="LayoutRoot" Background="{StaticResource PhoneChromeBrush}">
@@ -40,7 +44,7 @@
                                     Storyboard.TargetProperty="RotationX"
                                     From="-45"
                                     To="0"
-                                    Duration="0:0:0.35">
+                                    Duration="0:0:0.25">
                                     <DoubleAnimation.EasingFunction>
                                         <ExponentialEase EasingMode="EaseOut" Exponent="6"/>
                                     </DoubleAnimation.EasingFunction>
@@ -60,17 +64,16 @@
                                 Storyboard.TargetProperty="RotationX"
                                 From="0"
                                 To="60"
-                                Duration="0:0:0.25">
+                                Duration="0:0:0.15">
                                 <DoubleAnimation.EasingFunction>
-                                    <ExponentialEase EasingMode="EaseIn" Exponent="15"/>
+                                    <ExponentialEase EasingMode="EaseIn" Exponent="6"/>
                                 </DoubleAnimation.EasingFunction>
                             </DoubleAnimation>
                             <DoubleAnimationUsingKeyFrames
                                 Storyboard.TargetName="LayoutRoot"
                                 Storyboard.TargetProperty="Opacity">
                                 <DiscreteDoubleKeyFrame KeyTime="0" Value="1"/>
-                                <DiscreteDoubleKeyFrame KeyTime="0:0:0.24" Value="1"/>
-                                <DiscreteDoubleKeyFrame KeyTime="0:0:0.25" Value="0"/>
+                                <DiscreteDoubleKeyFrame KeyTime="0:0:0.15" Value="0"/>
                             </DoubleAnimationUsingKeyFrames>
                         </Storyboard>
                     </VisualTransition>
@@ -104,120 +107,125 @@
                     </Storyboard>
                 </VisualState>
             </VisualStateGroup>
+            <VisualStateGroup x:Name="OrientationStates">
+                <VisualState x:Name="PortraitUp"/>
+                <VisualState x:Name="LandscapeLeft">
+                    <Storyboard>
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="MainGrid" Storyboard.TargetProperty="Margin">
+                            <DiscreteObjectKeyFrame KeyTime="0" Value="72,8,0,0"/>
+                        </ObjectAnimationUsingKeyFrames>
+                    </Storyboard>
+                </VisualState>
+                <VisualState x:Name="LandscapeRight">
+                    <Storyboard>
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="MainGrid" Storyboard.TargetProperty="Margin">
+                            <DiscreteObjectKeyFrame KeyTime="0" Value="0,8,72,0"/>
+                        </ObjectAnimationUsingKeyFrames>
+                    </Storyboard>
+                </VisualState>
+            </VisualStateGroup>
         </VisualStateManager.VisualStateGroups>
         <Grid.Projection>
             <PlaneProjection x:Name="PlaneProjection"/>
         </Grid.Projection>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition/>
-        </Grid.RowDefinitions>
 
-        <!-- Landscape placeholder -->
-        <Rectangle
-            x:Name="LandscapePlaceholder"
-            Grid.Row="0"
-            Height="8"/>
-        <!-- Title -->
-        <TextBlock
-            x:Name="HeaderTitle"
-            Grid.Row="1"
-            Text="{Binding DatePickerTitle, Source={StaticResource DateTimePickerResources}}"
-            FontFamily="{StaticResource PhoneFontFamilySemiBold}"
-            FontSize="{StaticResource PhoneFontSizeMedium}"
-            Foreground="{StaticResource PhoneForegroundBrush}"
-            Margin="23,16,0,17"/>
-        <!-- LoopingSelectors -->
-        <Grid
-            Grid.Row="2"
-            HorizontalAlignment="Center">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition/>
-                <ColumnDefinition/>
-                <ColumnDefinition/>
-            </Grid.ColumnDefinitions>
-            <primitives:LoopingSelector
-                x:Name="SecondarySelector"
-                Grid.Column="0"
-                Width="148"
-                ItemSize="148,148"
-                ItemMargin="6">
-                <primitives:LoopingSelector.ItemTemplate>
-                    <DataTemplate>
-                        <StackPanel
-                            HorizontalAlignment="Left"
-                            VerticalAlignment="Bottom"
-                            Margin="6">
-                            <TextBlock
-                                Text="{Binding MonthNumber}"
-                                FontSize="54"
-                                FontFamily="{StaticResource PhoneFontFamilySemiBold}"
-                                Margin="0,-8"/>
-                            <TextBlock
-                                Text="{Binding MonthName}"
-                                FontSize="20"
-                                FontFamily="{StaticResource PhoneFontFamilyNormal}"
-                                Foreground="{StaticResource PhoneSubtleBrush}"
-                                Margin="0,-2"/>
-                        </StackPanel>
-                    </DataTemplate>
-                </primitives:LoopingSelector.ItemTemplate>
-            </primitives:LoopingSelector>
-            <primitives:LoopingSelector
-                x:Name="TertiarySelector"
-                Grid.Column="1"
-                Width="148"
-                ItemSize="148,148"
-                ItemMargin="6">
-                <primitives:LoopingSelector.ItemTemplate>
-                    <DataTemplate>
-                        <StackPanel
-                            HorizontalAlignment="Left"
-                            VerticalAlignment="Bottom"
-                            Margin="6">
-                            <TextBlock
-                                Text="{Binding DayNumber}"
-                                FontSize="54"
-                                FontFamily="{StaticResource PhoneFontFamilySemiBold}"
-                                Margin="0,-8"/>
-                            <TextBlock
-                                Text="{Binding DayName}"
-                                FontSize="20"
-                                FontFamily="{StaticResource PhoneFontFamilyNormal}"
-                                Foreground="{StaticResource PhoneSubtleBrush}"
-                                Margin="0,-2"/>
-                        </StackPanel>
-                    </DataTemplate>
-                </primitives:LoopingSelector.ItemTemplate>
-            </primitives:LoopingSelector>
-            <primitives:LoopingSelector
-                Grid.Column="2"
-                x:Name="PrimarySelector"
-                Width="148"
-                ItemSize="148,148"
-                ItemMargin="6">
-                <primitives:LoopingSelector.ItemTemplate>
-                    <DataTemplate>
-                        <StackPanel
-                            HorizontalAlignment="Left"
-                            VerticalAlignment="Bottom"
-                            Margin="6">
-                            <TextBlock
-                                Text="{Binding YearNumber}"
-                                FontSize="54"
-                                FontFamily="{StaticResource PhoneFontFamilySemiBold}"
-                                Margin="0,-8"/>
-                            <TextBlock
-                                Text=" "
-                                FontSize="20"
-                                FontFamily="{StaticResource PhoneFontFamilyNormal}"
-                                Foreground="{StaticResource PhoneSubtleBrush}"
-                                Margin="0,-2"/>
-                        </StackPanel>
-                    </DataTemplate>
-                </primitives:LoopingSelector.ItemTemplate>
-            </primitives:LoopingSelector>
+        <Grid x:Name="MainGrid" Margin="0,32,0,0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+
+            <!-- Title -->
+            <TextBlock
+                x:Name="HeaderTitle"
+                Grid.Row="0"
+                Text="{Binding DatePickerTitle, Source={StaticResource DateTimePickerResources}}"
+                FontFamily="{StaticResource PhoneFontFamilySemiBold}"
+                FontSize="{StaticResource PhoneFontSizeMedium}"
+                Foreground="{StaticResource PhoneForegroundBrush}"
+                Margin="23,16,0,17"/>
+            <!-- LoopingSelectors -->
+            <Grid
+                Grid.Row="1"
+                HorizontalAlignment="Center">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <primitives:LoopingSelector
+                    x:Name="SecondarySelector"
+                    Grid.Column="0"
+                    Width="148"
+                    ItemSize="148,148"
+                    ItemMargin="6">
+                    <primitives:LoopingSelector.ItemTemplate>
+                        <DataTemplate>
+                            <StackPanel
+                                HorizontalAlignment="Left"
+                                VerticalAlignment="Bottom"
+                                Margin="6">
+                                <TextBlock
+                                    Text="{Binding MonthNumber}"
+                                    FontSize="54"
+                                    FontFamily="{StaticResource PhoneFontFamilySemiBold}"
+                                    Margin="0,-8"/>
+                                <TextBlock
+                                    Text="{Binding MonthName}"
+                                    Style="{StaticResource SubTextStyle}"/>
+                            </StackPanel>
+                        </DataTemplate>
+                    </primitives:LoopingSelector.ItemTemplate>
+                </primitives:LoopingSelector>
+                <primitives:LoopingSelector
+                    x:Name="TertiarySelector"
+                    Grid.Column="1"
+                    Width="148"
+                    ItemSize="148,148"
+                    ItemMargin="6">
+                    <primitives:LoopingSelector.ItemTemplate>
+                        <DataTemplate>
+                            <StackPanel
+                                HorizontalAlignment="Left"
+                                VerticalAlignment="Bottom"
+                                Margin="6">
+                                <TextBlock
+                                    Text="{Binding DayNumber}"
+                                    FontSize="54"
+                                    FontFamily="{StaticResource PhoneFontFamilySemiBold}"
+                                    Margin="0,-8"/>
+                                <TextBlock
+                                    Text="{Binding DayName}"
+                                    Style="{StaticResource SubTextStyle}"/>
+                            </StackPanel>
+                        </DataTemplate>
+                    </primitives:LoopingSelector.ItemTemplate>
+                </primitives:LoopingSelector>
+                <primitives:LoopingSelector
+                    Grid.Column="2"
+                    x:Name="PrimarySelector"
+                    Width="148"
+                    ItemSize="148,148"
+                    ItemMargin="6">
+                    <primitives:LoopingSelector.ItemTemplate>
+                        <DataTemplate>
+                            <StackPanel
+                                HorizontalAlignment="Left"
+                                VerticalAlignment="Bottom"
+                                Margin="6">
+                                <TextBlock
+                                    Text="{Binding YearNumber}"
+                                    FontSize="54"
+                                    FontFamily="{StaticResource PhoneFontFamilySemiBold}"
+                                    Margin="0,-8"/>
+                                <TextBlock
+                                    Text=" "
+                                    Style="{StaticResource SubTextStyle}"/>
+                            </StackPanel>
+                        </DataTemplate>
+                    </primitives:LoopingSelector.ItemTemplate>
+                </primitives:LoopingSelector>
+            </Grid>
         </Grid>
     </Grid>
 

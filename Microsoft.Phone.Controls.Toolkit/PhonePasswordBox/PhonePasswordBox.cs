@@ -454,11 +454,12 @@ namespace Microsoft.Phone.Controls
 
         #region PlaceholderText
         /// <summary>
-        /// The placeholder text in the password box when the password box doesn't have the input focus and the user hasn't entered any characters.
+        /// Gets or sets the text that is displayed in the control until the value is changed by a user action or some other operation.
         /// </summary>
-        /// <value>
-        /// The placeholder text to display in the password box.
-        /// </value>
+        /// 
+        /// <returns>
+        /// The text that is displayed in the control when no value is entered. The default is an empty string ("").
+        /// </returns>
         public string PlaceholderText
         {
             get { return (string)GetValue(PlaceholderTextProperty); }
@@ -649,12 +650,14 @@ namespace Microsoft.Phone.Controls
 
             if (_passwordBox != null)
             {
+                _passwordBox.CacheMode = new BitmapCache();
                 _passwordBox.GotFocus += OnEditBoxGotFocus;
                 _passwordBox.PasswordChanged += OnPasswordBoxPasswordChanged;
             }
 
             if (_textBox != null)
             {
+                _textBox.CacheMode = new BitmapCache();
                 _textBox.GotFocus += OnEditBoxGotFocus;
                 _textBox.TextChanged += OnTextBoxTextChanged;
             }

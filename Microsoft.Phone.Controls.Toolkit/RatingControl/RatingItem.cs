@@ -5,6 +5,7 @@
 
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Media;
 
 namespace Microsoft.Phone.Controls
 {
@@ -26,6 +27,7 @@ namespace Microsoft.Phone.Controls
         public RatingItem()
         {
             DefaultStyleKey = typeof(RatingItem);
+            CacheMode = new BitmapCache();
         }
 
         #region public double StrokeThickness

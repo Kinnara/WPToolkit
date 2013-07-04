@@ -36,11 +36,13 @@
                                            TextWrapping="Wrap" 
                                            Margin="12,-6,12,0" 
                                            Style="{StaticResource PhoneTextAccentStyle}"
+                                           CacheMode="BitmapCache"
                                            toolkit:SlideInEffect.LineIndex="1"/>
                                 <TextBlock Text="{Binding LineTwo}" 
                                            TextWrapping="Wrap" 
                                            Margin="12,-6,12,0" 
                                            Style="{StaticResource PhoneTextSubtleStyle}"
+                                           CacheMode="BitmapCache"
                                            toolkit:SlideInEffect.LineIndex="2"/>
                             </StackPanel>
                         </DataTemplate>
@@ -56,6 +58,7 @@
                             <StackPanel Margin="0,0,0,17" Width="432">
                                 <TextBlock Text="{Binding LineOne}" TextWrapping="Wrap" Style="{StaticResource PhoneTextExtraLargeStyle}"/>
                                 <TextBlock Text="{Binding LineThree}" TextWrapping="Wrap" Margin="12,-6,12,0" Style="{StaticResource PhoneTextSubtleStyle}"
+                                           CacheMode="BitmapCache"
                                            toolkit:SlideInEffect.LineIndex="1"/>
                             </StackPanel>
                         </DataTemplate>

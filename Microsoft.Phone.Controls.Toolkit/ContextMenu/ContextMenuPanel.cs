@@ -47,6 +47,11 @@ namespace Microsoft.Phone.Controls
 
                 if (child == null) { continue; }
 
+                if (!(child.CacheMode is BitmapCache))
+                {
+                    child.CacheMode = new BitmapCache();
+                }
+
                 // Measure the child.
                 child.Measure(layoutSlotSize);
                 Size childDesiredSize = child.DesiredSize;

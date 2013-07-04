@@ -146,6 +146,7 @@
         <phone:Pivot Title="LONGLISTMULTISELECTOR SAMPLE"
                      x:Name="SamplePivot"
                      SelectionChanged="OnPivotSelectionChanged"
+                     LoadingPivotItem="OnPivotLoadingPivotItem"
                      toolkit:TurnstileFeatherEffect.FeatheringIndex="0">
 
             <phone:PivotItem x:Name="MultiselectLbxItem" Header="multiselect lbx" Padding="0,0,0,72">
@@ -176,6 +177,7 @@
                                                 JumpListStyle="{StaticResource BuddiesJumpListStyle}"
                                                 GroupHeaderTemplate="{StaticResource BuddiesGroupHeaderTemplate}"
                                                 ItemTemplate="{StaticResource BuddiesItemTemplate}"
+                                                IsSelectionEnabledChanged="OnBuddiesIsSelectionEnabledChanged"
                                                 toolkit:TurnstileFeatherEffect.FeatheringIndex="2"
             />
             </phone:PivotItem>

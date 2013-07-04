@@ -205,7 +205,9 @@ namespace Microsoft.Phone.Controls.Primitives
             return item is PickerBoxListItem;
         }
 
-        /// <summary>Creates or identifies the element used to display a specified item.</summary>
+        /// <summary>
+        /// Creates or identifies the element used to display a specified item.
+        /// </summary>
         /// <returns>
         /// A <see cref="T:Microsoft.Phone.Controls.Primitives.PickerBoxList" /> corresponding to a specified item.
         /// </returns>

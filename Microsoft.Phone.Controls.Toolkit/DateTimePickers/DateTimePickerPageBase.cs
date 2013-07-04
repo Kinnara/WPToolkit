@@ -21,7 +21,7 @@ namespace Microsoft.Phone.Controls.Primitives
     /// <summary>
     /// Represents a base class for pages that work with DateTimePickerBase to allow users to choose a date/time.
     /// </summary>
-    public abstract class DateTimePickerPageBase : PhoneApplicationPage, IDateTimePickerPage
+    public abstract class DateTimePickerPageBase : BasePage, IDateTimePickerPage
     {
         private const string VisibilityGroupName = "VisibilityStates";
         private const string OpenVisibilityStateName = "Open";
@@ -102,9 +102,13 @@ namespace Microsoft.Phone.Controls.Primitives
                 }
             }
 
-            ApplyOrientation();
-
             VisualStateManager.GoToState(this, ClosedVisibilityStateName, false);
+            Loaded += OnLoaded;
+        }
+
+        private void OnLoaded(object sender, RoutedEventArgs e)
+        {
+            Loaded -= OnLoaded;
             AnimationHelper.InvokeOnSecondRendering(() =>
             {
                 // Play the Open state
@@ -314,26 +318,9 @@ namespace Microsoft.Phone.Controls.Primitives
         }
 
         /// <summary>
-        /// Handles changes to the page's Orientation property.
-        /// </summary>
-        /// <param name="e">Event arguments.</param>
-        protected override void OnOrientationChanged(OrientationChangedEventArgs e)
-        {
-            if (null == e)
-            {
-                throw new ArgumentNullException("e");
-            }
-
-            base.OnOrientationChanged(e);
-            ApplyOrientation();
-        }
-
-        /// <summary>
         /// Sets the selectors and title flow direction.
         /// </summary>
         /// <param name="flowDirection">Flow direction to set.</param>
         internal abstract void SetFlowDirection(FlowDirection flowDirection);
-
-        internal abstract void ApplyOrientation();
     }
 }

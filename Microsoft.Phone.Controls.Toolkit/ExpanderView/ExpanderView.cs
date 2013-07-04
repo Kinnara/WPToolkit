@@ -418,6 +418,7 @@ namespace Microsoft.Phone.Controls
         {
             DefaultStyleKey = typeof(ExpanderView);
             SizeChanged += OnSizeChanged;
+            CacheMode = new BitmapCache();
         }
 
         /// <summary>
@@ -607,6 +608,20 @@ namespace Microsoft.Phone.Controls
         {
             base.OnItemsChanged(e);
             HasItems = Items.Count > 0;
+        }
+
+        /// <summary>
+        /// Creates or identifies the element that is used to display the given item.
+        /// </summary>
+        /// 
+        /// <returns>
+        /// The element that is used to display the given item.
+        /// </returns>
+        protected override DependencyObject GetContainerForItemOverride()
+        {
+            UIElement container = (UIElement)base.GetContainerForItemOverride();
+            container.CacheMode = new BitmapCache();
+            return container;
         }
 
         #endregion

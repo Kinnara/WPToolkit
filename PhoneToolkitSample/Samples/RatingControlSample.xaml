@@ -35,7 +35,7 @@
             <Button Grid.Row="1" Grid.Column="1" Content="Reset" Click="Button_Click_Reset" Grid.ColumnSpan="2" />
             <Button Grid.Row="3" Grid.Column="0" Content="Add Stars" Click="Button_Click_More" />
             <Button Grid.Row="2" Grid.Column="1" Content="Flip Orientation" Click="Button_Click_Flip" Grid.ColumnSpan="2"/>
-            <StackPanel Grid.Row="3" Grid.Column="1" Orientation="Horizontal" Grid.ColumnSpan="2" VerticalAlignment="Center" HorizontalAlignment="Center">
+            <StackPanel Grid.Row="3" Grid.Column="1" Orientation="Horizontal" Grid.ColumnSpan="2" VerticalAlignment="Center" HorizontalAlignment="Center" CacheMode="BitmapCache">
                 <TextBlock Text="Current Value: " />
                 <TextBlock>
                     <TextBlock.Text>

@@ -104,6 +104,26 @@
             </Setter>
         </Style>
 
+        <Style TargetType="Button">
+            <Setter Property="CacheMode" Value="BitmapCache"/>
+        </Style>
+
+        <Style TargetType="RepeatButton">
+            <Setter Property="CacheMode" Value="BitmapCache"/>
+        </Style>
+
+        <Style TargetType="ToggleButton">
+            <Setter Property="CacheMode" Value="BitmapCache"/>
+        </Style>
+        
+        <Style TargetType="CheckBox">
+            <Setter Property="CacheMode" Value="BitmapCache"/>
+        </Style>
+        
+        <Style TargetType="RadioButton">
+            <Setter Property="CacheMode" Value="BitmapCache"/>
+        </Style>
+
         <Style TargetType="phone:Pivot">
             <Setter Property="Template">
                 <Setter.Value>
@@ -200,6 +220,7 @@
             <Setter Property="FontFamily" Value="{StaticResource PhoneFontFamilyNormal}"/>
             <Setter Property="FontSize" Value="{StaticResource PhoneFontSizeNormal}"/>
             <Setter Property="Foreground" Value="{StaticResource PhoneForegroundBrush}"/>
+            <Setter Property="shell:SystemTray.BackgroundColor" Value="{StaticResource PhoneBackgroundColor}"/>
         </Style>
 
         <Style x:Key="PageStyle" TargetType="phone:PhoneApplicationPage" BasedOn="{StaticResource PageStyleBase}">
@@ -318,7 +339,7 @@
                                     <RowDefinition/>
                                 </Grid.RowDefinitions>
 
-                                <StackPanel x:Name="PortraitTitlePanel">
+                                <StackPanel x:Name="PortraitTitlePanel" CacheMode="BitmapCache">
                                     <ContentControl
                                         Content="{TemplateBinding Title}"
                                         ContentTemplate="{TemplateBinding TitleTemplate}"
@@ -338,7 +359,7 @@
                                             <RowDefinition/>
                                         </Grid.RowDefinitions>
 
-                                        <StackPanel x:Name="LandscapeTitlePanel" Margin="{StaticResource LandscapeTitleMargin}" Visibility="Collapsed">
+                                        <StackPanel x:Name="LandscapeTitlePanel" Margin="{StaticResource LandscapeTitleMargin}" Visibility="Collapsed" CacheMode="BitmapCache">
                                             <ContentControl
                                                 Content="{TemplateBinding Title}"
                                                 ContentTemplate="{TemplateBinding TitleTemplate}"

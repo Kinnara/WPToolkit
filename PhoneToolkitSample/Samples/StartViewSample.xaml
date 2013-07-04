@@ -51,6 +51,7 @@
                                      ImageSource="/Images/start.arrownext.dark.rest.png"
                                      Margin="0,0,12,15"
                                      HorizontalAlignment="Right"
+                                     CacheMode="BitmapCache"
                                      Click="NextButton_Click"/>
             </StackPanel>
         </toolkit:StartViewItem>

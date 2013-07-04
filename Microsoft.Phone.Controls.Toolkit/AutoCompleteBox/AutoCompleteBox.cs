@@ -19,11 +19,7 @@ using System.Windows.Markup;
 using System.Windows.Media;
 using System.Windows.Threading;
 
-#if WINDOWS_PHONE
 namespace Microsoft.Phone.Controls
-#else
-namespace System.Windows.Controls
-#endif
 {
     /// <summary>
     /// Represents a control that provides a text box for user input and a
@@ -36,7 +32,7 @@ namespace System.Windows.Controls
     [TemplatePart(Name = AutoCompleteBox.ElementTextBox, Type = typeof(TextBox))]
     [TemplatePart(Name = AutoCompleteBox.ElementPopup, Type = typeof(Popup))]
     [StyleTypedProperty(Property = AutoCompleteBox.ElementTextBoxStyle, StyleTargetType = typeof(TextBox))]
-    [StyleTypedProperty(Property = AutoCompleteBox.ElementItemContainerStyle, StyleTargetType = typeof(ListBox))]
+    [StyleTypedProperty(Property = AutoCompleteBox.ElementItemContainerStyle, StyleTargetType = typeof(ListBoxItem))]
     [TemplateVisualState(Name = VisualStates.StateNormal, GroupName = VisualStates.GroupCommon)]
     [TemplateVisualState(Name = VisualStates.StateMouseOver, GroupName = VisualStates.GroupCommon)]
     [TemplateVisualState(Name = VisualStates.StatePressed, GroupName = VisualStates.GroupCommon)]
@@ -1036,7 +1032,6 @@ namespace System.Windows.Controls
                 new PropertyMetadata(AutoCompleteSearch.GetFilter(AutoCompleteFilterMode.StartsWith)));
         #endregion public AutoCompleteStringFilterPredicate TextFilter
 
-#if WINDOWS_PHONE
         #region public InputScope InputScope
         /// <summary>
         /// Gets or sets the
@@ -1061,7 +1056,33 @@ namespace System.Windows.Controls
                 typeof(AutoCompleteBox),
                 null);
         #endregion public InputScope InputScope
-#endif
+
+        #region public string PlaceholderText
+        /// <summary>
+        /// Gets or sets the text that is displayed in the control until the value is changed by a user action or some other operation.
+        /// </summary>
+        /// 
+        /// <returns>
+        /// The text that is displayed in the control when no value is entered. The default is an empty string ("").
+        /// </returns>
+        public string PlaceholderText
+        {
+            get { return (string)GetValue(PlaceholderTextProperty); }
+            set { SetValue(PlaceholderTextProperty, value); }
+        }
+
+        /// <summary>
+        /// Identifies the
+        /// <see cref="P:Microsoft.Phone.Controls.AutoCompleteBox.PlaceholderText"/>
+        /// dependency property.
+        /// </summary>
+        public static readonly DependencyProperty PlaceholderTextProperty =
+            DependencyProperty.Register(
+                "PlaceholderText",
+                typeof(string),
+                typeof(AutoCompleteBox),
+                new PropertyMetadata(string.Empty));
+        #endregion public PlaceholderText PlaceholderText
 
         #region Template parts
 
@@ -1396,6 +1417,7 @@ namespace System.Windows.Controls
             {
 #if SILVERLIGHT
 #if WINDOWS_PHONE
+                TextBox.CacheMode = new BitmapCache();
                 TextBox.AddHandler(UIElement.KeyDownEvent, new KeyEventHandler(OnUIElementKeyDown), true);
                 TextBox.AddHandler(UIElement.KeyUpEvent, new KeyEventHandler(OnUIElementKeyUp), true);
 #else
@@ -1514,37 +1536,6 @@ namespace System.Windows.Controls
             UpdateVisualState(true);
         }
 
-#if !WINDOWS_PHONE
-        /// <summary>
-        /// Raise an expand/collapse event through the automation peer.
-        /// </summary>
-        /// <param name="oldValue">The old value.</param>
-        /// <param name="newValue">The new value.</param>
-        private void RaiseExpandCollapseAutomationEvent(bool oldValue, bool newValue)
-        {
-#if SILVERLIGHT
-            AutoCompleteBoxAutomationPeer peer = FrameworkElementAutomationPeer.FromElement(this) as AutoCompleteBoxAutomationPeer;
-            if (peer != null)
-            {
-                peer.RaiseExpandCollapseAutomationEvent(oldValue, newValue);
-            }
-#endif
-        }
-#endif
-
-#if !SILVERLIGHT
-        /// <summary>
-        /// Handles the PreviewKeyDown event on the TextBox for WPF. This method
-        /// is not implemented for Silverlight.
-        /// </summary>
-        /// <param name="sender">The source object.</param>
-        /// <param name="e">The event data.</param>
-        private void OnTextBoxPreviewKeyDown(object sender, KeyEventArgs e)
-        {
-            OnKeyDown(e);
-        }
-#endif
-
         /// <summary>
         /// Connects to the DropDownPopup Closed event.
         /// </summary>
@@ -1564,26 +1555,6 @@ namespace System.Windows.Controls
                 OnDropDownClosed(new RoutedPropertyChangedEventArgs<bool>(true, false));
             }
         }
-
-#if !WINDOWS_PHONE
-        /// <summary>
-        /// Returns a
-        /// <see cref="T:System.Windows.Automation.Peers.AutoCompleteBoxAutomationPeer" />
-        /// for use by the Silverlight automation infrastructure.
-        /// </summary>
-        /// <returns>A
-        /// <see cref="T:System.Windows.Automation.Peers.AutoCompleteBoxAutomationPeer" />
-        /// for the <see cref="T:Microsoft.Phone.Controls.AutoCompleteBox" />
-        /// object.</returns>
-        protected override AutomationPeer OnCreateAutomationPeer()
-        {
-#if SILVERLIGHT
-            return new AutoCompleteBoxAutomationPeer(this);
-#else
-            return null;
-#endif
-        }
-#endif
 
         #region Focus
 
@@ -1971,7 +1942,6 @@ namespace System.Windows.Controls
             _textSelectionStart = _text.SelectionStart;
         }
 
-#if WINDOWS_PHONE
         /// <summary>
         /// Handles KeyDown to set a flag that indicates that the user is inputting
         /// text.  This is important for IME input.
@@ -1993,29 +1963,6 @@ namespace System.Windows.Controls
         {
             _inputtingText = false;
         }
-#else
-        /// <summary>
-        /// Handles TextInputStart to set a flag that indicates that the user is inputting
-        /// text.  This is important for IME input.
-        /// </summary>
-        /// <param name="sender">The source TextBox object.</param>
-        /// <param name="e">The TextInputStart event data.</param>
-        private void OnTextBoxTextInputStart(object sender, KeyEventArgs e)
-        {
-            _inputtingText = true;
-        }
-
-        /// <summary>
-        /// Handles TextInput to turn off the flag that indicates that the user is inputting
-        /// text.  This is important for IME input.
-        /// </summary>
-        /// <param name="sender">The source TextBox object.</param>
-        /// <param name="e">The TextInput event data.</param>
-        private void OnTextBoxTextInput(object sender, KeyEventArgs e)
-        {
-            _inputtingText = false;
-        }
-#endif
 
         /// <summary>
         /// Updates both the text box value and underlying text dependency 

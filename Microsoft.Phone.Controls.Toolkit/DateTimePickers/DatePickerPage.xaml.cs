@@ -64,12 +64,5 @@ namespace Microsoft.Phone.Controls
             SecondarySelector.FlowDirection = flowDirection;
             TertiarySelector.FlowDirection = flowDirection;
         }
-
-        internal override void ApplyOrientation()
-        {
-            LandscapePlaceholder.Visibility = (0 != (PageOrientation.Landscape & Orientation)) ?
-                Visibility.Visible :
-                Visibility.Collapsed;
-        }
     }
 }

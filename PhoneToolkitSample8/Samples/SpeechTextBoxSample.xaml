@@ -13,7 +13,7 @@
     Style="{StaticResource PageStyle}">
 
     <toolkit:PageUI Header="speechtextbox" Style="{StaticResource ScrollablePageUIStyle}">
-        <Grid x:Name="ContentPanel">
+        <Grid x:Name="ContentPanel" Margin="0,0,0,408">
             <StackPanel Orientation="Vertical">
                 <TextBlock Text="Simple SpeechTextBox"
                            Foreground="{StaticResource PhoneSubtleBrush}"

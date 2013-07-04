@@ -137,6 +137,9 @@
     <Compile Include="..\Microsoft.Phone.Controls.Toolkit\Common\BindingEvaluator.cs">
       <Link>Common\BindingEvaluator.cs</Link>
     </Compile>
+    <Compile Include="..\Microsoft.Phone.Controls.Toolkit\Common\ClickHelper.cs">
+      <Link>Common\ClickHelper.cs</Link>
+    </Compile>
     <Compile Include="..\Microsoft.Phone.Controls.Toolkit\Common\CultureInfoExtensions.cs">
       <Link>Common\CultureInfoExtensions.cs</Link>
     </Compile>
@@ -263,6 +266,10 @@
     <Compile Include="..\Microsoft.Phone.Controls.Toolkit\DateTimePickers\DatePicker.cs">
       <Link>DateTimePickers\DatePicker.cs</Link>
     </Compile>
+    <Compile Include="..\Microsoft.Phone.Controls.Toolkit\DateTimePickers\DatePickerPage.xaml.cs">
+      <Link>DateTimePickers\DatePickerPage.xaml.cs</Link>
+      <DependentUpon>DatePickerPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="..\Microsoft.Phone.Controls.Toolkit\DateTimePickers\DateTimePickerBase.cs">
       <Link>DateTimePickers\DateTimePickerBase.cs</Link>
     </Compile>
@@ -286,6 +293,10 @@
     </Compile>
     <Compile Include="..\Microsoft.Phone.Controls.Toolkit\DateTimePickers\TimePicker.cs">
       <Link>DateTimePickers\TimePicker.cs</Link>
+    </Compile>
+    <Compile Include="..\Microsoft.Phone.Controls.Toolkit\DateTimePickers\TimePickerPage.xaml.cs">
+      <Link>DateTimePickers\TimePickerPage.xaml.cs</Link>
+      <DependentUpon>TimePickerPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="..\Microsoft.Phone.Controls.Toolkit\Effects\SlideInEffect.cs">
       <Link>Effects\SlideInEffect.cs</Link>
@@ -331,6 +342,9 @@
     </Compile>
     <Compile Include="..\Microsoft.Phone.Controls.Toolkit\ImageButton\ImageButton.cs">
       <Link>ImageButton\ImageButton.cs</Link>
+    </Compile>
+    <Compile Include="..\microsoft.phone.controls.toolkit\itemsstackpanel\ItemsStackPanel.cs">
+      <Link>ItemsStackPanel\ItemsStackPanel.cs</Link>
     </Compile>
     <Compile Include="..\Microsoft.Phone.Controls.Toolkit\PageUI\PageUI.cs">
       <Link>PageUI\PageUI.cs</Link>
@@ -411,6 +425,9 @@
     <Compile Include="..\Microsoft.Phone.Controls.Toolkit\StartView\StartViewItem.cs">
       <Link>StartView\StartViewItem.cs</Link>
     </Compile>
+    <Compile Include="..\Microsoft.Phone.Controls.Toolkit\Transitions\TransitionFrameSlim.cs">
+      <Link>Transitions\TransitionFrameSlim.cs</Link>
+    </Compile>
     <Compile Include="..\Microsoft.Phone.Controls.Toolkit\VariableSizedWrapGrid\VariableSizedWrapGrid.cs">
       <Link>VariableSizedWrapGrid\VariableSizedWrapGrid.cs</Link>
     </Compile>
@@ -453,12 +470,6 @@
     </Compile>
     <Compile Include="..\Microsoft.Phone.Controls.Toolkit\ProgressBar\PerformanceProgressBar.cs">
       <Link>ProgressBar\PerformanceProgressBar.cs</Link>
-    </Compile>
-    <Compile Include="DateTimePickers\DatePickerPage.xaml.cs">
-      <DependentUpon>DatePickerPage.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="DateTimePickers\TimePickerPage.xaml.cs">
-      <DependentUpon>TimePickerPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="ListView\IncrementalLoadingTrigger.cs" />
     <Compile Include="ListView\ISupportIncrementalLoading.cs" />
@@ -592,19 +603,25 @@
     <Compile Include="SpeechTextBox\SpeechTextBox.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Page Include="..\Microsoft.Phone.Controls.Toolkit\DateTimePickers\DatePickerPage.xaml">
+      <Link>DateTimePickers\DatePickerPage.xaml</Link>
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="..\Microsoft.Phone.Controls.Toolkit\DateTimePickers\TimePickerPage.xaml">
+      <Link>DateTimePickers\TimePickerPage.xaml</Link>
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="..\Microsoft.Phone.Controls.Toolkit\PickerBox\PickerBoxPage.xaml">
       <Link>PickerBox\PickerBoxPage.xaml</Link>
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="DateTimePickers\DatePickerPage.xaml">
-      <SubType>Designer</SubType>
+    <Resource Include="DateTimePickers\DatePickerPageResources.xaml">
       <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="DateTimePickers\TimePickerPage.xaml">
       <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
+    </Resource>
     <Page Include="Themes\Generic.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

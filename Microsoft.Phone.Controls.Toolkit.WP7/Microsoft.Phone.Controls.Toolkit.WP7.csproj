@@ -125,6 +125,9 @@
     <Compile Include="..\Microsoft.Phone.Controls.Toolkit\Common\BindingEvaluator.cs">
       <Link>Common\BindingEvaluator.cs</Link>
     </Compile>
+    <Compile Include="..\Microsoft.Phone.Controls.Toolkit\Common\ClickHelper.cs">
+      <Link>Common\ClickHelper.cs</Link>
+    </Compile>
     <Compile Include="..\Microsoft.Phone.Controls.Toolkit\Common\CultureInfoExtensions.cs">
       <Link>Common\CultureInfoExtensions.cs</Link>
     </Compile>
@@ -328,6 +331,9 @@
     <Compile Include="..\Microsoft.Phone.Controls.Toolkit\ImageButton\ImageButton.cs">
       <Link>ImageButton\ImageButton.cs</Link>
     </Compile>
+    <Compile Include="..\Microsoft.Phone.Controls.Toolkit\ItemsStackPanel\ItemsStackPanel.cs">
+      <Link>ItemsStackPanel\ItemsStackPanel.cs</Link>
+    </Compile>
     <Compile Include="..\Microsoft.Phone.Controls.Toolkit\LongListSelector\LongListSelectorItem.cs">
       <Link>LongListSelector\LongListSelectorItem.cs</Link>
     </Compile>
@@ -415,6 +421,9 @@
     </Compile>
     <Compile Include="..\Microsoft.Phone.Controls.Toolkit\StartView\StartViewItem.cs">
       <Link>StartView\StartViewItem.cs</Link>
+    </Compile>
+    <Compile Include="..\Microsoft.Phone.Controls.Toolkit\Transitions\TransitionFrameSlim.cs">
+      <Link>Transitions\TransitionFrameSlim.cs</Link>
     </Compile>
     <Compile Include="..\Microsoft.Phone.Controls.Toolkit\VariableSizedWrapGrid\VariableSizedWrapGrid.cs">
       <Link>VariableSizedWrapGrid\VariableSizedWrapGrid.cs</Link>
@@ -601,6 +610,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Resource Include="DateTimePickers\DatePickerPageResources.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Resource>
     <Page Include="Themes\Generic.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>

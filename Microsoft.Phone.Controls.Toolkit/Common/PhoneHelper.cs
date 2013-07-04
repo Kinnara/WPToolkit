@@ -31,7 +31,7 @@ namespace Microsoft.Phone.Controls
         /// <summary>
         /// The height of the SIP text completion in either orientation.
         /// </summary>
-        public const double SipTextCompletionHeight = 62;
+        public const double SipTextCompletionHeight = 69;
 
         /// <summary>
         /// Gets the current <see cref="T:PhoneApplicationFrame"/>.

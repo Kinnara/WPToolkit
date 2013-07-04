@@ -425,6 +425,8 @@ namespace Microsoft.Phone.Controls
         {
             DefaultStyleKey = typeof(ListPicker);
 
+            CacheMode = new BitmapCache();
+
             Storyboard.SetTargetProperty(_heightAnimation, new PropertyPath(FrameworkElement.HeightProperty));
             Storyboard.SetTargetProperty(_translateAnimation, new PropertyPath(TranslateTransform.YProperty));
 
@@ -541,6 +543,20 @@ namespace Microsoft.Phone.Controls
                 SelectedItem = _deferredSelectedItem;
                 _deferredSelectedItem = null;
             }
+        }
+
+        /// <summary>
+        /// Creates or identifies the element that is used to display the given item.
+        /// </summary>
+        /// 
+        /// <returns>
+        /// The element that is used to display the given item.
+        /// </returns>
+        protected override DependencyObject GetContainerForItemOverride()
+        {
+            ListPickerItem container = (ListPickerItem)base.GetContainerForItemOverride();
+            container.CacheMode = new BitmapCache();
+            return container;
         }
 
         /// <summary>

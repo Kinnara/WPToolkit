@@ -43,7 +43,7 @@
                     BorderThickness="2"
                     Height="100"
                     Margin="{StaticResource PhoneHorizontalMargin}">
-                <TextBlock x:Name="SampleTextBlock" Text="Sample" VerticalAlignment="Bottom"/>
+                <TextBlock x:Name="SampleTextBlock" Text="Sample" VerticalAlignment="Bottom" CacheMode="BitmapCache"/>
             </Border>
             <toolkit:PhoneSlider x:Name="TextSizeSlider"
                                  Minimum="1"

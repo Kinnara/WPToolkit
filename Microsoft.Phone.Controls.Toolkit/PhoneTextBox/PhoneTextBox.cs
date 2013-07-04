@@ -211,11 +211,12 @@ namespace Microsoft.Phone.Controls
 
         #region Placeholder Text
         /// <summary>
-        /// The placeholder text in the text box when the text box doesn't have the input focus and the user hasn't entered any characters.
+        /// Gets or sets the text that is displayed in the control until the value is changed by a user action or some other operation.
         /// </summary>
-        /// <value>
-        /// The placeholder text to display in the text box.
-        /// </value>
+        /// 
+        /// <returns>
+        /// The text that is displayed in the control when no value is entered. The default is an empty string ("").
+        /// </returns>
         public string PlaceholderText
         {
             get { return (string)GetValue(PlaceholderTextProperty); }

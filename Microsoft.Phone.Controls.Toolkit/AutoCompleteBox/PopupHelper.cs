@@ -3,6 +3,7 @@
 // Please see http://go.microsoft.com/fwlink/?LinkID=131993 for details.
 // All other rights reserved.
 
+using Microsoft.Phone.Shell;
 using System;
 using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
@@ -12,11 +13,7 @@ using System.Windows.Controls.Primitives;
 using System.Windows.Input;
 using System.Windows.Media;
 
-#if WINDOWS_PHONE
 namespace Microsoft.Phone.Controls
-#else
-namespace System.Windows.Controls
-#endif
 {
     /// <summary>
     /// PopupHelper is a simple wrapper type that helps abstract platform
@@ -48,7 +45,6 @@ namespace System.Windows.Controls
         /// </summary>
         private Control Parent { get; set; }
 
-#if SILVERLIGHT
         /// <summary>
         /// Gets or sets the expansive area outside of the popup.
         /// </summary>
@@ -58,7 +54,6 @@ namespace System.Windows.Controls
         /// Gets or sets the canvas for the popup child.
         /// </summary>
         private Canvas PopupChildCanvas { get; set; }
-#endif
 
         /// <summary>
         /// Gets or sets the maximum drop down height value.
@@ -124,7 +119,6 @@ namespace System.Windows.Controls
             Popup = popup;
         }
 
-#if WINDOWS_PHONE
         /// <summary>
         /// Gets the <see cref="T:MatrixTransform"/> for the control.
         /// </summary>
@@ -242,7 +236,7 @@ namespace System.Windows.Controls
         private Size BelowChildSize(Size displaySize, Size controlSize, Point controlPoint)
         {
             double width = controlSize.Width;
-            double availableHeight = displaySize.Height - controlSize.Height - controlPoint.Y - PopupOffset;
+            double availableHeight = displaySize.Height - controlSize.Height - controlPoint.Y - PopupOffset - 10;
             double customHeight = MaxDropDownHeight;
             double height = Min0(availableHeight, customHeight);
             return new Size(width, height);
@@ -329,6 +323,10 @@ namespace System.Windows.Controls
                 isChildAbove ?
                 AboveChildSize(controlSize, controlPoint) :
                 BelowChildSize(displaySize, controlSize, controlPoint);
+            if (isChildAbove && frame.IsPortrait() && SystemTray.IsVisible)
+            {
+                childSize.Height = Math.Max(childSize.Height - 32, 0);
+            }
             if (frameSize.Width == 0 || frameSize.Height == 0 || childSize.Height == 0)
             {
                 return;
@@ -362,176 +360,6 @@ namespace System.Windows.Controls
             matrixTransform.Matrix = fromControlToFrame;
             OutsidePopupCanvas.RenderTransform = matrixTransform;
         }
-#else // WINDOWS_PHONE
-        /// <summary>
-        /// Arrange the popup.
-        /// </summary>
-        [SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes", Justification = "This try-catch pattern is used by other popup controls to keep the runtime up.")]
-        public void Arrange()
-        {
-            if (Popup == null
-                || PopupChild == null || Application.Current == null
-#if SILVERLIGHT
-                || OutsidePopupCanvas == null || Application.Current.Host == null || Application.Current.Host.Content == null
-#endif
-                || false)
-            {
-                return;
-            }
-
-#if SILVERLIGHT
-            Content hostContent = Application.Current.Host.Content;
-            double rootWidth = hostContent.ActualWidth;
-            double rootHeight = hostContent.ActualHeight;
-#else
-            UIElement u = Parent;
-            if (Application.Current.Windows.Count > 0)
-            {
-                u = Application.Current.Windows[0];
-            }
-            while ((u as Window) == null && u != null)
-            {
-                u = VisualTreeHelper.GetParent(u) as UIElement;
-            }
-            Window w = u as Window;
-            if (w == null)
-            {
-                return;
-            }
-
-            double rootWidth = w.ActualWidth;
-            double rootHeight = w.ActualHeight;
-#endif
-
-            double popupContentWidth = PopupChild.ActualWidth;
-            double popupContentHeight = PopupChild.ActualHeight;
-
-            if (rootHeight == 0 || rootWidth == 0 || popupContentWidth == 0 || popupContentHeight == 0)
-            {
-                return;
-            }
-
-            double rootOffsetX = 0;
-            double rootOffsetY = 0;
-
-#if SILVERLIGHT
-            // Getting the transform will throw if the popup is no longer in 
-            // the visual tree.  This can happen if you first open the popup 
-            // and then click on something else on the page that removes it 
-            // from the live tree.
-            MatrixTransform mt = null;
-            try
-            {
-                mt = Parent.TransformToVisual(null) as MatrixTransform;
-            }
-            catch
-            {
-                OnClosed(EventArgs.Empty); // IsDropDownOpen = false;
-            }
-            if (mt == null)
-            {
-                return;
-            }
-
-            rootOffsetX = mt.Matrix.OffsetX;
-            rootOffsetY = mt.Matrix.OffsetY;
-
-            if (Parent.FlowDirection == FlowDirection.RightToLeft)
-            {
-                // In RTL mode the coordinate system is flipped horizontally,
-                // right plugin edge corresponds to X==0, so we need to adjust
-                // the rootOffsetX to be mirrored too, for the below code to
-                // compute popup position correctly
-                rootOffsetX = rootWidth - rootOffsetX;
-            }
-#endif
-
-            double myControlHeight = Parent.ActualHeight;
-            double myControlWidth = Parent.ActualWidth;
-
-            // Use or come up with a maximum popup height.
-            double popupMaxHeight = MaxDropDownHeight;
-            if (double.IsInfinity(popupMaxHeight) || double.IsNaN(popupMaxHeight))
-            {
-                popupMaxHeight = (rootHeight - myControlHeight) * 3 / 5;
-            }
-
-            popupContentWidth = Math.Min(popupContentWidth, rootWidth);
-            popupContentHeight = Math.Min(popupContentHeight, popupMaxHeight);
-            popupContentWidth = Math.Max(myControlWidth, popupContentWidth);
-
-            // We prefer to align the popup box with the left edge of the 
-            // control, if it will fit.
-            double popupX = rootOffsetX;
-            if (rootWidth < popupX + popupContentWidth)
-            {
-                // Since it doesn't fit when strictly left aligned, we shift it 
-                // to the left until it does fit.
-                popupX = rootWidth - popupContentWidth;
-                popupX = Math.Max(0, popupX);
-            }
-
-            // We prefer to put the popup below the combobox if it will fit.
-            bool below = true;
-            double popupY = rootOffsetY + myControlHeight;
-            if (rootHeight < popupY + popupContentHeight)
-            {
-                below = false;
-                // It doesn't fit below the combobox, lets try putting it above 
-                // the combobox.
-                popupY = rootOffsetY - popupContentHeight;
-                if (popupY < 0)
-                {
-                    // doesn't really fit below either.  Now we just pick top 
-                    // or bottom based on wich area is bigger.
-                    if (rootOffsetY < (rootHeight - myControlHeight) / 2)
-                    {
-                        below = true;
-                        popupY = rootOffsetY + myControlHeight;
-                    }
-                    else
-                    {
-                        below = false;
-                        popupY = rootOffsetY - popupContentHeight;
-                    }
-                }
-            }
-
-            // Now that we have positioned the popup we may need to truncate 
-            // its size.
-            popupMaxHeight = below ? Math.Min(rootHeight - popupY, popupMaxHeight) : Math.Min(rootOffsetY, popupMaxHeight);
-
-            Popup.HorizontalOffset = 0;
-            Popup.VerticalOffset = 0;
-
-#if SILVERLIGHT
-            OutsidePopupCanvas.Width = rootWidth;
-            OutsidePopupCanvas.Height = rootHeight;
-
-            // Transform the transparent canvas to the plugin's coordinate 
-            // space origin.
-            Matrix transformToRootMatrix = mt.Matrix;
-            Matrix newMatrix;
-            transformToRootMatrix.Invert(out newMatrix);
-            mt.Matrix = newMatrix;
-
-            OutsidePopupCanvas.RenderTransform = mt;
-#endif
-            PopupChild.MinWidth = myControlWidth;
-            PopupChild.MaxWidth = rootWidth;
-            PopupChild.MinHeight = 0;
-            PopupChild.MaxHeight = Math.Max(0, popupMaxHeight);
-
-            PopupChild.Width = popupContentWidth;
-            // PopupChild.Height = popupContentHeight;
-            PopupChild.HorizontalAlignment = HorizontalAlignment.Left;
-            PopupChild.VerticalAlignment = VerticalAlignment.Top;
-
-            // Set the top left corner for the actual drop down.
-            Canvas.SetLeft(PopupChild, popupX - rootOffsetX);
-            Canvas.SetTop(PopupChild, popupY - rootOffsetY);
-        }
-#endif // WINDOWS_PHONE
 
         /// <summary>
         /// Fires the Closed event.

@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Diagnostics.CodeAnalysis;
 using System.Windows.Controls;
 using System.Windows.Input;
 
@@ -10,7 +9,17 @@ namespace Microsoft.Phone.Controls.Primitives
     /// </summary>
     public class PickerBoxListItem : ListBoxItem
     {
-        private bool _isMouseCaptured;
+        private ClickHelper _clickHelper;
+
+        /// <summary>
+        /// Initializes a new instance of the
+        /// <see cref="T:Microsoft.Phone.Controls.Primitives.PickerBoxList" /> class.
+        /// </summary>
+        public PickerBoxListItem()
+        {
+            _clickHelper = ClickHelper.Create(this);
+            _clickHelper.Click += delegate { SafeRaise.Raise(Click, this); };
+        }
 
         /// <summary>
         /// Occurs when the
@@ -45,56 +54,6 @@ namespace Microsoft.Phone.Controls.Primitives
         /// <param name="e">The event data.</param>
         protected override void OnMouseLeftButtonDown(MouseButtonEventArgs e)
         {
-            CaptureMouseInternal();
-        }
-
-        /// <summary>
-        /// Called before the <see cref="E:System.Windows.UIElement.MouseLeftButtonUp" /> event occurs.
-        /// </summary>
-        /// <param name="e">The data for the event.</param>
-        [SuppressMessage("Microsoft.Design", "CA1062:Validate arguments of public methods", MessageId = "0", Justification = "Standard pattern.")]
-        protected override void OnMouseLeftButtonUp(MouseButtonEventArgs e)
-        {
-            base.OnMouseLeftButtonUp(e);
-
-            if (!e.Handled)
-            {
-                e.Handled = true;
-
-                if (_isMouseCaptured)
-                {
-                    SafeRaise.Raise(Click, this);
-                }
-
-                ReleaseMouseCaptureInternal();
-            }
-        }
-
-        /// <summary>
-        /// Called before the <see cref="E:System.Windows.UIElement.LostMouseCapture" /> event occurs to
-        /// provide handling for the event in a derived class without attaching a delegate.
-        /// </summary>
-        /// <param name="e">A <see cref="T:System.Windows.Input.MouseEventArgs" /> that contains the
-        /// event data.</param>
-        protected override void OnLostMouseCapture(MouseEventArgs e)
-        {
-            ReleaseMouseCaptureInternal();
-        }
-
-        private void CaptureMouseInternal()
-        {
-            if (_isMouseCaptured)
-            {
-                return;
-            }
-
-            _isMouseCaptured = CaptureMouse();
-        }
-
-        private void ReleaseMouseCaptureInternal()
-        {
-            ReleaseMouseCapture();
-            _isMouseCaptured = false;
         }
     }
 }
