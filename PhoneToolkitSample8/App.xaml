@@ -374,7 +374,7 @@
                                                 HorizontalContentAlignment="Stretch"/>
                                         </StackPanel>
 
-                                        <ContentPresenter Margin="{StaticResource PhoneHorizontalMargin}" Grid.Row="1"/>
+                                        <ContentPresenter Margin="12,10,12,95" Grid.Row="1"/>
                                     </Grid>
                                 </toolkit:Scroller>
                             </Grid>

@@ -20,7 +20,7 @@
     shell:SystemTray.IsVisible="True"
     Style="{StaticResource PageStyle}">
 
-    <toolkit:PageUI Header="tilt effect">
+    <toolkit:PageUI Header="tilt effect" Style="{StaticResource ScrollablePageUIStyle}">
         <StackPanel>
 
             <TextBlock Style="{StaticResource PhoneTextNormalStyle}"
@@ -34,6 +34,16 @@
                        Text="Be mindful that there are slight performance implications of using this visual effect."/>
 
             <CheckBox Content="Touch this checkbox"/>
+
+            <TextBlock Style="{StaticResource PhoneTextNormalStyle}"
+                       TextWrapping="Wrap"
+                       Text="Tilt effect can now be applied also to ListPicker control"/>
+
+            <toolkit:ListPicker Header="Background">
+                <sys:String>dark</sys:String>
+                <sys:String>light</sys:String>
+                <sys:String>dazzle</sys:String>
+            </toolkit:ListPicker>
 
             <HyperlinkButton Content="Click for online documentation"
                              TargetName="_self"

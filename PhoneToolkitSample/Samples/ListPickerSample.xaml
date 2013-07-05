@@ -29,7 +29,7 @@
 
     <toolkit:PageUI Header="list picker" Style="{StaticResource ScrollablePageUIStyle}">
         <toolkit:PageUI.Content>
-            <StackPanel Margin="0,10,0,95">
+            <StackPanel>
 
                 <!-- 
                     ListPicker does not support its items set directly to a UIElement.

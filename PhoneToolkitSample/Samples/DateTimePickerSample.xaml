@@ -21,7 +21,7 @@
 
     <toolkit:PageUI Header="date &amp; time pickers" Style="{StaticResource ScrollablePageUIStyle}">
         <toolkit:PageUI.Content>
-            <StackPanel x:Name="ContentPanel" Margin="0,10,0,95">
+            <StackPanel x:Name="ContentPanel">
                 <toolkit:DatePicker Header="Select date" Margin="0,0,0,26" ValueChanged="DatePicker_ValueChanged"/>
                 <toolkit:TimePicker Header="Select time" Margin="0,0,0,26" ValueChanged="TimePicker_ValueChanged"/>
                 <TextBlock Text="note" Style="{StaticResource PhoneTextLargeStyle}"/>
