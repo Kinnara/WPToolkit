@@ -6,6 +6,7 @@
 using System;
 using System.Diagnostics;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
 using System.Windows.Navigation;
@@ -24,6 +25,10 @@ namespace Microsoft.Phone.Controls
         /// A single shared instance for setting BitmapCache on a visual.
         /// </summary>
         internal static readonly CacheMode BitmapCacheMode = new BitmapCache();
+        #endregion
+
+        #region Template Parts
+        private ContentPresenter _contentPresenter;
         #endregion
 
         /// <summary>
@@ -81,6 +86,20 @@ namespace Microsoft.Phone.Controls
         {
             Navigating += OnNavigating;
             NavigationStopped += OnNavigationStopped;
+        }
+
+        /// <summary>
+        /// When overridden in a derived class, is invoked whenever application 
+        /// code or internal processes (such as a rebuilding layout pass) call
+        /// <see cref="M:System.Windows.Controls.Control.ApplyTemplate"/>.
+        /// In simplest terms, this means the method is called just before a UI 
+        /// element displays in an application.
+        /// </summary>
+        public override void OnApplyTemplate()
+        {
+            base.OnApplyTemplate();
+
+            _contentPresenter = this.GetFirstLogicalChildByType<ContentPresenter>(false);
         }
 
         /// <summary>
@@ -150,9 +169,9 @@ namespace Microsoft.Phone.Controls
 
                 _performingExitTransition = true;
 
-                PerformTransition(navigationOutTransition, this, oldTransition);
+                PerformTransition(navigationOutTransition, _contentPresenter, oldTransition);
 
-                PrepareContentPresenterForCompositor(this);
+                PrepareContentPresenterForCompositor(_contentPresenter);
             }
         }
 
@@ -171,7 +190,7 @@ namespace Microsoft.Phone.Controls
 
             if (!_performingExitTransition)
             {
-                RestoreContentPresenterInteractivity(this);
+                RestoreContentPresenterInteractivity(_contentPresenter);
                 _navigationStopped = false;
             }
         }
@@ -224,7 +243,7 @@ namespace Microsoft.Phone.Controls
             if (_navigationStopped)
             {
                 // Restore the old content presenter's interactivity if the navigation is cancelled.
-                CompleteTransition(_storedNavigationOutTransition, this, _storedOldTransition);
+                CompleteTransition(_storedNavigationOutTransition, _contentPresenter, _storedOldTransition);
                 _navigationStopped = false;
             }
             else
@@ -274,7 +293,7 @@ namespace Microsoft.Phone.Controls
                     newElement.UpdateLayout();
 
                     newTransition = newTransitionElement.GetTransition(newElement);
-                    PrepareContentPresenterForCompositor(this);
+                    PrepareContentPresenterForCompositor(_contentPresenter);
                 }
             }
 
@@ -319,28 +338,31 @@ namespace Microsoft.Phone.Controls
         {
             if (null == newTransition)
             {
-                RestoreContentPresenterInteractivity(this);
+                RestoreContentPresenterInteractivity(_contentPresenter);
                 return;
             }
 
             EnsureStoppedTransition(newTransition);
             newTransition.Completed += delegate
             {
-                CompleteTransition(navigationInTransition, this, newTransition);
+                CompleteTransition(navigationInTransition, _contentPresenter, newTransition);
             };
 
             _readyToTransitionToNewContent = false;
             _storedNavigationInTransition = null;
             _storedNewTransition = null;
 
-            PerformTransition(navigationInTransition, this, newTransition);
+            PerformTransition(navigationInTransition, _contentPresenter, newTransition);
         }
 
         private void DoDeferredNavigation()
         {
             if (_deferredNavigation != null)
             {
-                Opacity = 0;
+                if (_contentPresenter != null)
+                {
+                    _contentPresenter.Opacity = 0;
+                }
 
                 NavigatingCancelEventArgs pendingNavigation = _deferredNavigation;
                 _deferredNavigation = null;
@@ -379,7 +401,7 @@ namespace Microsoft.Phone.Controls
         /// <param name="navigationTransition">The navigation transition.</param>
         /// <param name="presenter">The content presenter.</param>
         /// <param name="transition">The transition instance.</param>
-        private static void PerformTransition(NavigationTransition navigationTransition, UIElement presenter, ITransition transition)
+        private static void PerformTransition(NavigationTransition navigationTransition, ContentPresenter presenter, ITransition transition)
         {
             if (navigationTransition != null)
             {
@@ -402,7 +424,7 @@ namespace Microsoft.Phone.Controls
         /// <param name="navigationTransition">The navigation transition.</param>
         /// <param name="presenter">The content presenter.</param>
         /// <param name="transition">The transition instance.</param>
-        private static void CompleteTransition(NavigationTransition navigationTransition, UIElement presenter, ITransition transition)
+        private static void CompleteTransition(NavigationTransition navigationTransition, ContentPresenter presenter, ITransition transition)
         {
             if (transition != null)
             {
@@ -425,7 +447,7 @@ namespace Microsoft.Phone.Controls
         /// <param name="presenter">The content presenter instance.</param>
         /// <param name="applyBitmapCache">A value indicating whether to apply
         /// a bitmap cache.</param>
-        private static void PrepareContentPresenterForCompositor(UIElement presenter, bool applyBitmapCache = true)
+        private static void PrepareContentPresenterForCompositor(ContentPresenter presenter, bool applyBitmapCache = true)
         {
             if (presenter != null)
             {
@@ -442,7 +464,7 @@ namespace Microsoft.Phone.Controls
         /// removes the BitmapCache value.
         /// </summary>
         /// <param name="presenter">The content presenter instance.</param>
-        private static void RestoreContentPresenterInteractivity(UIElement presenter)
+        private static void RestoreContentPresenterInteractivity(ContentPresenter presenter)
         {
             if (presenter != null)
             {
