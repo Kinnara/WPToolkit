@@ -181,6 +181,13 @@ namespace System.Windows.Controls
         /// </summary>
         private WeakEventListener<AutoCompleteBox, object, NotifyCollectionChangedEventArgs> _collectionChangedWeakEventListener;
 
+        /// <summary>
+        /// Gets or sets a reference to the PhoneApplicationFrame that has an 
+        /// orientation handler attached.  Keeping the reference to ensure
+        /// the event handler is currently detached from the right frame.
+        /// </summary>
+        private PhoneApplicationFrame _frame;
+
         #region public int MinimumPrefixLength
         /// <summary>
         /// Gets or sets the minimum number of characters required to be entered
@@ -1277,26 +1284,58 @@ namespace System.Windows.Controls
         {
             DefaultStyleKey = typeof(AutoCompleteBox);
 
-            Loaded += (sender, e) => ApplyTemplate();
-#if WINDOWS_PHONE
-            Loaded += delegate
-            {
-                PhoneApplicationFrame frame;
-                if (PhoneHelper.TryGetPhoneApplicationFrame(out frame))
-                {
-                    frame.OrientationChanged += delegate
-                    {
-                        IsDropDownOpen = false;
-                    };
-                }
-            };
-#endif
+            Loaded += OnLoaded;
+            Unloaded += OnUnloaded;
+
             IsEnabledChanged += ControlIsEnabledChanged;
 
             Interaction = new InteractionHelper(this);
 
             // Creating the view here ensures that View is always != null
             ClearView();
+        }
+
+        /// <summary>
+        /// Called when the Loaded event is raised.
+        /// </summary>
+        /// <param name="sender">Source of the event.</param>
+        /// <param name="e">Event arguments.</param>        
+        private void OnLoaded(object sender, RoutedEventArgs e)
+        {
+            ApplyTemplate();
+
+            if (_frame == null)
+            {
+                if (PhoneHelper.TryGetPhoneApplicationFrame(out _frame))
+                {
+                    _frame.OrientationChanged += OnOrientationChanged;
+                }
+            }
+        }
+
+        /// <summary>
+        /// Called when the Unloaded event is raised.
+        /// </summary>
+        /// <param name="sender">Source of the event.</param>
+        /// <param name="e">Event arguments.</param>
+        private void OnUnloaded(object sender, RoutedEventArgs e)
+        {
+            if (_frame != null)
+            {
+                _frame.OrientationChanged -= OnOrientationChanged;
+                _frame = null;
+            }
+        }
+
+        /// <summary>
+        /// Called when the current page changes orientation and forces the
+        /// AutoCompleteBox to close if it's currently open.
+        /// </summary>
+        /// <param name="sender">The event sender.</param>
+        /// <param name="e">The event information.</param>        
+        private void OnOrientationChanged(object sender, OrientationChangedEventArgs e)
+        {
+            IsDropDownOpen = false;
         }
 
         /// <summary>
