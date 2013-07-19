@@ -14,10 +14,6 @@
     xmlns:controls="clr-namespace:Microsoft.Phone.Controls"
     xmlns:primitives="clr-namespace:Microsoft.Phone.Controls.Primitives">
 
-    <ControlTemplate x:Key="PhoneSimpleThumb" TargetType="Thumb">
-        <Rectangle Fill="Transparent" />
-    </ControlTemplate>
-
     <DataTemplate x:Key="ControlHeaderTemplate">
         <TextBlock Text="{Binding}"
                    FontFamily="{StaticResource PhoneFontFamilyNormal}"

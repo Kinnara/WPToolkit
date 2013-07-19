@@ -355,10 +355,6 @@ namespace Microsoft.Phone.Controls
         /// <param name="e">Event arguments.</param>
         protected virtual void OnOpened(RoutedEventArgs e)
         {
-            // Handles initial open (where OnOpened is called before OnApplyTemplate)
-            SetRenderTransform();
-            UpdateVisualStates(true);
-
             var handler = Opened;
             if (null != handler)
             {
@@ -491,8 +487,6 @@ namespace Microsoft.Phone.Controls
             // Go to correct visual state(s)
             bool portrait = DesignerProperties.IsInDesignTool || _rootVisual.Orientation.IsPortrait();
 
-            SetRenderTransform();
-
             if (IsOpen)
             {
                 // Handles initial open (where OnOpened is called before OnApplyTemplate)
@@ -501,8 +495,6 @@ namespace Microsoft.Phone.Controls
                     // if landscape to the full height. NOTE: device is rotated so use the ActualWidth
                     _innerGrid.MinHeight = portrait ? 0 : _rootVisual.ActualWidth;
                 }
-
-                UpdateVisualStates(true);
             }
         }
 
@@ -1067,6 +1059,9 @@ namespace Microsoft.Phone.Controls
                 // Size the overlay to match the new container
                 _overlay.Width = effectiveWidth;
                 _overlay.Height = effectiveHeight;
+
+                SetRenderTransform();
+                UpdateVisualStates(true);
             }
         }
 
@@ -1262,8 +1257,6 @@ namespace Microsoft.Phone.Controls
             {
                 _rootVisual.SizeChanged += OnContextMenuOrRootVisualSizeChanged;
             }
-
-            UpdateContextMenuPlacement();
 
             FrameworkElement dataContextSource = Owner as FrameworkElement ?? _rootVisual;
             if (ReadLocalValue(DataContextProperty) == DependencyProperty.UnsetValue)
