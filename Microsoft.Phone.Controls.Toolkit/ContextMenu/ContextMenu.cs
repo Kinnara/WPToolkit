@@ -188,7 +188,7 @@ namespace Microsoft.Phone.Controls
                     {
                         ownerFrameworkElement.RemoveHandler(MouseLeftButtonDownEvent, new MouseButtonEventHandler(OnOwnerMouseLeftButtonDown));
                         ownerFrameworkElement.ManipulationDelta -= OnOwnerManipulationDelta;
-                        ownerFrameworkElement.RemoveHandler(MouseLeftButtonUpEvent, new MouseButtonEventHandler(OnOwnerMouseLeftButtonUp));
+                        ownerFrameworkElement.ManipulationCompleted -= OnOwnerManipulationCompleted;
                         ownerFrameworkElement.Unloaded -= OnOwnerUnloaded;
 
                         OnOwnerUnloaded(null, null);
@@ -204,7 +204,7 @@ namespace Microsoft.Phone.Controls
                     {
                         ownerFrameworkElement.AddHandler(MouseLeftButtonDownEvent, new MouseButtonEventHandler(OnOwnerMouseLeftButtonDown), true);
                         ownerFrameworkElement.ManipulationDelta += OnOwnerManipulationDelta;
-                        ownerFrameworkElement.AddHandler(MouseLeftButtonUpEvent, new MouseButtonEventHandler(OnOwnerMouseLeftButtonUp), true);
+                        ownerFrameworkElement.ManipulationCompleted += OnOwnerManipulationCompleted;
                         ownerFrameworkElement.Unloaded += OnOwnerUnloaded;
                     }
                 }
@@ -707,11 +707,11 @@ namespace Microsoft.Phone.Controls
         }
 
         /// <summary>
-        /// Handles the MouseLeftButtonUp event for the owning element.
+        /// Handles the ManipulationCompleted event for the owning element.
         /// </summary>
         /// <param name="sender">Source of the event.</param>
         /// <param name="e">Event arguments.</param>
-        private void OnOwnerMouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+        private void OnOwnerManipulationCompleted(object sender, ManipulationCompletedEventArgs e)
         {
             StopHoldTimer();
         }
@@ -770,6 +770,8 @@ namespace Microsoft.Phone.Controls
         /// <param name="e">Event arguments.</param>
         private void OnOwnerUnloaded(object sender, RoutedEventArgs e)
         {
+            OnEventThatClosesContextMenu(sender, e);
+
             if (null != _rootVisual)
             {
                 _rootVisual.ManipulationCompleted -= OnRootVisualManipulationCompleted;
