@@ -252,12 +252,7 @@ namespace Microsoft.Phone.Controls
         private void OnPickerPageOpening(IDateTimePickerPage pickerPage)
         {
             pickerPage.Value = Value.GetValueOrDefault(DateTime.Now);
-
-            var page = pickerPage as DateTimePickerPageBase;
-            if (null != page)
-            {
-                page.SetFlowDirection(this.GetUsefulFlowDirection());
-            }
+            pickerPage.SetFlowDirection(this.GetUsefulFlowDirection());
         }
 
         private void OnPickerPageClosed(IDateTimePickerPage pickerPage)
