@@ -76,7 +76,7 @@ namespace Microsoft.Phone.Controls
         /// Sets the selectors and title flow direction.
         /// </summary>
         /// <param name="flowDirection">Flow direction to set.</param>
-        internal override void SetFlowDirection(FlowDirection flowDirection)
+        public override void SetFlowDirection(FlowDirection flowDirection)
         {
             HeaderTitle.FlowDirection = flowDirection;
 

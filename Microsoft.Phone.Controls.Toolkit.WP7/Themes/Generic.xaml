@@ -510,6 +510,7 @@
 
     <Style TargetType="controls:DatePicker">
         <Setter Property="Background" Value="{StaticResource PhoneTextBoxBrush}"/>
+        <Setter Property="BorderBrush" Value="{StaticResource PhoneForegroundBrush}"/>
         <Setter Property="BorderThickness" Value="0"/>
         <Setter Property="Foreground" Value="{StaticResource PhoneTextBoxForegroundBrush}"/>
         <Setter Property="HorizontalContentAlignment" Value="Left"/>
@@ -530,6 +531,7 @@
                             x:Name="DateTimeButton"
                             Content="{TemplateBinding ValueString}"
                             Background="{TemplateBinding Background}"
+                            BorderBrush="{TemplateBinding BorderBrush}"
                             BorderThickness="{TemplateBinding BorderThickness}"
                             FontFamily="{TemplateBinding FontFamily}"
                             Foreground="{TemplateBinding Foreground}"
@@ -543,6 +545,7 @@
 
     <Style TargetType="controls:TimePicker">
         <Setter Property="Background" Value="{StaticResource PhoneTextBoxBrush}"/>
+        <Setter Property="BorderBrush" Value="{StaticResource PhoneForegroundBrush}"/>
         <Setter Property="BorderThickness" Value="0"/>
         <Setter Property="Foreground" Value="{StaticResource PhoneTextBoxForegroundBrush}"/>
         <Setter Property="HorizontalContentAlignment" Value="Left"/>
@@ -565,6 +568,7 @@
                             x:Name="DateTimeButton"
                             Content="{TemplateBinding ValueString}"
                             Background="{TemplateBinding Background}"
+                            BorderBrush="{TemplateBinding BorderBrush}"
                             BorderThickness="{TemplateBinding BorderThickness}"
                             FontFamily="{TemplateBinding FontFamily}"
                             Foreground="{TemplateBinding Foreground}"

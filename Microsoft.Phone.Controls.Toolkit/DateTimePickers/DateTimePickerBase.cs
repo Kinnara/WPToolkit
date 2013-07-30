@@ -301,14 +301,14 @@ namespace Microsoft.Phone.Controls
             else if (null == _dateTimePickerPage)
             {
                 // Navigation to a new page; capture it and push the value in
-                var page = e.Content as DateTimePickerPageBase;
+                var pickerPage = e.Content as IDateTimePickerPage;
                 
-                if (null != page)
+                if (null != pickerPage)
                 {
-                    _dateTimePickerPage = page;
+                    _dateTimePickerPage = pickerPage;
                     _dateTimePickerPage.Value = Value.GetValueOrDefault(DateTime.Now);
 
-                    page.SetFlowDirection(this.FlowDirection);
+                    pickerPage.SetFlowDirection(this.FlowDirection);
                 }
             }
         }

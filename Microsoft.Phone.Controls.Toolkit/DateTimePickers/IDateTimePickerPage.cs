@@ -4,6 +4,7 @@
 // All other rights reserved.
 
 using System;
+using System.Windows;
 
 namespace Microsoft.Phone.Controls.Primitives
 {
@@ -16,5 +17,11 @@ namespace Microsoft.Phone.Controls.Primitives
         /// Gets or sets the DateTime to show in the picker page and to set when the user makes a selection.
         /// </summary>
         DateTime? Value { get; set; }
+
+        /// <summary>
+        /// Sets the flow direction on any children controls that need it.
+        /// </summary>
+        /// <param name="flowDirection">Flow direction to set.</param>
+        void SetFlowDirection(FlowDirection flowDirection);
     }
 }
