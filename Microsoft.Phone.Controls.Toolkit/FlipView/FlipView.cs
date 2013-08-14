@@ -506,7 +506,7 @@ namespace Microsoft.Phone.Controls
 
         private void UpdateSelection(int oldSelectedIndex, int newSelectedIndex, object oldSelectedItem, object newSelectedItem)
         {
-            if (oldSelectedIndex == newSelectedIndex && AreValuesEqual(oldSelectedItem, newSelectedItem))
+            if (oldSelectedIndex == newSelectedIndex && InternalUtils.AreValuesEqual(oldSelectedItem, newSelectedItem))
             {
                 return;
             }
@@ -525,7 +525,7 @@ namespace Microsoft.Phone.Controls
                 SelectedItem = newSelectedItem;
                 OnSelectionChanged();
 
-                if (!AreValuesEqual(oldSelectedItem, newSelectedItem))
+                if (!InternalUtils.AreValuesEqual(oldSelectedItem, newSelectedItem))
                 {
                     List<object> unselected = new List<object>();
                     List<object> selected = new List<object>();
@@ -918,23 +918,6 @@ namespace Microsoft.Phone.Controls
                 num = 2 * Math.PI + num;
             }
             return num * 360 / (2 * Math.PI);
-        }
-
-        private static bool AreValuesEqual(object o1, object o2)
-        {
-            if (o1 == o2)
-            {
-                return true;
-            }
-            if (o1 == null || o2 == null)
-            {
-                return false;
-            }
-            if (o1.GetType().IsValueType || o1.GetType() == typeof(string))
-            {
-                return Equals(o1, o2);
-            }
-            return ReferenceEquals(o1, o2);
         }
 
         void ISupportInitialize.BeginInit()

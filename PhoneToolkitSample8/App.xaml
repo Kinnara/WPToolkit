@@ -207,11 +207,11 @@
             <Setter Property="Foreground" Value="{StaticResource PhoneTextMidContrastBrush}"/>
             <Setter Property="LineHeight" Value="23.333"/>
             <Setter Property="LineStackingStrategy" Value="BlockLineHeight"/>
-            <Setter Property="Margin" Value="12,-10,0,0"/>
+            <Setter Property="Margin" Value="12,-9,0,0"/>
             <Setter Property="TextWrapping" Value="Wrap"/>
             <Setter Property="RenderTransform">
                 <Setter.Value>
-                    <TranslateTransform X="-1" Y="5"/>
+                    <TranslateTransform X="-1" Y="4"/>
                 </Setter.Value>
             </Setter>
         </Style>

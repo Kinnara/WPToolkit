@@ -190,6 +190,9 @@
     <Compile Include="Samples\PickerBoxSample.xaml.cs">
       <DependentUpon>PickerBoxSample.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Samples\RadioButtonGroupSample.xaml.cs">
+      <DependentUpon>RadioButtonGroupSample.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Samples\RatingControlSample.xaml.cs">
       <DependentUpon>RatingControlSample.xaml</DependentUpon>
     </Compile>
@@ -336,6 +339,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Samples\PickerBoxSample.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Samples\RadioButtonGroupSample.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

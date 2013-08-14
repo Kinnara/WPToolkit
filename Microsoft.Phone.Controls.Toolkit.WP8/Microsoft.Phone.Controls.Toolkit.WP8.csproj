@@ -149,6 +149,9 @@
     <Compile Include="..\Microsoft.Phone.Controls.Toolkit\Common\InteractionHelper.cs">
       <Link>Common\InteractionHelper.cs</Link>
     </Compile>
+    <Compile Include="..\Microsoft.Phone.Controls.Toolkit\Common\InternalUtils.cs">
+      <Link>Common\InternalUtils.cs</Link>
+    </Compile>
     <Compile Include="..\Microsoft.Phone.Controls.Toolkit\Common\ItemsControlHelper.cs">
       <Link>Common\ItemsControlHelper.cs</Link>
     </Compile>
@@ -181,6 +184,9 @@
     </Compile>
     <Compile Include="..\Microsoft.Phone.Controls.Toolkit\Common\SafeRaise.cs">
       <Link>Common\SafeRaise.cs</Link>
+    </Compile>
+    <Compile Include="..\Microsoft.Phone.Controls.Toolkit\Common\SelectorHelper.cs">
+      <Link>Common\SelectorHelper.cs</Link>
     </Compile>
     <Compile Include="..\Microsoft.Phone.Controls.Toolkit\Common\SingleDataTemplateSelector.cs">
       <Link>Common\SingleDataTemplateSelector.cs</Link>
@@ -297,6 +303,9 @@
     <Compile Include="..\Microsoft.Phone.Controls.Toolkit\DateTimePickers\TimePickerPage.xaml.cs">
       <Link>DateTimePickers\TimePickerPage.xaml.cs</Link>
       <DependentUpon>TimePickerPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="..\Microsoft.Phone.Controls.Toolkit\Design\StandardStyles.cs">
+      <Link>Design\StandardStyles.cs</Link>
     </Compile>
     <Compile Include="..\Microsoft.Phone.Controls.Toolkit\Effects\SlideInEffect.cs">
       <Link>Effects\SlideInEffect.cs</Link>
@@ -419,6 +428,9 @@
     <Compile Include="..\Microsoft.Phone.Controls.Toolkit\Primitives\TiltUserControl.cs">
       <Link>Primitives\TiltUserControl.cs</Link>
     </Compile>
+    <Compile Include="..\Microsoft.Phone.Controls.Toolkit\RadioButtonGroup\RadioButtonGroup.cs">
+      <Link>RadioButtonGroup\RadioButtonGroup.cs</Link>
+    </Compile>
     <Compile Include="..\Microsoft.Phone.Controls.Toolkit\StartView\StartView.cs">
       <Link>StartView\StartView.cs</Link>
     </Compile>
@@ -471,6 +483,9 @@
     <Compile Include="..\Microsoft.Phone.Controls.Toolkit\ProgressBar\PerformanceProgressBar.cs">
       <Link>ProgressBar\PerformanceProgressBar.cs</Link>
     </Compile>
+    <Compile Include="Label\FontMetrics.cs" />
+    <Compile Include="Label\Label.cs" />
+    <Compile Include="Label\TextLineBounds.cs" />
     <Compile Include="ListView\IncrementalLoadingTrigger.cs" />
     <Compile Include="ListView\ISupportIncrementalLoading.cs" />
     <Compile Include="ListView\LoadMoreItemsResult.cs" />
@@ -622,6 +637,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Resource>
+    <Page Include="Design\StandardStyles.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Themes\Generic.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

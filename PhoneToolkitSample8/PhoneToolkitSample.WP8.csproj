@@ -264,6 +264,10 @@ ar-SA;az-Latn-AZ;be-BY;bg-BG;ca-ES;cs-CZ;da-DK;de-DE;el-GR;en-GB;en-US;es-ES;es-
       <Link>Samples\PickerBoxSample.xaml.cs</Link>
       <DependentUpon>PickerBoxSample.xaml</DependentUpon>
     </Compile>
+    <Compile Include="..\PhoneToolkitSample\Samples\RadioButtonGroupSample.xaml.cs">
+      <Link>Samples\RadioButtonGroupSample.xaml.cs</Link>
+      <DependentUpon>RadioButtonGroupSample.xaml</DependentUpon>
+    </Compile>
     <Compile Include="..\PhoneToolkitSample\Samples\RatingControlSample.xaml.cs">
       <Link>Samples\RatingControlSample.xaml.cs</Link>
       <DependentUpon>RatingControlSample.xaml</DependentUpon>
@@ -330,6 +334,9 @@ ar-SA;az-Latn-AZ;be-BY;bg-BG;ca-ES;cs-CZ;da-DK;de-DE;el-GR;en-GB;en-US;es-ES;es-
     </Compile>
     <Compile Include="Samples\GestureSample.xaml.cs">
       <DependentUpon>GestureSample.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Samples\LabelSample.xaml.cs">
+      <DependentUpon>LabelSample.xaml</DependentUpon>
     </Compile>
     <Compile Include="Samples\ListViewSample.xaml.cs">
       <DependentUpon>ListViewSample.xaml</DependentUpon>
@@ -465,6 +472,11 @@ ar-SA;az-Latn-AZ;be-BY;bg-BG;ca-ES;cs-CZ;da-DK;de-DE;el-GR;en-GB;en-US;es-ES;es-
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="..\PhoneToolkitSample\Samples\RadioButtonGroupSample.xaml">
+      <Link>Samples\RadioButtonGroupSample.xaml</Link>
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="..\PhoneToolkitSample\Samples\RatingControlSample.xaml">
       <Link>Samples\RatingControlSample.xaml</Link>
       <Generator>MSBuild:Compile</Generator>
@@ -527,6 +539,10 @@ ar-SA;az-Latn-AZ;be-BY;bg-BG;ca-ES;cs-CZ;da-DK;de-DE;el-GR;en-GB;en-US;es-ES;es-
     <Page Include="Samples\GestureSample.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Samples\LabelSample.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Samples\ListViewSample.xaml">
       <SubType>Designer</SubType>

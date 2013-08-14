@@ -235,7 +235,7 @@ namespace Microsoft.Phone.Controls
         {
             if (SelectionMode == SelectionMode.Single && SelectedIndex != -1)
             {
-                _selectionChanger.SelectJustThisItem(SelectedIndex, SelectedIndex);
+                SelectorHelper._selectionChanger.SelectJustThisItem(SelectedIndex, SelectedIndex);
             }
 
             UpdateButtonContent();
@@ -246,7 +246,7 @@ namespace Microsoft.Phone.Controls
         /// </summary>
         public IList SelectedItems
         {
-            get { return SelectedItemsImpl; }
+            get { return SelectorHelper.SelectedItemsImpl; }
         }
 
         internal override bool CanSelectMultiple
@@ -464,7 +464,7 @@ namespace Microsoft.Phone.Controls
             }
             else if ((SelectionMode == SelectionMode.Multiple || SelectionMode == SelectionMode.Extended) && null != pickerPage.SelectedItems)
             {
-                SelectRange(pickerPage.SelectedItems);
+                SelectorHelper.SelectRange(pickerPage.SelectedItems);
             }
         }
 

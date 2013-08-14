@@ -20,10 +20,10 @@
                    FontSize="{StaticResource PhoneFontSizeNormal}"
                    LineHeight="23.333"
                    LineStackingStrategy="BlockLineHeight"
-                   Margin="0,-10,0,0"
+                   Margin="0,-9,0,0"
                    TextWrapping="Wrap">
             <TextBlock.RenderTransform>
-                <TranslateTransform X="-1" Y="5"/>
+                <TranslateTransform X="-1" Y="4"/>
             </TextBlock.RenderTransform>
         </TextBlock>
     </DataTemplate>
@@ -1441,6 +1441,9 @@
                                             <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource PhoneTextBoxEditBackgroundBrush}" />
                                         </ObjectAnimationUsingKeyFrames>
                                         <ObjectAnimationUsingKeyFrames Storyboard.TargetName="MainBorder" Storyboard.TargetProperty="BorderBrush">
+                                            <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource PhoneTextBoxEditBorderBrush}" />
+                                        </ObjectAnimationUsingKeyFrames>
+                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="BubbleTail" Storyboard.TargetProperty="Background">
                                             <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource PhoneTextBoxEditBorderBrush}" />
                                         </ObjectAnimationUsingKeyFrames>
                                     </Storyboard>
@@ -2948,6 +2951,36 @@
                             <ContentPresenter Margin="{StaticResource PhoneHorizontalMargin}" Grid.Row="1"/>
                         </Grid>
                     </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style TargetType="controls:Label">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="controls:Label">
+                    <Border x:Name="TextBlockHost" Background="Transparent" Padding="{TemplateBinding Padding}"/>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    
+    <Style TargetType="controls:RadioButtonGroup">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="controls:RadioButtonGroup">
+                    <StackPanel>
+                        <controls:PhoneContentControl
+                            x:Name="Header"
+                            Content="{TemplateBinding Header}"
+                            ContentTemplate="{TemplateBinding HeaderTemplate}"
+                            ContentTemplateSelector="{StaticResource ControlHeaderTemplateSelector}"
+                            Foreground="{StaticResource PhoneTextMidContrastBrush}"
+                            HorizontalContentAlignment="Left"
+                            Margin="{StaticResource PhoneHorizontalMargin}"/>
+                        <ItemsPresenter/>
+                    </StackPanel>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>

@@ -39,7 +39,7 @@
                        TextWrapping="Wrap"
                        Text="Tilt effect can now be applied also to ListPicker control"/>
 
-            <toolkit:ListPicker Header="Background">
+            <toolkit:ListPicker Header="Background" Margin="0,20">
                 <sys:String>dark</sys:String>
                 <sys:String>light</sys:String>
                 <sys:String>dazzle</sys:String>

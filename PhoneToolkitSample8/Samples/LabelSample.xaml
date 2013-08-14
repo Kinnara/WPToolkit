@@ -1,0 +1,91 @@
+﻿<toolkit:BasePage
+    x:Class="PhoneToolkitSample.Samples.LabelSample"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
+    xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
+    xmlns:toolkit="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit"
+    xmlns:System="clr-namespace:System;assembly=mscorlib"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    shell:SystemTray.IsVisible="True"
+    Style="{StaticResource PageStyle}">
+
+    <toolkit:BasePage.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <toolkit:StandardStyles/>
+            </ResourceDictionary.MergedDictionaries>
+            <Style x:Key="TextLineBoundsBorderStyle" TargetType="Border">
+                <Setter Property="Background" Value="{StaticResource PhoneSubtleBrush}"/>
+                <Setter Property="Margin" Value="12,0,12,20"/>
+            </Style>            
+            <Style x:Key="TextLineBoundsLabelStyle" TargetType="toolkit:Label" BasedOn="{StaticResource ExtraLargeHigh}">
+                <Setter Property="Margin" Value="0"/>
+            </Style>
+        </ResourceDictionary>
+    </toolkit:BasePage.Resources>
+    
+    <phone:Pivot Title="LABEL SAMPLE">
+        <phone:PivotItem Header="features">
+            <toolkit:Scroller Margin="-12,0">
+                <StackPanel Margin="12,10,12,95">
+                    <toolkit:Label Text="MaxLines" Style="{StaticResource LabelListGroupHeaderStyle}"/>
+                    <Rectangle Height="20"/>
+                    <toolkit:Label Text="{Binding MaxLines, ElementName=MaxLinesSampleLabel, StringFormat='MaxLines: {0}'}"
+                                   Style="{StaticResource MediumStrongHigh}"/>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+                        <Button x:Name="MaxLinesIncreaseButton" Content="increase" Click="MaxLinesIncreaseButton_Click"/>
+                        <Button x:Name="MaxLinesDecreaseButton" Content="decrease" Grid.Column="1" Click="MaxLinesDecreaseButton_Click"/>
+                    </Grid>
+                    <Rectangle Height="20"/>
+                    <toolkit:Label x:Name="MaxLinesSampleLabel"
+                                   Text="Use the MaxLines property to specify the maximum lines of text shown in a text block. The text control will adjust it's height to show no more than the specified number of lines, regardless of the font size, font style, or text length."
+                                   TextWrapping="Wrap"
+                                   Style="{StaticResource LargeHighLoose}"
+                                   MaxLines="{Binding SelectedItem, ElementName=MaxLinesPicker}"/>
+                    <Rectangle Height="40"/>
+                    <toolkit:Label Text="TextLineBounds" Style="{StaticResource LabelListGroupHeaderStyle}"/>
+                    <Rectangle Height="20"/>
+                    <Border Style="{StaticResource TextLineBoundsBorderStyle}">
+                        <toolkit:Label Text="Full" Style="{StaticResource TextLineBoundsLabelStyle}" TextLineBounds="Full"/>
+                    </Border>
+                    <Border Style="{StaticResource TextLineBoundsBorderStyle}">
+                        <toolkit:Label Text="TrimToCapHeight" Style="{StaticResource TextLineBoundsLabelStyle}" TextLineBounds="TrimToCapHeight"/>
+                    </Border>
+                    <Border Style="{StaticResource TextLineBoundsBorderStyle}">
+                        <toolkit:Label Text="TrimToBaseline" Style="{StaticResource TextLineBoundsLabelStyle}" TextLineBounds="TrimToBaseline"/>
+                    </Border>
+                    <Border Style="{StaticResource TextLineBoundsBorderStyle}">
+                        <toolkit:Label Text="Tight" Style="{StaticResource TextLineBoundsLabelStyle}" TextLineBounds="Tight"/>
+                    </Border>
+                </StackPanel>
+            </toolkit:Scroller>
+        </phone:PivotItem>
+        <phone:PivotItem Header="styles">
+            <phone:LongListSelector x:Name="StyleList" Margin="-12,0" toolkit:TiltEffect.SuppressTilt="True">
+                <phone:LongListSelector.ListHeaderTemplate>
+                    <DataTemplate>
+                        <Rectangle Height="10"/>
+                    </DataTemplate>
+                </phone:LongListSelector.ListHeaderTemplate>
+                <phone:LongListSelector.ItemTemplate>
+                    <DataTemplate>
+                        <toolkit:Label Text="{Binding Key}" Style="{Binding Value}" Margin="24,0,24,24"/>
+                    </DataTemplate>
+                </phone:LongListSelector.ItemTemplate>
+                <phone:LongListSelector.ListFooterTemplate>
+                    <DataTemplate>
+                        <Rectangle Height="95"/>
+                    </DataTemplate>
+                </phone:LongListSelector.ListFooterTemplate>
+            </phone:LongListSelector>
+        </phone:PivotItem>
+    </phone:Pivot>
+
+</toolkit:BasePage>

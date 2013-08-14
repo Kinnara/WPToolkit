@@ -272,7 +272,7 @@ namespace Microsoft.Phone.Controls
 
             // Require the appropriate template parts plus a new element to
             // transition to.
-            if (Template == null || newElement == null)
+            if (_contentPresenter == null || newElement == null)
             {
                 return;
             }
@@ -296,6 +296,8 @@ namespace Microsoft.Phone.Controls
                     PrepareContentPresenterForCompositor(_contentPresenter);
                 }
             }
+
+            _contentPresenter.Opacity = 0;
 
             _readyToTransitionToNewContent = newTransition == null;
 
