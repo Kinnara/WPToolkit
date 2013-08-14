@@ -174,6 +174,12 @@ ar-SA;az-Latn-AZ;be-BY;bg-BG;ca-ES;cs-CZ;da-DK;de-DE;el-GR;en-GB;en-US;es-ES;es-
       <Link>Samples\AutoCompleteBoxSample.xaml.cs</Link>
       <DependentUpon>AutoCompleteBoxSample.xaml</DependentUpon>
     </Compile>
+    <Compile Include="..\PhoneToolkitSample\Samples\BackgroundTransferControlSample.xaml.cs">
+      <Link>Samples\BackgroundTransferControlSample.xaml.cs</Link>
+    </Compile>
+    <Compile Include="..\PhoneToolkitSample\Samples\BackgroundTransferQueueSample.xaml.cs">
+      <Link>Samples\BackgroundTransferQueueSample.xaml.cs</Link>
+    </Compile>
     <Compile Include="..\PhoneToolkitSample\Samples\ContextMenuPositionTest.xaml.cs">
       <Link>Samples\ContextMenuPositionTest.xaml.cs</Link>
     </Compile>
@@ -245,6 +251,10 @@ ar-SA;az-Latn-AZ;be-BY;bg-BG;ca-ES;cs-CZ;da-DK;de-DE;el-GR;en-GB;en-US;es-ES;es-
       <Link>Samples\ToggleSwitchSample.xaml.cs</Link>
       <DependentUpon>ToggleSwitchSample.xaml</DependentUpon>
     </Compile>
+    <Compile Include="..\PhoneToolkitSample\Samples\TransferControlSample.xaml.cs">
+      <Link>Samples\TransferControlSample.xaml.cs</Link>
+      <DependentUpon>TransferControlSample.xaml</DependentUpon>
+    </Compile>
     <Compile Include="..\PhoneToolkitSample\Samples\TransitionsSample.xaml.cs">
       <Link>Samples\TransitionsSample.xaml.cs</Link>
       <DependentUpon>TransitionsSample.xaml</DependentUpon>
@@ -311,6 +321,11 @@ ar-SA;az-Latn-AZ;be-BY;bg-BG;ca-ES;cs-CZ;da-DK;de-DE;el-GR;en-GB;en-US;es-ES;es-
     </ApplicationDefinition>
     <Page Include="..\PhoneToolkitSample\Samples\AutoCompleteBoxSample.xaml">
       <Link>Samples\AutoCompleteBoxSample.xaml</Link>
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="..\PhoneToolkitSample\Samples\BackgroundTransferControlSample.xaml">
+      <Link>Samples\BackgroundTransferControlSample.xaml</Link>
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -403,6 +418,11 @@ ar-SA;az-Latn-AZ;be-BY;bg-BG;ca-ES;cs-CZ;da-DK;de-DE;el-GR;en-GB;en-US;es-ES;es-
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="..\PhoneToolkitSample\Samples\TransferControlSample.xaml">
+      <Link>Samples\TransferControlSample.xaml</Link>
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="..\PhoneToolkitSample\Samples\TransitionsSample.xaml">
       <Link>Samples\TransitionsSample.xaml</Link>
       <Generator>MSBuild:Compile</Generator>
@@ -426,6 +446,10 @@ ar-SA;az-Latn-AZ;be-BY;bg-BG;ca-ES;cs-CZ;da-DK;de-DE;el-GR;en-GB;en-US;es-ES;es-
     <Page Include="MainPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Samples\BackgroundTransferQueueSample.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="Samples\GestureSample.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -566,6 +590,9 @@ ar-SA;az-Latn-AZ;be-BY;bg-BG;ca-ES;cs-CZ;da-DK;de-DE;el-GR;en-GB;en-US;es-ES;es-
     </Content>
     <Content Include="..\PhoneToolkitSample\Images\Venice.jpg">
       <Link>Images\Venice.jpg</Link>
+    </Content>
+    <Content Include="..\PhoneToolkitSample\Toolkit.Content\ApplicationBar.Add.png">
+      <Link>Toolkit.Content\ApplicationBar.Add.png</Link>
     </Content>
     <Content Include="..\PhoneToolkitSample\Toolkit.Content\ApplicationBar.Cancel.png">
       <Link>Toolkit.Content\ApplicationBar.Cancel.png</Link>

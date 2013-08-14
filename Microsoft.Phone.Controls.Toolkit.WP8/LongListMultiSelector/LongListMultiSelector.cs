@@ -451,7 +451,7 @@ namespace Microsoft.Phone.Controls
         #endregion
 
         /// <summary>
-        /// Initializes a new instance of the Microsoft.Phone.Cointrols.LongListMultiSelector
+        /// Initializes a new instance of the Microsoft.Phone.Controls.LongListMultiSelector
         /// </summary>
         public LongListMultiSelector()
         {

@@ -218,7 +218,8 @@
     <comment>Default text for "{0} seconds ago" as used by the RelativeTimeConverter,  where {0} is 2, 3 or 4.</comment>
   </data>
   <data name="XSecondsAgo_EndsIn1Not11" xml:space="preserve">
-    <value>منذ {0} ثانية</value>
+    <value>منذ {0} ثانية
+</value>
     <comment>Default text for "{0} seconds ago" as used by the RelativeTimeConverter, where {0} is a number that ends in 1 but doesn't end in 11.</comment>
   </data>
   <data name="XSecondsAgo_EndsIn2To4Not12To14" xml:space="preserve">
@@ -296,5 +297,94 @@
   <data name="on Wednesday" xml:space="preserve">
     <value>يوم الأربعاء</value>
     <comment>Default text for "on Wednesday" as used by RelativeTimeConverter</comment>
+  </data>
+  <data name="Cancel" xml:space="preserve">
+    <value>إلغاء</value>
+  </data>
+  <data name="Gigabyte" xml:space="preserve">
+    <value>غيغابايت</value>
+    <comment>Abbreviation for gigabyte</comment>
+  </data>
+  <data name="Kilobyte" xml:space="preserve">
+    <value>كيلوبايت</value>
+    <comment>Abbreviation for kilobyte</comment>
+  </data>
+  <data name="Megabyte" xml:space="preserve">
+    <value>ميغابايت</value>
+    <comment>Abbreviation for megabyte</comment>
+  </data>
+  <data name="No" xml:space="preserve">
+    <value>لا</value>
+  </data>
+  <data name="PartOfWhole" xml:space="preserve">
+    <value>{0} من {1}</value>
+    <comment>Default text for displaying a part of a whole, where {0} is the part and {1} is the whole, as in "5 of 10"</comment>
+  </data>
+  <data name="Pause" xml:space="preserve">
+    <value>إيقاف مؤقت</value>
+    <comment>Menu action item for pausing a download</comment>
+  </data>
+  <data name="Resume" xml:space="preserve">
+    <value>استئناف</value>
+    <comment>Menu action item for resuming a paused download</comment>
+  </data>
+  <data name="StatusComplete" xml:space="preserve">
+    <value>إكمال</value>
+    <comment>Status displayed when a file has finished uploading, as used by TransferControl</comment>
+  </data>
+  <data name="StatusDownloading" xml:space="preserve">
+    <value>يتم الآن التنزيل...</value>
+    <comment>Status displayed when a file is downloading, used by TransferControl</comment>
+  </data>
+  <data name="StatusFailed" xml:space="preserve">
+    <value>خطأ</value>
+    <comment>Status displayed when an error occurs in downloading a file, , as used by TransferControl</comment>
+  </data>
+  <data name="StatusPaused" xml:space="preserve">
+    <value>متوقف مؤقتًا</value>
+    <comment>Status displayed when a file download is paused, as used by TransferControl</comment>
+  </data>
+  <data name="StatusPending" xml:space="preserve">
+    <value>معلق</value>
+    <comment>Status displayed when a file download is pending, as used by TransferControl</comment>
+  </data>
+  <data name="StatusUnknown" xml:space="preserve">
+    <value>مجهول</value>
+    <comment>Status displayed when the status of a file download is unknown, as used by TransferControl</comment>
+  </data>
+  <data name="StatusUploading" xml:space="preserve">
+    <value>يتم الآن التحميل...</value>
+    <comment>Status displayed when a file is uploading, , as used by TransferControl</comment>
+  </data>
+  <data name="StatusWaiting" xml:space="preserve">
+    <value>يتم الآن الانتظار...</value>
+    <comment>Status displayed when a file download is waiting, as used by TransferControl</comment>
+  </data>
+  <data name="StatusWaitingForExternalPower" xml:space="preserve">
+    <value>يتم الآن الانتظار...</value>
+    <comment>Status displayed when a file download is waiting for external power, as used by TransferControl</comment>
+  </data>
+  <data name="StatusWaitingForExternalPowerDueToBatterySaverMode" xml:space="preserve">
+    <value>البطارية منخفضة</value>
+    <comment>Status displayed when a file download is waiting for external power, as used by TransferControl</comment>
+  </data>
+  <data name="StatusWaitingForNonVoiceBlockingNetwork" xml:space="preserve">
+    <value>في انتظار الاتصال</value>
+    <comment>Status displayed when a file download is waiting for the network to unblock as used by TransferControl</comment>
+  </data>
+  <data name="StatusWaitingForWiFi" xml:space="preserve">
+    <value>في انتظار Wi-Fi</value>
+    <comment>Status displayed when a file download is waiting for wifi, as used by TransferControl</comment>
+  </data>
+  <data name="Yes" xml:space="preserve">
+    <value>نعم</value>
+  </data>
+  <data name="StatusCancelled" xml:space="preserve">
+    <value>ملغى</value>
+    <comment>Status displayed when a file download has been cancelled, as used by TransferControl</comment>
+  </data>
+  <data name="Byte" xml:space="preserve">
+    <value>بايت</value>
+    <comment>Abbreviation for byte</comment>
   </data>
 </root>

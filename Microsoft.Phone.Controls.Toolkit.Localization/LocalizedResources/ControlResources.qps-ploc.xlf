@@ -231,6 +231,118 @@
           <target state="needs-review-translation" state-qualifier="mt-suggestion">[B7AB4][!!_òή Ŵęďηęšđáў_!!]</target>
           <note from="MultilingualBuild" priority="2" annotates="source">Default text for "on Wednesday" as used by RelativeTimeConverter</note>
         </trans-unit>
+        <trans-unit id="Resx/Byte" translate="yes" xml:space="preserve">
+          <source>bytes</source>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">[85C67][!!_вÿťêš_!!]</target>
+          <note from="MultilingualBuild" priority="2" annotates="source">Abbreviation for byte</note>
+        </trans-unit>
+        <trans-unit id="Resx/Cancel" translate="yes" xml:space="preserve">
+          <source>cancel</source>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">[0BD37][!!_čãήćêľ_!!]</target>
+        </trans-unit>
+        <trans-unit id="Resx/Gigabyte" translate="yes" xml:space="preserve">
+          <source>GB</source>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">[99DFD][!!_ĠВ_!!]</target>
+          <note from="MultilingualBuild" priority="2" annotates="source">Abbreviation for gigabyte</note>
+        </trans-unit>
+        <trans-unit id="Resx/Kilobyte" translate="yes" xml:space="preserve">
+          <source>KB</source>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">[59752][!!_ĶЪ_!!]</target>
+          <note from="MultilingualBuild" priority="2" annotates="source">Abbreviation for kilobyte</note>
+        </trans-unit>
+        <trans-unit id="Resx/Megabyte" translate="yes" xml:space="preserve">
+          <source>MB</source>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">[06A3A][!!_Мβ_!!]</target>
+          <note from="MultilingualBuild" priority="2" annotates="source">Abbreviation for megabyte</note>
+        </trans-unit>
+        <trans-unit id="Resx/No" translate="yes" xml:space="preserve">
+          <source>no</source>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">[3F1C8][!!_ηò_!!]</target>
+        </trans-unit>
+        <trans-unit id="Resx/PartOfWhole" translate="yes" xml:space="preserve">
+          <source>{0} of {1}</source>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">[CEED7][!!_{0} óƒ {1}_!!]</target>
+          <note from="MultilingualBuild" priority="2" annotates="source">Default text for displaying a part of a whole, where {0} is the part and {1} is the whole, as in "5 of 10"</note>
+        </trans-unit>
+        <trans-unit id="Resx/Pause" translate="yes" xml:space="preserve">
+          <source>pause</source>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">[BAA40][!!_ρáµśè_!!]</target>
+          <note from="MultilingualBuild" priority="2" annotates="source">Menu action item for pausing a download</note>
+        </trans-unit>
+        <trans-unit id="Resx/Resume" translate="yes" xml:space="preserve">
+          <source>resume</source>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">[E933A][!!_ѓéśúмè_!!]</target>
+          <note from="MultilingualBuild" priority="2" annotates="source">Menu action item for resuming a paused download</note>
+        </trans-unit>
+        <trans-unit id="Resx/StatusCancelled" translate="yes" xml:space="preserve">
+          <source>Canceled</source>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">[37818][!!_Ĉãήćéļéð_!!]</target>
+          <note from="MultilingualBuild" priority="2" annotates="source">Status displayed when a file download has been cancelled, as used by TransferControl</note>
+        </trans-unit>
+        <trans-unit id="Resx/StatusComplete" translate="yes" xml:space="preserve">
+          <source>complete</source>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">[5F1E8][!!_čóмþľéτê_!!]</target>
+          <note from="MultilingualBuild" priority="2" annotates="source">Status displayed when a file has finished uploading, as used by TransferControl</note>
+        </trans-unit>
+        <trans-unit id="Resx/StatusDownloading" translate="yes" xml:space="preserve">
+          <source>Downloading...</source>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">[ED945][!!_Đòŵйłõãđíйġ..._!!!!]</target>
+          <note from="MultilingualBuild" priority="2" annotates="source">Status displayed when a file is downloading, used by TransferControl</note>
+        </trans-unit>
+        <trans-unit id="Resx/StatusFailed" translate="yes" xml:space="preserve">
+          <source>Error</source>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">[79B3A][!!_Êřŕôř_!!]</target>
+          <note from="MultilingualBuild" priority="2" annotates="source">Status displayed when an error occurs in downloading a file, , as used by TransferControl</note>
+        </trans-unit>
+        <trans-unit id="Resx/StatusPaused" translate="yes" xml:space="preserve">
+          <source>paused</source>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">[B5D67][!!_þáµŝêð_!!]</target>
+          <note from="MultilingualBuild" priority="2" annotates="source">Status displayed when a file download is paused, as used by TransferControl</note>
+        </trans-unit>
+        <trans-unit id="Resx/StatusPending" translate="yes" xml:space="preserve">
+          <source>Pending</source>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">[AF4D8][!!_Рèиďíηģ_!!]</target>
+          <note from="MultilingualBuild" priority="2" annotates="source">Status displayed when a file download is pending, as used by TransferControl</note>
+        </trans-unit>
+        <trans-unit id="Resx/StatusUnknown" translate="yes" xml:space="preserve">
+          <source>unknown</source>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">[25F5E][!!_ùήкηôŵη_!!]</target>
+          <note from="MultilingualBuild" priority="2" annotates="source">Status displayed when the status of a file download is unknown, as used by TransferControl</note>
+        </trans-unit>
+        <trans-unit id="Resx/StatusUploading" translate="yes" xml:space="preserve">
+          <source>Uploading...</source>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">[9833D][!!_Ûþłõãďìиğ..._!!]</target>
+          <note from="MultilingualBuild" priority="2" annotates="source">Status displayed when a file is uploading, , as used by TransferControl</note>
+        </trans-unit>
+        <trans-unit id="Resx/StatusWaiting" translate="yes" xml:space="preserve">
+          <source>Waiting...</source>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">[738E6][!!_Ẃáìţíηĝ..._!!]</target>
+          <note from="MultilingualBuild" priority="2" annotates="source">Status displayed when a file download is waiting, as used by TransferControl</note>
+        </trans-unit>
+        <trans-unit id="Resx/StatusWaitingForExternalPower" translate="yes" xml:space="preserve">
+          <source>Waiting...</source>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">[D237C][!!_Ẅâíтîйģ..._!!]</target>
+          <note from="MultilingualBuild" priority="2" annotates="source">Status displayed when a file download is waiting for external power, as used by TransferControl</note>
+        </trans-unit>
+        <trans-unit id="Resx/StatusWaitingForExternalPowerDueToBatterySaverMode" translate="yes" xml:space="preserve">
+          <source>Low battery</source>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">[36CF0][!!_Ļôẅ ъàťτéŕÿ_!!]</target>
+          <note from="MultilingualBuild" priority="2" annotates="source">Status displayed when a file download is waiting for external power, as used by TransferControl</note>
+        </trans-unit>
+        <trans-unit id="Resx/StatusWaitingForNonVoiceBlockingNetwork" translate="yes" xml:space="preserve">
+          <source>Waiting for connection</source>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">[2E56E][!!_Ŵàìţíйğ ƒôŕ čòйиęċţìóи_!!!!!!]</target>
+          <note from="MultilingualBuild" priority="2" annotates="source">Status displayed when a file download is waiting for the network to unblock as used by TransferControl</note>
+        </trans-unit>
+        <trans-unit id="Resx/StatusWaitingForWiFi" translate="yes" xml:space="preserve">
+          <source>Waiting for Wi-Fi</source>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">[6F1FC][!!_Ẁãìτìиģ ƒòŕ Ẅî-₣į_!!!!!!]</target>
+          <note from="MultilingualBuild" priority="2" annotates="source">Status displayed when a file download is waiting for wifi, as used by TransferControl</note>
+        </trans-unit>
+        <trans-unit id="Resx/Yes" translate="yes" xml:space="preserve">
+          <source>yes</source>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">[77034][!!_ŷèś_!!]</target>
+        </trans-unit>
       </group>
     </body>
   </file>

@@ -63,13 +63,21 @@
         </StackPanel>
 
         <StackPanel x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0">
-            <TextBlock Text="AutoCompleteBox, single-line items" Style="{StaticResource PhoneTextNormalStyle}"/>
-            <toolkit:AutoCompleteBox VerticalAlignment="Top" ItemsSource="{StaticResource words}" Margin="0,12"/>
-            <TextBlock Text="AutoCompleteBox, double-line items" Style="{StaticResource PhoneTextNormalStyle}"/>
+            
+            <TextBlock 
+                Text="AutoCompleteBox, single-line items" 
+                Style="{StaticResource PhoneControlHeaderTextStyle}" />            
+            <toolkit:AutoCompleteBox 
+                VerticalAlignment="Top" 
+                ItemsSource="{StaticResource words}" />
+            <Border Height="10" />
+
+            <TextBlock 
+                Text="AutoCompleteBox, double-line items" 
+                Style="{StaticResource PhoneControlHeaderTextStyle}"/>
             <toolkit:AutoCompleteBox
                 InputScope="Url"
                 ItemsSource="{StaticResource websites}"
-                Margin="0,12"
                 ValueMemberPath="Item1">
                 <toolkit:AutoCompleteBox.ItemTemplate>
                     <DataTemplate>

@@ -302,6 +302,21 @@
     <Compile Include="..\Microsoft.Phone.Controls.Toolkit\Input\GestureHelperEventArgs.cs">
       <Link>Input\GestureHelperEventArgs.cs</Link>
     </Compile>
+    <Compile Include="..\Microsoft.Phone.Controls.Toolkit\TransferControl\NullToVisibilityConverter.cs">
+      <Link>TransferControl\NullToVisibilityConverter.cs</Link>
+    </Compile>
+    <Compile Include="..\Microsoft.Phone.Controls.Toolkit\TransferControl\TransferControl.cs">
+      <Link>TransferControl\TransferControl.cs</Link>
+    </Compile>
+    <Compile Include="..\Microsoft.Phone.Controls.Toolkit\TransferControl\TransferMonitor.cs">
+      <Link>TransferControl\TransferMonitor.cs</Link>
+    </Compile>
+    <Compile Include="..\Microsoft.Phone.Controls.Toolkit\TransferControl\TransferRequestState.cs">
+      <Link>TransferControl\TransferRequestState.cs</Link>
+    </Compile>
+    <Compile Include="..\Microsoft.Phone.Controls.Toolkit\TransferControl\TransferType.cs">
+      <Link>TransferControl\TransferType.cs</Link>
+    </Compile>
     <Compile Include="Common\LongListSelectorExtensions.cs" />
     <Compile Include="Input\GestureListenerStatic.cs" />
     <Compile Include="Input\GestureService.cs" />

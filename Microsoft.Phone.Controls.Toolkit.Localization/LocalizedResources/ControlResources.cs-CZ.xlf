@@ -231,6 +231,118 @@
           <target state="translated" state-qualifier="exact-match">ve středu</target>
           <note from="MultilingualBuild" priority="2" annotates="source">Default text for "on Wednesday" as used by RelativeTimeConverter</note>
         </trans-unit>
+        <trans-unit id="Resx/Byte" translate="yes" xml:space="preserve">
+          <source>bytes</source>
+          <target state="translated" state-qualifier="exact-match">B</target>
+          <note from="MultilingualBuild" priority="2" annotates="source">Abbreviation for byte</note>
+        </trans-unit>
+        <trans-unit id="Resx/Cancel" translate="yes" xml:space="preserve">
+          <source>cancel</source>
+          <target state="translated" state-qualifier="exact-match">storno</target>
+        </trans-unit>
+        <trans-unit id="Resx/Gigabyte" translate="yes" xml:space="preserve">
+          <source>GB</source>
+          <target state="translated" state-qualifier="exact-match">GB</target>
+          <note from="MultilingualBuild" priority="2" annotates="source">Abbreviation for gigabyte</note>
+        </trans-unit>
+        <trans-unit id="Resx/Kilobyte" translate="yes" xml:space="preserve">
+          <source>KB</source>
+          <target state="translated" state-qualifier="exact-match">kB</target>
+          <note from="MultilingualBuild" priority="2" annotates="source">Abbreviation for kilobyte</note>
+        </trans-unit>
+        <trans-unit id="Resx/Megabyte" translate="yes" xml:space="preserve">
+          <source>MB</source>
+          <target state="translated" state-qualifier="exact-match">MB</target>
+          <note from="MultilingualBuild" priority="2" annotates="source">Abbreviation for megabyte</note>
+        </trans-unit>
+        <trans-unit id="Resx/No" translate="yes" xml:space="preserve">
+          <source>no</source>
+          <target state="translated" state-qualifier="exact-match">ne</target>
+        </trans-unit>
+        <trans-unit id="Resx/PartOfWhole" translate="yes" xml:space="preserve">
+          <source>{0} of {1}</source>
+          <target state="translated" state-qualifier="exact-match">{0} z {1}</target>
+          <note from="MultilingualBuild" priority="2" annotates="source">Default text for displaying a part of a whole, where {0} is the part and {1} is the whole, as in "5 of 10"</note>
+        </trans-unit>
+        <trans-unit id="Resx/Pause" translate="yes" xml:space="preserve">
+          <source>pause</source>
+          <target state="translated" state-qualifier="exact-match">pozastavit</target>
+          <note from="MultilingualBuild" priority="2" annotates="source">Menu action item for pausing a download</note>
+        </trans-unit>
+        <trans-unit id="Resx/Resume" translate="yes" xml:space="preserve">
+          <source>resume</source>
+          <target state="translated" state-qualifier="exact-match">pokračovat</target>
+          <note from="MultilingualBuild" priority="2" annotates="source">Menu action item for resuming a paused download</note>
+        </trans-unit>
+        <trans-unit id="Resx/StatusCancelled" translate="yes" xml:space="preserve">
+          <source>Canceled</source>
+          <target state="translated" state-qualifier="exact-match">Zrušeno</target>
+          <note from="MultilingualBuild" priority="2" annotates="source">Status displayed when a file download has been cancelled, as used by TransferControl</note>
+        </trans-unit>
+        <trans-unit id="Resx/StatusComplete" translate="yes" xml:space="preserve">
+          <source>complete</source>
+          <target state="translated" state-qualifier="exact-match">dokončit</target>
+          <note from="MultilingualBuild" priority="2" annotates="source">Status displayed when a file has finished uploading, as used by TransferControl</note>
+        </trans-unit>
+        <trans-unit id="Resx/StatusDownloading" translate="yes" xml:space="preserve">
+          <source>Downloading...</source>
+          <target state="translated" state-qualifier="exact-match">Stahuji...</target>
+          <note from="MultilingualBuild" priority="2" annotates="source">Status displayed when a file is downloading, used by TransferControl</note>
+        </trans-unit>
+        <trans-unit id="Resx/StatusFailed" translate="yes" xml:space="preserve">
+          <source>Error</source>
+          <target state="translated" state-qualifier="exact-match">Chyba</target>
+          <note from="MultilingualBuild" priority="2" annotates="source">Status displayed when an error occurs in downloading a file, , as used by TransferControl</note>
+        </trans-unit>
+        <trans-unit id="Resx/StatusPaused" translate="yes" xml:space="preserve">
+          <source>paused</source>
+          <target state="translated" state-qualifier="exact-match">zastaveno</target>
+          <note from="MultilingualBuild" priority="2" annotates="source">Status displayed when a file download is paused, as used by TransferControl</note>
+        </trans-unit>
+        <trans-unit id="Resx/StatusPending" translate="yes" xml:space="preserve">
+          <source>Pending</source>
+          <target state="translated" state-qualifier="exact-match">Čeká na dokončení.</target>
+          <note from="MultilingualBuild" priority="2" annotates="source">Status displayed when a file download is pending, as used by TransferControl</note>
+        </trans-unit>
+        <trans-unit id="Resx/StatusUnknown" translate="yes" xml:space="preserve">
+          <source>unknown</source>
+          <target state="translated" state-qualifier="exact-match">neznámé</target>
+          <note from="MultilingualBuild" priority="2" annotates="source">Status displayed when the status of a file download is unknown, as used by TransferControl</note>
+        </trans-unit>
+        <trans-unit id="Resx/StatusUploading" translate="yes" xml:space="preserve">
+          <source>Uploading...</source>
+          <target state="translated" state-qualifier="exact-match">Odesílám...</target>
+          <note from="MultilingualBuild" priority="2" annotates="source">Status displayed when a file is uploading, , as used by TransferControl</note>
+        </trans-unit>
+        <trans-unit id="Resx/StatusWaiting" translate="yes" xml:space="preserve">
+          <source>Waiting...</source>
+          <target state="translated" state-qualifier="exact-match">Čekám...</target>
+          <note from="MultilingualBuild" priority="2" annotates="source">Status displayed when a file download is waiting, as used by TransferControl</note>
+        </trans-unit>
+        <trans-unit id="Resx/StatusWaitingForExternalPower" translate="yes" xml:space="preserve">
+          <source>Waiting...</source>
+          <target state="translated" state-qualifier="exact-match">Čekám...</target>
+          <note from="MultilingualBuild" priority="2" annotates="source">Status displayed when a file download is waiting for external power, as used by TransferControl</note>
+        </trans-unit>
+        <trans-unit id="Resx/StatusWaitingForExternalPowerDueToBatterySaverMode" translate="yes" xml:space="preserve">
+          <source>Low battery</source>
+          <target state="translated" state-qualifier="exact-match">Nízký stav baterie</target>
+          <note from="MultilingualBuild" priority="2" annotates="source">Status displayed when a file download is waiting for external power, as used by TransferControl</note>
+        </trans-unit>
+        <trans-unit id="Resx/StatusWaitingForNonVoiceBlockingNetwork" translate="yes" xml:space="preserve">
+          <source>Waiting for connection</source>
+          <target state="translated" state-qualifier="exact-match">Čekám na připojení.</target>
+          <note from="MultilingualBuild" priority="2" annotates="source">Status displayed when a file download is waiting for the network to unblock as used by TransferControl</note>
+        </trans-unit>
+        <trans-unit id="Resx/StatusWaitingForWiFi" translate="yes" xml:space="preserve">
+          <source>Waiting for Wi-Fi</source>
+          <target state="translated" state-qualifier="exact-match">Čekám na Wi-Fi.</target>
+          <note from="MultilingualBuild" priority="2" annotates="source">Status displayed when a file download is waiting for wifi, as used by TransferControl</note>
+        </trans-unit>
+        <trans-unit id="Resx/Yes" translate="yes" xml:space="preserve">
+          <source>yes</source>
+          <target state="translated" state-qualifier="exact-match">ano</target>
+        </trans-unit>
       </group>
     </body>
   </file>

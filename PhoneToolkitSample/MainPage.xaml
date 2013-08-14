@@ -197,6 +197,13 @@
                                 Header="tilteffect"
                                 Content="Make buttons visually responsive to touch"/>
                         </HyperlinkButton>
+                        <HyperlinkButton NavigateUri="/Samples/TransferControlSample.xaml"
+                                         Style="{StaticResource HyperlinkEmptyStyle}">
+                            <localControls:HeaderedContentControl
+                                Style="{StaticResource MultilineHyperlinkStyle}"
+                                Header="transfercontrol"
+                                Content="controls to show background downloads and uploads"/>
+                        </HyperlinkButton>
                         <HyperlinkButton NavigateUri="/Samples/TransitionsSample.xaml"
                                          Style="{StaticResource HyperlinkEmptyStyle}">
                             <localControls:HeaderedContentControl

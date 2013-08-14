@@ -49,6 +49,7 @@ namespace PhoneToolkitSample8
                 new SampleItem("/Samples/SlideInEffectSample.xaml","slideineffect","make elements responsive to pivotitem sliding" ),
                 new SampleItem("/Samples/ToggleSwitchSample.xaml","toggleswitch","offer a touch control for on/off choices" ),
                 new SampleItem("/Samples/TiltEffectSample.xaml","tilteffect","make buttons visually responsive to touch" ),
+                new SampleItem("/Samples/TransferControlSample.xaml","transfercontrol","controls to show background downloads and uploads" ),
                 new SampleItem("/Samples/TransitionsSample.xaml","transitions","beautifully animate between pages" ),
                 new SampleItem("/Samples/WrapPanelSample.xaml","wrappanel","a non-virtualized wrapping control" ) 
             };

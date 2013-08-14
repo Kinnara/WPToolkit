@@ -97,6 +97,12 @@
     <Compile Include="Samples\AutoCompleteBoxSample.xaml.cs">
       <DependentUpon>AutoCompleteBoxSample.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Samples\BackgroundTransferControlSample.xaml.cs">
+      <DependentUpon>BackgroundTransferControlSample.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Samples\BackgroundTransferQueueSample.xaml.cs">
+      <DependentUpon>BackgroundTransferQueueSample.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Samples\ContextMenuPositionTest.xaml.cs" />
     <Compile Include="Samples\ContextMenuSample.xaml.cs">
       <DependentUpon>ContextMenuSample.xaml</DependentUpon>
@@ -164,6 +170,9 @@
     <Compile Include="Samples\ToggleSwitchSample.xaml.cs">
       <DependentUpon>ToggleSwitchSample.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Samples\TransferControlSample.xaml.cs">
+      <DependentUpon>TransferControlSample.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Samples\TransitionsSample.xaml.cs">
       <DependentUpon>TransitionsSample.xaml</DependentUpon>
     </Compile>
@@ -192,6 +201,14 @@
     <Page Include="Samples\AutoCompleteBoxSample.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Samples\BackgroundTransferControlSample.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Samples\BackgroundTransferQueueSample.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="Samples\ContextMenuPositionTest.xaml">
       <SubType>Designer</SubType>
@@ -284,6 +301,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Samples\TransferControlSample.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Samples\TransitionsSample.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -340,6 +361,7 @@
     <Content Include="Images\Venice.jpg" />
     <Content Include="Images\Search.png" />
     <Content Include="SplashScreenImage.jpg" />
+    <Content Include="Toolkit.Content\ApplicationBar.Add.png" />
     <Content Include="Toolkit.Content\ApplicationBar.Delete.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>

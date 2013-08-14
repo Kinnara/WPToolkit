@@ -17,7 +17,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Microsoft.Phone.Controls.To
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Microsoft.Phone.Controls.Toolkit.Localization", "Microsoft.Phone.Controls.Toolkit.Localization\Microsoft.Phone.Controls.Toolkit.Localization.csproj", "{05FA6951-722D-4EA0-82A9-4C81792E2992}"
 EndProject
-Global
+Global	
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Debug|ARM = Debug|ARM

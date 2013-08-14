@@ -107,6 +107,12 @@
                 </Setter.Value>
             </Setter>
         </Style>
+
+        <Style x:Key="PhoneControlHeaderTextStyle" 
+               TargetType="TextBlock" 
+               BasedOn="{StaticResource PhoneTextSubtleStyle}">
+            <Setter Property="Margin" Value="12,0,12,-4" />
+        </Style>
     </Application.Resources>
 
     <Application.ApplicationLifetimeObjects>
