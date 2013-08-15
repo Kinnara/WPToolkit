@@ -659,6 +659,18 @@ namespace Microsoft.Phone.Controls
 
                 if (ItemContainerStyle != null)
                 {
+                    if (ItemContainerStyle.BasedOn == null && !ItemContainerStyle.IsSealed)
+                    {
+                        if (LayoutMode == LongListSelectorLayoutMode.Grid)
+                        {
+                            ItemContainerStyle.BasedOn = DefaultGridItemContainerStyle;
+                        }
+                        else
+                        {
+                            ItemContainerStyle.BasedOn = DefaultListItemContainerStyle;
+                        }
+                    }
+
                     if (item.Style != ItemContainerStyle)
                     {
                         item.Style = ItemContainerStyle;

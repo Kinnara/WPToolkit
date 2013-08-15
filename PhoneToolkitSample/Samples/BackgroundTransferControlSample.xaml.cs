@@ -15,7 +15,7 @@ using GestureEventArgs = System.Windows.Input.GestureEventArgs;
 namespace PhoneToolkitSample.Samples
 {
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1001:TypesThatOwnDisposableFieldsShouldBeDisposable")]
-    public partial class BackgroundTransferControl : PhoneApplicationPage
+    public partial class BackgroundTransferControl : BasePage
     {
         private BackgroundTransferRequest _request;
         private TransferMonitor _monitor;

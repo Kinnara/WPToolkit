@@ -7,7 +7,7 @@ using Microsoft.Phone.Controls;
 
 namespace PhoneToolkitSample.Samples
 {
-    public partial class TransferControls : PhoneApplicationPage
+    public partial class TransferControls : BasePage
     {
         public TransferControls()
         {

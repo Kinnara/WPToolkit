@@ -26,23 +26,25 @@
         <DataTemplate x:Key="EmailItemTemplate">
             <StackPanel Margin="24,0,0,18">
                 <TextBlock Text="{Binding Sender}" 
-                                       Margin="0,0,0,-5"
-                                       FontSize="37.333" 
-                                       FontFamily="{StaticResource PhoneFontFamilySemiLight}"/>
+                           Margin="0,0,0,-5"
+                           FontSize="37.333" 
+                           FontFamily="{StaticResource PhoneFontFamilySemiLight}"/>
                 <TextBlock Text="{Binding Subject}"
-                                       Margin="0,0,0,-3"
-                                       Foreground="{Binding Unread, Converter={StaticResource UnreadToBrushConverter}}"
-                                       FontSize="{StaticResource PhoneFontSizeNormal}" 
-                                       FontFamily="{StaticResource PhoneFontFamilySemiBold}"/>
+                           Margin="0,0,0,-3"
+                           Foreground="{Binding Unread, Converter={StaticResource UnreadToBrushConverter}}"
+                           FontSize="{StaticResource PhoneFontSizeNormal}" 
+                           FontFamily="{StaticResource PhoneFontFamilySemiBold}"
+                           toolkit:SlideInEffect.LineIndex="1"/>
                 <TextBlock Text="{Binding Body}"
-                                       Foreground="{StaticResource PhoneTextMidContrastBrush}"
-                                       FontSize="{StaticResource PhoneFontSizeNormal}"/>
+                           Foreground="{StaticResource PhoneTextMidContrastBrush}"
+                           FontSize="{StaticResource PhoneFontSizeNormal}"
+                           toolkit:SlideInEffect.LineIndex="2"/>
             </StackPanel>
         </DataTemplate>
         <DataTemplate x:Key="EmailItemInfoTemplate">
             <Border Width="74" Margin="0,18,24,0">
                 <TextBlock Text="{Binding Time}"
-                                       HorizontalAlignment="Right"/>
+                           HorizontalAlignment="Right"/>
             </Border>
         </DataTemplate>
 
@@ -59,12 +61,12 @@
                 <Setter.Value>
                     <DataTemplate>
                         <Border Background="{Binding Converter={StaticResource GroupBackground}}" 
-                                                Width="99" Height="99" Margin="6">
+                                Width="99" Height="99" Margin="6">
                             <TextBlock Text="{Binding Key}" 
-                                                       Style="{StaticResource JumpListAlphabetStyle}"
-                                                       Margin="10,0,0,0"
-                                                       Foreground="{Binding Converter={StaticResource GroupForeground}}"                                        
-                                                       VerticalAlignment="Bottom"/>
+                                       Style="{StaticResource JumpListAlphabetStyle}"
+                                       Margin="10,0,0,0"
+                                       Foreground="{Binding Converter={StaticResource GroupForeground}}"                                        
+                                       VerticalAlignment="Bottom"/>
                         </Border>
                     </DataTemplate>
                 </Setter.Value>
@@ -73,14 +75,14 @@
         <DataTemplate x:Key="BuddiesGroupHeaderTemplate">
             <Border Background="Transparent" Padding="24,0,0,12">
                 <Border Background="{StaticResource PhoneAccentBrush}" 	
-                                        Width="62" Height="62" 				 
-                                        HorizontalAlignment="Left">
+                        Width="62" Height="62" 				 
+                        HorizontalAlignment="Left">
                     <TextBlock Text="{Binding Key}" 
-                                               Style="{StaticResource LongListSelectorGroupHeaderLetterTileStyle}"
-                                               Foreground="#FFFFFF" 
-                                               HorizontalAlignment="Left"
-                                               VerticalAlignment="Bottom"
-                                               Margin="5,0,0,1"/>
+                               Style="{StaticResource LongListSelectorGroupHeaderLetterTileStyle}"
+                               Foreground="#FFFFFF" 
+                               HorizontalAlignment="Left"
+                               VerticalAlignment="Bottom"
+                               Margin="5,0,0,1"/>
                 </Border>
             </Border>
         </DataTemplate>
@@ -130,7 +132,7 @@
                     Margin="0,0,0,3">
                     <TextBlock Text="{Binding FullName}"
                                FontSize="12"
-                                   TextTrimming="WordEllipsis"
+                               TextTrimming="WordEllipsis"
                                HorizontalAlignment="Center"/>
                 </Border>
             </Grid>
@@ -151,16 +153,21 @@
 
             <phone:PivotItem x:Name="MultiselectLbxItem" Header="multiselect lbx" Padding="0,0,0,72">
                 <toolkit:LongListMultiSelector x:Name="EmailList" 
-                                                Margin="-12,0"
-                                                ItemsSource="{StaticResource EmailCollection}"
-                                                LayoutMode="List"
-                                                SelectionChanged="OnEmailListSelectionChanged"
-                                                IsSelectionEnabledChanged="OnEmailListIsSelectionEnabledChanged"
-                                                ItemRealized="OnEmailListItemRealized"
-                                                ItemClick="OnItemContentTap"
-                                                ItemTemplate="{StaticResource EmailItemTemplate}"
-                                                ItemInfoTemplate="{StaticResource EmailItemInfoTemplate}"
-                                                toolkit:TurnstileFeatherEffect.FeatheringIndex="2">
+                                               Margin="-12,0"
+                                               ItemsSource="{StaticResource EmailCollection}"
+                                               LayoutMode="List"
+                                               SelectionChanged="OnEmailListSelectionChanged"
+                                               IsSelectionEnabledChanged="OnEmailListIsSelectionEnabledChanged"
+                                               ItemClick="OnItemContentTap"
+                                               ItemTemplate="{StaticResource EmailItemTemplate}"
+                                               ItemInfoTemplate="{StaticResource EmailItemInfoTemplate}"
+                                               toolkit:TurnstileFeatherEffect.FeatheringIndex="2">
+                    <toolkit:LongListMultiSelector.ItemContainerStyle>
+                        <Style TargetType="toolkit:LongListMultiSelectorItem">
+                            <Setter Property="HintPanelHeight" Value="100"/>
+                            <Setter Property="CheckBoxMargin" Value="0,13,0,0"/>
+                        </Style>
+                    </toolkit:LongListMultiSelector.ItemContainerStyle>
                     <toolkit:LongListMultiSelector.ListFooter>
                         <Rectangle Height="95"/>
                     </toolkit:LongListMultiSelector.ListFooter>
@@ -169,17 +176,22 @@
 
             <phone:PivotItem x:Name="BuddiesPivotItem" Header="std longlistmultiselector">
                 <toolkit:LongListMultiSelector x:Name="buddies" Background="Transparent"
-                                                Margin="-12,-8,-12,0"
-                                                ItemsSource="{StaticResource buddies}"
-                                                LayoutMode="List"
-                                                IsGroupingEnabled="True"
-                                                HideEmptyGroups="True"
-                                                JumpListStyle="{StaticResource BuddiesJumpListStyle}"
-                                                GroupHeaderTemplate="{StaticResource BuddiesGroupHeaderTemplate}"
-                                                ItemTemplate="{StaticResource BuddiesItemTemplate}"
-                                                IsSelectionEnabledChanged="OnBuddiesIsSelectionEnabledChanged"
-                                                toolkit:TurnstileFeatherEffect.FeatheringIndex="2"
-            />
+                                               Margin="-12,-8,-12,0"
+                                               ItemsSource="{StaticResource buddies}"
+                                               LayoutMode="List"
+                                               IsGroupingEnabled="True"
+                                               HideEmptyGroups="True"
+                                               JumpListStyle="{StaticResource BuddiesJumpListStyle}"
+                                               GroupHeaderTemplate="{StaticResource BuddiesGroupHeaderTemplate}"
+                                               ItemTemplate="{StaticResource BuddiesItemTemplate}"
+                                               IsSelectionEnabledChanged="OnBuddiesIsSelectionEnabledChanged"
+                                               toolkit:TurnstileFeatherEffect.FeatheringIndex="2">
+                    <toolkit:LongListMultiSelector.ItemContainerStyle>
+                        <Style TargetType="toolkit:LongListMultiSelectorItem">
+                            <Setter Property="CheckBoxMargin" Value="0"/>
+                        </Style>
+                    </toolkit:LongListMultiSelector.ItemContainerStyle>
+                </toolkit:LongListMultiSelector>
             </phone:PivotItem>
 
             <phone:PivotItem x:Name="GridModeItem" Header="grid mode" Padding="0,0,0,72">
@@ -193,8 +205,7 @@
                                                ItemTemplate="{StaticResource PictureItemTemplate}"
                                                IsSelectionEnabledChanged="OnGridSelectorIsSelectionEnabledChanged"
                                                SelectionChanged="OnGridSelectorSelectionChanged"
-                                               ItemClick="OnPictureItemTap"
-                />
+                                               ItemClick="OnPictureItemTap"/>
             </phone:PivotItem>
 
             <phone:PivotItem x:Name="DataboundPivotItem" Header="databinding">
@@ -209,26 +220,21 @@
                     <ItemsControl Grid.Row="1"
                                   ItemsSource="{Binding SelectedItems, ElementName=BoundBuddies}"
                                   ItemTemplate="{StaticResource BuddiesGridTemplate}"
-                                  ItemsPanel="{StaticResource AttendeesPanelTemplate}"
-                                  />
+                                  ItemsPanel="{StaticResource AttendeesPanelTemplate}"/>
                     <TextBlock Text="All Contacts" Grid.Row="2"/>
                     <toolkit:LongListMultiSelector x:Name="BoundBuddies"
-                        Margin="-24,0,-12,0"
-                        Background="Transparent"
-                        Grid.Row="3"
-                        ItemsSource="{StaticResource buddies}"
+                                                   Margin="-24,0,-12,0"
+                                                   Background="Transparent"
+                                                   Grid.Row="3"
+                                                   ItemsSource="{StaticResource buddies}"
                                                    GridCellSize="111,111"
-                                                LayoutMode="Grid"
-                        IsGroupingEnabled="True"
-                        GroupHeaderTemplate="{StaticResource BuddiesGroupHeaderTemplate}"
-                        HideEmptyGroups="True"
-                        JumpListStyle="{StaticResource BuddiesJumpListStyle}"
-                        ItemTemplate="{StaticResource BuddiesGridTemplate}"
-                                                   EnforceIsSelectionEnabled="True"
-                    />
-                    <!--
-                    
-                        -->
+                                                   LayoutMode="Grid"
+                                                   IsGroupingEnabled="True"
+                                                   GroupHeaderTemplate="{StaticResource BuddiesGroupHeaderTemplate}"
+                                                   HideEmptyGroups="True"
+                                                   JumpListStyle="{StaticResource BuddiesJumpListStyle}"
+                                                   ItemTemplate="{StaticResource BuddiesGridTemplate}"
+                                                   EnforceIsSelectionEnabled="True"/>
                 </Grid>
             </phone:PivotItem>
 

@@ -360,31 +360,6 @@ This sample and the sample code demonstrates how to use the new LongListMultiSel
             SamplePivot.IsLocked = (bool)e.NewValue;
         }
 
-        private void OnEmailListItemRealized(object sender, ItemRealizationEventArgs e)
-        {
-            if (e.ItemKind == LongListSelectorItemKind.Item)
-            {
-                int childrenCount = VisualTreeHelper.GetChildrenCount(e.Container);
-                if (childrenCount > 0)
-                {
-                    LongListMultiSelectorItem llItem = VisualTreeHelper.GetChild(e.Container, 0) as LongListMultiSelectorItem;
-                    if (llItem != null)
-                    {
-                        EmailList.ItemRealized -= OnEmailListItemRealized;
-                        EmailList.ItemContainerStyle = new Style(typeof(LongListMultiSelectorItem))
-                        {
-                            BasedOn = llItem.Style,
-                            Setters =
-                            {
-                                new Setter(LongListMultiSelectorItem.HintPanelHeightProperty, 100.0),
-                                new Setter(LongListMultiSelectorItem.SelectBoxMarginProperty, new Thickness(12, -7, 5, 0))
-                            }
-                        };
-                    }
-                }
-            }
-        }
-
         /// <summary>
         /// Tap on an item : consider it as read
         /// </summary>

@@ -105,15 +105,15 @@ namespace Microsoft.Phone.Controls
 
 
         private static readonly DependencyProperty IconProperty =
-            DependencyProperty.Register("Icon", typeof(Uri), typeof(TransferControl),
-                                        new PropertyMetadata(default(Uri)));
+            DependencyProperty.Register("Icon", typeof(ImageSource), typeof(TransferControl),
+                                        new PropertyMetadata(null));
 
         /// <summary>
         /// This icon can be set to any type of control and appears to the left of the progress bar
         /// </summary>
-        public Uri Icon
+        public ImageSource Icon
         {
-            get { return (Uri)GetValue(IconProperty); }
+            get { return (ImageSource)GetValue(IconProperty); }
             set { SetValue(IconProperty, value); }
         }
 
@@ -260,7 +260,7 @@ namespace Microsoft.Phone.Controls
             var cancelAction = GetTemplateChild("ContextMenuCancel") as MenuItem;
             if (cancelAction != null)
             {
-                cancelAction.Tap += (sender, args) => { if (this.Monitor != null) Monitor.RequestCancel(); };
+                cancelAction.Click += (sender, args) => { if (this.Monitor != null) Monitor.RequestCancel(); };
                 cancelAction.Header = ControlResources.Cancel;
             }
             base.OnApplyTemplate();

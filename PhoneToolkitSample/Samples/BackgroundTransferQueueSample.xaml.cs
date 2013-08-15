@@ -19,7 +19,7 @@ using Microsoft.Phone.Shell;
 
 namespace PhoneToolkitSample.Samples
 {
-    public partial class BackgroundTransferQueue : PhoneApplicationPage
+    public partial class BackgroundTransferQueue : BasePage
     {
         private ApplicationBarIconButton _selectButton = new ApplicationBarIconButton
             {

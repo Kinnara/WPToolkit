@@ -189,19 +189,19 @@ namespace Microsoft.Phone.Controls
         }
 
         /// <summary>
-        /// Gets or sets the margin of the select box.
+        /// Gets or sets the margin of the check box.
         /// </summary>
-        public Thickness SelectBoxMargin
+        public Thickness CheckBoxMargin
         {
-            get { return (Thickness)GetValue(SelectBoxMarginProperty); }
-            set { SetValue(SelectBoxMarginProperty, value); }
+            get { return (Thickness)GetValue(CheckBoxMarginProperty); }
+            set { SetValue(CheckBoxMarginProperty, value); }
         }
 
         /// <summary>
-        /// Identifies the SelectBoxMargin dependency property.
+        /// Identifies the CheckBoxMargin dependency property.
         /// </summary>
-        public static readonly DependencyProperty SelectBoxMarginProperty =
-            DependencyProperty.Register("SelectBoxMargin", typeof(Thickness), typeof(LongListMultiSelectorItem), null);
+        public static readonly DependencyProperty CheckBoxMarginProperty =
+            DependencyProperty.Register("CheckBoxMargin", typeof(Thickness), typeof(LongListMultiSelectorItem), null);
 
         #endregion
 
@@ -247,7 +247,6 @@ namespace Microsoft.Phone.Controls
             }
             if (_outerCover != null)
             {
-                _outerCover.Tap -= OnCoverTap;
                 _coverClickHelper.Click -= OnCoverClick;
                 _coverClickHelper = null;
             }
@@ -274,7 +273,6 @@ namespace Microsoft.Phone.Controls
             _outerCover = GetTemplateChild(OuterCoverName) as Grid;
             if (_outerCover != null)
             {
-                _outerCover.Tap += OnCoverTap;
                 _coverClickHelper = ClickHelper.Create(_outerCover);
                 _coverClickHelper.Click += OnCoverClick;
             }
@@ -298,20 +296,16 @@ namespace Microsoft.Phone.Controls
 
         void OnClickElementTap(object sender, System.Windows.Input.GestureEventArgs e)
         {
+            if (_outerCover != null && e.OriginalSource == _outerCover)
+            {
+                e.Handled = true;
+                return;
+            }
+
             if (Click != null)
             {
                 Click(this, EventArgs.Empty);
             }
-        }
-
-        /// <summary>
-        /// Tap on the cover grid
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        void OnCoverTap(object sender, System.Windows.Input.GestureEventArgs e)
-        {
-            e.Handled = true;
         }
 
         /// <summary>
