@@ -14,6 +14,100 @@
     xmlns:controls="clr-namespace:Microsoft.Phone.Controls"
     xmlns:primitives="clr-namespace:Microsoft.Phone.Controls.Primitives">
 
+   <controls:NullToVisibilityConverter x:Name="NullToVisibilityConverter"/>
+
+    <Style TargetType="controls:TransferControl" >
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="controls:TransferControl">
+                    <Border x:Name="TransferControl" Margin="0,0,0,12">
+                        <controls:ContextMenuService.ContextMenu>
+                            <controls:ContextMenu  IsEnabled="{Binding Path=IsContextMenuEnabled,RelativeSource={RelativeSource TemplatedParent}}">
+                                <controls:MenuItem Header="cancel" x:Name="ContextMenuCancel"/>
+                            </controls:ContextMenu>
+                        </controls:ContextMenuService.ContextMenu>
+                        <VisualStateManager.VisualStateGroups>
+                            <VisualStateGroup x:Name="ControlStates">
+                                <VisualState x:Name="Default">
+                                    <Storyboard>
+                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(Control.Visibility)" Storyboard.TargetName="TransferProgressBar">
+                                            <DiscreteObjectKeyFrame KeyTime="0" Value="Visible" />
+                                        </ObjectAnimationUsingKeyFrames>
+                                    </Storyboard>
+                                </VisualState>
+                                <VisualState x:Name="NoProgressBar" />
+                                <VisualState x:Name="Hidden">
+                                    <Storyboard>
+                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(Control.Visibility)" Storyboard.TargetName="Root">
+                                            <DiscreteObjectKeyFrame KeyTime="0" Value="Collapsed"/>
+                                        </ObjectAnimationUsingKeyFrames>
+                                    </Storyboard>
+                                </VisualState>
+                            </VisualStateGroup>
+                        </VisualStateManager.VisualStateGroups>
+                        <Grid x:Name="Root">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*" />
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+                            <Image 
+                                x:Name="Icon" 
+                                Source="{Binding Path=Icon,RelativeSource={RelativeSource TemplatedParent}}" 
+                                Stretch="UniformToFill"
+                                Margin="0,0,18,0"
+                                VerticalAlignment="Top"
+                                MaxWidth="99"
+                                MaxHeight="99"
+                                Visibility="{Binding RelativeSource={RelativeSource TemplatedParent},Path=Icon,Converter={StaticResource NullToVisibilityConverter}}"
+                                />
+                            <StackPanel VerticalAlignment="Top" Grid.Column="1" x:Name="ListItem">
+                                <ContentControl 
+                                    x:Name="Header" 
+                                    Content="{TemplateBinding Header}" 
+                                    ContentTemplate="{TemplateBinding HeaderTemplate}"
+                                    FontFamily="{StaticResource PhoneFontFamilyNormal}"
+                                    FontSize="{StaticResource PhoneFontSizeLarge}"
+                                    Foreground="{StaticResource PhoneForegroundBrush}"
+                                    Margin="0,-12,12,0"
+                                    Padding="0"
+                                    HorizontalAlignment="Left"
+                                    IsTabStop="False"
+                                    VerticalAlignment="Top"
+                                    
+                                    />
+                                <ProgressBar  
+                                    x:Name="TransferProgressBar"
+                                    Value="{Binding Path=Monitor.BytesTransferred,RelativeSource={RelativeSource TemplatedParent},Mode=OneWay}"
+                                    Minimum="0"
+                                    Maximum="{Binding Path=Monitor.TotalBytesToTransfer,RelativeSource={RelativeSource TemplatedParent},Mode=OneWay}"
+                                    IsIndeterminate="{Binding Path=Monitor.IsProgressIndeterminate,RelativeSource={RelativeSource TemplatedParent},Mode=OneWay,FallbackValue=False}"
+                                    Visibility="Collapsed" 
+                                    Style="{TemplateBinding ProgressBarStyle}"
+                                    Margin="-12,4,36,4"
+                                    />
+                                <TextBlock 
+                                    FontFamily="{StaticResource PhoneFontFamilySemiBold}"
+                                    FontSize="12"
+                                    Foreground="{TemplateBinding StatusTextBrush}">
+                                    <TextBlock.Text>
+                                        <Binding Path="Monitor.StatusText">
+                                            <Binding.RelativeSource>
+                                                <RelativeSource Mode="TemplatedParent" />
+                                            </Binding.RelativeSource>
+                                        </Binding>
+                                    </TextBlock.Text>
+                                </TextBlock>
+                            </StackPanel>
+                        </Grid>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
     <DataTemplate x:Key="ControlHeaderTemplate">
         <TextBlock Text="{Binding}"
                    FontFamily="{StaticResource PhoneFontFamilyNormal}"
@@ -465,7 +559,7 @@
             <Setter.Value>
                 <ControlTemplate>
                     <Border x:Name="root" CacheMode="BitmapCache" Background="Transparent" Padding="{TemplateBinding Padding}">
-                        
+
                         <VisualStateManager.VisualStateGroups>
                             <VisualStateGroup x:Name="CommonStates">
 
@@ -732,8 +826,8 @@
                             </Button.Template>
                             <Grid Background="Transparent">
                                 <Border x:Name="ButtonBackground"
-                                        Background="{TemplateBinding Background}"
-                                        BorderBrush="{TemplateBinding BorderBrush}"
+                                    Background="{TemplateBinding Background}"
+                                    BorderBrush="{TemplateBinding BorderBrush}"
                                         BorderThickness="{TemplateBinding BorderThickness}"
                                         Margin="{StaticResource PhoneTouchTargetOverhang}">
                                     <StackPanel>
@@ -745,8 +839,8 @@
                                             </ItemsPresenter>
                                         </Canvas>
                                     </StackPanel>
-                                </Border>
-                            </Grid>
+                            </Border>
+                        </Grid>
                         </Button>
                     </StackPanel>
                 </ControlTemplate>
@@ -1460,7 +1554,7 @@
                                                 </DiscreteObjectKeyFrame.Value>
                                             </DiscreteObjectKeyFrame>
                                         </ObjectAnimationUsingKeyFrames>
-
+                                        
                                         <ObjectAnimationUsingKeyFrames Storyboard.TargetName="RootGrid"
                                                                        Storyboard.TargetProperty="Margin">
                                             <DiscreteObjectKeyFrame KeyTime="0:0:0"
@@ -1497,7 +1591,7 @@
                                             <DiscreteObjectKeyFrame KeyTime="0:0:0"
                                                                     Value="0, 0, 0, 0" />
                                         </ObjectAnimationUsingKeyFrames>
-
+                                        
                                         <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Opacity" Storyboard.TargetName="LengthIndicator">
                                             <DiscreteObjectKeyFrame KeyTime="0:0:0.350" Value="0"/>
                                         </ObjectAnimationUsingKeyFrames>
@@ -1552,16 +1646,16 @@
                             <TextBlock x:Name="PlaceholderTextElement"
                                        Text="{TemplateBinding PlaceholderText}"
                                        Foreground="{StaticResource PhoneTextBoxReadOnlyBrush}"
-                                       HorizontalAlignment="Left"
+                                                HorizontalAlignment="Left"
                                        VerticalAlignment="Top"
-                                       Margin="{StaticResource PhoneTextBoxInnerMargin}"
+                                                Margin="{StaticResource PhoneTextBoxInnerMargin}"
                                        Padding="{TemplateBinding Padding}"/>
                         </Border>
                         <Border x:Name="ReadonlyBorder"
                                 Visibility="Collapsed"
                                 Background="Transparent"
                                 BorderBrush="{StaticResource PhoneDisabledBrush}"
-                                BorderThickness="{TemplateBinding BorderThickness}"
+                                BorderThickness="{TemplateBinding BorderThickness}" 
                                 Margin="{StaticResource PhoneTouchTargetOverhang}"
                                 Grid.Row="1" />
                         <Border Background="Transparent"
@@ -1582,16 +1676,16 @@
                             VerticalAlignment="Bottom"
                             Margin="0,0,-12,0"
                             Grid.Row="1">
-                            <Border x:Name="ActionIconBorder"
+                        <Border x:Name="ActionIconBorder"
                                     Width="96"
-                                    Height="72"
+                                Height="72"
                                     Background="Transparent">
-                                <Image x:Name="ActionIcon"
-                                        Height="26"
+                            <Image x:Name="ActionIcon"
+                                    Height="26"
                                         HorizontalAlignment="Right"
                                         Margin="0,0,36,0"
-                                        Source="{TemplateBinding ActionIcon}"/>
-                            </Border>
+                                    Source="{TemplateBinding ActionIcon}"/>
+                        </Border>
                         </primitives:TiltUserControl>
 
                         <TextBlock x:Name="MeasurementTextBlock"
@@ -1660,8 +1754,8 @@
                                 <ColumnDefinition Width="*"/>
                                 <ColumnDefinition Width="*"/>
                             </Grid.ColumnDefinitions>
-                            <StackPanel
-                                Grid.ColumnSpan="2"
+                            <StackPanel 
+                                Grid.ColumnSpan="2" 
                                 Margin="0,32,0,0">
                                 <TextBlock 
                                     x:Name="TitleTextBlock"
@@ -2078,17 +2172,17 @@
                             </VisualStateManager.VisualStateGroups>
                             <primitives:TiltUserControl controls:TiltEffect.SuppressTilt="False">
                                 <Grid x:Name="ContentPanel" HorizontalAlignment="Stretch" Background="Transparent">
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="*"/>
-                                        <ColumnDefinition Width="Auto"/>
-                                    </Grid.ColumnDefinitions>
-                                    <Grid Grid.Column="0" HorizontalAlignment="Stretch" primitives:ClipToBounds.IsEnabled="True">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                </Grid.ColumnDefinitions>
+                                <Grid Grid.Column="0" HorizontalAlignment="Stretch" primitives:ClipToBounds.IsEnabled="True">
                                         <ContentPresenter x:Name="Presenter" CacheMode="BitmapCache">
-                                            <ContentPresenter.RenderTransform>
+                                        <ContentPresenter.RenderTransform>
                                                 <CompositeTransform/>
-                                            </ContentPresenter.RenderTransform>
-                                        </ContentPresenter>
-                                    </Grid>
+                                        </ContentPresenter.RenderTransform>
+                                    </ContentPresenter>
+                                </Grid>
                                     <ContentControl x:Name="InfoPresenter" Grid.Column="1" 
                                                     VerticalAlignment="Top"
                                                     Content="{TemplateBinding ContentInfo}"
@@ -2099,14 +2193,14 @@
                                 </Grid>
                             </primitives:TiltUserControl>
                             <Rectangle x:Name="InnerHintPanel" Width="38"
-                                       Height="{TemplateBinding HintPanelHeight}"
-                                       HorizontalAlignment="Left"
-                                       Fill="Transparent"
-                                       StrokeThickness="0">
-                                <Rectangle.RenderTransform>
+                                           Height="{TemplateBinding HintPanelHeight}"
+                                           HorizontalAlignment="Left"
+                                           Fill="Transparent"
+                                           StrokeThickness="0">
+                                    <Rectangle.RenderTransform>
                                     <CompositeTransform TranslateX="20"/>
-                                </Rectangle.RenderTransform>
-                            </Rectangle>
+                                    </Rectangle.RenderTransform>
+                                </Rectangle>
                             <Rectangle x:Name="OuterHintPanel" Width="20"
                                        HorizontalAlignment="Left"
                                        Height="{TemplateBinding HintPanelHeight}"
@@ -2115,10 +2209,10 @@
                             <CheckBox x:Name="SelectBox" Margin="{TemplateBinding SelectBoxMargin}" Visibility="Collapsed"
                                       IsChecked="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=IsSelected, Mode=TwoWay}"
                                       controls:TiltEffect.SuppressTilt="False">
-                                <CheckBox.RenderTransform>
-                                    <CompositeTransform TranslateX="-58"/>
-                                </CheckBox.RenderTransform>
-                            </CheckBox>
+                                    <CheckBox.RenderTransform>
+                                        <CompositeTransform TranslateX="-58"/>
+                                    </CheckBox.RenderTransform>
+                                </CheckBox>
                         </Grid>
                     </ControlTemplate>
                 </Setter.Value>

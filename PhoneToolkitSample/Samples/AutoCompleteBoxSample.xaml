@@ -27,13 +27,13 @@
 
     <toolkit:PageUI Header="auto complete">
         <StackPanel x:Name="ContentPanel">
-            <TextBlock Text="AutoCompleteBox, single-line items" Style="{StaticResource PhoneTextNormalStyle}"/>
-            <toolkit:AutoCompleteBox VerticalAlignment="Top" ItemsSource="{StaticResource words}" Margin="0,12" PlaceholderText="words"/>
-            <TextBlock Text="AutoCompleteBox, double-line items" Style="{StaticResource PhoneTextNormalStyle}"/>
+            <TextBlock Text="AutoCompleteBox, single-line items" Style="{StaticResource ControlHeaderTextStyle}"/>
+            <toolkit:AutoCompleteBox VerticalAlignment="Top" ItemsSource="{StaticResource words}" PlaceholderText="words"/>
+            <Border Height="25"/>
+            <TextBlock Text="AutoCompleteBox, double-line items" Style="{StaticResource ControlHeaderTextStyle}"/>
             <toolkit:AutoCompleteBox
                 InputScope="Url"
                 ItemsSource="{StaticResource websites}"
-                Margin="0,12"
                 ValueMemberPath="Item1"
                 PlaceholderText="websites">
                 <toolkit:AutoCompleteBox.ItemTemplate>

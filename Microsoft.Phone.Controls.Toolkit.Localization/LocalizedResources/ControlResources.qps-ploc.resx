@@ -297,4 +297,93 @@
     <value>[B7AB4][!!_òή Ŵęďηęšđáў_!!]</value>
     <comment>Default text for "on Wednesday" as used by RelativeTimeConverter</comment>
   </data>
+  <data name="Cancel" xml:space="preserve">
+    <value>[0BD37][!!_čãήćêľ_!!]</value>
+  </data>
+  <data name="Gigabyte" xml:space="preserve">
+    <value>[99DFD][!!_ĠВ_!!]</value>
+    <comment>Abbreviation for gigabyte</comment>
+  </data>
+  <data name="Kilobyte" xml:space="preserve">
+    <value>[59752][!!_ĶЪ_!!]</value>
+    <comment>Abbreviation for kilobyte</comment>
+  </data>
+  <data name="Megabyte" xml:space="preserve">
+    <value>[06A3A][!!_Мβ_!!]</value>
+    <comment>Abbreviation for megabyte</comment>
+  </data>
+  <data name="No" xml:space="preserve">
+    <value>[3F1C8][!!_ηò_!!]</value>
+  </data>
+  <data name="PartOfWhole" xml:space="preserve">
+    <value>[CEED7][!!_{0} óƒ {1}_!!]</value>
+    <comment>Default text for displaying a part of a whole, where {0} is the part and {1} is the whole, as in "5 of 10"</comment>
+  </data>
+  <data name="Pause" xml:space="preserve">
+    <value>[BAA40][!!_ρáµśè_!!]</value>
+    <comment>Menu action item for pausing a download</comment>
+  </data>
+  <data name="Resume" xml:space="preserve">
+    <value>[E933A][!!_ѓéśúмè_!!]</value>
+    <comment>Menu action item for resuming a paused download</comment>
+  </data>
+  <data name="StatusComplete" xml:space="preserve">
+    <value>[5F1E8][!!_čóмþľéτê_!!]</value>
+    <comment>Status displayed when a file has finished uploading, as used by TransferControl</comment>
+  </data>
+  <data name="StatusDownloading" xml:space="preserve">
+    <value>[ED945][!!_Đòŵйłõãđíйġ..._!!!!]</value>
+    <comment>Status displayed when a file is downloading, used by TransferControl</comment>
+  </data>
+  <data name="StatusFailed" xml:space="preserve">
+    <value>[79B3A][!!_Êřŕôř_!!]</value>
+    <comment>Status displayed when an error occurs in downloading a file, , as used by TransferControl</comment>
+  </data>
+  <data name="StatusPaused" xml:space="preserve">
+    <value>[B5D67][!!_þáµŝêð_!!]</value>
+    <comment>Status displayed when a file download is paused, as used by TransferControl</comment>
+  </data>
+  <data name="StatusPending" xml:space="preserve">
+    <value>[AF4D8][!!_Рèиďíηģ_!!]</value>
+    <comment>Status displayed when a file download is pending, as used by TransferControl</comment>
+  </data>
+  <data name="StatusUnknown" xml:space="preserve">
+    <value>[25F5E][!!_ùήкηôŵη_!!]</value>
+    <comment>Status displayed when the status of a file download is unknown, as used by TransferControl</comment>
+  </data>
+  <data name="StatusUploading" xml:space="preserve">
+    <value>[9833D][!!_Ûþłõãďìиğ..._!!]</value>
+    <comment>Status displayed when a file is uploading, , as used by TransferControl</comment>
+  </data>
+  <data name="StatusWaiting" xml:space="preserve">
+    <value>[738E6][!!_Ẃáìţíηĝ..._!!]</value>
+    <comment>Status displayed when a file download is waiting, as used by TransferControl</comment>
+  </data>
+  <data name="StatusWaitingForExternalPower" xml:space="preserve">
+    <value>[D237C][!!_Ẅâíтîйģ..._!!]</value>
+    <comment>Status displayed when a file download is waiting for external power, as used by TransferControl</comment>
+  </data>
+  <data name="StatusWaitingForExternalPowerDueToBatterySaverMode" xml:space="preserve">
+    <value>[36CF0][!!_Ļôẅ ъàťτéŕÿ_!!]</value>
+    <comment>Status displayed when a file download is waiting for external power, as used by TransferControl</comment>
+  </data>
+  <data name="StatusWaitingForNonVoiceBlockingNetwork" xml:space="preserve">
+    <value>[2E56E][!!_Ŵàìţíйğ ƒôŕ čòйиęċţìóи_!!!!!!]</value>
+    <comment>Status displayed when a file download is waiting for the network to unblock as used by TransferControl</comment>
+  </data>
+  <data name="StatusWaitingForWiFi" xml:space="preserve">
+    <value>[6F1FC][!!_Ẁãìτìиģ ƒòŕ Ẅî-₣į_!!!!!!]</value>
+    <comment>Status displayed when a file download is waiting for wifi, as used by TransferControl</comment>
+  </data>
+  <data name="Yes" xml:space="preserve">
+    <value>[77034][!!_ŷèś_!!]</value>
+  </data>
+  <data name="StatusCancelled" xml:space="preserve">
+    <value>[37818][!!_Ĉãήćéļéð_!!]</value>
+    <comment>Status displayed when a file download has been cancelled, as used by TransferControl</comment>
+  </data>
+  <data name="Byte" xml:space="preserve">
+    <value>[85C67][!!_вÿťêš_!!]</value>
+    <comment>Abbreviation for byte</comment>
+  </data>
 </root>
