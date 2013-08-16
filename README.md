@@ -1,14 +1,17 @@
 # Windows Phone Toolkit Customized by Kinnara
 
-Contains fixes, improvements, and more controls.
+Includes fixes, improvements, and more controls.
 
-## Spotlight
+## Highlights
 
 **FlipView**  
 Lets people flip through items one at a time. Similar to the WinRT FlipView.
 
 **ImageButton**  
 Button control which has an image as its content.
+
+**Label**  
+Enhanced text control that supports MaxLines and TextLineBounds. A rich set of standard styles are provided.
 
 **ListView**  
 Long list selector with incremental loading and more.
@@ -18,6 +21,9 @@ An extended password box which implements header, placeholder text, and a show p
 
 **PhoneSlider**  
 An extended Slider which implements tick marks and snap points.
+
+**RadioButtonGroup**  
+More easily implement a group of radio buttons.
 
 **StartView**  
 Panoramic view similar to the start screen.
