@@ -29,11 +29,6 @@
 
     <toolkit:PageUI Header="all downloads">
         <Grid x:Name="LayoutRoot" Background="Transparent">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="*"/>
-            </Grid.RowDefinitions>
-
             <toolkit:Label
                 Style="{StaticResource ExtraLargeMid}"
                 Text="No downloads in progress"
@@ -43,15 +38,24 @@
             <toolkit:LongListMultiSelector
                 x:Name="TransfersList"
                 Margin="-12,0"
-                Grid.Row="1"
                 SelectionChanged="TransfersList_OnSelectionChanged"
                 IsSelectionEnabledChanged="TransfersList_OnIsSelectionEnabledChanged"
                 ItemsSource="{Binding}">
+                <toolkit:LongListMultiSelector.ListHeaderTemplate>
+                    <DataTemplate>
+                        <Rectangle Height="10"/>
+                    </DataTemplate>
+                </toolkit:LongListMultiSelector.ListHeaderTemplate>
                 <toolkit:LongListMultiSelector.ItemTemplate>
                     <DataTemplate>
-                        <toolkit:TransferControl Monitor="{Binding}" Height="77" Margin="12,10,12,0" />
+                        <toolkit:TransferControl Monitor="{Binding}" Padding="12,10,12,48" />
                     </DataTemplate>
                 </toolkit:LongListMultiSelector.ItemTemplate>
+                <toolkit:LongListMultiSelector.ListFooterTemplate>
+                    <DataTemplate>
+                        <Rectangle Height="95"/>
+                    </DataTemplate>
+                </toolkit:LongListMultiSelector.ListFooterTemplate>
             </toolkit:LongListMultiSelector>
         </Grid>
     </toolkit:PageUI>

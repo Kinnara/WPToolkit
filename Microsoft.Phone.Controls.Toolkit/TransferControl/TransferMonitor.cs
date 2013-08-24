@@ -222,6 +222,7 @@ namespace Microsoft.Phone.Controls
             _request.TransferProgressChanged += RequestProgressChanged;
 
             RequestStateChanged(_request, new BackgroundTransferEventArgs(_request)); // initializes the state of the helper
+            TransferringStatusText();
         }
 
 

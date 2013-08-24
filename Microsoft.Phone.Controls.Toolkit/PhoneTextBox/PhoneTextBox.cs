@@ -301,7 +301,10 @@ namespace Microsoft.Phone.Controls
         /// Length Indicator Visibile Dependency Property.
         /// </summary>
         public static readonly DependencyProperty LengthIndicatorVisibleProperty =
-            DependencyProperty.Register("LengthIndicatorVisible", typeof(Boolean), typeof(PhoneTextBox), null);
+            DependencyProperty.Register("LengthIndicatorVisible", typeof(Boolean), typeof(PhoneTextBox), new PropertyMetadata(
+                new PropertyChangedCallback(OnLengthIndicatorVisibleChanged)
+               )
+            );
 
         /// <summary>
         /// Boolean that determines if the length indicator should be visible.
@@ -310,6 +313,13 @@ namespace Microsoft.Phone.Controls
         {
             get { return (bool)base.GetValue(LengthIndicatorVisibleProperty); }
             set { base.SetValue(LengthIndicatorVisibleProperty, value); }
+        }
+
+        private static void OnLengthIndicatorVisibleChanged(DependencyObject sender, DependencyPropertyChangedEventArgs args)
+        {
+            PhoneTextBox phoneTextBox = sender as PhoneTextBox;
+
+            phoneTextBox.UpdateLengthIndicatorVisibility();
         }
 
         /// <summary>
@@ -409,7 +419,7 @@ namespace Microsoft.Phone.Controls
                 }
             }
 
-            VisualStateManager.GoToState(this, isHidden ? LengthIndicatorHiddenState : LengthIndicatorVisibleState, false);
+            VisualStateManager.GoToState(this, isHidden ? LengthIndicatorHiddenState : LengthIndicatorVisibleState, IsFocused);
         }
 
         #endregion

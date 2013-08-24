@@ -29,11 +29,6 @@
 
     <toolkit:PageUI Header="all downloads">
         <Grid x:Name="LayoutRoot" Background="Transparent">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="*"/>
-            </Grid.RowDefinitions>
-
             <TextBlock
                 Style="{StaticResource PhoneTextLargeStyle}"
                 Text="No downloads in progress"
@@ -45,13 +40,17 @@
             <toolkit:MultiselectList
                 x:Name="TransfersList"
                 Margin="-12,0"
-                Grid.Row="1"
                 SelectionChanged="TransfersList_OnSelectionChanged"
                 IsSelectionEnabledChanged="TransfersList_OnIsSelectionEnabledChanged"
                 ItemsSource="{Binding}">
+                <toolkit:MultiselectList.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <toolkit:ItemsStackPanel Padding="0,10,0,95"/>
+                    </ItemsPanelTemplate>
+                </toolkit:MultiselectList.ItemsPanel>
                 <toolkit:MultiselectList.ItemTemplate>
                     <DataTemplate>
-                        <toolkit:TransferControl Monitor="{Binding}" Height="87" Margin="-12,0,0,0" />
+                        <toolkit:TransferControl Monitor="{Binding}" Padding="0,10,0,48" Margin="-12,0,24,0" />
                     </DataTemplate>
                 </toolkit:MultiselectList.ItemTemplate>
             </toolkit:MultiselectList>

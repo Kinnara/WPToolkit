@@ -19,10 +19,14 @@ namespace Microsoft.Phone.Controls
     [TemplateVisualState(Name = DefaultState, GroupName = ControlStates)]
     [TemplateVisualState(Name = NoProgressBarState, GroupName = ControlStates)]
     [TemplateVisualState(Name = HiddenState, GroupName = ControlStates)]
+    [TemplateVisualState(Name = NoTransferState, GroupName = ControlStates)]
+    [TemplateVisualState(Name = IconVisibleState, GroupName = IconStates)]
+    [TemplateVisualState(Name = IconCollapsedState, GroupName = IconStates)]
     [TemplatePart(Name = ControlPart, Type = typeof(TransferControl))]
-    public class TransferControl : ContentControl
+    public class TransferControl : Control
     {
         private const string ControlPart = "TransferControl";
+
 
         #region visual states
 
@@ -32,6 +36,11 @@ namespace Microsoft.Phone.Controls
         private const string DefaultState = "Default";
         private const string NoProgressBarState = "NoProgressBar";
         private const string HiddenState = "Hidden";
+        private const string NoTransferState = "NoTransfer";
+
+        private const string IconStates = "IconStates";
+        private const string IconVisibleState = "IconVisible";
+        private const string IconCollapsedState = "IconCollapsed";
 
         #endregion
 
@@ -106,7 +115,7 @@ namespace Microsoft.Phone.Controls
 
         private static readonly DependencyProperty IconProperty =
             DependencyProperty.Register("Icon", typeof(ImageSource), typeof(TransferControl),
-                                        new PropertyMetadata(null));
+                                        new PropertyMetadata((d, e) => ((TransferControl)d).UpdateVisualStates()));
 
         /// <summary>
         /// This icon can be set to any type of control and appears to the left of the progress bar
@@ -131,7 +140,7 @@ namespace Microsoft.Phone.Controls
         public bool IsContextMenuEnabled
         {
             get { return (bool)GetValue(IsContextMenuEnabledProperty); }
-            set { SetValue(IsContextMenuEnabledProperty, value); }
+            private set { SetValue(IsContextMenuEnabledProperty, value); }
         }
 
         #endregion
@@ -171,13 +180,11 @@ namespace Microsoft.Phone.Controls
         #endregion
 
         /// <summary>
-        /// The default constructor assigns the object a DataTemplate style and adds event listeners.
+        /// Initializes a new instance of the TransferControl class.
         /// </summary>
         public TransferControl()
         {
             DefaultStyleKey = typeof(TransferControl);
-            UpdateState(this, new PropertyChangedEventArgs("State"));
-
         }
 
         /// <summary>
@@ -200,56 +207,67 @@ namespace Microsoft.Phone.Controls
             if (monitor == null)
                 return;
 
-            monitor.PropertyChanged -= UpdateState;
-            monitor.PropertyChanged += UpdateState;
+            monitor.PropertyChanged -= OnMonitorPropertyChanged;
+            monitor.PropertyChanged += OnMonitorPropertyChanged;
 
             if (Header == null && monitor.Name != null)
             {
                 Header = monitor.Name;
             }
 
-            UpdateState(this, new PropertyChangedEventArgs("State"));
+            UpdateVisualStates();
         }
 
-        /// <summary>
-        /// Updates the visual state of the control
-        /// </summary>
-        /// <param name="sender">The control being updated</param>
-        /// <param name="args">The property that changed on the event</param>
-        private void UpdateState(object sender, PropertyChangedEventArgs args)
+        private void OnMonitorPropertyChanged(object sender, PropertyChangedEventArgs e)
         {
-            if (args.PropertyName != "State" || Monitor == null) return;
+            if (e.PropertyName == "State")
+            {
+                UpdateVisualStates();
+            }
+        }
 
+        private void UpdateVisualStates()
+        {
             string newState;
 
-            switch (Monitor.State)
+            if (Monitor != null)
             {
-                case TransferRequestState.Failed:
-                    IsContextMenuEnabled = false;
-                    newState = NoProgressBarState;
-                    break;
-                case TransferRequestState.Pending:
-                case TransferRequestState.Waiting:
-                    IsContextMenuEnabled = true;
-                    newState = NoProgressBarState;
-                    break;
-                case TransferRequestState.Uploading:
-                case TransferRequestState.Paused:
-                case TransferRequestState.Downloading:
-                    IsContextMenuEnabled = true;
-                    newState = DefaultState;
-                    break;
-                case TransferRequestState.Unknown:
-                case TransferRequestState.Complete:
-                    IsContextMenuEnabled = false;
-                    newState = AutoHide ? HiddenState : NoProgressBarState;
-                    break;
-                default:
-                    return;
+                switch (Monitor.State)
+                {
+                    case TransferRequestState.Failed:
+                        IsContextMenuEnabled = false;
+                        newState = NoProgressBarState;
+                        break;
+                    case TransferRequestState.Pending:
+                    case TransferRequestState.Waiting:
+                        IsContextMenuEnabled = true;
+                        newState = NoProgressBarState;
+                        break;
+                    case TransferRequestState.Uploading:
+                    case TransferRequestState.Paused:
+                    case TransferRequestState.Downloading:
+                        IsContextMenuEnabled = true;
+                        newState = DefaultState;
+                        break;
+                    case TransferRequestState.Unknown:
+                    case TransferRequestState.Complete:
+                        IsContextMenuEnabled = false;
+                        newState = AutoHide ? HiddenState : DefaultState;
+                        break;
+                    default:
+                        IsContextMenuEnabled = false;
+                        newState = NoProgressBarState;
+                        break;
+                }
+            }
+            else
+            {
+                IsContextMenuEnabled = false;
+                newState = NoTransferState;
             }
 
             VisualStateManager.GoToState(this, newState, UseTransitions);
-
+            VisualStateManager.GoToState(this, Icon != null ? IconVisibleState : IconCollapsedState, UseTransitions);
         }
 
         /// <summary>
@@ -264,6 +282,7 @@ namespace Microsoft.Phone.Controls
                 cancelAction.Header = ControlResources.Cancel;
             }
             base.OnApplyTemplate();
+            UpdateVisualStates();
         }
 
     }

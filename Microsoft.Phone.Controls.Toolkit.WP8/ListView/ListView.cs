@@ -754,7 +754,7 @@ namespace Microsoft.Phone.Controls
         #region IncrementalLoadingThreshold
 
         /// <summary>
-        /// Gets or sets the threshold range that governs when the ListViewBase class will begin to prefetch more items.
+        /// Gets or sets the threshold range that governs when the ListView class will begin to prefetch more items.
         /// </summary>
         /// 
         /// <returns>

@@ -16,11 +16,17 @@
 
     <controls:NullToVisibilityConverter x:Name="NullToVisibilityConverter"/>
 
+    <DataTemplate x:Key="TransferControlHeaderTemplate">
+        <TextBlock Text="{Binding}" Margin="0,-14,0,-9"/>
+    </DataTemplate>
+
+    <controls:SingleDataTemplateSelector x:Key="TransferControlHeaderTemplateSelector" Template="{StaticResource TransferControlHeaderTemplate}"/>
+
     <Style TargetType="controls:TransferControl">
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="controls:TransferControl">
-                    <Border x:Name="TransferControl" Background="Transparent" Margin="-12,0">
+                    <Border x:Name="TransferControl" Background="Transparent" Margin="-12,0" Padding="{TemplateBinding Padding}">
                         <controls:ContextMenuService.ContextMenu>
                             <controls:ContextMenu>
                                 <controls:MenuItem Header="cancel" x:Name="ContextMenuCancel" IsEnabled="{TemplateBinding IsContextMenuEnabled}"/>
@@ -35,17 +41,40 @@
                                         </ObjectAnimationUsingKeyFrames>
                                     </Storyboard>
                                 </VisualState>
-                                <VisualState x:Name="NoProgressBar" />
+                                <VisualState x:Name="NoProgressBar">
+                                    <Storyboard>
+                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Visibility" Storyboard.TargetName="PlaceholderProgressBar">
+                                            <DiscreteObjectKeyFrame KeyTime="0" Value="Visible" />
+                                        </ObjectAnimationUsingKeyFrames>
+                                    </Storyboard>
+                                </VisualState>
                                 <VisualState x:Name="Hidden">
                                     <Storyboard>
-                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Visibility" Storyboard.TargetName="Root">
+                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Visibility" Storyboard.TargetName="TransferControl">
                                             <DiscreteObjectKeyFrame KeyTime="0" Value="Collapsed"/>
                                         </ObjectAnimationUsingKeyFrames>
                                     </Storyboard>
                                 </VisualState>
+                                <VisualState x:Name="NoTransfer"/>
+                            </VisualStateGroup>
+                            <VisualStateGroup x:Name="IconStates">
+                                <VisualState x:Name="IconVisible">
+                                    <Storyboard>
+                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Margin" Storyboard.TargetName="Root">
+                                            <DiscreteObjectKeyFrame KeyTime="0" Value="24,10,0,2" />
+                                        </ObjectAnimationUsingKeyFrames>
+                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Visibility" Storyboard.TargetName="Icon">
+                                            <DiscreteObjectKeyFrame KeyTime="0" Value="Visible" />
+                                        </ObjectAnimationUsingKeyFrames>
+                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Margin" Storyboard.TargetName="ProgressPanel">
+                                            <DiscreteObjectKeyFrame KeyTime="0" Value="0,0,0,10" />
+                                        </ObjectAnimationUsingKeyFrames>
+                                    </Storyboard>
+                                </VisualState>
+                                <VisualState x:Name="IconCollapsed"/>
                             </VisualStateGroup>
                         </VisualStateManager.VisualStateGroups>
-                        <Grid x:Name="Root" Margin="24,0,0,12">
+                        <Grid x:Name="Root" Margin="24,0,0,0">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="Auto" />
                                 <ColumnDefinition Width="*" />
@@ -55,36 +84,49 @@
                                 Source="{TemplateBinding Icon}"
                                 Stretch="UniformToFill"
                                 Margin="0,0,18,0"
-                                MaxWidth="99"
-                                MaxHeight="99"
-                                Visibility="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=Icon, Converter={StaticResource NullToVisibilityConverter}}"/>
-                            <StackPanel Grid.Column="1" x:Name="ListItem">
-                                <ContentControl
+                                Width="99"
+                                Height="99"
+                                Visibility="Collapsed"/>
+                            <Grid Grid.Column="1" x:Name="ListItem">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="*" />
+                                </Grid.RowDefinitions>
+                                <controls:PhoneContentControl
                                     x:Name="Header"
                                     Content="{TemplateBinding Header}"
                                     ContentTemplate="{TemplateBinding HeaderTemplate}"
+                                    ContentTemplateSelector="{StaticResource TransferControlHeaderTemplateSelector}"
                                     FontFamily="{StaticResource PhoneFontFamilySemiLight}"
                                     FontSize="37.333"
                                     Foreground="{StaticResource PhoneForegroundBrush}"
-                                    Margin="0,-14,0,0"
                                     HorizontalContentAlignment="Stretch"/>
-                                <ProgressBar
-                                    x:Name="TransferProgressBar"
-                                    Value="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=Monitor.BytesTransferred}"
-                                    Minimum="0"
-                                    Maximum="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=Monitor.TotalBytesToTransfer}"
-                                    IsIndeterminate="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=Monitor.IsProgressIndeterminate, FallbackValue=False}"
-                                    Visibility="Collapsed"
-                                    Style="{TemplateBinding ProgressBarStyle}"
-                                    Margin="-12,3,-12,4"
-                                    HorizontalAlignment="Left"
-                                    Width="289"/>
-                                <TextBlock
-                                    FontFamily="{StaticResource PhoneFontFamilyNormal}"
-                                    FontSize="13.333"
-                                    Foreground="{TemplateBinding StatusTextBrush}"
-                                    Text="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=Monitor.StatusText}"/>
-                            </StackPanel>
+                                <StackPanel x:Name="ProgressPanel" Grid.Row="2" Margin="0,9,0,0" VerticalAlignment="Bottom">
+                                    <Grid
+                                        x:Name="ProgressBarPanel"
+                                        Margin="-12,6,-12,9"
+                                        HorizontalAlignment="Left"
+                                        Width="289">
+                                        <ProgressBar
+                                            x:Name="PlaceholderProgressBar"
+                                            Visibility="Collapsed"
+                                            Style="{TemplateBinding ProgressBarStyle}"/>
+                                        <ProgressBar
+                                            x:Name="TransferProgressBar"
+                                            Value="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=Monitor.PercentComplete}"
+                                            Minimum="0"
+                                            Maximum="1"
+                                            Visibility="Collapsed"
+                                            Style="{TemplateBinding ProgressBarStyle}"/>
+                                    </Grid>
+                                    <TextBlock
+                                        FontFamily="{StaticResource PhoneFontFamilyNormal}"
+                                        FontSize="13.333"
+                                        Foreground="{TemplateBinding StatusTextBrush}"
+                                        Margin="0,-5,0,-2"
+                                        Text="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=Monitor.StatusText}"/>
+                                </StackPanel>
+                            </Grid>
                         </Grid>
                     </Border>
                 </ControlTemplate>
@@ -1526,6 +1568,68 @@
                                 <VisualState x:Name="Unfocused" />
                             </VisualStateGroup>
                             <VisualStateGroup x:Name="LengthIndicatorStates">
+                                <VisualStateGroup.Transitions>
+                                    <VisualTransition From="LengthIndicatorHidden" To="LengthIndicatorVisible">
+                                        <Storyboard>
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Visibility" Storyboard.TargetName="LengthIndicator">
+                                                <DiscreteObjectKeyFrame KeyTime="0:0:0">
+                                                    <DiscreteObjectKeyFrame.Value>
+                                                        <Visibility>Visible</Visibility>
+                                                    </DiscreteObjectKeyFrame.Value>
+                                                </DiscreteObjectKeyFrame>
+                                            </ObjectAnimationUsingKeyFrames>
+
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="RootGrid"
+                                                                           Storyboard.TargetProperty="Margin">
+                                                <DiscreteObjectKeyFrame KeyTime="0:0:0"
+                                                                        Value="0, 0, 0, 25" />
+                                            </ObjectAnimationUsingKeyFrames>
+
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Opacity" Storyboard.TargetName="LengthIndicator">
+                                                <DiscreteObjectKeyFrame KeyTime="0:0:0" Value="1"/>
+                                            </ObjectAnimationUsingKeyFrames>
+
+                                            <DoubleAnimation Storyboard.TargetName="LengthIndicator"
+                                                             Storyboard.TargetProperty="(UIElement.RenderTransform).(TranslateTransform.Y)"
+                                                             To="27"
+                                                             Duration="0:0:0.350">
+                                                <DoubleAnimation.EasingFunction>
+                                                    <ExponentialEase Exponent="6" />
+                                                </DoubleAnimation.EasingFunction>
+                                            </DoubleAnimation>
+                                        </Storyboard>
+                                    </VisualTransition>
+                                    <VisualTransition From="LengthIndicatorVisible" To="LengthIndicatorHidden">
+                                        <Storyboard>
+                                            <DoubleAnimation Storyboard.TargetName="LengthIndicator"
+                                                             Storyboard.TargetProperty="(UIElement.RenderTransform).(TranslateTransform.Y)"
+                                                             To="0"
+                                                             Duration="0:0:0.350">
+                                                <DoubleAnimation.EasingFunction>
+                                                    <ExponentialEase Exponent="6" />
+                                                </DoubleAnimation.EasingFunction>
+                                            </DoubleAnimation>
+
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="RootGrid"
+                                                                           Storyboard.TargetProperty="Margin">
+                                                <DiscreteObjectKeyFrame KeyTime="0:0:0"
+                                                                        Value="0, 0, 0, 0" />
+                                            </ObjectAnimationUsingKeyFrames>
+
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Opacity" Storyboard.TargetName="LengthIndicator">
+                                                <DiscreteObjectKeyFrame KeyTime="0:0:0.350" Value="0"/>
+                                            </ObjectAnimationUsingKeyFrames>
+
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Visibility" Storyboard.TargetName="LengthIndicator">
+                                                <DiscreteObjectKeyFrame KeyTime="0:0:0.350">
+                                                    <DiscreteObjectKeyFrame.Value>
+                                                        <Visibility>Collapsed</Visibility>
+                                                    </DiscreteObjectKeyFrame.Value>
+                                                </DiscreteObjectKeyFrame>
+                                            </ObjectAnimationUsingKeyFrames>
+                                        </Storyboard>
+                                    </VisualTransition>
+                                </VisualStateGroup.Transitions>
                                 <VisualState x:Name="LengthIndicatorVisible">
                                     <Storyboard>
                                         <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Visibility" Storyboard.TargetName="LengthIndicator">
@@ -1549,43 +1653,10 @@
                                         <DoubleAnimation Storyboard.TargetName="LengthIndicator"
                                                          Storyboard.TargetProperty="(UIElement.RenderTransform).(TranslateTransform.Y)"
                                                          To="27"
-                                                         Duration="0:0:0.350">
-                                            <DoubleAnimation.EasingFunction>
-                                                <ExponentialEase Exponent="6" />
-                                            </DoubleAnimation.EasingFunction>
-                                        </DoubleAnimation>
+                                                         Duration="0"/>
                                     </Storyboard>
                                 </VisualState>
-                                <VisualState x:Name="LengthIndicatorHidden">
-                                    <Storyboard>
-                                        <DoubleAnimation Storyboard.TargetName="LengthIndicator"
-                                                         Storyboard.TargetProperty="(UIElement.RenderTransform).(TranslateTransform.Y)"
-                                                         To="0"
-                                                         Duration="0:0:0.350">
-                                            <DoubleAnimation.EasingFunction>
-                                                <ExponentialEase Exponent="6" />
-                                            </DoubleAnimation.EasingFunction>
-                                        </DoubleAnimation>
-
-                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="RootGrid"
-                                                                       Storyboard.TargetProperty="Margin">
-                                            <DiscreteObjectKeyFrame KeyTime="0:0:0"
-                                                                    Value="0, 0, 0, 0" />
-                                        </ObjectAnimationUsingKeyFrames>
-
-                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Opacity" Storyboard.TargetName="LengthIndicator">
-                                            <DiscreteObjectKeyFrame KeyTime="0:0:0.350" Value="0"/>
-                                        </ObjectAnimationUsingKeyFrames>
-
-                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Visibility" Storyboard.TargetName="LengthIndicator">
-                                            <DiscreteObjectKeyFrame KeyTime="0:0:0.350">
-                                                <DiscreteObjectKeyFrame.Value>
-                                                    <Visibility>Collapsed</Visibility>
-                                                </DiscreteObjectKeyFrame.Value>
-                                            </DiscreteObjectKeyFrame>
-                                        </ObjectAnimationUsingKeyFrames>
-                                    </Storyboard>
-                                </VisualState>
+                                <VisualState x:Name="LengthIndicatorHidden"/>
                             </VisualStateGroup>
                         </VisualStateManager.VisualStateGroups>
 
@@ -1602,16 +1673,17 @@
 
                         <Border x:Name="LengthIndicatorBorder"
                                 Grid.Row="1">
-                            <TextBlock  Foreground="{StaticResource PhoneTextMidContrastBrush}"
-                                        HorizontalAlignment="Right"
-                                        TextAlignment="Right"
-                                        VerticalAlignment="Bottom"
-                                        Margin="{StaticResource PhoneMargin}"
-                                        FontFamily="{StaticResource PhoneFontFamilyNormal}"
-                                        FontSize="{StaticResource PhoneFontSizeNormal}"
-                                        Opacity="0"
-                                        CacheMode="BitmapCache"
-                                        x:Name="LengthIndicator">
+                            <TextBlock Foreground="{StaticResource PhoneTextMidContrastBrush}"
+                                       HorizontalAlignment="Right"
+                                       TextAlignment="Right"
+                                       VerticalAlignment="Bottom"
+                                       Margin="{StaticResource PhoneMargin}"
+                                       FontFamily="{StaticResource PhoneFontFamilyNormal}"
+                                       FontSize="{StaticResource PhoneFontSizeNormal}"
+                                       Opacity="0"
+                                       Visibility="Collapsed"
+                                       CacheMode="BitmapCache"
+                                       x:Name="LengthIndicator">
                                 <TextBlock.RenderTransform >
                                     <TranslateTransform />
                                 </TextBlock.RenderTransform>
@@ -1627,9 +1699,9 @@
                             <TextBlock x:Name="PlaceholderTextElement"
                                        Text="{TemplateBinding PlaceholderText}"
                                        Foreground="{StaticResource PhoneTextBoxReadOnlyBrush}"
-                                                HorizontalAlignment="Left"
+                                       HorizontalAlignment="Left"
                                        VerticalAlignment="Top"
-                                                Margin="{StaticResource PhoneTextBoxInnerMargin}"
+                                       Margin="{StaticResource PhoneTextBoxInnerMargin}"
                                        Padding="{TemplateBinding Padding}"/>
                         </Border>
                         <Border x:Name="ReadonlyBorder"
@@ -1659,12 +1731,12 @@
                             Grid.Row="1">
                             <Border x:Name="ActionIconBorder"
                                     Width="96"
-                                Height="72"
+                                    Height="72"
                                     Background="Transparent">
                                 <Image x:Name="ActionIcon"
                                     Height="26"
-                                        HorizontalAlignment="Right"
-                                        Margin="0,0,36,0"
+                                    HorizontalAlignment="Right"
+                                    Margin="0,0,36,0"
                                     Source="{TemplateBinding ActionIcon}"/>
                             </Border>
                         </primitives:TiltUserControl>

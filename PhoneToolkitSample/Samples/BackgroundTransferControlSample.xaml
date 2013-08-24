@@ -31,20 +31,20 @@
                     x:Name="Control1"
                     Tap="Control1_OnTap"
                     Icon="/Images/Seattle.jpg"
-                    Monitor="{Binding}"
-                    IsContextMenuEnabled="False">
+                    Monitor="{Binding}">
                     <toolkit:TransferControl.HeaderTemplate>
                         <DataTemplate>
                             <StackPanel>
-                                <ContentControl Content="{Binding}" HorizontalAlignment="Left" />
-                                <TextBlock Style="{StaticResource PhoneTextSubtleStyle}" Text="&quot;Files and Storage&quot;" Margin="0,-5,0,4"/>
+                                <TextBlock Text="{Binding}" Margin="0,-14,0,-9"/>
+                                <Rectangle Height="12"/>
+                                <TextBlock Style="{StaticResource PhoneTextSubtleStyle}" Text="&quot;Files and Storage&quot;" Margin="0,-8,0,-4"/>
                             </StackPanel>
                         </DataTemplate>
                     </toolkit:TransferControl.HeaderTemplate>
                     <toolkit:TransferControl.ProgressBarStyle>
                         <Style TargetType="ProgressBar">
                             <Setter Property="Foreground" Value="DeepSkyBlue"/>
-                            <Setter Property="Background" Value="{StaticResource PhoneBackgroundBrush}"/>
+                            <Setter Property="Background" Value="#FF292929"/>
                         </Style>
                     </toolkit:TransferControl.ProgressBarStyle>
                 </toolkit:TransferControl>
