@@ -14,8 +14,6 @@
     xmlns:controls="clr-namespace:Microsoft.Phone.Controls"
     xmlns:primitives="clr-namespace:Microsoft.Phone.Controls.Primitives">
 
-    <controls:NullToVisibilityConverter x:Name="NullToVisibilityConverter"/>
-
     <DataTemplate x:Key="TransferControlHeaderTemplate">
         <TextBlock Text="{Binding}" Margin="0,-14,0,-9"/>
     </DataTemplate>
@@ -2140,7 +2138,7 @@
                                                           GeneratedDuration="0:0:0.30">
                                             <Storyboard>
                                                 <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)"
-                                                                               Storyboard.TargetName="OuterHintPanel">
+                                                                               Storyboard.TargetName="HintPanel">
                                                     <EasingDoubleKeyFrame KeyTime="0:0:0.0" Value="0.0" EasingFunction="{StaticResource QuadraticEaseOut}"/>
                                                     <EasingDoubleKeyFrame KeyTime="0:0:0.30" Value="1.0" EasingFunction="{StaticResource QuadraticEaseOut}"/>
                                                 </DoubleAnimationUsingKeyFrames>
@@ -2151,7 +2149,7 @@
                                                           GeneratedDuration="0:0:0.30">
                                             <Storyboard>
                                                 <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)"
-                                                                               Storyboard.TargetName="OuterHintPanel">
+                                                                               Storyboard.TargetName="HintPanel">
                                                     <EasingDoubleKeyFrame KeyTime="0:0:0.0" Value="1.0" EasingFunction="{StaticResource QuadraticEaseOut}"/>
                                                     <EasingDoubleKeyFrame KeyTime="0:0:0.30" Value="0.0" EasingFunction="{StaticResource QuadraticEaseOut}"/>
                                                 </DoubleAnimationUsingKeyFrames>
@@ -2172,7 +2170,7 @@
                                                     <EasingDoubleKeyFrame KeyTime="0:0:0.15" Value="51" EasingFunction="{StaticResource ExponentialEaseIn}"/>
                                                 </DoubleAnimationUsingKeyFrames>
                                                 <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)"
-                                                                               Storyboard.TargetName="OuterHintPanel">
+                                                                               Storyboard.TargetName="HintPanel">
                                                     <EasingDoubleKeyFrame KeyTime="0:0:0.0" Value="1.0" EasingFunction="{StaticResource QuadraticEaseOut}"/>
                                                     <EasingDoubleKeyFrame KeyTime="0:0:0.30" Value="0.0" EasingFunction="{StaticResource QuadraticEaseOut}"/>
                                                 </DoubleAnimationUsingKeyFrames>
@@ -2181,11 +2179,7 @@
                                                     <DiscreteObjectKeyFrame KeyTime="0:0:0.0" Value="Visible"/>
                                                 </ObjectAnimationUsingKeyFrames>
                                                 <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.IsHitTestVisible)"
-                                                                               Storyboard.TargetName="OuterHintPanel">
-                                                    <DiscreteObjectKeyFrame KeyTime="0:0:0" Value="False"/>
-                                                </ObjectAnimationUsingKeyFrames>
-                                                <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.IsHitTestVisible)"
-                                                                               Storyboard.TargetName="InnerHintPanel">
+                                                                               Storyboard.TargetName="HitTargetPanel">
                                                     <DiscreteObjectKeyFrame KeyTime="0:0:0" Value="False"/>
                                                 </ObjectAnimationUsingKeyFrames>
                                             </Storyboard>
@@ -2209,11 +2203,7 @@
                                                     <DiscreteObjectKeyFrame KeyTime="0:0:0.0" Value="Visible"/>
                                                 </ObjectAnimationUsingKeyFrames>
                                                 <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.IsHitTestVisible)"
-                                                                               Storyboard.TargetName="OuterHintPanel">
-                                                    <DiscreteObjectKeyFrame KeyTime="0:0:0" Value="False"/>
-                                                </ObjectAnimationUsingKeyFrames>
-                                                <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.IsHitTestVisible)"
-                                                                               Storyboard.TargetName="InnerHintPanel">
+                                                                               Storyboard.TargetName="HitTargetPanel">
                                                     <DiscreteObjectKeyFrame KeyTime="0:0:0" Value="False"/>
                                                 </ObjectAnimationUsingKeyFrames>
                                             </Storyboard>
@@ -2244,7 +2234,7 @@
                                         <VisualState x:Name="Exposed">
                                             <Storyboard>
                                                 <DoubleAnimation Storyboard.TargetProperty="(UIElement.Opacity)"
-                                                                 Storyboard.TargetName="OuterHintPanel"
+                                                                 Storyboard.TargetName="HintPanel"
                                                                  Duration="0" To="1.0"/>
                                             </Storyboard>
                                         </VisualState>
@@ -2265,14 +2255,10 @@
                                                     <DiscreteObjectKeyFrame KeyTime="0:0:0" Value="Visible"/>
                                                 </ObjectAnimationUsingKeyFrames>
                                                 <DoubleAnimation Storyboard.TargetProperty="(UIElement.Opacity)"
-                                                                 Storyboard.TargetName="OuterHintPanel"
+                                                                 Storyboard.TargetName="HintPanel"
                                                                  Duration="0" To="0.0"/>
                                                 <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.IsHitTestVisible)"
-                                                                               Storyboard.TargetName="OuterHintPanel">
-                                                    <DiscreteObjectKeyFrame KeyTime="0:0:0" Value="False"/>
-                                                </ObjectAnimationUsingKeyFrames>
-                                                <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.IsHitTestVisible)"
-                                                                               Storyboard.TargetName="InnerHintPanel">
+                                                                               Storyboard.TargetName="HitTargetPanel">
                                                     <DiscreteObjectKeyFrame KeyTime="0:0:0" Value="False"/>
                                                 </ObjectAnimationUsingKeyFrames>
                                             </Storyboard>
@@ -2302,20 +2288,15 @@
                                           Visibility="Collapsed" Background="Transparent" Grid.ColumnSpan="2"/>
                                 </Grid>
                             </primitives:TiltUserControl>
-                            <Rectangle x:Name="InnerHintPanel" Width="38"
-                                       Height="{TemplateBinding HintPanelHeight}"
+                            <Rectangle x:Name="HitTargetPanel" Width="58"
                                        HorizontalAlignment="Left"
-                                       Fill="Transparent"
-                                       StrokeThickness="0">
-                                <Rectangle.RenderTransform>
-                                    <CompositeTransform TranslateX="20"/>
-                                </Rectangle.RenderTransform>
-                            </Rectangle>
-                            <Rectangle x:Name="OuterHintPanel" Width="20"
+                                       Fill="Transparent"/>
+                            <Rectangle x:Name="HintPanel" MinWidth="20"
                                        HorizontalAlignment="Left"
-                                       Height="{TemplateBinding HintPanelHeight}"
+                                       Style="{TemplateBinding HintPanelStyle}"
                                        Fill="{TemplateBinding Background}"
-                                       StrokeThickness="0" Opacity="0.0"/>
+                                       StrokeThickness="0" Opacity="0.0"
+                                       IsHitTestVisible="False"/>
                             <Grid Background="Transparent" HorizontalAlignment="Left">
                                 <CheckBox x:Name="SelectBox"
                                           Style="{StaticResource MultiSelectCheckBoxStyle}"

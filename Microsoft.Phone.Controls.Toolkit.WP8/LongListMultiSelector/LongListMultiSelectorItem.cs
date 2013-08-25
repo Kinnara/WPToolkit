@@ -20,10 +20,11 @@ namespace Microsoft.Phone.Controls
     [TemplateVisualState(Name = UnselectedStateName, GroupName = SelectionStatesName)]
     [TemplatePart(Name = ContentPanelName, Type = typeof(FrameworkElement))]
     [TemplatePart(Name = ContentContainerName, Type = typeof(ContentControl))]
-    [TemplatePart(Name = OuterHintPanelName, Type = typeof(Rectangle))]
-    [TemplatePart(Name = InnerHintPanelName, Type = typeof(Rectangle))]
-    [TemplatePart(Name = OuterCoverName, Type = typeof(Grid))]
+    [TemplatePart(Name = HintPanelName, Type = typeof(FrameworkElement))]
+    [TemplatePart(Name = HitTargetPanelName, Type = typeof(FrameworkElement))]
+    [TemplatePart(Name = OuterCoverName, Type = typeof(FrameworkElement))]
     [TemplatePart(Name = InfoPresenterName, Type = typeof(ContentControl))]
+    [StyleTypedProperty(Property = "HintPanelStyle", StyleTargetType = typeof(FrameworkElement))]
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Multi")]
     public class LongListMultiSelectorItem : ContentControl
     {
@@ -40,8 +41,8 @@ namespace Microsoft.Phone.Controls
 
         private const string ContentPanelName = "ContentPanel";
         private const string ContentContainerName = "ContentContainer";
-        private const string OuterHintPanelName = "OuterHintPanel";
-        private const string InnerHintPanelName = "InnerHintPanel";
+        private const string HintPanelName = "HintPanel";
+        private const string HitTargetPanelName = "HitTargetPanel";
         private const string OuterCoverName = "OuterCover";
         private const string InfoPresenterName = "InfoPresenter";
 
@@ -50,22 +51,22 @@ namespace Microsoft.Phone.Controls
         /// </summary>
         private const double _translationYLimit = 0.4;
 
-        FrameworkElement _clickElement = null;
+        FrameworkElement _clicker = null;
 
         /// <summary>
-        /// Outer Hint Panel template part.
+        /// Hint Panel template part.
         /// </summary>
-        Rectangle _outerHintPanel = null;
+        FrameworkElement _hintPanel = null;
 
         /// <summary>
-        /// Inner Hint Panel template part.
+        /// Hit Target Panel template part.
         /// </summary>
-        Rectangle _innerHintPanel = null;
+        FrameworkElement _hitTargetPanel = null;
 
         /// <summary>
         /// Outer Cover template part.
         /// </summary>
-        Grid _outerCover = null;
+        FrameworkElement _outerCover = null;
 
         /// <summary>
         /// Indicator for SelectPanel manipulation : true if still inside acceptable limits and will trigger Selection.
@@ -160,33 +161,19 @@ namespace Microsoft.Phone.Controls
         }
 
         /// <summary>
-        /// Gets or sets the height of the hint panel.
+        /// Gets or sets the style of the hint panel.
         /// </summary>
-        public double HintPanelHeight
+        public Style HintPanelStyle
         {
-            get { return (double)GetValue(HintPanelHeightProperty); }
-            set { SetValue(HintPanelHeightProperty, value); }
+            get { return (Style)GetValue(HintPanelStyleProperty); }
+            set { SetValue(HintPanelStyleProperty, value); }
         }
 
         /// <summary>
-        /// Identifies the HintPanelHeight dependency property.
+        /// Identifies the HintPanelStyle dependency property.
         /// </summary>
-        public static readonly DependencyProperty HintPanelHeightProperty =
-            DependencyProperty.Register("HintPanelHeight", typeof(double), typeof(LongListMultiSelectorItem), new PropertyMetadata(Double.NaN, OnHintPanelHeightPropertyChanged));
-
-        /// <summary>
-        /// Handles the change of the HintPanelHeight property
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private static void OnHintPanelHeightPropertyChanged(object sender, DependencyPropertyChangedEventArgs e)
-        {
-            LongListMultiSelectorItem This = sender as LongListMultiSelectorItem;
-            if (This != null)
-            {
-                This.OnHintPanelHeightChanged();
-            }
-        }
+        public static readonly DependencyProperty HintPanelStyleProperty =
+            DependencyProperty.Register("HintPanelStyle", typeof(Style), typeof(LongListMultiSelectorItem), null);
 
         /// <summary>
         /// Gets or sets the margin of the check box.
@@ -229,21 +216,15 @@ namespace Microsoft.Phone.Controls
         public override void OnApplyTemplate()
         {
             base.OnApplyTemplate();
-            if (_clickElement != null)
+            if (_clicker != null)
             {
-                _clickElement.Tap -= OnClickElementTap;
+                _clicker.Tap -= OnClickerTap;
             }
-            if (_outerHintPanel != null)
+            if (_hitTargetPanel != null)
             {
-                _outerHintPanel.ManipulationStarted -= OnSelectPanelManipulationStarted;
-                _outerHintPanel.ManipulationDelta -= OnSelectPanelManipulationDelta;
-                _outerHintPanel.ManipulationCompleted -= OnSelectPanelManipulationCompleted;
-            }
-            if (_innerHintPanel != null)
-            {
-                _innerHintPanel.ManipulationStarted -= OnSelectPanelManipulationStarted;
-                _innerHintPanel.ManipulationDelta -= OnSelectPanelManipulationDelta;
-                _innerHintPanel.ManipulationCompleted -= OnSelectPanelManipulationCompleted;
+                _hitTargetPanel.ManipulationStarted -= OnSelectPanelManipulationStarted;
+                _hitTargetPanel.ManipulationDelta -= OnSelectPanelManipulationDelta;
+                _hitTargetPanel.ManipulationCompleted -= OnSelectPanelManipulationCompleted;
             }
             if (_outerCover != null)
             {
@@ -251,24 +232,18 @@ namespace Microsoft.Phone.Controls
                 _coverClickHelper = null;
             }
 
-            _clickElement = GetTemplateChild(ContentPanelName) as FrameworkElement ?? GetTemplateChild(ContentContainerName) as FrameworkElement;
-            if (_clickElement != null)
+            _clicker = GetTemplateChild(ContentPanelName) as FrameworkElement ?? GetTemplateChild(ContentContainerName) as FrameworkElement;
+            if (_clicker != null)
             {
-                _clickElement.Tap += OnClickElementTap;
+                _clicker.Tap += OnClickerTap;
             }
-            _outerHintPanel = GetTemplateChild(OuterHintPanelName) as Rectangle;
-            if (_outerHintPanel != null)
+            _hintPanel = GetTemplateChild(HintPanelName) as Rectangle;
+            _hitTargetPanel = GetTemplateChild(HitTargetPanelName) as Rectangle;
+            if (_hitTargetPanel != null)
             {
-                _outerHintPanel.ManipulationStarted += OnSelectPanelManipulationStarted;
-                _outerHintPanel.ManipulationDelta += OnSelectPanelManipulationDelta;
-                _outerHintPanel.ManipulationCompleted += OnSelectPanelManipulationCompleted;
-            }
-            _innerHintPanel = GetTemplateChild(InnerHintPanelName) as Rectangle;
-            if (_innerHintPanel != null)
-            {
-                _innerHintPanel.ManipulationStarted += OnSelectPanelManipulationStarted;
-                _innerHintPanel.ManipulationDelta += OnSelectPanelManipulationDelta;
-                _innerHintPanel.ManipulationCompleted += OnSelectPanelManipulationCompleted;
+                _hitTargetPanel.ManipulationStarted += OnSelectPanelManipulationStarted;
+                _hitTargetPanel.ManipulationDelta += OnSelectPanelManipulationDelta;
+                _hitTargetPanel.ManipulationCompleted += OnSelectPanelManipulationCompleted;
             }
             _outerCover = GetTemplateChild(OuterCoverName) as Grid;
             if (_outerCover != null)
@@ -277,7 +252,6 @@ namespace Microsoft.Phone.Controls
                 _coverClickHelper.Click += OnCoverClick;
             }
 
-            OnHintPanelHeightChanged();
             GotoState(_isOpened ? State.Opened : State.Closed, false);
             GotoState(IsSelected ? State.Selected : State.Unselected, false);
         }
@@ -294,7 +268,7 @@ namespace Microsoft.Phone.Controls
             }
         }
 
-        void OnClickElementTap(object sender, System.Windows.Input.GestureEventArgs e)
+        void OnClickerTap(object sender, System.Windows.Input.GestureEventArgs e)
         {
             if (_outerCover != null && e.OriginalSource == _outerCover)
             {
@@ -387,22 +361,6 @@ namespace Microsoft.Phone.Controls
                     break;
             }
             VisualStateManager.GoToState(this, stateName, useTransitions);
-        }
-
-        /// <summary>
-        /// Sets the vertical alignment of the hint panels to stretch if the
-        /// height is not manually set. If it is, the alignment is set to top.
-        /// </summary>
-        protected virtual void OnHintPanelHeightChanged()
-        {
-            if (_outerHintPanel != null)
-            {
-                _outerHintPanel.VerticalAlignment = ((double.IsNaN(HintPanelHeight) ? VerticalAlignment.Stretch : VerticalAlignment.Top));
-            }
-            if (_innerHintPanel != null)
-            {
-                _innerHintPanel.VerticalAlignment = ((double.IsNaN(HintPanelHeight) ? VerticalAlignment.Stretch : VerticalAlignment.Top));
-            }
         }
 
         /// <summary>

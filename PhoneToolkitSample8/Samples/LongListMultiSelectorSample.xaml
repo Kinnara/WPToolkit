@@ -164,7 +164,14 @@
                                                toolkit:TurnstileFeatherEffect.FeatheringIndex="2">
                     <toolkit:LongListMultiSelector.ItemContainerStyle>
                         <Style TargetType="toolkit:LongListMultiSelectorItem">
-                            <Setter Property="HintPanelHeight" Value="100"/>
+                            <Setter Property="HintPanelStyle">
+                                <Setter.Value>
+                                    <Style TargetType="FrameworkElement">
+                                        <Setter Property="Height" Value="100"/>
+                                        <Setter Property="VerticalAlignment" Value="Top"/>
+                                    </Style>
+                                </Setter.Value>
+                            </Setter>
                             <Setter Property="CheckBoxMargin" Value="0,13,0,0"/>
                         </Style>
                     </toolkit:LongListMultiSelector.ItemContainerStyle>
