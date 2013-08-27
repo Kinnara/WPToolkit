@@ -27,6 +27,7 @@ namespace PhoneToolkitSample8
         {
             // These items show up sorted by the second parameter, not the name of the file
             _samples = new SampleItem[] {
+                new SampleItem("/Samples/ApplicationBarSubmenuSample.xaml","applicationbarsubmenu","submenu for an application bar item" ),
                 new SampleItem("/Samples/AutoCompleteBoxSample.xaml","autocompletebox","completion of text based on items" ),
                 new SampleItem("/Samples/ContextMenuSample.xaml","contextmenu","tap & hold menu options control" ),
                 new SampleItem("/Samples/CustomMessageBoxSample.xaml","custommessagebox","a modular dialog box to display notifications" ),

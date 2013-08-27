@@ -31,6 +31,13 @@
                                 TargetType="HyperlinkButton" 
                                 BasedOn="{StaticResource PhoneButtonBase}"/>
                         </StackPanel.Resources>
+                        <HyperlinkButton NavigateUri="/Samples/ApplicationBarSubmenuSample.xaml" 
+                                         Style="{StaticResource HyperlinkEmptyStyle}">
+                            <localControls:HeaderedContentControl
+                                Style="{StaticResource MultilineHyperlinkStyle}"
+                                Header="applicationbarsubmenu"
+                                Content="submenu for an application bar item"/>
+                        </HyperlinkButton>
                         <HyperlinkButton NavigateUri="/Samples/AutoCompleteBoxSample.xaml" 
                                          Style="{StaticResource HyperlinkEmptyStyle}">
                             <localControls:HeaderedContentControl

@@ -120,6 +120,9 @@
     <Compile Include="Samples\AccentColorPickerPage.xaml.cs">
       <DependentUpon>AccentColorPickerPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Samples\ApplicationBarSubmenuSample.xaml.cs">
+      <DependentUpon>ApplicationBarSubmenuSample.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Samples\AutoCompleteBoxSample.xaml.cs">
       <DependentUpon>AutoCompleteBoxSample.xaml</DependentUpon>
     </Compile>
@@ -252,6 +255,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Samples\AccentColorPickerPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Samples\ApplicationBarSubmenuSample.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -444,6 +451,7 @@
     <Content Include="Images\Beignets.jpg" />
     <Resource Include="Images\Copenhagen.jpg" />
     <Content Include="Images\Dessert.jpg" />
+    <Content Include="Images\email.appbar.reply.dark.png" />
     <Content Include="Images\Fruits.jpg" />
     <Content Include="Images\lock.add.png" />
     <Content Include="Images\lock.email.png" />

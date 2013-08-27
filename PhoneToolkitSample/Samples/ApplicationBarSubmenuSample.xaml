@@ -1,0 +1,59 @@
+﻿<toolkit:BasePage
+    x:Class="PhoneToolkitSample.Samples.ApplicationBarSubmenuSample"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
+    xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:toolkit="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit"
+    xmlns:local="clr-namespace:PhoneToolkitSample.Samples"
+    mc:Ignorable="d" d:DesignHeight="768" d:DesignWidth="480"
+    SupportedOrientations="PortraitOrLandscape"
+    shell:SystemTray.IsVisible="True"
+    Style="{StaticResource PageStyle}">
+
+    <toolkit:PageUI x:Name="LayoutRoot" Header="appbar submenu">
+        <StackPanel Margin="0,10,0,95">
+            <TextBlock Text="Tap an icon button or a menu item to show its submenu."
+                       Style="{StaticResource PhoneTextNormalStyle}"
+                       FontSize="{StaticResource PhoneFontSizeMedium}"
+                       Margin="12,-9,12,-5"
+                       LineHeight="30"
+                       LineStackingStrategy="BlockLineHeight"
+                       TextWrapping="Wrap"/>
+            <Rectangle Height="40"/>
+            <TextBlock Text="Last selection" Style="{StaticResource ControlHeaderTextStyle}"/>
+            <TextBlock x:Name="LastSelectionTextBlock" Text="none" Style="{StaticResource PhoneTextLargeStyle}" Margin="12,5,12,0"/>
+        </StackPanel>
+        
+        <VisualStateManager.VisualStateGroups>
+            <VisualStateGroup x:Name="OrientationStates">
+                <VisualState x:Name="PortraitUp"/>
+                <VisualState x:Name="LandscapeLeft">
+                    <Storyboard>
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="LayoutRoot" Storyboard.TargetProperty="Margin">
+                            <DiscreteObjectKeyFrame KeyTime="0" Value="0,0,72,0"/>
+                        </ObjectAnimationUsingKeyFrames>
+                    </Storyboard>
+                </VisualState>
+                <VisualState x:Name="LandscapeRight">
+                    <Storyboard>
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="LayoutRoot" Storyboard.TargetProperty="Margin">
+                            <DiscreteObjectKeyFrame KeyTime="0" Value="72,0,0,0"/>
+                        </ObjectAnimationUsingKeyFrames>
+                    </Storyboard>
+                </VisualState>
+            </VisualStateGroup>
+        </VisualStateManager.VisualStateGroups>
+    </toolkit:PageUI>
+
+    <phone:PhoneApplicationPage.ApplicationBar>
+        <shell:ApplicationBar Opacity="0.999">
+            <shell:ApplicationBarIconButton Text="respond" IconUri="/Images/email.appbar.reply.dark.png" Click="AppBarRespond_Click"/>
+            <shell:ApplicationBar.MenuItems>
+                <shell:ApplicationBarMenuItem Text="priority" Click="AppBarPriority_Click"/>
+            </shell:ApplicationBar.MenuItems>
+        </shell:ApplicationBar>
+    </phone:PhoneApplicationPage.ApplicationBar>
+</toolkit:BasePage>

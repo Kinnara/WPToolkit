@@ -95,6 +95,15 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>ControlResources.resx</DependentUpon>
     </Compile>
+    <Compile Include="..\Microsoft.Phone.Controls.Toolkit\ApplicationBarSubmenu\ApplicationBarSubmenu.cs">
+      <Link>ApplicationBarSubmenu\ApplicationBarSubmenu.cs</Link>
+    </Compile>
+    <Compile Include="..\Microsoft.Phone.Controls.Toolkit\ApplicationBarSubmenu\ApplicationBarSubmenuItem.cs">
+      <Link>ApplicationBarSubmenu\ApplicationBarSubmenuItem.cs</Link>
+    </Compile>
+    <Compile Include="..\Microsoft.Phone.Controls.Toolkit\ApplicationBarSubmenu\FullScreenPopup.cs">
+      <Link>ApplicationBarSubmenu\FullScreenPopup.cs</Link>
+    </Compile>
     <Compile Include="..\Microsoft.Phone.Controls.Toolkit\AutoCompleteBox\AutoCompleteBox.cs">
       <Link>AutoCompleteBox\AutoCompleteBox.cs</Link>
     </Compile>
