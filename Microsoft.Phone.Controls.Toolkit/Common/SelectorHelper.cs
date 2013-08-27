@@ -75,6 +75,7 @@ namespace Microsoft.Phone.Controls
             get { return _initializingData != null; }
         }
 
+        [SuppressMessage("Microsoft.Usage", "CA2208:InstantiateArgumentExceptionsCorrectly")]
         internal void OnSelectedIndexChanged(int oldIndex, int newIndex)
         {
             if (_selectionChanger.IsActive)
@@ -230,6 +231,7 @@ namespace Microsoft.Phone.Controls
             Selector.OnSelectionChanged(new SelectionChangedEventArgs(unselectedItems, selectedItems));
         }
 
+        [SuppressMessage("Microsoft.Maintainability", "CA1502:AvoidExcessiveComplexity")]
         internal void OnItemsChanged(NotifyCollectionChangedEventArgs e)
         {
             int selectedIndex = Selector.SelectedIndex;

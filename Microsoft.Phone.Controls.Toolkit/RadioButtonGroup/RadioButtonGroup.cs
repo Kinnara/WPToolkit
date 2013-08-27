@@ -325,7 +325,7 @@ namespace Microsoft.Phone.Controls
 
         bool ISelector<RadioButton>.GetIsSelected(RadioButton element)
         {
-            return element.IsChecked == true;
+            return element != null && element.IsChecked == true;
         }
 
         RadioButton ISelector<RadioButton>.GetSelectorItem(int index)

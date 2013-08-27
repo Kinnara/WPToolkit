@@ -272,7 +272,7 @@ namespace Microsoft.Phone.Controls.Primitives
 
         bool ISelector<SimpleSelectorItem>.GetIsSelected(SimpleSelectorItem element)
         {
-            return element.IsSelected;
+            return element != null && element.IsSelected;
         }
 
         SimpleSelectorItem ISelector<SimpleSelectorItem>.GetSelectorItem(int index)

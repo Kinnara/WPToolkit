@@ -1,8 +1,11 @@
-﻿namespace Microsoft.Phone.Controls
+﻿using System.Diagnostics.CodeAnalysis;
+
+namespace Microsoft.Phone.Controls
 {
     /// <summary>
     /// Influences how a line box height is calculated
     /// </summary>
+    [SuppressMessage("Microsoft.Naming", "CA1717:OnlyFlagsEnumsShouldHavePluralNames")]
     public enum TextLineBounds
     {
         /// <summary>

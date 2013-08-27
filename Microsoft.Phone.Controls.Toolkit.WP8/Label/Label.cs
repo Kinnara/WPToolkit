@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Documents;
@@ -122,6 +123,7 @@ namespace Microsoft.Phone.Controls
         /// <returns>
         /// A collection that holds all inline text elements from the <see cref="T:Microsoft.Phone.Controls.Label"/>.The default is an empty collection.
         /// </returns>
+        [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Inlines")]
         public InlineCollection Inlines
         {
             get { return _textBlock.Inlines; }
@@ -487,6 +489,7 @@ namespace Microsoft.Phone.Controls
             typeof(Label),
             new PropertyMetadata((d, e) => ((Label)d).OnMaxLinesChanged(e)));
 
+        [SuppressMessage("Microsoft.Usage", "CA2208:InstantiateArgumentExceptionsCorrectly")]
         private void OnMaxLinesChanged(DependencyPropertyChangedEventArgs e)
         {
             if (_ignorePropertyChange)
@@ -505,6 +508,8 @@ namespace Microsoft.Phone.Controls
             InvalidateMeasure();
         }
 
+        [SuppressMessage("Microsoft.Globalization", "CA1303:Do not pass literals as localized parameters", MessageId = "System.Windows.Controls.TextBlock.set_Text(System.String)")]
+        [SuppressMessage("Microsoft.Naming", "CA2204:Literals should be spelled correctly", MessageId = "Xg")]
         private void ApplyMaxLines()
         {
             if (MaxLines > 0)
@@ -563,9 +568,9 @@ namespace Microsoft.Phone.Controls
             "FontMetrics",
             typeof(FontMetrics),
             typeof(Label),
-            new PropertyMetadata((d, e) => ((Label)d).OnFontMetricsChanged(e)));
+            new PropertyMetadata((d, e) => ((Label)d).OnFontMetricsChanged()));
 
-        private void OnFontMetricsChanged(DependencyPropertyChangedEventArgs e)
+        private void OnFontMetricsChanged()
         {
             InvalidateMeasure();
         }

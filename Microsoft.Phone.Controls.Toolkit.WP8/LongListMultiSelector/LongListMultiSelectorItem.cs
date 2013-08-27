@@ -54,11 +54,6 @@ namespace Microsoft.Phone.Controls
         FrameworkElement _clicker = null;
 
         /// <summary>
-        /// Hint Panel template part.
-        /// </summary>
-        FrameworkElement _hintPanel = null;
-
-        /// <summary>
         /// Hit Target Panel template part.
         /// </summary>
         FrameworkElement _hitTargetPanel = null;
@@ -237,7 +232,6 @@ namespace Microsoft.Phone.Controls
             {
                 _clicker.Tap += OnClickerTap;
             }
-            _hintPanel = GetTemplateChild(HintPanelName) as Rectangle;
             _hitTargetPanel = GetTemplateChild(HitTargetPanelName) as Rectangle;
             if (_hitTargetPanel != null)
             {
