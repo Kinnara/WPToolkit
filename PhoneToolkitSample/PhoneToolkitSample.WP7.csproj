@@ -107,7 +107,6 @@
     <Compile Include="Data\MoviesByCategory.cs" />
     <Compile Include="Data\MoviesInCategory.cs" />
     <Compile Include="Data\RandomPeople.cs" />
-    <Compile Include="HeaderedContentControl.cs" />
     <Compile Include="MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
@@ -201,6 +200,9 @@
     </Compile>
     <Compile Include="Samples\PickerBoxSample.xaml.cs">
       <DependentUpon>PickerBoxSample.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Samples\PropertyUISample.xaml.cs">
+      <DependentUpon>PropertyUISample.xaml</DependentUpon>
     </Compile>
     <Compile Include="Samples\RadioButtonGroupSample.xaml.cs">
       <DependentUpon>RadioButtonGroupSample.xaml</DependentUpon>
@@ -369,6 +371,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="Samples\PropertyUISample.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Samples\RadioButtonGroupSample.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -422,10 +428,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Settings.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Themes\Generic.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

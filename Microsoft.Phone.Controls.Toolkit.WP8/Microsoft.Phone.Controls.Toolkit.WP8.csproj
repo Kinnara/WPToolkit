@@ -358,6 +358,9 @@
     <Compile Include="..\Microsoft.Phone.Controls.Toolkit\Gestures\ManipulationGestureHelper.cs">
       <Link>Gestures\ManipulationGestureHelper.cs</Link>
     </Compile>
+    <Compile Include="..\Microsoft.Phone.Controls.Toolkit\HeaderedContentControl\HeaderedContentControl.cs">
+      <Link>HeaderedContentControl\HeaderedContentControl.cs</Link>
+    </Compile>
     <Compile Include="..\Microsoft.Phone.Controls.Toolkit\ImageButton\ImageButton.cs">
       <Link>ImageButton\ImageButton.cs</Link>
     </Compile>
@@ -399,6 +402,9 @@
     </Compile>
     <Compile Include="..\Microsoft.Phone.Controls.Toolkit\Input\GestureHelperEventArgs.cs">
       <Link>Input\GestureHelperEventArgs.cs</Link>
+    </Compile>
+    <Compile Include="..\Microsoft.Phone.Controls.Toolkit\PropertyUI\PropertyUI.cs">
+      <Link>PropertyUI\PropertyUI.cs</Link>
     </Compile>
     <Compile Include="..\Microsoft.Phone.Controls.Toolkit\TransferControl\NullToVisibilityConverter.cs">
       <Link>TransferControl\NullToVisibilityConverter.cs</Link>

@@ -9,233 +9,233 @@
         <trans-unit id="Resx/AboutAMinuteAgo" translate="yes" xml:space="preserve">
           <source>about a minute ago</source>
           <target state="translated" state-qualifier="exact-match">kira-kira seminit lalu</target>
-          <note from="MultilingualBuild" priority="2" annotates="source">Default text for "about a minute ago" as used by the RelativeTimeConverter.</note>
-        </trans-unit>
+          
+        <note from="MultilingualBuild" annotates="source" priority="2">Default text for "about a minute ago" as used by the RelativeTimeConverter.</note></trans-unit>
         <trans-unit id="Resx/AboutAMonthAgo" translate="yes" xml:space="preserve">
           <source>about a month ago</source>
           <target state="translated" state-qualifier="exact-match">kira-kira sebulan lalu</target>
-          <note from="MultilingualBuild" priority="2" annotates="source">Default text for "about a month ago" as used by the RelativeTimeConverter.</note>
-        </trans-unit>
+          
+        <note from="MultilingualBuild" annotates="source" priority="2">Default text for "about a month ago" as used by the RelativeTimeConverter.</note></trans-unit>
         <trans-unit id="Resx/AboutAnHourAgo" translate="yes" xml:space="preserve">
           <source>about an hour ago</source>
           <target state="translated" state-qualifier="exact-match">kira-kira sejam lalu</target>
-          <note from="MultilingualBuild" priority="2" annotates="source">Default text for "about an hour ago" as used by the RelativeTimeConverter.</note>
-        </trans-unit>
+          
+        <note from="MultilingualBuild" annotates="source" priority="2">Default text for "about an hour ago" as used by the RelativeTimeConverter.</note></trans-unit>
         <trans-unit id="Resx/AboutAWeekAgo" translate="yes" xml:space="preserve">
           <source>about a week ago</source>
           <target state="translated" state-qualifier="exact-match">kira-kira seminggu lalu</target>
-          <note from="MultilingualBuild" priority="2" annotates="source">Default text for "about a week ago" as used by the RelativeTimeConverter.</note>
-        </trans-unit>
+          
+        <note from="MultilingualBuild" annotates="source" priority="2">Default text for "about a week ago" as used by the RelativeTimeConverter.</note></trans-unit>
         <trans-unit id="Resx/AlarmRepeatsOn" translate="yes" xml:space="preserve">
           <source>ALARM REPEATS ON</source>
           <target state="translated" state-qualifier="exact-match">ULANGAN PENGGERA PADA</target>
-          <note from="MultilingualBuild" priority="2" annotates="source">Default title for recurring day ListPicker.</note>
-        </trans-unit>
+          
+        <note from="MultilingualBuild" annotates="source" priority="2">Default title for recurring day ListPicker.</note></trans-unit>
         <trans-unit id="Resx/DatePickerTitle" translate="yes" xml:space="preserve">
           <source>CHOOSE DATE</source>
           <target state="translated" state-qualifier="exact-match">PILIH TARIKH</target>
-          <note from="MultilingualBuild" priority="2" annotates="source">Default title for DatePicker.</note>
-        </trans-unit>
+          
+        <note from="MultilingualBuild" annotates="source" priority="2">Default title for DatePicker.</note></trans-unit>
         <trans-unit id="Resx/DateTimePickerCancelText" translate="yes" xml:space="preserve">
           <source>cancel</source>
           <target state="translated" state-qualifier="exact-match">batal</target>
-          <note from="MultilingualBuild" priority="2" annotates="source">Default text for the "cancel" ApplicationBar button used by DatePicker/TimePicker.</note>
-        </trans-unit>
+          
+        <note from="MultilingualBuild" annotates="source" priority="2">Default text for the "cancel" ApplicationBar button used by DatePicker/TimePicker.</note></trans-unit>
         <trans-unit id="Resx/DateTimePickerDoneText" translate="yes" xml:space="preserve">
           <source>done</source>
           <target state="translated" state-qualifier="exact-match">selesai</target>
-          <note from="MultilingualBuild" priority="2" annotates="source">Default text for the "done" ApplicationBar button used by DatePicker/TimePicker.</note>
-        </trans-unit>
+          
+        <note from="MultilingualBuild" annotates="source" priority="2">Default text for the "done" ApplicationBar button used by DatePicker/TimePicker.</note></trans-unit>
         <trans-unit id="Resx/OverAYearAgo" translate="yes" xml:space="preserve">
           <source>over a year ago</source>
           <target state="translated" state-qualifier="exact-match">lebih setahun lalu</target>
-          <note from="MultilingualBuild" priority="2" annotates="source">Default text for "over a year ago" as used by the RelativeTimeConverter.</note>
-        </trans-unit>
+          
+        <note from="MultilingualBuild" annotates="source" priority="2">Default text for "over a year ago" as used by the RelativeTimeConverter.</note></trans-unit>
         <trans-unit id="Resx/RepeatsEveryDay" translate="yes" xml:space="preserve">
           <source>every day</source>
           <target state="translated" state-qualifier="exact-match">setiap hari</target>
-          <note from="MultilingualBuild" priority="2" annotates="source">Default text for the recurring day ListPicker when an alarm repeats daily.</note>
-        </trans-unit>
+          
+        <note from="MultilingualBuild" annotates="source" priority="2">Default text for the recurring day ListPicker when an alarm repeats daily.</note></trans-unit>
         <trans-unit id="Resx/RepeatsOnlyOnce" translate="yes" xml:space="preserve">
           <source>only once</source>
           <target state="translated" state-qualifier="exact-match">sekali sahaja</target>
-          <note from="MultilingualBuild" priority="2" annotates="source">Default text for the recurring day ListPicker when an alarm is not recurring.</note>
-        </trans-unit>
+          
+        <note from="MultilingualBuild" annotates="source" priority="2">Default text for the recurring day ListPicker when an alarm is not recurring.</note></trans-unit>
         <trans-unit id="Resx/RepeatsOnWeekdays" translate="yes" xml:space="preserve">
           <source>weekdays</source>
           <target state="translated" state-qualifier="exact-match">hari biasa</target>
-          <note from="MultilingualBuild" priority="2" annotates="source">Default text for the recurring day ListPicker when an alarm repeats on weekdays.</note>
-        </trans-unit>
+          
+        <note from="MultilingualBuild" annotates="source" priority="2">Default text for the recurring day ListPicker when an alarm repeats on weekdays.</note></trans-unit>
         <trans-unit id="Resx/RepeatsOnWeekends" translate="yes" xml:space="preserve">
           <source>weekends</source>
           <target state="translated" state-qualifier="exact-match">hujung minggu</target>
-          <note from="MultilingualBuild" priority="2" annotates="source">Default text for the recurring day ListPicker when an alarm repeats on weekends.</note>
-        </trans-unit>
+          
+        <note from="MultilingualBuild" annotates="source" priority="2">Default text for the recurring day ListPicker when an alarm repeats on weekends.</note></trans-unit>
         <trans-unit id="Resx/TimePickerTitle" translate="yes" xml:space="preserve">
           <source>CHOOSE TIME</source>
           <target state="translated" state-qualifier="exact-match">PILIH MASA</target>
-          <note from="MultilingualBuild" priority="2" annotates="source">Default title for TimePicker.</note>
-        </trans-unit>
+          
+        <note from="MultilingualBuild" annotates="source" priority="2">Default title for TimePicker.</note></trans-unit>
         <trans-unit id="Resx/XHoursAgo_2To4" translate="yes" xml:space="preserve">
           <source>{0} hours ago</source>
           <target state="translated" state-qualifier="exact-match">{0} jam lalu</target>
-          <note from="MultilingualBuild" priority="2" annotates="source">Default text for "{0} hours ago" as used by the RelativeTimeConverter,  where {0} is 2, 3 or 4.</note>
-        </trans-unit>
+          
+        <note from="MultilingualBuild" annotates="source" priority="2">Default text for "{0} hours ago" as used by the RelativeTimeConverter,  where {0} is 2, 3 or 4.</note></trans-unit>
         <trans-unit id="Resx/XHoursAgo_EndsIn1Not11" translate="yes" xml:space="preserve">
           <source>{0} hours ago</source>
           <target state="translated" state-qualifier="exact-match">{0} jam lalu</target>
-          <note from="MultilingualBuild" priority="2" annotates="source">Default text for "{0} hours ago" as used by the RelativeTimeConverter, where {0} is a number that ends in 1 but doesn't end in 11.</note>
-        </trans-unit>
+          
+        <note from="MultilingualBuild" annotates="source" priority="2">Default text for "{0} hours ago" as used by the RelativeTimeConverter, where {0} is a number that ends in 1 but doesn't end in 11.</note></trans-unit>
         <trans-unit id="Resx/XHoursAgo_EndsIn2To4Not12To14" translate="yes" xml:space="preserve">
           <source>{0} hours ago</source>
           <target state="translated" state-qualifier="exact-match">{0} jam lalu</target>
-          <note from="MultilingualBuild" priority="2" annotates="source">Default text for "{0} hours ago" as used by the RelativeTimeConverter, where {0} is a number that ends in 2, 3 or 4, but doesn't end in 12, 13 or 14.</note>
-        </trans-unit>
+          
+        <note from="MultilingualBuild" annotates="source" priority="2">Default text for "{0} hours ago" as used by the RelativeTimeConverter, where {0} is a number that ends in 2, 3 or 4, but doesn't end in 12, 13 or 14.</note></trans-unit>
         <trans-unit id="Resx/XHoursAgo_Other" translate="yes" xml:space="preserve">
           <source>{0} hours ago</source>
           <target state="translated" state-qualifier="exact-match">{0} jam lalu</target>
-          <note from="MultilingualBuild" priority="2" annotates="source">Default text for "{0} hours ago" as used by the RelativeTimeConverter, where {0} is a number not considered in any of the other exceptions, i.e. a number that ends in 0 or 5 to 9.</note>
-        </trans-unit>
+          
+        <note from="MultilingualBuild" annotates="source" priority="2">Default text for "{0} hours ago" as used by the RelativeTimeConverter, where {0} is a number not considered in any of the other exceptions, i.e. a number that ends in 0 or 5 to 9.</note></trans-unit>
         <trans-unit id="Resx/XMinutesAgo_2To4" translate="yes" xml:space="preserve">
           <source>{0} minutes ago</source>
           <target state="translated" state-qualifier="exact-match">{0} minit lalu</target>
-          <note from="MultilingualBuild" priority="2" annotates="source">Default text for "{0} minutes ago" as used by the RelativeTimeConverter, where {0} is 2, 3 or 4.</note>
-        </trans-unit>
+          
+        <note from="MultilingualBuild" annotates="source" priority="2">Default text for "{0} minutes ago" as used by the RelativeTimeConverter, where {0} is 2, 3 or 4.</note></trans-unit>
         <trans-unit id="Resx/XMinutesAgo_EndsIn1Not11" translate="yes" xml:space="preserve">
           <source>{0} minutes ago</source>
           <target state="translated" state-qualifier="exact-match">{0} minit lalu</target>
-          <note from="MultilingualBuild" priority="2" annotates="source">Default text for "{0} minutes ago" as used by the RelativeTimeConverter, where {0} is a number that ends in 1 but doesn't end in 11.</note>
-        </trans-unit>
+          
+        <note from="MultilingualBuild" annotates="source" priority="2">Default text for "{0} minutes ago" as used by the RelativeTimeConverter, where {0} is a number that ends in 1 but doesn't end in 11.</note></trans-unit>
         <trans-unit id="Resx/XMinutesAgo_EndsIn2To4Not12To14" translate="yes" xml:space="preserve">
           <source>{0} minutes ago</source>
           <target state="translated" state-qualifier="exact-match">{0} minit lalu</target>
-          <note from="MultilingualBuild" priority="2" annotates="source">Default text for "{0} minutes ago" as used by the RelativeTimeConverter, where {0} is a number that ends in 2, 3 or 4, but doesn't end in 12, 13 or 14.</note>
-        </trans-unit>
+          
+        <note from="MultilingualBuild" annotates="source" priority="2">Default text for "{0} minutes ago" as used by the RelativeTimeConverter, where {0} is a number that ends in 2, 3 or 4, but doesn't end in 12, 13 or 14.</note></trans-unit>
         <trans-unit id="Resx/XMinutesAgo_Other" translate="yes" xml:space="preserve">
           <source>{0} minutes ago</source>
           <target state="translated" state-qualifier="exact-match">{0} minit lalu</target>
-          <note from="MultilingualBuild" priority="2" annotates="source">Default text for "{0} minutes ago" as used by the RelativeTimeConverter, where {0} is a number not considered in any of the other exceptions, i.e. a number that ends in 0 or 5 to 9.</note>
-        </trans-unit>
+          
+        <note from="MultilingualBuild" annotates="source" priority="2">Default text for "{0} minutes ago" as used by the RelativeTimeConverter, where {0} is a number not considered in any of the other exceptions, i.e. a number that ends in 0 or 5 to 9.</note></trans-unit>
         <trans-unit id="Resx/XMonthsAgo_2To4" translate="yes" xml:space="preserve">
           <source>{0} months ago</source>
           <target state="translated" state-qualifier="exact-match">{0} bulan lalu</target>
-          <note from="MultilingualBuild" priority="2" annotates="source">Default text for "{0} months ago" as used by the RelativeTimeConverter, where {0} is 2, 3 or 4.</note>
-        </trans-unit>
+          
+        <note from="MultilingualBuild" annotates="source" priority="2">Default text for "{0} months ago" as used by the RelativeTimeConverter, where {0} is 2, 3 or 4.</note></trans-unit>
         <trans-unit id="Resx/XMonthsAgo_5To12" translate="yes" xml:space="preserve">
           <source>{0} months ago</source>
           <target state="translated" state-qualifier="exact-match">{0} bulan lalu</target>
-          <note from="MultilingualBuild" priority="2" annotates="source">Default text for "{0} months ago" as used by the RelativeTimeConverter, where {0} is a number from 5 to 12.</note>
-        </trans-unit>
+          
+        <note from="MultilingualBuild" annotates="source" priority="2">Default text for "{0} months ago" as used by the RelativeTimeConverter, where {0} is a number from 5 to 12.</note></trans-unit>
         <trans-unit id="Resx/XSecondsAgo_2To4" translate="yes" xml:space="preserve">
           <source>{0} seconds ago</source>
           <target state="translated" state-qualifier="exact-match">{0} saat lalu</target>
-          <note from="MultilingualBuild" priority="2" annotates="source">Default text for "{0} seconds ago" as used by the RelativeTimeConverter,  where {0} is 2, 3 or 4.</note>
-        </trans-unit>
+          
+        <note from="MultilingualBuild" annotates="source" priority="2">Default text for "{0} seconds ago" as used by the RelativeTimeConverter,  where {0} is 2, 3 or 4.</note></trans-unit>
         <trans-unit id="Resx/XSecondsAgo_EndsIn1Not11" translate="yes" xml:space="preserve">
           <source>{0} seconds ago</source>
           <target state="translated" state-qualifier="exact-match">{0} saat lalu</target>
-          <note from="MultilingualBuild" priority="2" annotates="source">Default text for "{0} seconds ago" as used by the RelativeTimeConverter, where {0} is a number that ends in 1 but doesn't end in 11.</note>
-        </trans-unit>
+          
+        <note from="MultilingualBuild" annotates="source" priority="2">Default text for "{0} seconds ago" as used by the RelativeTimeConverter, where {0} is a number that ends in 1 but doesn't end in 11.</note></trans-unit>
         <trans-unit id="Resx/XSecondsAgo_EndsIn2To4Not12To14" translate="yes" xml:space="preserve">
           <source>{0} seconds ago</source>
           <target state="translated" state-qualifier="exact-match">{0} saat lalu</target>
-          <note from="MultilingualBuild" priority="2" annotates="source">Default text for "{0} seconds ago" as used by the RelativeTimeConverter, where {0} is a number that ends in 2, 3 or 4, but doesn't end in 12, 13 or 14.</note>
-        </trans-unit>
+          
+        <note from="MultilingualBuild" annotates="source" priority="2">Default text for "{0} seconds ago" as used by the RelativeTimeConverter, where {0} is a number that ends in 2, 3 or 4, but doesn't end in 12, 13 or 14.</note></trans-unit>
         <trans-unit id="Resx/XSecondsAgo_Other" translate="yes" xml:space="preserve">
           <source>{0} seconds ago</source>
           <target state="translated" state-qualifier="exact-match">{0} saat lalu</target>
-          <note from="MultilingualBuild" priority="2" annotates="source">Default text for "{0} seconds ago" as used by the RelativeTimeConverter, where {0} is a number not considered in any of the other exceptions, i.e. a number that ends in 0 or 5 to 9.</note>
-        </trans-unit>
+          
+        <note from="MultilingualBuild" annotates="source" priority="2">Default text for "{0} seconds ago" as used by the RelativeTimeConverter, where {0} is a number not considered in any of the other exceptions, i.e. a number that ends in 0 or 5 to 9.</note></trans-unit>
         <trans-unit id="Resx/XWeeksAgo_2To4" translate="yes" xml:space="preserve">
           <source>{0} weeks ago</source>
           <target state="translated" state-qualifier="exact-match">{0} minggu lalu</target>
-          <note from="MultilingualBuild" priority="2" annotates="source">Default text for "{0} weeks ago" as used by the RelativeTimeConverter, where {0} is 2, 3 or 4.</note>
-        </trans-unit>
+          
+        <note from="MultilingualBuild" annotates="source" priority="2">Default text for "{0} weeks ago" as used by the RelativeTimeConverter, where {0} is 2, 3 or 4.</note></trans-unit>
         <trans-unit id="Resx/Off" translate="yes" xml:space="preserve">
           <source>Off</source>
           <target state="translated" state-qualifier="exact-match">Mati</target>
-          <note from="MultilingualBuild" priority="2" annotates="source">Default text for "Off" for ToggleSwitch.</note>
-        </trans-unit>
+          
+        <note from="MultilingualBuild" annotates="source" priority="2">Default text for "Off" for ToggleSwitch.</note></trans-unit>
         <trans-unit id="Resx/On" translate="yes" xml:space="preserve">
           <source>On</source>
           <target state="translated" state-qualifier="exact-match">Hidup</target>
-          <note from="MultilingualBuild" priority="2" annotates="source">Default text for "On" for ToggleSwitch.</note>
-        </trans-unit>
+          
+        <note from="MultilingualBuild" annotates="source" priority="2">Default text for "On" for ToggleSwitch.</note></trans-unit>
         <trans-unit id="Resx/last Friday" translate="yes" xml:space="preserve">
           <source>last Friday</source>
           <target state="translated" state-qualifier="exact-match">hari Jumaat lalu</target>
-          <note from="MultilingualBuild" priority="2" annotates="source">Default text for "last Friday" as used by RelativeTimeConverter</note>
-        </trans-unit>
+          
+        <note from="MultilingualBuild" annotates="source" priority="2">Default text for "last Friday" as used by RelativeTimeConverter</note></trans-unit>
         <trans-unit id="Resx/last Monday" translate="yes" xml:space="preserve">
           <source>last Monday</source>
           <target state="translated" state-qualifier="exact-match">hari Isnin lalu</target>
-          <note from="MultilingualBuild" priority="2" annotates="source">Default text for "last Monday" as used by RelativeTimeConverter</note>
-        </trans-unit>
+          
+        <note from="MultilingualBuild" annotates="source" priority="2">Default text for "last Monday" as used by RelativeTimeConverter</note></trans-unit>
         <trans-unit id="Resx/last Saturday" translate="yes" xml:space="preserve">
           <source>last Saturday</source>
           <target state="translated" state-qualifier="exact-match">hari Sabtu lalu</target>
-          <note from="MultilingualBuild" priority="2" annotates="source">Default text for "last Saturday" as used by RelativeTimeConverter</note>
-        </trans-unit>
+          
+        <note from="MultilingualBuild" annotates="source" priority="2">Default text for "last Saturday" as used by RelativeTimeConverter</note></trans-unit>
         <trans-unit id="Resx/last Sunday" translate="yes" xml:space="preserve">
           <source>last Sunday</source>
           <target state="translated" state-qualifier="exact-match">hari Ahad lalu</target>
-          <note from="MultilingualBuild" priority="2" annotates="source">Default text for "last Sunday" as used by RelativeTimeConverter</note>
-        </trans-unit>
+          
+        <note from="MultilingualBuild" annotates="source" priority="2">Default text for "last Sunday" as used by RelativeTimeConverter</note></trans-unit>
         <trans-unit id="Resx/last Thursday" translate="yes" xml:space="preserve">
           <source>last Thursday</source>
           <target state="translated" state-qualifier="exact-match">hari Khamis lalu</target>
-          <note from="MultilingualBuild" priority="2" annotates="source">Default text for "last Thursday" as used by RelativeTimeConverter</note>
-        </trans-unit>
+          
+        <note from="MultilingualBuild" annotates="source" priority="2">Default text for "last Thursday" as used by RelativeTimeConverter</note></trans-unit>
         <trans-unit id="Resx/last Tuesday" translate="yes" xml:space="preserve">
           <source>last Tuesday</source>
           <target state="translated" state-qualifier="exact-match">hari Selasa lalu</target>
-          <note from="MultilingualBuild" priority="2" annotates="source">Default text for "last Tuesday" as used by RelativeTimeConverter</note>
-        </trans-unit>
+          
+        <note from="MultilingualBuild" annotates="source" priority="2">Default text for "last Tuesday" as used by RelativeTimeConverter</note></trans-unit>
         <trans-unit id="Resx/last Wednesday" translate="yes" xml:space="preserve">
           <source>last Wednesday</source>
           <target state="translated" state-qualifier="exact-match">hari Rabu lalu</target>
-          <note from="MultilingualBuild" priority="2" annotates="source">Default text for "last Wednesday" as used by RelativeTimeConverter</note>
-        </trans-unit>
+          
+        <note from="MultilingualBuild" annotates="source" priority="2">Default text for "last Wednesday" as used by RelativeTimeConverter</note></trans-unit>
         <trans-unit id="Resx/on Friday" translate="yes" xml:space="preserve">
           <source>on Friday</source>
           <target state="translated" state-qualifier="exact-match">pada hari Jumaat</target>
-          <note from="MultilingualBuild" priority="2" annotates="source">Default text for "on Friday" as used by RelativeTimeConverter</note>
-        </trans-unit>
+          
+        <note from="MultilingualBuild" annotates="source" priority="2">Default text for "on Friday" as used by RelativeTimeConverter</note></trans-unit>
         <trans-unit id="Resx/on Monday" translate="yes" xml:space="preserve">
           <source>on Monday</source>
           <target state="translated" state-qualifier="exact-match">pada hari Isnin</target>
-          <note from="MultilingualBuild" priority="2" annotates="source">Default text for "on Monday" as used by RelativeTimeConverter</note>
-        </trans-unit>
+          
+        <note from="MultilingualBuild" annotates="source" priority="2">Default text for "on Monday" as used by RelativeTimeConverter</note></trans-unit>
         <trans-unit id="Resx/on Saturday" translate="yes" xml:space="preserve">
           <source>on Saturday</source>
           <target state="translated" state-qualifier="exact-match">pada hari Sabtu</target>
-          <note from="MultilingualBuild" priority="2" annotates="source">Default text for "on Saturday" as used by RelativeTimeConverter</note>
-        </trans-unit>
+          
+        <note from="MultilingualBuild" annotates="source" priority="2">Default text for "on Saturday" as used by RelativeTimeConverter</note></trans-unit>
         <trans-unit id="Resx/on Sunday" translate="yes" xml:space="preserve">
           <source>on Sunday</source>
           <target state="translated" state-qualifier="exact-match">pada hari Ahad</target>
-          <note from="MultilingualBuild" priority="2" annotates="source">Default text for "on Sunday" as used by RelativeTimeConverter</note>
-        </trans-unit>
+          
+        <note from="MultilingualBuild" annotates="source" priority="2">Default text for "on Sunday" as used by RelativeTimeConverter</note></trans-unit>
         <trans-unit id="Resx/on Thursday" translate="yes" xml:space="preserve">
           <source>on Thursday</source>
           <target state="translated" state-qualifier="exact-match">pada hari Khamis</target>
-          <note from="MultilingualBuild" priority="2" annotates="source">Default text for "on Thursday" as used by RelativeTimeConverter</note>
-        </trans-unit>
+          
+        <note from="MultilingualBuild" annotates="source" priority="2">Default text for "on Thursday" as used by RelativeTimeConverter</note></trans-unit>
         <trans-unit id="Resx/on Tuesday" translate="yes" xml:space="preserve">
           <source>on Tuesday</source>
           <target state="translated" state-qualifier="exact-match">pada hari Selasa</target>
-          <note from="MultilingualBuild" priority="2" annotates="source">Default text for "on Tuesday" as used by RelativeTimeConverter</note>
-        </trans-unit>
+          
+        <note from="MultilingualBuild" annotates="source" priority="2">Default text for "on Tuesday" as used by RelativeTimeConverter</note></trans-unit>
         <trans-unit id="Resx/on Wednesday" translate="yes" xml:space="preserve">
           <source>on Wednesday</source>
           <target state="translated" state-qualifier="exact-match">pada hari Rabu</target>
-          <note from="MultilingualBuild" priority="2" annotates="source">Default text for "on Wednesday" as used by RelativeTimeConverter</note>
-        </trans-unit>
+          
+        <note from="MultilingualBuild" annotates="source" priority="2">Default text for "on Wednesday" as used by RelativeTimeConverter</note></trans-unit>
         <trans-unit id="Resx/Byte" translate="yes" xml:space="preserve">
           <source>bytes</source>
           <target state="translated" state-qualifier="exact-match">bait</target>
-          <note from="MultilingualBuild" priority="2" annotates="source">Abbreviation for byte</note>
-        </trans-unit>
+          
+        <note from="MultilingualBuild" annotates="source" priority="2">Abbreviation for byte</note></trans-unit>
         <trans-unit id="Resx/Cancel" translate="yes" xml:space="preserve">
           <source>cancel</source>
           <target state="translated" state-qualifier="exact-match">batal</target>
@@ -243,18 +243,18 @@
         <trans-unit id="Resx/Gigabyte" translate="yes" xml:space="preserve">
           <source>GB</source>
           <target state="translated" state-qualifier="exact-match">GB</target>
-          <note from="MultilingualBuild" priority="2" annotates="source">Abbreviation for gigabyte</note>
-        </trans-unit>
+          
+        <note from="MultilingualBuild" annotates="source" priority="2">Abbreviation for gigabyte</note></trans-unit>
         <trans-unit id="Resx/Kilobyte" translate="yes" xml:space="preserve">
           <source>KB</source>
           <target state="translated" state-qualifier="exact-match">KB</target>
-          <note from="MultilingualBuild" priority="2" annotates="source">Abbreviation for kilobyte</note>
-        </trans-unit>
+          
+        <note from="MultilingualBuild" annotates="source" priority="2">Abbreviation for kilobyte</note></trans-unit>
         <trans-unit id="Resx/Megabyte" translate="yes" xml:space="preserve">
           <source>MB</source>
           <target state="translated" state-qualifier="exact-match">MB</target>
-          <note from="MultilingualBuild" priority="2" annotates="source">Abbreviation for megabyte</note>
-        </trans-unit>
+          
+        <note from="MultilingualBuild" annotates="source" priority="2">Abbreviation for megabyte</note></trans-unit>
         <trans-unit id="Resx/No" translate="yes" xml:space="preserve">
           <source>no</source>
           <target state="translated" state-qualifier="exact-match">tidak</target>
@@ -262,83 +262,83 @@
         <trans-unit id="Resx/PartOfWhole" translate="yes" xml:space="preserve">
           <source>{0} of {1}</source>
           <target state="translated" state-qualifier="exact-match">{0} daripada {1}</target>
-          <note from="MultilingualBuild" priority="2" annotates="source">Default text for displaying a part of a whole, where {0} is the part and {1} is the whole, as in "5 of 10"</note>
-        </trans-unit>
+          
+        <note from="MultilingualBuild" annotates="source" priority="2">Default text for displaying a part of a whole, where {0} is the part and {1} is the whole, as in "5 of 10"</note></trans-unit>
         <trans-unit id="Resx/Pause" translate="yes" xml:space="preserve">
           <source>pause</source>
           <target state="translated" state-qualifier="exact-match">jeda</target>
-          <note from="MultilingualBuild" priority="2" annotates="source">Menu action item for pausing a download</note>
-        </trans-unit>
+          
+        <note from="MultilingualBuild" annotates="source" priority="2">Menu action item for pausing a download</note></trans-unit>
         <trans-unit id="Resx/Resume" translate="yes" xml:space="preserve">
           <source>resume</source>
           <target state="translated" state-qualifier="exact-match">teruskan</target>
-          <note from="MultilingualBuild" priority="2" annotates="source">Menu action item for resuming a paused download</note>
-        </trans-unit>
+          
+        <note from="MultilingualBuild" annotates="source" priority="2">Menu action item for resuming a paused download</note></trans-unit>
         <trans-unit id="Resx/StatusCancelled" translate="yes" xml:space="preserve">
           <source>Canceled</source>
           <target state="translated" state-qualifier="exact-match">Dibatalkan</target>
-          <note from="MultilingualBuild" priority="2" annotates="source">Status displayed when a file download has been cancelled, as used by TransferControl</note>
-        </trans-unit>
+          
+        <note from="MultilingualBuild" annotates="source" priority="2">Status displayed when a file download has been cancelled, as used by TransferControl</note></trans-unit>
         <trans-unit id="Resx/StatusComplete" translate="yes" xml:space="preserve">
           <source>complete</source>
           <target state="translated" state-qualifier="exact-match">selesai</target>
-          <note from="MultilingualBuild" priority="2" annotates="source">Status displayed when a file has finished uploading, as used by TransferControl</note>
-        </trans-unit>
+          
+        <note from="MultilingualBuild" annotates="source" priority="2">Status displayed when a file has finished uploading, as used by TransferControl</note></trans-unit>
         <trans-unit id="Resx/StatusDownloading" translate="yes" xml:space="preserve">
           <source>Downloading...</source>
           <target state="translated" state-qualifier="exact-match">Memuat turun...</target>
-          <note from="MultilingualBuild" priority="2" annotates="source">Status displayed when a file is downloading, used by TransferControl</note>
-        </trans-unit>
+          
+        <note from="MultilingualBuild" annotates="source" priority="2">Status displayed when a file is downloading, used by TransferControl</note></trans-unit>
         <trans-unit id="Resx/StatusFailed" translate="yes" xml:space="preserve">
           <source>Error</source>
           <target state="translated" state-qualifier="exact-match">Ralat</target>
-          <note from="MultilingualBuild" priority="2" annotates="source">Status displayed when an error occurs in downloading a file, , as used by TransferControl</note>
-        </trans-unit>
+          
+        <note from="MultilingualBuild" annotates="source" priority="2">Status displayed when an error occurs in downloading a file, , as used by TransferControl</note></trans-unit>
         <trans-unit id="Resx/StatusPaused" translate="yes" xml:space="preserve">
           <source>paused</source>
           <target state="translated" state-qualifier="exact-match">dijeda</target>
-          <note from="MultilingualBuild" priority="2" annotates="source">Status displayed when a file download is paused, as used by TransferControl</note>
-        </trans-unit>
+          
+        <note from="MultilingualBuild" annotates="source" priority="2">Status displayed when a file download is paused, as used by TransferControl</note></trans-unit>
         <trans-unit id="Resx/StatusPending" translate="yes" xml:space="preserve">
           <source>Pending</source>
           <target state="translated" state-qualifier="exact-match">Belum selesai</target>
-          <note from="MultilingualBuild" priority="2" annotates="source">Status displayed when a file download is pending, as used by TransferControl</note>
-        </trans-unit>
+          
+        <note from="MultilingualBuild" annotates="source" priority="2">Status displayed when a file download is pending, as used by TransferControl</note></trans-unit>
         <trans-unit id="Resx/StatusUnknown" translate="yes" xml:space="preserve">
           <source>unknown</source>
           <target state="translated" state-qualifier="exact-match">tidak diketahui</target>
-          <note from="MultilingualBuild" priority="2" annotates="source">Status displayed when the status of a file download is unknown, as used by TransferControl</note>
-        </trans-unit>
+          
+        <note from="MultilingualBuild" annotates="source" priority="2">Status displayed when the status of a file download is unknown, as used by TransferControl</note></trans-unit>
         <trans-unit id="Resx/StatusUploading" translate="yes" xml:space="preserve">
           <source>Uploading...</source>
           <target state="translated" state-qualifier="exact-match">Memuat naik...</target>
-          <note from="MultilingualBuild" priority="2" annotates="source">Status displayed when a file is uploading, , as used by TransferControl</note>
-        </trans-unit>
+          
+        <note from="MultilingualBuild" annotates="source" priority="2">Status displayed when a file is uploading, , as used by TransferControl</note></trans-unit>
         <trans-unit id="Resx/StatusWaiting" translate="yes" xml:space="preserve">
           <source>Waiting...</source>
           <target state="translated" state-qualifier="exact-match">Menunggu...</target>
-          <note from="MultilingualBuild" priority="2" annotates="source">Status displayed when a file download is waiting, as used by TransferControl</note>
-        </trans-unit>
+          
+        <note from="MultilingualBuild" annotates="source" priority="2">Status displayed when a file download is waiting, as used by TransferControl</note></trans-unit>
         <trans-unit id="Resx/StatusWaitingForExternalPower" translate="yes" xml:space="preserve">
           <source>Waiting...</source>
           <target state="translated" state-qualifier="exact-match">Menunggu...</target>
-          <note from="MultilingualBuild" priority="2" annotates="source">Status displayed when a file download is waiting for external power, as used by TransferControl</note>
-        </trans-unit>
+          
+        <note from="MultilingualBuild" annotates="source" priority="2">Status displayed when a file download is waiting for external power, as used by TransferControl</note></trans-unit>
         <trans-unit id="Resx/StatusWaitingForExternalPowerDueToBatterySaverMode" translate="yes" xml:space="preserve">
           <source>Low battery</source>
           <target state="translated" state-qualifier="exact-match">Bateri lemah</target>
-          <note from="MultilingualBuild" priority="2" annotates="source">Status displayed when a file download is waiting for external power, as used by TransferControl</note>
-        </trans-unit>
+          
+        <note from="MultilingualBuild" annotates="source" priority="2">Status displayed when a file download is waiting for external power, as used by TransferControl</note></trans-unit>
         <trans-unit id="Resx/StatusWaitingForNonVoiceBlockingNetwork" translate="yes" xml:space="preserve">
           <source>Waiting for connection</source>
           <target state="translated" state-qualifier="exact-match">Menunggu sambungan</target>
-          <note from="MultilingualBuild" priority="2" annotates="source">Status displayed when a file download is waiting for the network to unblock as used by TransferControl</note>
-        </trans-unit>
+          
+        <note from="MultilingualBuild" annotates="source" priority="2">Status displayed when a file download is waiting for the network to unblock as used by TransferControl</note></trans-unit>
         <trans-unit id="Resx/StatusWaitingForWiFi" translate="yes" xml:space="preserve">
           <source>Waiting for Wi-Fi</source>
           <target state="translated" state-qualifier="exact-match">Menunggu Wi-Fi</target>
-          <note from="MultilingualBuild" priority="2" annotates="source">Status displayed when a file download is waiting for wifi, as used by TransferControl</note>
-        </trans-unit>
+          
+        <note from="MultilingualBuild" annotates="source" priority="2">Status displayed when a file download is waiting for wifi, as used by TransferControl</note></trans-unit>
         <trans-unit id="Resx/Yes" translate="yes" xml:space="preserve">
           <source>yes</source>
           <target state="translated" state-qualifier="exact-match">ya</target>
@@ -346,7 +346,11 @@
         <trans-unit id="Resx/ShowPassword" translate="yes" xml:space="preserve">
           <source>Show password</source>
           <target state="translated">Tunjukkan kata laluan</target>
-          <note from="MultilingualBuild" priority="2" annotates="source">Default text for the "Show password" check box used by PhonePasswordBox.</note>
+          
+        <note from="MultilingualBuild" annotates="source" priority="2">Default text for the "Show password" check box used by PhonePasswordBox.</note></trans-unit>
+        <trans-unit translate="yes" id="Resx/Copy" xml:space="preserve">
+          <source>copy</source>
+          <target state="translated">salin</target>
         </trans-unit>
       </group>
     </body>

@@ -52,6 +52,7 @@ namespace PhoneToolkitSample8
                 new SampleItem("/Samples/PhoneSliderSample.xaml","phoneslider","add new features to the slider" ),
                 new SampleItem("/Samples/PhoneTextBoxSample.xaml","phonetextbox","add new features to the textbox" ),
                 new SampleItem("/Samples/PickerBoxSample.xaml","pickerbox","select either a single item or multiple items" ),
+                new SampleItem("/Samples/PropertyUISample.xaml","propertyui","interactive property presenter with context menu" ),
                 new SampleItem("/Samples/SpeechTextBoxSample.xaml","speechtextbox","a speech-enabled phonetextbox" ),
                 new SampleItem("/Samples/RadioButtonGroupSample.xaml","radiobuttongroup","a group of radio buttons" ),
                 new SampleItem("/Samples/RatingControlSample.xaml","ratingcontrol","simple control for star-based rating" ),

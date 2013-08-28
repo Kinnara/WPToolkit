@@ -14,7 +14,7 @@
     xmlns:controls="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls"
     xmlns:controlsPrimitives="clr-namespace:Microsoft.Phone.Controls.Primitives;assembly=Microsoft.Phone.Controls"
     xmlns:toolkit="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit"
-    xmlns:localControls="clr-namespace:PhoneToolkitSample.LocalControls;assembly=PhoneToolkitSample"
+    xmlns:system="clr-namespace:System.Windows.Controls;assembly=Microsoft.Phone.Controls.Toolkit"
     xmlns:sys="clr-namespace:System;assembly=mscorlib">
 
     <!--Application Resources-->
@@ -34,7 +34,7 @@
             </Setter>
         </Style>
 
-        <Style x:Key="MultilineHyperlinkStyle" TargetType="localControls:HeaderedContentControl">
+        <Style x:Key="MultilineHyperlinkStyle" TargetType="system:HeaderedContentControl">
             <Setter Property="HorizontalAlignment" Value="Stretch"/>
             <Setter Property="HorizontalContentAlignment" Value="Left"/>
             <Setter Property="Margin" Value="0,0,0,39"/>

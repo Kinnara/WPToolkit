@@ -386,4 +386,11 @@
     <value>[85C67][!!_вÿťêš_!!]</value>
     <comment>Abbreviation for byte</comment>
   </data>
+  <data name="ShowPassword" xml:space="preserve">
+    <value>[8897B][!!_Šħòẅ рáśšŵòŕđ_!!]</value>
+    <comment>Default text for the "Show password" check box used by PhonePasswordBox.</comment>
+  </data>
+  <data name="Copy" xml:space="preserve">
+    <value>[63430][!!_ćòрў_!!]</value>
+  </data>
 </root>

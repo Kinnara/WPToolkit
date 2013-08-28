@@ -178,9 +178,6 @@ ar-SA;az-Latn-AZ;be-BY;bg-BG;ca-ES;cs-CZ;da-DK;de-DE;el-GR;en-GB;en-US;es-ES;es-
     <Compile Include="..\PhoneToolkitSample\Extensions.cs">
       <Link>Extensions.cs</Link>
     </Compile>
-    <Compile Include="..\PhoneToolkitSample\HeaderedContentControl.cs">
-      <Link>HeaderedContentControl.cs</Link>
-    </Compile>
     <Compile Include="..\PhoneToolkitSample\Samples\AccentColorPickerPage.xaml.cs">
       <Link>Samples\AccentColorPickerPage.xaml.cs</Link>
       <DependentUpon>AccentColorPickerPage.xaml</DependentUpon>
@@ -273,6 +270,10 @@ ar-SA;az-Latn-AZ;be-BY;bg-BG;ca-ES;cs-CZ;da-DK;de-DE;el-GR;en-GB;en-US;es-ES;es-
     <Compile Include="..\PhoneToolkitSample\Samples\PickerBoxSample.xaml.cs">
       <Link>Samples\PickerBoxSample.xaml.cs</Link>
       <DependentUpon>PickerBoxSample.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="..\PhoneToolkitSample\Samples\PropertyUISample.xaml.cs">
+      <Link>Samples\PropertyUISample.xaml.cs</Link>
+      <DependentUpon>PropertyUISample.xaml</DependentUpon>
     </Compile>
     <Compile Include="..\PhoneToolkitSample\Samples\RadioButtonGroupSample.xaml.cs">
       <Link>Samples\RadioButtonGroupSample.xaml.cs</Link>
@@ -496,6 +497,11 @@ ar-SA;az-Latn-AZ;be-BY;bg-BG;ca-ES;cs-CZ;da-DK;de-DE;el-GR;en-GB;en-US;es-ES;es-
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="..\PhoneToolkitSample\Samples\PropertyUISample.xaml">
+      <Link>Samples\PropertyUISample.xaml</Link>
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="..\PhoneToolkitSample\Samples\RadioButtonGroupSample.xaml">
       <Link>Samples\RadioButtonGroupSample.xaml</Link>
       <Generator>MSBuild:Compile</Generator>
@@ -608,10 +614,6 @@ ar-SA;az-Latn-AZ;be-BY;bg-BG;ca-ES;cs-CZ;da-DK;de-DE;el-GR;en-GB;en-US;es-ES;es-
     <Page Include="Settings.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Themes\Generic.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
     </Page>
   </ItemGroup>
   <ItemGroup>

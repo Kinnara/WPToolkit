@@ -390,4 +390,7 @@
     <value>Vis adgangskode</value>
     <comment>Default text for the "Show password" check box used by PhonePasswordBox.</comment>
   </data>
+  <data name="Copy" xml:space="preserve">
+    <value>kopiér</value>
+  </data>
 </root>

@@ -390,4 +390,7 @@
     <value>비밀번호 표시</value>
     <comment>Default text for the "Show password" check box used by PhonePasswordBox.</comment>
   </data>
+  <data name="Copy" xml:space="preserve">
+    <value>복사</value>
+  </data>
 </root>
