@@ -25,6 +25,9 @@ An extended password box which implements header, placeholder text, and a show p
 **PhoneSlider**  
 An extended Slider which implements tick marks and snap points.
 
+**PropertyUI**  
+Interactive property presenter with copy context menu.
+
 **RadioButtonGroup**  
 More easily implement a group of radio buttons.
 
