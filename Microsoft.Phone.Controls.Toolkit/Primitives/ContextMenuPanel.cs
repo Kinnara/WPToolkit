@@ -3,7 +3,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
 
-namespace Microsoft.Phone.Controls
+namespace Microsoft.Phone.Controls.Primitives
 {
     /// <summary>
     /// Implements a custom Panel for the ContextMenu control.

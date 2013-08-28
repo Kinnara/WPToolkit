@@ -398,7 +398,7 @@
         <Setter Property="ItemsPanel">
             <Setter.Value>
                 <ItemsPanelTemplate>
-                    <controls:ContextMenuPanel/>
+                    <primitives:ContextMenuPanel/>
                 </ItemsPanelTemplate>
             </Setter.Value>
         </Setter>
@@ -2402,10 +2402,10 @@
         </Setter>
     </Style>
 
-    <Style TargetType="controls:WaitCursorControl">
+    <Style TargetType="primitives:WaitCursorControl">
         <Setter Property="Template">
             <Setter.Value>
-                <ControlTemplate TargetType="controls:WaitCursorControl">
+                <ControlTemplate TargetType="primitives:WaitCursorControl">
                     <Border x:Name="LayoutRoot" Background="{TemplateBinding Background}">
                         <VisualStateManager.VisualStateGroups>
                             <VisualStateGroup x:Name="VisibilityStates">

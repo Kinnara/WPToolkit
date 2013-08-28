@@ -224,9 +224,6 @@
     <Compile Include="..\Microsoft.Phone.Controls.Toolkit\ContextMenu\ContextMenu.cs">
       <Link>ContextMenu\ContextMenu.cs</Link>
     </Compile>
-    <Compile Include="..\Microsoft.Phone.Controls.Toolkit\ContextMenu\ContextMenuPanel.cs">
-      <Link>ContextMenu\ContextMenuPanel.cs</Link>
-    </Compile>
     <Compile Include="..\Microsoft.Phone.Controls.Toolkit\ContextMenu\ContextMenuService.cs">
       <Link>ContextMenu\ContextMenuService.cs</Link>
     </Compile>
@@ -403,6 +400,12 @@
     <Compile Include="..\Microsoft.Phone.Controls.Toolkit\Input\GestureListener.cs">
       <Link>Input\GestureListener.cs</Link>
     </Compile>
+    <Compile Include="..\Microsoft.Phone.Controls.Toolkit\Primitives\ContextMenuPanel.cs">
+      <Link>Primitives\ContextMenuPanel.cs</Link>
+    </Compile>
+    <Compile Include="..\Microsoft.Phone.Controls.Toolkit\Primitives\WaitCursorControl.cs">
+      <Link>Primitives\WaitCursorControl.cs</Link>
+    </Compile>
     <Compile Include="..\Microsoft.Phone.Controls.Toolkit\PropertyUI\PropertyUI.cs">
       <Link>PropertyUI\PropertyUI.cs</Link>
     </Compile>
@@ -475,9 +478,6 @@
     </Compile>
     <Compile Include="..\Microsoft.Phone.Controls.Toolkit\WaitCursor\WaitCursor.cs">
       <Link>WaitCursor\WaitCursor.cs</Link>
-    </Compile>
-    <Compile Include="..\Microsoft.Phone.Controls.Toolkit\WaitCursor\WaitCursorControl.cs">
-      <Link>WaitCursor\WaitCursorControl.cs</Link>
     </Compile>
     <Compile Include="..\Microsoft.Phone.Controls.Toolkit\WaitCursor\WaitCursorService.cs">
       <Link>WaitCursor\WaitCursorService.cs</Link>

@@ -5,7 +5,7 @@ using System.Windows.Controls.Primitives;
 using System.Windows.Data;
 using System.Windows.Media;
 
-namespace Microsoft.Phone.Controls
+namespace Microsoft.Phone.Controls.Primitives
 {
     /// <summary>
     /// Represents a wait cursor in Windows Phone applications.
