@@ -4,6 +4,9 @@ Includes fixes, improvements, and more controls.
 
 ## Highlights
 
+**ApplicationBarSubmenu**  
+Submenu for an application bar item.
+
 **FlipView**  
 Lets people flip through items one at a time. Similar to the WinRT FlipView.
 
