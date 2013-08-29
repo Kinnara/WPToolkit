@@ -156,8 +156,8 @@
     <Compile Include="Samples\FlipViewSample.xaml.cs">
       <DependentUpon>FlipViewSample.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Samples\ImageButtonSample.xaml.cs">
-      <DependentUpon>ImageButtonSample.xaml</DependentUpon>
+    <Compile Include="Samples\ButtonsSample.xaml.cs">
+      <DependentUpon>ButtonsSample.xaml</DependentUpon>
     </Compile>
     <Compile Include="Samples\PhonePasswordBoxSample.xaml.cs">
       <DependentUpon>PhonePasswordBoxSample.xaml</DependentUpon>
@@ -307,7 +307,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Samples\ImageButtonSample.xaml">
+    <Page Include="Samples\ButtonsSample.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -471,6 +471,8 @@
     <Content Include="Images\start.arrownext.dark.rest.png" />
     <Content Include="Images\start.search.rest.png" />
     <Content Include="Images\SteakSandwich.jpg" />
+    <Content Include="Images\toggle.off.png" />
+    <Content Include="Images\toggle.on.png" />
     <Content Include="Images\Venice.jpg" />
     <Content Include="Images\Search.png" />
     <Content Include="Toolkit.Content\ApplicationBar.Add.png" />

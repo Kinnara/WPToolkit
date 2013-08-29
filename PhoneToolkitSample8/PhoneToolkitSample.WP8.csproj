@@ -196,6 +196,10 @@ ar-SA;az-Latn-AZ;be-BY;bg-BG;ca-ES;cs-CZ;da-DK;de-DE;el-GR;en-GB;en-US;es-ES;es-
     <Compile Include="..\PhoneToolkitSample\Samples\BackgroundTransferQueueSample.xaml.cs">
       <Link>Samples\BackgroundTransferQueueSample.xaml.cs</Link>
     </Compile>
+    <Compile Include="..\PhoneToolkitSample\Samples\ButtonsSample.xaml.cs">
+      <Link>Samples\ButtonsSample.xaml.cs</Link>
+      <DependentUpon>ButtonsSample.xaml</DependentUpon>
+    </Compile>
     <Compile Include="..\PhoneToolkitSample\Samples\ContextMenuPositionTest.xaml.cs">
       <Link>Samples\ContextMenuPositionTest.xaml.cs</Link>
     </Compile>
@@ -234,10 +238,6 @@ ar-SA;az-Latn-AZ;be-BY;bg-BG;ca-ES;cs-CZ;da-DK;de-DE;el-GR;en-GB;en-US;es-ES;es-
     <Compile Include="..\PhoneToolkitSample\Samples\HubTileSample.xaml.cs">
       <Link>Samples\HubTileSample.xaml.cs</Link>
       <DependentUpon>HubTileSample.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="..\PhoneToolkitSample\Samples\ImageButtonSample.xaml.cs">
-      <Link>Samples\ImageButtonSample.xaml.cs</Link>
-      <DependentUpon>ImageButtonSample.xaml</DependentUpon>
     </Compile>
     <Compile Include="..\PhoneToolkitSample\Samples\ListPickerSample.xaml.cs">
       <Link>Samples\ListPickerSample.xaml.cs</Link>
@@ -403,6 +403,11 @@ ar-SA;az-Latn-AZ;be-BY;bg-BG;ca-ES;cs-CZ;da-DK;de-DE;el-GR;en-GB;en-US;es-ES;es-
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="..\PhoneToolkitSample\Samples\ButtonsSample.xaml">
+      <Link>Samples\ButtonsSample.xaml</Link>
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="..\PhoneToolkitSample\Samples\ContextMenuPositionTest.xaml">
       <Link>Samples\ContextMenuPositionTest.xaml</Link>
       <SubType>Designer</SubType>
@@ -449,11 +454,6 @@ ar-SA;az-Latn-AZ;be-BY;bg-BG;ca-ES;cs-CZ;da-DK;de-DE;el-GR;en-GB;en-US;es-ES;es-
     </Page>
     <Page Include="..\PhoneToolkitSample\Samples\HubTileSample.xaml">
       <Link>Samples\HubTileSample.xaml</Link>
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="..\PhoneToolkitSample\Samples\ImageButtonSample.xaml">
-      <Link>Samples\ImageButtonSample.xaml</Link>
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -697,6 +697,12 @@ ar-SA;az-Latn-AZ;be-BY;bg-BG;ca-ES;cs-CZ;da-DK;de-DE;el-GR;en-GB;en-US;es-ES;es-
     </Content>
     <Content Include="..\PhoneToolkitSample\Images\SteakSandwich.jpg">
       <Link>Images\SteakSandwich.jpg</Link>
+    </Content>
+    <Content Include="..\PhoneToolkitSample\Images\toggle.off.png">
+      <Link>Images\toggle.off.png</Link>
+    </Content>
+    <Content Include="..\PhoneToolkitSample\Images\toggle.on.png">
+      <Link>Images\toggle.on.png</Link>
     </Content>
     <Content Include="..\PhoneToolkitSample\Images\Venice.jpg">
       <Link>Images\Venice.jpg</Link>

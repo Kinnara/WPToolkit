@@ -58,6 +58,66 @@ namespace Microsoft.Phone.Controls
 
         #endregion
 
+        #region public double ImageWidth
+
+        /// <summary>
+        /// Gets or sets the width of the image.
+        /// </summary>
+        /// 
+        /// <returns>
+        /// The width of the image, in pixels. The default is <see cref="F:System.Double.NaN"/>.
+        /// </returns>
+        public double ImageWidth
+        {
+            get { return (double)GetValue(ImageWidthProperty); }
+            set { SetValue(ImageWidthProperty, value); }
+        }
+
+        /// <summary>
+        /// Identifies the <see cref="P:Microsoft.Phone.Controls.ImageButton.ImageWidth"/> dependency property.
+        /// </summary>
+        /// 
+        /// <returns>
+        /// The identifier for the <see cref="P:Microsoft.Phone.Controls.ImageButton.ImageWidth"/> dependency property.
+        /// </returns>
+        public static readonly DependencyProperty ImageWidthProperty = DependencyProperty.Register(
+            "ImageWidth",
+            typeof(double),
+            typeof(ImageButton),
+            new PropertyMetadata(double.NaN));
+
+        #endregion
+
+        #region public double ImageHeight
+
+        /// <summary>
+        /// Gets or sets the height of the image.
+        /// </summary>
+        /// 
+        /// <returns>
+        /// The height of the image, in pixels. The default is <see cref="F:System.Double.NaN"/>.
+        /// </returns>
+        public double ImageHeight
+        {
+            get { return (double)GetValue(ImageHeightProperty); }
+            set { SetValue(ImageHeightProperty, value); }
+        }
+
+        /// <summary>
+        /// Identifies the <see cref="P:Microsoft.Phone.Controls.ImageButton.ImageHeight"/> dependency property.
+        /// </summary>
+        /// 
+        /// <returns>
+        /// The identifier for the <see cref="P:Microsoft.Phone.Controls.ImageButton.ImageHeight"/> dependency property.
+        /// </returns>
+        public static readonly DependencyProperty ImageHeightProperty = DependencyProperty.Register(
+            "ImageHeight",
+            typeof(double),
+            typeof(ImageButton),
+            new PropertyMetadata(double.NaN));
+
+        #endregion
+
         #region public CornerRadius CornerRadius
 
         /// <summary>

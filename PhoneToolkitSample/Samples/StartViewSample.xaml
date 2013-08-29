@@ -62,7 +62,7 @@
                     <ColumnDefinition/>
                 </Grid.ColumnDefinitions>
 
-                <toolkit:ImageButton ImageSource="/Images/start.search.rest.png" Margin="1,51,0,0" VerticalAlignment="Top" Canvas.ZIndex="1"/>
+                <toolkit:ImageButton ImageSource="/Images/start.search.rest.png" Margin="1,51,0,0" Canvas.ZIndex="1"/>
 
                 <ScrollViewer Grid.ColumnSpan="2" Margin="-12,0">
                     <ItemsControl x:Name="AppList" Margin="90,63,0,82">

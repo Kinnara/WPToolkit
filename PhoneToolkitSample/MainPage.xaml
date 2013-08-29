@@ -45,6 +45,13 @@
                                 Header="autocompletebox"
                                 Content="completion of text based on items"/>
                         </HyperlinkButton>
+                        <HyperlinkButton NavigateUri="/Samples/ButtonsSample.xaml"
+                                         Style="{StaticResource HyperlinkEmptyStyle}">
+                            <system:HeaderedContentControl
+                                Style="{StaticResource MultilineHyperlinkStyle}"
+                                Header="buttons"
+                                Content="image button and toggle image button"/>
+                        </HyperlinkButton>
                         <HyperlinkButton NavigateUri="/Samples/ContextMenuSample.xaml"
                                          Style="{StaticResource HyperlinkEmptyStyle}">
                             <system:HeaderedContentControl
@@ -107,13 +114,6 @@
                                 Style="{StaticResource MultilineHyperlinkStyle}"
                                 Header="hubtile"
                                 Content="tile control that is animated and alive"/>
-                        </HyperlinkButton>
-                        <HyperlinkButton NavigateUri="/Samples/ImageButtonSample.xaml"
-                                         Style="{StaticResource HyperlinkEmptyStyle}">
-                            <system:HeaderedContentControl
-                                Style="{StaticResource MultilineHyperlinkStyle}"
-                                Header="imagebutton"
-                                Content="button control which has an image as its content"/>
                         </HyperlinkButton>
                         <HyperlinkButton NavigateUri="/Samples/ListPickerSample.xaml"
                                          Style="{StaticResource HyperlinkEmptyStyle}">

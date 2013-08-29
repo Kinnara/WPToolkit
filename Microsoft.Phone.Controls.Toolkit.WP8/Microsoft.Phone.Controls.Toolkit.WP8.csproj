@@ -140,6 +140,12 @@
     <Compile Include="..\Microsoft.Phone.Controls.Toolkit\BasePage\BasePage.cs">
       <Link>BasePage\BasePage.cs</Link>
     </Compile>
+    <Compile Include="..\Microsoft.Phone.Controls.Toolkit\Buttons\ImageButton.cs">
+      <Link>Buttons\ImageButton.cs</Link>
+    </Compile>
+    <Compile Include="..\Microsoft.Phone.Controls.Toolkit\Buttons\ToggleImageButton.cs">
+      <Link>Buttons\ToggleImageButton.cs</Link>
+    </Compile>
     <Compile Include="..\Microsoft.Phone.Controls.Toolkit\Common\AnimationHelper.cs">
       <Link>Common\AnimationHelper.cs</Link>
     </Compile>
@@ -357,9 +363,6 @@
     </Compile>
     <Compile Include="..\Microsoft.Phone.Controls.Toolkit\HeaderedContentControl\HeaderedContentControl.cs">
       <Link>HeaderedContentControl\HeaderedContentControl.cs</Link>
-    </Compile>
-    <Compile Include="..\Microsoft.Phone.Controls.Toolkit\ImageButton\ImageButton.cs">
-      <Link>ImageButton\ImageButton.cs</Link>
     </Compile>
     <Compile Include="..\microsoft.phone.controls.toolkit\itemsstackpanel\ItemsStackPanel.cs">
       <Link>ItemsStackPanel\ItemsStackPanel.cs</Link>

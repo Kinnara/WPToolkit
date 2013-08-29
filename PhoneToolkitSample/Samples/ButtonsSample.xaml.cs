@@ -3,9 +3,9 @@ using System.Windows;
 
 namespace PhoneToolkitSample.Samples
 {
-    public partial class ImageButtonSample : BasePage
+    public partial class ButtonsSample : BasePage
     {
-        public ImageButtonSample()
+        public ButtonsSample()
         {
             InitializeComponent();
         }

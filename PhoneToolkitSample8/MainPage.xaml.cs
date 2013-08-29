@@ -29,6 +29,7 @@ namespace PhoneToolkitSample8
             _samples = new SampleItem[] {
                 new SampleItem("/Samples/ApplicationBarSubmenuSample.xaml","applicationbarsubmenu","submenu for an application bar item" ),
                 new SampleItem("/Samples/AutoCompleteBoxSample.xaml","autocompletebox","completion of text based on items" ),
+                new SampleItem("/Samples/ButtonsSample.xaml","buttons","image button and toggle image button" ),
                 new SampleItem("/Samples/ContextMenuSample.xaml","contextmenu","tap & hold menu options control" ),
                 new SampleItem("/Samples/CustomMessageBoxSample.xaml","custommessagebox","a modular dialog box to display notifications" ),
                 new SampleItem("/Samples/DateTimeConvertersSample.xaml","date+time converters","localized time display for data binding" ),
@@ -38,7 +39,6 @@ namespace PhoneToolkitSample8
                 new SampleItem("/Samples/FlipViewSample.xaml","flipview","lets people flip through items one at a time" ),
                 new SampleItem("/Samples/GestureSample.xaml","gestures*","a gesture service for tap pinch, etc." ),
                 new SampleItem("/Samples/HubTileSample.xaml","hubtile","tile control that is animated and alive" ),
-                new SampleItem("/Samples/ImageButtonSample.xaml","imagebutton","button control which has an image as its content" ),
                 new SampleItem("/Samples/LabelSample.xaml","label","add new features to the textblock" ),
                 new SampleItem("/Samples/ListPickerSample.xaml","listpicker","pick a single item from a list of potential options" ),
                 new SampleItem("/Samples/ListViewSample.xaml","listview","list control with incremental loading and more" ),
