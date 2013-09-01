@@ -8,17 +8,11 @@ namespace Microsoft.Phone.Controls
     /// <summary>
     /// Represents a control that is a ToggleButton which has an image as its content. 
     /// </summary>
-    [TemplatePart(Name = ElementImageBrushName, Type = typeof(ImageBrush))]
-    [TemplatePart(Name = ElementCheckedImageBrushName, Type = typeof(ImageBrush))]
     [TemplatePart(Name = ElementTextLabelName, Type = typeof(TextBlock))]
     public class ToggleImageButton : ToggleButton
     {
-        private const string ElementImageBrushName = "ImageBrush";
-        private const string ElementCheckedImageBrushName = "CheckedImageBrush";
         private const string ElementTextLabelName = "TextLabel";
 
-        private ImageBrush ElementImageBrush { get; set; }
-        private ImageBrush ElementCheckedImageBrush { get; set; }
         private TextBlock ElementTextLabel { get; set; }
 
         /// <summary>
@@ -60,7 +54,7 @@ namespace Microsoft.Phone.Controls
 
         private void OnImageSourceChanged()
         {
-            UpdateImageBrushes();
+            UpdateActualCheckedImageSource();
         }
 
         #endregion
@@ -95,68 +89,36 @@ namespace Microsoft.Phone.Controls
 
         private void OnCheckedImageSourceChanged()
         {
-            UpdateImageBrushes();
+            UpdateActualCheckedImageSource();
         }
 
         #endregion
 
-        #region public double ImageWidth
+        #region public ImageSource ActualCheckedImageSource
 
         /// <summary>
-        /// Gets or sets the width of the image.
+        /// Gets the actual image displayed by this <see cref="T:Microsoft.Phone.Controls.ToggleImageButton"/> when checked.
         /// </summary>
         /// 
         /// <returns>
-        /// The width of the image, in pixels. The default is <see cref="F:System.Double.NaN"/>.
+        /// The actual image displayed by this <see cref="T:Microsoft.Phone.Controls.ToggleImageButton"/> when checked.
         /// </returns>
-        public double ImageWidth
+        public ImageSource ActualCheckedImageSource
         {
-            get { return (double)GetValue(ImageWidthProperty); }
-            set { SetValue(ImageWidthProperty, value); }
+            get { return (ImageSource)GetValue(ActualCheckedImageSourceProperty); }
+            private set { SetValue(ActualCheckedImageSourceProperty, value); }
         }
 
-        /// <summary>
-        /// Identifies the <see cref="P:Microsoft.Phone.Controls.ToggleImageButton.ImageWidth"/> dependency property.
-        /// </summary>
-        /// 
-        /// <returns>
-        /// The identifier for the <see cref="P:Microsoft.Phone.Controls.ToggleImageButton.ImageWidth"/> dependency property.
-        /// </returns>
-        public static readonly DependencyProperty ImageWidthProperty = DependencyProperty.Register(
-            "ImageWidth",
-            typeof(double),
+        private static readonly DependencyProperty ActualCheckedImageSourceProperty = DependencyProperty.Register(
+            "ActualCheckedImageSource",
+            typeof(ImageSource),
             typeof(ToggleImageButton),
-            new PropertyMetadata(double.NaN));
+            null);
 
-        #endregion
-
-        #region public double ImageHeight
-
-        /// <summary>
-        /// Gets or sets the height of the image.
-        /// </summary>
-        /// 
-        /// <returns>
-        /// The height of the image, in pixels. The default is <see cref="F:System.Double.NaN"/>.
-        /// </returns>
-        public double ImageHeight
+        private void UpdateActualCheckedImageSource()
         {
-            get { return (double)GetValue(ImageHeightProperty); }
-            set { SetValue(ImageHeightProperty, value); }
+            ActualCheckedImageSource = CheckedImageSource ?? ImageSource;
         }
-
-        /// <summary>
-        /// Identifies the <see cref="P:Microsoft.Phone.Controls.ToggleImageButton.ImageHeight"/> dependency property.
-        /// </summary>
-        /// 
-        /// <returns>
-        /// The identifier for the <see cref="P:Microsoft.Phone.Controls.ToggleImageButton.ImageHeight"/> dependency property.
-        /// </returns>
-        public static readonly DependencyProperty ImageHeightProperty = DependencyProperty.Register(
-            "ImageHeight",
-            typeof(double),
-            typeof(ToggleImageButton),
-            new PropertyMetadata(double.NaN));
 
         #endregion
 
@@ -242,25 +204,10 @@ namespace Microsoft.Phone.Controls
         {
             base.OnApplyTemplate();
 
-            ElementImageBrush = GetTemplateChild(ElementImageBrushName) as ImageBrush;
-            ElementCheckedImageBrush = GetTemplateChild(ElementCheckedImageBrushName) as ImageBrush;
             ElementTextLabel = GetTemplateChild(ElementTextLabelName) as TextBlock;
 
-            UpdateImageBrushes();
+            UpdateActualCheckedImageSource();
             UpdateTextLabelVisibility();
-        }
-
-        private void UpdateImageBrushes()
-        {
-            if (ElementImageBrush != null)
-            {
-                ElementImageBrush.ImageSource = ImageSource;
-            }
-
-            if (ElementCheckedImageBrush != null)
-            {
-                ElementCheckedImageBrush.ImageSource = CheckedImageSource ?? ImageSource;
-            }
         }
     }
 }

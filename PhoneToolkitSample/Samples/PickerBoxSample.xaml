@@ -117,8 +117,8 @@
                                                 CornerRadius="0"
                                                 ImageSource="{Binding Content, RelativeSource={RelativeSource Self}}"
                                                 Padding="18"
-                                                ImageWidth="24"
-                                                ImageHeight="24"/>
+                                                Width="84"
+                                                Height="84"/>
                                         </StackPanel>
                                     </ControlTemplate>
                                 </Setter.Value>

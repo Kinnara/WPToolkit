@@ -2936,8 +2936,8 @@
         <Setter Property="BorderThickness" Value="{StaticResource PhoneBorderThickness}"/>
         <Setter Property="HorizontalAlignment" Value="Left"/>
         <Setter Property="VerticalAlignment" Value="Top"/>
-        <Setter Property="ImageWidth" Value="43"/>
-        <Setter Property="ImageHeight" Value="43"/>
+        <Setter Property="Width" Value="67"/>
+        <Setter Property="Height" Value="67"/>
         <Setter Property="CornerRadius" Value="1500"/>
 
         <Setter Property="Template">
@@ -2950,7 +2950,7 @@
                                 <VisualState x:Name="MouseOver"/>
                                 <VisualState x:Name="Pressed">
                                     <Storyboard>
-                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="Image" Storyboard.TargetProperty="Fill">
+                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="Image" Storyboard.TargetProperty="Foreground">
                                             <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource PhoneButtonBasePressedForegroundBrush}" />
                                         </ObjectAnimationUsingKeyFrames>
                                         <ObjectAnimationUsingKeyFrames Storyboard.TargetName="ButtonBackground" Storyboard.TargetProperty="Background">
@@ -2960,7 +2960,7 @@
                                 </VisualState>
                                 <VisualState x:Name="Disabled">
                                     <Storyboard>
-                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="Image" Storyboard.TargetProperty="Fill">
+                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="Image" Storyboard.TargetProperty="Foreground">
                                             <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource PhoneDisabledBrush}" />
                                         </ObjectAnimationUsingKeyFrames>
                                         <ObjectAnimationUsingKeyFrames Storyboard.TargetName="ButtonBackground" Storyboard.TargetProperty="BorderBrush">
@@ -2975,12 +2975,7 @@
                         </VisualStateManager.VisualStateGroups>
                         <Border x:Name="ButtonBackground" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" CornerRadius="{TemplateBinding CornerRadius}" Background="{TemplateBinding Background}" Margin="{StaticResource PhoneTouchTargetOverhang}" />
                         <Border Padding="{TemplateBinding Padding}">
-                            <Rectangle x:Name="Image" Fill="{TemplateBinding Foreground}" Margin="{StaticResource PhoneTouchTargetOverhang}"
-                                       Width="{TemplateBinding ImageWidth}" Height="{TemplateBinding ImageHeight}">
-                                <Rectangle.OpacityMask>
-                                    <ImageBrush x:Name="ImageBrush" />
-                                </Rectangle.OpacityMask>
-                            </Rectangle>
+                            <controls:ThemedImage x:Name="Image" Foreground="{TemplateBinding Foreground}" Margin="{StaticResource PhoneTouchTargetOverhang}" Source="{TemplateBinding ImageSource}"/>
                         </Border>
                     </Grid>
                 </ControlTemplate>
@@ -2995,8 +2990,7 @@
         <Setter Property="BorderThickness" Value="{StaticResource PhoneBorderThickness}"/>
         <Setter Property="HorizontalAlignment" Value="Left"/>
         <Setter Property="VerticalAlignment" Value="Top"/>
-        <Setter Property="ImageWidth" Value="48"/>
-        <Setter Property="ImageHeight" Value="48"/>
+        <Setter Property="Width" Value="72"/>
 
         <Setter Property="Template">
             <Setter.Value>
@@ -3021,10 +3015,10 @@
                                                 </DiscreteObjectKeyFrame.Value>
                                             </DiscreteObjectKeyFrame>
                                         </ObjectAnimationUsingKeyFrames>
-                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="Image" Storyboard.TargetProperty="Fill">
+                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="Image" Storyboard.TargetProperty="Foreground">
                                             <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource PhoneDisabledBrush}" />
                                         </ObjectAnimationUsingKeyFrames>
-                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="CheckedImage" Storyboard.TargetProperty="Fill">
+                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="CheckedImage" Storyboard.TargetProperty="Foreground">
                                             <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource PhoneBackgroundBrush}" />
                                         </ObjectAnimationUsingKeyFrames>
                                         <ObjectAnimationUsingKeyFrames Storyboard.TargetName="TextLabel" Storyboard.TargetProperty="Foreground">
@@ -3064,8 +3058,7 @@
                                 </VisualState>
                             </VisualStateGroup>
                         </VisualStateManager.VisualStateGroups>
-                        <Grid Width="{TemplateBinding ImageWidth}"
-                              Margin="{StaticResource PhoneTouchTargetOverhang}">
+                        <Grid Margin="{StaticResource PhoneTouchTargetOverhang}">
                             <Grid.RowDefinitions>
                                 <RowDefinition/>
                                 <RowDefinition Height="Auto"/>
@@ -3082,17 +3075,14 @@
                                     BorderThickness="{TemplateBinding BorderThickness}"
                                     CornerRadius="{TemplateBinding CornerRadius}"
                                     Visibility="Collapsed"/>
-                            <Grid Height="{TemplateBinding ImageHeight}">
-                                <Rectangle x:Name="Image" Fill="{TemplateBinding Foreground}">
-                                    <Rectangle.OpacityMask>
-                                        <ImageBrush x:Name="ImageBrush" />
-                                    </Rectangle.OpacityMask>
-                                </Rectangle>
-                                <Rectangle x:Name="CheckedImage" Fill="White" Visibility="Collapsed">
-                                    <Rectangle.OpacityMask>
-                                        <ImageBrush x:Name="CheckedImageBrush" />
-                                    </Rectangle.OpacityMask>
-                                </Rectangle>
+                            <Grid Margin="{TemplateBinding Padding}">
+                                <controls:ThemedImage x:Name="Image"
+                                                      Foreground="{TemplateBinding Foreground}"
+                                                      Source="{TemplateBinding ImageSource}"/>
+                                <controls:ThemedImage x:Name="CheckedImage"
+                                                      Foreground="{StaticResource PhoneButtonBasePressedForegroundBrush}"
+                                                      Source="{TemplateBinding ActualCheckedImageSource}"
+                                                      Visibility="Collapsed"/>
                             </Grid>
                             <TextBlock x:Name="TextLabel"
                                        Grid.Row="1"
@@ -3473,6 +3463,21 @@
                             </Grid>
                         </Button>
                     </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    
+    <Style TargetType="controls:ThemedImage">
+        <Setter Property="Foreground" Value="{StaticResource PhoneForegroundBrush}"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="controls:ThemedImage">
+                    <Rectangle Fill="{TemplateBinding Foreground}">
+                        <Rectangle.OpacityMask>
+                            <ImageBrush x:Name="ImageBrush" />
+                        </Rectangle.OpacityMask>
+                    </Rectangle>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>

@@ -7,13 +7,8 @@ namespace Microsoft.Phone.Controls
     /// <summary>
     /// Represents a control that is a Button which has an image as its content. 
     /// </summary>
-    [TemplatePart(Name = ElementImageBrushName, Type = typeof(ImageBrush))]
     public class ImageButton : Button
     {
-        private const string ElementImageBrushName = "ImageBrush";
-
-        private ImageBrush ElementImageBrush { get; set; }
-
         /// <summary>
         /// Initializes a new instance of the
         /// <see cref="T:Microsoft.Phone.Controls.ImageButton" /> class.
@@ -49,72 +44,7 @@ namespace Microsoft.Phone.Controls
             "ImageSource",
             typeof(ImageSource),
             typeof(ImageButton),
-            new PropertyMetadata((d, e) => ((ImageButton)d).OnImageSourceChanged()));
-
-        private void OnImageSourceChanged()
-        {
-            UpdateImageBrush();
-        }
-
-        #endregion
-
-        #region public double ImageWidth
-
-        /// <summary>
-        /// Gets or sets the width of the image.
-        /// </summary>
-        /// 
-        /// <returns>
-        /// The width of the image, in pixels. The default is <see cref="F:System.Double.NaN"/>.
-        /// </returns>
-        public double ImageWidth
-        {
-            get { return (double)GetValue(ImageWidthProperty); }
-            set { SetValue(ImageWidthProperty, value); }
-        }
-
-        /// <summary>
-        /// Identifies the <see cref="P:Microsoft.Phone.Controls.ImageButton.ImageWidth"/> dependency property.
-        /// </summary>
-        /// 
-        /// <returns>
-        /// The identifier for the <see cref="P:Microsoft.Phone.Controls.ImageButton.ImageWidth"/> dependency property.
-        /// </returns>
-        public static readonly DependencyProperty ImageWidthProperty = DependencyProperty.Register(
-            "ImageWidth",
-            typeof(double),
-            typeof(ImageButton),
-            new PropertyMetadata(double.NaN));
-
-        #endregion
-
-        #region public double ImageHeight
-
-        /// <summary>
-        /// Gets or sets the height of the image.
-        /// </summary>
-        /// 
-        /// <returns>
-        /// The height of the image, in pixels. The default is <see cref="F:System.Double.NaN"/>.
-        /// </returns>
-        public double ImageHeight
-        {
-            get { return (double)GetValue(ImageHeightProperty); }
-            set { SetValue(ImageHeightProperty, value); }
-        }
-
-        /// <summary>
-        /// Identifies the <see cref="P:Microsoft.Phone.Controls.ImageButton.ImageHeight"/> dependency property.
-        /// </summary>
-        /// 
-        /// <returns>
-        /// The identifier for the <see cref="P:Microsoft.Phone.Controls.ImageButton.ImageHeight"/> dependency property.
-        /// </returns>
-        public static readonly DependencyProperty ImageHeightProperty = DependencyProperty.Register(
-            "ImageHeight",
-            typeof(double),
-            typeof(ImageButton),
-            new PropertyMetadata(double.NaN));
+            null);
 
         #endregion
 
@@ -147,27 +77,5 @@ namespace Microsoft.Phone.Controls
             null);
 
         #endregion
-
-        /// <summary>
-        /// Builds the visual tree for the
-        /// <see cref="T:Microsoft.Phone.Controls.ImageButton" /> control
-        /// when a new template is applied.
-        /// </summary>
-        public override void OnApplyTemplate()
-        {
-            base.OnApplyTemplate();
-
-            ElementImageBrush = GetTemplateChild(ElementImageBrushName) as ImageBrush;
-
-            UpdateImageBrush();
-        }
-
-        private void UpdateImageBrush()
-        {
-            if (ElementImageBrush != null)
-            {
-                ElementImageBrush.ImageSource = ImageSource;
-            }
-        }
     }
 }
