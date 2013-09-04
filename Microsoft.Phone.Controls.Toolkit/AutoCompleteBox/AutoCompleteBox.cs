@@ -709,20 +709,9 @@ namespace Microsoft.Phone.Controls
             }
 
             source.OnSelectionChanged(new SelectionChangedEventArgs(
-#if !SILVERLIGHT
-                SelectionChangedEvent,
-#endif
                 removed,
                 added));
         }
-
-#if !SILVERLIGHT
-        /// <summary>
-        /// Declares the routed event for SelectionChanged.
-        /// </summary>
-        public static readonly RoutedEvent SelectionChangedEvent = EventManager.RegisterRoutedEvent(
-            "SelectionChanged", RoutingStrategy.Bubble, typeof(SelectionChangedEventHandler), typeof(AutoCompleteBox));
-#endif
 
         /// <summary>
         /// Called when the selected item is changed, updates the text value
@@ -1390,17 +1379,8 @@ namespace Microsoft.Phone.Controls
         {
             if (TextBox != null)
             {
-#if SILVERLIGHT
-#if WINDOWS_PHONE
                 TextBox.RemoveHandler(UIElement.KeyDownEvent, new KeyEventHandler(OnUIElementKeyDown));
                 TextBox.RemoveHandler(UIElement.KeyUpEvent, new KeyEventHandler(OnUIElementKeyUp));
-#else
-                TextBox.RemoveHandler(TextBox.TextInputStartEvent, new TextCompositionEventHandler(OnTextBoxTextInputStart));
-                TextBox.RemoveHandler(TextBox.TextInputEvent, new TextCompositionEventHandler(OnTextBoxTextInput));
-#endif
-#else
-                TextBox.PreviewKeyDown -= OnTextBoxPreviewKeyDown;
-#endif
             }
 
             if (DropDownPopup != null)
@@ -1454,18 +1434,8 @@ namespace Microsoft.Phone.Controls
             TextBox = GetTemplateChild(AutoCompleteBox.ElementTextBox) as TextBox;
             if (TextBox != null)
             {
-#if SILVERLIGHT
-#if WINDOWS_PHONE
-                TextBox.CacheMode = new BitmapCache();
                 TextBox.AddHandler(UIElement.KeyDownEvent, new KeyEventHandler(OnUIElementKeyDown), true);
                 TextBox.AddHandler(UIElement.KeyUpEvent, new KeyEventHandler(OnUIElementKeyUp), true);
-#else
-                TextBox.AddHandler(TextBox.TextInputStartEvent, new TextCompositionEventHandler(OnTextBoxTextInputStart), true);
-                TextBox.AddHandler(TextBox.TextInputEvent, new TextCompositionEventHandler(OnTextBoxTextInput), true);
-#endif
-#else
-                TextBox.PreviewKeyDown += OnTextBoxPreviewKeyDown;
-#endif
             }
 
             Interaction.OnApplyTemplateBase();

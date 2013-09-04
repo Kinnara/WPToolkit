@@ -546,6 +546,7 @@ namespace Microsoft.Phone.Controls
         public PhoneTextBox()
         {
             DefaultStyleKey = typeof(PhoneTextBox);
+            CacheMode = new BitmapCache();
             TextChanged += OnTextChanged;
         }
 

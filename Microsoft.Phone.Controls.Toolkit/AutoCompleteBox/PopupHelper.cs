@@ -443,7 +443,6 @@ namespace Microsoft.Phone.Controls
                 // canvas a single time.
                 if (PopupChild != null && !_hasControlLoaded)
                 {
-#if SILVERLIGHT
                     _hasControlLoaded = true;
 
                     // Replace the popup child with a canvas
@@ -456,7 +455,6 @@ namespace Microsoft.Phone.Controls
 
                     PopupChildCanvas.Children.Add(OutsidePopupCanvas);
                     PopupChildCanvas.Children.Add(PopupChild);
-#endif
 
                     PopupChild.GotFocus += PopupChild_GotFocus;
                     PopupChild.LostFocus += PopupChild_LostFocus;

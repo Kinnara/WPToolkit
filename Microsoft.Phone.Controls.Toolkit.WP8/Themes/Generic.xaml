@@ -1681,7 +1681,6 @@
                                        FontSize="{StaticResource PhoneFontSizeNormal}"
                                        Opacity="0"
                                        Visibility="Collapsed"
-                                       CacheMode="BitmapCache"
                                        x:Name="LengthIndicator">
                                 <TextBlock.RenderTransform >
                                     <TranslateTransform />
@@ -1720,8 +1719,7 @@
                                             Padding="{TemplateBinding Padding}"
                                             HorizontalContentAlignment="Stretch"
                                             VerticalContentAlignment="Stretch"
-                                            Margin="{StaticResource PhoneTextBoxInnerMargin}"
-                                            CacheMode="BitmapCache"/>
+                                            Margin="{StaticResource PhoneTextBoxInnerMargin}"/>
                         </Border>
                         <primitives:TiltUserControl
                             HorizontalAlignment="Right"
