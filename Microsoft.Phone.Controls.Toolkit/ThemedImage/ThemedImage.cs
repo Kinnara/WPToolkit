@@ -44,11 +44,11 @@ namespace Microsoft.Phone.Controls
         }
 
         /// <summary>
-        /// Identifies the <see cref="P:System.Windows.Controls.Image.Source"/> dependency property.
+        /// Identifies the <see cref="P:Microsoft.Phone.Controls.ThemedImage.Source"/> dependency property.
         /// </summary>
         /// 
         /// <returns>
-        /// The identifier for the <see cref="P:System.Windows.Controls.Image.Source"/> dependency property.
+        /// The identifier for the <see cref="P:Microsoft.Phone.Controls.ThemedImage.Source"/> dependency property.
         /// </returns>
         public static readonly DependencyProperty SourceProperty = DependencyProperty.Register(
             "Source",
@@ -75,11 +75,11 @@ namespace Microsoft.Phone.Controls
         #region public Stretch Stretch
 
         /// <summary>
-        /// Gets or sets a value that describes how an <see cref="T:System.Windows.Controls.Image"/> should be stretched to fill the destination rectangle.
+        /// Gets or sets a value that describes how an <see cref="T:Microsoft.Phone.Controls.ThemedImage"/> should be stretched to fill the destination rectangle.
         /// </summary>
         /// 
         /// <returns>
-        /// <see cref="T:System.Windows.Media.Stretch"/>A value of the enumeration that specifies how the source image is applied if the <see cref="P:System.Windows.FrameworkElement.Height"/> and <see cref="P:System.Windows.FrameworkElement.Width"/> of the <see cref="T:System.Windows.Controls.Image"/> are specified and are different than the source image's height and width.The default value is Uniform.
+        /// <see cref="T:System.Windows.Media.Stretch"/>A value of the enumeration that specifies how the source image is applied if the <see cref="P:System.Windows.FrameworkElement.Height"/> and <see cref="P:System.Windows.FrameworkElement.Width"/> of the <see cref="T:Microsoft.Phone.Controls.ThemedImage.Source"/> are specified and are different than the source image's height and width.The default value is Uniform.
         /// </returns>
         public Stretch Stretch
         {
@@ -88,11 +88,11 @@ namespace Microsoft.Phone.Controls
         }
 
         /// <summary>
-        /// Identifies the <see cref="P:System.Windows.Controls.Image.Stretch"/> dependency property.
+        /// Identifies the <see cref="P:Microsoft.Phone.Controls.ThemedImage.Source.Stretch"/> dependency property.
         /// </summary>
         /// 
         /// <returns>
-        /// The identifier for the <see cref="P:System.Windows.Controls.Image.Stretch"/> dependency property.
+        /// The identifier for the <see cref="P:Microsoft.Phone.Controls.ThemedImage.Source.Stretch"/> dependency property.
         /// </returns>
         public static readonly DependencyProperty StretchProperty = DependencyProperty.Register(
             "Stretch",
@@ -190,18 +190,6 @@ namespace Microsoft.Phone.Controls
             ApplyStretch();
         }
 
-        private void OnImageFailed(object sender, ExceptionRoutedEventArgs e)
-        {
-            SafeRaise.Raise(ImageFailed, this, e);
-        }
-
-        private void OnImageOpened(object sender, RoutedEventArgs e)
-        {
-            SafeRaise.Raise(ImageOpened, this, e);
-
-            UpdateImageSize();
-        }
-
         /// <summary>
         /// Handles the measure pass for the control.
         /// </summary>
@@ -287,6 +275,18 @@ namespace Microsoft.Phone.Controls
             {
                 _inMeasure = false;
             }
+        }
+
+        private void OnImageFailed(object sender, ExceptionRoutedEventArgs e)
+        {
+            SafeRaise.Raise(ImageFailed, this, e);
+        }
+
+        private void OnImageOpened(object sender, RoutedEventArgs e)
+        {
+            SafeRaise.Raise(ImageOpened, this, e);
+
+            UpdateImageSize();
         }
     }
 }
