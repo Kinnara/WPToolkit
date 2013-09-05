@@ -10,8 +10,8 @@ Submenu for an application bar item.
 **FlipView**  
 Lets people flip through items one at a time. Similar to the WinRT FlipView.
 
-**ImageButton**  
-Button control which has an image as its content.
+**ImageButton + ToggleImageButton**  
+Button/ToggleButton control which has an image as its content.
 
 **Label**  
 Enhanced text control that supports MaxLines and TextLineBounds. A rich set of standard styles are provided.
