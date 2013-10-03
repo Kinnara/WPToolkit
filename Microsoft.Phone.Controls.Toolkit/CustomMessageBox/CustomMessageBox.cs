@@ -688,7 +688,13 @@ namespace Microsoft.Phone.Controls
                 if (_hasApplicationBar)
                 {
                     _hasApplicationBar = false;
-                    _page.ApplicationBar.IsVisible = true;
+
+                    // Application bar can be nulled during the Dismissed event
+                    // so a null check needs to be performed here.
+                    if (_page.ApplicationBar != null)
+                    {
+                        _page.ApplicationBar.IsVisible = true;
+                    }
                 }                
             }
 
