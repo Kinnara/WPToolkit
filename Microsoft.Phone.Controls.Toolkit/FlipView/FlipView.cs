@@ -25,9 +25,9 @@ namespace Microsoft.Phone.Controls
 
         private const double CompressLimit = 125;
         private static readonly Duration ZeroDuration = TimeSpan.Zero;
-        private static readonly Duration DefaultDuration = TimeSpan.FromSeconds(0.5);
+        private static readonly Duration DefaultDuration = TimeSpan.FromSeconds(0.55);
 
-        private readonly IEasingFunction _easingFunction = new ExponentialEase { Exponent = 5 };
+        private readonly IEasingFunction _easingFunction = new ExponentialEase { Exponent = 8 };
 
         private InitializingData _initializingData;
         private bool _updatingSelection;
