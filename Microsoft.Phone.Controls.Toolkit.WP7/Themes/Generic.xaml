@@ -2974,7 +2974,6 @@
                         <ScrollViewer x:Name="ScrollViewer"
                                       HorizontalScrollBarVisibility="Disabled"
                                       VerticalScrollBarVisibility="Disabled"
-                                      ManipulationMode="Control"
                                       Padding="{TemplateBinding Padding}">
                             <ItemsPresenter x:Name="ItemsPresenter"/>
                         </ScrollViewer>

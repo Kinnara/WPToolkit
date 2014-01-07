@@ -3103,6 +3103,7 @@
         <Setter Property="Background" Value="Transparent"/>
         <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
         <Setter Property="VerticalContentAlignment" Value="Stretch"/>
+        <Setter Property="UseOptimizedManipulationRouting" Value="False"/>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="controls:FlipViewItem">
@@ -3139,7 +3140,6 @@
                         <ScrollViewer x:Name="ScrollViewer"
                                       HorizontalScrollBarVisibility="Disabled"
                                       VerticalScrollBarVisibility="Disabled"
-                                      ManipulationMode="Control"
                                       Padding="{TemplateBinding Padding}">
                             <ItemsPresenter x:Name="ItemsPresenter"/>
                         </ScrollViewer>

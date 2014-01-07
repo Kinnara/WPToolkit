@@ -53,5 +53,59 @@ namespace Microsoft.Phone.Controls
                 ParentFlipView.NotifyItemSelected(this, newValue);
             }
         }
+
+        /// <summary>
+        /// Called when the <see cref="E:System.Windows.UIElement.ManipulationStarted" /> event occurs.
+        /// This member overrides
+        /// <see cref="M:System.Windows.Controls.Control.OnManipulationStarted(System.Windows.Input.ManipulationStartedEventArgs)" />.
+        /// </summary>
+        /// <param name="e">Event data for the event.</param>
+        protected override void OnManipulationStarted(System.Windows.Input.ManipulationStartedEventArgs e)
+        {
+            base.OnManipulationStarted(e);
+
+            if (ParentFlipView != null)
+            {
+                ParentFlipView.OnManipulationStarted(this, e);
+            }
+
+            e.Handled = true;
+        }
+
+        /// <summary>
+        /// Called when the <see cref="E:System.Windows.UIElement.ManipulationDelta" /> event occurs.
+        /// This member overrides
+        /// <see cref="M:System.Windows.Controls.Control.OnManipulationDelta(System.Windows.Input.ManipulationDeltaEventArgs)" />.
+        /// </summary>
+        /// <param name="e">Event data for the event.</param>
+        protected override void OnManipulationDelta(System.Windows.Input.ManipulationDeltaEventArgs e)
+        {
+            base.OnManipulationDelta(e);
+
+            if (ParentFlipView != null)
+            {
+                ParentFlipView.OnManipulationDelta(this, e);
+            }
+
+            e.Handled = true;
+        }
+
+        /// <summary>
+        /// Called when the <see cref="E:System.Windows.UIElement.ManipulationCompleted" /> event occurs.
+        /// This member overrides
+        /// <see cref="M:System.Windows.Controls.Control.OnManipulationCompleted(System.Windows.Input.ManipulationCompletedEventArgs)" />.
+        /// </summary>
+        /// <param name="e">Event data for the event.</param>
+        protected override void OnManipulationCompleted(System.Windows.Input.ManipulationCompletedEventArgs e)
+        {
+            base.OnManipulationCompleted(e);
+
+            if (ParentFlipView != null)
+            {
+                ParentFlipView.OnManipulationCompleted(this, e);
+            }
+
+            e.Handled = true;
+        }
     }
 }

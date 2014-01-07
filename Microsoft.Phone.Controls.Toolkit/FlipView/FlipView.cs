@@ -56,10 +56,7 @@ namespace Microsoft.Phone.Controls
 
             Loaded += OnLoaded;
             Unloaded += OnUnloaded;
-
-            ManipulationStarted += OnManipulationStarted;
-            ManipulationDelta += OnManipulationDelta;
-            ManipulationCompleted += OnManipulationCompleted;
+            SizeChanged += OnSizeChanged;
         }
 
         #region SelectedIndex
@@ -631,20 +628,6 @@ namespace Microsoft.Phone.Controls
                 }
                 else
                 {
-                    if (ElementScrollViewer.ViewportHeight != 1)
-                    {
-                        for (int i = 0; i < ElementScrollViewer.ExtentHeight; i++)
-                        {
-                            ElementScrollViewer.ScrollToVerticalOffset(i);
-                            ElementScrollViewer.UpdateLayout();
-
-                            if (ElementScrollViewer.ViewportHeight == 1)
-                            {
-                                break;
-                            }
-                        }
-                    }
-
                     ElementScrollViewer.ScrollToVerticalOffset(index);
                 }
             }
@@ -662,7 +645,12 @@ namespace Microsoft.Phone.Controls
             _loaded = false;
         }
 
-        private void OnManipulationStarted(object sender, ManipulationStartedEventArgs e)
+        private void OnSizeChanged(object sender, SizeChangedEventArgs e)
+        {
+            ScrollSelectionIntoView();
+        }
+
+        internal void OnManipulationStarted(object sender, ManipulationStartedEventArgs e)
         {
             _gestureSource = new WeakReference(e.ManipulationContainer);
             _gestureOrigin = e.ManipulationOrigin;
@@ -670,7 +658,7 @@ namespace Microsoft.Phone.Controls
             _dragging = false;
         }
 
-        private void OnManipulationDelta(object sender, ManipulationDeltaEventArgs e)
+        internal void OnManipulationDelta(object sender, ManipulationDeltaEventArgs e)
         {
             if (!_dragging)
             {
@@ -694,7 +682,7 @@ namespace Microsoft.Phone.Controls
             }
         }
 
-        private void OnManipulationCompleted(object sender, ManipulationCompletedEventArgs e)
+        internal void OnManipulationCompleted(object sender, ManipulationCompletedEventArgs e)
         {
             ManipulationDelta totalManipulation = null;
 
@@ -883,10 +871,16 @@ namespace Microsoft.Phone.Controls
                 FrameworkElement gestureSource = _gestureSource.Target as FrameworkElement;
                 if (gestureSource != null)
                 {
-                    foreach (UIElement element in VisualTreeHelper.FindElementsInHostCoordinates(
-                            gestureSource.TransformToVisual(null).Transform(_gestureOrigin), Application.Current.RootVisual))
+                    try
                     {
-                        element.ReleaseMouseCapture();
+                        foreach (UIElement element in VisualTreeHelper.FindElementsInHostCoordinates(
+                                gestureSource.TransformToVisual(null).Transform(_gestureOrigin), Application.Current.RootVisual))
+                        {
+                            element.ReleaseMouseCapture();
+                        }
+                    }
+                    catch (ArgumentException)
+                    {
                     }
                 }
             }
@@ -1054,7 +1048,14 @@ namespace Microsoft.Phone.Controls
                     return null;
                 }
 
-                return container.RenderTransform as CompositeTransform;
+                CompositeTransform transform = container.RenderTransform as CompositeTransform;
+                if (transform == null)
+                {
+                    transform = new CompositeTransform();
+                    container.RenderTransform = transform;
+                }
+
+                return transform;
             }
         }
 
