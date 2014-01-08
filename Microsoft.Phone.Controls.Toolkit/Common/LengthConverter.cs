@@ -10,11 +10,7 @@ using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
 using System.Windows.Controls;
 
-#if WINDOWS_PHONE
 namespace Microsoft.Phone.Controls
-#else
-namespace System.Windows.Controls
-#endif
 {
     /// <summary>
     /// Converts instances of other types to and from instances of a double that
@@ -103,11 +99,7 @@ namespace System.Windows.Controls
             {
                 string message = string.Format(
                     CultureInfo.CurrentCulture,
-#if WINDOWS_PHONE
                     Microsoft.Phone.Controls.Properties.
-#else
-                    Controls.Properties.
-#endif
                         Resources.TypeConverters_ConvertFrom_CannotConvertFromType,
                     GetType().Name,
                     "null");
@@ -145,11 +137,7 @@ namespace System.Windows.Controls
                 {
                     string message = string.Format(
                         CultureInfo.CurrentCulture,
-#if WINDOWS_PHONE
                         Microsoft.Phone.Controls.Properties.
-#else
-                        Controls.Properties.
-#endif
                             Resources.TypeConverters_Convert_CannotConvert,
                         GetType().Name,
                         text,

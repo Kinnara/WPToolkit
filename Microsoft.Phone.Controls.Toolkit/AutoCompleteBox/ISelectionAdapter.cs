@@ -9,11 +9,7 @@ using System.Windows.Automation.Peers;
 using System.Windows.Controls;
 using System.Windows.Input;
 
-#if WINDOWS_PHONE
 namespace Microsoft.Phone.Controls
-#else
-namespace System.Windows.Controls
-#endif
 {
     /// <summary>
     /// Defines an item collection, selection members, and key handling for the

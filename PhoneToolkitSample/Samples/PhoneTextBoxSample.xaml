@@ -55,7 +55,7 @@
                     <TextBlock Text="This control is currently experimental and we are looking for your feedback. If you have comments about the PhoneTextBox or other Toolkit controls, visit the Windows Phone Toolkit on CodePlex."
                                Margin="12" Style="{StaticResource PhoneTextSubtleStyle}" TextWrapping="Wrap" />
                     <HyperlinkButton Content="Toolkit on CodePlex" 
-                                     NavigateUri="http://silverlight.codeplex.com/"
+                                     NavigateUri="http://phone.codeplex.com/"
                                      TargetName="_self"
                                      Foreground="{StaticResource PhoneAccentBrush}"
                                      toolkit:TiltEffect.SuppressTilt="True" />

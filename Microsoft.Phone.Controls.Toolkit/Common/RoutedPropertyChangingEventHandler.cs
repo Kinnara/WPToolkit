@@ -3,11 +3,7 @@
 // Please see http://go.microsoft.com/fwlink/?LinkID=131993 for details.
 // All other rights reserved.
 
-#if WINDOWS_PHONE
 namespace Microsoft.Phone.Controls
-#else
-namespace System.Windows.Controls
-#endif
 {
     /// <summary>
     /// Represents methods that handle various routed events that track property

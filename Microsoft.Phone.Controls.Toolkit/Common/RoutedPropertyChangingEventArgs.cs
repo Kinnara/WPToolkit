@@ -6,11 +6,7 @@
 using System;
 using System.Windows;
 
-#if WINDOWS_PHONE
 namespace Microsoft.Phone.Controls
-#else
-namespace System.Windows.Controls
-#endif
 {
     /// <summary>
     /// Provides event data for various routed events that track property values

@@ -6,11 +6,7 @@
 using System;
 
 
-#if WINDOWS_PHONE
 namespace Microsoft.Phone.Controls
-#else
-namespace System.Windows.Controls
-#endif
 {
     /// <summary>
     /// A predefined set of filter functions for the known, built-in 

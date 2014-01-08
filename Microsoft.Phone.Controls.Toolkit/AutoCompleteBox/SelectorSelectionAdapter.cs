@@ -12,11 +12,7 @@ using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
 using System.Windows.Input;
 
-#if WINDOWS_PHONE
 namespace Microsoft.Phone.Controls
-#else
-namespace System.Windows.Controls
-#endif
 {
     /// <summary>
     /// Represents the selection adapter contained in the drop-down portion of
@@ -53,9 +49,6 @@ namespace System.Windows.Controls
                 if (_selector != null)
                 {
                     _selector.SelectionChanged -= OnSelectionChanged;
-#if !WINDOWS_PHONE
-                    _selector.MouseLeftButtonUp -= OnSelectorMouseLeftButtonUp;
-#endif
                 }
 
                 _selector = value;
@@ -63,9 +56,6 @@ namespace System.Windows.Controls
                 if (_selector != null)
                 {
                     _selector.SelectionChanged += OnSelectionChanged;
-#if !WINDOWS_PHONE
-                    _selector.MouseLeftButtonUp += OnSelectorMouseLeftButtonUp;
-#endif
                 }
             }
         }
@@ -180,18 +170,6 @@ namespace System.Windows.Controls
             }
         }
 
-#if !WINDOWS_PHONE
-        /// <summary>
-        /// Handles the mouse left button up event on the selector control.
-        /// </summary>
-        /// <param name="sender">The source object.</param>
-        /// <param name="e">The event data.</param>
-        private void OnSelectorMouseLeftButtonUp(object sender, MouseButtonEventArgs e)
-        {
-            OnCommit();
-        }
-#endif
-
         /// <summary>
         /// Handles the SelectionChanged event on the Selector control.
         /// </summary>
@@ -210,9 +188,7 @@ namespace System.Windows.Controls
                 handler(sender, e);
             }
 
-#if WINDOWS_PHONE
             OnCommit();
-#endif
         }
 
         /// <summary>

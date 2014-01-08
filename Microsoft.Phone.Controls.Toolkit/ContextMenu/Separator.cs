@@ -5,11 +5,7 @@
 
 using System.Windows.Controls;
 
-#if WINDOWS_PHONE
 namespace Microsoft.Phone.Controls
-#else
-namespace System.Windows.Controls
-#endif
 {
     /// <summary>
     /// Control that is used to separate items in items controls.

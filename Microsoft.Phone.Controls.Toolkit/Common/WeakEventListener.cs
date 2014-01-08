@@ -6,11 +6,7 @@
 using System;
 using System.Diagnostics.CodeAnalysis;
 
-#if WINDOWS_PHONE
 namespace Microsoft.Phone.Controls
-#else
-namespace System.Windows.Controls
-#endif
 {
     /// <summary>
     /// Implements a weak event listener that allows the owner to be garbage

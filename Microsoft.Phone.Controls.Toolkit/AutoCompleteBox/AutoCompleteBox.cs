@@ -1361,11 +1361,7 @@ namespace Microsoft.Phone.Controls
             Size r = base.ArrangeOverride(finalSize);
             if (DropDownPopup != null)
             {
-#if WINDOWS_PHONE
                 DropDownPopup.Arrange(finalSize);
-#else
-                DropDownPopup.Arrange();
-#endif
             }
             return r;
         }
@@ -1500,9 +1496,6 @@ namespace Microsoft.Phone.Controls
                 // When a popup closed visual state is present, the code path is 
                 // slightly different and the actual call to CloseDropDown will 
                 // be called only after the visual state's transition is done
-#if !WINDOWS_PHONE
-                RaiseExpandCollapseAutomationEvent(oldValue, false);
-#endif
                 if (!delayedClosingVisual)
                 {
                     CloseDropDown(oldValue, false);
@@ -1536,9 +1529,6 @@ namespace Microsoft.Phone.Controls
             }
             else
             {
-#if !WINDOWS_PHONE
-                RaiseExpandCollapseAutomationEvent(oldValue, true);
-#endif
                 OpenDropDown(oldValue, true);
             }
 
@@ -1584,24 +1574,13 @@ namespace Microsoft.Phone.Controls
             {
                 if (TextBox != null && TextBox.SelectionLength == 0)
                 {
-#if !WINDOWS_PHONE
-                    TextBox.SelectAll();
-#endif
-#if WINDOWS_PHONE
                     TextBox.Focus();
-#endif
                 }
             }
             else
             {
                 IsDropDownOpen = false;
                 _userCalledPopulate = false;
-#if !WINDOWS_PHONE
-                if (TextBox != null)
-                {
-                    TextBox.Select(TextBox.Text.Length, 0);
-                }
-#endif
             }
         }
 
@@ -1616,11 +1595,7 @@ namespace Microsoft.Phone.Controls
         protected bool HasFocus()
         {
             DependencyObject focused =
-#if SILVERLIGHT
  FocusManager.GetFocusedElement() as DependencyObject;
-#else
-                FocusManager.GetFocusedElement(this) as DependencyObject;
-#endif
             while (focused != null)
             {
                 if (object.ReferenceEquals(focused, this))
@@ -2130,11 +2105,7 @@ namespace Microsoft.Phone.Controls
                 OpeningDropDown(false);
                 if (DropDownPopup != null)
                 {
-#if WINDOWS_PHONE
                     DropDownPopup.Arrange(null);
-#else
-                    DropDownPopup.Arrange();
-#endif
                 }
             }
             else
@@ -2508,11 +2479,7 @@ namespace Microsoft.Phone.Controls
             if (DropDownPopup != null)
             {
                 DropDownPopup.MaxDropDownHeight = newValue;
-#if WINDOWS_PHONE
                 DropDownPopup.Arrange(null);
-#else
-                DropDownPopup.Arrange();
-#endif
             }
             UpdateVisualState(true);
         }

@@ -15,10 +15,6 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
 
-#if WINDOWS_PHONE
-
-#endif
-
 namespace Microsoft.Phone.Controls
 {
     /// <summary>
@@ -432,8 +428,6 @@ namespace Microsoft.Phone.Controls
             Point elementCenter = new Point(element.ActualWidth / 2, element.ActualHeight / 2);
             Point containerCenter;
 
-#if WINDOWS_PHONE
-
             // Need to special-case the frame to handle different orientations.
             PhoneApplicationFrame frame = container as PhoneApplicationFrame;
             if (frame != null)
@@ -452,9 +446,6 @@ namespace Microsoft.Phone.Controls
             {
                 containerCenter = new Point(container.ActualWidth / 2, container.ActualHeight / 2);
             }
-#else
-            containerCenter = new Point(container.ActualWidth / 2, container.ActualHeight / 2);
-#endif
 
             Point transformedElementCenter = element.TransformToVisual(container).Transform(elementCenter);
             Point result = new Point(containerCenter.X - transformedElementCenter.X, containerCenter.Y - transformedElementCenter.Y);

@@ -10,11 +10,7 @@ using System.Globalization;
 using System.Windows;
 using System.Windows.Controls;
 
-#if WINDOWS_PHONE
 namespace Microsoft.Phone.Controls
-#else
-namespace System.Windows.Controls
-#endif
 {
     /// <summary>
     /// Positions child elements sequentially from left to right or top to

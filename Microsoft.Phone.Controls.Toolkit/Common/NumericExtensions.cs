@@ -36,20 +36,6 @@ namespace System.Windows.Controls
             internal ulong IntegerValue;
         }
 
-#if !WINDOWS_PHONE
-        /// <summary>
-        /// Check if a number is zero.
-        /// </summary>
-        /// <param name="value">The number to check.</param>
-        /// <returns>True if the number is zero, false otherwise.</returns>
-        public static bool IsZero(this double value)
-        {
-            // We actually consider anything within an order of magnitude of
-            // epsilon to be zero
-            return Math.Abs(value) < 2.2204460492503131E-15;
-        }
-#endif
-
         /// <summary>
         /// Check if a number isn't really a number.
         /// </summary>
@@ -107,21 +93,5 @@ namespace System.Windows.Controls
             double b = left - right;
             return (-a < b) && (a > b);
         }
-
-#if !WINDOWS_PHONE
-        /// <summary>
-        /// Determine if one number is less than or close to another.
-        /// </summary>
-        /// <param name="left">First number.</param>
-        /// <param name="right">Second number.</param>
-        /// <returns>
-        /// True if the first number is less than or close to the second, false
-        /// otherwise.
-        /// </returns>
-        public static bool IsLessThanOrClose(double left, double right)
-        {
-            return (left < right) || AreClose(left, right);
-        }
-#endif
     }
 }

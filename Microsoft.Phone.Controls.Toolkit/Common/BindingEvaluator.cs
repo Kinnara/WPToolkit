@@ -6,11 +6,7 @@
 using System.Windows;
 using System.Windows.Data;
 
-#if WINDOWS_PHONE
 namespace Microsoft.Phone.Controls
-#else
-namespace System.Windows.Controls
-#endif
 {
     /// <summary>
     /// A framework element that permits a binding to be evaluated in a new data

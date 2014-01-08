@@ -5,11 +5,7 @@
 
 using System.Diagnostics.CodeAnalysis;
 
-#if WINDOWS_PHONE
 namespace Microsoft.Phone.Controls
-#else
-namespace System.Windows.Controls
-#endif
 {
     /// <summary>
     /// The IUpdateVisualState interface is used to provide the

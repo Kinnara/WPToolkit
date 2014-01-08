@@ -6,11 +6,7 @@
 using System.Collections;
 using System.Windows;
 
-#if WINDOWS_PHONE
 namespace Microsoft.Phone.Controls
-#else
-namespace System.Windows.Controls
-#endif
 {
     /// <summary>
     /// Provides data for the

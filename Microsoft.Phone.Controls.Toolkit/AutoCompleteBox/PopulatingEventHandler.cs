@@ -5,11 +5,7 @@
 
 using System.Diagnostics.CodeAnalysis;
 
-#if WINDOWS_PHONE
 namespace Microsoft.Phone.Controls
-#else
-namespace System.Windows.Controls
-#endif
 {
     /// <summary>
     /// Represents the method that will handle the

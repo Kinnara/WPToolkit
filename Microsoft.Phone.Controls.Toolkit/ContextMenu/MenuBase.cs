@@ -6,11 +6,7 @@
 using System.Windows;
 using System.Windows.Controls;
 
-#if WINDOWS_PHONE
 namespace Microsoft.Phone.Controls.Primitives
-#else
-namespace System.Windows.Controls.Primitives
-#endif
 {
     /// <summary>
     /// Represents a control that defines choices for users to select.

@@ -3,11 +3,7 @@
 // Please see http://go.microsoft.com/fwlink/?LinkID=131993 for details.
 // All other rights reserved.
 
-#if WINDOWS_PHONE
 namespace Microsoft.Phone.Controls
-#else
-namespace System.Windows.Controls
-#endif
 {
     // When adding to this enum, please update the OnFilterModePropertyChanged
     // in the AutoCompleteBox class that is used for validation.

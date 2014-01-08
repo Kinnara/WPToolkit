@@ -14,65 +14,6 @@ namespace System.Windows.Controls
     /// </summary>
     internal static partial class TypeConverters
     {
-#if !WINDOWS_PHONE
-        /// <summary>
-        /// Returns a value indicating whether this converter can convert an
-        /// object of the given type to an instance of the expected type.
-        /// </summary>
-        /// <typeparam name="T">Expected type of the converter.</typeparam>
-        /// <param name="sourceType">
-        /// The type of the source that is being evaluated for conversion.
-        /// </param>
-        /// <returns>
-        /// A value indicating whether the converter can convert the provided
-        /// type.
-        /// </returns>
-        internal static bool CanConvertFrom<T>(Type sourceType)
-        {
-            if (sourceType == null)
-            {
-                throw new ArgumentNullException("sourceType");
-            }
-            return (sourceType == typeof(string)) ||
-                typeof(T).IsAssignableFrom(sourceType);
-        }
-
-        /// <summary>
-        /// Attempts to convert a specified object to an instance of the
-        /// expected type.
-        /// </summary>
-        /// <typeparam name="T">Expected type of the converter.</typeparam>
-        /// <param name="converter">TypeConverter instance.</param>
-        /// <param name="value">The object being converted.</param>
-        /// <returns>
-        /// The instance of the expected type created from the converted object.
-        /// </returns>
-        internal static object ConvertFrom<T>(TypeConverter converter, object value)
-        {
-            Debug.Assert(converter != null, "converter should not be null!");
-
-            if (value is T)
-            {
-                // There's nothing to convert if it's already the correct type
-                return value;
-            }
-            else
-            {
-                // Otherwise throw an error
-                throw new NotSupportedException(string.Format(
-                    CultureInfo.CurrentCulture,
-#if WINDOWS_PHONE
-                    Microsoft.Phone.Controls.Toolkit.Properties.
-#else
-                    Controls.Properties.
-#endif
-                        Resources.TypeConverters_ConvertFrom_CannotConvertFromType,
-                    converter.GetType().Name,
-                    value != null ? value.GetType().FullName : "(null)"));
-            }
-        }
-#endif
-
         /// <summary>
         /// Determines whether conversion is possible to a specified type.
         /// </summary>
@@ -128,11 +69,7 @@ namespace System.Windows.Controls
             // Otherwise throw an error
             throw new NotSupportedException(string.Format(
                 CultureInfo.CurrentCulture,
-#if WINDOWS_PHONE
                 Microsoft.Phone.Controls.Properties.
-#else
-                Properties.
-#endif
                     Resources.TypeConverters_Convert_CannotConvert,
                 converter.GetType().Name,
                 value != null ? value.GetType().FullName : "(null)",
