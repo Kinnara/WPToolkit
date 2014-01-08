@@ -59,6 +59,7 @@ This sample and the sample code demonstrates how to use the new, improved LongLi
             Person person = buddies.SelectedItem as Person;
             if (person != null)
             {
+                buddies.SelectedItem = null;
                 NavigationService.Navigate(new Uri("/Samples/PersonDetail.xaml?ID=" + person.ID, UriKind.Relative));
             }
         }   
