@@ -626,8 +626,20 @@ ar-SA;az-Latn-AZ;be-BY;bg-BG;ca-ES;cs-CZ;da-DK;de-DE;el-GR;en-GB;en-US;es-ES;es-
     <Content Include="..\PhoneToolkitSample\Assets\AppBar\add.png">
       <Link>Assets\AppBar\add.png</Link>
     </Content>
+    <Content Include="..\PhoneToolkitSample\Assets\AppBar\back.png">
+      <Link>Assets\AppBar\back.png</Link>
+    </Content>
+    <Content Include="..\PhoneToolkitSample\Assets\AppBar\down.png">
+      <Link>Assets\AppBar\down.png</Link>
+    </Content>
+    <Content Include="..\PhoneToolkitSample\Assets\AppBar\next.png">
+      <Link>Assets\AppBar\next.png</Link>
+    </Content>
     <Content Include="..\PhoneToolkitSample\Assets\AppBar\statuspicker.png">
       <Link>Assets\AppBar\statuspicker.png</Link>
+    </Content>
+    <Content Include="..\PhoneToolkitSample\Assets\AppBar\up.png">
+      <Link>Assets\AppBar\up.png</Link>
     </Content>
     <Content Include="..\PhoneToolkitSample\Data\loremipsum.txt">
       <Link>Data\loremipsum.txt</Link>

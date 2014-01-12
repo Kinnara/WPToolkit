@@ -36,17 +36,23 @@
                 <RowDefinition/>
             </Grid.RowDefinitions>
 
-            <toolkit:PickerBox x:Name="OrientationPicker" Header="Orientation" Margin="0,10,0,26"/>
+            <StackPanel Margin="0,10,0,0">
+                <toolkit:PickerBox x:Name="OrientationPicker" Header="Orientation"/>
+                <CheckBox x:Name="UseTouchAnimationsForAllNavigationCheckBox" Content="Use touch animations for all navigation" IsChecked="True" Margin="0,0,-12,0"/>
+            </StackPanel>
 
             <toolkit:FlipView x:Name="HorizontalFlipView"
                               ItemTemplate="{StaticResource ItemTemplate}"
                               ItemsSource="{Binding}"
+                              UseTouchAnimationsForAllNavigation="{Binding IsChecked, ElementName=UseTouchAnimationsForAllNavigationCheckBox}"
                               Margin="-18,-6"
-                              Grid.Row="1"/>
+                              Grid.Row="1"
+                              SelectionChanged="HorizontalFlipView_SelectionChanged"/>
 
             <toolkit:FlipView x:Name="VerticalFlipView"
                               ItemTemplate="{StaticResource ItemTemplate}"
                               ItemsSource="{Binding}"
+                              UseTouchAnimationsForAllNavigation="{Binding IsChecked, ElementName=UseTouchAnimationsForAllNavigationCheckBox}"
                               Margin="-18,-6"
                               Grid.Row="1"
                               SelectedItem="{Binding SelectedItem, ElementName=HorizontalFlipView, Mode=TwoWay}"
@@ -79,5 +85,12 @@
             </VisualStateGroup>
         </VisualStateManager.VisualStateGroups>
     </toolkit:PageUI>
+    
+    <phone:PhoneApplicationPage.ApplicationBar>
+        <shell:ApplicationBar>
+            <shell:ApplicationBarIconButton x:Name="AppBarPrevious" IconUri="/Assets/AppBar/back.png" Text="previous" Click="AppBarPrevious_Click"/>
+            <shell:ApplicationBarIconButton x:Name="AppBarNext" IconUri="/Assets/AppBar/next.png" Text="next" Click="AppBarNext_Click"/>
+        </shell:ApplicationBar>
+    </phone:PhoneApplicationPage.ApplicationBar>
 
 </toolkit:BasePage>

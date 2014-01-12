@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using System.Diagnostics.CodeAnalysis;
+using System.Windows;
 using System.Windows.Controls;
 
 namespace Microsoft.Phone.Controls
@@ -60,6 +61,7 @@ namespace Microsoft.Phone.Controls
         /// <see cref="M:System.Windows.Controls.Control.OnManipulationStarted(System.Windows.Input.ManipulationStartedEventArgs)" />.
         /// </summary>
         /// <param name="e">Event data for the event.</param>
+        [SuppressMessage("Microsoft.Design", "CA1062:Validate arguments of public methods", MessageId = "0", Justification = "Standard pattern.")]
         protected override void OnManipulationStarted(System.Windows.Input.ManipulationStartedEventArgs e)
         {
             base.OnManipulationStarted(e);
@@ -78,6 +80,7 @@ namespace Microsoft.Phone.Controls
         /// <see cref="M:System.Windows.Controls.Control.OnManipulationDelta(System.Windows.Input.ManipulationDeltaEventArgs)" />.
         /// </summary>
         /// <param name="e">Event data for the event.</param>
+        [SuppressMessage("Microsoft.Design", "CA1062:Validate arguments of public methods", MessageId = "0", Justification = "Standard pattern.")]
         protected override void OnManipulationDelta(System.Windows.Input.ManipulationDeltaEventArgs e)
         {
             base.OnManipulationDelta(e);
@@ -96,6 +99,7 @@ namespace Microsoft.Phone.Controls
         /// <see cref="M:System.Windows.Controls.Control.OnManipulationCompleted(System.Windows.Input.ManipulationCompletedEventArgs)" />.
         /// </summary>
         /// <param name="e">Event data for the event.</param>
+        [SuppressMessage("Microsoft.Design", "CA1062:Validate arguments of public methods", MessageId = "0", Justification = "Standard pattern.")]
         protected override void OnManipulationCompleted(System.Windows.Input.ManipulationCompletedEventArgs e)
         {
             base.OnManipulationCompleted(e);

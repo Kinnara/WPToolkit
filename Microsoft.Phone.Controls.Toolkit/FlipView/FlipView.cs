@@ -153,6 +153,36 @@ namespace Microsoft.Phone.Controls
 
         #endregion
 
+        #region UseTouchAnimationsForAllNavigation
+
+        /// <summary>
+        /// Gets or sets a value that indicates whether transition animations are always used whether the navigation is touch-based and programmatic.
+        /// </summary>
+        /// 
+        /// <returns>
+        /// true if transition animations are always used; false if transition animations are used only for touch navigation. The default is true.
+        /// </returns>
+        public bool UseTouchAnimationsForAllNavigation
+        {
+            get { return (bool)GetValue(UseTouchAnimationsForAllNavigationProperty); }
+            set { SetValue(UseTouchAnimationsForAllNavigationProperty, value); }
+        }
+
+        /// <summary>
+        /// Identifies the UseTouchAnimationsForAllNavigation dependency property.
+        /// </summary>
+        /// 
+        /// <returns>
+        /// The identifier for the UseTouchAnimationsForAllNavigation dependency property.
+        /// </returns>
+        public static readonly DependencyProperty UseTouchAnimationsForAllNavigationProperty = DependencyProperty.Register(
+            "UseTouchAnimationsForAllNavigation",
+            typeof(bool),
+            typeof(FlipView),
+            new PropertyMetadata(true));
+
+        #endregion
+
         #region IsSelected
 
         internal static readonly DependencyProperty IsSelectedProperty = DependencyProperty.RegisterAttached(
@@ -461,7 +491,7 @@ namespace Microsoft.Phone.Controls
             }
         }
 
-        private void OnSelectionChanged()
+        private void OnSelectionChanged(bool scrollSelectionIntoView = true)
         {
             if (_animating)
             {
@@ -477,7 +507,10 @@ namespace Microsoft.Phone.Controls
                 _panAnimator.GoTo(0, ZeroDuration);
             }
 
-            ScrollSelectionIntoView();
+            if (scrollSelectionIntoView)
+            {
+                ScrollSelectionIntoView();
+            }
         }
 
         private FlipViewItem GetContainer(int index)
@@ -508,6 +541,11 @@ namespace Microsoft.Phone.Controls
                 return;
             }
 
+            bool scrollSelectionIntoView = !(UseTouchAnimationsForAllNavigation &&
+                                            oldSelectedIndex != -1 &&
+                                            Math.Abs(newSelectedIndex - oldSelectedIndex) == 1 &&
+                                            !_animating);
+
             try
             {
                 _updatingSelection = true;
@@ -520,7 +558,7 @@ namespace Microsoft.Phone.Controls
 
                 SelectedIndex = newSelectedIndex;
                 SelectedItem = newSelectedItem;
-                OnSelectionChanged();
+                OnSelectionChanged(scrollSelectionIntoView);
 
                 if (!InternalUtils.AreValuesEqual(oldSelectedItem, newSelectedItem))
                 {
@@ -545,6 +583,11 @@ namespace Microsoft.Phone.Controls
             finally
             {
                 _updatingSelection = false;
+            }
+
+            if (!scrollSelectionIntoView)
+            {
+                NavigateByIndexChange(newSelectedIndex - oldSelectedIndex, false);
             }
         }
 
@@ -818,50 +861,57 @@ namespace Microsoft.Phone.Controls
             GoTo(targetOffset, ZeroDuration);
         }
 
-        private void NavigateByIndexChange(int indexDelta)
+        private void NavigateByIndexChange(int indexDelta, bool changeIndex = true)
         {
             if (_animating)
             {
                 GoTo(CalculateContentDestination(_animationHint.Value), ZeroDuration);
-
-                int newSelectedIndex = _deferredSelectedIndex.Value;
-
-                _animationHint = null;
-                _animating = false;
-                _deferredSelectedIndex = null;
-
-                SelectedIndex = newSelectedIndex;
+                CompleteNavigateByIndexChange();
             }
 
-            if (indexDelta == 1)
+            if (changeIndex)
             {
-                if (SelectedIndex == Items.Count - 1)
+                if (indexDelta == 1)
                 {
-                    return;
+                    if (SelectedIndex == Items.Count - 1)
+                    {
+                        return;
+                    }
                 }
-            }
-            else
-            {
-                if (SelectedIndex == 0)
+                else
                 {
-                    return;
+                    if (SelectedIndex == 0)
+                    {
+                        return;
+                    }
                 }
             }
 
             _animationHint = indexDelta > 0 ? AnimationDirection.Previous : AnimationDirection.Next;
             _animating = true;
-            _deferredSelectedIndex = SelectedIndex + indexDelta;
 
-            GoTo(CalculateContentDestination(_animationHint.Value), DefaultDuration, _easingFunction, () =>
+            if (changeIndex)
             {
-                int newSelectedIndex = _deferredSelectedIndex.Value;
+                _deferredSelectedIndex = SelectedIndex + indexDelta;
+            }
 
-                _animationHint = null;
-                _animating = false;
-                _deferredSelectedIndex = null;
+            GoTo(CalculateContentDestination(_animationHint.Value), DefaultDuration, _easingFunction, CompleteNavigateByIndexChange);
+        }
 
-                SelectedIndex = newSelectedIndex;
-            });
+        private void CompleteNavigateByIndexChange()
+        {
+            int? newSelectedIndex = _deferredSelectedIndex;
+
+            _animationHint = null;
+            _animating = false;
+            _deferredSelectedIndex = null;
+
+            if (newSelectedIndex.HasValue)
+            {
+                SelectedIndex = newSelectedIndex.Value;
+            }
+
+            OnSelectionChanged();
         }
 
         private void ReleaseMouseCaptureAtGestureOrigin()
@@ -948,6 +998,8 @@ namespace Microsoft.Phone.Controls
 
             _initializingData = null;
         }
+
+        #region Nested Types
 
         private class Animator
         {
@@ -1079,5 +1131,7 @@ namespace Microsoft.Phone.Controls
             Previous,
             Next
         }
+
+        #endregion
     }
 }
