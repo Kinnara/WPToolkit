@@ -337,6 +337,9 @@
     <Compile Include="..\Microsoft.Phone.Controls.Toolkit\FlipView\FlipViewItem.cs">
       <Link>FlipView\FlipViewItem.cs</Link>
     </Compile>
+    <Compile Include="..\Microsoft.Phone.Controls.Toolkit\FlipView\UpdateSelectionMode.cs">
+      <Link>FlipView\UpdateSelectionMode.cs</Link>
+    </Compile>
     <Compile Include="..\Microsoft.Phone.Controls.Toolkit\Gestures\DragEventArgs.cs">
       <Link>Gestures\DragEventArgs.cs</Link>
     </Compile>

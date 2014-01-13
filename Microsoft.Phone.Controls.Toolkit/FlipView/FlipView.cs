@@ -46,6 +46,7 @@ namespace Microsoft.Phone.Controls
         private Point _gestureOrigin;
         private Animator _panAnimator;
         private int? _deferredSelectedIndex;
+        private bool _suppressNavigateByIndexChange;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="T:Microsoft.Phone.Controls.FlipView" /> class.
@@ -180,6 +181,36 @@ namespace Microsoft.Phone.Controls
             typeof(bool),
             typeof(FlipView),
             new PropertyMetadata(true));
+
+        #endregion
+
+        #region UpdateSelectionMode
+
+        /// <summary>
+        /// Gets or sets a value that determines the timing of selection updates .
+        /// </summary>
+        /// 
+        /// <returns>
+        /// One of the UpdateSelectionMode values. The default is AfterTransition.
+        /// </returns>
+        public UpdateSelectionMode UpdateSelectionMode
+        {
+            get { return (UpdateSelectionMode)GetValue(UpdateSelectionModeProperty); }
+            set { SetValue(UpdateSelectionModeProperty, value); }
+        }
+
+        /// <summary>
+        /// Identifies the UpdateSelectionMode dependency property.
+        /// </summary>
+        /// 
+        /// <returns>
+        /// The identifier for the UpdateSelectionMode dependency property.
+        /// </returns>
+        public static readonly DependencyProperty UpdateSelectionModeProperty = DependencyProperty.Register(
+            "UpdateSelectionMode",
+            typeof(UpdateSelectionMode),
+            typeof(FlipView),
+            null);
 
         #endregion
 
@@ -863,6 +894,11 @@ namespace Microsoft.Phone.Controls
 
         private void NavigateByIndexChange(int indexDelta, bool changeIndex = true)
         {
+            if (_suppressNavigateByIndexChange)
+            {
+                return;
+            }
+
             if (_animating)
             {
                 GoTo(CalculateContentDestination(_animationHint.Value), ZeroDuration);
@@ -871,26 +907,33 @@ namespace Microsoft.Phone.Controls
 
             if (changeIndex)
             {
-                if (indexDelta == 1)
+                if (!ValidateIndexChange(indexDelta))
                 {
-                    if (SelectedIndex == Items.Count - 1)
-                    {
-                        return;
-                    }
+                    return;
                 }
-                else
+            }
+
+            bool suppressChangeIndex = false;
+            if (changeIndex && UpdateSelectionMode == UpdateSelectionMode.BeforeTransition)
+            {
+                suppressChangeIndex = true;
+
+                try
                 {
-                    if (SelectedIndex == 0)
-                    {
-                        return;
-                    }
+                    _suppressNavigateByIndexChange = true;
+
+                    SelectedIndex += indexDelta;
+                }
+                finally
+                {
+                    _suppressNavigateByIndexChange = false;
                 }
             }
 
             _animationHint = indexDelta > 0 ? AnimationDirection.Previous : AnimationDirection.Next;
             _animating = true;
 
-            if (changeIndex)
+            if (changeIndex && !suppressChangeIndex)
             {
                 _deferredSelectedIndex = SelectedIndex + indexDelta;
             }
@@ -912,6 +955,12 @@ namespace Microsoft.Phone.Controls
             }
 
             OnSelectionChanged();
+        }
+
+        private bool ValidateIndexChange(int indexDelta)
+        {
+            return (indexDelta == 1 && SelectedIndex < Items.Count - 1) ||
+                   (indexDelta == -1 && SelectedIndex > 0);
         }
 
         private void ReleaseMouseCaptureAtGestureOrigin()
