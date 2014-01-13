@@ -5,6 +5,7 @@
 
 using System;
 using System.Windows;
+using System.Windows.Data;
 using System.Windows.Media;
 
 namespace Microsoft.Phone.Controls
@@ -112,6 +113,22 @@ namespace Microsoft.Phone.Controls
             }
 
             return element.FlowDirection;
+        }
+
+        public static void WriteLocalValue(this FrameworkElement element, DependencyProperty dp, object localValue)
+        {
+            if (localValue == DependencyProperty.UnsetValue)
+            {
+                element.ClearValue(dp);
+            }
+            else if (localValue is BindingExpression)
+            {
+                element.SetBinding(dp, ((BindingExpression)localValue).ParentBinding);
+            }
+            else
+            {
+                element.SetValue(dp, localValue);
+            }
         }
     }
 }

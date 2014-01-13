@@ -173,6 +173,8 @@ namespace Microsoft.Phone.Controls
 
         private MouseButtonEventArgs _ownerMouseLeftButtonDownEventArgs;
 
+        private object _ownerUseOptimizedManipulationRouting;
+
         /// <summary>
         /// Gets or sets the owning object for the ContextMenu.
         /// </summary>
@@ -186,6 +188,11 @@ namespace Microsoft.Phone.Controls
                     FrameworkElement ownerFrameworkElement = _owner as FrameworkElement;
                     if (null != ownerFrameworkElement)
                     {
+#if !WP7
+                        ownerFrameworkElement.WriteLocalValue(FrameworkElement.UseOptimizedManipulationRoutingProperty, _ownerUseOptimizedManipulationRouting);
+                        _ownerUseOptimizedManipulationRouting = null;
+#endif
+
                         ownerFrameworkElement.RemoveHandler(MouseLeftButtonDownEvent, new MouseButtonEventHandler(OnOwnerMouseLeftButtonDown));
                         ownerFrameworkElement.ManipulationDelta -= OnOwnerManipulationDelta;
                         ownerFrameworkElement.ManipulationCompleted -= OnOwnerManipulationCompleted;
@@ -202,6 +209,11 @@ namespace Microsoft.Phone.Controls
                     FrameworkElement ownerFrameworkElement = _owner as FrameworkElement;
                     if (null != ownerFrameworkElement)
                     {
+#if !WP7
+                        _ownerUseOptimizedManipulationRouting = ownerFrameworkElement.ReadLocalValue(FrameworkElement.UseOptimizedManipulationRoutingProperty);
+                        ownerFrameworkElement.UseOptimizedManipulationRouting = false;
+#endif
+
                         ownerFrameworkElement.AddHandler(MouseLeftButtonDownEvent, new MouseButtonEventHandler(OnOwnerMouseLeftButtonDown), true);
                         ownerFrameworkElement.ManipulationDelta += OnOwnerManipulationDelta;
                         ownerFrameworkElement.ManipulationCompleted += OnOwnerManipulationCompleted;
@@ -696,6 +708,11 @@ namespace Microsoft.Phone.Controls
         private void OnOwnerManipulationDelta(object sender, ManipulationDeltaEventArgs e)
         {
             StopHoldTimer();
+
+            if (IsOpen)
+            {
+                e.Handled = true;
+            }
         }
 
         /// <summary>
