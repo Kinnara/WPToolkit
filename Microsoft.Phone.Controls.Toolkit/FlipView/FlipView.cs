@@ -533,13 +533,13 @@ namespace Microsoft.Phone.Controls
                 _deferredSelectedIndex = null;
             }
 
-            if (_panAnimator != null)
-            {
-                _panAnimator.GoTo(0, ZeroDuration);
-            }
-
             if (scrollSelectionIntoView)
             {
+                if (_panAnimator != null)
+                {
+                    _panAnimator.GoTo(0, ZeroDuration);
+                }
+
                 ScrollSelectionIntoView();
             }
         }
