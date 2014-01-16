@@ -567,15 +567,19 @@ namespace Microsoft.Phone.Controls
 
         private void UpdateSelection(int oldSelectedIndex, int newSelectedIndex, object oldSelectedItem, object newSelectedItem)
         {
-            if (oldSelectedIndex == newSelectedIndex && InternalUtils.AreValuesEqual(oldSelectedItem, newSelectedItem))
+            int indexDelta = newSelectedIndex - oldSelectedIndex;
+            bool selectedItemChanged = !InternalUtils.AreValuesEqual(oldSelectedItem, newSelectedItem);
+
+            if (indexDelta == 0 && !selectedItemChanged)
             {
                 return;
             }
 
             bool scrollSelectionIntoView = !(UseTouchAnimationsForAllNavigation &&
-                                            oldSelectedIndex != -1 &&
-                                            Math.Abs(newSelectedIndex - oldSelectedIndex) == 1 &&
-                                            !_animating);
+                                             oldSelectedIndex != -1 &&
+                                             Math.Abs(indexDelta) == 1 &&
+                                             selectedItemChanged &&
+                                             !_animating);
 
             try
             {
@@ -591,7 +595,7 @@ namespace Microsoft.Phone.Controls
                 SelectedItem = newSelectedItem;
                 OnSelectionChanged(scrollSelectionIntoView);
 
-                if (!InternalUtils.AreValuesEqual(oldSelectedItem, newSelectedItem))
+                if (selectedItemChanged)
                 {
                     List<object> unselected = new List<object>();
                     List<object> selected = new List<object>();
@@ -618,7 +622,7 @@ namespace Microsoft.Phone.Controls
 
             if (!scrollSelectionIntoView)
             {
-                NavigateByIndexChange(newSelectedIndex - oldSelectedIndex, false);
+                NavigateByIndexChange(indexDelta, false);
             }
         }
 
