@@ -47,6 +47,7 @@ namespace Microsoft.Phone.Controls
         private Animator _panAnimator;
         private int? _deferredSelectedIndex;
         private bool _suppressNavigateByIndexChange;
+        private double? _offsetWhenDragStarted;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="T:Microsoft.Phone.Controls.FlipView" /> class.
@@ -248,6 +249,11 @@ namespace Microsoft.Phone.Controls
             }
         }
 
+        private double ItemSize
+        {
+            get { return Orientation == Orientation.Horizontal ? ItemsHostSize.Width : ItemsHostSize.Height; }
+        }
+
         private ScrollViewer ElementScrollViewer { get; set; }
 
         private ItemsPresenter ElementItemsPresenter { get; set; }
@@ -273,6 +279,11 @@ namespace Microsoft.Phone.Controls
         private bool ShouldHandleManipulation
         {
             get { return Items.Count > 1 && ElementItemsPresenter != null; }
+        }
+
+        private int EffectiveSelectedIndex
+        {
+            get { return _deferredSelectedIndex.HasValue ? _deferredSelectedIndex.Value : SelectedIndex; }
         }
 
         /// <summary>
@@ -535,11 +546,7 @@ namespace Microsoft.Phone.Controls
 
             if (scrollSelectionIntoView)
             {
-                if (_panAnimator != null)
-                {
-                    _panAnimator.GoTo(0, ZeroDuration);
-                }
-
+                GoTo(0, ZeroDuration);
                 ScrollSelectionIntoView();
             }
         }
@@ -575,11 +582,14 @@ namespace Microsoft.Phone.Controls
                 return;
             }
 
-            bool scrollSelectionIntoView = !(UseTouchAnimationsForAllNavigation &&
-                                             oldSelectedIndex != -1 &&
-                                             Math.Abs(indexDelta) == 1 &&
-                                             selectedItemChanged &&
-                                             !_animating);
+            bool animate =
+                _loaded &&
+                UseTouchAnimationsForAllNavigation &&
+                Items.Count > 1 &&
+                oldSelectedIndex != -1 &&
+                Math.Abs(indexDelta) == 1 &&
+                selectedItemChanged &&
+                !_animating || _suppressNavigateByIndexChange;
 
             try
             {
@@ -593,7 +603,7 @@ namespace Microsoft.Phone.Controls
 
                 SelectedIndex = newSelectedIndex;
                 SelectedItem = newSelectedItem;
-                OnSelectionChanged(scrollSelectionIntoView);
+                OnSelectionChanged(!animate);
 
                 if (selectedItemChanged)
                 {
@@ -620,7 +630,7 @@ namespace Microsoft.Phone.Controls
                 _updatingSelection = false;
             }
 
-            if (!scrollSelectionIntoView)
+            if (animate)
             {
                 NavigateByIndexChange(indexDelta, false);
             }
@@ -814,7 +824,7 @@ namespace Microsoft.Phone.Controls
         private double CalculateContentDestination(AnimationDirection direction)
         {
             double destination = 0;
-            double itemSize = Orientation == Orientation.Horizontal ? _itemsHostSize.Width : _itemsHostSize.Height;
+            double itemSize = ItemSize;
             switch (direction)
             {
                 case AnimationDirection.Previous:
@@ -831,13 +841,16 @@ namespace Microsoft.Phone.Controls
         {
             if (ShouldHandleManipulation)
             {
-                if (totalManipulation != null && _isEffectiveDragging)
+                if (_offsetWhenDragStarted.HasValue && _animationHint.HasValue)
+                {
+                    GoTo(CalculateContentDestination(_animationHint.Value), DefaultDuration, _easingFunction, CompleteNavigateByIndexChange);
+                }
+                else if (totalManipulation != null && _isEffectiveDragging)
                 {
                     bool horizontal = Orientation == Orientation.Horizontal;
                     double translation = horizontal ? totalManipulation.Translation.X : totalManipulation.Translation.Y;
                     double absoluteTranslation = Math.Abs(translation);
-                    double itemSize = horizontal ? _itemsHostSize.Width : _itemsHostSize.Height;
-                    if (translation != 0 && absoluteTranslation >= itemSize / 2)
+                    if (translation != 0 && absoluteTranslation >= ItemSize / 2)
                     {
                         NavigateByIndexChange(translation < 0 ? 1 : -1);
                     }
@@ -850,6 +863,7 @@ namespace Microsoft.Phone.Controls
             }
 
             _isEffectiveDragging = false;
+            _offsetWhenDragStarted = null;
         }
 
         private void Flick(double angle)
@@ -871,25 +885,47 @@ namespace Microsoft.Phone.Controls
         {
             _isEffectiveDragging = true;
 
-            if (_animating || !ShouldHandleManipulation)
+            if (!ShouldHandleManipulation)
             {
                 return;
             }
 
-            double targetOffset = Orientation == Orientation.Horizontal ? e.CumulativeManipulation.Translation.X : e.CumulativeManipulation.Translation.Y;
-
-            if (SelectedIndex <= 0)
+            if (_animating)
             {
-                if (targetOffset > CompressLimit)
+                if (!_offsetWhenDragStarted.HasValue)
                 {
-                    targetOffset = CompressLimit;
+                    _offsetWhenDragStarted = _panAnimator != null ? _panAnimator.CurrentOffset : 0;
                 }
             }
-            else if (SelectedIndex >= Items.Count - 1)
+            else
             {
-                if (targetOffset < -CompressLimit)
+                _offsetWhenDragStarted = null;
+            }
+
+            double targetOffset = Orientation == Orientation.Horizontal ? e.CumulativeManipulation.Translation.X : e.CumulativeManipulation.Translation.Y;
+            if (_offsetWhenDragStarted.HasValue)
+            {
+                targetOffset += _offsetWhenDragStarted.Value;
+            }
+
+            double compressLimit = CompressLimit;
+            if (_animationHint.HasValue)
+            {
+                compressLimit += Math.Abs(CalculateContentDestination(_animationHint.Value));
+            }
+
+            if (EffectiveSelectedIndex <= 0)
+            {
+                if (targetOffset > compressLimit)
                 {
-                    targetOffset = -CompressLimit;
+                    targetOffset = compressLimit;
+                }
+            }
+            else if (EffectiveSelectedIndex >= Items.Count - 1)
+            {
+                if (targetOffset < -compressLimit)
+                {
+                    targetOffset = -compressLimit;
                 }
             }
 
@@ -905,8 +941,16 @@ namespace Microsoft.Phone.Controls
 
             if (_animating)
             {
-                GoTo(CalculateContentDestination(_animationHint.Value), ZeroDuration);
-                CompleteNavigateByIndexChange();
+                if (ValidateIndexChange(indexDelta))
+                {
+                    double targetOffset = 0;
+                    if (_panAnimator != null)
+                    {
+                        targetOffset = _panAnimator.CurrentOffset - CalculateContentDestination(_animationHint.Value);
+                    }
+                    CompleteNavigateByIndexChange();
+                    GoTo(targetOffset, ZeroDuration);
+                }
             }
 
             if (changeIndex)
@@ -963,8 +1007,8 @@ namespace Microsoft.Phone.Controls
 
         private bool ValidateIndexChange(int indexDelta)
         {
-            return (indexDelta == 1 && SelectedIndex < Items.Count - 1) ||
-                   (indexDelta == -1 && SelectedIndex > 0);
+            return (indexDelta == 1 && EffectiveSelectedIndex < Items.Count - 1) ||
+                   (indexDelta == -1 && EffectiveSelectedIndex > 0);
         }
 
         private void ReleaseMouseCaptureAtGestureOrigin()
