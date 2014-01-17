@@ -1,0 +1,91 @@
+﻿<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:controls="clr-namespace:Microsoft.Phone.Controls"
+    xmlns:primitives="clr-namespace:Microsoft.Phone.Controls.Primitives">
+
+    <Style TargetType="primitives:TickBar">
+        <Setter Property="Fill" Value="{StaticResource PhoneBackgroundBrush}"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="primitives:TickBar">
+                    <Canvas/>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style TargetType="controls:PhoneSlider">
+        <Setter Property="BorderThickness" Value="0"/>
+        <Setter Property="BorderBrush" Value="Transparent"/>
+        <Setter Property="Maximum" Value="10"/>
+        <Setter Property="Minimum" Value="0"/>
+        <Setter Property="Value" Value="0"/>
+        <Setter Property="Background" Value="{StaticResource PhoneChromeBrush}"/>
+        <Setter Property="Foreground" Value="{StaticResource PhoneAccentBrush}"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="controls:PhoneSlider">
+                    <Grid Background="Transparent">
+                        <VisualStateManager.VisualStateGroups>
+                            <VisualStateGroup x:Name="CommonStates">
+                                <VisualState x:Name="Normal"/>
+                                <VisualState x:Name="MouseOver"/>
+                                <VisualState x:Name="Disabled">
+                                    <Storyboard>
+                                        <DoubleAnimation Duration="0" Storyboard.TargetName="HorizontalFillFill" Storyboard.TargetProperty="Opacity" To="0.3" />
+                                        <DoubleAnimation Duration="0" Storyboard.TargetName="VerticalFillFill" Storyboard.TargetProperty="Opacity" To="0.3" />
+                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="HorizontalFillFill" Storyboard.TargetProperty="Fill">
+                                            <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource PhoneForegroundBrush}" />
+                                        </ObjectAnimationUsingKeyFrames>
+                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="VerticalFillFill" Storyboard.TargetProperty="Fill">
+                                            <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource PhoneForegroundBrush}" />
+                                        </ObjectAnimationUsingKeyFrames>
+                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="HorizontalCenterElementFill" Storyboard.TargetProperty="Fill">
+                                            <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource PhoneSubtleBrush}" />
+                                        </ObjectAnimationUsingKeyFrames>
+                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="VerticalCenterElementFill" Storyboard.TargetProperty="Fill">
+                                            <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource PhoneSubtleBrush}" />
+                                        </ObjectAnimationUsingKeyFrames>
+                                    </Storyboard>
+                                </VisualState>
+                            </VisualStateGroup>
+                        </VisualStateManager.VisualStateGroups>
+                        <Grid x:Name="HorizontalTemplate" Margin="{StaticResource PhoneHorizontalMargin}">
+                            <Rectangle x:Name="HorizontalTrack" Fill="{TemplateBinding Background}" Height="12" IsHitTestVisible="False" Margin="0,22,0,50"/>
+                            <Border x:Name="HorizontalFill" Background="{StaticResource PhoneBackgroundBrush}" Height="12" IsHitTestVisible="False" Margin="0,22,0,50" CacheMode="BitmapCache">
+                                <Border.Clip>
+                                    <RectangleGeometry Rect="0, 0, 6, 12" />
+                                </Border.Clip>
+                                <Rectangle x:Name="HorizontalFillFill" Fill="{TemplateBinding Foreground}"/>
+                            </Border>
+                            <primitives:TickBar Height="12" IsHitTestVisible="False" Margin="0,22,0,50"/>
+                            <Border x:Name="HorizontalCenterElement" HorizontalAlignment="Left" Background="{StaticResource PhoneBackgroundBrush}" Width="12" Height="24" Margin="0,16,0,44" CacheMode="BitmapCache">
+                                <Border.RenderTransform>
+                                    <TranslateTransform />
+                                </Border.RenderTransform>
+                                <Rectangle x:Name="HorizontalCenterElementFill" Fill="{StaticResource PhoneForegroundBrush}"/>
+                            </Border>
+                        </Grid>
+                        <Grid x:Name="VerticalTemplate" Margin="{StaticResource PhoneVerticalMargin}">
+                            <Rectangle x:Name="VerticalTrack" Fill="{TemplateBinding Background}" Width="12" IsHitTestVisible="False" Margin="18,0,18,0"/>
+                            <Border x:Name="VerticalFill" Background="{StaticResource PhoneBackgroundBrush}" Width="12" IsHitTestVisible="False" Margin="18,0,18,0" CacheMode="BitmapCache">
+                                <Border.Clip>
+                                    <RectangleGeometry Rect="0, 0, 12, 6" />
+                                </Border.Clip>
+                                <Rectangle x:Name="VerticalFillFill" Fill="{TemplateBinding Foreground}"/>
+                            </Border>
+                            <primitives:TickBar Width="12" IsHitTestVisible="False" Margin="18,0,18,0"/>
+                            <Border x:Name="VerticalCenterElement" VerticalAlignment="Top" Background="{StaticResource PhoneBackgroundBrush}" Width="24" Height="12" Margin="12,0,12,0" CacheMode="BitmapCache">
+                                <Border.RenderTransform>
+                                    <TranslateTransform />
+                                </Border.RenderTransform>
+                                <Rectangle x:Name="VerticalCenterElementFill" Fill="{StaticResource PhoneForegroundBrush}"/>
+                            </Border>
+                        </Grid>
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+</ResourceDictionary>

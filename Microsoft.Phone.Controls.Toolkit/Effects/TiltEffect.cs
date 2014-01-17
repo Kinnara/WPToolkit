@@ -129,12 +129,7 @@ namespace Microsoft.Phone.Controls
             { 
                 typeof(ButtonBase), 
                 typeof(ListBoxItem), 
-                typeof(ListPickerItem),
-                typeof(MenuItem),
-                typeof(LongListSelector),
-                typeof(HubTile),
-                typeof(PhonePasswordBoxCheckBox),
-                typeof(TransferControl)
+                typeof(LongListSelector)
             };
         }
 

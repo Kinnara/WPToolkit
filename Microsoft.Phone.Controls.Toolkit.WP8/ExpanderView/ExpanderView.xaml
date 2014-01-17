@@ -1,0 +1,164 @@
+﻿<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:controls="clr-namespace:Microsoft.Phone.Controls">
+
+    <Style TargetType="controls:ExpanderView">
+        <Style.Setters>
+            <Setter Property="HorizontalAlignment" Value="Stretch"/>
+            <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+            <Setter Property="ItemsPanel">
+                <Setter.Value>
+                    <ItemsPanelTemplate>
+                        <StackPanel/>
+                    </ItemsPanelTemplate>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="controls:ExpanderView">
+                        <Grid>
+                            <Grid.Resources>
+                                <QuadraticEase EasingMode="EaseOut" x:Key="QuadraticEaseOut"/>
+                                <QuadraticEase EasingMode="EaseInOut" x:Key="QuadraticEaseInOut"/>
+                            </Grid.Resources>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="41"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <VisualStateManager.VisualStateGroups>
+                                <VisualStateGroup x:Name="ExpansionStates">
+                                    <VisualStateGroup.States>
+                                        <VisualState x:Name="Collapsed">
+                                            <Storyboard>
+                                                <DoubleAnimation Storyboard.TargetProperty="(FrameworkElement.Height)"
+                                                                 Storyboard.TargetName="ItemsCanvas"
+                                                                 Duration="0" To="0"/>
+                                                <DoubleAnimation Storyboard.TargetProperty="(UIElement.Opacity)"
+                                                                 Storyboard.TargetName="ItemsCanvas"
+                                                                 Duration="0" To="0.0"/>
+                                            </Storyboard>
+                                        </VisualState>
+                                        <VisualState x:Name="Expanded">
+                                            <Storyboard>
+                                                <DoubleAnimation Storyboard.TargetProperty="(FrameworkElement.Height)"
+                                                                 Storyboard.TargetName="ItemsCanvas" Duration="0"/>
+                                                <DoubleAnimation Storyboard.TargetProperty="(UIElement.Opacity)"
+                                                                 Storyboard.TargetName="ItemsCanvas"
+                                                                 Duration="0" To="1.0"/>
+                                            </Storyboard>
+                                        </VisualState>
+                                    </VisualStateGroup.States>
+                                    <VisualStateGroup.Transitions>
+                                        <VisualTransition From="Collapsed" To="Expanded"
+                                                          GeneratedDuration="0:0:0.15">
+                                            <Storyboard>
+                                                <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Height)" Storyboard.TargetName="ItemsCanvas">
+                                                    <EasingDoubleKeyFrame KeyTime="0:0:0.00" Value="0" EasingFunction="{StaticResource QuadraticEaseOut}"/>
+                                                    <EasingDoubleKeyFrame KeyTime="0:0:0.15" Value="1" EasingFunction="{StaticResource QuadraticEaseOut}" x:Name="CollapsedToExpandedKeyFrame"/>
+                                                </DoubleAnimationUsingKeyFrames>
+                                                <DoubleAnimation Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="ItemsCanvas" Duration="0" To="1.0"/>
+                                            </Storyboard>
+                                        </VisualTransition>
+                                        <VisualTransition From="Expanded" To="Collapsed"
+                                                          GeneratedDuration="0:0:0.15" >
+                                            <Storyboard>
+                                                <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Height)" Storyboard.TargetName="ItemsCanvas">
+                                                    <EasingDoubleKeyFrame KeyTime="0:0:0.00" Value="1" EasingFunction="{StaticResource QuadraticEaseInOut}" x:Name="ExpandedToCollapsedKeyFrame"/>
+                                                    <EasingDoubleKeyFrame KeyTime="0:0:0.15" Value="0" EasingFunction="{StaticResource QuadraticEaseInOut}"/>
+                                                </DoubleAnimationUsingKeyFrames>
+                                                <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="ItemsCanvas">
+                                                    <EasingDoubleKeyFrame KeyTime="0:0:0.00" Value="1.0" EasingFunction="{StaticResource QuadraticEaseInOut}"/>
+                                                    <EasingDoubleKeyFrame KeyTime="0:0:0.15" Value="0.0" EasingFunction="{StaticResource QuadraticEaseInOut}"/>
+                                                </DoubleAnimationUsingKeyFrames>
+                                                <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateY)"
+                                                                               Storyboard.TargetName="ItemsCanvas">
+                                                    <EasingDoubleKeyFrame KeyTime="0:0:0.00" Value="0.0" EasingFunction="{StaticResource QuadraticEaseInOut}"/>
+                                                    <EasingDoubleKeyFrame KeyTime="0:0:0.15" Value="-35" EasingFunction="{StaticResource QuadraticEaseInOut}"/>
+                                                </DoubleAnimationUsingKeyFrames>
+                                            </Storyboard>
+                                        </VisualTransition>
+                                    </VisualStateGroup.Transitions>
+                                </VisualStateGroup>
+                                <VisualStateGroup x:Name="ExpandabilityStates">
+                                    <VisualState x:Name="Expandable"/>
+                                    <VisualState x:Name="NonExpandable">
+                                        <Storyboard>
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)" Storyboard.TargetName="ExpandableContent">
+                                                <DiscreteObjectKeyFrame KeyTime="0:0:0.0" Value="Collapsed"/>
+                                            </ObjectAnimationUsingKeyFrames>
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)" Storyboard.TargetName="Line">
+                                                <DiscreteObjectKeyFrame KeyTime="0:0:0.0" Value="Collapsed"/>
+                                            </ObjectAnimationUsingKeyFrames>
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)" Storyboard.TargetName="NonExpandableContent">
+                                                <DiscreteObjectKeyFrame KeyTime="0:0:0.0" Value="Visible"/>
+                                            </ObjectAnimationUsingKeyFrames>
+                                        </Storyboard>
+                                    </VisualState>
+                                </VisualStateGroup>
+                            </VisualStateManager.VisualStateGroups>
+                            <ListBoxItem x:Name="ExpandableContent" controls:TiltEffect.IsTiltEnabled="True"
+                                         Grid.Row="0" Grid.Column="0" Grid.RowSpan="2" Grid.ColumnSpan="2">
+                                <Grid>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="Auto"/>
+                                    </Grid.RowDefinitions>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="41"/>
+                                        <ColumnDefinition Width="*"/>
+                                    </Grid.ColumnDefinitions>
+                                    <ContentControl x:Name="Header"
+                                                    HorizontalContentAlignment="Stretch"
+                                                    HorizontalAlignment="Stretch"
+                                                    Content="{TemplateBinding Header}"
+                                                    ContentTemplate="{TemplateBinding HeaderTemplate}"
+                                                    Grid.Row="0" Grid.Column="0"
+                                                    Grid.ColumnSpan="2"/>
+                                    <ContentControl x:Name="Expander"
+                                                    Margin="11,0,0,0"
+                                                    Grid.Row="1" Grid.Column="1"
+                                                    HorizontalContentAlignment="Stretch"
+                                                    HorizontalAlignment="Stretch"
+                                                    Content="{TemplateBinding Expander}"
+                                                    ContentTemplate="{TemplateBinding ExpanderTemplate}"/>
+                                    <Grid x:Name="ExpanderPanel" Grid.Row="0" Grid.Column="0"
+                                          Grid.RowSpan="2" Grid.ColumnSpan="2" Background="Transparent"/>
+                                </Grid>
+                            </ListBoxItem>
+                            <Line x:Name="Line" Grid.Row="1" Grid.Column="1"
+                                  Grid.RowSpan="2"
+                                  HorizontalAlignment="Left"
+                                  Stroke="{StaticResource PhoneSubtleBrush}"
+                                  StrokeThickness="3" X1="0" Y1="0" X2="0" Y2="1"
+                                  Stretch="Fill"/>
+                            <ContentControl x:Name="NonExpandableContent"
+                                            Grid.Row="0" Grid.Column="0"
+                                            Grid.RowSpan="2" Grid.ColumnSpan="2"
+                                            Visibility="Collapsed"
+                                            HorizontalAlignment="Stretch"
+                                            HorizontalContentAlignment="Stretch"
+                                            Content="{TemplateBinding NonExpandableHeader}"
+                                            ContentTemplate="{TemplateBinding NonExpandableHeaderTemplate}"/>
+                            <Canvas x:Name="ItemsCanvas"
+                                    Grid.Row="2" Grid.Column="1"
+                                    Opacity="0.0"
+                                    Margin="11,0,0,0">
+                                <ItemsPresenter x:Name="Presenter"/>
+                                <Canvas.RenderTransform>
+                                    <CompositeTransform TranslateY="0.0"/>
+                                </Canvas.RenderTransform>
+                            </Canvas>
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style.Setters>
+    </Style>
+</ResourceDictionary>

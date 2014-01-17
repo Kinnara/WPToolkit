@@ -1,0 +1,213 @@
+﻿<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:controls="clr-namespace:Microsoft.Phone.Controls"
+    xmlns:primitives="clr-namespace:Microsoft.Phone.Controls.Primitives">
+    
+    <Style TargetType="controls:ContextMenu">
+        <Setter Property="Padding" Value="0 20 0 22"/>
+        <Setter Property="ItemsPanel">
+            <Setter.Value>
+                <ItemsPanelTemplate>
+                    <primitives:ContextMenuPanel/>
+                </ItemsPanelTemplate>
+            </Setter.Value>
+        </Setter>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="controls:ContextMenu">
+                    <StackPanel x:Name="OuterPanel">
+                        <VisualStateManager.VisualStateGroups>
+                            <VisualStateGroup x:Name="VisibilityStates">
+                                <VisualState x:Name="Open">
+                                    <Storyboard>
+                                        <DoubleAnimationUsingKeyFrames Duration="0:0:0.42" Storyboard.TargetName="ScaleX" Storyboard.TargetProperty="ScaleX">
+                                            <LinearDoubleKeyFrame KeyTime="0:0:0" Value="0"/>
+                                            <LinearDoubleKeyFrame KeyTime="0:0:0.3" Value="1"/>
+                                        </DoubleAnimationUsingKeyFrames>
+                                        <DoubleAnimationUsingKeyFrames Duration="0:0:0.42" Storyboard.TargetName="ScaleY" Storyboard.TargetProperty="ScaleY">
+                                            <LinearDoubleKeyFrame KeyTime="0:0:0" Value="0"/>
+                                            <LinearDoubleKeyFrame KeyTime="0:0:.3" Value="0"/>
+                                            <LinearDoubleKeyFrame KeyTime="0:0:.42" Value="1"/>
+                                        </DoubleAnimationUsingKeyFrames>
+
+                                        <DoubleAnimation Duration="0" Storyboard.TargetName="Border1" Storyboard.TargetProperty="Opacity" To="1"/>
+                                        <DoubleAnimation Duration="0" Storyboard.TargetName="Border2" Storyboard.TargetProperty="Opacity" To="1"/>
+                                        <DoubleAnimationUsingKeyFrames Duration="0:0:0.42" Storyboard.TargetName="Border1Reversed" Storyboard.TargetProperty="Opacity">
+                                            <LinearDoubleKeyFrame KeyTime="0:0:0" Value="0"/>
+                                            <LinearDoubleKeyFrame KeyTime="0:0:0.4099" Value="0"/>
+                                            <LinearDoubleKeyFrame KeyTime="0:0:0.41" Value="1"/>
+                                        </DoubleAnimationUsingKeyFrames>
+                                        <DoubleAnimationUsingKeyFrames Duration="0:0:0.42" Storyboard.TargetName="Border2Reversed" Storyboard.TargetProperty="Opacity">
+                                            <LinearDoubleKeyFrame KeyTime="0:0:0" Value="0"/>
+                                            <LinearDoubleKeyFrame KeyTime="0:0:0.4099" Value="0"/>
+                                            <LinearDoubleKeyFrame KeyTime="0:0:0.41" Value="1"/>
+                                        </DoubleAnimationUsingKeyFrames>
+                                    </Storyboard>
+                                </VisualState>
+                                <VisualState x:Name="OpenReversed">
+                                    <Storyboard>
+                                        <DoubleAnimationUsingKeyFrames Duration="0:0:0.42" Storyboard.TargetName="ScaleX" Storyboard.TargetProperty="ScaleX">
+                                            <LinearDoubleKeyFrame KeyTime="0:0:0" Value="0"/>
+                                            <LinearDoubleKeyFrame KeyTime="0:0:0.3" Value="1"/>
+                                        </DoubleAnimationUsingKeyFrames>
+                                        <DoubleAnimationUsingKeyFrames Duration="0:0:0.42" Storyboard.TargetName="ScaleY" Storyboard.TargetProperty="ScaleY">
+                                            <LinearDoubleKeyFrame KeyTime="0:0:0" Value="0"/>
+                                            <LinearDoubleKeyFrame KeyTime="0:0:0.3" Value="0"/>
+                                            <LinearDoubleKeyFrame KeyTime="0:0:0.42" Value="1"/>
+                                        </DoubleAnimationUsingKeyFrames>
+
+                                        <DoubleAnimation Duration="0" Storyboard.TargetName="Border1Reversed" Storyboard.TargetProperty="Opacity" To="1"/>
+                                        <DoubleAnimation Duration="0" Storyboard.TargetName="Border2Reversed" Storyboard.TargetProperty="Opacity" To="1"/>
+                                        <DoubleAnimationUsingKeyFrames Duration="0:0:0.42" Storyboard.TargetName="Border1" Storyboard.TargetProperty="Opacity">
+                                            <LinearDoubleKeyFrame KeyTime="0:0:0" Value="0"/>
+                                            <LinearDoubleKeyFrame KeyTime="0:0:0.4099" Value="0"/>
+                                            <LinearDoubleKeyFrame KeyTime="0:0:0.41" Value="1"/>
+                                        </DoubleAnimationUsingKeyFrames>
+                                        <DoubleAnimationUsingKeyFrames Duration="0:0:0.42" Storyboard.TargetName="Border2" Storyboard.TargetProperty="Opacity">
+                                            <LinearDoubleKeyFrame KeyTime="0:0:0" Value="0"/>
+                                            <LinearDoubleKeyFrame KeyTime="0:0:0.4099" Value="0"/>
+                                            <LinearDoubleKeyFrame KeyTime="0:0:0.41" Value="1"/>
+                                        </DoubleAnimationUsingKeyFrames>
+                                    </Storyboard>
+                                </VisualState>
+                                <VisualState x:Name="OpenLandscape">
+                                    <Storyboard>
+                                        <DoubleAnimationUsingKeyFrames Duration="0:0:0.42" Storyboard.TargetName="ScaleX" Storyboard.TargetProperty="ScaleY">
+                                            <LinearDoubleKeyFrame KeyTime="0:0:0" Value="0"/>
+                                            <LinearDoubleKeyFrame KeyTime="0:0:0.3" Value="1"/>
+                                        </DoubleAnimationUsingKeyFrames>
+                                        <DoubleAnimationUsingKeyFrames Duration="0:0:0.42" Storyboard.TargetName="ScaleY" Storyboard.TargetProperty="ScaleX">
+                                            <LinearDoubleKeyFrame KeyTime="0:0:0" Value="0"/>
+                                            <LinearDoubleKeyFrame KeyTime="0:0:0.3" Value="0"/>
+                                            <LinearDoubleKeyFrame KeyTime="0:0:0.42" Value="1"/>
+                                        </DoubleAnimationUsingKeyFrames>
+
+                                        <DoubleAnimation Duration="0" Storyboard.TargetName="Border1" Storyboard.TargetProperty="Opacity" To="1"/>
+                                        <DoubleAnimation Duration="0" Storyboard.TargetName="Border2" Storyboard.TargetProperty="Opacity" To="1"/>
+                                        <DoubleAnimationUsingKeyFrames Duration="0:0:0.42" Storyboard.TargetName="Border1Reversed" Storyboard.TargetProperty="Opacity">
+                                            <LinearDoubleKeyFrame KeyTime="0:0:0" Value="0"/>
+                                            <LinearDoubleKeyFrame KeyTime="0:0:0.4099" Value="0"/>
+                                            <LinearDoubleKeyFrame KeyTime="0:0:0.41" Value="1"/>
+                                        </DoubleAnimationUsingKeyFrames>
+                                        <DoubleAnimationUsingKeyFrames Duration="0:0:0.42" Storyboard.TargetName="Border2Reversed" Storyboard.TargetProperty="Opacity">
+                                            <LinearDoubleKeyFrame KeyTime="0:0:0" Value="0"/>
+                                            <LinearDoubleKeyFrame KeyTime="0:0:0.4099" Value="0"/>
+                                            <LinearDoubleKeyFrame KeyTime="0:0:0.41" Value="1"/>
+                                        </DoubleAnimationUsingKeyFrames>
+                                    </Storyboard>
+                                </VisualState>
+                                <VisualState x:Name="OpenLandscapeReversed">
+                                    <Storyboard>
+                                        <DoubleAnimationUsingKeyFrames Duration="0:0:0.42" Storyboard.TargetName="ScaleX" Storyboard.TargetProperty="ScaleY">
+                                            <LinearDoubleKeyFrame KeyTime="0:0:0" Value="0"/>
+                                            <LinearDoubleKeyFrame KeyTime="0:0:0.3" Value="1"/>
+                                        </DoubleAnimationUsingKeyFrames>
+                                        <DoubleAnimationUsingKeyFrames Duration="0:0:0.42" Storyboard.TargetName="ScaleY" Storyboard.TargetProperty="ScaleX">
+                                            <LinearDoubleKeyFrame KeyTime="0:0:0" Value="0"/>
+                                            <LinearDoubleKeyFrame KeyTime="0:0:0.3" Value="0"/>
+                                            <LinearDoubleKeyFrame KeyTime="0:0:0.42" Value="1"/>
+                                        </DoubleAnimationUsingKeyFrames>
+
+                                        <DoubleAnimation Duration="0" Storyboard.TargetName="Border1Reversed" Storyboard.TargetProperty="Opacity" To="1"/>
+                                        <DoubleAnimation Duration="0" Storyboard.TargetName="Border2Reversed" Storyboard.TargetProperty="Opacity" To="1"/>
+                                        <DoubleAnimationUsingKeyFrames Duration="0:0:0.42" Storyboard.TargetName="Border1" Storyboard.TargetProperty="Opacity">
+                                            <LinearDoubleKeyFrame KeyTime="0:0:0" Value="0"/>
+                                            <LinearDoubleKeyFrame KeyTime="0:0:0.4099" Value="0"/>
+                                            <LinearDoubleKeyFrame KeyTime="0:0:0.41" Value="1"/>
+                                        </DoubleAnimationUsingKeyFrames>
+                                        <DoubleAnimationUsingKeyFrames Duration="0:0:0.42" Storyboard.TargetName="Border2" Storyboard.TargetProperty="Opacity">
+                                            <LinearDoubleKeyFrame KeyTime="0:0:0" Value="0"/>
+                                            <LinearDoubleKeyFrame KeyTime="0:0:0.4099" Value="0"/>
+                                            <LinearDoubleKeyFrame KeyTime="0:0:0.41" Value="1"/>
+                                        </DoubleAnimationUsingKeyFrames>
+                                    </Storyboard>
+                                </VisualState>
+                                <VisualState x:Name="Closed">
+                                    <Storyboard>
+                                        <DoubleAnimation Duration="0" Storyboard.TargetName="ScaleX" Storyboard.TargetProperty="ScaleX" To="0"/>
+                                        <DoubleAnimation Duration="0" Storyboard.TargetName="ScaleX" Storyboard.TargetProperty="ScaleY" To="0"/>
+                                        <DoubleAnimation Duration="0" Storyboard.TargetName="ScaleY" Storyboard.TargetProperty="ScaleY" To="0"/>
+                                        <DoubleAnimation Duration="0" Storyboard.TargetName="ScaleY" Storyboard.TargetProperty="ScaleX" To="0"/>
+                                        <DoubleAnimation Duration="0" Storyboard.TargetName="Border1" Storyboard.TargetProperty="Opacity" To="0"/>
+                                        <DoubleAnimation Duration="0" Storyboard.TargetName="Border2" Storyboard.TargetProperty="Opacity" To="0"/>
+                                        <DoubleAnimation Duration="0" Storyboard.TargetName="Border1Reversed" Storyboard.TargetProperty="Opacity" To="0"/>
+                                        <DoubleAnimation Duration="0" Storyboard.TargetName="Border2Reversed" Storyboard.TargetProperty="Opacity" To="0"/>
+                                    </Storyboard>
+                                </VisualState>
+                            </VisualStateGroup>
+                        </VisualStateManager.VisualStateGroups>
+                        <StackPanel.RenderTransform>
+                            <ScaleTransform x:Name="ScaleX"/>
+                        </StackPanel.RenderTransform>
+
+                        <Rectangle MinWidth="2" MinHeight="2" Fill="{TemplateBinding BorderBrush}" x:Name="Border1"/>
+                        <Rectangle MinWidth="2" MinHeight="2" Fill="{TemplateBinding Background}" x:Name="Border2"/>
+                        <Grid x:Name="InnerGrid" Background="{TemplateBinding Background}">
+                            <Grid.RenderTransform>
+                                <ScaleTransform x:Name="ScaleY"/>
+                            </Grid.RenderTransform>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="*"/>
+                            </Grid.RowDefinitions>
+                            <ItemsPresenter Margin="{TemplateBinding Padding}" Grid.Row="1"/>
+                        </Grid>
+                        <Rectangle MinWidth="2" MinHeight="2" Fill="{TemplateBinding Background}" x:Name="Border1Reversed"/>
+                        <Rectangle MinWidth="2" MinHeight="2" Fill="{TemplateBinding BorderBrush}" x:Name="Border2Reversed"/>
+                    </StackPanel>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style TargetType="controls:MenuItem">
+        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="Foreground" Value="{StaticResource PhoneBackgroundBrush}"/>
+        <Setter Property="FontFamily" Value="{StaticResource PhoneFontFamilySemiLight}"/>
+        <Setter Property="FontSize" Value="{StaticResource PhoneFontSizeLarge}"/>
+        <Setter Property="Padding" Value="0 7 0 14"/>
+        <Setter Property="Margin" Value="23 0 0 0"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="controls:MenuItem">
+                    <Grid Background="{TemplateBinding Background}">
+                        <VisualStateManager.VisualStateGroups>
+                            <VisualStateGroup x:Name="CommonStates">
+                                <VisualState x:Name="Normal"/>
+                                <VisualState x:Name="Disabled">
+                                    <Storyboard>
+                                        <DoubleAnimation Duration="0" Storyboard.TargetName="Presenter" Storyboard.TargetProperty="Opacity" To="0.5"/>
+                                    </Storyboard>
+                                </VisualState>
+                            </VisualStateGroup>
+                        </VisualStateManager.VisualStateGroups>
+                        <ContentPresenter
+                            x:Name="Presenter"
+                            Content="{TemplateBinding Header}"
+                            ContentTemplate="{TemplateBinding HeaderTemplate}"
+                            Margin="{TemplateBinding Padding}"/>
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style TargetType="controls:Separator">
+        <Setter Property="Background" Value="{StaticResource PhoneBackgroundBrush}"/>
+        <Setter Property="IsTabStop" Value="False"/>
+        <Setter Property="Margin" Value="20 4 20 4"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="controls:Separator">
+                    <Border
+                        BorderThickness="{TemplateBinding BorderThickness}"
+                        BorderBrush="{TemplateBinding BorderBrush}"
+                        Background="{TemplateBinding Background}"
+                        Height="3"/>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+</ResourceDictionary>

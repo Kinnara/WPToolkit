@@ -20,6 +20,11 @@ namespace Microsoft.Phone.Controls
         private const string SelectionStatesUnselectedStateName = "Unselected";
         private const string SelectionStatesSelectedStateName = "Selected";
 
+        static ListPickerItem()
+        {
+            TiltEffect.TiltableItems.Add(typeof(ListPickerItem));
+        }
+
         /// <summary>
         /// Initializes a new instance of the ListPickerItem class.
         /// </summary>

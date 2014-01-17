@@ -1,0 +1,123 @@
+﻿<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:controls="clr-namespace:Microsoft.Phone.Controls">
+
+    <DataTemplate x:Key="TransferControlHeaderTemplate">
+        <TextBlock Text="{Binding}" Margin="0,-14,0,-9"/>
+    </DataTemplate>
+
+    <controls:SingleDataTemplateSelector x:Key="TransferControlHeaderTemplateSelector" Template="{StaticResource TransferControlHeaderTemplate}"/>
+
+    <Style TargetType="controls:TransferControl">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="controls:TransferControl">
+                    <Border x:Name="TransferControl" Background="Transparent" Margin="-12,0" Padding="{TemplateBinding Padding}">
+                        <controls:ContextMenuService.ContextMenu>
+                            <controls:ContextMenu>
+                                <controls:MenuItem Header="cancel" x:Name="ContextMenuCancel" IsEnabled="{TemplateBinding IsContextMenuEnabled}"/>
+                            </controls:ContextMenu>
+                        </controls:ContextMenuService.ContextMenu>
+                        <VisualStateManager.VisualStateGroups>
+                            <VisualStateGroup x:Name="ControlStates">
+                                <VisualState x:Name="Default">
+                                    <Storyboard>
+                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Visibility" Storyboard.TargetName="TransferProgressBar">
+                                            <DiscreteObjectKeyFrame KeyTime="0" Value="Visible" />
+                                        </ObjectAnimationUsingKeyFrames>
+                                    </Storyboard>
+                                </VisualState>
+                                <VisualState x:Name="NoProgressBar">
+                                    <Storyboard>
+                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Visibility" Storyboard.TargetName="PlaceholderProgressBar">
+                                            <DiscreteObjectKeyFrame KeyTime="0" Value="Visible" />
+                                        </ObjectAnimationUsingKeyFrames>
+                                    </Storyboard>
+                                </VisualState>
+                                <VisualState x:Name="Hidden">
+                                    <Storyboard>
+                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Visibility" Storyboard.TargetName="TransferControl">
+                                            <DiscreteObjectKeyFrame KeyTime="0" Value="Collapsed"/>
+                                        </ObjectAnimationUsingKeyFrames>
+                                    </Storyboard>
+                                </VisualState>
+                                <VisualState x:Name="NoTransfer"/>
+                            </VisualStateGroup>
+                            <VisualStateGroup x:Name="IconStates">
+                                <VisualState x:Name="IconVisible">
+                                    <Storyboard>
+                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Margin" Storyboard.TargetName="Root">
+                                            <DiscreteObjectKeyFrame KeyTime="0" Value="24,10,0,2" />
+                                        </ObjectAnimationUsingKeyFrames>
+                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Visibility" Storyboard.TargetName="Icon">
+                                            <DiscreteObjectKeyFrame KeyTime="0" Value="Visible" />
+                                        </ObjectAnimationUsingKeyFrames>
+                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Margin" Storyboard.TargetName="ProgressPanel">
+                                            <DiscreteObjectKeyFrame KeyTime="0" Value="0,0,0,10" />
+                                        </ObjectAnimationUsingKeyFrames>
+                                    </Storyboard>
+                                </VisualState>
+                                <VisualState x:Name="IconCollapsed"/>
+                            </VisualStateGroup>
+                        </VisualStateManager.VisualStateGroups>
+                        <Grid x:Name="Root" Margin="24,0,0,0">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+                            <Image
+                                x:Name="Icon"
+                                Source="{TemplateBinding Icon}"
+                                Stretch="UniformToFill"
+                                Margin="0,0,18,0"
+                                Width="99"
+                                Height="99"
+                                Visibility="Collapsed"/>
+                            <Grid Grid.Column="1" x:Name="ListItem">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="*" />
+                                </Grid.RowDefinitions>
+                                <controls:PhoneContentControl
+                                    x:Name="Header"
+                                    Content="{TemplateBinding Header}"
+                                    ContentTemplate="{TemplateBinding HeaderTemplate}"
+                                    ContentTemplateSelector="{StaticResource TransferControlHeaderTemplateSelector}"
+                                    FontFamily="{StaticResource PhoneFontFamilySemiLight}"
+                                    FontSize="37.333"
+                                    Foreground="{StaticResource PhoneForegroundBrush}"
+                                    HorizontalContentAlignment="Stretch"/>
+                                <StackPanel x:Name="ProgressPanel" Grid.Row="2" Margin="0,9,0,0" VerticalAlignment="Bottom">
+                                    <Grid
+                                        x:Name="ProgressBarPanel"
+                                        Margin="-12,6,-12,9"
+                                        HorizontalAlignment="Left"
+                                        Width="289">
+                                        <ProgressBar
+                                            x:Name="PlaceholderProgressBar"
+                                            Visibility="Collapsed"
+                                            Style="{TemplateBinding ProgressBarStyle}"/>
+                                        <ProgressBar
+                                            x:Name="TransferProgressBar"
+                                            Value="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=Monitor.PercentComplete}"
+                                            Minimum="0"
+                                            Maximum="1"
+                                            Visibility="Collapsed"
+                                            Style="{TemplateBinding ProgressBarStyle}"/>
+                                    </Grid>
+                                    <TextBlock
+                                        FontFamily="{StaticResource PhoneFontFamilyNormal}"
+                                        FontSize="13.333"
+                                        Foreground="{TemplateBinding StatusTextBrush}"
+                                        Margin="0,-5,0,-2"
+                                        Text="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=Monitor.StatusText}"/>
+                                </StackPanel>
+                            </Grid>
+                        </Grid>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+</ResourceDictionary>

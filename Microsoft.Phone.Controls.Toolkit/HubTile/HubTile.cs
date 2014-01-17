@@ -497,6 +497,11 @@ namespace Microsoft.Phone.Controls
             UpdateVisualState();            
         }
 
+        static HubTile()
+        {
+            TiltEffect.TiltableItems.Add(typeof(HubTile));
+        }
+
         /// <summary>
         /// Initializes a new instance of the HubTile class.
         /// </summary>

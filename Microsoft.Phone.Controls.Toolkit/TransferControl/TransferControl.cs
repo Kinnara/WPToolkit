@@ -179,6 +179,11 @@ namespace Microsoft.Phone.Controls
 
         #endregion
 
+        static TransferControl()
+        {
+            TiltEffect.TiltableItems.Add(typeof(TransferControl));
+        }
+
         /// <summary>
         /// Initializes a new instance of the TransferControl class.
         /// </summary>

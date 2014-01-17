@@ -1,0 +1,77 @@
+﻿<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:controls="clr-namespace:Microsoft.Phone.Controls">
+
+    <DataTemplate x:Key="PageUITitleTemplate">
+        <TextBlock Text="{Binding}"
+                   FontFamily="{StaticResource PhoneFontFamilySemiBold}"
+                   FontSize="{StaticResource PivotTitleFontSize}"
+                   Margin="24,16,0,39"/>
+    </DataTemplate>
+
+    <DataTemplate x:Key="PageUIHeaderTemplate">
+        <TextBlock Text="{Binding}"
+                   FontFamily="{StaticResource PhoneFontFamilySemiLight}"
+                   FontSize="{StaticResource PivotHeaderFontSize}"
+                   Margin="21,-49,0,28"/>
+    </DataTemplate>
+
+    <Style TargetType="controls:PageUI">
+        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="Foreground" Value="{StaticResource PhoneForegroundBrush}"/>
+        <Setter Property="FontFamily" Value="{StaticResource PhoneFontFamilyNormal}"/>
+        <Setter Property="FontSize" Value="{StaticResource PhoneFontSizeNormal}"/>
+        <Setter Property="TitleTemplate" Value="{StaticResource PageUITitleTemplate}"/>
+        <Setter Property="HeaderTemplate" Value="{StaticResource PageUIHeaderTemplate}"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="controls:PageUI">
+                    <Border x:Name="LayoutRoot" Background="{TemplateBinding Background}" Padding="{TemplateBinding Padding}">
+                        <VisualStateManager.VisualStateGroups>
+                            <VisualStateGroup x:Name="OrientationStates">
+                                <VisualState x:Name="PortraitUp"/>
+                                <VisualState x:Name="LandscapeLeft">
+                                    <Storyboard>
+                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="TitlePanel" Storyboard.TargetProperty="Margin">
+                                            <DiscreteObjectKeyFrame KeyTime="0" Value="0,8,0,0"/>
+                                        </ObjectAnimationUsingKeyFrames>
+                                    </Storyboard>
+                                </VisualState>
+                                <VisualState x:Name="LandscapeRight">
+                                    <Storyboard>
+                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="TitlePanel" Storyboard.TargetProperty="Margin">
+                                            <DiscreteObjectKeyFrame KeyTime="0" Value="0,8,0,0"/>
+                                        </ObjectAnimationUsingKeyFrames>
+                                    </Storyboard>
+                                </VisualState>
+                            </VisualStateGroup>
+                        </VisualStateManager.VisualStateGroups>
+
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition/>
+                            </Grid.RowDefinitions>
+
+                            <StackPanel x:Name="TitlePanel" CacheMode="BitmapCache">
+                                <ContentControl
+                                    Content="{TemplateBinding Title}"
+                                    ContentTemplate="{TemplateBinding TitleTemplate}"
+                                    Style="{TemplateBinding TitleStyle}"
+                                    HorizontalContentAlignment="Stretch"/>
+                                <ContentControl
+                                    Content="{TemplateBinding Header}"
+                                    ContentTemplate="{TemplateBinding HeaderTemplate}"
+                                    Style="{TemplateBinding HeaderStyle}"
+                                    HorizontalContentAlignment="Stretch"/>
+                            </StackPanel>
+
+                            <ContentPresenter Margin="{StaticResource PhoneHorizontalMargin}" Grid.Row="1"/>
+                        </Grid>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+</ResourceDictionary>

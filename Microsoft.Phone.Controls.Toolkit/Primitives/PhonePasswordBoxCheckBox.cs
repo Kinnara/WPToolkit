@@ -23,6 +23,11 @@ namespace Microsoft.Phone.Controls.Primitives
         private Point _mousePosition;
         private bool _suspendStateChanges;
 
+        static PhonePasswordBoxCheckBox()
+        {
+            TiltEffect.TiltableItems.Add(typeof(PhonePasswordBoxCheckBox));
+        }
+
         /// <summary>
         /// Initializes a new instance of the
         /// <see cref="T:Microsoft.Phone.Controls.Primitives.PhonePasswordBoxCheckBox" /> class.

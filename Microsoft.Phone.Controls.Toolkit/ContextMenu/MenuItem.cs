@@ -114,6 +114,11 @@ namespace Microsoft.Phone.Controls
             UpdateIsEnabled(true);
         }
 
+        static MenuItem()
+        {
+            TiltEffect.TiltableItems.Add(typeof(MenuItem));
+        }
+
         /// <summary>
         /// Initializes a new instance of the MenuItem class.
         /// </summary>
