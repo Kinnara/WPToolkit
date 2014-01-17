@@ -173,7 +173,9 @@ namespace Microsoft.Phone.Controls
 
         private MouseButtonEventArgs _ownerMouseLeftButtonDownEventArgs;
 
-        private object _ownerUseOptimizedManipulationRouting;
+#if !WP7
+        private bool _ownerUseOptimizedManipulationRoutingSet;
+#endif
 
         /// <summary>
         /// Gets or sets the owning object for the ContextMenu.
@@ -189,8 +191,11 @@ namespace Microsoft.Phone.Controls
                     if (null != ownerFrameworkElement)
                     {
 #if !WP7
-                        ownerFrameworkElement.WriteLocalValue(FrameworkElement.UseOptimizedManipulationRoutingProperty, _ownerUseOptimizedManipulationRouting);
-                        _ownerUseOptimizedManipulationRouting = null;
+                        if (_ownerUseOptimizedManipulationRoutingSet)
+                        {
+                            ownerFrameworkElement.ClearValue(FrameworkElement.UseOptimizedManipulationRoutingProperty);
+                            _ownerUseOptimizedManipulationRoutingSet = false;
+                        }
 #endif
 
                         ownerFrameworkElement.RemoveHandler(MouseLeftButtonDownEvent, new MouseButtonEventHandler(OnOwnerMouseLeftButtonDown));
@@ -210,8 +215,11 @@ namespace Microsoft.Phone.Controls
                     if (null != ownerFrameworkElement)
                     {
 #if !WP7
-                        _ownerUseOptimizedManipulationRouting = ownerFrameworkElement.ReadLocalValue(FrameworkElement.UseOptimizedManipulationRoutingProperty);
-                        ownerFrameworkElement.UseOptimizedManipulationRouting = false;
+                        if (ownerFrameworkElement.ReadLocalValue(FrameworkElement.UseOptimizedManipulationRoutingProperty) == DependencyProperty.UnsetValue)
+                        {
+                            ownerFrameworkElement.UseOptimizedManipulationRouting = false;
+                            _ownerUseOptimizedManipulationRoutingSet = true;
+                        }
 #endif
 
                         ownerFrameworkElement.AddHandler(MouseLeftButtonDownEvent, new MouseButtonEventHandler(OnOwnerMouseLeftButtonDown), true);
