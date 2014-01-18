@@ -17,35 +17,35 @@
 
     <ResourceDictionary.MergedDictionaries>
         <controls:SharedResources/>
-        <ResourceDictionary Source="/Microsoft.Phone.Controls.Toolkit;component/ApplicationBarSubmenu/ApplicationBarSubmenu.xaml"/>
-        <ResourceDictionary Source="/Microsoft.Phone.Controls.Toolkit;component/AutoCompleteBox/AutoCompleteBox.xaml"/>
-        <ResourceDictionary Source="/Microsoft.Phone.Controls.Toolkit;component/Buttons/Buttons.xaml"/>
+        <!--<ResourceDictionary Source="/Microsoft.Phone.Controls.Toolkit;component/ApplicationBarSubmenu/ApplicationBarSubmenu.xaml"/>-->
+        <!--<ResourceDictionary Source="/Microsoft.Phone.Controls.Toolkit;component/AutoCompleteBox/AutoCompleteBox.xaml"/>-->
+        <!--<ResourceDictionary Source="/Microsoft.Phone.Controls.Toolkit;component/Buttons/Buttons.xaml"/>-->
         <ResourceDictionary Source="/Microsoft.Phone.Controls.Toolkit;component/ContextMenu/ContextMenu.xaml"/>
-        <ResourceDictionary Source="/Microsoft.Phone.Controls.Toolkit;component/CustomMessageBox/CustomMessageBox.xaml"/>
-        <ResourceDictionary Source="/Microsoft.Phone.Controls.Toolkit;component/DateTimePickers/DateTimePickers.xaml"/>
-        <ResourceDictionary Source="/Microsoft.Phone.Controls.Toolkit;component/ExpanderView/ExpanderView.xaml"/>
+        <!--<ResourceDictionary Source="/Microsoft.Phone.Controls.Toolkit;component/CustomMessageBox/CustomMessageBox.xaml"/>-->
+        <!--<ResourceDictionary Source="/Microsoft.Phone.Controls.Toolkit;component/DateTimePickers/DateTimePickers.xaml"/>-->
+        <!--<ResourceDictionary Source="/Microsoft.Phone.Controls.Toolkit;component/ExpanderView/ExpanderView.xaml"/>-->
         <ResourceDictionary Source="/Microsoft.Phone.Controls.Toolkit;component/FlipView/FlipView.xaml"/>
-        <ResourceDictionary Source="/Microsoft.Phone.Controls.Toolkit;component/HubTile/HubTile.xaml"/>
-        <ResourceDictionary Source="/Microsoft.Phone.Controls.Toolkit;component/ListPicker/ListPicker.xaml"/>
-        <ResourceDictionary Source="/Microsoft.Phone.Controls.Toolkit;component/ListView/ListView.xaml"/>
-        <ResourceDictionary Source="/Microsoft.Phone.Controls.Toolkit;component/LongListMultiSelector/LongListMultiSelector.xaml"/>
-        <ResourceDictionary Source="/Microsoft.Phone.Controls.Toolkit;component/Maps/Maps.xaml"/>
+        <!--<ResourceDictionary Source="/Microsoft.Phone.Controls.Toolkit;component/HubTile/HubTile.xaml"/>-->
+        <!--<ResourceDictionary Source="/Microsoft.Phone.Controls.Toolkit;component/ListPicker/ListPicker.xaml"/>-->
+        <!--<ResourceDictionary Source="/Microsoft.Phone.Controls.Toolkit;component/ListView/ListView.xaml"/>-->
+        <!--<ResourceDictionary Source="/Microsoft.Phone.Controls.Toolkit;component/LongListMultiSelector/LongListMultiSelector.xaml"/>-->
+        <!--<ResourceDictionary Source="/Microsoft.Phone.Controls.Toolkit;component/Maps/Maps.xaml"/>-->
         <ResourceDictionary Source="/Microsoft.Phone.Controls.Toolkit;component/PageUI/PageUI.xaml"/>
-        <ResourceDictionary Source="/Microsoft.Phone.Controls.Toolkit;component/PhonePasswordBox/PhonePasswordBox.xaml"/>
-        <ResourceDictionary Source="/Microsoft.Phone.Controls.Toolkit;component/PhoneSlider/PhoneSlider.xaml"/>
-        <ResourceDictionary Source="/Microsoft.Phone.Controls.Toolkit;component/PhoneTextBox/PhoneTextBox.xaml"/>
-        <ResourceDictionary Source="/Microsoft.Phone.Controls.Toolkit;component/PickerBox/PickerBox.xaml"/>
-        <ResourceDictionary Source="/Microsoft.Phone.Controls.Toolkit;component/PropertyUI/PropertyUI.xaml"/>
-        <ResourceDictionary Source="/Microsoft.Phone.Controls.Toolkit;component/RatingControl/RatingControl.xaml"/>
-        <ResourceDictionary Source="/Microsoft.Phone.Controls.Toolkit;component/StartView/StartView.xaml"/>
+        <!--<ResourceDictionary Source="/Microsoft.Phone.Controls.Toolkit;component/PhonePasswordBox/PhonePasswordBox.xaml"/>-->
+        <!--<ResourceDictionary Source="/Microsoft.Phone.Controls.Toolkit;component/PhoneSlider/PhoneSlider.xaml"/>-->
+        <!--<ResourceDictionary Source="/Microsoft.Phone.Controls.Toolkit;component/PhoneTextBox/PhoneTextBox.xaml"/>-->
+        <!--<ResourceDictionary Source="/Microsoft.Phone.Controls.Toolkit;component/PickerBox/PickerBox.xaml"/>-->
+        <!--<ResourceDictionary Source="/Microsoft.Phone.Controls.Toolkit;component/PropertyUI/PropertyUI.xaml"/>-->
+        <!--<ResourceDictionary Source="/Microsoft.Phone.Controls.Toolkit;component/RatingControl/RatingControl.xaml"/>-->
+        <!--<ResourceDictionary Source="/Microsoft.Phone.Controls.Toolkit;component/StartView/StartView.xaml"/>-->
         <ResourceDictionary Source="/Microsoft.Phone.Controls.Toolkit;component/Scroller/Scroller.xaml"/>
-        <ResourceDictionary Source="/Microsoft.Phone.Controls.Toolkit;component/ToggleSwitch/ToggleSwitch.xaml"/>
-        <ResourceDictionary Source="/Microsoft.Phone.Controls.Toolkit;component/TransferControl/TransferControl.xaml"/>
-        <ResourceDictionary Source="/Microsoft.Phone.Controls.Toolkit;component/Transitions/Transitions.xaml"/>
-        <ResourceDictionary Source="/Microsoft.Phone.Controls.Toolkit;component/WaitCursor/WaitCursor.xaml"/>
+        <!--<ResourceDictionary Source="/Microsoft.Phone.Controls.Toolkit;component/ToggleSwitch/ToggleSwitch.xaml"/>-->
+        <!--<ResourceDictionary Source="/Microsoft.Phone.Controls.Toolkit;component/TransferControl/TransferControl.xaml"/>-->
+        <!--<ResourceDictionary Source="/Microsoft.Phone.Controls.Toolkit;component/Transitions/Transitions.xaml"/>-->
+        <!--<ResourceDictionary Source="/Microsoft.Phone.Controls.Toolkit;component/WaitCursor/WaitCursor.xaml"/>-->
     </ResourceDictionary.MergedDictionaries>
 
-    <Style TargetType="controls:PerformanceProgressBar">
+    <!--<Style TargetType="controls:PerformanceProgressBar">
         <Setter Property="IsIndeterminate" Value="False"/>
         <Setter Property="Foreground" Value="{StaticResource PhoneAccentBrush}"/>
         <Setter Property="IsHitTestVisible" Value="False"/>
@@ -62,7 +62,7 @@
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
-    </Style>
+    </Style>-->
 
     <Style TargetType="controls:PhoneContentControl">
         <Setter Property="Template">
@@ -84,7 +84,7 @@
         </Setter>
     </Style>
 
-    <Style TargetType="controls:RadioButtonGroup">
+    <!--<Style TargetType="controls:RadioButtonGroup">
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="controls:RadioButtonGroup">
@@ -102,7 +102,7 @@
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
-    </Style>
+    </Style>-->
 
     <Style TargetType="system:HeaderedContentControl">
         <Setter Property="HorizontalContentAlignment" Value="Left"/>
@@ -134,7 +134,7 @@
         </Setter>
     </Style>
     
-    <Style TargetType="controls:ThemedImage">
+    <!--<Style TargetType="controls:ThemedImage">
         <Setter Property="Foreground" Value="{StaticResource PhoneForegroundBrush}"/>
         <Setter Property="Template">
             <Setter.Value>
@@ -147,6 +147,6 @@
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
-    </Style>
+    </Style>-->
 </ResourceDictionary>
 
