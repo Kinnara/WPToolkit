@@ -49,7 +49,8 @@
                              TargetName="_self"
                              HorizontalAlignment="Left"
                              NavigateUri="http://msdn.microsoft.com/en-us/library/ff941094(VS.92).aspx"
-                             toolkit:TiltEffect.SuppressTilt="True"/>
+                             toolkit:TiltEffect.SuppressTilt="True"
+                             CacheMode="BitmapCache"/>
 
         </StackPanel>
     </toolkit:PageUI>
