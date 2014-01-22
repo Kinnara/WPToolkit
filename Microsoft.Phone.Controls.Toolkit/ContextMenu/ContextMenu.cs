@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
+using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
@@ -843,7 +844,7 @@ namespace Microsoft.Phone.Controls
                 _rootVisual = Application.Current.RootVisual as
                     PhoneApplicationFrame;
                 if (null != _rootVisual)
-                {
+                {                                       
                     _rootVisual.ManipulationCompleted -= OnRootVisualManipulationCompleted;
                     _rootVisual.ManipulationCompleted += OnRootVisualManipulationCompleted;
 
@@ -892,15 +893,14 @@ namespace Microsoft.Phone.Controls
         }
 
         /// <summary>
-        /// Handles the MouseButtonUp events for the overlay.
+        /// Handles the ManipulationCompleted events for the overlay.
         /// </summary>
         /// <param name="sender">Source of the event.</param>
         /// <param name="e">Event arguments.</param>
-        private void OnOverlayMouseButtonUp(object sender, MouseButtonEventArgs e)
+        private void OnOverlayManipulationCompleted(object sender, ManipulationCompletedEventArgs e)
         {
-            // If they clicked in the context menu, then don't close
-            List<UIElement> list = VisualTreeHelper.FindElementsInHostCoordinates(e.GetPosition(null), _rootVisual) as List<UIElement>;
-            if (!list.Contains(this))
+            FrameworkElement manipulationContainer = e.ManipulationContainer as FrameworkElement;
+            if (e.ManipulationContainer != null && !manipulationContainer.GetVisualAncestors().Contains(this))
             {
                 ClosePopup();
             }
@@ -1122,7 +1122,7 @@ namespace Microsoft.Phone.Controls
             }
 
             _overlay = new Canvas { Background = new SolidColorBrush(Colors.Transparent) };
-            _overlay.MouseLeftButtonUp += OnOverlayMouseButtonUp;
+            _overlay.ManipulationCompleted += OnOverlayManipulationCompleted;
 
             FrameworkElement ownerElement = _owner as FrameworkElement;
             if (ReadLocalValue(FlowDirectionProperty) == DependencyProperty.UnsetValue)
