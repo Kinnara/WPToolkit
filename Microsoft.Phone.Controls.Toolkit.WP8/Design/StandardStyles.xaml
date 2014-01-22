@@ -348,7 +348,7 @@
 
     <Style TargetType="RepeatButton" BasedOn="{StaticResource PhoneButtonBase}"/>
 
-    <Style x:Key="PhoneRadioButtonCheckBoxBase" TargetType="ToggleButton" BasedOn="{StaticResource PhoneButtonBase}">
+    <!--<Style x:Key="PhoneRadioButtonCheckBoxBase" TargetType="ToggleButton" BasedOn="{StaticResource PhoneButtonBase}">
         <Setter Property="Background" Value="{StaticResource PhoneRadioCheckBoxBrush}"/>
         <Setter Property="BorderBrush" Value="{StaticResource PhoneRadioCheckBoxBorderBrush}"/>
         <Setter Property="FontSize" Value="{StaticResource PhoneFontSizeMedium}"/>
@@ -536,6 +536,6 @@
         </Setter>
     </Style>
     
-    <Style TargetType="RadioButton" BasedOn="{StaticResource PhoneRadioButton}"/>
+    <Style TargetType="RadioButton" BasedOn="{StaticResource PhoneRadioButton}"/>-->
 
 </ResourceDictionary>

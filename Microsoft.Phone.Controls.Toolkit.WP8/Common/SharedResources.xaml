@@ -3,7 +3,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:controls="clr-namespace:Microsoft.Phone.Controls">
 
-    <DataTemplate x:Key="ControlHeaderTemplate">
+    <!--<DataTemplate x:Key="ControlHeaderTemplate">
         <TextBlock Text="{Binding}"
                    FontFamily="{StaticResource PhoneFontFamilyNormal}"
                    FontSize="{StaticResource PhoneFontSizeNormal}"
@@ -17,5 +17,5 @@
         </TextBlock>
     </DataTemplate>
 
-    <controls:SingleDataTemplateSelector x:Key="ControlHeaderTemplateSelector" Template="{StaticResource ControlHeaderTemplate}"/>
+    <controls:SingleDataTemplateSelector x:Key="ControlHeaderTemplateSelector" Template="{StaticResource ControlHeaderTemplate}"/>-->
 </ResourceDictionary>

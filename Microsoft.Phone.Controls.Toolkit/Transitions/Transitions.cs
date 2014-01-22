@@ -82,54 +82,54 @@ namespace Microsoft.Phone.Controls
             return XamlReader.Load(xaml) as Storyboard;
         }
 
-        /// <summary>
-        /// Creates an
-        /// <see cref="T:Microsoft.Phone.Controls.ITransition"/>
-        /// for a
-        /// <see cref="T:System.Windows.UIElement"/>
-        /// for the roll transition.
-        /// </summary>
-        /// <param name="element">The <see cref="T:System.Windows.UIElement"/>.</param>
-        /// <returns>The <see cref="T:Microsoft.Phone.Controls.ITransition"/>.</returns>
-        public static ITransition Roll(UIElement element)
-        {
-            if (element == null)
-            {
-                throw new ArgumentNullException("element");
-            }
-            Storyboard storyboard = GetStoryboard("Roll");
-            Storyboard.SetTarget(storyboard, element);
-            element.Projection = new PlaneProjection { CenterOfRotationX = 0.5, CenterOfRotationY = 0.5 };
-            return new Transition(element, storyboard);
-        }
+        ///// <summary>
+        ///// Creates an
+        ///// <see cref="T:Microsoft.Phone.Controls.ITransition"/>
+        ///// for a
+        ///// <see cref="T:System.Windows.UIElement"/>
+        ///// for the roll transition.
+        ///// </summary>
+        ///// <param name="element">The <see cref="T:System.Windows.UIElement"/>.</param>
+        ///// <returns>The <see cref="T:Microsoft.Phone.Controls.ITransition"/>.</returns>
+        //public static ITransition Roll(UIElement element)
+        //{
+        //    if (element == null)
+        //    {
+        //        throw new ArgumentNullException("element");
+        //    }
+        //    Storyboard storyboard = GetStoryboard("Roll");
+        //    Storyboard.SetTarget(storyboard, element);
+        //    element.Projection = new PlaneProjection { CenterOfRotationX = 0.5, CenterOfRotationY = 0.5 };
+        //    return new Transition(element, storyboard);
+        //}
 
-        /// <summary>
-        /// Creates an
-        /// <see cref="T:Microsoft.Phone.Controls.ITransition"/>
-        /// for a
-        /// <see cref="T:System.Windows.UIElement"/>
-        /// for the rotate transition family.
-        /// </summary>
-        /// <param name="element">The <see cref="T:System.Windows.UIElement"/>.</param>
-        /// <param name="rotateTransitionMode">The transition mode.</param>
-        /// <returns>The <see cref="T:Microsoft.Phone.Controls.ITransition"/>.</returns>
-        public static ITransition Rotate(UIElement element, RotateTransitionMode rotateTransitionMode)
-        {
-            if (element == null)
-            {
-                throw new ArgumentNullException("element");
-            }
-            if (!Enum.IsDefined(typeof(RotateTransitionMode), rotateTransitionMode))
-            {
-                throw new ArgumentOutOfRangeException("rotateTransitionMode");
-            }
-            element.Projection = new PlaneProjection { CenterOfRotationX = 0.5, CenterOfRotationY = 0.5 };
+        ///// <summary>
+        ///// Creates an
+        ///// <see cref="T:Microsoft.Phone.Controls.ITransition"/>
+        ///// for a
+        ///// <see cref="T:System.Windows.UIElement"/>
+        ///// for the rotate transition family.
+        ///// </summary>
+        ///// <param name="element">The <see cref="T:System.Windows.UIElement"/>.</param>
+        ///// <param name="rotateTransitionMode">The transition mode.</param>
+        ///// <returns>The <see cref="T:Microsoft.Phone.Controls.ITransition"/>.</returns>
+        //public static ITransition Rotate(UIElement element, RotateTransitionMode rotateTransitionMode)
+        //{
+        //    if (element == null)
+        //    {
+        //        throw new ArgumentNullException("element");
+        //    }
+        //    if (!Enum.IsDefined(typeof(RotateTransitionMode), rotateTransitionMode))
+        //    {
+        //        throw new ArgumentOutOfRangeException("rotateTransitionMode");
+        //    }
+        //    element.Projection = new PlaneProjection { CenterOfRotationX = 0.5, CenterOfRotationY = 0.5 };
 
-            // Takes into account the flow direction.
-            rotateTransitionMode = AdjustRotateTransitionModeForFlowDirection(element, rotateTransitionMode);
+        //    // Takes into account the flow direction.
+        //    rotateTransitionMode = AdjustRotateTransitionModeForFlowDirection(element, rotateTransitionMode);
             
-            return GetEnumStoryboard<RotateTransitionMode>(element, "Rotate", rotateTransitionMode);
-        }
+        //    return GetEnumStoryboard<RotateTransitionMode>(element, "Rotate", rotateTransitionMode);
+        //}
 
         /// <summary>
         /// Creates an
@@ -155,29 +155,29 @@ namespace Microsoft.Phone.Controls
             return GetEnumStoryboard<SlideTransitionMode>(element, string.Empty, slideTransitionMode);
         }
 
-        /// <summary>
-        /// Creates an
-        /// <see cref="T:Microsoft.Phone.Controls.ITransition"/>
-        /// for a
-        /// <see cref="T:System.Windows.UIElement"/>
-        /// for the swivel transition family.
-        /// </summary>
-        /// <param name="element">The <see cref="T:System.Windows.UIElement"/>.</param>
-        /// <param name="swivelTransitionMode">The transition mode.</param>
-        /// <returns>The <see cref="T:Microsoft.Phone.Controls.ITransition"/>.</returns>
-        public static ITransition Swivel(UIElement element, SwivelTransitionMode swivelTransitionMode)
-        {
-            if (element == null)
-            {
-                throw new ArgumentNullException("element");
-            }
-            if (!Enum.IsDefined(typeof(SwivelTransitionMode), swivelTransitionMode))
-            {
-                throw new ArgumentOutOfRangeException("swivelTransitionMode");
-            }
-            element.Projection = new PlaneProjection();
-            return GetEnumStoryboard<SwivelTransitionMode>(element, "Swivel", swivelTransitionMode);
-        }
+        ///// <summary>
+        ///// Creates an
+        ///// <see cref="T:Microsoft.Phone.Controls.ITransition"/>
+        ///// for a
+        ///// <see cref="T:System.Windows.UIElement"/>
+        ///// for the swivel transition family.
+        ///// </summary>
+        ///// <param name="element">The <see cref="T:System.Windows.UIElement"/>.</param>
+        ///// <param name="swivelTransitionMode">The transition mode.</param>
+        ///// <returns>The <see cref="T:Microsoft.Phone.Controls.ITransition"/>.</returns>
+        //public static ITransition Swivel(UIElement element, SwivelTransitionMode swivelTransitionMode)
+        //{
+        //    if (element == null)
+        //    {
+        //        throw new ArgumentNullException("element");
+        //    }
+        //    if (!Enum.IsDefined(typeof(SwivelTransitionMode), swivelTransitionMode))
+        //    {
+        //        throw new ArgumentOutOfRangeException("swivelTransitionMode");
+        //    }
+        //    element.Projection = new PlaneProjection();
+        //    return GetEnumStoryboard<SwivelTransitionMode>(element, "Swivel", swivelTransitionMode);
+        //}
 
         /// <summary>
         /// Creates an
@@ -228,49 +228,49 @@ namespace Microsoft.Phone.Controls
         //    return new FeatheredTransition(element, new Storyboard(), turnstileFeatherTransitionMode, beginTime); 
         //}
 
-        /// <summary>
-        /// Adjusts the rotate transition mode based on the <paramref name="element"/>'s FlowDirection.
-        /// </summary>
-        /// <param name="element">The <see cref="T:System.Windows.UIElement"/>.</param>
-        /// <param name="rotateTransitionMode">The transition mode.</param>
-        /// <returns>Returns the adjusted rotate transition mode.</returns>
-        private static RotateTransitionMode AdjustRotateTransitionModeForFlowDirection(UIElement element, RotateTransitionMode rotateTransitionMode)
-        {
-            FrameworkElement fe = element as FrameworkElement;
-            RotateTransitionMode adjustedRotateTransitionMode = rotateTransitionMode;
+        ///// <summary>
+        ///// Adjusts the rotate transition mode based on the <paramref name="element"/>'s FlowDirection.
+        ///// </summary>
+        ///// <param name="element">The <see cref="T:System.Windows.UIElement"/>.</param>
+        ///// <param name="rotateTransitionMode">The transition mode.</param>
+        ///// <returns>Returns the adjusted rotate transition mode.</returns>
+        //private static RotateTransitionMode AdjustRotateTransitionModeForFlowDirection(UIElement element, RotateTransitionMode rotateTransitionMode)
+        //{
+        //    FrameworkElement fe = element as FrameworkElement;
+        //    RotateTransitionMode adjustedRotateTransitionMode = rotateTransitionMode;
 
-            if (fe != null && fe.FlowDirection == FlowDirection.RightToLeft)
-            {
-                switch (rotateTransitionMode)
-                {
-                    case RotateTransitionMode.In180Clockwise:
-                        adjustedRotateTransitionMode = RotateTransitionMode.In180Counterclockwise;
-                        break;
-                    case RotateTransitionMode.In180Counterclockwise:
-                        adjustedRotateTransitionMode = RotateTransitionMode.In180Clockwise;
-                        break;
-                    case RotateTransitionMode.In90Clockwise:
-                        adjustedRotateTransitionMode = RotateTransitionMode.In90Counterclockwise;
-                        break;
-                    case RotateTransitionMode.In90Counterclockwise:
-                        adjustedRotateTransitionMode = RotateTransitionMode.In90Clockwise;
-                        break;
-                    case RotateTransitionMode.Out180Clockwise:
-                        adjustedRotateTransitionMode = RotateTransitionMode.Out180Counterclockwise;
-                        break;
-                    case RotateTransitionMode.Out180Counterclockwise:
-                        adjustedRotateTransitionMode = RotateTransitionMode.Out180Clockwise;
-                        break;
-                    case RotateTransitionMode.Out90Clockwise:
-                        adjustedRotateTransitionMode = RotateTransitionMode.Out90Counterclockwise;
-                        break;
-                    case RotateTransitionMode.Out90Counterclockwise:
-                        adjustedRotateTransitionMode = RotateTransitionMode.Out90Clockwise;
-                        break;
-                }
-            }
+        //    if (fe != null && fe.FlowDirection == FlowDirection.RightToLeft)
+        //    {
+        //        switch (rotateTransitionMode)
+        //        {
+        //            case RotateTransitionMode.In180Clockwise:
+        //                adjustedRotateTransitionMode = RotateTransitionMode.In180Counterclockwise;
+        //                break;
+        //            case RotateTransitionMode.In180Counterclockwise:
+        //                adjustedRotateTransitionMode = RotateTransitionMode.In180Clockwise;
+        //                break;
+        //            case RotateTransitionMode.In90Clockwise:
+        //                adjustedRotateTransitionMode = RotateTransitionMode.In90Counterclockwise;
+        //                break;
+        //            case RotateTransitionMode.In90Counterclockwise:
+        //                adjustedRotateTransitionMode = RotateTransitionMode.In90Clockwise;
+        //                break;
+        //            case RotateTransitionMode.Out180Clockwise:
+        //                adjustedRotateTransitionMode = RotateTransitionMode.Out180Counterclockwise;
+        //                break;
+        //            case RotateTransitionMode.Out180Counterclockwise:
+        //                adjustedRotateTransitionMode = RotateTransitionMode.Out180Clockwise;
+        //                break;
+        //            case RotateTransitionMode.Out90Clockwise:
+        //                adjustedRotateTransitionMode = RotateTransitionMode.Out90Counterclockwise;
+        //                break;
+        //            case RotateTransitionMode.Out90Counterclockwise:
+        //                adjustedRotateTransitionMode = RotateTransitionMode.Out90Clockwise;
+        //                break;
+        //        }
+        //    }
 
-            return adjustedRotateTransitionMode;
-        }
+        //    return adjustedRotateTransitionMode;
+        //}
     }
 }
