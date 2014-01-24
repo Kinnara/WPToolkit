@@ -57,7 +57,7 @@
                     <HyperlinkButton Content="Toolkit on CodePlex" 
                                      NavigateUri="http://phone.codeplex.com/"
                                      TargetName="_self"
-                                     Foreground="{StaticResource PhoneAccentBrush}"
+                                     HorizontalAlignment="Left"
                                      toolkit:TiltEffect.SuppressTilt="True" />
                 </StackPanel>
             </Grid.Children>
