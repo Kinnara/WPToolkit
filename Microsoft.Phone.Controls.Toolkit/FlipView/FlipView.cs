@@ -46,7 +46,8 @@ namespace Microsoft.Phone.Controls
         private Point _gestureOrigin;
         private Animator _panAnimator;
         private int? _deferredSelectedIndex;
-        private bool _suppressNavigateByIndexChange;
+        private bool _suppressAnimation;
+        private bool _suppressKeepOffset;
         private double? _offsetWhenDragStarted;
 
         /// <summary>
@@ -387,8 +388,8 @@ namespace Microsoft.Phone.Controls
                         }
                         else if (Items.Count > 0)
                         {
-                            newSelectedIndex = 0;
-                            newSelectedItem = Items[0];
+                            newSelectedIndex = Items.Count - 1;
+                            newSelectedItem = Items[newSelectedIndex];
                         }
                         else
                         {
@@ -446,7 +447,11 @@ namespace Microsoft.Phone.Controls
                 newSelectedItem = Items[0];
             }
 
+            _suppressAnimation = true;
+            _suppressKeepOffset = true;
             UpdateSelection(oldSelectedIndex, newSelectedIndex, oldSelectedItem, newSelectedItem);
+            _suppressAnimation = false;
+            _suppressKeepOffset = false;
         }
 
         /// <summary>
@@ -540,6 +545,11 @@ namespace Microsoft.Phone.Controls
 
         private void OnSelectionChanged(bool keepOffset, int indexDelta)
         {
+            if (_suppressKeepOffset)
+            {
+                keepOffset = false;
+            }
+
             double oldTransformOffset = 0;
             if (keepOffset)
             {
@@ -605,7 +615,8 @@ namespace Microsoft.Phone.Controls
                 Items.Count > 1 &&
                 oldSelectedIndex != -1 &&
                 Math.Abs(indexDelta) == 1 &&
-                selectedItemChanged;
+                selectedItemChanged &&
+                !_suppressAnimation;
 
             try
             {
@@ -619,7 +630,8 @@ namespace Microsoft.Phone.Controls
 
                 SelectedIndex = newSelectedIndex;
                 SelectedItem = newSelectedItem;
-                OnSelectionChanged(animate || (_animating && UseTouchAnimationsForAllNavigation) || _suppressNavigateByIndexChange, indexDelta);
+
+                OnSelectionChanged(animate || (_animating && UseTouchAnimationsForAllNavigation) || (_suppressAnimation && TransformOffset != 0), indexDelta);
 
                 if (selectedItemChanged)
                 {
@@ -950,7 +962,7 @@ namespace Microsoft.Phone.Controls
 
         private void NavigateByIndexChange(int indexDelta, bool changeIndex = true)
         {
-            if (_suppressNavigateByIndexChange)
+            if (_suppressAnimation)
             {
                 return;
             }
@@ -975,9 +987,9 @@ namespace Microsoft.Phone.Controls
             {
                 changeIndex = false;
 
-                _suppressNavigateByIndexChange = true;
+                _suppressAnimation = true;
                 SelectedIndex += indexDelta;
-                _suppressNavigateByIndexChange = false;
+                _suppressAnimation = false;
             }
 
             _animationHint = indexDelta > 0 ? AnimationDirection.Previous : AnimationDirection.Next;
@@ -1008,9 +1020,9 @@ namespace Microsoft.Phone.Controls
 
             if (newSelectedIndex.HasValue)
             {
-                _suppressNavigateByIndexChange = true;
+                _suppressAnimation = true;
                 SelectedIndex = newSelectedIndex.Value;
-                _suppressNavigateByIndexChange = false;
+                _suppressAnimation = false;
             }
         }
 
