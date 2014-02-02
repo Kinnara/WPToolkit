@@ -37,14 +37,22 @@
             </Grid.RowDefinitions>
 
             <StackPanel Margin="0,10,0,0">
-                <toolkit:PickerBox x:Name="OrientationPicker" Header="Orientation"/>
-                <CheckBox x:Name="UseTouchAnimationsForAllNavigationCheckBox" Content="Use touch animations for all navigation" IsChecked="True" Margin="0,0,-12,0"/>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <toolkit:PickerBox x:Name="OrientationPicker" Header="Orientation"/>
+                    <toolkit:PickerBox x:Name="UpdateSelectionModePicker" Header="UpdateSelectionMode" Grid.Column="1"/>
+                </Grid>
+                <CheckBox x:Name="UseTouchAnimationsForAllNavigationCheckBox" Content="UseTouchAnimationsForAllNavigation" IsChecked="True"/>
             </StackPanel>
 
             <toolkit:FlipView x:Name="HorizontalFlipView"
                               ItemTemplate="{StaticResource ItemTemplate}"
                               ItemsSource="{Binding}"
                               UseTouchAnimationsForAllNavigation="{Binding IsChecked, ElementName=UseTouchAnimationsForAllNavigationCheckBox}"
+                              UpdateSelectionMode="{Binding SelectedItem, ElementName=UpdateSelectionModePicker}"
                               Margin="-18,-6"
                               Grid.Row="1"
                               SelectionChanged="HorizontalFlipView_SelectionChanged"/>
@@ -53,6 +61,7 @@
                               ItemTemplate="{StaticResource ItemTemplate}"
                               ItemsSource="{Binding}"
                               UseTouchAnimationsForAllNavigation="{Binding IsChecked, ElementName=UseTouchAnimationsForAllNavigationCheckBox}"
+                              UpdateSelectionMode="{Binding SelectedItem, ElementName=UpdateSelectionModePicker}"
                               Margin="-18,-6"
                               Grid.Row="1"
                               SelectedItem="{Binding SelectedItem, ElementName=HorizontalFlipView, Mode=TwoWay}"
