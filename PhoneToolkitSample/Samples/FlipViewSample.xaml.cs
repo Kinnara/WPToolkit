@@ -23,6 +23,13 @@ namespace PhoneToolkitSample.Samples
             };
             OrientationPicker.SelectedIndex = 0;
 
+            UpdateSelectionModePicker.ItemsSource = new[]
+            {
+                UpdateSelectionMode.AfterTransition,
+                UpdateSelectionMode.BeforeTransition
+            };
+            UpdateSelectionModePicker.SelectedIndex = 0;
+
             DataContext = ColorExtensions.AccentColors();
         }
 
