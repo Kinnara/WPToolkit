@@ -46,7 +46,8 @@ namespace Microsoft.Phone.Controls
         private Point _gestureOrigin;
         private Animator _panAnimator;
         private int? _deferredSelectedIndex;
-        private bool _suppressNavigateByIndexChange;
+        private bool _suppressAnimation;
+        private bool _suppressKeepOffset;
         private double? _offsetWhenDragStarted;
 
         /// <summary>
@@ -286,6 +287,11 @@ namespace Microsoft.Phone.Controls
             get { return _deferredSelectedIndex.HasValue ? _deferredSelectedIndex.Value : SelectedIndex; }
         }
 
+        private double TransformOffset
+        {
+            get { return _panAnimator != null ? _panAnimator.CurrentOffset : 0; }
+        }
+
         /// <summary>
         /// Occurs when the currently selected item changes.
         /// </summary>
@@ -382,8 +388,8 @@ namespace Microsoft.Phone.Controls
                         }
                         else if (Items.Count > 0)
                         {
-                            newSelectedIndex = 0;
-                            newSelectedItem = Items[0];
+                            newSelectedIndex = Items.Count - 1;
+                            newSelectedItem = Items[newSelectedIndex];
                         }
                         else
                         {
@@ -441,7 +447,11 @@ namespace Microsoft.Phone.Controls
                 newSelectedItem = Items[0];
             }
 
+            _suppressAnimation = true;
+            _suppressKeepOffset = true;
             UpdateSelection(oldSelectedIndex, newSelectedIndex, oldSelectedItem, newSelectedItem);
+            _suppressAnimation = false;
+            _suppressKeepOffset = false;
         }
 
         /// <summary>
@@ -533,21 +543,38 @@ namespace Microsoft.Phone.Controls
             }
         }
 
-        private void OnSelectionChanged(bool scrollSelectionIntoView = true)
+        private void OnSelectionChanged(bool keepOffset, int indexDelta)
         {
+            if (_suppressKeepOffset)
+            {
+                keepOffset = false;
+            }
+
+            double oldTransformOffset = 0;
+            if (keepOffset)
+            {
+                oldTransformOffset = TransformOffset;
+            }
+
             if (_animating)
             {
-                GoTo(0, ZeroDuration);
+                GoTo(0);
 
                 _animationHint = null;
                 _animating = false;
                 _deferredSelectedIndex = null;
             }
 
-            if (scrollSelectionIntoView)
+            if (!keepOffset)
             {
-                GoTo(0, ZeroDuration);
-                ScrollSelectionIntoView();
+                GoTo(0);
+            }
+
+            ScrollSelectionIntoView();
+
+            if (keepOffset)
+            {
+                GoTo(indexDelta * ItemSize + oldTransformOffset);
             }
         }
 
@@ -589,7 +616,7 @@ namespace Microsoft.Phone.Controls
                 oldSelectedIndex != -1 &&
                 Math.Abs(indexDelta) == 1 &&
                 selectedItemChanged &&
-                !_animating || _suppressNavigateByIndexChange;
+                !_suppressAnimation;
 
             try
             {
@@ -603,7 +630,8 @@ namespace Microsoft.Phone.Controls
 
                 SelectedIndex = newSelectedIndex;
                 SelectedItem = newSelectedItem;
-                OnSelectionChanged(!animate);
+
+                OnSelectionChanged(animate || (_animating && UseTouchAnimationsForAllNavigation) || (_suppressAnimation && TransformOffset != 0), indexDelta);
 
                 if (selectedItemChanged)
                 {
@@ -841,9 +869,9 @@ namespace Microsoft.Phone.Controls
         {
             if (ShouldHandleManipulation)
             {
-                if (_offsetWhenDragStarted.HasValue && _animationHint.HasValue)
+                if (_offsetWhenDragStarted.HasValue && _animating)
                 {
-                    GoTo(CalculateContentDestination(_animationHint.Value), DefaultDuration, _easingFunction, CompleteNavigateByIndexChange);
+                    GoTo(_deferredSelectedIndex.HasValue ? CalculateContentDestination(_animationHint.Value) : 0, DefaultDuration, _easingFunction, CompleteNavigateByIndexChange);
                 }
                 else if (totalManipulation != null && _isEffectiveDragging)
                 {
@@ -856,7 +884,7 @@ namespace Microsoft.Phone.Controls
                     }
                 }
 
-                if (!_animating)
+                if (!_animating && TransformOffset != 0)
                 {
                     GoTo(CalculateContentDestination(AnimationDirection.Center), DefaultDuration, _easingFunction);
                 }
@@ -894,7 +922,7 @@ namespace Microsoft.Phone.Controls
             {
                 if (!_offsetWhenDragStarted.HasValue)
                 {
-                    _offsetWhenDragStarted = _panAnimator != null ? _panAnimator.CurrentOffset : 0;
+                    _offsetWhenDragStarted = TransformOffset;
                 }
             }
             else
@@ -929,12 +957,12 @@ namespace Microsoft.Phone.Controls
                 }
             }
 
-            GoTo(targetOffset, ZeroDuration);
+            GoTo(targetOffset);
         }
 
         private void NavigateByIndexChange(int indexDelta, bool changeIndex = true)
         {
-            if (_suppressNavigateByIndexChange)
+            if (_suppressAnimation)
             {
                 return;
             }
@@ -943,13 +971,7 @@ namespace Microsoft.Phone.Controls
             {
                 if (ValidateIndexChange(indexDelta))
                 {
-                    double targetOffset = 0;
-                    if (_panAnimator != null)
-                    {
-                        targetOffset = _panAnimator.CurrentOffset - CalculateContentDestination(_animationHint.Value);
-                    }
                     CompleteNavigateByIndexChange();
-                    GoTo(targetOffset, ZeroDuration);
                 }
             }
 
@@ -961,32 +983,31 @@ namespace Microsoft.Phone.Controls
                 }
             }
 
-            bool suppressChangeIndex = false;
             if (changeIndex && UpdateSelectionMode == UpdateSelectionMode.BeforeTransition)
             {
-                suppressChangeIndex = true;
+                changeIndex = false;
 
-                try
-                {
-                    _suppressNavigateByIndexChange = true;
-
-                    SelectedIndex += indexDelta;
-                }
-                finally
-                {
-                    _suppressNavigateByIndexChange = false;
-                }
+                _suppressAnimation = true;
+                SelectedIndex += indexDelta;
+                _suppressAnimation = false;
             }
 
             _animationHint = indexDelta > 0 ? AnimationDirection.Previous : AnimationDirection.Next;
             _animating = true;
 
-            if (changeIndex && !suppressChangeIndex)
+            if (changeIndex)
             {
                 _deferredSelectedIndex = SelectedIndex + indexDelta;
             }
+            else
+            {
+                if (TransformOffset == 0)
+                {
+                    GoTo(-CalculateContentDestination(_animationHint.Value));
+                }
+            }
 
-            GoTo(CalculateContentDestination(_animationHint.Value), DefaultDuration, _easingFunction, CompleteNavigateByIndexChange);
+            GoTo(changeIndex ? CalculateContentDestination(_animationHint.Value) : 0, DefaultDuration, _easingFunction, CompleteNavigateByIndexChange);
         }
 
         private void CompleteNavigateByIndexChange()
@@ -999,10 +1020,10 @@ namespace Microsoft.Phone.Controls
 
             if (newSelectedIndex.HasValue)
             {
+                _suppressAnimation = true;
                 SelectedIndex = newSelectedIndex.Value;
+                _suppressAnimation = false;
             }
-
-            OnSelectionChanged();
         }
 
         private bool ValidateIndexChange(int indexDelta)
@@ -1031,6 +1052,11 @@ namespace Microsoft.Phone.Controls
                     }
                 }
             }
+        }
+
+        private void GoTo(double targetOffset)
+        {
+            GoTo(targetOffset, ZeroDuration, null, null);
         }
 
         private void GoTo(double targetOffset, Duration duration)
