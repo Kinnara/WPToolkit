@@ -25,9 +25,11 @@ namespace Microsoft.Phone.Controls
 
         private const double CompressLimit = 125;
         private static readonly Duration ZeroDuration = TimeSpan.Zero;
-        private static readonly Duration DefaultDuration = TimeSpan.FromSeconds(0.55);
+        private static readonly Duration DefaultDuration = TimeSpan.FromSeconds(0.5);
+        private static readonly Duration FlickDuration = TimeSpan.FromSeconds(0.3);
+        private static readonly Duration BounceDuration = TimeSpan.FromSeconds(0.3);
 
-        private readonly IEasingFunction _easingFunction = new ExponentialEase { Exponent = 8 };
+        private readonly IEasingFunction _easingFunction = new ExponentialEase { Exponent = 5 };
 
         private InitializingData _initializingData;
         private bool _updatingSelection;
@@ -49,6 +51,7 @@ namespace Microsoft.Phone.Controls
         private bool _suppressAnimation;
         private bool _suppressKeepOffset;
         private double? _offsetWhenDragStarted;
+        private bool _compressing;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="T:Microsoft.Phone.Controls.FlipView" /> class.
@@ -284,7 +287,7 @@ namespace Microsoft.Phone.Controls
 
         private int EffectiveSelectedIndex
         {
-            get { return _deferredSelectedIndex.HasValue ? _deferredSelectedIndex.Value : SelectedIndex; }
+            get { return _deferredSelectedIndex.GetValueOrDefault(SelectedIndex); }
         }
 
         private double TransformOffset
@@ -871,7 +874,11 @@ namespace Microsoft.Phone.Controls
             {
                 if (_offsetWhenDragStarted.HasValue && _animating)
                 {
-                    GoTo(_deferredSelectedIndex.HasValue ? CalculateContentDestination(_animationHint.Value) : 0, DefaultDuration, _easingFunction, CompleteNavigateByIndexChange);
+                    GoTo(
+                        _deferredSelectedIndex.HasValue ? CalculateContentDestination(_animationHint.Value) : 0,
+                        _compressing ? BounceDuration : DefaultDuration,
+                        _easingFunction,
+                        CompleteNavigateByIndexChange);
                 }
                 else if (totalManipulation != null && _isEffectiveDragging)
                 {
@@ -886,12 +893,16 @@ namespace Microsoft.Phone.Controls
 
                 if (!_animating && TransformOffset != 0)
                 {
-                    GoTo(CalculateContentDestination(AnimationDirection.Center), DefaultDuration, _easingFunction);
+                    GoTo(
+                        CalculateContentDestination(AnimationDirection.Center),
+                        _compressing ? BounceDuration : DefaultDuration,
+                        _easingFunction);
                 }
             }
 
             _isEffectiveDragging = false;
             _offsetWhenDragStarted = null;
+            _compressing = false;
         }
 
         private void Flick(double angle)
@@ -903,7 +914,7 @@ namespace Microsoft.Phone.Controls
                 {
                     case 0:
                     case 180:
-                        NavigateByIndexChange(intAngle == 180 ? 1 : -1);
+                        NavigateByIndexChange(intAngle == 180 ? 1 : -1, flick: true);
                         break;
                 }
             }
@@ -937,16 +948,19 @@ namespace Microsoft.Phone.Controls
             }
 
             double compressLimit = CompressLimit;
-            if (_animationHint.HasValue)
+            if (_deferredSelectedIndex.HasValue)
             {
                 compressLimit += Math.Abs(CalculateContentDestination(_animationHint.Value));
             }
+
+            _compressing = false;
 
             if (EffectiveSelectedIndex <= 0)
             {
                 if (targetOffset > compressLimit)
                 {
                     targetOffset = compressLimit;
+                    _compressing = true;
                 }
             }
             else if (EffectiveSelectedIndex >= Items.Count - 1)
@@ -954,13 +968,14 @@ namespace Microsoft.Phone.Controls
                 if (targetOffset < -compressLimit)
                 {
                     targetOffset = -compressLimit;
+                    _compressing = true;
                 }
             }
 
             GoTo(targetOffset);
         }
 
-        private void NavigateByIndexChange(int indexDelta, bool changeIndex = true)
+        private void NavigateByIndexChange(int indexDelta, bool changeIndex = true, bool flick = false)
         {
             if (_suppressAnimation)
             {
@@ -1007,7 +1022,11 @@ namespace Microsoft.Phone.Controls
                 }
             }
 
-            GoTo(changeIndex ? CalculateContentDestination(_animationHint.Value) : 0, DefaultDuration, _easingFunction, CompleteNavigateByIndexChange);
+            GoTo(
+                changeIndex ? CalculateContentDestination(_animationHint.Value) : 0,
+                flick ? FlickDuration : DefaultDuration,
+                _easingFunction,
+                CompleteNavigateByIndexChange);
         }
 
         private void CompleteNavigateByIndexChange()
