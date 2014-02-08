@@ -3137,7 +3137,7 @@
                     <Border Background="{TemplateBinding Background}"
                             BorderBrush="{TemplateBinding BorderBrush}"
                             BorderThickness="{TemplateBinding BorderThickness}" >
-                        <ScrollViewer x:Name="ScrollViewer"
+                        <ScrollViewer x:Name="ScrollingHost"
                                       HorizontalScrollBarVisibility="Disabled"
                                       VerticalScrollBarVisibility="Disabled"
                                       Padding="{TemplateBinding Padding}">
