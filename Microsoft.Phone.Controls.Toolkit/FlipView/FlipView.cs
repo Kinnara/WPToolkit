@@ -25,7 +25,7 @@ namespace Microsoft.Phone.Controls
 
         private const double MaxDraggingSquishDistance = 125;
         private static readonly Duration ZeroDuration = TimeSpan.Zero;
-        private static readonly Duration DefaultDuration = TimeSpan.FromSeconds(0.3);
+        private static readonly Duration DefaultDuration = TimeSpan.FromSeconds(0.4);
         private static readonly Duration UnsquishDuration = TimeSpan.FromSeconds(0.3);
         private static readonly IEasingFunction DefaultEase = new ExponentialEase { Exponent = 5 };
         private static readonly IEasingFunction UnsquishEase = DefaultEase;
