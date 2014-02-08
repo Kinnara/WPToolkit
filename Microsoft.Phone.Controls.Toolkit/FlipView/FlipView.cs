@@ -15,19 +15,20 @@ namespace Microsoft.Phone.Controls
     /// <summary>
     /// Represents an items control that displays one item at a time, and enables "flip" behavior for traversing its collection of items.
     /// </summary>
-    [TemplatePart(Name = ElementScrollViewerName, Type = typeof(ScrollViewer))]
+    [TemplatePart(Name = ElementScrollingHostName, Type = typeof(ScrollViewer))]
     [TemplatePart(Name = ElementItemsPresenterName, Type = typeof(ItemsPresenter))]
     [StyleTypedProperty(Property = "ItemContainerStyle", StyleTargetType = typeof(FlipViewItem))]
     public class FlipView : TemplatedItemsControl<FlipViewItem>, ISupportInitialize
     {
-        private const string ElementScrollViewerName = "ScrollViewer";
+        private const string ElementScrollingHostName = "ScrollingHost";
         private const string ElementItemsPresenterName = "ItemsPresenter";
 
-        private const double CompressLimit = 125;
+        private const double MaxDraggingSquishDistance = 125;
         private static readonly Duration ZeroDuration = TimeSpan.Zero;
-        private static readonly Duration DefaultDuration = TimeSpan.FromSeconds(0.55);
-
-        private readonly IEasingFunction _easingFunction = new ExponentialEase { Exponent = 8 };
+        private static readonly Duration DefaultDuration = TimeSpan.FromSeconds(0.3);
+        private static readonly Duration UnsquishDuration = TimeSpan.FromSeconds(0.3);
+        private static readonly IEasingFunction DefaultEase = new ExponentialEase { Exponent = 5 };
+        private static readonly IEasingFunction UnsquishEase = DefaultEase;
 
         private InitializingData _initializingData;
         private bool _updatingSelection;
@@ -37,18 +38,19 @@ namespace Microsoft.Phone.Controls
         private List<FlipViewItem> _realizedItems = new List<FlipViewItem>();
         private bool _loaded;
 
-        private AnimationDirection? _animationHint;
         private bool _animating;
         private bool _isEffectiveDragging;
         private bool _dragging;
         private DragLock _dragLock;
         private WeakReference _gestureSource;
         private Point _gestureOrigin;
-        private Animator _panAnimator;
+        private ManipulationStartedEventArgs _gestureStartedEventArgs;
+        private Animator _animator;
         private int? _deferredSelectedIndex;
         private bool _suppressAnimation;
-        private bool _suppressKeepOffset;
         private double? _offsetWhenDragStarted;
+        private bool _squishing;
+        private bool _supressHandleManipulation;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="T:Microsoft.Phone.Controls.FlipView" /> class.
@@ -255,7 +257,7 @@ namespace Microsoft.Phone.Controls
             get { return Orientation == Orientation.Horizontal ? ItemsHostSize.Width : ItemsHostSize.Height; }
         }
 
-        private ScrollViewer ElementScrollViewer { get; set; }
+        private ScrollViewer ElementScrollingHost { get; set; }
 
         private ItemsPresenter ElementItemsPresenter { get; set; }
 
@@ -279,17 +281,30 @@ namespace Microsoft.Phone.Controls
 
         private bool ShouldHandleManipulation
         {
-            get { return Items.Count > 1 && ElementItemsPresenter != null; }
+            get { return Items.Count > 1 && ElementItemsPresenter != null && !_supressHandleManipulation; }
         }
 
         private int EffectiveSelectedIndex
         {
-            get { return _deferredSelectedIndex.HasValue ? _deferredSelectedIndex.Value : SelectedIndex; }
+            get { return _deferredSelectedIndex.GetValueOrDefault(SelectedIndex); }
+        }
+
+        private double ScrollOffset
+        {
+            get
+            {
+                if (ElementScrollingHost != null)
+                {
+                    return Orientation == Orientation.Horizontal ? ElementScrollingHost.HorizontalOffset : ElementScrollingHost.VerticalOffset;
+                }
+
+                return 0;
+            }
         }
 
         private double TransformOffset
         {
-            get { return _panAnimator != null ? _panAnimator.CurrentOffset : 0; }
+            get { return _animator != null ? _animator.CurrentOffset : 0; }
         }
 
         /// <summary>
@@ -302,7 +317,7 @@ namespace Microsoft.Phone.Controls
         /// </summary>
         public override void OnApplyTemplate()
         {
-            _panAnimator = null;
+            _animator = null;
             ItemsHost = null;
             ItemsHostSize = new Size(double.NaN, double.NaN);
 
@@ -313,7 +328,7 @@ namespace Microsoft.Phone.Controls
 
             base.OnApplyTemplate();
 
-            ElementScrollViewer = GetTemplateChild(ElementScrollViewerName) as ScrollViewer;
+            ElementScrollingHost = GetTemplateChild(ElementScrollingHostName) as ScrollViewer;
             ElementItemsPresenter = GetTemplateChild(ElementItemsPresenterName) as ItemsPresenter;
 
             if (ElementItemsPresenter != null)
@@ -448,10 +463,22 @@ namespace Microsoft.Phone.Controls
             }
 
             _suppressAnimation = true;
-            _suppressKeepOffset = true;
             UpdateSelection(oldSelectedIndex, newSelectedIndex, oldSelectedItem, newSelectedItem);
             _suppressAnimation = false;
-            _suppressKeepOffset = false;
+
+            if (_animating)
+            {
+                _deferredSelectedIndex = null;
+                CompleteAnimateTo();
+            }
+
+            if (_gestureStartedEventArgs != null)
+            {
+                _supressHandleManipulation = true;
+                _gestureStartedEventArgs.Complete();
+                _supressHandleManipulation = false;
+                GoTo(0);
+            }
         }
 
         /// <summary>
@@ -543,41 +570,6 @@ namespace Microsoft.Phone.Controls
             }
         }
 
-        private void OnSelectionChanged(bool keepOffset, int indexDelta)
-        {
-            if (_suppressKeepOffset)
-            {
-                keepOffset = false;
-            }
-
-            double oldTransformOffset = 0;
-            if (keepOffset)
-            {
-                oldTransformOffset = TransformOffset;
-            }
-
-            if (_animating)
-            {
-                GoTo(0);
-
-                _animationHint = null;
-                _animating = false;
-                _deferredSelectedIndex = null;
-            }
-
-            if (!keepOffset)
-            {
-                GoTo(0);
-            }
-
-            ScrollSelectionIntoView();
-
-            if (keepOffset)
-            {
-                GoTo(indexDelta * ItemSize + oldTransformOffset);
-            }
-        }
-
         private FlipViewItem GetContainer(int index)
         {
             if (index < 0 || Items.Count <= index)
@@ -616,6 +608,7 @@ namespace Microsoft.Phone.Controls
                 oldSelectedIndex != -1 &&
                 Math.Abs(indexDelta) == 1 &&
                 selectedItemChanged &&
+                !(_animating && _deferredSelectedIndex.HasValue && _deferredSelectedIndex == newSelectedIndex) &&
                 !_suppressAnimation;
 
             try
@@ -630,8 +623,6 @@ namespace Microsoft.Phone.Controls
 
                 SelectedIndex = newSelectedIndex;
                 SelectedItem = newSelectedItem;
-
-                OnSelectionChanged(animate || (_animating && UseTouchAnimationsForAllNavigation) || (_suppressAnimation && TransformOffset != 0), indexDelta);
 
                 if (selectedItemChanged)
                 {
@@ -660,7 +651,22 @@ namespace Microsoft.Phone.Controls
 
             if (animate)
             {
-                NavigateByIndexChange(indexDelta, false);
+                AnimateTo(SelectedIndex, false);
+            }
+            else if (!_isEffectiveDragging)
+            {
+                if (_animating)
+                {
+                    if (!UseTouchAnimationsForAllNavigation)
+                    {
+                        _deferredSelectedIndex = null;
+                        CompleteAnimateTo();
+                    }
+                }
+                else
+                {
+                    ScrollSelectionIntoView();
+                }
             }
         }
 
@@ -732,20 +738,22 @@ namespace Microsoft.Phone.Controls
 
         private void ScrollSelectionIntoView()
         {
-            int index = SelectedIndex;
+            int index = EffectiveSelectedIndex;
 
-            if (ItemsHost != null && ElementScrollViewer != null && _loaded && index >= 0)
+            if (ItemsHost != null && ElementScrollingHost != null && _loaded && index >= 0 && index != ScrollOffset)
             {
-                ElementScrollViewer.UpdateLayout();
+                ElementScrollingHost.UpdateLayout();
 
                 if (Orientation == Orientation.Horizontal)
                 {
-                    ElementScrollViewer.ScrollToHorizontalOffset(index);
+                    ElementScrollingHost.ScrollToHorizontalOffset(index);
                 }
                 else
                 {
-                    ElementScrollViewer.ScrollToVerticalOffset(index);
+                    ElementScrollingHost.ScrollToVerticalOffset(index);
                 }
+
+                ElementScrollingHost.UpdateLayout();
             }
         }
 
@@ -770,6 +778,7 @@ namespace Microsoft.Phone.Controls
         {
             _gestureSource = new WeakReference(e.ManipulationContainer);
             _gestureOrigin = e.ManipulationOrigin;
+            _gestureStartedEventArgs = e;
             _dragLock = DragLock.Unset;
             _dragging = false;
         }
@@ -802,6 +811,7 @@ namespace Microsoft.Phone.Controls
         {
             ManipulationDelta totalManipulation = null;
 
+            _gestureStartedEventArgs = null;
             _dragLock = DragLock.Unset;
             _dragging = false;
 
@@ -849,66 +859,6 @@ namespace Microsoft.Phone.Controls
             GesturesComplete(totalManipulation);
         }
 
-        private double CalculateContentDestination(AnimationDirection direction)
-        {
-            double destination = 0;
-            double itemSize = ItemSize;
-            switch (direction)
-            {
-                case AnimationDirection.Previous:
-                    destination = -itemSize;
-                    break;
-                case AnimationDirection.Next:
-                    destination = itemSize;
-                    break;
-            }
-            return destination;
-        }
-
-        private void GesturesComplete(ManipulationDelta totalManipulation)
-        {
-            if (ShouldHandleManipulation)
-            {
-                if (_offsetWhenDragStarted.HasValue && _animating)
-                {
-                    GoTo(_deferredSelectedIndex.HasValue ? CalculateContentDestination(_animationHint.Value) : 0, DefaultDuration, _easingFunction, CompleteNavigateByIndexChange);
-                }
-                else if (totalManipulation != null && _isEffectiveDragging)
-                {
-                    bool horizontal = Orientation == Orientation.Horizontal;
-                    double translation = horizontal ? totalManipulation.Translation.X : totalManipulation.Translation.Y;
-                    double absoluteTranslation = Math.Abs(translation);
-                    if (translation != 0 && absoluteTranslation >= ItemSize / 2)
-                    {
-                        NavigateByIndexChange(translation < 0 ? 1 : -1);
-                    }
-                }
-
-                if (!_animating && TransformOffset != 0)
-                {
-                    GoTo(CalculateContentDestination(AnimationDirection.Center), DefaultDuration, _easingFunction);
-                }
-            }
-
-            _isEffectiveDragging = false;
-            _offsetWhenDragStarted = null;
-        }
-
-        private void Flick(double angle)
-        {
-            if (ShouldHandleManipulation)
-            {
-                int intAngle = (int)angle;
-                switch (intAngle)
-                {
-                    case 0:
-                    case 180:
-                        NavigateByIndexChange(intAngle == 180 ? 1 : -1);
-                        break;
-                }
-            }
-        }
-
         private void Drag(ManipulationDeltaEventArgs e)
         {
             _isEffectiveDragging = true;
@@ -920,14 +870,17 @@ namespace Microsoft.Phone.Controls
 
             if (_animating)
             {
+                _animating = false;
+
+                double oldScrollOffset = ScrollOffset;
+                double oldTransformOffset = TransformOffset;
+
+                ScrollSelectionIntoView();
+
                 if (!_offsetWhenDragStarted.HasValue)
                 {
-                    _offsetWhenDragStarted = TransformOffset;
+                    _offsetWhenDragStarted = (ScrollOffset - oldScrollOffset) * ItemSize + oldTransformOffset;
                 }
-            }
-            else
-            {
-                _offsetWhenDragStarted = null;
             }
 
             double targetOffset = Orientation == Orientation.Horizontal ? e.CumulativeManipulation.Translation.X : e.CumulativeManipulation.Translation.Y;
@@ -936,100 +889,68 @@ namespace Microsoft.Phone.Controls
                 targetOffset += _offsetWhenDragStarted.Value;
             }
 
-            double compressLimit = CompressLimit;
-            if (_animationHint.HasValue)
-            {
-                compressLimit += Math.Abs(CalculateContentDestination(_animationHint.Value));
-            }
+            _squishing = false;
 
             if (EffectiveSelectedIndex <= 0)
             {
-                if (targetOffset > compressLimit)
+                if (targetOffset > MaxDraggingSquishDistance)
                 {
-                    targetOffset = compressLimit;
+                    targetOffset = MaxDraggingSquishDistance;
+                }
+
+                if (targetOffset > 0)
+                {
+                    _squishing = true;
                 }
             }
             else if (EffectiveSelectedIndex >= Items.Count - 1)
             {
-                if (targetOffset < -compressLimit)
+                if (targetOffset < -MaxDraggingSquishDistance)
                 {
-                    targetOffset = -compressLimit;
+                    targetOffset = -MaxDraggingSquishDistance;
+                }
+
+                if (targetOffset < 0)
+                {
+                    _squishing = true;
                 }
             }
 
             GoTo(targetOffset);
         }
 
-        private void NavigateByIndexChange(int indexDelta, bool changeIndex = true)
+        private void Flick(double angle)
         {
-            if (_suppressAnimation)
+            if (ShouldHandleManipulation)
             {
-                return;
-            }
-
-            if (_animating)
-            {
-                if (ValidateIndexChange(indexDelta))
+                int intAngle = (int)angle;
+                switch (intAngle)
                 {
-                    CompleteNavigateByIndexChange();
+                    case 0:
+                    case 180:
+                        AnimateTo(EffectiveSelectedIndex + (intAngle == 180 ? 1 : -1));
+                        break;
                 }
-            }
-
-            if (changeIndex)
-            {
-                if (!ValidateIndexChange(indexDelta))
-                {
-                    return;
-                }
-            }
-
-            if (changeIndex && UpdateSelectionMode == UpdateSelectionMode.BeforeTransition)
-            {
-                changeIndex = false;
-
-                _suppressAnimation = true;
-                SelectedIndex += indexDelta;
-                _suppressAnimation = false;
-            }
-
-            _animationHint = indexDelta > 0 ? AnimationDirection.Previous : AnimationDirection.Next;
-            _animating = true;
-
-            if (changeIndex)
-            {
-                _deferredSelectedIndex = SelectedIndex + indexDelta;
-            }
-            else
-            {
-                if (TransformOffset == 0)
-                {
-                    GoTo(-CalculateContentDestination(_animationHint.Value));
-                }
-            }
-
-            GoTo(changeIndex ? CalculateContentDestination(_animationHint.Value) : 0, DefaultDuration, _easingFunction, CompleteNavigateByIndexChange);
-        }
-
-        private void CompleteNavigateByIndexChange()
-        {
-            int? newSelectedIndex = _deferredSelectedIndex;
-
-            _animationHint = null;
-            _animating = false;
-            _deferredSelectedIndex = null;
-
-            if (newSelectedIndex.HasValue)
-            {
-                _suppressAnimation = true;
-                SelectedIndex = newSelectedIndex.Value;
-                _suppressAnimation = false;
             }
         }
 
-        private bool ValidateIndexChange(int indexDelta)
+        private void GesturesComplete(ManipulationDelta totalManipulation)
         {
-            return (indexDelta == 1 && EffectiveSelectedIndex < Items.Count - 1) ||
-                   (indexDelta == -1 && EffectiveSelectedIndex > 0);
+            if (ShouldHandleManipulation)
+            {
+                if (totalManipulation != null && _isEffectiveDragging)
+                {
+                    AnimateTo((int)Math.Round(ScrollOffset - TransformOffset / ItemSize));
+                }
+                else if (totalManipulation == null && !_animating)
+                {
+                    AnimateTo(EffectiveSelectedIndex);
+                }
+            }
+
+            _isEffectiveDragging = false;
+            _offsetWhenDragStarted = null;
+            _squishing = false;
         }
 
         private void ReleaseMouseCaptureAtGestureOrigin()
@@ -1054,26 +975,110 @@ namespace Microsoft.Phone.Controls
             }
         }
 
+        private void AnimateTo(int index, bool changeIndex = true)
+        {
+            if (_suppressAnimation)
+            {
+                return;
+            }
+
+            double? oldScrollOffset = null;
+            double? oldTransformOffset = null;
+
+            if (_animating)
+            {
+                if (ValidateIndex(index))
+                {
+                    oldScrollOffset = ScrollOffset;
+                    oldTransformOffset = TransformOffset;
+                    _deferredSelectedIndex = null;
+                    CompleteAnimateTo();
+                }
+            }
+
+            if (changeIndex)
+            {
+                if (!ValidateIndex(index))
+                {
+                    return;
+                }
+            }
+
+            if (changeIndex && UpdateSelectionMode == UpdateSelectionMode.BeforeTransition)
+            {
+                changeIndex = false;
+
+                _suppressAnimation = true;
+                SelectedIndex = index;
+                _suppressAnimation = false;
+            }
+
+            _animating = true;
+
+            if (changeIndex)
+            {
+                _deferredSelectedIndex = index;
+            }
+
+            if (oldScrollOffset.HasValue && oldTransformOffset.HasValue)
+            {
+                GoTo((ScrollOffset - oldScrollOffset.Value) * ItemSize + oldTransformOffset.Value);
+            }
+
+            Duration duration;
+            IEasingFunction easingFunction;
+
+            if (_squishing)
+            {
+                duration = UnsquishDuration;
+                easingFunction = UnsquishEase;
+            }
+            else
+            {
+                duration = DefaultDuration;
+                easingFunction = DefaultEase;
+            }
+
+            GoTo(
+                (ScrollOffset - EffectiveSelectedIndex) * ItemSize,
+                duration,
+                easingFunction,
+                CompleteAnimateTo);
+        }
+
+        private void CompleteAnimateTo()
+        {
+            int? newSelectedIndex = _deferredSelectedIndex;
+
+            _animating = false;
+            _deferredSelectedIndex = null;
+
+            if (newSelectedIndex.HasValue)
+            {
+                _suppressAnimation = true;
+                SelectedIndex = newSelectedIndex.Value;
+                _suppressAnimation = false;
+            }
+
+            ScrollSelectionIntoView();
+            GoTo(0);
+        }
+
+        private bool ValidateIndex(int index)
+        {
+            return index >= 0 && index <= Items.Count - 1;
+        }
+
         private void GoTo(double targetOffset)
         {
             GoTo(targetOffset, ZeroDuration, null, null);
         }
 
-        private void GoTo(double targetOffset, Duration duration)
-        {
-            GoTo(targetOffset, duration, null, null);
-        }
-
-        private void GoTo(double targetOffset, Duration duration, IEasingFunction easingFunction)
-        {
-            GoTo(targetOffset, duration, easingFunction, null);
-        }
-
         private void GoTo(double targetOffset, Duration duration, IEasingFunction easingFunction, Action completionAction)
         {
-            if (Animator.TryEnsureAnimator(ElementItemsPresenter, Orientation, ref _panAnimator))
+            if (Animator.TryEnsureAnimator(ElementItemsPresenter, Orientation, ref _animator))
             {
-                _panAnimator.GoTo(targetOffset, duration, easingFunction, completionAction);
+                _animator.GoTo(targetOffset, duration, easingFunction, completionAction);
             }
         }
 
@@ -1086,6 +1091,8 @@ namespace Microsoft.Phone.Controls
             }
             return num * 360 / (2 * Math.PI);
         }
+
+        #region ISupportInitialize
 
         void ISupportInitialize.BeginInit()
         {
@@ -1122,6 +1129,8 @@ namespace Microsoft.Phone.Controls
             _initializingData = null;
         }
 
+        #endregion
+
         #region Nested Types
 
         private class Animator
@@ -1150,7 +1159,6 @@ namespace Microsoft.Phone.Controls
                 Storyboard.SetTargetProperty(_daRunning, _orientation == Orientation.Horizontal ? TranslateXPropertyPath : TranslateYPropertyPath);
             }
 
-            [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
             public double CurrentOffset
             {
                 get { return _orientation == Orientation.Horizontal ? _transform.TranslateX : _transform.TranslateY; }
@@ -1164,18 +1172,6 @@ namespace Microsoft.Phone.Controls
             public void GoTo(double targetOffset, Duration duration)
             {
                 GoTo(targetOffset, duration, null, null);
-            }
-
-            [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-            public void GoTo(double targetOffset, Duration duration, Action completionAction)
-            {
-                GoTo(targetOffset, duration, null, completionAction);
-            }
-
-            [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-            public void GoTo(double targetOffset, Duration duration, IEasingFunction easingFunction)
-            {
-                GoTo(targetOffset, duration, easingFunction, null);
             }
 
             public void GoTo(double targetOffset, Duration duration, IEasingFunction easingFunction, Action completionAction)
@@ -1246,13 +1242,6 @@ namespace Microsoft.Phone.Controls
             Free,
             Vertical,
             Horizontal,
-        }
-
-        private enum AnimationDirection
-        {
-            Center,
-            Previous,
-            Next
         }
 
         #endregion
