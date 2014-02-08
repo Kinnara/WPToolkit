@@ -99,6 +99,9 @@
         <shell:ApplicationBar>
             <shell:ApplicationBarIconButton x:Name="AppBarPrevious" IconUri="/Assets/AppBar/back.png" Text="previous" Click="AppBarPrevious_Click"/>
             <shell:ApplicationBarIconButton x:Name="AppBarNext" IconUri="/Assets/AppBar/next.png" Text="next" Click="AppBarNext_Click"/>
+            <shell:ApplicationBar.MenuItems>
+                <shell:ApplicationBarMenuItem x:Name="AppBarRemove" Text="remove selected item" Click="AppBarRemove_Click"/>
+            </shell:ApplicationBar.MenuItems>
         </shell:ApplicationBar>
     </phone:PhoneApplicationPage.ApplicationBar>
 
