@@ -2,18 +2,22 @@
 using Microsoft.Phone.Shell;
 using PhoneToolkitSample.Data;
 using System;
+using System.Collections.ObjectModel;
 using System.Windows.Controls;
 
 namespace PhoneToolkitSample.Samples
 {
     public partial class FlipViewSample : BasePage
     {
+        private ObservableCollection<string> _items = new ObservableCollection<string>(ColorExtensions.AccentColors());
+
         public FlipViewSample()
         {
             InitializeComponent();
 
             AppBarPrevious = (ApplicationBarIconButton)ApplicationBar.Buttons[0];
             AppBarNext = (ApplicationBarIconButton)ApplicationBar.Buttons[1];
+            AppBarRemove = (ApplicationBarMenuItem)ApplicationBar.MenuItems[0];
 
             OrientationPicker.SelectionChanged += OrientationPicker_SelectionChanged;
             OrientationPicker.ItemsSource = new[]
@@ -30,7 +34,7 @@ namespace PhoneToolkitSample.Samples
             };
             UpdateSelectionModePicker.SelectedIndex = 0;
 
-            DataContext = ColorExtensions.AccentColors();
+            DataContext = _items;
         }
 
         private void OrientationPicker_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -58,12 +62,26 @@ namespace PhoneToolkitSample.Samples
 
         private void AppBarPrevious_Click(object sender, EventArgs e)
         {
-            HorizontalFlipView.SelectedIndex -= 1;
+            if (HorizontalFlipView.SelectedIndex > 0)
+            {
+                HorizontalFlipView.SelectedIndex--;
+            }
         }
 
         private void AppBarNext_Click(object sender, EventArgs e)
         {
-            HorizontalFlipView.SelectedIndex += 1;
+            if (HorizontalFlipView.SelectedIndex < HorizontalFlipView.Items.Count)
+            {
+                HorizontalFlipView.SelectedIndex++;
+            }
+        }
+
+        private void AppBarRemove_Click(object sender, EventArgs e)
+        {
+            if (HorizontalFlipView.SelectedItem != null)
+            {
+                _items.Remove((string)HorizontalFlipView.SelectedItem);
+            }
         }
 
         private void UpdateAppBar()
@@ -72,6 +90,7 @@ namespace PhoneToolkitSample.Samples
             int selectedIndex = HorizontalFlipView.SelectedIndex;
             AppBarPrevious.IsEnabled = itemsCount > 0 && selectedIndex > 0;
             AppBarNext.IsEnabled = itemsCount > 0 && selectedIndex < itemsCount - 1;
+            AppBarRemove.IsEnabled = selectedIndex != -1;
         }
     }
 }
