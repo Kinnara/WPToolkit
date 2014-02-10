@@ -39,7 +39,7 @@ namespace Microsoft.Phone.Controls
         private bool _loaded;
 
         private bool _animating;
-        private bool _isEffectiveDragging;
+        private bool _hasDragDelta;
         private bool _dragging;
         private DragLock _dragLock;
         private WeakReference _gestureSource;
@@ -653,7 +653,7 @@ namespace Microsoft.Phone.Controls
             {
                 AnimateTo(SelectedIndex, false);
             }
-            else if (!_isEffectiveDragging)
+            else if (!_hasDragDelta)
             {
                 if (_animating)
                 {
@@ -800,8 +800,7 @@ namespace Microsoft.Phone.Controls
 
             e.Handled = true;
 
-            if (_dragLock == DragLock.Horizontal && e.DeltaManipulation.Translation.X != 0 && Orientation == Orientation.Horizontal ||
-                _dragLock == DragLock.Vertical && e.DeltaManipulation.Translation.Y != 0 && Orientation == Orientation.Vertical)
+            if (HasDragDelta(e.DeltaManipulation))
             {
                 Drag(e);
             }
@@ -809,49 +808,51 @@ namespace Microsoft.Phone.Controls
 
         internal void OnManipulationCompleted(object sender, ManipulationCompletedEventArgs e)
         {
+            _hasDragDelta = HasDragDelta(e.TotalManipulation);
+
             ManipulationDelta totalManipulation = null;
 
             _gestureStartedEventArgs = null;
             _dragLock = DragLock.Unset;
             _dragging = false;
 
-            if (e.IsInertial)
+            if (_hasDragDelta)
             {
-                double angle = AngleFromVector(e.FinalVelocities.LinearVelocity.X, e.FinalVelocities.LinearVelocity.Y);
-
-                if (Orientation == Orientation.Vertical)
+                if (e.IsInertial)
                 {
-                    angle -= 90;
-                    if (angle < 0)
+                    double angle = AngleFromVector(e.FinalVelocities.LinearVelocity.X, e.FinalVelocities.LinearVelocity.Y);
+
+                    if (Orientation == Orientation.Vertical)
                     {
-                        angle += 360;
+                        angle -= 90;
+                        if (angle < 0)
+                        {
+                            angle += 360;
+                        }
+                    }
+
+                    if (angle <= 45 || angle >= 315)
+                    {
+                        angle = 0;
+                    }
+                    else if (angle >= 135 && angle <= 225)
+                    {
+                        angle = 180;
+                    }
+
+                    ReleaseMouseCaptureAtGestureOrigin();
+
+                    Flick(angle);
+
+                    if (angle == 0 || angle == 180)
+                    {
+                        e.Handled = true;
                     }
                 }
-
-                if (angle <= 45 || angle >= 315)
+                else
                 {
-                    angle = 0;
-                }
-                else if (angle >= 135 && angle <= 225)
-                {
-                    angle = 180;
-                }
+                    totalManipulation = e.TotalManipulation;
 
-                ReleaseMouseCaptureAtGestureOrigin();
-
-                Flick(angle);
-
-                if (angle == 0 || angle == 180)
-                {
-                    e.Handled = true;
-                }
-            }
-            else if (e.TotalManipulation.Translation.X != 0 || e.TotalManipulation.Translation.Y != 0)
-            {
-                totalManipulation = e.TotalManipulation;
-
-                if (_isEffectiveDragging)
-                {
                     e.Handled = true;
                 }
             }
@@ -861,7 +862,7 @@ namespace Microsoft.Phone.Controls
 
         private void Drag(ManipulationDeltaEventArgs e)
         {
-            _isEffectiveDragging = true;
+            _hasDragDelta = HasDragDelta(e.CumulativeManipulation);
 
             if (!ShouldHandleManipulation)
             {
@@ -936,19 +937,19 @@ namespace Microsoft.Phone.Controls
 
         private void GesturesComplete(ManipulationDelta totalManipulation)
         {
-            if (ShouldHandleManipulation)
+            if (ShouldHandleManipulation && _hasDragDelta)
             {
-                if (totalManipulation != null && _isEffectiveDragging)
+                if (totalManipulation != null)
                 {
                     AnimateTo((int)Math.Round(ScrollOffset - TransformOffset / ItemSize));
                 }
-                else if (totalManipulation == null && !_animating)
+                else if (!_animating)
                 {
                     AnimateTo(EffectiveSelectedIndex);
                 }
             }
 
-            _isEffectiveDragging = false;
+            _hasDragDelta = false;
             _offsetWhenDragStarted = null;
             _squishing = false;
         }
@@ -973,6 +974,12 @@ namespace Microsoft.Phone.Controls
                     }
                 }
             }
+        }
+
+        private bool HasDragDelta(ManipulationDelta manipulation)
+        {
+            return _dragLock == DragLock.Horizontal && manipulation.Translation.X != 0 && Orientation == Orientation.Horizontal ||
+                   _dragLock == DragLock.Vertical && manipulation.Translation.Y != 0 && Orientation == Orientation.Vertical;
         }
 
         private void AnimateTo(int index, bool changeIndex = true)
