@@ -140,12 +140,12 @@
     <Compile Include="..\Microsoft.Phone.Controls.Toolkit\BasePage\BasePage.cs">
       <Link>BasePage\BasePage.cs</Link>
     </Compile>
-    <None Include="..\Microsoft.Phone.Controls.Toolkit\Buttons\ImageButton.cs">
+    <Compile Include="..\Microsoft.Phone.Controls.Toolkit\Buttons\ImageButton.cs">
       <Link>Buttons\ImageButton.cs</Link>
-    </None>
-    <None Include="..\Microsoft.Phone.Controls.Toolkit\Buttons\ToggleImageButton.cs">
+    </Compile>
+    <Compile Include="..\Microsoft.Phone.Controls.Toolkit\Buttons\ToggleImageButton.cs">
       <Link>Buttons\ToggleImageButton.cs</Link>
-    </None>
+    </Compile>
     <Compile Include="..\Microsoft.Phone.Controls.Toolkit\Common\AnimationHelper.cs">
       <Link>Common\AnimationHelper.cs</Link>
     </Compile>
@@ -415,9 +415,9 @@
     <None Include="..\Microsoft.Phone.Controls.Toolkit\PropertyUI\PropertyUI.cs">
       <Link>PropertyUI\PropertyUI.cs</Link>
     </None>
-    <None Include="..\Microsoft.Phone.Controls.Toolkit\ThemedImage\ThemedImage.cs">
+    <Compile Include="..\Microsoft.Phone.Controls.Toolkit\ThemedImage\ThemedImage.cs">
       <Link>ThemedImage\ThemedImage.cs</Link>
-    </None>
+    </Compile>
     <None Include="..\Microsoft.Phone.Controls.Toolkit\TransferControl\NullToVisibilityConverter.cs">
       <Link>TransferControl\NullToVisibilityConverter.cs</Link>
     </None>
@@ -737,10 +737,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </None>
-    <None Include="Buttons\Buttons.xaml">
+    <Page Include="Buttons\Buttons.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
-    </None>
+    </Page>
     <Page Include="ContextMenu\ContextMenu.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
