@@ -6,6 +6,7 @@
 using System;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Media;
 using Microsoft.Phone.Controls;
 
 namespace PhoneToolkitSample.Samples
@@ -60,6 +61,7 @@ namespace PhoneToolkitSample.Samples
             {
                 Content = "Privacy Statement",
                 HorizontalAlignment = HorizontalAlignment.Left,
+                Margin = new Thickness(0, 0, 0, 30),
                 NavigateUri = new Uri("http://phone.codeplex.com/", UriKind.Absolute)
             };
 
