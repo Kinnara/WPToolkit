@@ -24,7 +24,7 @@ namespace Microsoft.Phone.Controls
         /// <summary>
         /// A single shared instance for setting BitmapCache on a visual.
         /// </summary>
-        internal static readonly CacheMode BitmapCacheMode = new BitmapCache();
+        private static readonly CacheMode BitmapCacheMode = new BitmapCache();
         #endregion
 
         #region Template Parts
@@ -142,6 +142,11 @@ namespace Microsoft.Phone.Controls
 
             EnsureLastTransitionIsComplete();
 
+            if (!e.IsCancelable)
+            {
+                return;
+            }
+
             TransitionElement oldTransitionElement = null;
             NavigationOutTransition navigationOutTransition = null;
             ITransition oldTransition = null;
@@ -250,7 +255,7 @@ namespace Microsoft.Phone.Controls
             {
                 CompleteTransition(_storedNavigationOutTransition, /*_oldContentPresenter*/ null, _storedOldTransition);
             }
-            
+
             _storedNavigationOutTransition = null;
             _storedOldTransition = null;
 
@@ -361,25 +366,42 @@ namespace Microsoft.Phone.Controls
         {
             if (_deferredNavigation != null)
             {
-                if (_contentPresenter != null)
+                if (ValidateNavigation(_deferredNavigation))
                 {
-                    _contentPresenter.Opacity = 0;
-                }
+                    if (_contentPresenter != null)
+                    {
+                        _contentPresenter.Opacity = 0;
+                    }
 
-                NavigatingCancelEventArgs pendingNavigation = _deferredNavigation;
-                _deferredNavigation = null;
+                    NavigatingCancelEventArgs pendingNavigation = _deferredNavigation;
+                    _deferredNavigation = null;
 
-                _deferredNavigationRequested = true;
+                    _deferredNavigationRequested = true;
 
-                if (pendingNavigation.NavigationMode == NavigationMode.Back)
-                {
-                    GoBack();
+                    if (pendingNavigation.NavigationMode == NavigationMode.Back)
+                    {
+                        GoBack();
+                    }
+                    else
+                    {
+                        Navigate(pendingNavigation.Uri);
+                    }
                 }
                 else
                 {
-                    Navigate(pendingNavigation.Uri);
+                    _deferredNavigation = null;
                 }
             }
+        }
+
+        private bool ValidateNavigation(NavigatingCancelEventArgs navigation)
+        {
+            if (navigation.NavigationMode == NavigationMode.Back && !CanGoBack)
+            {
+                return false;
+            }
+
+            return true;
         }
 
         /// <summary>
@@ -447,16 +469,11 @@ namespace Microsoft.Phone.Controls
         /// accidental touches.
         /// </summary>
         /// <param name="presenter">The content presenter instance.</param>
-        /// <param name="applyBitmapCache">A value indicating whether to apply
-        /// a bitmap cache.</param>
-        private static void PrepareContentPresenterForCompositor(ContentPresenter presenter, bool applyBitmapCache = true)
+        private static void PrepareContentPresenterForCompositor(ContentPresenter presenter)
         {
             if (presenter != null)
             {
-                if (applyBitmapCache)
-                {
-                    presenter.CacheMode = BitmapCacheMode;
-                }
+                presenter.CacheMode = BitmapCacheMode;
                 presenter.IsHitTestVisible = false;
             }
         }

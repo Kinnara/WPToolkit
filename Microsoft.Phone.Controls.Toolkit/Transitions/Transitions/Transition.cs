@@ -27,6 +27,11 @@ namespace Microsoft.Phone.Controls
     public class Transition : ITransition
     {
         /// <summary>
+        /// A single shared instance for setting BitmapCache on a visual.
+        /// </summary>
+        private static readonly CacheMode BitmapCacheMode = new BitmapCache();
+
+        /// <summary>
         /// The original
         /// <see cref="P:System.Windows.UIElement.CacheMode"/>
         /// of the
@@ -205,7 +210,7 @@ namespace Microsoft.Phone.Controls
             _cacheMode = _element.CacheMode;
             if (!(_cacheMode is BitmapCache))
             {
-                _element.CacheMode = TransitionFrame.BitmapCacheMode;
+                _element.CacheMode = BitmapCacheMode;
             }
             _isHitTestVisible = _element.IsHitTestVisible;
             if (_isHitTestVisible)
