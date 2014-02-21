@@ -40,7 +40,7 @@ namespace Microsoft.Phone.Controls
         /// <summary>
         /// A single shared instance for setting BitmapCache on a visual.
         /// </summary>
-        internal static readonly CacheMode BitmapCacheMode = new BitmapCache();
+        private static readonly CacheMode BitmapCacheMode = new BitmapCache();
         #endregion
 
         #region Template Parts
@@ -473,16 +473,11 @@ namespace Microsoft.Phone.Controls
         /// accidental touches.
         /// </summary>
         /// <param name="presenter">The content presenter instance.</param>
-        /// <param name="applyBitmapCache">A value indicating whether to apply
-        /// a bitmap cache.</param>
-        private static void PrepareContentPresenterForCompositor(ContentPresenter presenter, bool applyBitmapCache = true)
+        private static void PrepareContentPresenterForCompositor(ContentPresenter presenter)
         {
             if (presenter != null)
             {
-                if (applyBitmapCache)
-                {
-                    presenter.CacheMode = BitmapCacheMode;
-                }
+                presenter.CacheMode = BitmapCacheMode;
                 presenter.IsHitTestVisible = false;
             }
         }
