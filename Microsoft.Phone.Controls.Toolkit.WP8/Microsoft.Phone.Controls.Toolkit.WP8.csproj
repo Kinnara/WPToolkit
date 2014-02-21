@@ -400,12 +400,12 @@
     <None Include="..\Microsoft.Phone.Controls.Toolkit\HubTile\HubTileService.cs">
       <Link>HubTile\HubTileService.cs</Link>
     </None>
-    <Compile Include="..\Microsoft.Phone.Controls.Toolkit\Input\GestureListener.cs">
+    <None Include="..\Microsoft.Phone.Controls.Toolkit\Input\GestureListener.cs">
       <Link>Input\GestureListener.cs</Link>
-    </Compile>
-    <Compile Include="..\Microsoft.Phone.Controls.Toolkit\Input\GestureHelperEventArgs.cs">
+    </None>
+    <None Include="..\Microsoft.Phone.Controls.Toolkit\Input\GestureHelperEventArgs.cs">
       <Link>Input\GestureHelperEventArgs.cs</Link>
-    </Compile>
+    </None>
     <Compile Include="..\Microsoft.Phone.Controls.Toolkit\Primitives\ContextMenuPanel.cs">
       <Link>Primitives\ContextMenuPanel.cs</Link>
     </Compile>
@@ -467,9 +467,9 @@
     <None Include="..\Microsoft.Phone.Controls.Toolkit\Primitives\TickBar.cs">
       <Link>Primitives\TickBar.cs</Link>
     </None>
-    <Compile Include="..\Microsoft.Phone.Controls.Toolkit\Primitives\TiltUserControl.cs">
+    <None Include="..\Microsoft.Phone.Controls.Toolkit\Primitives\TiltUserControl.cs">
       <Link>Primitives\TiltUserControl.cs</Link>
-    </Compile>
+    </None>
     <None Include="..\Microsoft.Phone.Controls.Toolkit\RadioButtonGroup\RadioButtonGroup.cs">
       <Link>RadioButtonGroup\RadioButtonGroup.cs</Link>
     </None>
@@ -493,18 +493,18 @@
     </None>
     <None Include="Common\LongListSelectorExtensions.cs" />
     <Compile Include="Common\SharedResources.cs" />
-    <Compile Include="Data\StyleSelector.cs" />
-    <Compile Include="Input\GestureListenerStatic.cs" />
-    <Compile Include="Input\GestureService.cs" />
+    <None Include="Data\StyleSelector.cs" />
+    <None Include="Input\GestureListenerStatic.cs" />
+    <None Include="Input\GestureService.cs" />
     <None Include="..\Microsoft.Phone.Controls.Toolkit\ListPicker\ListPicker.cs">
       <Link>ListPicker\ListPicker.cs</Link>
     </None>
     <None Include="..\Microsoft.Phone.Controls.Toolkit\ListPicker\ListPickerItem.cs">
       <Link>ListPicker\ListPickerItem.cs</Link>
     </None>
-    <Compile Include="..\Microsoft.Phone.Controls.Toolkit\Primitives\ClipToBounds.cs">
+    <None Include="..\Microsoft.Phone.Controls.Toolkit\Primitives\ClipToBounds.cs">
       <Link>Primitives\ClipToBounds.cs</Link>
-    </Compile>
+    </None>
     <None Include="..\Microsoft.Phone.Controls.Toolkit\Common\ItemsControlExtensions.cs">
       <Link>Common\ItemsControlExtensions.cs</Link>
     </None>
@@ -591,9 +591,9 @@
     <Compile Include="..\Microsoft.Phone.Controls.Toolkit\Transitions\NavigationOutTransition.cs">
       <Link>Transitions\NavigationOutTransition.cs</Link>
     </Compile>
-    <Compile Include="..\Microsoft.Phone.Controls.Toolkit\Transitions\TransitionFrame.cs">
+    <None Include="..\Microsoft.Phone.Controls.Toolkit\Transitions\TransitionFrame.cs">
       <Link>Transitions\TransitionFrame.cs</Link>
-    </Compile>
+    </None>
     <Compile Include="..\Microsoft.Phone.Controls.Toolkit\Transitions\ITransition.cs">
       <Link>Transitions\ITransition.cs</Link>
     </Compile>
@@ -717,10 +717,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </None>
-    <Page Include="Transitions\Transitions.xaml">
+    <None Include="Transitions\Transitions.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
-    </Page>
+    </None>
     <None Include="WaitCursor\WaitCursor.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
