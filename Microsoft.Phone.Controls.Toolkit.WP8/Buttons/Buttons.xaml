@@ -17,7 +17,7 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="controls:ImageButton">
-                    <Grid Background="Transparent">
+                    <Grid Background="Transparent" Margin="0,-8">
                         <VisualStateManager.VisualStateGroups>
                             <VisualStateGroup x:Name="CommonStates">
                                 <VisualState x:Name="Normal"/>
@@ -47,9 +47,9 @@
                                 </VisualState>
                             </VisualStateGroup>
                         </VisualStateManager.VisualStateGroups>
-                        <Border x:Name="ButtonBackground" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" CornerRadius="{TemplateBinding CornerRadius}" Background="{TemplateBinding Background}" Margin="{StaticResource PhoneTouchTargetOverhang}" />
+                        <Border x:Name="ButtonBackground" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" CornerRadius="{TemplateBinding CornerRadius}" Background="{TemplateBinding Background}" Margin="{StaticResource PhoneTouchTargetLargeOverhang}" />
                         <Border Padding="{TemplateBinding Padding}">
-                            <controls:ThemedImage x:Name="Image" Foreground="{TemplateBinding Foreground}" Margin="{StaticResource PhoneTouchTargetOverhang}" Source="{TemplateBinding ImageSource}"/>
+                            <controls:ThemedImage x:Name="Image" Foreground="{TemplateBinding Foreground}" Margin="{StaticResource PhoneTouchTargetLargeOverhang}" Source="{TemplateBinding ImageSource}"/>
                         </Border>
                     </Grid>
                 </ControlTemplate>
