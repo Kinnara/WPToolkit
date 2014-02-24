@@ -230,21 +230,21 @@
     <None Include="..\Microsoft.Phone.Controls.Toolkit\Common\WeakReferenceHelper.cs">
       <Link>Common\WeakReferenceHelper.cs</Link>
     </None>
-    <Compile Include="..\Microsoft.Phone.Controls.Toolkit\ContextMenu\ContextMenu.cs">
+    <None Include="..\Microsoft.Phone.Controls.Toolkit\ContextMenu\ContextMenu.cs">
       <Link>ContextMenu\ContextMenu.cs</Link>
-    </Compile>
-    <Compile Include="..\Microsoft.Phone.Controls.Toolkit\ContextMenu\ContextMenuService.cs">
+    </None>
+    <None Include="..\Microsoft.Phone.Controls.Toolkit\ContextMenu\ContextMenuService.cs">
       <Link>ContextMenu\ContextMenuService.cs</Link>
-    </Compile>
-    <Compile Include="..\Microsoft.Phone.Controls.Toolkit\ContextMenu\MenuBase.cs">
+    </None>
+    <None Include="..\Microsoft.Phone.Controls.Toolkit\ContextMenu\MenuBase.cs">
       <Link>ContextMenu\MenuBase.cs</Link>
-    </Compile>
-    <Compile Include="..\Microsoft.Phone.Controls.Toolkit\ContextMenu\MenuItem.cs">
+    </None>
+    <None Include="..\Microsoft.Phone.Controls.Toolkit\ContextMenu\MenuItem.cs">
       <Link>ContextMenu\MenuItem.cs</Link>
-    </Compile>
-    <Compile Include="..\Microsoft.Phone.Controls.Toolkit\ContextMenu\Separator.cs">
+    </None>
+    <None Include="..\Microsoft.Phone.Controls.Toolkit\ContextMenu\Separator.cs">
       <Link>ContextMenu\Separator.cs</Link>
-    </Compile>
+    </None>
     <None Include="..\Microsoft.Phone.Controls.Toolkit\CustomMessageBox\CustomMessageBoxResult.cs">
       <Link>CustomMessageBox\CustomMessageBoxResult.cs</Link>
     </None>
@@ -319,9 +319,9 @@
     <Compile Include="..\Microsoft.Phone.Controls.Toolkit\Design\StandardStyles.cs">
       <Link>Design\StandardStyles.cs</Link>
     </Compile>
-    <None Include="..\Microsoft.Phone.Controls.Toolkit\Effects\SlideInEffect.cs">
+    <Compile Include="..\Microsoft.Phone.Controls.Toolkit\Effects\SlideInEffect.cs">
       <Link>Effects\SlideInEffect.cs</Link>
-    </None>
+    </Compile>
     <None Include="..\Microsoft.Phone.Controls.Toolkit\ExpanderView\ExpanderView.cs">
       <Link>ExpanderView\ExpanderView.cs</Link>
     </None>
@@ -741,10 +741,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="ContextMenu\ContextMenu.xaml">
+    <None Include="ContextMenu\ContextMenu.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
-    </Page>
+    </None>
     <None Include="CustomMessageBox\CustomMessageBox.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
