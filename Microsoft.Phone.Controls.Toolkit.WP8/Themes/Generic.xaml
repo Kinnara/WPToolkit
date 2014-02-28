@@ -2551,12 +2551,12 @@
                                                 <DoubleAnimationUsingKeyFrames Storyboard.TargetName="VerticalScrollBar" Storyboard.TargetProperty="Opacity" BeginTime="00:00:00.35">
                                                     <LinearDoubleKeyFrame KeyTime="0" Value="1"/>
                                                     <LinearDoubleKeyFrame KeyTime="00:00:00.5" Value="1"/>
-                                                    <LinearDoubleKeyFrame KeyTime="00:00:01" Value="0"/>
+                                                    <LinearDoubleKeyFrame KeyTime="00:00:00.75" Value="0"/>
                                                 </DoubleAnimationUsingKeyFrames>
                                                 <DoubleAnimationUsingKeyFrames Storyboard.TargetName="HorizontalScrollBar" Storyboard.TargetProperty="Opacity" BeginTime="00:00:00.35">
                                                     <LinearDoubleKeyFrame KeyTime="0" Value="1"/>
                                                     <LinearDoubleKeyFrame KeyTime="00:00:00.5" Value="1"/>
-                                                    <LinearDoubleKeyFrame KeyTime="00:00:01" Value="0"/>
+                                                    <LinearDoubleKeyFrame KeyTime="00:00:00.75" Value="0"/>
                                                 </DoubleAnimationUsingKeyFrames>
                                             </Storyboard>
                                         </VisualTransition.Storyboard>
