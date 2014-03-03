@@ -18,9 +18,6 @@ namespace Microsoft.Phone.Controls
         public PageUI()
         {
             DefaultStyleKey = typeof(PageUI);
-
-            Loaded += OnLoaded;
-            Unloaded += OnUnloaded;
         }
 
         #region Title
@@ -188,22 +185,16 @@ namespace Microsoft.Phone.Controls
         {
             base.OnApplyTemplate();
 
-            _parentPage = this.GetParentByType<BasePage>();
-        }
-
-        private void OnLoaded(object sender, RoutedEventArgs e)
-        {
             if (_parentPage != null)
             {
-                _parentPage.StartLayoutUpdates(this, e);
+                _parentPage.StopLayoutUpdates(this);
             }
-        }
 
-        private void OnUnloaded(object sender, RoutedEventArgs e)
-        {
+            _parentPage = this.GetParentByType<BasePage>();
+
             if (_parentPage != null)
             {
-                _parentPage.StopLayoutUpdates(sender, e);
+                _parentPage.StartLayoutUpdates(this);
             }
         }
     }
