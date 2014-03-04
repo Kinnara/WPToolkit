@@ -42,7 +42,7 @@ namespace Microsoft.Phone.Maps.Toolkit
         /// Gets the Children collection of a map.
         /// </summary>
         /// <param name="element">The dependency object</param>
-        /// <returns>Returns <see cref="ObservableCollection&lt;DependencyObject&gt;"/></returns>
+        /// <returns>Returns <see cref="DependencyObjectCollection&lt;DependencyObject&gt;"/></returns>
         public static DependencyObjectCollection<DependencyObject> GetChildren(Map element)
         {
             if (element == null)
@@ -72,7 +72,7 @@ namespace Microsoft.Phone.Maps.Toolkit
         /// <summary>
         /// Adds a dependency object to the map at the specified location. 
         /// </summary>
-        /// <param name="childrenCollection">An <see cref="ObservableCollection&lt;DependencyObject&gt;"/> to add to.</param>
+        /// <param name="childrenCollection">An <see cref="DependencyObjectCollection&lt;DependencyObject&gt;"/> to add to.</param>
         /// <param name="dependencyObject">The dependency object to add.</param>
         /// <param name="geoCoordinate">The geographic coordinate at which to add the dependency object.</param>
         public static void Add(this DependencyObjectCollection<DependencyObject> childrenCollection, DependencyObject dependencyObject, GeoCoordinate geoCoordinate)
@@ -99,7 +99,7 @@ namespace Microsoft.Phone.Maps.Toolkit
         /// <summary>
         /// Adds a dependency object to the map at the specified location. 
         /// </summary>
-        /// <param name="childrenCollection">An <see cref="ObservableCollection&lt;DependencyObject&gt;"/> to add to.</param>
+        /// <param name="childrenCollection">An <see cref="DependencyObjectCollection&lt;DependencyObject&gt;"/> to add to.</param>
         /// <param name="dependencyObject">The dependency object to add.</param>
         /// <param name="geoCoordinate">The geographic coordinate at which to add the dependency object.</param>
         /// <param name="positionOrigin">The position origin to use.</param>
