@@ -46,7 +46,7 @@ namespace Microsoft.Phone.Maps.Toolkit
         /// Identifies the <see cref="Name"/> dependency property.
         /// </summary>
         public static readonly DependencyProperty NameProperty = DependencyProperty.Register(
-            "ItemTemplate",
+            "Name",
             typeof(string),
             typeof(MapItemsControl),
             null);
