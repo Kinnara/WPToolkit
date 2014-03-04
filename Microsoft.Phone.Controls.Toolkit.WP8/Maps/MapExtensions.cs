@@ -25,7 +25,7 @@ namespace Microsoft.Phone.Maps.Toolkit
         /// </summary>
         public static readonly DependencyProperty ChildrenProperty = DependencyProperty.RegisterAttached(
             "Children",
-            typeof(ObservableCollection<DependencyObject>),
+            typeof(DependencyObjectCollection<DependencyObject>),
             typeof(MapExtensions),
             null);
 
@@ -43,20 +43,20 @@ namespace Microsoft.Phone.Maps.Toolkit
         /// </summary>
         /// <param name="element">The dependency object</param>
         /// <returns>Returns <see cref="ObservableCollection&lt;DependencyObject&gt;"/></returns>
-        public static ObservableCollection<DependencyObject> GetChildren(Map element)
+        public static DependencyObjectCollection<DependencyObject> GetChildren(Map element)
         {
             if (element == null)
             {
                 throw new ArgumentNullException("element");
             }
 
-            ObservableCollection<DependencyObject> childrenCollection = (ObservableCollection<DependencyObject>)element.GetValue(MapExtensions.ChildrenProperty);
+            DependencyObjectCollection<DependencyObject> childrenCollection = (DependencyObjectCollection<DependencyObject>)element.GetValue(MapExtensions.ChildrenProperty);
 
             if (childrenCollection == null)
             {
                 MapExtensionsChildrenChangeManager childrenChangeManager;
 
-                childrenCollection = new ObservableCollection<DependencyObject>();
+                childrenCollection = new DependencyObjectCollection<DependencyObject>();
                 childrenChangeManager = new MapExtensionsChildrenChangeManager(childrenCollection)
                 {
                     Map = element
@@ -75,7 +75,7 @@ namespace Microsoft.Phone.Maps.Toolkit
         /// <param name="childrenCollection">An <see cref="ObservableCollection&lt;DependencyObject&gt;"/> to add to.</param>
         /// <param name="dependencyObject">The dependency object to add.</param>
         /// <param name="geoCoordinate">The geographic coordinate at which to add the dependency object.</param>
-        public static void Add(this ObservableCollection<DependencyObject> childrenCollection, DependencyObject dependencyObject, GeoCoordinate geoCoordinate)
+        public static void Add(this DependencyObjectCollection<DependencyObject> childrenCollection, DependencyObject dependencyObject, GeoCoordinate geoCoordinate)
         {
             if (childrenCollection == null)
             {
@@ -103,7 +103,7 @@ namespace Microsoft.Phone.Maps.Toolkit
         /// <param name="dependencyObject">The dependency object to add.</param>
         /// <param name="geoCoordinate">The geographic coordinate at which to add the dependency object.</param>
         /// <param name="positionOrigin">The position origin to use.</param>
-        public static void Add(this ObservableCollection<DependencyObject> childrenCollection, DependencyObject dependencyObject, GeoCoordinate geoCoordinate, Point positionOrigin)
+        public static void Add(this DependencyObjectCollection<DependencyObject> childrenCollection, DependencyObject dependencyObject, GeoCoordinate geoCoordinate, Point positionOrigin)
         {
             if (childrenCollection == null)
             {
