@@ -321,7 +321,7 @@ namespace PhoneToolkitSample.Samples
         /// <param name="map">The map that uses the map extensions</param>
         private void MapExtensionsSetup(Map map)
         {
-            ObservableCollection<DependencyObject> children = MapExtensions.GetChildren(map);
+            var children = MapExtensions.GetChildren(map);
             var runtimeFields = this.GetType().GetRuntimeFields();
 
             foreach (DependencyObject i in children)
