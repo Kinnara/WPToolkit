@@ -16,7 +16,7 @@
     <toolkit:BasePage.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="../Common/StandardStyles.xaml"/>
+                <ResourceDictionary Source="../Toolkit.Content/StandardStyles.xaml"/>
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </toolkit:BasePage.Resources>

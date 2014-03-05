@@ -567,11 +567,11 @@ ar-SA;az-Latn-AZ;be-BY;bg-BG;ca-ES;cs-CZ;da-DK;de-DE;el-GR;en-GB;en-US;es-ES;es-
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Common\StandardStyles.xaml">
+    <Page Include="Toolkit.Content\StandardStyles.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Common\LabelStyles.xaml">
+    <Page Include="Toolkit.Content\LabelStyles.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
