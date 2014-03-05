@@ -21,7 +21,7 @@
     <phone:PhoneApplicationPage.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
-                <toolkit:StandardStyles/>
+                <ResourceDictionary Source="/Microsoft.Phone.Controls.Toolkit;component/Label/Styles.xaml"/>
             </ResourceDictionary.MergedDictionaries>
             <samples:EmptyTextConverter x:Key="EmptyTextConverter" />
         </ResourceDictionary>

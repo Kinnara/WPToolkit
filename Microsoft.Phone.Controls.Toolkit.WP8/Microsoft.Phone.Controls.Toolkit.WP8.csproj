@@ -316,9 +316,6 @@
       <Link>DateTimePickers\TimePickerPage.xaml.cs</Link>
       <DependentUpon>TimePickerPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="..\Microsoft.Phone.Controls.Toolkit\Design\StandardStyles.cs">
-      <Link>Design\StandardStyles.cs</Link>
-    </Compile>
     <Compile Include="..\Microsoft.Phone.Controls.Toolkit\Effects\SlideInEffect.cs">
       <Link>Effects\SlideInEffect.cs</Link>
     </Compile>
@@ -677,6 +674,10 @@
       <SubType>Designer</SubType>
     </Resource>
     <Page Include="Design\StandardStyles.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Label\Styles.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

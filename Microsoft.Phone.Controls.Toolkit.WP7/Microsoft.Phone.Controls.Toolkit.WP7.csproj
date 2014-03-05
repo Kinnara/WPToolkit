@@ -313,9 +313,6 @@
       <Link>DateTimePickers\TimePickerPage.xaml.cs</Link>
       <DependentUpon>TimePickerPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="..\Microsoft.Phone.Controls.Toolkit\Design\StandardStyles.cs">
-      <Link>Design\StandardStyles.cs</Link>
-    </Compile>
     <Compile Include="..\Microsoft.Phone.Controls.Toolkit\Effects\SlideInEffect.cs">
       <Link>Effects\SlideInEffect.cs</Link>
     </Compile>

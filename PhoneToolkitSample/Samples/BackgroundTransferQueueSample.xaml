@@ -19,12 +19,7 @@
     Style="{StaticResource PageStyle}">
 
     <phone:PhoneApplicationPage.Resources>
-        <ResourceDictionary>
-            <ResourceDictionary.MergedDictionaries>
-                <toolkit:StandardStyles/>
-            </ResourceDictionary.MergedDictionaries>
-            <samples:EmptyTextConverter x:Key="EmptyTextConverter" />
-        </ResourceDictionary>
+        <samples:EmptyTextConverter x:Key="EmptyTextConverter" />
     </phone:PhoneApplicationPage.Resources>
 
     <toolkit:PageUI Header="all downloads">

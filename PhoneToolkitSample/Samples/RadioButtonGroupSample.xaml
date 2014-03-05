@@ -16,7 +16,7 @@
     <toolkit:BasePage.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
-                <toolkit:StandardStyles/>
+                <ResourceDictionary Source="/Microsoft.Phone.Controls.Toolkit;component/Design/StandardStyles.xaml"/>
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </toolkit:BasePage.Resources>

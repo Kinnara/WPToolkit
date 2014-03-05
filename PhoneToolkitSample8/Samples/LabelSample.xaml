@@ -15,7 +15,7 @@
     <toolkit:BasePage.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
-                <toolkit:StandardStyles/>
+                <ResourceDictionary Source="/Microsoft.Phone.Controls.Toolkit;component/Label/Styles.xaml"/>
             </ResourceDictionary.MergedDictionaries>
             <Style x:Key="TextLineBoundsBorderStyle" TargetType="Border">
                 <Setter Property="Background" Value="{StaticResource PhoneSubtleBrush}"/>
