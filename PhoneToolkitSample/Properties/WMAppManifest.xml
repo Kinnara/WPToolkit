@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Deployment xmlns="http://schemas.microsoft.com/windowsphone/2009/deployment" AppPlatformVersion="7.1">
-  <App xmlns="" ProductID="{495f145d-d13a-4d58-b0e6-dbdcd2103536}" Title="Toolkit Sample 7" RuntimeType="Silverlight" Version="1.0.0.0" Genre="apps.normal" Author="PhoneToolkitSample author" Description="Sample description" Publisher="PhoneToolkitSample">
+  <App xmlns="" ProductID="{8f57094e-af94-4d7f-846a-09311c428e70}" Title="Toolkit Sample 7" RuntimeType="Silverlight" Version="1.0.0.0" Genre="apps.normal" Author="PhoneToolkitSample author" Description="Sample description" Publisher="PhoneToolkitSample">
     <IconPath IsRelative="true" IsResource="false">ApplicationIcon.png</IconPath>
     <Capabilities>
       <Capability Name="ID_CAP_GAMERSERVICES" />
