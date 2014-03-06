@@ -984,6 +984,16 @@
                                     </Storyboard>
                                 </VisualState>
                             </VisualStateGroup>
+                            <VisualStateGroup x:Name="PlaceholderStates">
+                                <VisualState x:Name="PlaceholderVisible">
+                                    <Storyboard>
+                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="Button" Storyboard.TargetProperty="Foreground">
+                                            <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource PhoneTextBoxReadOnlyBrush}"/>
+                                        </ObjectAnimationUsingKeyFrames>
+                                    </Storyboard>
+                                </VisualState>
+                                <VisualState x:Name="PlaceholderCollapsed"/>
+                            </VisualStateGroup>
                         </VisualStateManager.VisualStateGroups>
                         <controls:PhoneContentControl
                             x:Name="Header"
@@ -2117,7 +2127,7 @@
                                 <TextBlock x:Name="PlaceholderTextElement"
                                            Text="{TemplateBinding PlaceholderText}"
                                            Foreground="{StaticResource PhoneTextBoxReadOnlyBrush}"
-                                                HorizontalAlignment="Left"
+                                           HorizontalAlignment="Left"
                                            VerticalAlignment="Top"
                                            Margin="{StaticResource PhoneTextBoxInnerMargin}"
                                            Padding="{TemplateBinding Padding}"/>
@@ -2166,12 +2176,12 @@
                             Grid.Row="1">
                             <Border x:Name="ActionIconBorder"
                                     Width="96"
-                                Height="72"
+                                    Height="72"
                                     Background="Transparent">
                                 <Image x:Name="ActionIcon"
                                     Height="26"
-                                        HorizontalAlignment="Right"
-                                        Margin="0,0,36,0"
+                                    HorizontalAlignment="Right"
+                                    Margin="0,0,36,0"
                                     Source="{TemplateBinding ActionIcon}"/>
                             </Border>
                         </primitives:TiltUserControl>

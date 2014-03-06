@@ -934,6 +934,16 @@
                                     </Storyboard>
                                 </VisualState>
                             </VisualStateGroup>
+                            <VisualStateGroup x:Name="PlaceholderStates">
+                                <VisualState x:Name="PlaceholderVisible">
+                                    <Storyboard>
+                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="Button" Storyboard.TargetProperty="Foreground">
+                                            <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource PhoneTextMidContrastBrush}"/>
+                                        </ObjectAnimationUsingKeyFrames>
+                                    </Storyboard>
+                                </VisualState>
+                                <VisualState x:Name="PlaceholderCollapsed"/>
+                            </VisualStateGroup>
                         </VisualStateManager.VisualStateGroups>
                         <controls:PhoneContentControl
                             x:Name="Header"

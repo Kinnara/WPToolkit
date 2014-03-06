@@ -22,12 +22,18 @@ namespace Microsoft.Phone.Controls
     [TemplatePart(Name = ButtonPartName, Type = typeof(ButtonBase))]
     [TemplateVisualState(GroupName = VisualStates.GroupCommon, Name = VisualStates.StateNormal)]
     [TemplateVisualState(GroupName = VisualStates.GroupCommon, Name = VisualStates.StateDisabled)]
+    [TemplateVisualState(GroupName = GroupPlaceholder, Name = StatePlaceholderVisible)]
+    [TemplateVisualState(GroupName = GroupPlaceholder, Name = StatePlaceholderCollapsed)]
     [StyleTypedProperty(Property = FullModeItemContainerStylePropertyName, StyleTargetType = typeof(ListBoxItem))]
     public class PickerBox : SimpleSelector
     {
         private const string ButtonPartName = "Button";
 
         private const string FullModeItemContainerStylePropertyName = "FullModeItemContainerStyle";
+
+        private const string GroupPlaceholder = "PlaceholderStates";
+        private const string StatePlaceholderVisible = "PlaceholderVisible";
+        private const string StatePlaceholderCollapsed = "PlaceholderCollapsed";
 
         private ButtonBase _buttonPart;
 
@@ -98,6 +104,7 @@ namespace Microsoft.Phone.Controls
 
             base.OnSelectionChanged(e);
 
+            UpdateVisualStates(false);
             UpdateButtonContent();
         }
 
@@ -249,6 +256,50 @@ namespace Microsoft.Phone.Controls
             get { return SelectorHelper.SelectedItemsImpl; }
         }
 
+        #region public string PlaceholderText
+
+        /// <summary>
+        /// Gets or sets the text that is displayed in the control until the value is changed by a user action or some other operation.
+        /// </summary>
+        /// 
+        /// <returns>
+        /// The text that is displayed in the control when no value is selected. The default is an empty string ("").
+        /// </returns>
+        public string PlaceholderText
+        {
+            get { return (string)GetValue(PlaceholderTextProperty); }
+            set { SetValue(PlaceholderTextProperty, value); }
+        }
+
+        /// <summary>
+        /// Identifies the
+        /// <see cref="P:Microsoft.Phone.Controls.PickerBox.PlaceholderText" />
+        /// dependency property.
+        /// </summary>
+        /// <value>
+        /// The identifier for the
+        /// <see cref="P:Microsoft.Phone.Controls.PickerBox.PlaceholderText" />
+        /// dependency property.
+        /// </value>
+        public static readonly DependencyProperty PlaceholderTextProperty = DependencyProperty.Register(
+            "PlaceholderText",
+            typeof(string),
+            typeof(PickerBox),
+            new PropertyMetadata(string.Empty, (d, e) => ((PickerBox)d).OnPlaceholderTextChanged(e)));
+
+        private void OnPlaceholderTextChanged(DependencyPropertyChangedEventArgs e)
+        {
+            UpdateVisualStates(false);
+            UpdateButtonContent();
+        }
+
+        private bool UsePlaceholder
+        {
+            get { return SelectedItems.Count == 0 && !string.IsNullOrEmpty(PlaceholderText); }
+        }
+
+        #endregion
+
         internal override bool CanSelectMultiple
         {
             get { return SelectionMode != SelectionMode.Single; }
@@ -357,6 +408,15 @@ namespace Microsoft.Phone.Controls
             else
             {
                 VisualStateManager.GoToState(this, VisualStates.StateNormal, useTransitions);
+            }
+
+            if (UsePlaceholder)
+            {
+                VisualStateManager.GoToState(this, StatePlaceholderVisible, useTransitions);
+            }
+            else
+            {
+                VisualStateManager.GoToState(this, StatePlaceholderCollapsed, useTransitions);
             }
         }
 
@@ -477,7 +537,15 @@ namespace Microsoft.Phone.Controls
         {
             if (null != _buttonPart)
             {
-                if (SelectionMode == SelectionMode.Single)
+                if (UsePlaceholder)
+                {
+                    if (null != _buttonPart)
+                    {
+                        _buttonPart.Content = PlaceholderText;
+                        return;
+                    }
+                }
+                else if (SelectionMode == SelectionMode.Single)
                 {
                     if (_selectedValueBinding != null)
                     {

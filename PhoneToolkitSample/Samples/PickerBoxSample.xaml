@@ -136,6 +136,7 @@
                 <toolkit:PickerBox Header="Print in colors" 
                                    SelectionMode="Multiple" 
                                    FullModeHeader="COLORS" 
+                                   PlaceholderText="choose colors"
                                    x:Name="PrintInColors">
                     <sys:String>Cyan</sys:String>
                     <sys:String>Magenta</sys:String>
@@ -146,6 +147,11 @@
                 <toolkit:RecurringDaysPicker Header="Repeats" FullModeHeader="ALARM REPEATS ON"/>
 
                 <toolkit:PickerBox x:Name="RegionList" Header="System Locale"/>
+                
+                <toolkit:PickerBox x:Name="MonthlyResetDatePicker"
+                                   Header="Monthly reset date"
+                                   FullModeHeader="CHOOSE DAY OF THE MONTH"
+                                   PlaceholderText="choose day of the month"/>
 
                 <toolkit:PickerBox x:Name="AccountPicker"
                                    FullModeHeader="CHOOSE ACCOUNT"
