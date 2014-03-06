@@ -327,6 +327,11 @@ namespace Microsoft.Phone.Controls
                 throw new InvalidOperationException(Properties.Resources.InvalidSelectedItem);
             }
 
+            if (InternalUtils.AreValuesEqual(oldValue, newValue))
+            {
+                return;
+            }
+
             // Synchronize SelectedIndex property
             if (!_updatingSelection)
             {
@@ -384,39 +389,6 @@ namespace Microsoft.Phone.Controls
         /// </summary>
         public static readonly DependencyProperty HeaderTemplateProperty =
             DependencyProperty.Register("HeaderTemplate", typeof(DataTemplate), typeof(ListPicker), null);
-
-        private void OnSelectedItemsChanged(IList oldValue, IList newValue)
-        {
-            // Fire SelectionChanged event
-            var handler = SelectionChanged;
-            if (null != handler)
-            {
-                IList removedItems = new List<object>();
-                if (null != oldValue)
-                {
-                    foreach (object o in oldValue)
-                    {
-                        if (null == newValue || !newValue.Contains(o))
-                        {
-                            removedItems.Add(o);
-                        }
-                    }
-                }
-                IList addedItems = new List<object>();
-                if (null != newValue)
-                {
-                    foreach (object o in newValue)
-                    {
-                        if (null == oldValue || !oldValue.Contains(o))
-                        {
-                            addedItems.Add(o);
-                        }
-                    }
-                }
-
-                handler(this, new SelectionChangedEventArgs(removedItems, addedItems));
-            }
-        }
 
         /// <summary>
         /// Initializes a new instance of the ListPicker class.
