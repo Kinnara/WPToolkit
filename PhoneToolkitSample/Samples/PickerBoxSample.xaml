@@ -177,7 +177,7 @@
     </toolkit:PageUI>
 
     <phone:PhoneApplicationPage.ApplicationBar>
-        <shell:ApplicationBar IsVisible="False">
+        <shell:ApplicationBar>
             <shell:ApplicationBarIconButton Text="new" IconUri="/Assets/AppBar/add.png" Click="NewButton_Click"/>
             <shell:ApplicationBarIconButton Text="status" IconUri="/Assets/AppBar/statuspicker.png" Click="StatusButton_Click"/>
         </shell:ApplicationBar>
