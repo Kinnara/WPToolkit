@@ -351,8 +351,11 @@ namespace Microsoft.Phone.Controls
 
         private void OnClosedStoryboardCompleted(object sender, EventArgs e)
         {
-            _closedStoryboard.Stop();
-            _closedStoryboard = null;
+            if (_closedStoryboard != null)
+            {
+                _closedStoryboard.Stop();
+                _closedStoryboard = null;
+            }
 
             // Close the picker flyout
             _flyout.InternalHide(false);
