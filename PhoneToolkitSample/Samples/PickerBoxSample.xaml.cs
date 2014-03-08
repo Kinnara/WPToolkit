@@ -141,8 +141,8 @@ namespace PhoneToolkitSample.Samples
 
             AccentColorList.ItemsSource = ColorExtensions.AccentColors();
             AccentColorList.SelectedIndex = 0;
-            AccentColorGrid.ItemsSource = ColorExtensions.AccentColors();
-            AccentColorGrid.SelectedIndex = 0;
+            //AccentColorGrid.ItemsSource = ColorExtensions.AccentColors();
+            //AccentColorGrid.SelectedIndex = 0;
         }
 
         private string Summarize(IList items)
@@ -171,7 +171,7 @@ namespace PhoneToolkitSample.Samples
             return str;
         }
 
-        private void AccountPicker_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void AccountPicker_ItemsPicked(object sender, SelectionChangedEventArgs e)
         {
             string selectedItem = AccountPicker.SelectedItem as string;
             if (selectedItem != null)
@@ -183,12 +183,12 @@ namespace PhoneToolkitSample.Samples
 
         private void NewButton_Click(object sender, EventArgs e)
         {
-            AccountPicker.Open();
+            AccountPicker.Show();
         }
 
         private void StatusButton_Click(object sender, EventArgs e)
         {
-            StatusPicker.Open();
+            StatusPicker.Show();
         }
     }
 }

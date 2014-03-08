@@ -5,6 +5,7 @@ using System.Globalization;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Data;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
 
@@ -37,18 +38,14 @@ namespace Microsoft.Phone.Controls
             _orientationHelper = new OrientationHelper(this);
 
             Picker = new PickerBoxList();
+            Picker.SetBinding(PickerBoxList.SelectedIndexProperty, new Binding("SelectedIndex") { Source = _flyout, Mode = BindingMode.TwoWay });
+            Picker.SetBinding(PickerBoxList.SelectedItemProperty, new Binding("SelectedItem") { Source = _flyout, Mode = BindingMode.TwoWay });
             Picker.ItemClick += OnPickerItemClick;
 
             Loaded += OnLoaded;
-            Unloaded += ListPickerFlyoutPresenter_Unloaded;
         }
 
-        private void ListPickerFlyoutPresenter_Unloaded(object sender, RoutedEventArgs e)
-        {
-            ResetListItems();
-        }
-
-        private PickerBoxList Picker { get; set; }
+        internal PickerBoxList Picker { get; private set; }
 
         private TextBlock ElementTitlePresenter { get; set; }
 
@@ -65,70 +62,6 @@ namespace Microsoft.Phone.Controls
         private static readonly DependencyProperty IsOpenProperty = DependencyProperty.Register(
             "IsOpen",
             typeof(bool),
-            typeof(ListPickerFlyoutPresenter),
-            null);
-
-        #endregion
-
-        #region internal DataTemplate DefaultSingleSelectItemTemplat
-
-        internal DataTemplate DefaultSingleSelectItemTemplate
-        {
-            get { return (DataTemplate)GetValue(DefaultSingleSelectItemTemplateProperty); }
-            set { SetValue(DefaultSingleSelectItemTemplateProperty, value); }
-        }
-
-        internal static readonly DependencyProperty DefaultSingleSelectItemTemplateProperty = DependencyProperty.Register(
-            "DefaultSingleSelectItemTemplate",
-            typeof(DataTemplate),
-            typeof(ListPickerFlyoutPresenter),
-            null);
-
-        #endregion
-
-        #region internal DataTemplate DefaultMultiSelectItemTemplate
-
-        internal DataTemplate DefaultMultiSelectItemTemplate
-        {
-            get { return (DataTemplate)GetValue(DefaultMultiSelectItemTemplateProperty); }
-            set { SetValue(DefaultMultiSelectItemTemplateProperty, value); }
-        }
-
-        internal static readonly DependencyProperty DefaultMultiSelectItemTemplateProperty = DependencyProperty.Register(
-            "DefaultMultiSelectItemTemplate",
-            typeof(DataTemplate),
-            typeof(ListPickerFlyoutPresenter),
-            null);
-
-        #endregion
-
-        #region internal Style DefaultSingleSelectItemContainerStyle
-
-        internal Style DefaultSingleSelectItemContainerStyle
-        {
-            get { return (Style)GetValue(DefaultSingleSelectItemContainerStyleProperty); }
-            set { SetValue(DefaultSingleSelectItemContainerStyleProperty, value); }
-        }
-
-        internal static readonly DependencyProperty DefaultSingleSelectItemContainerStyleProperty = DependencyProperty.Register(
-            "DefaultSingleSelectItemContainerStyle",
-            typeof(Style),
-            typeof(ListPickerFlyoutPresenter),
-            null);
-
-        #endregion
-
-        #region internal Style DefaultMultiSelectItemContainerStyle
-
-        internal Style DefaultMultiSelectItemContainerStyle
-        {
-            get { return (Style)GetValue(DefaultMultiSelectItemContainerStyleProperty); }
-            set { SetValue(DefaultMultiSelectItemContainerStyleProperty, value); }
-        }
-
-        internal static readonly DependencyProperty DefaultMultiSelectItemContainerStyleProperty = DependencyProperty.Register(
-            "DefaultMultiSelectItemContainerStyle",
-            typeof(Style),
             typeof(ListPickerFlyoutPresenter),
             null);
 
@@ -154,36 +87,28 @@ namespace Microsoft.Phone.Controls
             SetupTitle();
             UpdateTitlePresenter();
 
-            if (DefaultSingleSelectItemTemplate != null)
-            {
-                Picker.DefaultSingleSelectItemTemplate = DefaultSingleSelectItemTemplate;
-            }
-
-            if (DefaultMultiSelectItemTemplate != null)
-            {
-                Picker.DefaultMultiSelectItemTemplate = DefaultMultiSelectItemTemplate;
-            }
-
-            if (DefaultSingleSelectItemContainerStyle != null)
-            {
-                Picker.DefaultSingleSelectItemContainerStyle = DefaultSingleSelectItemContainerStyle;
-            }
-
-            if (DefaultMultiSelectItemContainerStyle != null)
-            {
-                Picker.DefaultMultiSelectItemContainerStyle = DefaultMultiSelectItemContainerStyle;
-            }
-
-            UpdatePicker();
-
             if (ElementItemsHostPanel != null)
             {
                 ElementItemsHostPanel.Children.Add(Picker);
             }
 
+            SetFlowDirection();
+
             _orientationHelper.OnApplyTemplate();
 
             _templateApplied = true;
+        }
+
+        private void SetFlowDirection()
+        {
+            FrameworkElement root = VisualStates.GetImplementationRoot(this);
+            if (root != null)
+            {
+                if (root.ReadLocalValue(FlowDirectionProperty) == DependencyProperty.UnsetValue)
+                {
+                    root.FlowDirection = this.GetUsefulFlowDirection();
+                }
+            }
         }
 
         private void UpdateTitlePresenter()
@@ -203,46 +128,6 @@ namespace Microsoft.Phone.Controls
             }
         }
 
-        private void UpdatePicker()
-        {
-            Picker.SelectionMode = ToSelectionMode(_flyout.SelectionMode);
-
-            if (_flyout.ItemTemplate != null)
-            {
-                Picker.DisplayMemberPath = null;
-                Picker.ItemTemplate = _flyout.ItemTemplate;
-            }
-            else if (_flyout.DisplayMemberPath != null)
-            {
-                Picker.DisplayMemberPath = _flyout.DisplayMemberPath;
-                Picker.ItemTemplate = null;
-            }
-            else
-            {
-                Picker.DisplayMemberPath = null;
-                Picker.ItemTemplate = null;
-            }
-
-            Picker.ItemsSource = _flyout.ItemsSource;
-
-            if (_flyout.SelectionMode == ListPickerFlyoutSelectionMode.Single)
-            {
-                Picker.SelectedItem = _flyout.SelectedItem;
-            }
-            else if (!Picker.SelectedItems.Cast<object>().SequenceEqual(_flyout.SelectedItems.Cast<object>()))
-            {
-                if (Picker.SelectedItems.Count > 0)
-                {
-                    Picker.SelectedItems.Clear();
-                }
-
-                foreach (object item in _flyout.SelectedItems)
-                {
-                    Picker.SelectedItems.Add(item);
-                }
-            }
-        }
-
         private void OnLoaded(object sender, RoutedEventArgs e)
         {
             Picker.UpdateLayout();
@@ -258,7 +143,7 @@ namespace Microsoft.Phone.Controls
                 // the items in view.
                 if (Picker.SelectionMode == SelectionMode.Single)
                 {
-                    Picker.ScrollIntoView(_flyout.SelectedItem);
+                    Picker.ScrollIntoView(Picker.SelectedItem);
                 }
                 else
                 {
@@ -316,20 +201,9 @@ namespace Microsoft.Phone.Controls
             }
         }
 
-        private void ResetListItems()
-        {
-            //SetupListItems(0);
-        }
-
         private void Commit()
         {
             // Commit the value and close
-            _flyout.SelectedItem = Picker.SelectedItem;
-            _flyout.SelectedItems.Clear();
-            foreach (object item in Picker.SelectedItems)
-            {
-                _flyout.SelectedItems.Add(item);
-            }
             CloseFlyout(true);
         }
 
@@ -454,7 +328,7 @@ namespace Microsoft.Phone.Controls
             // We listen to the ItemClick event because SelectionChanged does not fire if the user picks the already selected item.
 
             // Only close the flyout in Single Selection mode.
-            if (_flyout.SelectionMode == ListPickerFlyoutSelectionMode.Single)
+            if (Picker.SelectionMode == SelectionMode.Single)
             {
                 // Commit the value and close
                 Commit();
@@ -471,8 +345,6 @@ namespace Microsoft.Phone.Controls
             {
                 SetupTitle();
                 UpdateTitlePresenter();
-                UpdatePicker();
-                //ResetListItems();
             }
         }
 
@@ -505,19 +377,6 @@ namespace Microsoft.Phone.Controls
                 {
                     _closedStoryboard.SkipToFill();
                 }
-            }
-        }
-
-        private static SelectionMode ToSelectionMode(ListPickerFlyoutSelectionMode selectionMode)
-        {
-            switch (selectionMode)
-            {
-                case ListPickerFlyoutSelectionMode.Single:
-                    return SelectionMode.Single;
-                case ListPickerFlyoutSelectionMode.Multiple:
-                    return SelectionMode.Multiple;
-                default:
-                    throw new ArgumentOutOfRangeException("selectionMode");
             }
         }
     }

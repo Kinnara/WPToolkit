@@ -214,6 +214,11 @@ namespace Microsoft.Phone.Controls.Primitives
 
                     if (ApplicationBar != null)
                     {
+                        if (_applicationBar != null && _applicationBar.Opacity < 1)
+                        {
+                            ApplicationBar.Opacity = 0.999;
+                        }
+
                         _hostPage.ApplicationBar = ApplicationBar;
                     }
                 }

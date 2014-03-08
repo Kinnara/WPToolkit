@@ -96,6 +96,7 @@
     <Compile Include="Data\MultilineItem.cs" />
     <Compile Include="Data\LoremIpsumWebsites.cs" />
     <Compile Include="Data\MultilineItemCollection.cs" />
+    <Compile Include="Data\ObjectCollection.cs" />
     <Compile Include="Data\PeopleByFirstName.cs" />
     <Compile Include="Data\PeopleInGroup.cs" />
     <Compile Include="Data\Person.cs" />
@@ -116,9 +117,9 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>AppResources.resx</DependentUpon>
     </Compile>
-    <Compile Include="Samples\AccentColorPickerPage.xaml.cs">
+    <None Include="Samples\AccentColorPickerPage.xaml.cs">
       <DependentUpon>AccentColorPickerPage.xaml</DependentUpon>
-    </Compile>
+    </None>
     <Compile Include="Samples\ApplicationBarSubmenuSample.xaml.cs">
       <DependentUpon>ApplicationBarSubmenuSample.xaml</DependentUpon>
     </Compile>
@@ -260,10 +261,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Samples\AccentColorPickerPage.xaml">
+    <None Include="Samples\AccentColorPickerPage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
-    </Page>
+    </None>
     <Page Include="Samples\ApplicationBarSubmenuSample.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>

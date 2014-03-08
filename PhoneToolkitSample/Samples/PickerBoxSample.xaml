@@ -6,6 +6,7 @@
 -->
 
 <toolkit:BasePage
+    x:Name="Page"
     x:Class="PhoneToolkitSample.Samples.PickerBoxSample"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
@@ -15,11 +16,13 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:toolkit="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit"
+    xmlns:toolkitPrimitives="clr-namespace:Microsoft.Phone.Controls.Primitives;assembly=Microsoft.Phone.Controls.Toolkit"
     xmlns:data="clr-namespace:PhoneToolkitSample.Data"
     SupportedOrientations="PortraitOrLandscape"
     mc:Ignorable="d" d:DesignHeight="768" d:DesignWidth="480"
     shell:SystemTray.IsVisible="True"
-    Style="{StaticResource PageStyle}">
+    Style="{StaticResource PageStyle}"
+    Margin="0,0,0,72">
 
     <phone:PhoneApplicationPage.Resources>
         <Style TargetType="toolkit:PickerBox">
@@ -30,6 +33,32 @@
         </Style>
         <data:AccentColorNameToBrush x:Key="ColorNameToBrushConverter" />
         <data:LockScreenAppCollection x:Key="LockScreenApps"/>
+
+        <toolkit:ListPickerFlyout x:Name="AccountPicker"
+                                  toolkitPrimitives:PickerFlyoutBase.Title="CHOOSE ACCOUNT"
+                                  ItemsPicked="AccountPicker_ItemsPicked">
+            <toolkit:ListPickerFlyout.ItemsSource>
+                <data:ObjectCollection>
+                    <sys:String>account1@example.com</sys:String>
+                    <sys:String>account2@example.com</sys:String>
+                    <sys:String>account3@example.com</sys:String>
+                </data:ObjectCollection>
+            </toolkit:ListPickerFlyout.ItemsSource>
+        </toolkit:ListPickerFlyout>
+
+        <toolkit:ListPickerFlyout x:Name="StatusPicker"
+                                  toolkitPrimitives:PickerFlyoutBase.Title="SET CHAT STATUS">
+            <toolkit:ListPickerFlyout.ItemsSource>
+                <data:ObjectCollection>
+                    <sys:String>available</sys:String>
+                    <sys:String>busy</sys:String>
+                    <sys:String>away</sys:String>
+                    <sys:String>invisible</sys:String>
+                    <sys:String>offline</sys:String>
+                </data:ObjectCollection>
+            </toolkit:ListPickerFlyout.ItemsSource>
+            <toolkit:ListPickerFlyout.SelectedIndex>0</toolkit:ListPickerFlyout.SelectedIndex>
+        </toolkit:ListPickerFlyout>
     </phone:PhoneApplicationPage.Resources>
 
     <toolkit:PageUI Header="picker box" Style="{StaticResource ScrollablePageUIStyle}">
@@ -79,7 +108,7 @@
                     </toolkit:PickerBox.FullModeItemTemplate>
                 </toolkit:PickerBox>
 
-                <toolkit:PickerBox Header="Accent color (grid)"
+                <!--<toolkit:PickerBox Header="Accent color (grid)"
                                    FullModeHeader="ACCENTS"
                                    PickerPageUri="/Samples/AccentColorPickerPage.xaml"
                                    x:Name="AccentColorGrid">
@@ -98,7 +127,7 @@
                             </Border>
                         </DataTemplate>
                     </toolkit:PickerBox.FullModeItemTemplate>
-                </toolkit:PickerBox>
+                </toolkit:PickerBox>-->
 
                 <TextBlock Text="Choose apps to show quick status" Style="{StaticResource ControlHeaderTextStyle}"/>
                 <StackPanel Orientation="Horizontal">
@@ -152,32 +181,32 @@
                                    Header="Monthly reset date"
                                    FullModeHeader="CHOOSE DAY OF THE MONTH"
                                    PlaceholderText="choose day of the month"/>
-
-                <toolkit:PickerBox x:Name="AccountPicker"
-                                   FullModeHeader="CHOOSE ACCOUNT"
-                                   Visibility="Collapsed"
-                                   SelectionChanged="AccountPicker_SelectionChanged">
-                    <sys:String>account1@example.com</sys:String>
-                    <sys:String>account2@example.com</sys:String>
-                    <sys:String>account3@example.com</sys:String>
-                </toolkit:PickerBox>
-
-                <toolkit:PickerBox x:Name="StatusPicker"
-                                   FullModeHeader="SET CHAT STATUS"
-                                   SelectedIndex="0"
-                                   Visibility="Collapsed">
-                    <sys:String>available</sys:String>
-                    <sys:String>busy</sys:String>
-                    <sys:String>away</sys:String>
-                    <sys:String>invisible</sys:String>
-                    <sys:String>offline</sys:String>
-                </toolkit:PickerBox>
             </StackPanel>
         </toolkit:PageUI.Content>
+
+        <VisualStateManager.VisualStateGroups>
+            <VisualStateGroup x:Name="OrientationStates">
+                <VisualState x:Name="PortraitUp"/>
+                <VisualState x:Name="LandscapeLeft">
+                    <Storyboard>
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="Page" Storyboard.TargetProperty="Margin">
+                            <DiscreteObjectKeyFrame KeyTime="0" Value="0,0,72,0" />
+                        </ObjectAnimationUsingKeyFrames>
+                    </Storyboard>
+                </VisualState>
+                <VisualState x:Name="LandscapeRight">
+                    <Storyboard>
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="Page" Storyboard.TargetProperty="Margin">
+                            <DiscreteObjectKeyFrame KeyTime="0" Value="72,0,0,0" />
+                        </ObjectAnimationUsingKeyFrames>
+                    </Storyboard>
+                </VisualState>
+            </VisualStateGroup>
+        </VisualStateManager.VisualStateGroups>
     </toolkit:PageUI>
 
     <phone:PhoneApplicationPage.ApplicationBar>
-        <shell:ApplicationBar>
+        <shell:ApplicationBar Opacity="0.999">
             <shell:ApplicationBarIconButton Text="new" IconUri="/Assets/AppBar/add.png" Click="NewButton_Click"/>
             <shell:ApplicationBarIconButton Text="status" IconUri="/Assets/AppBar/statuspicker.png" Click="StatusButton_Click"/>
         </shell:ApplicationBar>

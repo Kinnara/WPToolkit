@@ -37,7 +37,7 @@ namespace Microsoft.Phone.Controls
 
         private ButtonBase _buttonPart;
 
-        private PickerPageHelper<IPickerBoxPage> _pickerPageHelper;
+        private ListPickerFlyout _pickerFlyout;
 
         private Binding _selectedValueBinding;
 
@@ -77,12 +77,12 @@ namespace Microsoft.Phone.Controls
         {
             if (oldValue)
             {
-                _pickerPageHelper.ClosePickerPage();
+                _pickerFlyout.Hide();
             }
 
             if (newValue)
             {
-                _pickerPageHelper.OpenPickerPage(PickerPageUri);
+                ShowPickerFlyout();
             }
         }
 
@@ -197,21 +197,6 @@ namespace Microsoft.Phone.Controls
         /// </summary>
         public static readonly DependencyProperty FullModeHeaderProperty =
             DependencyProperty.Register("FullModeHeader", typeof(object), typeof(PickerBox), null);
-
-        /// <summary>
-        /// Gets or sets the Uri to use for loading the IPickerBoxPage instance when the control is tapped.
-        /// </summary>
-        public Uri PickerPageUri
-        {
-            get { return (Uri)GetValue(PickerPageUriProperty); }
-            set { SetValue(PickerPageUriProperty, value); }
-        }
-
-        /// <summary>
-        /// Identifies the PickerPageUri DependencyProperty.
-        /// </summary>
-        public static readonly DependencyProperty PickerPageUriProperty = DependencyProperty.Register(
-            "PickerPageUri", typeof(Uri), typeof(PickerBox), null);
 
         /// <summary>
         /// Gets or sets the SelectionMode. Extended is treated as Multiple.
@@ -331,7 +316,9 @@ namespace Microsoft.Phone.Controls
 
             Loaded += OnLoaded;
 
-            _pickerPageHelper = new PickerPageHelper<IPickerBoxPage>(this, OnPickerPageOpening, OnPickerPageClosed, ClosePickerPage);
+            _pickerFlyout = new ListPickerFlyout();
+            _pickerFlyout.ItemsPicked += OnPickerFlyoutItemsPicked;
+            _pickerFlyout.Closed += OnPickerFlyoutClosed;
 
             SetBinding(DisplayMemberPathShadowProperty, new Binding("DisplayMemberPath") { Source = this });
         }
@@ -464,68 +451,54 @@ namespace Microsoft.Phone.Controls
             }
         }
 
-        private void OnPickerPageOpening(IPickerBoxPage pickerPage)
+        private void ShowPickerFlyout()
         {
-            // Sets the flow direction.
-            pickerPage.FlowDirection = this.GetUsefulFlowDirection();
-
-            // Set up the list picker page with the necesarry fields.
+            // Set up the list picker flyout with the necesarry fields.
             if (null != FullModeHeader)
             {
-                pickerPage.HeaderText = (string)FullModeHeader;
+                PickerFlyoutBase.SetTitle(_pickerFlyout, (string)FullModeHeader);
             }
             else
             {
-                pickerPage.HeaderText = (string)Header;
+                PickerFlyoutBase.SetTitle(_pickerFlyout, (string)Header);
             }
 
-            pickerPage.ItemTemplate = FullModeItemTemplate;
-            pickerPage.ItemContainerStyle = FullModeItemContainerStyle;
-            pickerPage.DisplayMemberPath = FullModeDisplayMemberPath;
-
-            pickerPage.Items.Clear();
-            if (null != Items)
-            {
-                foreach (var element in Items)
-                {
-                    pickerPage.Items.Add(element);
-                }
-            }
-
-            pickerPage.SelectionMode = SelectionMode;
+            _pickerFlyout.ItemTemplate = FullModeItemTemplate;
+            _pickerFlyout.DisplayMemberPath = FullModeDisplayMemberPath;
+            _pickerFlyout.ItemsSource = Items;
+            _pickerFlyout.SelectionMode = SelectionMode;
 
             if (SelectionMode == SelectionMode.Single)
             {
-                pickerPage.SelectedItem = SelectedItem;
+                _pickerFlyout.SelectedItem = SelectedItem;
             }
             else
             {
-                pickerPage.SelectedItems.Clear();
-                if (null != SelectedItems)
+                _pickerFlyout.SelectedItems.Clear();
+                foreach (var element in SelectedItems)
                 {
-                    foreach (var element in SelectedItems)
-                    {
-                        pickerPage.SelectedItems.Add(element);
-                    }
+                    _pickerFlyout.SelectedItems.Add(element);
                 }
             }
+
+            _pickerFlyout.Show();
         }
 
-        private void ClosePickerPage()
+        private void OnPickerFlyoutItemsPicked(object sender, SelectionChangedEventArgs e)
+        {
+            if (SelectionMode == SelectionMode.Single && null != _pickerFlyout.SelectedItem)
+            {
+                SelectedItem = _pickerFlyout.SelectedItem;
+            }
+            else if ((SelectionMode == SelectionMode.Multiple || SelectionMode == SelectionMode.Extended) && null != _pickerFlyout.SelectedItems)
+            {
+                SelectorHelper.SelectRange(_pickerFlyout.SelectedItems);
+            }
+        }
+
+        private void OnPickerFlyoutClosed(object sender, EventArgs e)
         {
             IsOpen = false;
-        }
-
-        private void OnPickerPageClosed(IPickerBoxPage pickerPage)
-        {
-            if (SelectionMode == SelectionMode.Single && null != pickerPage.SelectedItem)
-            {
-                SelectedItem = pickerPage.SelectedItem;
-            }
-            else if ((SelectionMode == SelectionMode.Multiple || SelectionMode == SelectionMode.Extended) && null != pickerPage.SelectedItems)
-            {
-                SelectorHelper.SelectRange(pickerPage.SelectedItems);
-            }
         }
 
         private void OnButtonClick(object sender, RoutedEventArgs e)

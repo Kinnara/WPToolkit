@@ -974,16 +974,29 @@
                    Margin="-1,-4,0,37"/>
     </DataTemplate>
 
-    <Style TargetType="controls:ListPickerFlyoutPresenter">
+    <Style x:Key="ListPickerFlyoutPresenterListStyle" TargetType="primitives:PickerBoxList">
         <Setter Property="DefaultSingleSelectItemTemplate" Value="{StaticResource ListPickerFlyoutPresenterItemSingleSelectItemTemplate}"/>
         <Setter Property="DefaultMultiSelectItemTemplate" Value="{StaticResource ListPickerFlyoutPresenterItemMultiSelectItemTemplate}"/>
         <Setter Property="DefaultMultiSelectItemContainerStyle" Value="{StaticResource ListPickerFlyoutPresenterItemStyle}"/>
+        <Setter Property="ItemsPanel">
+            <Setter.Value>
+                <ItemsPanelTemplate>
+                    <controls:ItemsStackPanel Padding="0,0,0,95"/>
+                </ItemsPanelTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style TargetType="controls:ListPickerFlyoutPresenter">
         <Setter Property="Background" Value="{StaticResource PhoneChromeBrush}"/>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="controls:ListPickerFlyoutPresenter">
                     <Border Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}"
                             controls:TiltEffect.IsTiltEnabled="True">
+                        <Border.Resources>
+                            <Style TargetType="primitives:PickerBoxList" BasedOn="{StaticResource ListPickerFlyoutPresenterListStyle}"/>
+                        </Border.Resources>
                         <VisualStateManager.VisualStateGroups>
                             <VisualStateGroup x:Name="OrientationStates">
                                 <VisualState x:Name="PortraitUp"/>
@@ -1029,7 +1042,6 @@
         <Setter Property="Foreground" Value="{StaticResource PhoneForegroundBrush}"/>
         <Setter Property="HorizontalContentAlignment" Value="Left"/>
         <Setter Property="Padding" Value="7,2,0,6"/>
-        <Setter Property="PickerPageUri" Value="/Microsoft.Phone.Controls.Toolkit;component/PickerBox/PickerBoxPage.xaml"/>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="controls:PickerBox">

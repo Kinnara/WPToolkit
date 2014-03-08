@@ -2,7 +2,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
+using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -16,9 +16,9 @@ namespace Microsoft.Phone.Controls
     {
         private bool _isOpen;
         private ListPickerFlyoutPresenter _presenter;
+        private PickerBoxList _picker;
 
-        private ObservableCollection<object> _selectedItems = new ObservableCollection<object>();
-        private List<object> _selectedItemsWhenOpened = new List<object>();
+        private List<object> _selectedItemsWhenOpened;
 
         private TaskCompletionSource<IList> _tcs;
 
@@ -27,6 +27,9 @@ namespace Microsoft.Phone.Controls
         /// </summary>
         public ListPickerFlyout()
         {
+            _presenter = new ListPickerFlyoutPresenter(this);
+            _presenter.ItemPicked += OnItemPicked;
+            _picker = _presenter.Picker;
         }
 
         #region public IEnumerable ItemsSource
@@ -55,10 +58,11 @@ namespace Microsoft.Phone.Controls
             "ItemsSource",
             typeof(IEnumerable),
             typeof(ListPickerFlyout),
-            new PropertyMetadata((d, e) => ((ListPickerFlyout)d).OnItemsSourceChanged(e)));
+            new PropertyMetadata((d, e) => ((ListPickerFlyout)d).OnItemsSourceChanged()));
 
-        private void OnItemsSourceChanged(DependencyPropertyChangedEventArgs e)
+        private void OnItemsSourceChanged()
         {
+            _picker.ItemsSource = ItemsSource;
         }
 
         #endregion
@@ -89,10 +93,11 @@ namespace Microsoft.Phone.Controls
             "ItemTemplate",
             typeof(DataTemplate),
             typeof(ListPickerFlyout),
-            new PropertyMetadata((d, e) => ((ListPickerFlyout)d).OnItemTemplateChanged(e)));
+            new PropertyMetadata((d, e) => ((ListPickerFlyout)d).OnItemTemplateChanged()));
 
-        private void OnItemTemplateChanged(DependencyPropertyChangedEventArgs e)
+        private void OnItemTemplateChanged()
         {
+            _picker.ItemTemplate = ItemTemplate;
         }
 
         #endregion
@@ -123,10 +128,11 @@ namespace Microsoft.Phone.Controls
             "DisplayMemberPath",
             typeof(string),
             typeof(ListPickerFlyout),
-            new PropertyMetadata((d, e) => ((ListPickerFlyout)d).OnDisplayMemberPathChanged(e)));
+            new PropertyMetadata((d, e) => ((ListPickerFlyout)d).OnDisplayMemberPathChanged()));
 
-        private void OnDisplayMemberPathChanged(DependencyPropertyChangedEventArgs e)
+        private void OnDisplayMemberPathChanged()
         {
+            _picker.DisplayMemberPath = DisplayMemberPath;
         }
 
         #endregion
@@ -157,11 +163,7 @@ namespace Microsoft.Phone.Controls
             "SelectedIndex",
             typeof(int),
             typeof(ListPickerFlyout),
-            new PropertyMetadata(-1, (d, e) => ((ListPickerFlyout)d).OnSelectedIndexChanged(e)));
-
-        private void OnSelectedIndexChanged(DependencyPropertyChangedEventArgs e)
-        {
-        }
+            new PropertyMetadata(-1));
 
         #endregion
 
@@ -191,11 +193,7 @@ namespace Microsoft.Phone.Controls
             "SelectedItem",
             typeof(object),
             typeof(ListPickerFlyout),
-            new PropertyMetadata((d, e) => ((ListPickerFlyout)d).OnSelectedItemChanged(e)));
-
-        private void OnSelectedItemChanged(DependencyPropertyChangedEventArgs e)
-        {
-        }
+            null);
 
         #endregion
 
@@ -208,21 +206,21 @@ namespace Microsoft.Phone.Controls
         /// </returns>
         public IList SelectedItems
         {
-            get { return _selectedItems; }
+            get { return _picker.SelectedItems; }
         }
 
-        #region public ListPickerFlyoutSelectionMode SelectionMode
+        #region public SelectionMode SelectionMode
 
         /// <summary>
         /// Gets or sets the selection behavior for the control.
         /// </summary>
         /// 
         /// <returns>
-        /// One of the ListPickerFlyoutSelectionMode values.
+        /// One of the SelectionMode values.
         /// </returns>
-        public ListPickerFlyoutSelectionMode SelectionMode
+        public SelectionMode SelectionMode
         {
-            get { return (ListPickerFlyoutSelectionMode)GetValue(SelectionModeProperty); }
+            get { return (SelectionMode)GetValue(SelectionModeProperty); }
             set { SetValue(SelectionModeProperty, value); }
         }
 
@@ -235,12 +233,13 @@ namespace Microsoft.Phone.Controls
         /// </returns>
         public static readonly DependencyProperty SelectionModeProperty = DependencyProperty.Register(
             "SelectionMode",
-            typeof(ListPickerFlyoutSelectionMode),
+            typeof(SelectionMode),
             typeof(ListPickerFlyout),
-            new PropertyMetadata((d, e) => ((ListPickerFlyout)d).OnSelectionModeChanged(e)));
+            new PropertyMetadata((d, e) => ((ListPickerFlyout)d).OnSelectionModeChanged()));
 
-        private void OnSelectionModeChanged(DependencyPropertyChangedEventArgs e)
+        private void OnSelectionModeChanged()
         {
+            _picker.SelectionMode = SelectionMode;
         }
 
         #endregion
@@ -287,8 +286,6 @@ namespace Microsoft.Phone.Controls
         /// </returns>
         protected override Control CreatePresenter()
         {
-            _presenter = new ListPickerFlyoutPresenter(this);
-            _presenter.ItemPicked += OnItemPicked;
             return _presenter;
         }
 
@@ -300,7 +297,7 @@ namespace Microsoft.Phone.Controls
 
         protected override bool ShouldShowConfirmationButtons()
         {
-            return SelectionMode == ListPickerFlyoutSelectionMode.Multiple;
+            return SelectionMode != SelectionMode.Single;
         }
 
         internal override void OnOpened()
@@ -308,12 +305,26 @@ namespace Microsoft.Phone.Controls
             base.OnOpened();
 
             _isOpen = true;
-            _selectedItemsWhenOpened.AddRange(_selectedItems);
+
+            _selectedItemsWhenOpened = SelectedItems.Cast<object>().ToList();
         }
 
         internal override void OnClosed()
         {
-            _selectedItemsWhenOpened.Clear();
+            if (_selectedItemsWhenOpened != null)
+            {
+                if (SelectionMode != SelectionMode.Single)
+                {
+                    SelectedItems.Clear();
+
+                    foreach (object item in _selectedItemsWhenOpened)
+                    {
+                        SelectedItems.Add(item);
+                    }
+                }
+
+                _selectedItemsWhenOpened = null;
+            }
 
             CompleteShowAsync(null);
 
@@ -377,12 +388,8 @@ namespace Microsoft.Phone.Controls
 
                 handler(this, new SelectionChangedEventArgs(removedItems, addedItems));
             }
-        }
-    }
 
-    public enum ListPickerFlyoutSelectionMode
-    {
-        Single,
-        Multiple
+            _selectedItemsWhenOpened = null;
+        }
     }
 }

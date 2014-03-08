@@ -445,19 +445,19 @@
     <Compile Include="..\Microsoft.Phone.Controls.Toolkit\TransferControl\TransferType.cs">
       <Link>TransferControl\TransferType.cs</Link>
     </Compile>
-    <Compile Include="..\Microsoft.Phone.Controls.Toolkit\PickerBox\IPickerBoxPage.cs">
+    <None Include="..\Microsoft.Phone.Controls.Toolkit\PickerBox\IPickerBoxPage.cs">
       <Link>PickerBox\IPickerBoxPage.cs</Link>
-    </Compile>
+    </None>
     <Compile Include="..\Microsoft.Phone.Controls.Toolkit\PickerBox\PickerBox.cs">
       <Link>PickerBox\PickerBox.cs</Link>
     </Compile>
-    <Compile Include="..\Microsoft.Phone.Controls.Toolkit\PickerBox\PickerBoxPage.xaml.cs">
+    <None Include="..\Microsoft.Phone.Controls.Toolkit\PickerBox\PickerBoxPage.xaml.cs">
       <Link>PickerBox\PickerBoxPage.xaml.cs</Link>
       <DependentUpon>PickerBoxPage.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="..\Microsoft.Phone.Controls.Toolkit\PickerBox\PickerBoxPageBase.cs">
+    </None>
+    <None Include="..\Microsoft.Phone.Controls.Toolkit\PickerBox\PickerBoxPageBase.cs">
       <Link>PickerBox\PickerBoxPageBase.cs</Link>
-    </Compile>
+    </None>
     <Compile Include="..\Microsoft.Phone.Controls.Toolkit\Primitives\PhonePasswordBoxCheckBox.cs">
       <Link>Primitives\PhonePasswordBoxCheckBox.cs</Link>
     </Compile>
@@ -671,11 +671,11 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="..\Microsoft.Phone.Controls.Toolkit\PickerBox\PickerBoxPage.xaml">
+    <None Include="..\Microsoft.Phone.Controls.Toolkit\PickerBox\PickerBoxPage.xaml">
       <Link>PickerBox\PickerBoxPage.xaml</Link>
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
-    </Page>
+    </None>
     <Resource Include="DateTimePickers\DatePickerPageResources.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
