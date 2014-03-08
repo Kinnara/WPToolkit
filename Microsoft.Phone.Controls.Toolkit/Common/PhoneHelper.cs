@@ -34,6 +34,21 @@ namespace Microsoft.Phone.Controls
         public const double SipTextCompletionHeight = 69;
 
         /// <summary>
+        /// Height of the system tray in Portrait Mode
+        /// </summary>
+        public const double SystemTrayPortraitHeight = 32;
+
+        /// <summary>
+        /// Width of the system tray in Landscape Mode
+        /// </summary>
+        public const double SystemTrayLandscapeWidth = 72;
+
+        /// <summary>
+        /// Width of the application bar in Landscape mode
+        /// </summary>
+        public const double ApplicationBarLandscapeWidth = 72;
+
+        /// <summary>
         /// Gets the current <see cref="T:PhoneApplicationFrame"/>.
         /// </summary>
         /// <param name="phoneApplicationFrame">The current <see cref="T:PhoneApplicationFrame"/>.</param>

@@ -173,6 +173,9 @@
     <Compile Include="..\Microsoft.Phone.Controls.Toolkit\Common\NumericExtensions.cs">
       <Link>Common\NumericExtensions.cs</Link>
     </Compile>
+    <Compile Include="..\Microsoft.Phone.Controls.Toolkit\Common\OrientationHelper.cs">
+      <Link>Common\OrientationHelper.cs</Link>
+    </Compile>
     <Compile Include="..\Microsoft.Phone.Controls.Toolkit\Common\PhoneHelper.cs">
       <Link>Common\PhoneHelper.cs</Link>
     </Compile>
@@ -358,6 +361,12 @@
     <Compile Include="..\Microsoft.Phone.Controls.Toolkit\ItemsStackPanel\ItemsStackPanel.cs">
       <Link>ItemsStackPanel\ItemsStackPanel.cs</Link>
     </Compile>
+    <Compile Include="..\Microsoft.Phone.Controls.Toolkit\ListPicker\ListPickerFlyout.cs">
+      <Link>ListPicker\ListPickerFlyout.cs</Link>
+    </Compile>
+    <Compile Include="..\Microsoft.Phone.Controls.Toolkit\ListPicker\ListPickerFlyoutPresenter.cs">
+      <Link>ListPicker\ListPickerFlyoutPresenter.cs</Link>
+    </Compile>
     <Compile Include="..\Microsoft.Phone.Controls.Toolkit\LongListSelector\LongListSelectorItem.cs">
       <Link>LongListSelector\LongListSelectorItem.cs</Link>
     </Compile>
@@ -405,6 +414,12 @@
     </Compile>
     <Compile Include="..\Microsoft.Phone.Controls.Toolkit\Primitives\ContextMenuPanel.cs">
       <Link>Primitives\ContextMenuPanel.cs</Link>
+    </Compile>
+    <Compile Include="..\Microsoft.Phone.Controls.Toolkit\Primitives\FlyoutBase.cs">
+      <Link>Primitives\FlyoutBase.cs</Link>
+    </Compile>
+    <Compile Include="..\Microsoft.Phone.Controls.Toolkit\Primitives\PickerFlyoutBase.cs">
+      <Link>Primitives\PickerFlyoutBase.cs</Link>
     </Compile>
     <Compile Include="..\Microsoft.Phone.Controls.Toolkit\Primitives\WaitCursorControl.cs">
       <Link>Primitives\WaitCursorControl.cs</Link>

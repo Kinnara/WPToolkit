@@ -42,16 +42,6 @@ namespace Microsoft.Phone.Controls
         private const double LandscapeWidth = 486;
 
         /// <summary>
-        /// Width of the system tray in Landscape Mode
-        /// </summary>
-        private const double SystemTrayLandscapeWidth = 72;
-
-        /// <summary>
-        /// Width of the application bar in Landscape mode
-        /// </summary>
-        private const double ApplicationBarLandscapeWidth = 72;
-
-        /// <summary>
         /// Width of the borders around the menu
         /// </summary>
         private const double TotalBorderWidth = 8;
@@ -1055,14 +1045,14 @@ namespace Microsoft.Phone.Controls
                     {
                         if (SystemTray.IsVisible)
                         {
-                            x += SystemTrayLandscapeWidth;
+                            x += PhoneHelper.SystemTrayLandscapeWidth;
                         }
                     }
                     else
                     {
                         if (null != _page.ApplicationBar && _page.ApplicationBar.IsVisible)
                         {
-                            x += ApplicationBarLandscapeWidth;
+                            x += PhoneHelper.ApplicationBarLandscapeWidth;
                         }
                     }
 

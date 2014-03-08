@@ -9,11 +9,6 @@ namespace Microsoft.Phone.Controls
     /// </summary>
     public class ApplicationBarSubmenu : MenuBase
     {
-        /// <summary>
-        /// Width of the system tray in Landscape Mode
-        /// </summary>
-        private const double SystemTrayLandscapeWidth = 72;
-
         private static SwivelTransition ShowTransition = new SwivelTransition { Mode = SwivelTransitionMode.BackwardIn };
         private static SwivelTransition HideTransition = new SwivelTransition { Mode = SwivelTransitionMode.BackwardOut };
 
@@ -130,10 +125,10 @@ namespace Microsoft.Phone.Controls
                 switch (orientation)
                 {
                     case PageOrientation.LandscapeLeft:
-                        margin.Left = SystemTrayLandscapeWidth;
+                        margin.Left = PhoneHelper.SystemTrayLandscapeWidth;
                         break;
                     case PageOrientation.LandscapeRight:
-                        margin.Right = SystemTrayLandscapeWidth;
+                        margin.Right = PhoneHelper.SystemTrayLandscapeWidth;
                         break;
                 }
             }
