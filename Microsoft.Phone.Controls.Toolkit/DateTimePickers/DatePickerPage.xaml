@@ -44,7 +44,7 @@
                                     Storyboard.TargetProperty="RotationX"
                                     From="-45"
                                     To="0"
-                                    Duration="0:0:0.25">
+                                    Duration="0:0:0.3">
                                     <DoubleAnimation.EasingFunction>
                                         <ExponentialEase EasingMode="EaseOut" Exponent="6"/>
                                     </DoubleAnimation.EasingFunction>
@@ -64,7 +64,7 @@
                                 Storyboard.TargetProperty="RotationX"
                                 From="0"
                                 To="60"
-                                Duration="0:0:0.15">
+                                Duration="0:0:0.2">
                                 <DoubleAnimation.EasingFunction>
                                     <ExponentialEase EasingMode="EaseIn" Exponent="6"/>
                                 </DoubleAnimation.EasingFunction>
@@ -73,7 +73,7 @@
                                 Storyboard.TargetName="LayoutRoot"
                                 Storyboard.TargetProperty="Opacity">
                                 <DiscreteDoubleKeyFrame KeyTime="0" Value="1"/>
-                                <DiscreteDoubleKeyFrame KeyTime="0:0:0.15" Value="0"/>
+                                <DiscreteDoubleKeyFrame KeyTime="0:0:0.2" Value="0"/>
                             </DoubleAnimationUsingKeyFrames>
                         </Storyboard>
                     </VisualTransition>
