@@ -191,6 +191,9 @@
     <Compile Include="..\Microsoft.Phone.Controls.Toolkit\Common\PhysicsConstants.cs">
       <Link>Common\PhysicsConstants.cs</Link>
     </Compile>
+    <Compile Include="..\Microsoft.Phone.Controls.Toolkit\Common\PickerFlyoutHelper.cs">
+      <Link>Common\PickerFlyoutHelper.cs</Link>
+    </Compile>
     <Compile Include="..\Microsoft.Phone.Controls.Toolkit\Common\PickerPageHelper.cs">
       <Link>Common\PickerPageHelper.cs</Link>
     </Compile>
@@ -287,12 +290,30 @@
     <Compile Include="..\Microsoft.Phone.Controls.Toolkit\DateTimePickers\DatePicker.cs">
       <Link>DateTimePickers\DatePicker.cs</Link>
     </Compile>
+    <Compile Include="..\Microsoft.Phone.Controls.Toolkit\DateTimePickers\DatePickerFlyout.cs">
+      <Link>DateTimePickers\DatePickerFlyout.cs</Link>
+    </Compile>
+    <Compile Include="..\Microsoft.Phone.Controls.Toolkit\DateTimePickers\DatePickerFlyoutPresenter.cs">
+      <Link>DateTimePickers\DatePickerFlyoutPresenter.cs</Link>
+    </Compile>
+    <Compile Include="..\Microsoft.Phone.Controls.Toolkit\DateTimePickers\DatePickerFlyoutPresenterHelper.cs">
+      <Link>DateTimePickers\DatePickerFlyoutPresenterHelper.cs</Link>
+    </Compile>
     <Compile Include="..\Microsoft.Phone.Controls.Toolkit\DateTimePickers\DatePickerPage.xaml.cs">
       <Link>DateTimePickers\DatePickerPage.xaml.cs</Link>
       <DependentUpon>DatePickerPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="..\Microsoft.Phone.Controls.Toolkit\DateTimePickers\DatePickerValueChangedEventArgs.cs">
+      <Link>DateTimePickers\DatePickerValueChangedEventArgs.cs</Link>
+    </Compile>
     <Compile Include="..\Microsoft.Phone.Controls.Toolkit\DateTimePickers\DateTimePickerBase.cs">
       <Link>DateTimePickers\DateTimePickerBase.cs</Link>
+    </Compile>
+    <Compile Include="..\Microsoft.Phone.Controls.Toolkit\DateTimePickers\DateTimePickerFlyoutPresenterHelperBase.cs">
+      <Link>DateTimePickers\DateTimePickerFlyoutPresenterHelperBase.cs</Link>
+    </Compile>
+    <Compile Include="..\Microsoft.Phone.Controls.Toolkit\DateTimePickers\DateTimePickerHelper.cs">
+      <Link>DateTimePickers\DateTimePickerHelper.cs</Link>
     </Compile>
     <Compile Include="..\Microsoft.Phone.Controls.Toolkit\DateTimePickers\DateTimePickerPageBase.cs">
       <Link>DateTimePickers\DateTimePickerPageBase.cs</Link>
@@ -315,9 +336,21 @@
     <Compile Include="..\Microsoft.Phone.Controls.Toolkit\DateTimePickers\TimePicker.cs">
       <Link>DateTimePickers\TimePicker.cs</Link>
     </Compile>
+    <Compile Include="..\Microsoft.Phone.Controls.Toolkit\DateTimePickers\TimePickerFlyout.cs">
+      <Link>DateTimePickers\TimePickerFlyout.cs</Link>
+    </Compile>
+    <Compile Include="..\Microsoft.Phone.Controls.Toolkit\DateTimePickers\TimePickerFlyoutPresenter.cs">
+      <Link>DateTimePickers\TimePickerFlyoutPresenter.cs</Link>
+    </Compile>
+    <Compile Include="..\Microsoft.Phone.Controls.Toolkit\DateTimePickers\TimePickerFlyoutPresenterHelper.cs">
+      <Link>DateTimePickers\TimePickerFlyoutPresenterHelper.cs</Link>
+    </Compile>
     <Compile Include="..\Microsoft.Phone.Controls.Toolkit\DateTimePickers\TimePickerPage.xaml.cs">
       <Link>DateTimePickers\TimePickerPage.xaml.cs</Link>
       <DependentUpon>TimePickerPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="..\Microsoft.Phone.Controls.Toolkit\DateTimePickers\TimePickerValueChangedEventArgs.cs">
+      <Link>DateTimePickers\TimePickerValueChangedEventArgs.cs</Link>
     </Compile>
     <Compile Include="..\Microsoft.Phone.Controls.Toolkit\Effects\SlideInEffect.cs">
       <Link>Effects\SlideInEffect.cs</Link>

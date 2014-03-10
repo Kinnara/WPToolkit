@@ -24,6 +24,52 @@ namespace Microsoft.Phone.Controls.Primitives
         {
         }
 
+        #region AttachedFlyout
+
+        /// <summary>
+        /// Gets the flyout associated with the specified element.
+        /// </summary>
+        /// <param name="element">The element for which to get the associated flyout.</param>
+        /// <returns>The flyout attached to the specified element.</returns>
+        public static FlyoutBase GetAttachedFlyout(FrameworkElement element)
+        {
+            return (FlyoutBase)element.GetValue(AttachedFlyoutProperty);
+        }
+
+        /// <summary>
+        /// Associates the specified flyout with the specified FrameworkElement.
+        /// </summary>
+        /// <param name="element">The element to associate the flyout with.</param>
+        /// <param name="value">The flyout to associate with the specified element.</param>
+        public static void SetAttachedFlyout(FrameworkElement element, FlyoutBase value)
+        {
+            element.SetValue(AttachedFlyoutProperty, value);
+        }
+
+        /// <summary>
+        /// Shows the flyout associated with the specified element, if any.
+        /// </summary>
+        /// <param name="flyoutOwner">The element for which to show the associated flyout.</param>
+        public static void ShowAttachedFlyout(FrameworkElement flyoutOwner)
+        {
+            FlyoutBase flyout = GetAttachedFlyout(flyoutOwner);
+            if (flyout != null)
+            {
+                flyout.Show();
+            }
+        }
+
+        /// <summary>
+        /// Identifies the FlyoutBase.AttachedFlyout XAML attached property.
+        /// </summary>
+        public static readonly DependencyProperty AttachedFlyoutProperty = DependencyProperty.RegisterAttached(
+            "AttachedFlyout",
+            typeof(FlyoutBase),
+            typeof(FlyoutBase),
+            null);
+
+        #endregion
+
         /// <summary>
         /// Occurs before the flyout is shown.
         /// </summary>
@@ -214,7 +260,7 @@ namespace Microsoft.Phone.Controls.Primitives
 
                     if (ApplicationBar != null)
                     {
-                        if (_applicationBar != null && _applicationBar.Opacity < 1)
+                        if (_applicationBar == null || _applicationBar.Opacity < 1)
                         {
                             ApplicationBar.Opacity = 0.999;
                         }
@@ -241,7 +287,7 @@ namespace Microsoft.Phone.Controls.Primitives
 
                 PhoneApplicationFrame frame = Application.Current.RootVisual as PhoneApplicationFrame;
 
-                if (_applicationBar != null && _hostPage != null && _hostPage.ApplicationBar != _applicationBar)
+                if (_hostPage != null && _hostPage.ApplicationBar != _applicationBar)
                 {
                     _hostPage.ApplicationBar = _applicationBar;
                 }
@@ -282,7 +328,10 @@ namespace Microsoft.Phone.Controls.Primitives
                     return;
                 }
 
-                _isCancelled = true;
+                if (!isDeferrable)
+                {
+                    _isCancelled = true;
+                }
 
                 var handler = PopupCancelled;
                 if (handler != null)

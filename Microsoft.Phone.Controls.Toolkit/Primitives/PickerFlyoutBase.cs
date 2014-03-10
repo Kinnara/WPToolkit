@@ -54,7 +54,7 @@ namespace Microsoft.Phone.Controls.Primitives
             "Title",
             typeof(string),
             typeof(PickerFlyoutBase),
-            null);
+            new PropertyMetadata(string.Empty));
 
         #endregion
 

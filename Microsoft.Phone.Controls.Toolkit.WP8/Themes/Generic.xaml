@@ -641,6 +641,24 @@
         </Setter>
     </Style>
 
+    <Style x:Key="LoopingSelectorItemRootStyle" TargetType="StackPanel">
+        <Setter Property="HorizontalAlignment" Value="Left"/>
+        <Setter Property="VerticalAlignment" Value="Bottom"/>
+        <Setter Property="Margin" Value="6"/>
+    </Style>
+
+    <Style x:Key="LoopingSelectorItemPrimaryTextStyle" TargetType="TextBlock">
+        <Setter Property="FontSize" Value="54"/>
+        <Setter Property="FontFamily" Value="{StaticResource PhoneFontFamilySemiBold}"/>
+        <Setter Property="Margin" Value="0,-8"/>
+    </Style>
+
+    <Style x:Key="LoopingSelectorItemSecondaryTextStyle" TargetType="TextBlock">
+        <Setter Property="FontSize" Value="20"/>
+        <Setter Property="FontFamily" Value="{StaticResource PhoneFontFamilyNormal}"/>
+        <Setter Property="Margin" Value="0,-2"/>
+    </Style>
+
     <Style TargetType="controls:DatePicker">
         <Setter Property="Background" Value="Transparent"/>
         <Setter Property="BorderBrush" Value="{StaticResource PhoneForegroundBrush}"/>
@@ -689,6 +707,157 @@
                             Height="72"
                             HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"/>
                     </StackPanel>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style TargetType="controls:DatePickerFlyoutPresenter">
+        <Setter Property="FontFamily" Value="{StaticResource PhoneFontFamilyNormal}" />
+        <Setter Property="FontSize" Value="{StaticResource PhoneFontSizeMediumLarge}" />
+        <Setter Property="Background" Value="{StaticResource PhoneChromeBrush}" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="controls:DatePickerFlyoutPresenter">
+                    <Border x:Name="LayoutRoot" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}">
+                        <Border.Resources>
+                            <DataTemplate x:Key="FirstPickerItemTemplate">
+                                <StackPanel Style="{StaticResource LoopingSelectorItemRootStyle}">
+                                    <TextBlock Text="{Binding YearNumber}" Style="{StaticResource LoopingSelectorItemPrimaryTextStyle}"/>
+                                    <TextBlock Text=" " Style="{StaticResource LoopingSelectorItemSecondaryTextStyle}"/>
+                                </StackPanel>
+                            </DataTemplate>
+                            <DataTemplate x:Key="SecondPickerItemTemplate">
+                                <StackPanel Style="{StaticResource LoopingSelectorItemRootStyle}">
+                                    <TextBlock Text="{Binding MonthNumber}" Style="{StaticResource LoopingSelectorItemPrimaryTextStyle}"/>
+                                    <TextBlock Text="{Binding MonthName}" Style="{StaticResource LoopingSelectorItemSecondaryTextStyle}"/>
+                                </StackPanel>
+                            </DataTemplate>
+                            <DataTemplate x:Key="ThirdPickerItemTemplate">
+                                <StackPanel Style="{StaticResource LoopingSelectorItemRootStyle}">
+                                    <TextBlock Text="{Binding DayNumber}" Style="{StaticResource LoopingSelectorItemPrimaryTextStyle}"/>
+                                    <TextBlock Text="{Binding DayName}" Style="{StaticResource LoopingSelectorItemSecondaryTextStyle}"/>
+                                </StackPanel>
+                            </DataTemplate>
+                        </Border.Resources>
+                        <Border.Projection>
+                            <PlaneProjection x:Name="PlaneProjection"/>
+                        </Border.Projection>
+                        <VisualStateManager.VisualStateGroups>
+                            <VisualStateGroup x:Name="VisibilityStates">
+                                <VisualStateGroup.Transitions>
+                                    <VisualTransition To="Open">
+                                        <VisualTransition.Storyboard>
+                                            <Storyboard>
+                                                <DoubleAnimation
+                                                    Storyboard.TargetName="PlaneProjection"
+                                                    Storyboard.TargetProperty="RotationX"
+                                                    From="-45"
+                                                    To="0"
+                                                    Duration="0:0:0.3">
+                                                    <DoubleAnimation.EasingFunction>
+                                                        <ExponentialEase EasingMode="EaseOut" Exponent="6"/>
+                                                    </DoubleAnimation.EasingFunction>
+                                                </DoubleAnimation>
+                                                <DoubleAnimationUsingKeyFrames
+                                                    Storyboard.TargetName="LayoutRoot"
+                                                    Storyboard.TargetProperty="Opacity">
+                                                    <DiscreteDoubleKeyFrame KeyTime="0" Value="1"/>
+                                                </DoubleAnimationUsingKeyFrames>
+                                            </Storyboard>
+                                        </VisualTransition.Storyboard>
+                                    </VisualTransition>
+                                    <VisualTransition To="Closed">
+                                        <Storyboard>
+                                            <DoubleAnimation
+                                                Storyboard.TargetName="PlaneProjection"
+                                                Storyboard.TargetProperty="RotationX"
+                                                From="0"
+                                                To="60"
+                                                Duration="0:0:0.2">
+                                                <DoubleAnimation.EasingFunction>
+                                                    <ExponentialEase EasingMode="EaseIn" Exponent="6"/>
+                                                </DoubleAnimation.EasingFunction>
+                                            </DoubleAnimation>
+                                            <DoubleAnimationUsingKeyFrames
+                                                Storyboard.TargetName="LayoutRoot"
+                                                Storyboard.TargetProperty="Opacity">
+                                                <DiscreteDoubleKeyFrame KeyTime="0" Value="1"/>
+                                                <DiscreteDoubleKeyFrame KeyTime="0:0:0.2" Value="0"/>
+                                            </DoubleAnimationUsingKeyFrames>
+                                        </Storyboard>
+                                    </VisualTransition>
+                                </VisualStateGroup.Transitions>
+                                <VisualState x:Name="Open">
+                                    <Storyboard>
+                                        <DoubleAnimation
+                                            Storyboard.TargetName="PlaneProjection"
+                                            Storyboard.TargetProperty="RotationX"
+                                            To="0"
+                                            Duration="0"/>
+                                        <DoubleAnimation
+                                            Storyboard.TargetName="LayoutRoot"
+                                            Storyboard.TargetProperty="Opacity"
+                                            To="1"
+                                            Duration="0"/>
+                                    </Storyboard>
+                                </VisualState>
+                                <VisualState x:Name="Closed">
+                                    <Storyboard>
+                                        <DoubleAnimation
+                                            Storyboard.TargetName="PlaneProjection"
+                                            Storyboard.TargetProperty="RotationX"
+                                            To="60"
+                                            Duration="0"/>
+                                        <DoubleAnimation
+                                            Storyboard.TargetName="LayoutRoot"
+                                            Storyboard.TargetProperty="Opacity"
+                                            To="0"
+                                            Duration="0"/>
+                                    </Storyboard>
+                                </VisualState>
+                            </VisualStateGroup>
+                            <VisualStateGroup x:Name="OrientationStates">
+                                <VisualState x:Name="PortraitUp"/>
+                                <VisualState x:Name="LandscapeLeft">
+                                    <Storyboard>
+                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="MainGrid" Storyboard.TargetProperty="Margin">
+                                            <DiscreteObjectKeyFrame KeyTime="0" Value="0,8,0,0"/>
+                                        </ObjectAnimationUsingKeyFrames>
+                                    </Storyboard>
+                                </VisualState>
+                                <VisualState x:Name="LandscapeRight">
+                                    <Storyboard>
+                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="MainGrid" Storyboard.TargetProperty="Margin">
+                                            <DiscreteObjectKeyFrame KeyTime="0" Value="0,8,0,0"/>
+                                        </ObjectAnimationUsingKeyFrames>
+                                    </Storyboard>
+                                </VisualState>
+                            </VisualStateGroup>
+                        </VisualStateManager.VisualStateGroups>
+                        <Grid x:Name="MainGrid" Margin="{TemplateBinding Padding}">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition />
+                            </Grid.RowDefinitions>
+                            <TextBlock x:Name="TitlePresenter"
+                                       FontFamily="{StaticResource PhoneFontFamilySemiBold}"
+                                       FontSize="{StaticResource PhoneFontSizeMedium}"
+                                       Foreground="{StaticResource PhoneForegroundBrush}"
+                                       Margin="23,16,0,17" />
+                            <Grid Grid.Row="1" HorizontalAlignment="Center">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                </Grid.ColumnDefinitions>
+                                <Border x:Name="FirstPickerHost" Grid.Column="0" />
+                                <Border x:Name="SecondPickerHost" Grid.Column="1" />
+                                <Border x:Name="ThirdPickerHost" Grid.Column="2" />
+                            </Grid>
+                        </Grid>
+                    </Border>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
@@ -744,6 +913,154 @@
                             Height="72"
                             HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"/>
                     </StackPanel>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style TargetType="controls:TimePickerFlyoutPresenter">
+        <Setter Property="FontFamily" Value="{StaticResource PhoneFontFamilyNormal}" />
+        <Setter Property="FontSize" Value="{StaticResource PhoneFontSizeMediumLarge}" />
+        <Setter Property="Background" Value="{StaticResource PhoneChromeBrush}" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="controls:TimePickerFlyoutPresenter">
+                    <Border x:Name="LayoutRoot" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}">
+                        <Border.Resources>
+                            <DataTemplate x:Key="FirstPickerItemTemplate">
+                                <StackPanel Style="{StaticResource LoopingSelectorItemRootStyle}">
+                                    <TextBlock Text="{Binding HourNumber}" Style="{StaticResource LoopingSelectorItemPrimaryTextStyle}"/>
+                                </StackPanel>
+                            </DataTemplate>
+                            <DataTemplate x:Key="SecondPickerItemTemplate">
+                                <StackPanel Style="{StaticResource LoopingSelectorItemRootStyle}">
+                                    <TextBlock Text="{Binding MinuteNumber}" Style="{StaticResource LoopingSelectorItemPrimaryTextStyle}"/>
+                                </StackPanel>
+                            </DataTemplate>
+                            <DataTemplate x:Key="ThirdPickerItemTemplate">
+                                <StackPanel Style="{StaticResource LoopingSelectorItemRootStyle}">
+                                    <TextBlock Text="{Binding AmPmString}" Style="{StaticResource LoopingSelectorItemPrimaryTextStyle}"/>
+                                </StackPanel>
+                            </DataTemplate>
+                        </Border.Resources>
+                        <Border.Projection>
+                            <PlaneProjection x:Name="PlaneProjection"/>
+                        </Border.Projection>
+                        <VisualStateManager.VisualStateGroups>
+                            <VisualStateGroup x:Name="VisibilityStates">
+                                <VisualStateGroup.Transitions>
+                                    <VisualTransition To="Open">
+                                        <VisualTransition.Storyboard>
+                                            <Storyboard>
+                                                <DoubleAnimation
+                                                    Storyboard.TargetName="PlaneProjection"
+                                                    Storyboard.TargetProperty="RotationX"
+                                                    From="-45"
+                                                    To="0"
+                                                    Duration="0:0:0.3">
+                                                    <DoubleAnimation.EasingFunction>
+                                                        <ExponentialEase EasingMode="EaseOut" Exponent="6"/>
+                                                    </DoubleAnimation.EasingFunction>
+                                                </DoubleAnimation>
+                                                <DoubleAnimationUsingKeyFrames
+                                                    Storyboard.TargetName="LayoutRoot"
+                                                    Storyboard.TargetProperty="Opacity">
+                                                    <DiscreteDoubleKeyFrame KeyTime="0" Value="1"/>
+                                                </DoubleAnimationUsingKeyFrames>
+                                            </Storyboard>
+                                        </VisualTransition.Storyboard>
+                                    </VisualTransition>
+                                    <VisualTransition To="Closed">
+                                        <Storyboard>
+                                            <DoubleAnimation
+                                                Storyboard.TargetName="PlaneProjection"
+                                                Storyboard.TargetProperty="RotationX"
+                                                From="0"
+                                                To="60"
+                                                Duration="0:0:0.2">
+                                                <DoubleAnimation.EasingFunction>
+                                                    <ExponentialEase EasingMode="EaseIn" Exponent="6"/>
+                                                </DoubleAnimation.EasingFunction>
+                                            </DoubleAnimation>
+                                            <DoubleAnimationUsingKeyFrames
+                                                Storyboard.TargetName="LayoutRoot"
+                                                Storyboard.TargetProperty="Opacity">
+                                                <DiscreteDoubleKeyFrame KeyTime="0" Value="1"/>
+                                                <DiscreteDoubleKeyFrame KeyTime="0:0:0.2" Value="0"/>
+                                            </DoubleAnimationUsingKeyFrames>
+                                        </Storyboard>
+                                    </VisualTransition>
+                                </VisualStateGroup.Transitions>
+                                <VisualState x:Name="Open">
+                                    <Storyboard>
+                                        <DoubleAnimation
+                                            Storyboard.TargetName="PlaneProjection"
+                                            Storyboard.TargetProperty="RotationX"
+                                            To="0"
+                                            Duration="0"/>
+                                        <DoubleAnimation
+                                            Storyboard.TargetName="LayoutRoot"
+                                            Storyboard.TargetProperty="Opacity"
+                                            To="1"
+                                            Duration="0"/>
+                                    </Storyboard>
+                                </VisualState>
+                                <VisualState x:Name="Closed">
+                                    <Storyboard>
+                                        <DoubleAnimation
+                                            Storyboard.TargetName="PlaneProjection"
+                                            Storyboard.TargetProperty="RotationX"
+                                            To="60"
+                                            Duration="0"/>
+                                        <DoubleAnimation
+                                            Storyboard.TargetName="LayoutRoot"
+                                            Storyboard.TargetProperty="Opacity"
+                                            To="0"
+                                            Duration="0"/>
+                                    </Storyboard>
+                                </VisualState>
+                            </VisualStateGroup>
+                            <VisualStateGroup x:Name="OrientationStates">
+                                <VisualState x:Name="PortraitUp"/>
+                                <VisualState x:Name="LandscapeLeft">
+                                    <Storyboard>
+                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="MainGrid" Storyboard.TargetProperty="Margin">
+                                            <DiscreteObjectKeyFrame KeyTime="0" Value="0,8,0,0"/>
+                                        </ObjectAnimationUsingKeyFrames>
+                                    </Storyboard>
+                                </VisualState>
+                                <VisualState x:Name="LandscapeRight">
+                                    <Storyboard>
+                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="MainGrid" Storyboard.TargetProperty="Margin">
+                                            <DiscreteObjectKeyFrame KeyTime="0" Value="0,8,0,0"/>
+                                        </ObjectAnimationUsingKeyFrames>
+                                    </Storyboard>
+                                </VisualState>
+                            </VisualStateGroup>
+                        </VisualStateManager.VisualStateGroups>
+                        <Grid x:Name="MainGrid" Margin="{TemplateBinding Padding}">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition />
+                            </Grid.RowDefinitions>
+                            <TextBlock x:Name="TitlePresenter"
+                                       FontFamily="{StaticResource PhoneFontFamilySemiBold}"
+                                       FontSize="{StaticResource PhoneFontSizeMedium}"
+                                       Foreground="{StaticResource PhoneForegroundBrush}"
+                                       Margin="23,16,0,17" />
+                            <Grid Grid.Row="1" HorizontalAlignment="Center">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                </Grid.ColumnDefinitions>
+                                <Border x:Name="FirstPickerHost" Grid.Column="0" />
+                                <Border x:Name="SecondPickerHost" Grid.Column="1" />
+                                <Border x:Name="ThirdPickerHost" Grid.Column="2" />
+                            </Grid>
+                        </Grid>
+                    </Border>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>

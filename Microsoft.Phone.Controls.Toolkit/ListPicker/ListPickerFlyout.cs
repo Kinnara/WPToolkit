@@ -14,13 +14,11 @@ namespace Microsoft.Phone.Controls
     /// </summary>
     public sealed class ListPickerFlyout : PickerFlyoutBase
     {
-        private bool _isOpen;
         private ListPickerFlyoutPresenter _presenter;
         private PickerBoxList _picker;
+        private PickerFlyoutHelper<IList> _helper;
 
         private List<object> _selectedItemsWhenOpened;
-
-        private TaskCompletionSource<IList> _tcs;
 
         /// <summary>
         /// Initializes a new instance of the ListPickerFlyout class.
@@ -30,6 +28,7 @@ namespace Microsoft.Phone.Controls
             _presenter = new ListPickerFlyoutPresenter(this);
             _presenter.ItemPicked += OnItemPicked;
             _picker = _presenter.Picker;
+            _helper = new PickerFlyoutHelper<IList>(this);
         }
 
         #region public IEnumerable ItemsSource
@@ -254,28 +253,7 @@ namespace Microsoft.Phone.Controls
         /// <returns>An asynchronous operation.</returns>
         public Task<IList> ShowAsync()
         {
-            if (_tcs != null)
-            {
-                throw new InvalidOperationException();
-            }
-
-            if (_isOpen)
-            {
-                EventHandler onClosed = null;
-                onClosed = delegate
-                {
-                    Closed -= onClosed;
-                    Show();
-                };
-                Closed += onClosed;
-            }
-            else
-            {
-                Show();
-            }
-
-            _tcs = new TaskCompletionSource<IList>();
-            return _tcs.Task;
+            return _helper.ShowAsync();
         }
 
         /// <summary>
@@ -304,8 +282,6 @@ namespace Microsoft.Phone.Controls
         {
             base.OnOpened();
 
-            _isOpen = true;
-
             _selectedItemsWhenOpened = SelectedItems.Cast<object>().ToList();
         }
 
@@ -326,30 +302,19 @@ namespace Microsoft.Phone.Controls
                 _selectedItemsWhenOpened = null;
             }
 
-            CompleteShowAsync(null);
-
-            _isOpen = false;
+            _helper.CompleteShowAsync(null);
 
             base.OnClosed();
         }
 
         internal override void RequestHide()
         {
-            if (_tcs != null)
+            if (_helper.IsAsyncOperationInProgress)
             {
                 return;
             }
 
             base.RequestHide();
-        }
-
-        private void CompleteShowAsync(IList result)
-        {
-            if (_tcs != null)
-            {
-                _tcs.TrySetResult(result);
-                _tcs = null;
-            }
         }
 
         private void OnItemPicked(object sender, EventArgs e)
@@ -359,7 +324,7 @@ namespace Microsoft.Phone.Controls
 
         private void RaiseItemsPicked()
         {
-            CompleteShowAsync(SelectedItems);
+            _helper.CompleteShowAsync(SelectedItems);
 
             var handler = ItemsPicked;
             if (handler != null)

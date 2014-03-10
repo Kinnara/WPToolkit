@@ -14,10 +14,12 @@ namespace Microsoft.Phone.Controls
     /// <summary>
     /// Represents a control that allows a user to pick one or more items from a list.
     /// </summary>
+    [TemplatePart(Name = TitlePresenterName, Type = typeof(TextBlock))]
+    [TemplatePart(Name = ItemsHostPanelName, Type = typeof(Grid))]
     public sealed class ListPickerFlyoutPresenter : Control
     {
-        private const string ElementTitlePresenterName = "TitlePresenter";
-        private const string ElementItemsHostPanelName = "ItemsHostPanel";
+        private const string TitlePresenterName = "TitlePresenter";
+        private const string ItemsHostPanelName = "ItemsHostPanel";
 
         private ListPickerFlyout _flyout;
         private IList<WeakReference> _itemsToAnimate;
@@ -47,25 +49,11 @@ namespace Microsoft.Phone.Controls
 
         internal PickerBoxList Picker { get; private set; }
 
-        private TextBlock ElementTitlePresenter { get; set; }
+        private TextBlock TitlePresenter { get; set; }
 
-        private Grid ElementItemsHostPanel { get; set; }
+        private Grid ItemsHostPanel { get; set; }
 
-        #region private bool IsOpen
-
-        private bool IsOpen
-        {
-            get { return (bool)GetValue(IsOpenProperty); }
-            set { SetValue(IsOpenProperty, value); }
-        }
-
-        private static readonly DependencyProperty IsOpenProperty = DependencyProperty.Register(
-            "IsOpen",
-            typeof(bool),
-            typeof(ListPickerFlyoutPresenter),
-            null);
-
-        #endregion
+        private bool IsOpen { get; set; }
 
         internal event EventHandler ItemPicked;
 
@@ -76,20 +64,20 @@ namespace Microsoft.Phone.Controls
         {
             base.OnApplyTemplate();
 
-            if (ElementItemsHostPanel != null)
+            if (ItemsHostPanel != null)
             {
-                ElementItemsHostPanel.Children.Remove(Picker);
+                ItemsHostPanel.Children.Remove(Picker);
             }
 
-            ElementTitlePresenter = GetTemplateChild(ElementTitlePresenterName) as TextBlock;
-            ElementItemsHostPanel = GetTemplateChild(ElementItemsHostPanelName) as Grid;
+            TitlePresenter = GetTemplateChild(TitlePresenterName) as TextBlock;
+            ItemsHostPanel = GetTemplateChild(ItemsHostPanelName) as Grid;
 
             SetupTitle();
             UpdateTitlePresenter();
 
-            if (ElementItemsHostPanel != null)
+            if (ItemsHostPanel != null)
             {
-                ElementItemsHostPanel.Children.Add(Picker);
+                ItemsHostPanel.Children.Add(Picker);
             }
 
             SetFlowDirection();
@@ -113,18 +101,9 @@ namespace Microsoft.Phone.Controls
 
         private void UpdateTitlePresenter()
         {
-            if (ElementTitlePresenter != null)
+            if (TitlePresenter != null)
             {
-                // Automatically uppercase the text for the title.
-                string title = ListPickerFlyout.GetTitle(_flyout);
-                if (title != null)
-                {
-                    ElementTitlePresenter.Text = title.ToUpper(CultureInfo.CurrentCulture);
-                }
-                else
-                {
-                    ElementTitlePresenter.Text = string.Empty;
-                }
+                TitlePresenter.Text = PickerFlyoutBase.GetTitle(_flyout);
             }
         }
 
@@ -169,13 +148,13 @@ namespace Microsoft.Phone.Controls
 
         private void SetupTitle()
         {
-            if (ElementTitlePresenter != null)
+            if (TitlePresenter != null)
             {
-                PlaneProjection titleProjection = (PlaneProjection)ElementTitlePresenter.Projection;
+                PlaneProjection titleProjection = (PlaneProjection)TitlePresenter.Projection;
                 if (null == titleProjection)
                 {
                     titleProjection = new PlaneProjection();
-                    ElementTitlePresenter.Projection = titleProjection;
+                    TitlePresenter.Projection = titleProjection;
                 }
                 titleProjection.RotationX = -90;
             }
@@ -255,7 +234,7 @@ namespace Microsoft.Phone.Controls
 
                 Storyboard mainBoard = new Storyboard();
 
-                Storyboard titleBoard = AnimationForElement(ElementTitlePresenter, 0);
+                Storyboard titleBoard = AnimationForElement(TitlePresenter, 0);
                 mainBoard.Children.Add(titleBoard);
 
                 for (int i = 0; i < _itemsToAnimate.Count; i++)
