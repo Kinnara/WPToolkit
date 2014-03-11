@@ -361,6 +361,27 @@
     <Compile Include="..\Microsoft.Phone.Controls.Toolkit\FlipView\UpdateSelectionMode.cs">
       <Link>FlipView\UpdateSelectionMode.cs</Link>
     </Compile>
+    <Compile Include="..\Microsoft.Phone.Controls.Toolkit\Flyouts\ButtonExtensions.cs">
+      <Link>Flyouts\ButtonExtensions.cs</Link>
+    </Compile>
+    <Compile Include="..\Microsoft.Phone.Controls.Toolkit\Flyouts\Flyout.cs">
+      <Link>Flyouts\Flyout.cs</Link>
+    </Compile>
+    <Compile Include="..\Microsoft.Phone.Controls.Toolkit\Flyouts\FlyoutBase.cs">
+      <Link>Flyouts\FlyoutBase.cs</Link>
+    </Compile>
+    <Compile Include="..\Microsoft.Phone.Controls.Toolkit\Flyouts\FlyoutPresenter.cs">
+      <Link>Flyouts\FlyoutPresenter.cs</Link>
+    </Compile>
+    <Compile Include="..\Microsoft.Phone.Controls.Toolkit\Flyouts\PickerFlyout.cs">
+      <Link>Flyouts\PickerFlyout.cs</Link>
+    </Compile>
+    <Compile Include="..\Microsoft.Phone.Controls.Toolkit\Flyouts\PickerFlyoutBase.cs">
+      <Link>Flyouts\PickerFlyoutBase.cs</Link>
+    </Compile>
+    <Compile Include="..\Microsoft.Phone.Controls.Toolkit\Flyouts\PickerFlyoutPresenter.cs">
+      <Link>Flyouts\PickerFlyoutPresenter.cs</Link>
+    </Compile>
     <Compile Include="..\Microsoft.Phone.Controls.Toolkit\Gestures\DragEventArgs.cs">
       <Link>Gestures\DragEventArgs.cs</Link>
     </Compile>
@@ -444,12 +465,6 @@
     </Compile>
     <Compile Include="..\Microsoft.Phone.Controls.Toolkit\Primitives\ContextMenuPanel.cs">
       <Link>Primitives\ContextMenuPanel.cs</Link>
-    </Compile>
-    <Compile Include="..\Microsoft.Phone.Controls.Toolkit\Primitives\FlyoutBase.cs">
-      <Link>Primitives\FlyoutBase.cs</Link>
-    </Compile>
-    <Compile Include="..\Microsoft.Phone.Controls.Toolkit\Primitives\PickerFlyoutBase.cs">
-      <Link>Primitives\PickerFlyoutBase.cs</Link>
     </Compile>
     <Compile Include="..\Microsoft.Phone.Controls.Toolkit\Primitives\WaitCursorControl.cs">
       <Link>Primitives\WaitCursorControl.cs</Link>

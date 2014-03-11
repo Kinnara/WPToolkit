@@ -149,6 +149,12 @@
 
     <controls:SingleDataTemplateSelector x:Key="ControlHeaderTemplateSelector" Template="{StaticResource ControlHeaderTemplate}"/>
 
+    <Style x:Key="PickerFlyoutTitleStyle" TargetType="TextBlock">
+        <Setter Property="FontFamily" Value="{StaticResource PhoneFontFamilySemiBold}"/>
+        <Setter Property="FontSize" Value="{StaticResource PhoneFontSizeMedium}"/>
+        <Setter Property="Foreground" Value="{StaticResource PhoneForegroundBrush}"/>
+    </Style>
+
     <Style TargetType="primitives:ToggleSwitchButton">
         <Setter Property="Background" Value="{StaticResource PhoneBackgroundBrush}"/>
         <Setter Property="IsTabStop" Value="False"/>
@@ -842,9 +848,7 @@
                                 <RowDefinition />
                             </Grid.RowDefinitions>
                             <TextBlock x:Name="TitlePresenter"
-                                       FontFamily="{StaticResource PhoneFontFamilySemiBold}"
-                                       FontSize="{StaticResource PhoneFontSizeMedium}"
-                                       Foreground="{StaticResource PhoneForegroundBrush}"
+                                       Style="{StaticResource PickerFlyoutTitleStyle}"
                                        Margin="23,16,0,17" />
                             <Grid Grid.Row="1" HorizontalAlignment="Center">
                                 <Grid.ColumnDefinitions>
@@ -1045,9 +1049,7 @@
                                 <RowDefinition />
                             </Grid.RowDefinitions>
                             <TextBlock x:Name="TitlePresenter"
-                                       FontFamily="{StaticResource PhoneFontFamilySemiBold}"
-                                       FontSize="{StaticResource PhoneFontSizeMedium}"
-                                       Foreground="{StaticResource PhoneForegroundBrush}"
+                                       Style="{StaticResource PickerFlyoutTitleStyle}"
                                        Margin="23,16,0,17" />
                             <Grid Grid.Row="1" HorizontalAlignment="Center">
                                 <Grid.ColumnDefinitions>
@@ -1340,9 +1342,7 @@
                             </Grid.RowDefinitions>
                             <TextBlock
                                 x:Name="TitlePresenter"
-                                FontFamily="{StaticResource PhoneFontFamilySemiBold}"
-                                FontSize="{StaticResource PhoneFontSizeMedium}"
-                                Foreground="{StaticResource PhoneForegroundBrush}"
+                                Style="{StaticResource PickerFlyoutTitleStyle}"
                                 Margin="23,16,0,39"/>
                             <Grid x:Name="ItemsHostPanel" Grid.Row="1"/>
                         </Grid>
@@ -3926,6 +3926,69 @@
                             <ImageBrush x:Name="ImageBrush" />
                         </Rectangle.OpacityMask>
                     </Rectangle>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style TargetType="controls:FlyoutPresenter">
+        <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+        <Setter Property="VerticalContentAlignment" Value="Stretch" />
+        <Setter Property="Background" Value="{StaticResource PhoneChromeBrush}" />
+        <Setter Property="Padding" Value="0" />
+        <Setter Property="MinHeight" Value="54" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="controls:FlyoutPresenter">
+                    <Border Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}">
+                        <ContentPresenter Content="{TemplateBinding Content}" ContentTemplate="{TemplateBinding ContentTemplate}"
+                                          Margin="{TemplateBinding Padding}"
+                                          HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                          VerticalAlignment="{TemplateBinding VerticalContentAlignment}" />
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style TargetType="controls:PickerFlyoutPresenter">
+        <Setter Property="Background" Value="{StaticResource PhoneChromeBrush}" />
+        <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+        <Setter Property="VerticalContentAlignment" Value="Stretch" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="controls:PickerFlyoutPresenter">
+                    <Border Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}">
+                        <VisualStateManager.VisualStateGroups>
+                            <VisualStateGroup x:Name="OrientationStates">
+                                <VisualState x:Name="PortraitUp"/>
+                                <VisualState x:Name="LandscapeLeft">
+                                    <Storyboard>
+                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="MainGrid" Storyboard.TargetProperty="Margin">
+                                            <DiscreteObjectKeyFrame KeyTime="0" Value="0,8,0,0"/>
+                                        </ObjectAnimationUsingKeyFrames>
+                                    </Storyboard>
+                                </VisualState>
+                                <VisualState x:Name="LandscapeRight">
+                                    <Storyboard>
+                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="MainGrid" Storyboard.TargetProperty="Margin">
+                                            <DiscreteObjectKeyFrame KeyTime="0" Value="0,8,0,0"/>
+                                        </ObjectAnimationUsingKeyFrames>
+                                    </Storyboard>
+                                </VisualState>
+                            </VisualStateGroup>
+                        </VisualStateManager.VisualStateGroups>
+                        <Grid x:Name="MainGrid">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="*" />
+                            </Grid.RowDefinitions>
+                            <TextBlock x:Name="TitlePresenter"
+                                       Style="{StaticResource PickerFlyoutTitleStyle}"
+                                       Margin="23,16,0,39" />
+                            <ContentPresenter Grid.Row="1" Content="{TemplateBinding Content}" ContentTemplate="{TemplateBinding ContentTemplate}" Margin="{TemplateBinding Padding}" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}" />
+                        </Grid>
+                    </Border>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
