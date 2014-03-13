@@ -62,6 +62,96 @@ namespace Microsoft.Phone.Controls
 
         #endregion
 
+        #region public bool DayVisible
+
+        /// <summary>
+        /// Gets or sets a value that indicates whether the day selector is shown.
+        /// </summary>
+        /// 
+        /// <returns>
+        /// True if the day selector is shown; otherwise, false. The default is true.
+        /// </returns>
+        public bool DayVisible
+        {
+            get { return (bool)GetValue(DayVisibleProperty); }
+            set { SetValue(DayVisibleProperty, value); }
+        }
+
+        /// <summary>
+        /// Gets the identifier for the DayVisible dependency property.
+        /// </summary>
+        /// 
+        /// <returns>
+        /// The identifier for the DayVisible dependency property.
+        /// </returns>
+        public static readonly DependencyProperty DayVisibleProperty = DependencyProperty.Register(
+            "DayVisible",
+            typeof(bool),
+            typeof(DatePickerFlyout),
+            new PropertyMetadata(true));
+
+        #endregion
+
+        #region public bool MonthVisible
+
+        /// <summary>
+        /// Gets or sets a value that indicates whether the month selector is shown.
+        /// </summary>
+        /// 
+        /// <returns>
+        /// True if the month selector is shown; otherwise, false. The default is true.
+        /// </returns>
+        public bool MonthVisible
+        {
+            get { return (bool)GetValue(MonthVisibleProperty); }
+            set { SetValue(MonthVisibleProperty, value); }
+        }
+
+        /// <summary>
+        /// Gets the identifier for the MonthVisible dependency property.
+        /// </summary>
+        /// 
+        /// <returns>
+        /// The identifier for the MonthVisible dependency property.
+        /// </returns>
+        public static readonly DependencyProperty MonthVisibleProperty = DependencyProperty.Register(
+            "MonthVisible",
+            typeof(bool),
+            typeof(DatePickerFlyout),
+            new PropertyMetadata(true));
+
+        #endregion
+
+        #region public bool YearVisible
+
+        /// <summary>
+        /// Gets or sets a value that indicates whether the year selector is shown.
+        /// </summary>
+        /// 
+        /// <returns>
+        /// True if the year selector is shown; otherwise, false. The default is true.
+        /// </returns>
+        public bool YearVisible
+        {
+            get { return (bool)GetValue(YearVisibleProperty); }
+            set { SetValue(YearVisibleProperty, value); }
+        }
+
+        /// <summary>
+        /// Gets the identifier for the YearVisible dependency property.
+        /// </summary>
+        /// 
+        /// <returns>
+        /// The identifier for the YearVisible dependency property.
+        /// </returns>
+        public static readonly DependencyProperty YearVisibleProperty = DependencyProperty.Register(
+            "YearVisible",
+            typeof(bool),
+            typeof(DatePickerFlyout),
+            new PropertyMetadata(true));
+
+        #endregion
+
         public event EventHandler<DatePickerValueChangedEventArgs> DatePicked;
 
         public Task<DateTimeOffset?> ShowAsync()

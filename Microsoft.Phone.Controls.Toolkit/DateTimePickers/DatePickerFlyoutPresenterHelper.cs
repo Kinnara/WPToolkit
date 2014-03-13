@@ -7,11 +7,13 @@ namespace Microsoft.Phone.Controls
 {
     internal sealed class DatePickerFlyoutPresenterHelper : DateTimePickerFlyoutPresenterHelperBase
     {
+        private DatePickerFlyout _flyout;
         private DatePickerFlyoutPresenter _presenter;
 
         internal DatePickerFlyoutPresenterHelper(DatePickerFlyout flyout, DatePickerFlyoutPresenter presenter)
             : base(flyout, presenter)
         {
+            _flyout = flyout;
             _presenter = presenter;
         }
 
@@ -42,10 +44,31 @@ namespace Microsoft.Phone.Controls
                 pattern = new string(reversedPattern);
             }
 
+            var patternCharacters = new List<char>();
+            var selectors = new List<LoopingSelector>();
+
+            if (_flyout.YearVisible)
+            {
+                patternCharacters.Add('Y');
+                selectors.Add(FirstPicker);
+            }
+
+            if (_flyout.MonthVisible)
+            {
+                patternCharacters.Add('M');
+                selectors.Add(SecondPicker);
+            }
+
+            if (_flyout.DayVisible)
+            {
+                patternCharacters.Add('D');
+                selectors.Add(ThirdPicker);
+            }
+
             return DateTimePickerFlyoutPresenterHelperBase.GetSelectorsOrderedByCulturePattern(
                 pattern,
-                new char[] { 'Y', 'M', 'D' },
-                new LoopingSelector[] { FirstPicker, SecondPicker, ThirdPicker });
+                patternCharacters.ToArray(),
+                selectors.ToArray());
         }
     }
 }

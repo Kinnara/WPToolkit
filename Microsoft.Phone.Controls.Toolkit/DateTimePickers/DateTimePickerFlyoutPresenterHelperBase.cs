@@ -39,20 +39,6 @@ namespace Microsoft.Phone.Controls
             FirstPicker.IsExpandedChanged += OnSelectorIsExpandedChanged;
             SecondPicker.IsExpandedChanged += OnSelectorIsExpandedChanged;
             ThirdPicker.IsExpandedChanged += OnSelectorIsExpandedChanged;
-
-            // Hide all selectors
-            FirstPicker.Visibility = Visibility.Collapsed;
-            SecondPicker.Visibility = Visibility.Collapsed;
-            ThirdPicker.Visibility = Visibility.Collapsed;
-
-            // Position and reveal the culture-relevant selectors
-            int column = 0;
-            foreach (LoopingSelector selector in GetSelectorsOrderedByCulturePattern())
-            {
-                Grid.SetColumn(selector, column);
-                selector.Visibility = Visibility.Visible;
-                column++;
-            }
         }
 
         internal DateTime Value
@@ -146,6 +132,19 @@ namespace Microsoft.Phone.Controls
 
         private void OnFlyoutOpening(object sender, EventArgs e)
         {
+            // Hide all selectors
+            FirstPicker.Visibility = Visibility.Collapsed;
+            SecondPicker.Visibility = Visibility.Collapsed;
+            ThirdPicker.Visibility = Visibility.Collapsed;
+
+            // Position and reveal the culture-relevant selectors
+            int column = 0;
+            foreach (LoopingSelector selector in GetSelectorsOrderedByCulturePattern())
+            {
+                Grid.SetColumn(selector, column);
+                selector.Visibility = Visibility.Visible;
+                column++;
+            }
         }
 
         private void OnFlyoutClosing(object sender, FlyoutClosingEventArgs e)
