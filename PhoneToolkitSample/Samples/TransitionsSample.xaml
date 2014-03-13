@@ -37,11 +37,11 @@
                     SelectedIndex="{Binding FamilyIndex, Mode=TwoWay}"
                     SelectionChanged="FamilySelectionChanged"
                     Header="Transition family"
-                    FullModeHeader="Transition family"/>
+                    FullModeHeader="TRANSITION FAMILY"/>
                 <toolkit:PickerBox
                     x:Name="Mode"
-                    FullModeHeader="Transition mode"
                     Header="Transition mode"
+                    FullModeHeader="TRANSITION MODE"
                     ItemsSource="{Binding Family, Converter={StaticResource EnumConverter}}"
                     SelectedIndex="{Binding ModeIndex, Mode=TwoWay}"/>
             </StackPanel>

@@ -73,6 +73,12 @@ namespace Microsoft.Phone.Controls
             return true;
         }
 
+        /// <summary>
+        /// Initializes a control to show the flyout content.
+        /// </summary>
+        /// <returns>
+        /// The control that displays the content of the flyout.
+        /// </returns>
         protected override Control CreatePresenter()
         {
             return _presenter;

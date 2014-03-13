@@ -1,0 +1,38 @@
+﻿<UserControl
+    x:Class="PhoneToolkitSample.Samples.AccentColorPicker"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:toolkit="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit"
+    xmlns:toolkitPrimitives="clr-namespace:Microsoft.Phone.Controls.Primitives;assembly=Microsoft.Phone.Controls.Toolkit"
+    xmlns:data="clr-namespace:PhoneToolkitSample.Data"
+    mc:Ignorable="d"
+    d:DesignHeight="480" d:DesignWidth="480">
+    
+    <UserControl.Resources>
+        <data:AccentColorNameToBrush x:Key="ColorNameToBrushConverter" />
+    </UserControl.Resources>
+    
+    <Grid x:Name="LayoutRoot">
+        <!-- List of Items -->
+        <toolkitPrimitives:PickerBoxList
+                x:Name="Picker"
+                ItemsSource="{Binding}"
+                toolkit:TiltEffect.IsTiltEnabled="True"
+                Margin="12 0 0 0">
+            <toolkitPrimitives:PickerBoxList.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <toolkit:WrapPanel ItemWidth="111" ItemHeight="111" Width="444" HorizontalAlignment="Left" Margin="0,0,0,83"/>
+                </ItemsPanelTemplate>
+            </toolkitPrimitives:PickerBoxList.ItemsPanel>
+            <toolkitPrimitives:PickerBoxList.ItemTemplate>
+                <DataTemplate>
+                    <Border Background="Transparent" Padding="12 0 0 0" Margin="0 0 0 12">
+                        <Rectangle Fill="{Binding Converter={StaticResource ColorNameToBrushConverter}}" Width="99" Height="99"/>
+                    </Border>
+                </DataTemplate>
+            </toolkitPrimitives:PickerBoxList.ItemTemplate>
+        </toolkitPrimitives:PickerBoxList>
+    </Grid>
+</UserControl>

@@ -3,6 +3,7 @@
 // Please see http://go.microsoft.com/fwlink/?LinkID=131993 for details.
 // All other rights reserved.
 
+using System;
 using System.Windows;
 using System.Windows.Media;
 using System.Windows.Navigation;
@@ -87,7 +88,15 @@ namespace PhoneToolkitSample
 
                 App.UICultureOverride = new CultureInfo(AppResources.ResourceLanguage);
                 App.RegionalCultureOverride = new CultureInfo(AppResources.ResourceLanguage);
-                
+
+                // Set the FlowDirection of all elements under the root frame based
+                // on the ResourceFlowDirection resource string for each
+                // supported language.
+                //
+                // If a compiler error is hit then ResourceFlowDirection is missing from
+                // the resource file.
+                FlowDirection flow = (FlowDirection)Enum.Parse(typeof(FlowDirection), AppResources.ResourceFlowDirection, false);
+                RootFrame.FlowDirection = flow;
             }
             catch
             {

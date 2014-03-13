@@ -257,7 +257,7 @@ namespace Microsoft.Phone.Controls
         }
 
         /// <summary>
-        /// Initializes a control to show the flyout content as appropriate for the derived control.
+        /// Initializes a control to show the flyout content.
         /// </summary>
         /// <returns>
         /// The control that displays the content of the flyout.

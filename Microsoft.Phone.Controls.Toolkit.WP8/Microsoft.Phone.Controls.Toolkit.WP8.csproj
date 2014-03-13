@@ -236,6 +236,27 @@
     <Compile Include="..\Microsoft.Phone.Controls.Toolkit\Common\WeakReferenceHelper.cs">
       <Link>Common\WeakReferenceHelper.cs</Link>
     </Compile>
+    <Compile Include="..\Microsoft.Phone.Controls.Toolkit\ContentDialog\ContentDialog.cs">
+      <Link>ContentDialog\ContentDialog.cs</Link>
+    </Compile>
+    <Compile Include="..\Microsoft.Phone.Controls.Toolkit\ContentDialog\ContentDialogButtonClickEventArgs.cs">
+      <Link>ContentDialog\ContentDialogButtonClickEventArgs.cs</Link>
+    </Compile>
+    <Compile Include="..\Microsoft.Phone.Controls.Toolkit\ContentDialog\ContentDialogClosedEventArgs.cs">
+      <Link>ContentDialog\ContentDialogClosedEventArgs.cs</Link>
+    </Compile>
+    <Compile Include="..\Microsoft.Phone.Controls.Toolkit\ContentDialog\ContentDialogClosingEventArgs.cs">
+      <Link>ContentDialog\ContentDialogClosingEventArgs.cs</Link>
+    </Compile>
+    <Compile Include="..\Microsoft.Phone.Controls.Toolkit\ContentDialog\ContentDialogOpenedEventArgs.cs">
+      <Link>ContentDialog\ContentDialogOpenedEventArgs.cs</Link>
+    </Compile>
+    <Compile Include="..\Microsoft.Phone.Controls.Toolkit\ContentDialog\ContentDialogResources.cs">
+      <Link>ContentDialog\ContentDialogResources.cs</Link>
+    </Compile>
+    <Compile Include="..\Microsoft.Phone.Controls.Toolkit\ContentDialog\ContentDialogResult.cs">
+      <Link>ContentDialog\ContentDialogResult.cs</Link>
+    </Compile>
     <Compile Include="..\Microsoft.Phone.Controls.Toolkit\ContextMenu\ContextMenu.cs">
       <Link>ContextMenu\ContextMenu.cs</Link>
     </Compile>
@@ -736,6 +757,16 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Resource>
+    <Resource Include="..\Microsoft.Phone.Controls.Toolkit\Transitions\Storyboards\SwivelIn.xaml">
+      <Link>Transitions\Storyboards\SwivelIn.xaml</Link>
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Resource>
+    <Resource Include="..\Microsoft.Phone.Controls.Toolkit\Transitions\Storyboards\SwivelOut.xaml">
+      <Link>Transitions\Storyboards\SwivelOut.xaml</Link>
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Resource>
     <Page Include="Themes\Generic.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -943,16 +974,6 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Resource>
-    <Resource Include="..\Microsoft.Phone.Controls.Toolkit\Transitions\Storyboards\SwivelBackwardIn.xaml">
-      <Link>Transitions\Storyboards\SwivelBackwardIn.xaml</Link>
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Resource>
-    <Resource Include="..\Microsoft.Phone.Controls.Toolkit\Transitions\Storyboards\SwivelBackwardOut.xaml">
-      <Link>Transitions\Storyboards\SwivelBackwardOut.xaml</Link>
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Resource>
     <Resource Include="..\Microsoft.Phone.Controls.Toolkit\Transitions\Storyboards\RotateIn180Clockwise.xaml">
       <Link>Transitions\Storyboards\RotateIn180Clockwise.xaml</Link>
       <SubType>Designer</SubType>
@@ -1003,16 +1024,6 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Resource>
-    <Resource Include="..\Microsoft.Phone.Controls.Toolkit\Transitions\Storyboards\SwivelFullScreenOut.xaml">
-      <Link>Transitions\Storyboards\SwivelFullScreenOut.xaml</Link>
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Resource>
-    <Resource Include="..\Microsoft.Phone.Controls.Toolkit\Transitions\Storyboards\SwivelForwardOut.xaml">
-      <Link>Transitions\Storyboards\SwivelForwardOut.xaml</Link>
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Resource>
     <Resource Include="..\Microsoft.Phone.Controls.Toolkit\Transitions\Storyboards\TurnstileForwardOut.xaml">
       <Link>Transitions\Storyboards\TurnstileForwardOut.xaml</Link>
       <SubType>Designer</SubType>
@@ -1030,16 +1041,6 @@
     </Resource>
     <Resource Include="..\Microsoft.Phone.Controls.Toolkit\Transitions\Storyboards\TurnstileBackwardOut.xaml">
       <Link>Transitions\Storyboards\TurnstileBackwardOut.xaml</Link>
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Resource>
-    <Resource Include="..\Microsoft.Phone.Controls.Toolkit\Transitions\Storyboards\SwivelForwardIn.xaml">
-      <Link>Transitions\Storyboards\SwivelForwardIn.xaml</Link>
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Resource>
-    <Resource Include="..\Microsoft.Phone.Controls.Toolkit\Transitions\Storyboards\SwivelFullScreenIn.xaml">
-      <Link>Transitions\Storyboards\SwivelFullScreenIn.xaml</Link>
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Resource>

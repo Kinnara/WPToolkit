@@ -216,6 +216,28 @@
             </Setter>
         </Style>
 
+        <Style x:Key="MessageDialogTitleStyle" TargetType="TextBlock">
+            <Setter Property="FontFamily" Value="{StaticResource PhoneFontFamilySemiBold}" />
+            <Setter Property="FontSize" Value="{StaticResource PhoneFontSizeLarge}" />
+            <Setter Property="TextWrapping" Value="Wrap"/>
+            <Setter Property="LineHeight" Value="40" />
+            <Setter Property="LineStackingStrategy" Value="BlockLineHeight" />
+            <Setter Property="Margin" Value="{StaticResource PhoneMargin}"/>
+        </Style>
+
+        <Style x:Key="MessageDialogContentStyle" TargetType="TextBlock">
+            <Setter Property="FontFamily" Value="{StaticResource PhoneFontFamilyNormal}" />
+            <Setter Property="FontSize" Value="{StaticResource PhoneFontSizeMedium}" />
+            <Setter Property="TextWrapping" Value="Wrap"/>
+            <Setter Property="LineHeight" Value="26.667" />
+            <Setter Property="LineStackingStrategy" Value="BlockLineHeight" />
+            <Setter Property="Margin" Value="12,15,12,31"/>
+        </Style>
+
+        <DataTemplate x:Key="ContentDialogTitleTemplate">
+            <TextBlock Text="{Binding}" Style="{StaticResource MessageDialogTitleStyle}"/>
+        </DataTemplate>
+
         <Thickness x:Key="LandscapeTitleMargin">0,8,0,0</Thickness>
 
         <Style x:Key="PageStyleBase" TargetType="phone:PhoneApplicationPage">

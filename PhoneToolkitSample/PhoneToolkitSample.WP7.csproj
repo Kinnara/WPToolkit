@@ -120,6 +120,9 @@
     <None Include="Samples\AccentColorPickerPage.xaml.cs">
       <DependentUpon>AccentColorPickerPage.xaml</DependentUpon>
     </None>
+    <Compile Include="Samples\AccentColorPicker.xaml.cs">
+      <DependentUpon>AccentColorPicker.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Samples\ApplicationBarSubmenuSample.xaml.cs">
       <DependentUpon>ApplicationBarSubmenuSample.xaml</DependentUpon>
     </Compile>
@@ -132,9 +135,30 @@
     <Compile Include="Samples\BackgroundTransferQueueSample.xaml.cs">
       <DependentUpon>BackgroundTransferQueueSample.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Samples\BasicContentDialog.xaml.cs">
+      <DependentUpon>BasicContentDialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Samples\ContentDialogWithCheckBox.xaml.cs">
+      <DependentUpon>ContentDialogWithCheckBox.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Samples\ContentDialogWithHyperlinkButton.xaml.cs">
+      <DependentUpon>ContentDialogWithHyperlinkButton.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Samples\ContentDialogWithListPicker.xaml.cs">
+      <DependentUpon>ContentDialogWithListPicker.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Samples\ContentDialogWithPivot.xaml.cs">
+      <DependentUpon>ContentDialogWithPivot.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Samples\ContextMenuPositionTest.xaml.cs" />
     <Compile Include="Samples\ContextMenuSample.xaml.cs">
       <DependentUpon>ContextMenuSample.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Samples\ContentDialogSample.xaml.cs">
+      <DependentUpon>ContentDialogSample.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Samples\FlyoutsSample.xaml.cs">
+      <DependentUpon>FlyoutsSample.xaml</DependentUpon>
     </Compile>
     <Compile Include="Samples\DateTimeConvertersSample.xaml.cs">
       <DependentUpon>DateTimeConvertersSample.xaml</DependentUpon>
@@ -253,6 +277,38 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </ApplicationDefinition>
+    <Page Include="Samples\AccentColorPicker.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Samples\BasicContentDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Samples\ContentDialogSample.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Samples\ContentDialogWithCheckBox.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Samples\ContentDialogWithHyperlinkButton.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Samples\ContentDialogWithListPicker.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Samples\ContentDialogWithPivot.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Samples\FlyoutsSample.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Toolkit.Content\StandardStyles.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>

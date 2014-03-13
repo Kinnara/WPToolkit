@@ -185,6 +185,10 @@ ar-SA;az-Latn-AZ;be-BY;bg-BG;ca-ES;cs-CZ;da-DK;de-DE;el-GR;en-GB;en-US;es-ES;es-
       <Link>Samples\AccentColorPickerPage.xaml.cs</Link>
       <DependentUpon>AccentColorPickerPage.xaml</DependentUpon>
     </None>
+    <Compile Include="..\PhoneToolkitSample\Samples\AccentColorPicker.xaml.cs">
+      <Link>Samples\AccentColorPicker.xaml.cs</Link>
+      <DependentUpon>AccentColorPicker.xaml</DependentUpon>
+    </Compile>
     <Compile Include="..\PhoneToolkitSample\Samples\ApplicationBarSubmenuSample.xaml.cs">
       <Link>Samples\ApplicationBarSubmenuSample.xaml.cs</Link>
       <DependentUpon>ApplicationBarSubmenuSample.xaml</DependentUpon>
@@ -199,9 +203,33 @@ ar-SA;az-Latn-AZ;be-BY;bg-BG;ca-ES;cs-CZ;da-DK;de-DE;el-GR;en-GB;en-US;es-ES;es-
     <Compile Include="..\PhoneToolkitSample\Samples\BackgroundTransferQueueSample.xaml.cs">
       <Link>Samples\BackgroundTransferQueueSample.xaml.cs</Link>
     </Compile>
+    <Compile Include="..\PhoneToolkitSample\Samples\BasicContentDialog.xaml.cs">
+      <Link>Samples\BasicContentDialog.xaml.cs</Link>
+      <DependentUpon>BasicContentDialog.xaml</DependentUpon>
+    </Compile>
     <Compile Include="..\PhoneToolkitSample\Samples\ButtonsSample.xaml.cs">
       <Link>Samples\ButtonsSample.xaml.cs</Link>
       <DependentUpon>ButtonsSample.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="..\PhoneToolkitSample\Samples\ContentDialogSample.xaml.cs">
+      <Link>Samples\ContentDialogSample.xaml.cs</Link>
+      <DependentUpon>ContentDialogSample.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="..\PhoneToolkitSample\Samples\ContentDialogWithCheckBox.xaml.cs">
+      <Link>Samples\ContentDialogWithCheckBox.xaml.cs</Link>
+      <DependentUpon>ContentDialogWithCheckBox.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="..\PhoneToolkitSample\Samples\ContentDialogWithHyperlinkButton.xaml.cs">
+      <Link>Samples\ContentDialogWithHyperlinkButton.xaml.cs</Link>
+      <DependentUpon>ContentDialogWithHyperlinkButton.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="..\PhoneToolkitSample\Samples\ContentDialogWithListPicker.xaml.cs">
+      <Link>Samples\ContentDialogWithListPicker.xaml.cs</Link>
+      <DependentUpon>ContentDialogWithListPicker.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="..\PhoneToolkitSample\Samples\ContentDialogWithPivot.xaml.cs">
+      <Link>Samples\ContentDialogWithPivot.xaml.cs</Link>
+      <DependentUpon>ContentDialogWithPivot.xaml</DependentUpon>
     </Compile>
     <Compile Include="..\PhoneToolkitSample\Samples\ContextMenuPositionTest.xaml.cs">
       <Link>Samples\ContextMenuPositionTest.xaml.cs</Link>
@@ -237,6 +265,10 @@ ar-SA;az-Latn-AZ;be-BY;bg-BG;ca-ES;cs-CZ;da-DK;de-DE;el-GR;en-GB;en-US;es-ES;es-
     <Compile Include="..\PhoneToolkitSample\Samples\FlipViewSample.xaml.cs">
       <Link>Samples\FlipViewSample.xaml.cs</Link>
       <DependentUpon>FlipViewSample.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="..\PhoneToolkitSample\Samples\FlyoutsSample.xaml.cs">
+      <Link>Samples\FlyoutsSample.xaml.cs</Link>
+      <DependentUpon>FlyoutsSample.xaml</DependentUpon>
     </Compile>
     <Compile Include="..\PhoneToolkitSample\Samples\HubTileSample.xaml.cs">
       <Link>Samples\HubTileSample.xaml.cs</Link>
@@ -391,6 +423,11 @@ ar-SA;az-Latn-AZ;be-BY;bg-BG;ca-ES;cs-CZ;da-DK;de-DE;el-GR;en-GB;en-US;es-ES;es-
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </None>
+    <Page Include="..\PhoneToolkitSample\Samples\AccentColorPicker.xaml">
+      <Link>Samples\AccentColorPicker.xaml</Link>
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="..\PhoneToolkitSample\Samples\ApplicationBarSubmenuSample.xaml">
       <Link>Samples\ApplicationBarSubmenuSample.xaml</Link>
       <Generator>MSBuild:Compile</Generator>
@@ -406,8 +443,38 @@ ar-SA;az-Latn-AZ;be-BY;bg-BG;ca-ES;cs-CZ;da-DK;de-DE;el-GR;en-GB;en-US;es-ES;es-
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="..\PhoneToolkitSample\Samples\BasicContentDialog.xaml">
+      <Link>Samples\BasicContentDialog.xaml</Link>
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="..\PhoneToolkitSample\Samples\ButtonsSample.xaml">
       <Link>Samples\ButtonsSample.xaml</Link>
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="..\PhoneToolkitSample\Samples\ContentDialogSample.xaml">
+      <Link>Samples\ContentDialogSample.xaml</Link>
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="..\PhoneToolkitSample\Samples\ContentDialogWithCheckBox.xaml">
+      <Link>Samples\ContentDialogWithCheckBox.xaml</Link>
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="..\PhoneToolkitSample\Samples\ContentDialogWithHyperlinkButton.xaml">
+      <Link>Samples\ContentDialogWithHyperlinkButton.xaml</Link>
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="..\PhoneToolkitSample\Samples\ContentDialogWithListPicker.xaml">
+      <Link>Samples\ContentDialogWithListPicker.xaml</Link>
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="..\PhoneToolkitSample\Samples\ContentDialogWithPivot.xaml">
+      <Link>Samples\ContentDialogWithPivot.xaml</Link>
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -452,6 +519,11 @@ ar-SA;az-Latn-AZ;be-BY;bg-BG;ca-ES;cs-CZ;da-DK;de-DE;el-GR;en-GB;en-US;es-ES;es-
     </Page>
     <Page Include="..\PhoneToolkitSample\Samples\FlipViewSample.xaml">
       <Link>Samples\FlipViewSample.xaml</Link>
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="..\PhoneToolkitSample\Samples\FlyoutsSample.xaml">
+      <Link>Samples\FlyoutsSample.xaml</Link>
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

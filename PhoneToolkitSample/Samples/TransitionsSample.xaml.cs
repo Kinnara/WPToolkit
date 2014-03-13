@@ -177,12 +177,8 @@ namespace PhoneToolkitSample.Samples
                 case "Swivel":
                     return new List<string>
                     {
-                        "FullScreenIn",
-                        "FullScreenOut",
-                        "ForwardIn",
-                        "ForwardOut",
-                        "BackwardIn",
-                        "BackwardOut"
+                        "In",
+                        "Out"
                     };
                 case "Turnstile":
                     return new List<string>

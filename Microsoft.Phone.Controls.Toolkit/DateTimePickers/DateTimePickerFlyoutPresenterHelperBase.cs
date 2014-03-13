@@ -9,7 +9,7 @@ namespace Microsoft.Phone.Controls
 {
     internal abstract class DateTimePickerFlyoutPresenterHelperBase
     {
-        private const string VisibilityGroupName = "VisibilityStates";
+        private const string OpenGroupName = "OpenStates";
         private const string OpenVisibilityStateName = "Open";
         private const string ClosedVisibilityStateName = "Closed";
 
@@ -75,7 +75,7 @@ namespace Microsoft.Phone.Controls
 
         internal LoopingSelector ThirdPicker { get; private set; }
 
-        private VisualStateGroup VisibilityStates { get; set; }
+        private VisualStateGroup OpenStates { get; set; }
 
         private bool IsOpen { get; set; }
 
@@ -85,9 +85,9 @@ namespace Microsoft.Phone.Controls
 
         internal void BeforeOnApplyTemplate()
         {
-            if (VisibilityStates != null)
+            if (OpenStates != null)
             {
-                VisibilityStates.CurrentStateChanged -= OnVisibilityStatesCurrentStateChanged;
+                OpenStates.CurrentStateChanged -= OnOpenStatesCurrentStateChanged;
             }
         }
 
@@ -101,11 +101,11 @@ namespace Microsoft.Phone.Controls
                 ThirdPicker.ItemTemplate = TryFindResource<DataTemplate>(templateRoot, "ThirdPickerItemTemplate");
             }
 
-            VisibilityStates = VisualStates.TryGetVisualStateGroup(_presenter, VisibilityGroupName);
+            OpenStates = VisualStates.TryGetVisualStateGroup(_presenter, OpenGroupName);
 
-            if (VisibilityStates != null)
+            if (OpenStates != null)
             {
-                VisibilityStates.CurrentStateChanged += OnVisibilityStatesCurrentStateChanged;
+                OpenStates.CurrentStateChanged += OnOpenStatesCurrentStateChanged;
             }
 
             UpdateVisualStates(false);
@@ -177,7 +177,7 @@ namespace Microsoft.Phone.Controls
 
         private void OnPresenterLoaded(object sender, RoutedEventArgs e)
         {
-            _presenter.Dispatcher.BeginInvoke(() =>
+            AnimationHelper.InvokeOnSecondRendering(() =>
             {
                 IsOpen = true;
                 UpdateVisualStates(true);
@@ -191,7 +191,7 @@ namespace Microsoft.Phone.Controls
             ThirdPicker.IsExpanded = false;
         }
 
-        private void OnVisibilityStatesCurrentStateChanged(object sender, VisualStateChangedEventArgs e)
+        private void OnOpenStatesCurrentStateChanged(object sender, VisualStateChangedEventArgs e)
         {
             if ((e.OldState != null && e.OldState.Name == OpenVisibilityStateName) &&
                 (e.NewState != null && e.NewState.Name == ClosedVisibilityStateName))

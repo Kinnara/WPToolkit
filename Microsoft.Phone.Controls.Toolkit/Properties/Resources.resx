@@ -133,6 +133,9 @@
     <value>Cannot set read-only property SearchText.</value>
     <comment>Exception thrown when the SearchText property is improperly set.</comment>
   </data>
+  <data name="ContentDialog_AlreadyOpen" xml:space="preserve">
+    <value>Only a single ContentDialog can be open at any time.</value>
+  </data>
   <data name="FlipView_NotAllowedItemsPanel" xml:space="preserve">
     <value>The Panel you are using for the Control is not allowed as an ItemsPanel for the Control.</value>
   </data>

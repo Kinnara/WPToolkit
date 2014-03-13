@@ -775,7 +775,7 @@
             <Setter.Value>
                 <ControlTemplate TargetType="controls:DatePickerFlyoutPresenter">
                     <Border x:Name="LayoutRoot" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}"
-                            BorderThickness="{TemplateBinding BorderThickness}">
+                            BorderThickness="{TemplateBinding BorderThickness}" Padding="{TemplateBinding Padding}">
                         <Border.Resources>
                             <DataTemplate x:Key="FirstPickerItemTemplate">
                                 <StackPanel Style="{StaticResource LoopingSelectorItemRootStyle}">
@@ -800,24 +800,17 @@
                             <PlaneProjection x:Name="PlaneProjection"/>
                         </Border.Projection>
                         <VisualStateManager.VisualStateGroups>
-                            <VisualStateGroup x:Name="VisibilityStates">
+                            <VisualStateGroup x:Name="OpenStates">
                                 <VisualStateGroup.Transitions>
                                     <VisualTransition To="Open">
                                         <VisualTransition.Storyboard>
                                             <Storyboard>
-                                                <DoubleAnimation
-                                                    Storyboard.TargetName="PlaneProjection"
-                                                    Storyboard.TargetProperty="RotationX"
-                                                    From="-45"
-                                                    To="0"
-                                                    Duration="0:0:0.3">
+                                                <DoubleAnimation Storyboard.TargetName="PlaneProjection" Storyboard.TargetProperty="RotationX" From="-45" To="0" Duration="0:0:0.3">
                                                     <DoubleAnimation.EasingFunction>
                                                         <ExponentialEase EasingMode="EaseOut" Exponent="6"/>
                                                     </DoubleAnimation.EasingFunction>
                                                 </DoubleAnimation>
-                                                <DoubleAnimationUsingKeyFrames
-                                                    Storyboard.TargetName="LayoutRoot"
-                                                    Storyboard.TargetProperty="Opacity">
+                                                <DoubleAnimationUsingKeyFrames Storyboard.TargetName="LayoutRoot" Storyboard.TargetProperty="Opacity">
                                                     <DiscreteDoubleKeyFrame KeyTime="0" Value="1"/>
                                                 </DoubleAnimationUsingKeyFrames>
                                             </Storyboard>
@@ -825,19 +818,12 @@
                                     </VisualTransition>
                                     <VisualTransition To="Closed">
                                         <Storyboard>
-                                            <DoubleAnimation
-                                                Storyboard.TargetName="PlaneProjection"
-                                                Storyboard.TargetProperty="RotationX"
-                                                From="0"
-                                                To="60"
-                                                Duration="0:0:0.2">
+                                            <DoubleAnimation Storyboard.TargetName="PlaneProjection" Storyboard.TargetProperty="RotationX" From="0" To="60" Duration="0:0:0.2">
                                                 <DoubleAnimation.EasingFunction>
                                                     <ExponentialEase EasingMode="EaseIn" Exponent="6"/>
                                                 </DoubleAnimation.EasingFunction>
                                             </DoubleAnimation>
-                                            <DoubleAnimationUsingKeyFrames
-                                                Storyboard.TargetName="LayoutRoot"
-                                                Storyboard.TargetProperty="Opacity">
+                                            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="LayoutRoot" Storyboard.TargetProperty="Opacity">
                                                 <DiscreteDoubleKeyFrame KeyTime="0" Value="1"/>
                                                 <DiscreteDoubleKeyFrame KeyTime="0:0:0.2" Value="0"/>
                                             </DoubleAnimationUsingKeyFrames>
@@ -846,30 +832,14 @@
                                 </VisualStateGroup.Transitions>
                                 <VisualState x:Name="Open">
                                     <Storyboard>
-                                        <DoubleAnimation
-                                            Storyboard.TargetName="PlaneProjection"
-                                            Storyboard.TargetProperty="RotationX"
-                                            To="0"
-                                            Duration="0"/>
-                                        <DoubleAnimation
-                                            Storyboard.TargetName="LayoutRoot"
-                                            Storyboard.TargetProperty="Opacity"
-                                            To="1"
-                                            Duration="0"/>
+                                        <DoubleAnimation Storyboard.TargetName="PlaneProjection" Storyboard.TargetProperty="RotationX" To="0" Duration="0"/>
+                                        <DoubleAnimation Storyboard.TargetName="LayoutRoot" Storyboard.TargetProperty="Opacity" To="1" Duration="0"/>
                                     </Storyboard>
                                 </VisualState>
                                 <VisualState x:Name="Closed">
                                     <Storyboard>
-                                        <DoubleAnimation
-                                            Storyboard.TargetName="PlaneProjection"
-                                            Storyboard.TargetProperty="RotationX"
-                                            To="60"
-                                            Duration="0"/>
-                                        <DoubleAnimation
-                                            Storyboard.TargetName="LayoutRoot"
-                                            Storyboard.TargetProperty="Opacity"
-                                            To="0"
-                                            Duration="0"/>
+                                        <DoubleAnimation Storyboard.TargetName="PlaneProjection" Storyboard.TargetProperty="RotationX" To="60" Duration="0"/>
+                                        <DoubleAnimation Storyboard.TargetName="LayoutRoot" Storyboard.TargetProperty="Opacity" To="0" Duration="0"/>
                                     </Storyboard>
                                 </VisualState>
                             </VisualStateGroup>
@@ -891,7 +861,7 @@
                                 </VisualState>
                             </VisualStateGroup>
                         </VisualStateManager.VisualStateGroups>
-                        <Grid x:Name="MainGrid" Margin="{TemplateBinding Padding}">
+                        <Grid x:Name="MainGrid">
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="Auto" />
                                 <RowDefinition />
@@ -978,7 +948,7 @@
             <Setter.Value>
                 <ControlTemplate TargetType="controls:TimePickerFlyoutPresenter">
                     <Border x:Name="LayoutRoot" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}"
-                            BorderThickness="{TemplateBinding BorderThickness}">
+                            BorderThickness="{TemplateBinding BorderThickness}" Padding="{TemplateBinding Padding}">
                         <Border.Resources>
                             <DataTemplate x:Key="FirstPickerItemTemplate">
                                 <StackPanel Style="{StaticResource LoopingSelectorItemRootStyle}">
@@ -1000,24 +970,17 @@
                             <PlaneProjection x:Name="PlaneProjection"/>
                         </Border.Projection>
                         <VisualStateManager.VisualStateGroups>
-                            <VisualStateGroup x:Name="VisibilityStates">
+                            <VisualStateGroup x:Name="OpenStates">
                                 <VisualStateGroup.Transitions>
                                     <VisualTransition To="Open">
                                         <VisualTransition.Storyboard>
                                             <Storyboard>
-                                                <DoubleAnimation
-                                                    Storyboard.TargetName="PlaneProjection"
-                                                    Storyboard.TargetProperty="RotationX"
-                                                    From="-45"
-                                                    To="0"
-                                                    Duration="0:0:0.3">
+                                                <DoubleAnimation Storyboard.TargetName="PlaneProjection" Storyboard.TargetProperty="RotationX" From="-45" To="0" Duration="0:0:0.3">
                                                     <DoubleAnimation.EasingFunction>
                                                         <ExponentialEase EasingMode="EaseOut" Exponent="6"/>
                                                     </DoubleAnimation.EasingFunction>
                                                 </DoubleAnimation>
-                                                <DoubleAnimationUsingKeyFrames
-                                                    Storyboard.TargetName="LayoutRoot"
-                                                    Storyboard.TargetProperty="Opacity">
+                                                <DoubleAnimationUsingKeyFrames Storyboard.TargetName="LayoutRoot" Storyboard.TargetProperty="Opacity">
                                                     <DiscreteDoubleKeyFrame KeyTime="0" Value="1"/>
                                                 </DoubleAnimationUsingKeyFrames>
                                             </Storyboard>
@@ -1025,19 +988,12 @@
                                     </VisualTransition>
                                     <VisualTransition To="Closed">
                                         <Storyboard>
-                                            <DoubleAnimation
-                                                Storyboard.TargetName="PlaneProjection"
-                                                Storyboard.TargetProperty="RotationX"
-                                                From="0"
-                                                To="60"
-                                                Duration="0:0:0.2">
+                                            <DoubleAnimation Storyboard.TargetName="PlaneProjection" Storyboard.TargetProperty="RotationX" From="0" To="60" Duration="0:0:0.2">
                                                 <DoubleAnimation.EasingFunction>
                                                     <ExponentialEase EasingMode="EaseIn" Exponent="6"/>
                                                 </DoubleAnimation.EasingFunction>
                                             </DoubleAnimation>
-                                            <DoubleAnimationUsingKeyFrames
-                                                Storyboard.TargetName="LayoutRoot"
-                                                Storyboard.TargetProperty="Opacity">
+                                            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="LayoutRoot" Storyboard.TargetProperty="Opacity">
                                                 <DiscreteDoubleKeyFrame KeyTime="0" Value="1"/>
                                                 <DiscreteDoubleKeyFrame KeyTime="0:0:0.2" Value="0"/>
                                             </DoubleAnimationUsingKeyFrames>
@@ -1046,30 +1002,14 @@
                                 </VisualStateGroup.Transitions>
                                 <VisualState x:Name="Open">
                                     <Storyboard>
-                                        <DoubleAnimation
-                                            Storyboard.TargetName="PlaneProjection"
-                                            Storyboard.TargetProperty="RotationX"
-                                            To="0"
-                                            Duration="0"/>
-                                        <DoubleAnimation
-                                            Storyboard.TargetName="LayoutRoot"
-                                            Storyboard.TargetProperty="Opacity"
-                                            To="1"
-                                            Duration="0"/>
+                                        <DoubleAnimation Storyboard.TargetName="PlaneProjection" Storyboard.TargetProperty="RotationX" To="0" Duration="0"/>
+                                        <DoubleAnimation Storyboard.TargetName="LayoutRoot" Storyboard.TargetProperty="Opacity" To="1" Duration="0"/>
                                     </Storyboard>
                                 </VisualState>
                                 <VisualState x:Name="Closed">
                                     <Storyboard>
-                                        <DoubleAnimation
-                                            Storyboard.TargetName="PlaneProjection"
-                                            Storyboard.TargetProperty="RotationX"
-                                            To="60"
-                                            Duration="0"/>
-                                        <DoubleAnimation
-                                            Storyboard.TargetName="LayoutRoot"
-                                            Storyboard.TargetProperty="Opacity"
-                                            To="0"
-                                            Duration="0"/>
+                                        <DoubleAnimation Storyboard.TargetName="PlaneProjection" Storyboard.TargetProperty="RotationX" To="60" Duration="0"/>
+                                        <DoubleAnimation Storyboard.TargetName="LayoutRoot" Storyboard.TargetProperty="Opacity" To="0" Duration="0"/>
                                     </Storyboard>
                                 </VisualState>
                             </VisualStateGroup>
@@ -1091,7 +1031,7 @@
                                 </VisualState>
                             </VisualStateGroup>
                         </VisualStateManager.VisualStateGroups>
-                        <Grid x:Name="MainGrid" Margin="{TemplateBinding Padding}">
+                        <Grid x:Name="MainGrid">
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="Auto" />
                                 <RowDefinition />
@@ -1363,6 +1303,7 @@
             <Setter.Value>
                 <ControlTemplate TargetType="controls:ListPickerFlyoutPresenter">
                     <Border Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}"
+                            Padding="{TemplateBinding Padding}"
                             controls:TiltEffect.IsTiltEnabled="True">
                         <Border.Resources>
                             <Style TargetType="primitives:PickerBoxList" BasedOn="{StaticResource ListPickerFlyoutPresenterListStyle}"/>
@@ -2753,6 +2694,72 @@
         </Setter>
     </Style>
 
+    <controls:ContentDialogResources x:Key="ContentDialogResources"/>
+    
+    <Style TargetType="controls:ContentDialog">
+        <Setter Property="Foreground" Value="{StaticResource PhoneForegroundBrush}"/>
+        <Setter Property="Background" Value="{StaticResource PhoneChromeBrush}" />
+        <Setter Property="FontSize" Value="{StaticResource PhoneFontSizeMedium}" />
+        <Setter Property="FontFamily" Value="{StaticResource PhoneFontFamilyNormal}" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="controls:ContentDialog">
+                    <Border x:Name="Container"
+                            Background="{Binding ContentDialogDimmingThemeBrush, Source={StaticResource ContentDialogResources}}"
+                            controls:TiltEffect.IsTiltEnabled="True">
+                        <VisualStateManager.VisualStateGroups>
+                            <VisualStateGroup x:Name="OrientationStates">
+                                <VisualState x:Name="PortraitUp"/>
+                                <VisualState x:Name="LandscapeLeft">
+                                    <Storyboard>
+                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="MainGrid" Storyboard.TargetProperty="Margin">
+                                            <DiscreteObjectKeyFrame KeyTime="0" Value="72,0,0,0"/>
+                                        </ObjectAnimationUsingKeyFrames>
+                                    </Storyboard>
+                                </VisualState>
+                                <VisualState x:Name="LandscapeRight">
+                                    <Storyboard>
+                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="MainGrid" Storyboard.TargetProperty="Margin">
+                                            <DiscreteObjectKeyFrame KeyTime="0" Value="0,0,72,0"/>
+                                        </ObjectAnimationUsingKeyFrames>
+                                    </Storyboard>
+                                </VisualState>
+                            </VisualStateGroup>
+                        </VisualStateManager.VisualStateGroups>
+                        <Border x:Name="LayoutRoot" Background="{TemplateBinding Background}" Padding="0,32,0,0" VerticalAlignment="Top">
+                            <Grid x:Name="MainGrid" Width="480" HorizontalAlignment="Left">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="*" />
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="*" />
+                                </Grid.ColumnDefinitions>
+                                <ContentControl x:Name="Title" Padding="{StaticResource PhoneHorizontalMargin}" Content="{TemplateBinding Title}" ContentTemplate="{TemplateBinding TitleTemplate}" FontSize="{StaticResource PhoneFontSizeLarge}" FontFamily="{StaticResource PhoneFontFamilySemiBold}" HorizontalContentAlignment="Stretch" Margin="0" Grid.ColumnSpan="2" />
+                                <ContentPresenter x:Name="Content" ContentTemplate="{TemplateBinding ContentTemplate}" Content="{TemplateBinding Content}" Margin="{StaticResource PhoneHorizontalMargin}" Grid.Row="1" Grid.ColumnSpan="2" />
+                                <Border x:Name="Button1Host" VerticalAlignment="Bottom" Padding="12,0,0,12" Grid.Row="2">
+                                    <Button Content="{TemplateBinding PrimaryButtonText}"
+                                            Command="{TemplateBinding PrimaryButtonCommand}"
+                                            CommandParameter="{TemplateBinding PrimaryButtonCommandParameter}"
+                                            IsEnabled="{TemplateBinding IsPrimaryButtonEnabled}"/>
+                                </Border>
+                                <Border x:Name="Button2Host" VerticalAlignment="Bottom" Padding="0,0,12,12" Grid.Row="2" Grid.Column="1">
+                                    <Button Content="{TemplateBinding SecondaryButtonText}"
+                                            Command="{TemplateBinding SecondaryButtonCommand}"
+                                            CommandParameter="{TemplateBinding SecondaryButtonCommandParameter}"
+                                            IsEnabled="{TemplateBinding IsSecondaryButtonEnabled}"/>
+                                </Border>
+                            </Grid>
+                        </Border>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
     <Style TargetType="controls:Rating">
 
         <Setter Property="Background" Value="{StaticResource PhoneBackgroundBrush}" />
@@ -3765,7 +3772,55 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="controls:FlyoutPresenter">
-                    <Border Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}">
+                    <Border x:Name="LayoutRoot" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}">
+                        <Border.Projection>
+                            <PlaneProjection x:Name="PlaneProjection"/>
+                        </Border.Projection>
+                        <VisualStateManager.VisualStateGroups>
+                            <VisualStateGroup x:Name="OpenStates">
+                                <VisualStateGroup.Transitions>
+                                    <VisualTransition To="Open">
+                                        <VisualTransition.Storyboard>
+                                            <Storyboard>
+                                                <DoubleAnimation Storyboard.TargetName="PlaneProjection" Storyboard.TargetProperty="RotationX" From="-45" To="0" Duration="0:0:0.3">
+                                                    <DoubleAnimation.EasingFunction>
+                                                        <ExponentialEase EasingMode="EaseOut" Exponent="6"/>
+                                                    </DoubleAnimation.EasingFunction>
+                                                </DoubleAnimation>
+                                                <DoubleAnimationUsingKeyFrames Storyboard.TargetName="LayoutRoot" Storyboard.TargetProperty="Opacity">
+                                                    <DiscreteDoubleKeyFrame KeyTime="0" Value="1"/>
+                                                </DoubleAnimationUsingKeyFrames>
+                                            </Storyboard>
+                                        </VisualTransition.Storyboard>
+                                    </VisualTransition>
+                                    <VisualTransition To="Closed">
+                                        <Storyboard>
+                                            <DoubleAnimation Storyboard.TargetName="PlaneProjection" Storyboard.TargetProperty="RotationX" From="0" To="60" Duration="0:0:0.2">
+                                                <DoubleAnimation.EasingFunction>
+                                                    <ExponentialEase EasingMode="EaseIn" Exponent="6"/>
+                                                </DoubleAnimation.EasingFunction>
+                                            </DoubleAnimation>
+                                            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="LayoutRoot" Storyboard.TargetProperty="Opacity">
+                                                <DiscreteDoubleKeyFrame KeyTime="0" Value="1"/>
+                                                <DiscreteDoubleKeyFrame KeyTime="0:0:0.2" Value="0"/>
+                                            </DoubleAnimationUsingKeyFrames>
+                                        </Storyboard>
+                                    </VisualTransition>
+                                </VisualStateGroup.Transitions>
+                                <VisualState x:Name="Open">
+                                    <Storyboard>
+                                        <DoubleAnimation Storyboard.TargetName="PlaneProjection" Storyboard.TargetProperty="RotationX" To="0" Duration="0"/>
+                                        <DoubleAnimation Storyboard.TargetName="LayoutRoot" Storyboard.TargetProperty="Opacity" To="1" Duration="0"/>
+                                    </Storyboard>
+                                </VisualState>
+                                <VisualState x:Name="Closed">
+                                    <Storyboard>
+                                        <DoubleAnimation Storyboard.TargetName="PlaneProjection" Storyboard.TargetProperty="RotationX" To="60" Duration="0"/>
+                                        <DoubleAnimation Storyboard.TargetName="LayoutRoot" Storyboard.TargetProperty="Opacity" To="0" Duration="0"/>
+                                    </Storyboard>
+                                </VisualState>
+                            </VisualStateGroup>
+                        </VisualStateManager.VisualStateGroups>
                         <ContentPresenter Content="{TemplateBinding Content}" ContentTemplate="{TemplateBinding ContentTemplate}"
                                           Margin="{TemplateBinding Padding}"
                                           HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
@@ -3783,7 +3838,8 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="controls:PickerFlyoutPresenter">
-                    <Border Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}">
+                    <Border Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}"
+                            Padding="{TemplateBinding Padding}">
                         <VisualStateManager.VisualStateGroups>
                             <VisualStateGroup x:Name="OrientationStates">
                                 <VisualState x:Name="PortraitUp"/>
@@ -3811,7 +3867,7 @@
                             <TextBlock x:Name="TitlePresenter"
                                        Style="{StaticResource PickerFlyoutTitleStyle}"
                                        Margin="23,16,0,39" />
-                            <ContentPresenter Grid.Row="1" Content="{TemplateBinding Content}" ContentTemplate="{TemplateBinding ContentTemplate}" Margin="{TemplateBinding Padding}" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}" />
+                            <ContentPresenter Grid.Row="1" Content="{TemplateBinding Content}" ContentTemplate="{TemplateBinding ContentTemplate}" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}" />
                         </Grid>
                     </Border>
                 </ControlTemplate>

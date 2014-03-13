@@ -194,9 +194,9 @@ namespace Microsoft.Phone.Controls.Primitives
             internal PhoneApplicationPage _hostPage;
             private bool _isCancelled;
 
-            public FrameworkElement Child
+            public Control Child
             {
-                get { return _hostPopup.Child as FrameworkElement; }
+                get { return _hostPopup.Child as Control; }
                 set { _hostPopup.Child = value; }
             }
 
@@ -229,7 +229,17 @@ namespace Microsoft.Phone.Controls.Primitives
                     _systemTrayColor = SystemTray.BackgroundColor;
                     _systemTrayOpacity = SystemTray.Opacity;
 
-                    SystemTray.BackgroundColor = ((SolidColorBrush)Application.Current.Resources["PhoneChromeBrush"]).Color;
+                    Color backgroundColor;
+                    SolidColorBrush childBackground = Child.Background as SolidColorBrush;
+                    if (childBackground != null)
+                    {
+                        backgroundColor = childBackground.Color;
+                    }
+                    else
+                    {
+                        backgroundColor = ((SolidColorBrush)Application.Current.Resources["PhoneChromeBrush"]).Color;
+                    }
+                    SystemTray.BackgroundColor = backgroundColor;
 
                     if (SystemTray.Opacity < 1)
                     {
@@ -345,15 +355,17 @@ namespace Microsoft.Phone.Controls.Primitives
                 PhoneApplicationFrame frame = Application.Current.RootVisual as PhoneApplicationFrame;
                 if (frame != null)
                 {
-                    bool isApplicationBarVisible = _hostPage != null && _hostPage.ApplicationBar != null && _hostPage.ApplicationBar.IsVisible;
+                    bool reserveSystemTraySpace = true;
+                    bool reserveApplicationBarSpace = _hostPage != null && _hostPage.ApplicationBar != null && _hostPage.ApplicationBar.IsVisible;
 
-                    PageOrientation orientation = frame.Orientation;
                     CompositeTransform transform = null;
+                    Thickness padding = new Thickness();
                     double frameWidth = Application.Current.Host.Content.ActualWidth;
                     double frameHeight = Application.Current.Host.Content.ActualHeight;
                     double width = frameWidth;
                     double height = frameHeight;
-                    switch (orientation)
+
+                    switch (frame.Orientation)
                     {
                         case PageOrientation.Landscape:
                         case PageOrientation.LandscapeLeft:
@@ -361,15 +373,14 @@ namespace Microsoft.Phone.Controls.Primitives
                             width = frameHeight;
                             height = frameWidth;
 
-                            if (SystemTray.IsVisible)
+                            if (reserveSystemTraySpace)
                             {
-                                transform.TranslateY += PhoneHelper.SystemTrayLandscapeWidth;
-                                width -= PhoneHelper.SystemTrayLandscapeWidth;
+                                padding.Left = PhoneHelper.SystemTrayLandscapeWidth;
                             }
 
-                            if (isApplicationBarVisible)
+                            if (reserveApplicationBarSpace)
                             {
-                                width -= PhoneHelper.ApplicationBarLandscapeWidth;
+                                padding.Right = PhoneHelper.ApplicationBarLandscapeWidth;
                             }
 
                             break;
@@ -378,37 +389,42 @@ namespace Microsoft.Phone.Controls.Primitives
                             width = frameHeight;
                             height = frameWidth;
 
-                            if (SystemTray.IsVisible)
+                            if (reserveSystemTraySpace)
                             {
-                                width -= PhoneHelper.SystemTrayLandscapeWidth;
+                                padding.Right = PhoneHelper.SystemTrayLandscapeWidth;
                             }
 
-                            if (isApplicationBarVisible)
+                            if (reserveApplicationBarSpace)
                             {
-                                transform.TranslateY -= PhoneHelper.SystemTrayLandscapeWidth;
-                                width -= PhoneHelper.ApplicationBarLandscapeWidth;
+                                padding.Left = PhoneHelper.ApplicationBarLandscapeWidth;
                             }
 
                             break;
                         default:
-                            if (SystemTray.IsVisible)
+                            if (reserveSystemTraySpace)
                             {
-                                transform = new CompositeTransform { TranslateY = PhoneHelper.SystemTrayPortraitHeight };
-                                height -= PhoneHelper.SystemTrayPortraitHeight;
+                                padding.Top = PhoneHelper.SystemTrayPortraitHeight;
                             }
 
-                            if (isApplicationBarVisible)
+                            if (reserveApplicationBarSpace)
                             {
-                                height -= _hostPage.ApplicationBar.DefaultSize;
+                                padding.Bottom = 1;
+                                height -= GetApplicationBarSize(_hostPage.ApplicationBar) - 1;
                             }
 
                             break;
                     }
 
                     Child.RenderTransform = transform;
+                    Child.Padding = padding;
                     Child.Width = width;
                     Child.Height = height;
                 }
+            }
+
+            private static double GetApplicationBarSize(IApplicationBar applicationBar)
+            {
+                return applicationBar.Mode == ApplicationBarMode.Minimized ? applicationBar.MiniSize : applicationBar.DefaultSize;
             }
         }
 

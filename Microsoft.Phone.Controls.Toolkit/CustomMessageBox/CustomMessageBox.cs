@@ -498,7 +498,8 @@ namespace Microsoft.Phone.Controls
                 }
             }
 
-            LayoutUpdated += CustomMessageBox_LayoutUpdated;
+            Opacity = 0;
+            Loaded += CustomMessageBox_Loaded;
 
             _frame = Application.Current.RootVisual as PhoneApplicationFrame;
             _page = _frame.Content as PhoneApplicationPage;
@@ -677,14 +678,14 @@ namespace Microsoft.Phone.Controls
             // Close popup.
             if (useTransition)
             {
-                SwivelTransition backwardOut = new SwivelTransition { Mode = SwivelTransitionMode.BackwardOut };
-                ITransition swivelTransition = backwardOut.GetTransition(this);
-                swivelTransition.Completed += (s, e) =>
+                SwivelTransition transitionElement = new SwivelTransition { Mode = SwivelTransitionMode.Out };
+                ITransition transition = transitionElement.GetTransition(this);
+                transition.Completed += (s, e) =>
                 {
-                    swivelTransition.Stop();
+                    transition.Stop();
                     ClosePopup(restoreOriginalValues, source);
                 };
-               swivelTransition.Begin();
+                transition.Begin();
             }
             else
             {
@@ -754,18 +755,20 @@ namespace Microsoft.Phone.Controls
             }
         }
 
-        /// <summary>
-        /// Called when the visual layout changes.
-        /// </summary>
-        /// <param name="sender">The event sender.</param>
-        /// <param name="e">The event information.</param>
-        private void CustomMessageBox_LayoutUpdated(object sender, EventArgs e)
+        private void CustomMessageBox_Loaded(object sender, RoutedEventArgs e)
         {
-            SwivelTransition backwardIn = new SwivelTransition { Mode = SwivelTransitionMode.BackwardIn };
-            ITransition swivelTransition = backwardIn.GetTransition(this);
-            swivelTransition.Completed += (s1, e1) => swivelTransition.Stop();
-            swivelTransition.Begin();
-            LayoutUpdated -= CustomMessageBox_LayoutUpdated;
+            AnimationHelper.InvokeOnSecondRendering(() =>
+                {
+                    SwivelTransition transitionElement = new SwivelTransition { Mode = SwivelTransitionMode.In };
+                    ITransition transition = transitionElement.GetTransition(this);
+                    transition.Completed += (s1, e1) =>
+                        {
+                            transition.Stop();
+                            Opacity = 1;
+                        };
+                    transition.Begin();
+                });
+            Loaded -= CustomMessageBox_Loaded;
         }
 
         /// <summary>

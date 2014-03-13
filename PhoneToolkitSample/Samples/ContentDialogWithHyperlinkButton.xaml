@@ -1,0 +1,23 @@
+﻿<toolkit:ContentDialog
+    x:Class="PhoneToolkitSample.Samples.ContentDialogWithHyperlinkButton"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:toolkit="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Title="Allow this application to access and use your location?"
+    TitleTemplate="{StaticResource ContentDialogTitleTemplate}"
+    PrimaryButtonText="allow"  
+    SecondaryButtonText="cancel">
+    
+    <StackPanel>
+        <TextBlock Text="Sharing this information helps us provide and improve the location-based services offered for this phone. We won't use the information to identify or contact you."
+                   Style="{StaticResource MessageDialogContentStyle}"/>
+        <HyperlinkButton Content="Privacy Statement"
+                         HorizontalAlignment="Left"
+                         Margin="0,0,0,30"
+                         NavigateUri="http://phone.codeplex.com/"
+                         toolkit:TiltEffect.SuppressTilt="True"/>
+    </StackPanel>
+</toolkit:ContentDialog>

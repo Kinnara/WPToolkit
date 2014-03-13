@@ -1,0 +1,16 @@
+﻿<toolkit:ContentDialog
+    x:Class="PhoneToolkitSample.Samples.BasicContentDialog"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:toolkit="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Title="Do you like this sample?"
+    TitleTemplate="{StaticResource ContentDialogTitleTemplate}"
+    PrimaryButtonText="yes"  
+    SecondaryButtonText="no">
+
+    <TextBlock Text="There are tons of things you can do using content dialogs. To learn more, be sure to check out the source code at GitHub."
+               Style="{StaticResource MessageDialogContentStyle}"/>
+</toolkit:ContentDialog>

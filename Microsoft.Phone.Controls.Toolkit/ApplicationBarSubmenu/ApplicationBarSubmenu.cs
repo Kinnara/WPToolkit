@@ -9,8 +9,8 @@ namespace Microsoft.Phone.Controls
     /// </summary>
     public class ApplicationBarSubmenu : MenuBase
     {
-        private static SwivelTransition ShowTransition = new SwivelTransition { Mode = SwivelTransitionMode.BackwardIn };
-        private static SwivelTransition HideTransition = new SwivelTransition { Mode = SwivelTransitionMode.BackwardOut };
+        private static SwivelTransition ShowTransition = new SwivelTransition { Mode = SwivelTransitionMode.In };
+        private static SwivelTransition HideTransition = new SwivelTransition { Mode = SwivelTransitionMode.Out };
 
         private FullScreenPopup _popup;
         private bool _isHiding;

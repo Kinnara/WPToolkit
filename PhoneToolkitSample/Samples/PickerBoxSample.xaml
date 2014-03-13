@@ -21,8 +21,9 @@
     SupportedOrientations="PortraitOrLandscape"
     mc:Ignorable="d" d:DesignHeight="768" d:DesignWidth="480"
     shell:SystemTray.IsVisible="True"
+    shell:SystemTray.Opacity="0"
     Style="{StaticResource PageStyle}"
-    Margin="0,0,0,72">
+    Margin="0,32,0,72">
 
     <phone:PhoneApplicationPage.Resources>
         <Style TargetType="toolkit:PickerBox">
@@ -71,7 +72,8 @@
                     Data can be set like below, by directly setting the Items to a list of strings.
                     The other option is to use databinding.
                 -->
-                <toolkit:PickerBox Header="Background">
+                <toolkit:PickerBox Header="Background"
+                                   FullModeHeader="BACKGROUND">
                     <toolkit:PickerBox.ItemTemplate>
                         <DataTemplate>
                             <TextBlock Text="{Binding TargetNullValue='choose background'}"/>
@@ -175,7 +177,7 @@
 
                 <toolkit:RecurringDaysPicker Header="Repeats" FullModeHeader="ALARM REPEATS ON"/>
 
-                <toolkit:PickerBox x:Name="RegionList" Header="System Locale"/>
+                <toolkit:PickerBox x:Name="RegionList" Header="System Locale" FullModeHeader="SYSTEM LOCALE"/>
                 
                 <toolkit:PickerBox x:Name="MonthlyResetDatePicker"
                                    Header="Monthly reset date"
@@ -190,14 +192,14 @@
                 <VisualState x:Name="LandscapeLeft">
                     <Storyboard>
                         <ObjectAnimationUsingKeyFrames Storyboard.TargetName="Page" Storyboard.TargetProperty="Margin">
-                            <DiscreteObjectKeyFrame KeyTime="0" Value="0,0,72,0" />
+                            <DiscreteObjectKeyFrame KeyTime="0" Value="72,0,72,0" />
                         </ObjectAnimationUsingKeyFrames>
                     </Storyboard>
                 </VisualState>
                 <VisualState x:Name="LandscapeRight">
                     <Storyboard>
                         <ObjectAnimationUsingKeyFrames Storyboard.TargetName="Page" Storyboard.TargetProperty="Margin">
-                            <DiscreteObjectKeyFrame KeyTime="0" Value="72,0,0,0" />
+                            <DiscreteObjectKeyFrame KeyTime="0" Value="72,0,72,0" />
                         </ObjectAnimationUsingKeyFrames>
                     </Storyboard>
                 </VisualState>

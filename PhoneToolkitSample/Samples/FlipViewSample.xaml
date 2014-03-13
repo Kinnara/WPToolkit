@@ -42,8 +42,8 @@
                         <ColumnDefinition/>
                         <ColumnDefinition/>
                     </Grid.ColumnDefinitions>
-                    <toolkit:PickerBox x:Name="OrientationPicker" Header="Orientation"/>
-                    <toolkit:PickerBox x:Name="UpdateSelectionModePicker" Header="UpdateSelectionMode" Grid.Column="1"/>
+                    <toolkit:PickerBox x:Name="OrientationPicker" Header="Orientation" FullModeHeader="ORIENTATION"/>
+                    <toolkit:PickerBox x:Name="UpdateSelectionModePicker" Header="UpdateSelectionMode" FullModeHeader="UPDATESELECTIONMODE" Grid.Column="1"/>
                 </Grid>
                 <CheckBox x:Name="UseTouchAnimationsForAllNavigationCheckBox" Content="UseTouchAnimationsForAllNavigation" IsChecked="True"/>
             </StackPanel>

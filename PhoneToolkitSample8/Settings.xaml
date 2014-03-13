@@ -24,13 +24,13 @@
 
                 <toolkit:PickerBox Name="currentUICulture_listpicker" 
                                    Header="CurrentUICulture or Language"
-                                   FullModeHeader="CURRENT*UI*CULTURE or LANGUAGE">
+                                   FullModeHeader="CURRENT*UI*CULTURE OR LANGUAGE">
 
                 </toolkit:PickerBox>
 
                 <toolkit:PickerBox Name="currentCulture_listpicker"
                                    Header="CurrentCulture or Regional format"
-                                   FullModeHeader="CURRENT CULTURE or REGIONAL FORMAT">
+                                   FullModeHeader="CURRENT CULTURE OR REGIONAL FORMAT">
 
                 </toolkit:PickerBox>
             </StackPanel>

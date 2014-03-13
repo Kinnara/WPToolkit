@@ -1,0 +1,126 @@
+﻿<toolkit:BasePage
+    x:Class="PhoneToolkitSample.Samples.FlyoutsSample"
+    x:Name="Page"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
+    xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:toolkit="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit"
+    xmlns:toolkitPrimitives="clr-namespace:Microsoft.Phone.Controls.Primitives;assembly=Microsoft.Phone.Controls.Toolkit"
+    xmlns:data="clr-namespace:PhoneToolkitSample.Data"
+    xmlns:samples="clr-namespace:PhoneToolkitSample.Samples"
+    xmlns:sys="clr-namespace:System;assembly=mscorlib"
+    mc:Ignorable="d" d:DesignHeight="768" d:DesignWidth="480"
+    SupportedOrientations="PortraitOrLandscape"
+    shell:SystemTray.IsVisible="True"
+    shell:SystemTray.Opacity="0"
+    Style="{StaticResource PageStyle}"
+    Margin="0,32,0,0">
+
+    <toolkit:BasePage.Resources>
+        <data:AccentColorNameToBrush x:Key="ColorNameToBrushConverter" />
+    </toolkit:BasePage.Resources>
+    
+    <toolkit:PageUI x:Name="LayoutRoot" Header="flyouts" Style="{StaticResource ScrollablePageUIStyle}">
+        <StackPanel>
+            <Button Content="show flyout">
+                <toolkit:ButtonExtensions.Flyout>
+                    <toolkit:Flyout>
+                        <toolkit:Flyout.FlyoutPresenterStyle>
+                            <Style TargetType="toolkit:FlyoutPresenter">
+                                <Setter Property="Background" Value="{StaticResource PhoneAccentBrush}" />
+                            </Style>
+                        </toolkit:Flyout.FlyoutPresenterStyle>
+                        <StackPanel Margin="{StaticResource PhoneHorizontalMargin}">
+                            <TextBlock Text="Flyout content"
+                                       Style="{StaticResource PhoneTextTitle1Style}"
+                                       FontFamily="{StaticResource PhoneFontFamilyLight}"
+                                       Foreground="White"
+                                       Margin="6,4,-12,0"/>
+                        </StackPanel>
+                    </toolkit:Flyout>
+                </toolkit:ButtonExtensions.Flyout>
+            </Button>
+
+            <Button Content="show picker flyout">
+                <toolkit:ButtonExtensions.Flyout>
+                    <toolkit:PickerFlyout
+                        ConfirmationButtonsVisible="True"
+                        toolkitPrimitives:PickerFlyoutBase.Title="PICKER FLYOUT TITLE">
+                        <StackPanel Margin="{StaticResource PhoneHorizontalMargin}">
+                            <TextBlock Text="Flyout content"
+                                       Style="{StaticResource PhoneTextTitle1Style}"
+                                       FontFamily="{StaticResource PhoneFontFamilyLight}"
+                                       Margin="6,-17,-12,0"/>
+                        </StackPanel>
+                    </toolkit:PickerFlyout>
+                </toolkit:ButtonExtensions.Flyout>
+            </Button>
+
+            <Button Content="show date picker flyout">
+                <toolkit:ButtonExtensions.Flyout>
+                    <toolkit:DatePickerFlyout/>
+                </toolkit:ButtonExtensions.Flyout>
+            </Button>
+            
+            <Button Content="show time picker flyout">
+                <toolkit:ButtonExtensions.Flyout>
+                    <toolkit:TimePickerFlyout/>
+                </toolkit:ButtonExtensions.Flyout>
+            </Button>
+
+            <Button Content="show list picker flyout">
+                <toolkit:ButtonExtensions.Flyout>
+                    <toolkit:ListPickerFlyout toolkitPrimitives:PickerFlyoutBase.Title="CHOOSE AN ITEM">
+                        <toolkit:ListPickerFlyout.ItemsSource>
+                            <data:ObjectCollection>
+                                <sys:String>Item 1</sys:String>
+                                <sys:String>Item 2</sys:String>
+                                <sys:String>Item 3</sys:String>
+                                <sys:String>Item 4</sys:String>
+                                <sys:String>Item 5</sys:String>
+                                <sys:String>Item 6</sys:String>
+                                <sys:String>Item 7</sys:String>
+                                <sys:String>Item 8</sys:String>
+                            </data:ObjectCollection>
+                        </toolkit:ListPickerFlyout.ItemsSource>
+                    </toolkit:ListPickerFlyout>
+                </toolkit:ButtonExtensions.Flyout>
+            </Button>
+
+            <Button Content="show accent color picker"
+                    Background="{Binding ElementName=AccentColorPickerFlyout, Path=Content.SelectedItem, Converter={StaticResource ColorNameToBrushConverter}}"
+                    Foreground="White">
+                <toolkit:ButtonExtensions.Flyout>
+                    <toolkit:PickerFlyout
+                        x:Name="AccentColorPickerFlyout"
+                        toolkitPrimitives:PickerFlyoutBase.Title="ACCENTS">
+                        <samples:AccentColorPicker ItemPicked="AccentColorPicker_ItemPicked"/>
+                    </toolkit:PickerFlyout>
+                </toolkit:ButtonExtensions.Flyout>
+            </Button>
+        </StackPanel>
+
+        <VisualStateManager.VisualStateGroups>
+            <VisualStateGroup x:Name="OrientationStates">
+                <VisualState x:Name="PortraitUp"/>
+                <VisualState x:Name="LandscapeLeft">
+                    <Storyboard>
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="Page" Storyboard.TargetProperty="Margin">
+                            <DiscreteObjectKeyFrame KeyTime="0" Value="72,0,0,0"/>
+                        </ObjectAnimationUsingKeyFrames>
+                    </Storyboard>
+                </VisualState>
+                <VisualState x:Name="LandscapeRight">
+                    <Storyboard>
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="Page" Storyboard.TargetProperty="Margin">
+                            <DiscreteObjectKeyFrame KeyTime="0" Value="0,0,72,0"/>
+                        </ObjectAnimationUsingKeyFrames>
+                    </Storyboard>
+                </VisualState>
+            </VisualStateGroup>
+        </VisualStateManager.VisualStateGroups>
+    </toolkit:PageUI>
+</toolkit:BasePage>

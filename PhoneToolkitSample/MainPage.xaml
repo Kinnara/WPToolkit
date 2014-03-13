@@ -59,6 +59,13 @@
                                 Header="contextmenu"
                                 Content="tap &amp; hold menu options control"/>
                         </HyperlinkButton>
+                        <HyperlinkButton NavigateUri="/Samples/ContentDialogSample.xaml"
+                                         Style="{StaticResource HyperlinkEmptyStyle}">
+                            <system:HeaderedContentControl
+                                Style="{StaticResource MultilineHyperlinkStyle}"
+                                Header="contentdialog"
+                                Content="a dialog box that can be customized"/>
+                        </HyperlinkButton>
                         <HyperlinkButton NavigateUri="/Samples/CustomMessageBoxSample.xaml"
                                          Style="{StaticResource HyperlinkEmptyStyle}">
                             <system:HeaderedContentControl
@@ -100,6 +107,13 @@
                                 Style="{StaticResource MultilineHyperlinkStyle}"
                                 Header="flipview"
                                 Content="lets people flip through items one at a time"/>
+                        </HyperlinkButton>
+                        <HyperlinkButton NavigateUri="/Samples/FlyoutsSample.xaml"
+                                         Style="{StaticResource HyperlinkEmptyStyle}">
+                            <system:HeaderedContentControl
+                                Style="{StaticResource MultilineHyperlinkStyle}"
+                                Header="flyouts"
+                                Content="controls that display lightweight UI"/>
                         </HyperlinkButton>
                         <HyperlinkButton NavigateUri="/Samples/GestureSample.xaml"
                                          Style="{StaticResource HyperlinkEmptyStyle}">
