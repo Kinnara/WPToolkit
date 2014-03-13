@@ -283,6 +283,18 @@ ar-SA;az-Latn-AZ;be-BY;bg-BG;ca-ES;cs-CZ;da-DK;de-DE;el-GR;en-GB;en-US;es-ES;es-
       <Link>Samples\RatingControlSample.xaml.cs</Link>
       <DependentUpon>RatingControlSample.xaml</DependentUpon>
     </Compile>
+    <Compile Include="..\PhoneToolkitSample\Samples\ReaderboardEffectSample1.xaml.cs">
+      <Link>Samples\ReaderboardEffectSample1.xaml.cs</Link>
+      <DependentUpon>ReaderboardEffectSample1.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="..\PhoneToolkitSample\Samples\ReaderboardEffectSample2.xaml.cs">
+      <Link>Samples\ReaderboardEffectSample2.xaml.cs</Link>
+      <DependentUpon>ReaderboardEffectSample2.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="..\PhoneToolkitSample\Samples\ReaderboardTransitionSample.xaml.cs">
+      <Link>Samples\ReaderboardTransitionSample.xaml.cs</Link>
+      <DependentUpon>ReaderboardTransitionSample.xaml</DependentUpon>
+    </Compile>
     <Compile Include="..\PhoneToolkitSample\Samples\SlideInEffectSample.xaml.cs">
       <Link>Samples\SlideInEffectSample.xaml.cs</Link>
       <DependentUpon>SlideInEffectSample.xaml</DependentUpon>
@@ -509,6 +521,21 @@ ar-SA;az-Latn-AZ;be-BY;bg-BG;ca-ES;cs-CZ;da-DK;de-DE;el-GR;en-GB;en-US;es-ES;es-
     </Page>
     <Page Include="..\PhoneToolkitSample\Samples\RatingControlSample.xaml">
       <Link>Samples\RatingControlSample.xaml</Link>
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="..\PhoneToolkitSample\Samples\ReaderboardEffectSample1.xaml">
+      <Link>Samples\ReaderboardEffectSample1.xaml</Link>
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="..\PhoneToolkitSample\Samples\ReaderboardEffectSample2.xaml">
+      <Link>Samples\ReaderboardEffectSample2.xaml</Link>
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="..\PhoneToolkitSample\Samples\ReaderboardTransitionSample.xaml">
+      <Link>Samples\ReaderboardTransitionSample.xaml</Link>
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

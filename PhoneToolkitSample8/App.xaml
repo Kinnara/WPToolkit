@@ -279,6 +279,48 @@
             </Setter>
         </Style>
 
+        <Style x:Key="ReaderboardPageStyle" TargetType="phone:PhoneApplicationPage" BasedOn="{StaticResource PageStyleBase}">
+            <Setter Property="toolkit:TransitionService.NavigationInTransition">
+                <Setter.Value>
+                    <toolkit:NavigationInTransition>
+                        <toolkit:NavigationInTransition.Forward>
+                            <toolkit:ReaderboardTransition Mode="In" BeginTime="0:0:0.05"/>
+                        </toolkit:NavigationInTransition.Forward>
+                    </toolkit:NavigationInTransition>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="toolkit:TransitionService.NavigationOutTransition">
+                <Setter.Value>
+                    <toolkit:NavigationOutTransition>
+                        <toolkit:NavigationOutTransition.Backward>
+                            <toolkit:ReaderboardTransition Mode="Out"/>
+                        </toolkit:NavigationOutTransition.Backward>
+                    </toolkit:NavigationOutTransition>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style x:Key="ReaderboardNoDelayPageStyle" TargetType="phone:PhoneApplicationPage" BasedOn="{StaticResource PageStyleBase}">
+            <Setter Property="toolkit:TransitionService.NavigationInTransition">
+                <Setter.Value>
+                    <toolkit:NavigationInTransition>
+                        <toolkit:NavigationInTransition.Forward>
+                            <toolkit:ReaderboardTransition Mode="In" NoDelay="True" BeginTime="0:0:0.1"/>
+                        </toolkit:NavigationInTransition.Forward>
+                    </toolkit:NavigationInTransition>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="toolkit:TransitionService.NavigationOutTransition">
+                <Setter.Value>
+                    <toolkit:NavigationOutTransition>
+                        <toolkit:NavigationOutTransition.Backward>
+                            <toolkit:ReaderboardTransition Mode="Out" NoDelay="True"/>
+                        </toolkit:NavigationOutTransition.Backward>
+                    </toolkit:NavigationOutTransition>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
         <Style x:Key="PageUIBase" TargetType="toolkit:PageUI">
             <Setter Property="Title" Value="{StaticResource ApplicationTitle}"/>
         </Style>
@@ -299,6 +341,23 @@
                 <Setter.Value>
                     <Style TargetType="ContentControl">
                         <Setter Property="toolkit:TurnstileFeatherEffect.FeatheringIndex" Value="1"/>
+                    </Style>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style x:Key="ReaderboardPageUIStyle" TargetType="toolkit:PageUI" BasedOn="{StaticResource PageUIBase}">
+            <Setter Property="TitleStyle">
+                <Setter.Value>
+                    <Style TargetType="ContentControl">
+                        <Setter Property="toolkit:ReaderboardEffect.RowIndex" Value="0"/>
+                    </Style>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="HeaderStyle">
+                <Setter.Value>
+                    <Style TargetType="ContentControl">
+                        <Setter Property="Visibility" Value="Collapsed"/>
                     </Style>
                 </Setter.Value>
             </Setter>
