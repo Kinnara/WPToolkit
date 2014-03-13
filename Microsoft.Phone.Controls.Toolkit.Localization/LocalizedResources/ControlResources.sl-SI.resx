@@ -393,4 +393,4 @@
   <data name="Copy" xml:space="preserve">
     <value>kopiraj</value>
   </data>
-</root>
+<data name="ChooseItems" xml:space="preserve"><value>IZBIRANJE ELEMENTOV</value><comment>Default title for multiselect ListPicker.</comment></data><data name="ChooseAnItem" xml:space="preserve"><value>IZBIRANJE ELEMENTA</value><comment>Default title for ListPicker.</comment></data></root>

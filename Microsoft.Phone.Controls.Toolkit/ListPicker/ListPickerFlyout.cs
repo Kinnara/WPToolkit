@@ -1,4 +1,5 @@
-﻿using Microsoft.Phone.Controls.Primitives;
+﻿using Microsoft.Phone.Controls.LocalizedResources;
+using Microsoft.Phone.Controls.Primitives;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -276,6 +277,16 @@ namespace Microsoft.Phone.Controls
         protected override bool ShouldShowConfirmationButtons()
         {
             return SelectionMode != SelectionMode.Single;
+        }
+
+        internal override void OnOpening()
+        {
+            if (string.IsNullOrEmpty(GetTitle(this)))
+            {
+                SetTitle(this, SelectionMode == SelectionMode.Single ? ControlResources.ChooseAnItem : ControlResources.ChooseItems);
+            }
+
+            base.OnOpening();
         }
 
         internal override void OnOpened()

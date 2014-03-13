@@ -32,7 +32,6 @@ namespace Microsoft.Phone.Controls.Primitives
             return (string)element.GetValue(TitleProperty);
         }
 
-
         /// <summary>
         /// Sets the title displayed on a picker control.
         /// </summary>

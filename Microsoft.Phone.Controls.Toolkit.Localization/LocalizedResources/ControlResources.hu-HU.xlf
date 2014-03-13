@@ -352,6 +352,16 @@
           <source>copy</source>
           <target state="translated">másolás</target>
         </trans-unit>
+        <trans-unit translate="yes" id="Resx/ChooseItems" xml:space="preserve">
+          <source>CHOOSE ITEMS</source>
+          <target state="translated">ELEMEK KIVÁLASZTÁSA</target>
+          
+        <note from="MultilingualBuild" annotates="source" priority="2">Default title for multiselect ListPicker.</note></trans-unit>
+        <trans-unit translate="yes" id="Resx/ChooseAnItem" xml:space="preserve">
+          <source>CHOOSE AN ITEM</source>
+          <target state="translated">ELEM KIVÁLASZTÁSA</target>
+          
+        <note from="MultilingualBuild" annotates="source" priority="2">Default title for ListPicker.</note></trans-unit>
       </group>
     </body>
   </file>

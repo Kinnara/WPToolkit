@@ -352,6 +352,16 @@
           <source>copy</source>
           <target state="needs-review-translation" state-qualifier="mt-suggestion">[63430][!!_ćòрў_!!]</target>
         </trans-unit>
+        <trans-unit translate="yes" id="Resx/ChooseItems" xml:space="preserve">
+          <source>CHOOSE ITEMS</source>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">[AAE81][!!_ĊΉÕÓŜĘ ÎŢÊΜŚ_!!]</target>
+          
+        <note from="MultilingualBuild" annotates="source" priority="2">Default title for multiselect ListPicker.</note></trans-unit>
+        <trans-unit translate="yes" id="Resx/ChooseAnItem" xml:space="preserve">
+          <source>CHOOSE AN ITEM</source>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">[67723][!!_ĆΗÕÓŠÊ ÂŃ ĮŤÉΜ_!!!!]</target>
+          
+        <note from="MultilingualBuild" annotates="source" priority="2">Default title for ListPicker.</note></trans-unit>
       </group>
     </body>
   </file>

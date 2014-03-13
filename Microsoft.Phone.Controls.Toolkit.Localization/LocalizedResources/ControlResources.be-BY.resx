@@ -393,4 +393,4 @@
   <data name="Copy" xml:space="preserve">
     <value>капіраваць</value>
   </data>
-</root>
+<data name="ChooseItems" xml:space="preserve"><value>ВЫБЕРЫЦЕ ЭЛЕМЕНТЫ</value><comment>Default title for multiselect ListPicker.</comment></data><data name="ChooseAnItem" xml:space="preserve"><value>ВЫБЕРЫЦЕ ЭЛЕМЕНТ</value><comment>Default title for ListPicker.</comment></data></root>

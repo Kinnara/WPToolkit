@@ -393,4 +393,4 @@
   <data name="Copy" xml:space="preserve">
     <value>sao chép</value>
   </data>
-</root>
+<data name="ChooseItems" xml:space="preserve"><value>CHỌN CÁC MỤC</value><comment>Default title for multiselect ListPicker.</comment></data><data name="ChooseAnItem" xml:space="preserve"><value>CHỌN MỘT MỤC</value><comment>Default title for ListPicker.</comment></data></root>

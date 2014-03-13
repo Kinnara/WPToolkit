@@ -393,4 +393,4 @@
   <data name="Copy" xml:space="preserve">
     <value>kopeeri</value>
   </data>
-</root>
+<data name="ChooseItems" xml:space="preserve"><value>ÜKSUSTE VALIMINE</value><comment>Default title for multiselect ListPicker.</comment></data><data name="ChooseAnItem" xml:space="preserve"><value>VALIGE ÜKSUS</value><comment>Default title for ListPicker.</comment></data></root>
