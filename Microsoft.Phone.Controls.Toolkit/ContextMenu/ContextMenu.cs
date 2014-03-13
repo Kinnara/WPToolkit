@@ -989,6 +989,16 @@ namespace Microsoft.Phone.Controls
                 if (_page != null)
                 {
                     bounds = SafeTransformToVisual(_page, _rootVisual).TransformBounds(new Rect(0, 0, _page.ActualWidth, _page.ActualHeight));
+
+                    if (portrait && bounds != null && _page.ApplicationBar != null && _page.ApplicationBar.IsVisible)
+                    {
+                        double actualReservedSpace = effectiveHeight - bounds.Bottom;
+                        double desiredReservedSpace = _page.ApplicationBar.DefaultSize;
+                        if (actualReservedSpace < desiredReservedSpace)
+                        {
+                            bounds.Height -= desiredReservedSpace - actualReservedSpace;
+                        }
+                    }
                 }
 
                 if (portrait && null != _rootVisual && null != bounds)
