@@ -160,6 +160,15 @@
     <Compile Include="Samples\FlyoutsSample.xaml.cs">
       <DependentUpon>FlyoutsSample.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Samples\ReaderboardEffectSample2.xaml.cs">
+      <DependentUpon>ReaderboardEffectSample2.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Samples\ReaderboardEffectSample1.xaml.cs">
+      <DependentUpon>ReaderboardEffectSample1.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Samples\ReaderboardTransitionSample.xaml.cs">
+      <DependentUpon>ReaderboardTransitionSample.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Samples\DateTimeConvertersSample.xaml.cs">
       <DependentUpon>DateTimeConvertersSample.xaml</DependentUpon>
     </Compile>
@@ -306,6 +315,18 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Samples\FlyoutsSample.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Samples\ReaderboardEffectSample2.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Samples\ReaderboardEffectSample1.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Samples\ReaderboardTransitionSample.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

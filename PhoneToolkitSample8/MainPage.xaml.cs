@@ -58,6 +58,7 @@ namespace PhoneToolkitSample8
                 new SampleItem("/Samples/SpeechTextBoxSample.xaml","speechtextbox","a speech-enabled phonetextbox" ),
                 new SampleItem("/Samples/RadioButtonGroupSample.xaml","radiobuttongroup","a group of radio buttons" ),
                 new SampleItem("/Samples/RatingControlSample.xaml","ratingcontrol","simple control for star-based rating" ),
+                new SampleItem("/Samples/ReaderboardTransitionSample.xaml","readerboardtransition","animate multiple elements between pages" ),
                 new SampleItem("/Samples/SlideInEffectSample.xaml","slideineffect","make elements responsive to pivotitem sliding" ),
                 new SampleItem("/Samples/StartViewSample.xaml","startview","panoramic view similar to the start screen" ),
                 new SampleItem("/Samples/ToggleSwitchSample.xaml","toggleswitch","offer a touch control for on/off choices" ),

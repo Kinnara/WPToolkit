@@ -213,6 +213,13 @@
                                 Header="ratingcontrol"
                                 Content="simple control for star-based rating"/>
                         </HyperlinkButton>
+                        <HyperlinkButton NavigateUri="/Samples/ReaderboardTransitionSample.xaml"
+                                         Style="{StaticResource HyperlinkEmptyStyle}">
+                            <system:HeaderedContentControl
+                                Style="{StaticResource MultilineHyperlinkStyle}"
+                                Header="readerboardtransition"
+                                Content="animate multiple elements between pages"/>
+                        </HyperlinkButton>
                         <HyperlinkButton NavigateUri="/Samples/SlideInEffectSample.xaml"
                                          Style="{StaticResource HyperlinkEmptyStyle}">
                             <system:HeaderedContentControl

@@ -367,6 +367,9 @@
     <Compile Include="..\Microsoft.Phone.Controls.Toolkit\DateTimePickers\TimePickerValueChangedEventArgs.cs">
       <Link>DateTimePickers\TimePickerValueChangedEventArgs.cs</Link>
     </Compile>
+    <Compile Include="..\Microsoft.Phone.Controls.Toolkit\Effects\ReaderboardEffect.cs">
+      <Link>Effects\ReaderboardEffect.cs</Link>
+    </Compile>
     <Compile Include="..\Microsoft.Phone.Controls.Toolkit\Effects\SlideInEffect.cs">
       <Link>Effects\SlideInEffect.cs</Link>
     </Compile>
@@ -559,6 +562,12 @@
     </Compile>
     <Compile Include="..\Microsoft.Phone.Controls.Toolkit\Transitions\TransitionFrameSlim.cs">
       <Link>Transitions\TransitionFrameSlim.cs</Link>
+    </Compile>
+    <Compile Include="..\Microsoft.Phone.Controls.Toolkit\Transitions\Transitions\ReaderboardTransition.cs">
+      <Link>Transitions\Transitions\ReaderboardTransition.cs</Link>
+    </Compile>
+    <Compile Include="..\Microsoft.Phone.Controls.Toolkit\Transitions\Transitions\ReaderboardTransitionMode.cs">
+      <Link>Transitions\Transitions\ReaderboardTransitionMode.cs</Link>
     </Compile>
     <Compile Include="..\Microsoft.Phone.Controls.Toolkit\VariableSizedWrapGrid\VariableSizedWrapGrid.cs">
       <Link>VariableSizedWrapGrid\VariableSizedWrapGrid.cs</Link>

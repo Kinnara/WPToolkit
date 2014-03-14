@@ -1,0 +1,42 @@
+﻿<toolkit:BasePage
+    x:Class="PhoneToolkitSample.Samples.ReaderboardEffectSample1"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
+    xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:toolkit="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit"
+    SupportedOrientations="PortraitOrLandscape"
+    mc:Ignorable="d" d:DesignHeight="768" d:DesignWidth="480"
+    shell:SystemTray.IsVisible="True"
+    Style="{StaticResource ReaderboardPageStyle}">
+
+    <!--LayoutRoot-->
+    <toolkit:PageUI Title="READERBOARD" Style="{StaticResource ReaderboardPageUIStyle}">
+        
+        <!--ContentPanel-->
+        <Grid x:Name="ContentPanel">
+            <ListBox Margin="0,0,-12,0" ItemsSource="{Binding Items}"
+                     toolkit:TiltEffect.IsTiltEnabled="True"     
+                     toolkit:ReaderboardEffect.RowIndex="1">
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <Grid Background="Transparent" Margin="0,10" Tap="Item_Tap">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition/>
+                            </Grid.ColumnDefinitions>
+                            <Border Background="#FF292929" Width="99" Height="99" Margin="12,0,18,0"/>
+                            <StackPanel Grid.Column="1">
+                                <TextBlock Text="{Binding LineOne}" FontSize="37.333" Margin="0,-14,0,0" Style="{StaticResource PhoneTextExtraLargeStyle}"/>
+                                <TextBlock Text="{Binding LineTwo}" Margin="0,-5,0,0" Style="{StaticResource PhoneTextAccentStyle}"/>
+                                <TextBlock Text="{Binding LineThree}" Margin="0,4,0,0" Style="{StaticResource PhoneTextSubtleStyle}"/>
+                            </StackPanel>
+                        </Grid>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+        </Grid>
+    </toolkit:PageUI>
+</toolkit:BasePage>
