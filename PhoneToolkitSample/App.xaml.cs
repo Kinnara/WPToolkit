@@ -53,7 +53,7 @@ namespace PhoneToolkitSample
 
                 // Enable non-production analysis visualization mode, 
                 // which shows areas of a page that are being GPU accelerated with a colored overlay.
-                Application.Current.Host.Settings.EnableCacheVisualization = true;
+                //Application.Current.Host.Settings.EnableCacheVisualization = true;
             }
 
             // Standard XAML initialization

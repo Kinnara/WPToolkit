@@ -109,6 +109,8 @@ namespace Microsoft.Phone.Controls
 
         private void OnLoaded(object sender, RoutedEventArgs e)
         {
+            ApplyTemplate();
+
             Picker.UpdateLayout();
 
             if (Picker.SelectedItems.Count == 0 && Picker.Items.Count > 0)

@@ -67,6 +67,8 @@ namespace Microsoft.Phone.Controls
 
         private void OnLoaded(object sender, RoutedEventArgs e)
         {
+            ApplyTemplate();
+
             _isOpening = true;
             AnimationHelper.InvokeOnSecondRendering(() =>
                 {

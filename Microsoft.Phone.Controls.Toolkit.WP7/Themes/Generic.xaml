@@ -1155,8 +1155,8 @@
                             </Button.Template>
                             <Grid Background="Transparent">
                                 <Border x:Name="ButtonBackground"
-                                    Background="{TemplateBinding Background}"
-                                    BorderBrush="{TemplateBinding BorderBrush}"
+                                        Background="{TemplateBinding Background}"
+                                        BorderBrush="{TemplateBinding BorderBrush}"
                                         BorderThickness="{TemplateBinding BorderThickness}"
                                         Margin="{StaticResource PhoneTouchTargetOverhang}">
                                     <StackPanel>
