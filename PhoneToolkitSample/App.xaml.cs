@@ -88,7 +88,7 @@ namespace PhoneToolkitSample
 
                 App.UICultureOverride = new CultureInfo(AppResources.ResourceLanguage);
                 App.RegionalCultureOverride = new CultureInfo(AppResources.ResourceLanguage);
-
+                
                 // Set the FlowDirection of all elements under the root frame based
                 // on the ResourceFlowDirection resource string for each
                 // supported language.
