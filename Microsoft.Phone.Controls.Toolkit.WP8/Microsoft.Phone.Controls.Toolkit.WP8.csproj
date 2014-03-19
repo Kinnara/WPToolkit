@@ -534,8 +534,6 @@
     <Compile Include="ListView\IncrementalLoadingTrigger.cs" />
     <Compile Include="ListView\ISupportIncrementalLoading.cs" />
     <Compile Include="ListView\LoadMoreItemsResult.cs" />
-    <Compile Include="Scroller\Scroller.cs" />
-    <Compile Include="Scroller\ScrollerContentPresenter.cs" />
     <Compile Include="ListView\ItemClickEventArgs.cs" />
     <Compile Include="ListView\ListView.cs" />
     <Compile Include="ListView\ListViewItem.cs" />

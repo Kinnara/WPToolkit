@@ -413,7 +413,7 @@
                                         HorizontalContentAlignment="Stretch"/>
                                 </StackPanel>
 
-                                <toolkit:Scroller Grid.Row="1">
+                                <ScrollViewer Grid.Row="1">
                                     <Grid>
                                         <Grid.RowDefinitions>
                                             <RowDefinition Height="Auto"/>
@@ -435,7 +435,7 @@
 
                                         <ContentPresenter Margin="12,10,12,95" Grid.Row="1"/>
                                     </Grid>
-                                </toolkit:Scroller>
+                                </ScrollViewer>
                             </Grid>
                         </Border>
                     </ControlTemplate>
