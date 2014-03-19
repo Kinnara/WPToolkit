@@ -66,7 +66,7 @@ namespace System.Windows.Controls
         /// </summary>
         /// <param name="node">The element to start from.</param>
         /// <returns>An enumerator of the ancestors.</returns>
-        internal static IEnumerable<FrameworkElement> GetVisualAncestors(this FrameworkElement node)
+        public static IEnumerable<FrameworkElement> GetVisualAncestors(this FrameworkElement node)
         {
             FrameworkElement parent = node.GetVisualParent();
             while (parent != null)
@@ -81,7 +81,7 @@ namespace System.Windows.Controls
         /// </summary>
         /// <param name="node">The element to check.</param>
         /// <returns>The visual parent.</returns>
-        internal static FrameworkElement GetVisualParent(this FrameworkElement node)
+        public static FrameworkElement GetVisualParent(this FrameworkElement node)
         {
             return VisualTreeHelper.GetParent(node) as FrameworkElement;
         }
@@ -97,7 +97,7 @@ namespace System.Windows.Controls
         /// <returns>
         /// The first parent of the framework element of the specified type.
         /// </returns>
-        internal static T GetParentByType<T>(this DependencyObject element)
+        public static T GetParentByType<T>(this DependencyObject element)
             where T : FrameworkElement
         {
             Debug.Assert(element != null, "The element cannot be null.");
