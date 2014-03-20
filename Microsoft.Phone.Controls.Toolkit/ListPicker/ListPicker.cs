@@ -4,17 +4,13 @@
 // All other rights reserved.
 
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.ComponentModel;
-using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
 using System.Windows.Data;
-using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
 using System.Windows.Navigation;
@@ -26,25 +22,27 @@ namespace Microsoft.Phone.Controls
     /// Class that implements a flexible list-picking experience with a custom interface for few/many items.
     /// </summary>
     /// <QualityBand>Preview</QualityBand>
-    [SuppressMessage("Microsoft.Maintainability", "CA1506:AvoidExcessiveClassCoupling", Justification = "This is a complicated control.")]
     [TemplatePart(Name = ItemsPresenterPartName, Type = typeof(ItemsPresenter))]
     [TemplatePart(Name = ItemsPresenterTranslateTransformPartName, Type = typeof(TranslateTransform))]
     [TemplatePart(Name = ItemsPresenterHostPartName, Type = typeof(Canvas))]
     [TemplatePart(Name = ButtonPartName, Type = typeof(ButtonBase))]
-    [TemplateVisualState(GroupName = PickerStatesGroupName, Name = PickerStatesNormalStateName)]
-    [TemplateVisualState(GroupName = PickerStatesGroupName, Name = PickerStatesHighlightedStateName)]
-    [TemplateVisualState(GroupName = PickerStatesGroupName, Name = PickerStatesDisabledStateName)]
-    public class ListPicker : TemplatedItemsControl<ListPickerItem>
+    [TemplateVisualState(GroupName = VisualStates.GroupCommon, Name = VisualStates.StateNormal)]
+    [TemplateVisualState(GroupName = VisualStates.GroupCommon, Name = StateHighlighted)]
+    [TemplateVisualState(GroupName = VisualStates.GroupCommon, Name = VisualStates.StateDisabled)]
+    [TemplateVisualState(GroupName = GroupPresenter, Name = StateInlineNormal)]
+    [TemplateVisualState(GroupName = GroupPresenter, Name = StateInlinePlaceholder)]
+    public class ListPicker : SimpleSelector
     {
         private const string ItemsPresenterPartName = "ItemsPresenter";
         private const string ItemsPresenterTranslateTransformPartName = "ItemsPresenterTranslateTransform";
         private const string ItemsPresenterHostPartName = "ItemsPresenterHost";
         private const string ButtonPartName = "Button";
 
-        private const string PickerStatesGroupName = "PickerStates";
-        private const string PickerStatesNormalStateName = "Normal";
-        private const string PickerStatesHighlightedStateName = "Highlighted";
-        private const string PickerStatesDisabledStateName = "Disabled";
+        private const string StateHighlighted = "Highlighted";
+
+        private const string GroupPresenter = "PresenterStates";
+        private const string StateInlineNormal = "InlineNormal";
+        private const string StateInlinePlaceholder = "InlinePlaceholder";
 
         /// <summary>
         /// In Mango, the size of list pickers in expanded mode was given extra offset.
@@ -65,14 +63,41 @@ namespace Microsoft.Phone.Controls
         private ItemsPresenter _itemsPresenterPart;
         private TranslateTransform _itemsPresenterTranslateTransformPart;
         private ButtonBase _buttonPart;
-        private bool _updatingSelection;
-        private int _deferredSelectedIndex = -1;
-        private object _deferredSelectedItem = null;
+
+        #region public string PlaceholderText
 
         /// <summary>
-        /// Event that is raised when the selection changes.
+        /// Gets or sets the text that is displayed in the control until the value is changed by a user action or some other operation.
         /// </summary>
-        public event SelectionChangedEventHandler SelectionChanged;
+        /// 
+        /// <returns>
+        /// The text that is displayed in the control when no value is selected. The default is an empty string ("").
+        /// </returns>
+        public string PlaceholderText
+        {
+            get { return (string)GetValue(PlaceholderTextProperty); }
+            set { SetValue(PlaceholderTextProperty, value); }
+        }
+
+        /// <summary>
+        /// Identifies the PlaceholderText dependency property.
+        /// </summary>
+        /// 
+        /// <returns>
+        /// The identifier for the PlaceholderText dependency property.
+        /// </returns>
+        public static readonly DependencyProperty PlaceholderTextProperty = DependencyProperty.Register(
+            "PlaceholderText",
+            typeof(string),
+            typeof(ListPicker),
+            new PropertyMetadata(string.Empty, (d, e) => ((ListPicker)d).OnPlaceholderTextChanged(e)));
+
+        private void OnPlaceholderTextChanged(DependencyPropertyChangedEventArgs e)
+        {
+            UpdateVisualStates(false);
+        }
+
+        #endregion
 
         /// <summary>
         /// Gets or sets the flag that indicates whether the ListPicker is expanded.
@@ -165,6 +190,7 @@ namespace Microsoft.Phone.Controls
                 TiltEffect.SetSuppressTilt(_buttonPart, newValue);
             }
 
+            UpdateVisualStates(true);
             SizeForAppropriateView(true);
             IsHighlighted = newValue;
         }
@@ -227,140 +253,6 @@ namespace Microsoft.Phone.Controls
         }
 
         /// <summary>
-        /// Gets or sets the index of the selected item.
-        /// </summary>
-        public int SelectedIndex
-        {
-            get { return (int)GetValue(SelectedIndexProperty); }
-            set { SetValue(SelectedIndexProperty, value); }
-        }
-
-        /// <summary>
-        /// Identifies the SelectedIndex DependencyProperty.
-        /// </summary>
-        public static readonly DependencyProperty SelectedIndexProperty =
-            DependencyProperty.Register("SelectedIndex", typeof(int), typeof(ListPicker), new PropertyMetadata(-1, OnSelectedIndexChanged));
-
-        private static void OnSelectedIndexChanged(DependencyObject o, DependencyPropertyChangedEventArgs e)
-        {
-            ((ListPicker)o).OnSelectedIndexChanged((int)e.OldValue, (int)e.NewValue);
-        }
-
-        [SuppressMessage("Microsoft.Naming", "CA2204:Literals should be spelled correctly", MessageId = "SelectedIndex", Justification = "Property name.")]
-        private void OnSelectedIndexChanged(int oldValue, int newValue)
-        {
-            // Validate new value
-            if ((Items.Count <= newValue) ||
-                ((0 < Items.Count) && (newValue < 0)) ||
-                ((0 == Items.Count) && (newValue != -1)))
-            {
-                if ((null == Template) && (0 <= newValue))
-                {
-                    // Can't set the value now; remember it for later
-                    _deferredSelectedIndex = newValue;
-                    return;
-                }
-                throw new InvalidOperationException(Properties.Resources.InvalidSelectedIndex);
-            }
-
-            // Synchronize SelectedItem property
-            if (!_updatingSelection)
-            {
-                _updatingSelection = true;
-                SelectedItem = (-1 != newValue) ? Items[newValue] : null;
-                _updatingSelection = false;
-            }
-
-            if (-1 != oldValue)
-            {
-                // Toggle container selection
-                ListPickerItem oldContainer = (ListPickerItem)ItemContainerGenerator.ContainerFromIndex(oldValue);
-                if (null != oldContainer)
-                {
-                    oldContainer.IsSelected = false;
-                }
-            }
-        }
-
-        /// <summary>
-        /// Gets or sets the selected item.
-        /// </summary>
-        public object SelectedItem
-        {
-            get { return (object)GetValue(SelectedItemProperty); }
-            set { SetValue(SelectedItemProperty, value); }
-        }
-
-        /// <summary>
-        /// Identifies the SelectedItem DependencyProperty.
-        /// </summary>
-        public static readonly DependencyProperty SelectedItemProperty =
-            DependencyProperty.Register("SelectedItem", typeof(object), typeof(ListPicker), new PropertyMetadata(null, OnSelectedItemChanged));
-
-        private static void OnSelectedItemChanged(DependencyObject o, DependencyPropertyChangedEventArgs e)
-        {
-            ((ListPicker)o).OnSelectedItemChanged(e.OldValue, e.NewValue);
-        }
-
-        [SuppressMessage("Microsoft.Naming", "CA2204:Literals should be spelled correctly", MessageId = "SelectedItem", Justification = "Property name.")]
-        private void OnSelectedItemChanged(object oldValue, object newValue)
-        {
-            if (newValue != null && (null == Items || Items.Count == 0))
-            {
-                if (null == Template)
-                {
-                    // Can't set the value now; remember it for later
-                    _deferredSelectedItem = newValue;
-                    return;
-                }
-                else
-                {
-                    throw new InvalidOperationException(Properties.Resources.InvalidSelectedItem);
-                }
-            }
-
-            // Validate new value
-            int newValueIndex = (null != newValue) ? Items.IndexOf(newValue) : -1;
-
-            if ((-1 == newValueIndex) && (0 < Items.Count))
-            {
-                throw new InvalidOperationException(Properties.Resources.InvalidSelectedItem);
-            }
-
-            if (InternalUtils.AreValuesEqual(oldValue, newValue))
-            {
-                return;
-            }
-
-            // Synchronize SelectedIndex property
-            if (!_updatingSelection)
-            {
-                _updatingSelection = true;
-                SelectedIndex = newValueIndex;
-                _updatingSelection = false;
-            }
-
-            // Switch to Normal mode or size for current item
-            if (IsExpanded)
-            {
-                IsExpanded = false;
-            }
-            else
-            {
-                SizeForAppropriateView(false);
-            }
-
-            // Fire SelectionChanged event
-            var handler = SelectionChanged;
-            if (null != handler)
-            {
-                IList removedItems = (null == oldValue) ? new object[0] : new object[] { oldValue };
-                IList addedItems = (null == newValue) ? new object[0] : new object[] { newValue };
-                handler(this, new SelectionChangedEventArgs(removedItems, addedItems));
-            }
-        }
-
-        /// <summary>
         /// Gets or sets the header of the control.
         /// </summary>
         public object Header
@@ -406,7 +298,7 @@ namespace Microsoft.Phone.Controls
             Duration duration = AnimationDuration;
             _heightAnimation.Duration = duration;
             _translateAnimation.Duration = duration;
-            IEasingFunction easingFunction = new ExponentialEase { EasingMode = EasingMode.EaseInOut, Exponent = 4 };
+            IEasingFunction easingFunction = new ExponentialEase { EasingMode = EasingMode.EaseInOut, Exponent = 3 };
             _heightAnimation.EasingFunction = easingFunction;
             _translateAnimation.EasingFunction = easingFunction;
 
@@ -414,11 +306,14 @@ namespace Microsoft.Phone.Controls
 
             Loaded += OnLoaded;
             Unloaded += OnUnloaded;
+
+            SizeChanged += OnFirstSizeChanged;
         }
 
         private void OnLoaded(object sender, RoutedEventArgs e)
         {
-            UpdateVisualStates (true);
+            UpdateVisualStates(false);
+            SizeForAppropriateView(false);
         }
 
         private void OnUnloaded(object sender, RoutedEventArgs e)
@@ -435,6 +330,13 @@ namespace Microsoft.Phone.Controls
                 _frame.Navigated -= OnFrameNavigated;
                 _frame = null;
             }
+        }
+
+        private void OnFirstSizeChanged(object sender, SizeChangedEventArgs e)
+        {
+            SizeChanged -= OnFirstSizeChanged;
+
+            UpdateVisualStates(false);
         }
 
         /// <summary>
@@ -502,19 +404,6 @@ namespace Microsoft.Phone.Controls
                 _buttonPart.Click += OnButtonClick;
                 SetBinding(IsPressedProperty, new Binding("IsPressed") { Source = _buttonPart });
             }
-
-
-            // Commit deferred SelectedIndex (if any)
-            if (-1 != _deferredSelectedIndex)
-            {
-                SelectedIndex = _deferredSelectedIndex;
-                _deferredSelectedIndex = -1;
-            }
-            if (null != _deferredSelectedItem)
-            {
-                SelectedItem = _deferredSelectedItem;
-                _deferredSelectedItem = null;
-            }
         }
 
         /// <summary>
@@ -526,7 +415,7 @@ namespace Microsoft.Phone.Controls
         /// </returns>
         protected override DependencyObject GetContainerForItemOverride()
         {
-            ListPickerItem container = (ListPickerItem)base.GetContainerForItemOverride();
+            ListPickerItem container = new ListPickerItem();
             container.CacheMode = new BitmapCache();
             return container;
         }
@@ -575,45 +464,32 @@ namespace Microsoft.Phone.Controls
         {
             base.OnItemsChanged(e);
 
-            if ((0 < Items.Count) && (null == SelectedItem))
+            // Translate it into view once layout has been updated for the added/removed item(s)
+            Dispatcher.BeginInvoke(() => SizeForAppropriateView(false));
+        }
+
+        internal override void OnSelectionChanged(int oldIndex, int newIndex, object oldValue, object newValue)
+        {
+            base.OnSelectionChanged(oldIndex, newIndex, oldValue, newValue);
+
+            // Switch to Normal mode or size for current item
+            if (IsExpanded)
             {
-                // Nothing selected (and no pending Binding); select the first item
-                if ((null == GetBindingExpression(SelectedIndexProperty)) &&
-                    (null == GetBindingExpression(SelectedItemProperty)))
-                {
-                    SelectedIndex = 0;
-                }
-            }
-            else if (0 == Items.Count)
-            {
-                // No items; select nothing
-                SelectedIndex = -1;
                 IsExpanded = false;
-            }
-            else if (Items.Count <= SelectedIndex)
-            {
-                // Selected item no longer present; select the last item
-                SelectedIndex = Items.Count - 1;
             }
             else
             {
-                // Re-synchronize SelectedIndex with SelectedItem if necessary
-                if (!object.Equals(Items[SelectedIndex], SelectedItem))
-                {
-                    int selectedItemIndex = Items.IndexOf(SelectedItem);
-                    if (-1 == selectedItemIndex)
-                    {
-                        SelectedItem = Items[0];
-                    }
-                    else
-                    {
-                        SelectedIndex = selectedItemIndex;
-                    }
-                }
+                SizeForAppropriateView(false);
             }
+        }
 
-            // Translate it into view once layout has been updated for the added/removed item(s)
-            Dispatcher.BeginInvoke(() => SizeForAppropriateView(false));
+        internal override bool OnSelectorItemClicked(SimpleSelectorItem item)
+        {
+            return false;
+        }
+
+        internal override void NotifySelectorItemSelected(SimpleSelectorItem selectorItem, bool isSelected)
+        {
         }
 
         /// <summary>
@@ -712,7 +588,7 @@ namespace Microsoft.Phone.Controls
 
         private void SizeForNormalMode(bool animate)
         {
-            ContentControl container = (ContentControl)ItemContainerGenerator.ContainerFromItem(SelectedItem);
+            ContentControl container = (ContentControl)ItemContainerGenerator.ContainerFromItem(SelectedItem ?? Items.FirstOrDefault());
             if (null != container)
             {
                 // Set height/translation to show just the selected item
@@ -817,15 +693,24 @@ namespace Microsoft.Phone.Controls
         {
             if (!IsEnabled)
             {
-                VisualStateManager.GoToState(this, PickerStatesDisabledStateName, useTransitions);
+                VisualStateManager.GoToState(this, VisualStates.StateDisabled, useTransitions);
             }
             else if (IsHighlighted)
             {
-                VisualStateManager.GoToState(this, PickerStatesHighlightedStateName, useTransitions);
+                VisualStateManager.GoToState(this, StateHighlighted, useTransitions);
             }
             else
             {
-                VisualStateManager.GoToState(this, PickerStatesNormalStateName, useTransitions);
+                VisualStateManager.GoToState(this, VisualStates.StateNormal, useTransitions);
+            }
+
+            if (SelectedIndex == -1 && !IsExpanded)
+            {
+                VisualStateManager.GoToState(this, StateInlinePlaceholder, useTransitions);
+            }
+            else
+            {
+                VisualStateManager.GoToState(this, StateInlineNormal, useTransitions);
             }
         }
     }

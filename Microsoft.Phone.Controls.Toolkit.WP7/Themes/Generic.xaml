@@ -809,67 +809,45 @@
                 <ControlTemplate TargetType="controls:ListPicker">
                     <StackPanel Background="Transparent">
                         <VisualStateManager.VisualStateGroups>
-                            <VisualStateGroup x:Name="PickerStates">
+                            <VisualStateGroup x:Name="CommonStates">
                                 <VisualState x:Name="Normal"/>
                                 <VisualState x:Name="Highlighted">
                                     <Storyboard>
-                                        <ObjectAnimationUsingKeyFrames
-                                            Storyboard.TargetName="ButtonBackground"
-                                            Storyboard.TargetProperty="Background"
-                                            Duration="0">
-                                            <DiscreteObjectKeyFrame
-                                                Value="{StaticResource PhoneTextBoxEditBackgroundBrush}"
-                                                KeyTime="0"/>
+                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="ButtonBackground" Storyboard.TargetProperty="Background">
+                                            <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource PhoneTextBoxEditBackgroundBrush}"/>
                                         </ObjectAnimationUsingKeyFrames>
-                                        <ObjectAnimationUsingKeyFrames
-                                            Storyboard.TargetName="ButtonBackground"
-                                            Storyboard.TargetProperty="BorderBrush"
-                                            Duration="0">
-                                            <DiscreteObjectKeyFrame
-                                                Value="{StaticResource PhoneTextBoxEditBackgroundBrush}"
-                                                KeyTime="0"/>
+                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="ButtonBackground" Storyboard.TargetProperty="BorderBrush">
+                                            <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource PhoneTextBoxEditBackgroundBrush}"/>
                                         </ObjectAnimationUsingKeyFrames>
-                                        <DoubleAnimation
-                                            Storyboard.TargetName="HighlightedVisual"
-                                            Storyboard.TargetProperty="Opacity"
-                                            Duration="0"
-                                            To="1"/>
+                                        <DoubleAnimation Storyboard.TargetName="HighlightedVisual" Storyboard.TargetProperty="Opacity" To="1" Duration="0"/>
                                     </Storyboard>
                                 </VisualState>
                                 <VisualState x:Name="Disabled">
                                     <Storyboard>
-                                        <ObjectAnimationUsingKeyFrames
-                                            Storyboard.TargetName="Header"
-                                            Storyboard.TargetProperty="Foreground"
-                                            Duration="0">
-                                            <DiscreteObjectKeyFrame
-                                                Value="{StaticResource PhoneDisabledBrush}"
-                                                KeyTime="0"/>
+                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="Header" Storyboard.TargetProperty="Foreground">
+                                            <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource PhoneDisabledBrush}"/>
                                         </ObjectAnimationUsingKeyFrames>
-                                        <ObjectAnimationUsingKeyFrames
-                                            Storyboard.TargetName="ButtonBackground"
-                                            Storyboard.TargetProperty="Background"
-                                            Duration="0">
-                                            <DiscreteObjectKeyFrame
-                                                Value="{StaticResource TransparentBrush}"
-                                                KeyTime="0"/>
+                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="ButtonBackground" Storyboard.TargetProperty="Background">
+                                            <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource TransparentBrush}"/>
                                         </ObjectAnimationUsingKeyFrames>
-                                        <ObjectAnimationUsingKeyFrames
-                                            Storyboard.TargetName="ButtonBackground"
-                                            Storyboard.TargetProperty="BorderBrush"
-                                            Duration="0">
-                                            <DiscreteObjectKeyFrame
-                                                Value="{StaticResource PhoneDisabledBrush}"
-                                                KeyTime="0"/>
+                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="ButtonBackground" Storyboard.TargetProperty="BorderBrush">
+                                            <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource PhoneDisabledBrush}"/>
                                         </ObjectAnimationUsingKeyFrames>
-                                        <ObjectAnimationUsingKeyFrames
-                                            Storyboard.TargetName="Button"
-                                            Storyboard.TargetProperty="Foreground"
-                                            Duration="0">
-                                            <DiscreteObjectKeyFrame
-                                                Value="{StaticResource PhoneDisabledBrush}"
-                                                KeyTime="0"/>
+                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="Button" Storyboard.TargetProperty="Foreground">
+                                            <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource PhoneDisabledBrush}"/>
                                         </ObjectAnimationUsingKeyFrames>
+                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="PlaceholderTextContentPresenter" Storyboard.TargetProperty="Foreground">
+                                            <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource PhoneDisabledBrush}"/>
+                                        </ObjectAnimationUsingKeyFrames>
+                                    </Storyboard>
+                                </VisualState>
+                            </VisualStateGroup>
+                            <VisualStateGroup x:Name="PresenterStates">
+                                <VisualState x:Name="InlineNormal"/>
+                                <VisualState x:Name="InlinePlaceholder">
+                                    <Storyboard>
+                                        <DoubleAnimation Storyboard.TargetName="PlaceholderTextContentPresenter" Storyboard.TargetProperty="Opacity" To="1" Duration="0" />
+                                        <DoubleAnimation Storyboard.TargetName="ItemsPresenter" Storyboard.TargetProperty="Opacity" To="0" Duration="0" />
                                     </Storyboard>
                                 </VisualState>
                             </VisualStateGroup>
@@ -889,18 +867,23 @@
                                 FontFamily="{TemplateBinding FontFamily}"
                                 FontSize="{TemplateBinding FontSize}">
                             <Button.Template>
-                                <ControlTemplate TargetType="ButtonBase">
+                                <ControlTemplate TargetType="Button">
                                     <ContentPresenter/>
                                 </ControlTemplate>
                             </Button.Template>
                             <Grid Background="Transparent">
                                 <Border x:Name="ButtonBackground"
-                                    Background="{TemplateBinding Background}"
-                                    BorderBrush="{TemplateBinding BorderBrush}"
+                                        Background="{TemplateBinding Background}"
+                                        BorderBrush="{TemplateBinding BorderBrush}"
                                         BorderThickness="{TemplateBinding BorderThickness}"
                                         Margin="{StaticResource PhoneTouchTargetOverhang}">
                                     <StackPanel>
                                         <Canvas x:Name="ItemsPresenterHost" MinHeight="42">
+                                            <TextBlock x:Name="PlaceholderTextContentPresenter"
+                                                       Foreground="{StaticResource PhoneTextBoxReadOnlyBrush}"
+                                                       Margin="7,2,0,6"
+                                                       Text="{TemplateBinding PlaceholderText}"
+                                                       Opacity="0"/>
                                             <ItemsPresenter x:Name="ItemsPresenter" IsHitTestVisible="False">
                                                 <ItemsPresenter.RenderTransform>
                                                     <TranslateTransform x:Name="ItemsPresenterTranslateTransform"/>
