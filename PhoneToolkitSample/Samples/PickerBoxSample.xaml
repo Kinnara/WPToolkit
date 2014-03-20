@@ -153,6 +153,10 @@
                                    FullModeHeader="CHOOSE DAY OF THE MONTH"
                                    PlaceholderText="choose day of the month"/>
 
+                <toolkit:PickerBox Header="Picker box disabled" SelectedIndex="0" IsEnabled="False">
+                    <sys:String>None</sys:String>
+                </toolkit:PickerBox>
+
                 <toolkit:PickerBox x:Name="AccountPicker"
                                    FullModeHeader="CHOOSE ACCOUNT"
                                    Visibility="Collapsed"
