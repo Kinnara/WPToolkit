@@ -151,24 +151,6 @@ namespace Microsoft.Phone.Controls.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to SelectedIndex must always be set to a valid value..
-        /// </summary>
-        internal static string InvalidSelectedIndex {
-            get {
-                return ResourceManager.GetString("InvalidSelectedIndex", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to SelectedItem must always be set to a valid value..
-        /// </summary>
-        internal static string InvalidSelectedItem {
-            get {
-                return ResourceManager.GetString("InvalidSelectedItem", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Invalid argument. Future dates and times are not supported..
         /// </summary>
         internal static string NonSupportedDateTime {

@@ -183,6 +183,10 @@
                                    Header="Monthly reset date"
                                    FullModeHeader="CHOOSE DAY OF THE MONTH"
                                    PlaceholderText="choose day of the month"/>
+                
+                <toolkit:PickerBox Header="Picker box disabled" SelectedIndex="0" IsEnabled="False">
+                    <sys:String>None</sys:String>
+                </toolkit:PickerBox>
             </StackPanel>
         </toolkit:PageUI.Content>
 
