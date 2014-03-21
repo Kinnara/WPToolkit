@@ -496,7 +496,7 @@
 
                         <Rectangle MinWidth="2" MinHeight="2" Fill="{TemplateBinding BorderBrush}" x:Name="Border1"/>
                         <Rectangle MinWidth="2" MinHeight="2" Fill="{TemplateBinding Background}" x:Name="Border2"/>
-                        <Grid x:Name="InnerGrid" Background="{TemplateBinding Background}">
+                        <Grid x:Name="InnerGrid" Background="{TemplateBinding Background}" Margin="-1">
                             <Grid.RenderTransform>
                                 <ScaleTransform x:Name="ScaleY"/>
                             </Grid.RenderTransform>
@@ -505,7 +505,9 @@
                                 <RowDefinition Height="Auto"/>
                                 <RowDefinition Height="*"/>
                             </Grid.RowDefinitions>
-                            <ItemsPresenter Margin="{TemplateBinding Padding}" Grid.Row="1"/>
+                            <Border Margin="1">
+                                <ItemsPresenter Margin="{TemplateBinding Padding}" Grid.Row="1"/>
+                            </Border>
                         </Grid>
                         <Rectangle MinWidth="2" MinHeight="2" Fill="{TemplateBinding Background}" x:Name="Border1Reversed"/>
                         <Rectangle MinWidth="2" MinHeight="2" Fill="{TemplateBinding BorderBrush}" x:Name="Border2Reversed"/>
