@@ -141,39 +141,6 @@
             <Setter Property="FontSize" Value="{StaticResource PivotTitleFontSize}"/>
         </Style>
 
-        <Style x:Key="PivotStyle" TargetType="controls:Pivot">
-            <Setter Property="Template">
-                <Setter.Value>
-                    <ControlTemplate TargetType="controls:Pivot">
-                        <Grid HorizontalAlignment="{TemplateBinding HorizontalAlignment}"
-                              VerticalAlignment="{TemplateBinding VerticalAlignment}">
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="Auto"/>
-                                <RowDefinition Height="Auto"/>
-                                <RowDefinition Height="*"/>
-                            </Grid.RowDefinitions>
-                            <Grid
-                                Grid.RowSpan="3"
-                                Background="{TemplateBinding Background}"/>
-                            <ContentControl HorizontalAlignment="Left" Style="{StaticResource PivotTitleStyle}"
-                                Content="{TemplateBinding Title}"
-                                Margin="24,16,0,-10"
-                                ContentTemplate="{TemplateBinding TitleTemplate}"/>
-                            <controlsPrimitives:PivotHeadersControl
-                                Grid.Row="1"
-                                x:Name="HeadersListElement"/>
-                            <ItemsPresenter
-                                Grid.Row="2"
-                                Margin="{TemplateBinding Padding}"
-                                x:Name="PivotItemPresenter"/>
-                        </Grid>
-                    </ControlTemplate>
-                </Setter.Value>
-            </Setter>
-        </Style>
-        <Style TargetType="controls:Pivot" BasedOn="{StaticResource PivotStyle}"/>
-        <Style TargetType="toolkit:LockablePivot" BasedOn="{StaticResource PivotStyle}"/>
-
         <Style x:Key="PivotTitleTextStyle" TargetType="TextBlock" BasedOn="{StaticResource PhoneTextBlockBase}">
             <Setter Property="FontFamily" Value="{StaticResource PhoneFontFamilySemiBold}"/>
             <Setter Property="FontSize" Value="{StaticResource PivotTitleFontSize}"/>
@@ -196,6 +163,10 @@
                     <TranslateTransform X="-1" Y="4"/>
                 </Setter.Value>
             </Setter>
+        </Style>
+
+        <Style x:Key="TurnstileFeatherTitlePanelStyle" TargetType="StackPanel">
+            <Setter Property="toolkit:TurnstileFeatherEffect.FeatheringIndex" Value="0"/>
         </Style>
 
         <Thickness x:Key="LandscapeTitleMargin">0,8,0,0</Thickness>
@@ -239,10 +210,10 @@
                 <Setter.Value>
                     <toolkit:NavigationInTransition>
                         <toolkit:NavigationInTransition.Backward>
-                            <toolkit:TurnstileFeatherTransition Mode="BackwardIn"/>
+                            <toolkit:TurnstileFeatherTransition Mode="BackwardIn" BeginTime="0:0:0.1"/>
                         </toolkit:NavigationInTransition.Backward>
                         <toolkit:NavigationInTransition.Forward>
-                            <toolkit:TurnstileFeatherTransition Mode="ForwardIn"/>
+                            <toolkit:TurnstileFeatherTransition Mode="ForwardIn" BeginTime="0:0:0.1"/>
                         </toolkit:NavigationInTransition.Forward>
                     </toolkit:NavigationInTransition>
                 </Setter.Value>
@@ -266,7 +237,7 @@
                 <Setter.Value>
                     <toolkit:NavigationInTransition>
                         <toolkit:NavigationInTransition.Forward>
-                            <toolkit:ReaderboardTransition Mode="In" BeginTime="0:0:0.05"/>
+                            <toolkit:ReaderboardTransition Mode="In" BeginTime="0:0:0.1"/>
                         </toolkit:NavigationInTransition.Forward>
                     </toolkit:NavigationInTransition>
                 </Setter.Value>
@@ -312,20 +283,7 @@
         </Style>
 
         <Style x:Key="TurnstileFeatherPageUIStyle" TargetType="toolkit:PageUI" BasedOn="{StaticResource PageUIBase}">
-            <Setter Property="TitleStyle">
-                <Setter.Value>
-                    <Style TargetType="ContentControl">
-                        <Setter Property="toolkit:TurnstileFeatherEffect.FeatheringIndex" Value="0"/>
-                    </Style>
-                </Setter.Value>
-            </Setter>
-            <Setter Property="HeaderStyle">
-                <Setter.Value>
-                    <Style TargetType="ContentControl">
-                        <Setter Property="toolkit:TurnstileFeatherEffect.FeatheringIndex" Value="1"/>
-                    </Style>
-                </Setter.Value>
-            </Setter>
+            <Setter Property="TitlePanelStyle" Value="{StaticResource TurnstileFeatherTitlePanelStyle}"/>
         </Style>
 
         <Style x:Key="ReaderboardPageUIStyle" TargetType="toolkit:PageUI" BasedOn="{StaticResource PageUIBase}">
@@ -382,7 +340,7 @@
                                     <RowDefinition/>
                                 </Grid.RowDefinitions>
 
-                                <StackPanel x:Name="PortraitTitlePanel" CacheMode="BitmapCache">
+                                <StackPanel x:Name="PortraitTitlePanel" Style="{TemplateBinding TitlePanelStyle}" CacheMode="BitmapCache">
                                     <ContentControl
                                         Content="{TemplateBinding Title}"
                                         ContentTemplate="{TemplateBinding TitleTemplate}"
@@ -402,7 +360,7 @@
                                             <RowDefinition/>
                                         </Grid.RowDefinitions>
 
-                                        <StackPanel x:Name="LandscapeTitlePanel" Margin="{StaticResource LandscapeTitleMargin}" Visibility="Collapsed" CacheMode="BitmapCache">
+                                        <StackPanel x:Name="LandscapeTitlePanel" Style="{TemplateBinding TitlePanelStyle}" Margin="{StaticResource LandscapeTitleMargin}" Visibility="Collapsed" CacheMode="BitmapCache">
                                             <ContentControl
                                                 Content="{TemplateBinding Title}"
                                                 ContentTemplate="{TemplateBinding TitleTemplate}"

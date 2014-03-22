@@ -13,7 +13,7 @@
     shell:SystemTray.IsVisible="True"
     Style="{StaticResource PageStyle}">
 
-    <controls:Pivot Title="BUTTONS SAMPLE">
+    <toolkit:PivotEx Title="BUTTONS SAMPLE">
         <controls:PivotItem Header="image">
             <ListBox Margin="0,0,-12,0">
                 <ListBox.ItemContainerStyle>
@@ -87,6 +87,6 @@
                 </StackPanel>
             </StackPanel>
         </controls:PivotItem>
-    </controls:Pivot>
+    </toolkit:PivotEx>
 
 </toolkit:BasePage>

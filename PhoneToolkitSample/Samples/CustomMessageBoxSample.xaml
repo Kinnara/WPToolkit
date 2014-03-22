@@ -23,7 +23,7 @@
     <!--Resources-->
     <phone:PhoneApplicationPage.Resources>
         <DataTemplate x:Key="PivotContentTemplate">
-            <controls:Pivot Margin="-12,0,0,0" Title="WHAT CAN I SAY?" Height="684" TextOptions.TextHintingMode="Animated">
+            <toolkit:PivotEx Margin="-12,0,0,0" Title="WHAT CAN I SAY?" Height="684" TextOptions.TextHintingMode="Animated">
                 <controls:PivotItem Header="call" FontFamily="{StaticResource PhoneFontFamilySemiLight}" FontSize="32">
                     <StackPanel Margin="12,0,0,0">
                         <TextBlock Text="Call anyone in your contacts list." 
@@ -111,7 +111,7 @@
                         </TextBlock>
                     </StackPanel>
                 </controls:PivotItem>
-            </controls:Pivot>
+            </toolkit:PivotEx>
         </DataTemplate>
     </phone:PhoneApplicationPage.Resources>
     

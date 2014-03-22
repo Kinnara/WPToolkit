@@ -176,6 +176,28 @@ namespace Microsoft.Phone.Controls
 
         #endregion
 
+        #region TitlePanelStyle
+
+        /// <summary>
+        /// Gets or sets the style applied to the title panel.
+        /// </summary>
+        public Style TitlePanelStyle
+        {
+            get { return (Style)GetValue(TitlePanelStyleProperty); }
+            set { SetValue(TitlePanelStyleProperty, value); }
+        }
+
+        /// <summary>
+        /// Identifies the TitlePanelStyle dependency property.
+        /// </summary>
+        public static readonly DependencyProperty TitlePanelStyleProperty = DependencyProperty.Register(
+            "TitlePanelStyle",
+            typeof(Style),
+            typeof(PageUI),
+            null);
+
+        #endregion
+
         /// <summary>
         /// Builds the visual tree for the
         /// <see cref="T:Microsoft.Phone.Controls.PageUI" /> control

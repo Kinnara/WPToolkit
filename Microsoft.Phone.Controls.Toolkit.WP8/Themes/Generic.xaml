@@ -10,6 +10,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
     xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
+    xmlns:phonePrimitives="clr-namespace:Microsoft.Phone.Controls.Primitives;assembly=Microsoft.Phone"
     xmlns:maptk="clr-namespace:Microsoft.Phone.Maps.Toolkit"
     xmlns:controls="clr-namespace:Microsoft.Phone.Controls"
     xmlns:primitives="clr-namespace:Microsoft.Phone.Controls.Primitives"
@@ -3175,7 +3176,7 @@
                                 <RowDefinition/>
                             </Grid.RowDefinitions>
 
-                            <StackPanel x:Name="TitlePanel" CacheMode="BitmapCache">
+                            <StackPanel x:Name="TitlePanel" Style="{TemplateBinding TitlePanelStyle}" CacheMode="BitmapCache">
                                 <ContentControl
                                     Content="{TemplateBinding Title}"
                                     ContentTemplate="{TemplateBinding TitleTemplate}"
@@ -3419,6 +3420,58 @@
                             <ImageBrush x:Name="ImageBrush" />
                         </Rectangle.OpacityMask>
                     </Rectangle>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style TargetType="controls:PivotEx">
+        <Setter Property="Margin" Value="0"/>
+        <Setter Property="Padding" Value="0"/>
+        <Setter Property="Foreground" Value="{StaticResource PhoneForegroundBrush}"/>
+        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="ItemsPanel">
+            <Setter.Value>
+                <ItemsPanelTemplate>
+                    <Grid />
+                </ItemsPanelTemplate>
+            </Setter.Value>
+        </Setter>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="controls:PivotEx">
+                    <Grid HorizontalAlignment="{TemplateBinding HorizontalAlignment}"
+                          VerticalAlignment="{TemplateBinding VerticalAlignment}">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+                        <Grid
+                            Grid.RowSpan="2"
+                            Background="{TemplateBinding Background}"/>
+                        <StackPanel Style="{TemplateBinding TitlePanelStyle}">
+                            <ContentControl
+                                HorizontalAlignment="Left"
+                                Style="{StaticResource PivotTitleStyle}"
+                                Content="{TemplateBinding Title}"
+                                Margin="24,16,0,-10"
+                                ContentTemplate="{TemplateBinding TitleTemplate}"/>
+                            <ContentControl
+                                HorizontalAlignment="Left"
+                                FontFamily="{StaticResource PhoneFontFamilyNormal}"
+                                FontSize="{StaticResource PhoneFontSizeNormal}"
+                                Foreground="{StaticResource PhoneTextMidContrastBrush}"
+                                Content="{TemplateBinding Subtitle}"
+                                Margin="24,5,0,-8"
+                                ContentTemplate="{TemplateBinding SubtitleTemplate}"/>
+                            <phonePrimitives:PivotHeadersControl
+                                x:Name="HeadersListElement"/>
+                        </StackPanel>
+                        <ItemsPresenter
+                            Grid.Row="1"
+                            Margin="{TemplateBinding Padding}"
+                            x:Name="PivotItemPresenter"/>
+                    </Grid>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
