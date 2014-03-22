@@ -82,7 +82,7 @@
     </phone:PhoneApplicationPage.Resources>
 
     <Grid x:Name="LayoutRoot" Background="Transparent" Margin="0,32,0,0">
-        <controls:Pivot Title="LONGLISTSELECTOR SAMPLES">
+        <toolkit:PivotEx Title="LONGLISTSELECTOR SAMPLES">
             <controls:PivotItem Header="buddies">
                 <toolkit:LongListSelector x:Name="buddies" Background="Transparent"
                                           Margin="0,-8,0,0"
@@ -182,7 +182,7 @@
                 </toolkit:LongListSelector>                
             </controls:PivotItem>          
             
-        </controls:Pivot>
+        </toolkit:PivotEx>
     </Grid>
 
 </toolkit:BasePage>

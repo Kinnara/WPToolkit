@@ -45,7 +45,7 @@ namespace Microsoft.Phone.Controls
         /// The delay in milliseconds between each element that 
         /// feathers forward in.
         /// </summary>
-        private const double ForwardInFeatheringDelay = 40.0;
+        private const double ForwardInFeatheringDelay = 33.0;
 
         /// <summary>
         /// The duration in milliseconds that each element takes
@@ -63,7 +63,7 @@ namespace Microsoft.Phone.Controls
         /// The delay in milliseconds between each element that 
         /// feathers forward out.
         /// </summary>
-        private const double ForwardOutFeatheringDelay = 50.0;
+        private const double ForwardOutFeatheringDelay = 33.0;
 
         /// <summary>
         /// The duration in milliseconds that each element takes
@@ -81,7 +81,7 @@ namespace Microsoft.Phone.Controls
         /// The delay in milliseconds between each element that 
         /// feathers backward in.
         /// </summary>
-        private const double BackwardInFeatheringDelay = 50.0; 
+        private const double BackwardInFeatheringDelay = 33.0; 
 
         /// <summary>
         /// The duration in milliseconds that each element takes
@@ -99,7 +99,7 @@ namespace Microsoft.Phone.Controls
         /// The delay in milliseconds between each element that 
         /// feathers backward out.
         /// </summary>
-        private const double BackwardOutFeatheringDelay = 40.0; 
+        private const double BackwardOutFeatheringDelay = 33.0; 
 
         /// <summary>
         /// The easing function that defines the exponential inwards 
@@ -842,7 +842,7 @@ namespace Microsoft.Phone.Controls
             if (!isParentTransparent)
             {
                 Pivot pivot = ancestors.OfType<Pivot>().FirstOrDefault();
-                if (pivot != null && pivot.SelectedItem != null)
+                if (pivot != null && pivot.SelectedItem != null && ancestors.Take(ancestors.IndexOf(pivot)).OfType<ItemsPresenter>().Any())
                 {
                     FrameworkElement selectedItemContainer = pivot.ItemContainerGenerator.ContainerFromItem(pivot.SelectedItem) as FrameworkElement;
                     if (selectedItemContainer != null)

@@ -100,8 +100,8 @@
     </phone:PhoneApplicationPage.Resources>
 
     <Grid x:Name="LayoutRoot" Background="Transparent">
-        <controls:Pivot Title="LONGLISTSELECTOR SAMPLES"
-                        toolkit:TurnstileFeatherEffect.FeatheringIndex="0">
+        <toolkit:PivotEx Title="LONGLISTSELECTOR SAMPLES"
+                         TitlePanelStyle="{StaticResource TurnstileFeatherTitlePanelStyle}">
             <controls:PivotItem Header="buddies">
                 <phone:LongListSelector x:Name="buddies"
                                           Margin="0,-8,0,0"
@@ -203,7 +203,7 @@
                 </phone:LongListSelector>                
             </controls:PivotItem>          
             
-        </controls:Pivot>
+        </toolkit:PivotEx>
     </Grid>
 
 </toolkit:BasePage>

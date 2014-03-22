@@ -21,7 +21,7 @@
 
     <Grid x:Name="LayoutRoot" Background="Transparent">
 
-        <controls:Pivot Title="HUBTILE SAMPLE" SelectionChanged="Pivot_SelectionChanged">
+        <toolkit:PivotEx Title="HUBTILE SAMPLE" SelectionChanged="Pivot_SelectionChanged">
 
             <!-- All images by Jeff Wilcox, used with permission -->
             <controls:PivotItem Header="food">
@@ -223,7 +223,7 @@
                     </Grid>
                 </ScrollViewer>
             </controls:PivotItem>
-        </controls:Pivot>
+        </toolkit:PivotEx>
     </Grid>
     
 </toolkit:BasePage>

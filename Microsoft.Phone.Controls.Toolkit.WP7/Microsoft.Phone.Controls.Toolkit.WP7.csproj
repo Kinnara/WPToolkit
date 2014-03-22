@@ -487,6 +487,9 @@
     <Compile Include="..\Microsoft.Phone.Controls.Toolkit\Input\GestureListener.cs">
       <Link>Input\GestureListener.cs</Link>
     </Compile>
+    <Compile Include="..\Microsoft.Phone.Controls.Toolkit\Pivot\PivotEx.cs">
+      <Link>Pivot\PivotEx.cs</Link>
+    </Compile>
     <Compile Include="..\Microsoft.Phone.Controls.Toolkit\Primitives\ContextMenuPanel.cs">
       <Link>Primitives\ContextMenuPanel.cs</Link>
     </Compile>

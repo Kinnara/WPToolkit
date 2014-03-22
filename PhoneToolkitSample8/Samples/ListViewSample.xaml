@@ -32,7 +32,7 @@
     </shell:SystemTray.ProgressIndicator>
 
     <Grid x:Name="LayoutRoot" Background="Transparent">
-        <controls:Pivot Title="{StaticResource ApplicationTitle}">
+        <toolkit:PivotEx Title="{StaticResource ApplicationTitle}">
             <controls:PivotItem Header="listview">
                 <Grid>
                     <toolkit:ListView x:Name="List"
@@ -75,7 +75,7 @@
                     </toolkit:ListView>
                 </Grid>
             </controls:PivotItem>
-        </controls:Pivot>
+        </toolkit:PivotEx>
     </Grid>
 
 </toolkit:BasePage>

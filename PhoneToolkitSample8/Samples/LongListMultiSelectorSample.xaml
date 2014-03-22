@@ -145,11 +145,11 @@
 
     <Grid x:Name="LayoutRoot" Background="Transparent">
         <!--Pivot Control-->
-        <phone:Pivot Title="LONGLISTMULTISELECTOR SAMPLE"
-                     x:Name="SamplePivot"
-                     SelectionChanged="OnPivotSelectionChanged"
-                     LoadingPivotItem="OnPivotLoadingPivotItem"
-                     toolkit:TurnstileFeatherEffect.FeatheringIndex="0">
+        <toolkit:PivotEx Title="LONGLISTMULTISELECTOR SAMPLE"
+                         x:Name="SamplePivot"
+                         SelectionChanged="OnPivotSelectionChanged"
+                         LoadingPivotItem="OnPivotLoadingPivotItem"
+                         TitlePanelStyle="{StaticResource TurnstileFeatherTitlePanelStyle}">
 
             <phone:PivotItem x:Name="MultiselectLbxItem" Header="multiselect lbx" Padding="0,0,0,72">
                 <toolkit:LongListMultiSelector x:Name="EmailList" 
@@ -245,7 +245,7 @@
                 </Grid>
             </phone:PivotItem>
 
-        </phone:Pivot>
+        </toolkit:PivotEx>
 
         <Grid x:Name="ZoomGrid" Visibility="Collapsed" Background="#C0000000" Tap="OnZoomGridTap">
             <Grid Margin="32" VerticalAlignment="Center">
