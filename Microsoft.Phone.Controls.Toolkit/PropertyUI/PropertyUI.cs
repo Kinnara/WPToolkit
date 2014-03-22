@@ -13,6 +13,7 @@ namespace Microsoft.Phone.Controls
     [TemplatePart(Name = ElementButtonName, Type = typeof(ButtonBase))]
     [TemplateVisualState(Name = StateInteractive, GroupName = GroupIsInteractive)]
     [TemplateVisualState(Name = StateNonInteractive, GroupName = GroupIsInteractive)]
+    [StyleTypedProperty(Property = ContextMenuStylePropertyName, StyleTargetType = typeof(ContextMenu))]
     public class PropertyUI : HeaderedContentControl
     {
         private const string ElementButtonName = "Button";
@@ -20,6 +21,8 @@ namespace Microsoft.Phone.Controls
         private const string GroupIsInteractive = "IsInteractiveStates";
         private const string StateInteractive = "Interactive";
         private const string StateNonInteractive = "NonInteractive";
+
+        private const string ContextMenuStylePropertyName = "ContextMenuStyle";
 
         private ContextMenu _contextMenu;
         private MenuItem _contextMenuCopy;
@@ -146,6 +149,8 @@ namespace Microsoft.Phone.Controls
                     Items = { _contextMenuCopy }
                 };
                 _contextMenu.Opened += OnContextMenuOpened;
+
+                ApplyContextMenuStyle();
             }
         }
 
@@ -189,6 +194,41 @@ namespace Microsoft.Phone.Controls
             if (Content != null)
             {
                 Clipboard.SetText(Content.ToString());
+            }
+        }
+
+        #endregion
+
+        #region public Style ContextMenuStyle
+
+        /// <summary>
+        /// Gets or sets the style that is used when rendering the context menu.
+        /// </summary>
+        public Style ContextMenuStyle
+        {
+            get { return (Style)GetValue(ContextMenuStyleProperty); }
+            set { SetValue(ContextMenuStyleProperty, value); }
+        }
+
+        /// <summary>
+        /// Identifies the ContextMenuStyleProperty dependency property.
+        /// </summary>
+        public static readonly DependencyProperty ContextMenuStyleProperty = DependencyProperty.Register(
+            ContextMenuStylePropertyName,
+            typeof(Style),
+            typeof(PropertyUI),
+            new PropertyMetadata((d, e) => ((PropertyUI)d).OnContextMenuStyleChanged()));
+
+        private void OnContextMenuStyleChanged()
+        {
+            ApplyContextMenuStyle();
+        }
+
+        private void ApplyContextMenuStyle()
+        {
+            if (_contextMenu != null)
+            {
+                _contextMenu.Style = ContextMenuStyle;
             }
         }
 

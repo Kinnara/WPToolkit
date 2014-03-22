@@ -3674,6 +3674,13 @@
                 </DataTemplate>
             </Setter.Value>
         </Setter>
+        <Setter Property="ContextMenuStyle">
+            <Setter.Value>
+                <Style TargetType="controls:ContextMenu">
+                    <Setter Property="IsZoomEnabled" Value="False"/>
+                </Style>
+            </Setter.Value>
+        </Setter>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="controls:PropertyUI">

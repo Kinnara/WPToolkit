@@ -1037,7 +1037,7 @@
                                             <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource PhoneTextBoxEditBorderBrush}"/>
                                         </ObjectAnimationUsingKeyFrames>
                                         <ObjectAnimationUsingKeyFrames Storyboard.TargetName="PlaceholderTextContentPresenter" Storyboard.TargetProperty="Foreground">
-                                            <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource PhoneTextBoxReadOnlyBrush}"/>
+                                            <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource PhoneTextBoxForegroundBrush}"/>
                                         </ObjectAnimationUsingKeyFrames>
                                     </Storyboard>
                                 </VisualState>
@@ -3788,6 +3788,13 @@
                                LineStackingStrategy="BlockLineHeight"
                                Margin="-1,7,0,-3"/>
                 </DataTemplate>
+            </Setter.Value>
+        </Setter>
+        <Setter Property="ContextMenuStyle">
+            <Setter.Value>
+                <Style TargetType="controls:ContextMenu">
+                    <Setter Property="IsZoomEnabled" Value="False"/>
+                </Style>
             </Setter.Value>
         </Setter>
         <Setter Property="Template">
