@@ -2,9 +2,9 @@
 
 Includes fixes, improvements, and more controls.
 
-[NuGet package](https://www.nuget.org/packages/WPtoolkit.Kinnara/)
+<a href="https://www.nuget.org/packages/WPtoolkit.Kinnara/" target="_blank">NuGet package</a>
 
-[Sample app in Windows Phone Store](http://www.windowsphone.com/s?appid=54871b50-f399-42a7-8024-16070a338176)
+<a href="http://www.windowsphone.com/s?appid=54871b50-f399-42a7-8024-16070a338176" target="_blank">Sample app in Windows Phone Store</a>
 
 
 ## Highlights
