@@ -30,10 +30,11 @@ namespace PhoneToolkitSample.Data
         /// Constructs a Picture object
         /// </summary>
         /// <param name="city"></param>
-        public Picture(string city)
+        /// <param name="fileName"></param>
+        public Picture(string city, string fileName = null)
         {
             this.City = city;
-            this.Url = "/Images/" + city + ".jpg";
+            this.Url = "/Images/" + (fileName ?? city) + ".jpg";
         }
     }
 
@@ -48,7 +49,7 @@ namespace PhoneToolkitSample.Data
         public PicturesAlbum()
         {
             this.Add(new Picture("Copenhagen"));
-            this.Add(new Picture("Mürren"));
+            this.Add(new Picture("Mürren", "Murren"));
             this.Add(new Picture("Neuschwanstein"));
             this.Add(new Picture("Paris"));
             this.Add(new Picture("Seattle"));
