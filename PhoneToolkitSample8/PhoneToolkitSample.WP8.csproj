@@ -709,8 +709,8 @@ ar-SA;az-Latn-AZ;be-BY;bg-BG;ca-ES;cs-CZ;da-DK;de-DE;el-GR;en-GB;en-US;es-ES;es-
     <Content Include="..\PhoneToolkitSample\Images\Movie.jpg">
       <Link>Images\Movie.jpg</Link>
     </Content>
-    <Content Include="..\PhoneToolkitSample\Images\Mürren.jpg">
-      <Link>Images\Mürren.jpg</Link>
+    <Content Include="..\PhoneToolkitSample\Images\Murren.jpg">
+      <Link>Images\Murren.jpg</Link>
     </Content>
     <Content Include="..\PhoneToolkitSample\Images\Neuschwanstein.jpg">
       <Link>Images\Neuschwanstein.jpg</Link>
