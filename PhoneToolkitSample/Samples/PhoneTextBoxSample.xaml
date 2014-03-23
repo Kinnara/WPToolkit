@@ -20,7 +20,7 @@
     Style="{StaticResource PageStyle}">
 
     <toolkit:PageUI Header="phonetextbox" Style="{StaticResource ScrollablePageUIStyle}">
-        <Grid x:Name="ContentPanel" Margin="0,0,0,313">
+        <Grid x:Name="ContentPanel">
             <Grid.Children>
                 <StackPanel Orientation="Vertical">
                     <toolkit:PhoneTextBox PlaceholderText="First Name" />

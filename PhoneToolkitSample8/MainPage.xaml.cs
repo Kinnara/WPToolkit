@@ -71,10 +71,20 @@ namespace PhoneToolkitSample8
             };
         }
 
+        private void lls_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            var item = lls.SelectedItem as SampleItem;
+            if (item != null)
+            {
+                lls.SelectedItem = null;
+                NavigationService.Navigate(new Uri(item.Url, UriKind.Relative));
+            }
+        }
+
         private void ApplicationBarIconSettingsButton_Click(object sender, EventArgs e)
         {
             NavigationService.Navigate(new Uri("/Settings.xaml", UriKind.RelativeOrAbsolute));
-        }   
+        }
     }
 
     public class SampleItem

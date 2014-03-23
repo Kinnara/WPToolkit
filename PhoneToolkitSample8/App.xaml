@@ -44,6 +44,7 @@
                 <Setter.Value>
                     <DataTemplate>
                         <TextBlock Style="{StaticResource PhoneTextSubtleStyle}"
+                                   Foreground="{StaticResource PhoneTextMidContrastBrush}"
                                    Margin="23,-8,0,-5"
                                    Padding="0,13,0,0"
                                    Text="{Binding}"/>

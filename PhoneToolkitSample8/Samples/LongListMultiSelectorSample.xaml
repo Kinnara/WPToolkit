@@ -145,7 +145,7 @@
 
     <Grid x:Name="LayoutRoot" Background="Transparent">
         <!--Pivot Control-->
-        <toolkit:PivotEx Title="LONGLISTMULTISELECTOR SAMPLE"
+        <toolkit:PivotEx Title="LONGLISTMULTISELECTOR"
                          x:Name="SamplePivot"
                          SelectionChanged="OnPivotSelectionChanged"
                          LoadingPivotItem="OnPivotLoadingPivotItem"

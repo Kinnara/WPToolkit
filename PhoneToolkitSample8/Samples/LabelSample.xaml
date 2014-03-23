@@ -27,7 +27,7 @@
         </ResourceDictionary>
     </toolkit:BasePage.Resources>
     
-    <phone:Pivot Title="LABEL SAMPLE">
+    <phone:Pivot Title="LABEL">
         <phone:PivotItem Header="features">
             <ScrollViewer Margin="-12,0">
                 <StackPanel Margin="12,10,12,95">
