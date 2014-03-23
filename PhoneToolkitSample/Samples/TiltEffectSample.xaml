@@ -48,7 +48,7 @@
             <HyperlinkButton Content="Click for online documentation"
                              TargetName="_self"
                              HorizontalAlignment="Left"
-                             NavigateUri="http://msdn.microsoft.com/en-us/library/ff941094(VS.92).aspx"
+                             NavigateUri="http://msdn.microsoft.com/en-us/library/windowsphone/develop/ff941094(v=vs.105).aspx"
                              toolkit:TiltEffect.SuppressTilt="True"
                              CacheMode="BitmapCache"/>
 

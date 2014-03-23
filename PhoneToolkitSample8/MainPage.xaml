@@ -10,12 +10,12 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
     shell:SystemTray.IsVisible="True"
-    Style="{StaticResource PageStyle}"
-    Margin="0,0,0,72">
+    SupportedOrientations="PortraitOrLandscape"
+    Style="{StaticResource PageStyle}">
 
     <toolkit:PageUI Header="samples">
         <Grid>
-            <phone:LongListSelector x:Name="lls" Margin="-12,0">
+            <phone:LongListSelector x:Name="lls" Margin="-12,0" SelectionChanged="lls_SelectionChanged">
                 <phone:LongListSelector.ListHeaderTemplate>
                     <DataTemplate>
                         <Rectangle Height="10"/>
@@ -23,12 +23,10 @@
                 </phone:LongListSelector.ListHeaderTemplate>
                 <phone:LongListSelector.ItemTemplate>
                     <DataTemplate>
-                        <HyperlinkButton NavigateUri="{Binding Url}" Style="{StaticResource HyperlinkEmptyStyle}">
-                            <system:HeaderedContentControl
-                                Style="{StaticResource MultilineHyperlinkStyle}"
-                                Header="{Binding Header}"
-                                Content="{Binding Description}"/>
-                        </HyperlinkButton>
+                        <system:HeaderedContentControl
+                            Style="{StaticResource MultilineHyperlinkStyle}"
+                            Header="{Binding Header}"
+                            Content="{Binding Description}"/>
                     </DataTemplate>
                 </phone:LongListSelector.ItemTemplate>
                 <phone:LongListSelector.ListFooterTemplate>
@@ -41,10 +39,10 @@
     </toolkit:PageUI>
 
     <phone:PhoneApplicationPage.ApplicationBar>
-        <shell:ApplicationBar Opacity="0.999">
+        <shell:ApplicationBar>
             <shell:ApplicationBarIconButton 
                 IconUri="/Assets/ApplicationBar.settings.png" Text="Settings"
-                         IsEnabled="True" Click="ApplicationBarIconSettingsButton_Click"/>
+                IsEnabled="True" Click="ApplicationBarIconSettingsButton_Click"/>
         </shell:ApplicationBar>
     </phone:PhoneApplicationPage.ApplicationBar>
 </toolkit:BasePage>

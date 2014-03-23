@@ -38,7 +38,7 @@
     </toolkit:TransitionService.NavigationOutTransition>
 
     <Grid x:Name="LayoutRoot">
-        <controls:Panorama Title="WrapPanel sample">
+        <controls:Panorama Title="wrappanel">
 
             <controls:PanoramaItem Header="home">
                 <StackPanel>

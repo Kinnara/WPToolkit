@@ -21,7 +21,7 @@
 
     <Grid x:Name="LayoutRoot" Background="Transparent">
 
-        <toolkit:PivotEx Title="HUBTILE SAMPLE" SelectionChanged="Pivot_SelectionChanged">
+        <toolkit:PivotEx Title="HUBTILE" SelectionChanged="Pivot_SelectionChanged">
 
             <!-- All images by Jeff Wilcox, used with permission -->
             <controls:PivotItem Header="food">

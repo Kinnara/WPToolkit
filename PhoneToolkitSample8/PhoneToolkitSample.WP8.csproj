@@ -769,7 +769,6 @@ ar-SA;az-Latn-AZ;be-BY;bg-BG;ca-ES;cs-CZ;da-DK;de-DE;el-GR;en-GB;en-US;es-ES;es-
     <Content Include="..\PhoneToolkitSample\Toolkit.Content\ApplicationBar.Select.png">
       <Link>Toolkit.Content\ApplicationBar.Select.png</Link>
     </Content>
-    <Content Include="Assets\AlignmentGrid.png" />
     <Content Include="Assets\ApplicationIcon.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
