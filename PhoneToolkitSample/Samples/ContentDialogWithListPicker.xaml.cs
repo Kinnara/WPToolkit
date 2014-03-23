@@ -9,6 +9,7 @@ namespace PhoneToolkitSample.Samples
             InitializeComponent();
 
             Picker.ItemsSource = new string[] { "5 minutes", "10 minutes", "1 hour", "4 hours", "1 day" };
+            Picker.SelectedIndex = 0;
         }
 
         private void ContentDialog_Closing(object sender, ContentDialogClosingEventArgs e)
