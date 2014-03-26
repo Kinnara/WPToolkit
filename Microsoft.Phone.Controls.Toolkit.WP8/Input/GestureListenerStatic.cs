@@ -373,6 +373,8 @@ namespace Microsoft.Phone.Controls
             FrameworkElement originalSource = null;
             bool handled = false;
 
+            if (_elements == null) return;
+
             foreach (FrameworkElement element in _elements)
             {
                 if (releaseMouseCapture)
