@@ -12,7 +12,7 @@ namespace Microsoft.Phone.Controls
 {
     /// <summary>
     /// Provides attached properties to flip FrameworkElements in
-    /// and out during page transitions. The result is a 'readerboard' effect
+    /// and out during transitions. The result is a 'readerboard' effect
     /// added to the select elements.
     /// </summary>
     public sealed class ReaderboardEffect : DependencyObject
@@ -76,10 +76,10 @@ namespace Microsoft.Phone.Controls
         private static readonly Point Origin = new Point(0, 0);
 
         /// <summary>
-        /// Private manager that represents a correlation between pages
+        /// Private manager that represents a correlation between roots
         /// and the indexed elements it contains.
         /// </summary>
-        private static Dictionary<PhoneApplicationPage, List<WeakReference>> _pagesToReferences = new Dictionary<PhoneApplicationPage, List<WeakReference>>();
+        private static Dictionary<UIElement, List<WeakReference>> _rootsToReferences = new Dictionary<UIElement, List<WeakReference>>();
 
         /// <summary>
         /// Identifies the set of framework elements that are targeted
@@ -191,52 +191,52 @@ namespace Microsoft.Phone.Controls
 
         #endregion
 
-        #region ParentPage DependencyProperty
+        #region Root DependencyProperty
 
         /// <summary>
-        /// Gets the parent page of the specified dependency object.
+        /// Gets the root of the specified dependency object.
         /// </summary>
         /// <param name="obj">The dependency object.</param>
-        /// <returns>The page.</returns>
-        private static PhoneApplicationPage GetParentPage(DependencyObject obj)
+        /// <returns>The root.</returns>
+        private static UIElement GetRoot(DependencyObject obj)
         {
-            return (PhoneApplicationPage)obj.GetValue(ParentPageProperty);
+            return (UIElement)obj.GetValue(RootProperty);
         }
 
         /// <summary>
-        /// Sets the parent page of the specified dependency object.
+        /// Sets the root of the specified dependency object.
         /// </summary>
         /// <param name="obj">The depedency object.</param>
-        /// <param name="value">The page.</param>
-        private static void SetParentPage(DependencyObject obj, PhoneApplicationPage value)
+        /// <param name="value">The root.</param>
+        private static void SetRoot(DependencyObject obj, UIElement value)
         {
-            obj.SetValue(ParentPageProperty, value);
+            obj.SetValue(RootProperty, value);
         }
 
         /// <summary>
-        /// Identifies the ParentPage dependency property.
+        /// Identifies the Root dependency property.
         /// </summary>
-        private static readonly DependencyProperty ParentPageProperty =
-            DependencyProperty.RegisterAttached("ParentPage", typeof(PhoneApplicationPage), typeof(ReaderboardEffect), new PropertyMetadata(null, OnParentPagePropertyChanged));
+        private static readonly DependencyProperty RootProperty =
+            DependencyProperty.RegisterAttached("Root", typeof(UIElement), typeof(ReaderboardEffect), new PropertyMetadata(null, OnRootPropertyChanged));
 
         /// <summary>
-        /// Manages subscription to a page.
+        /// Manages subscription to a root.
         /// </summary>
         /// <param name="obj">The dependency object.</param>
         /// <param name="e">The event arguments.</param>
-        private static void OnParentPagePropertyChanged(DependencyObject obj, DependencyPropertyChangedEventArgs e)
+        private static void OnRootPropertyChanged(DependencyObject obj, DependencyPropertyChangedEventArgs e)
         {
             FrameworkElement target = (FrameworkElement)obj;
-            PhoneApplicationPage oldPage = (PhoneApplicationPage)e.OldValue;
-            PhoneApplicationPage newPage = (PhoneApplicationPage)e.NewValue;
+            UIElement oldRoot = (UIElement)e.OldValue;
+            UIElement newRoot = (UIElement)e.NewValue;
             List<WeakReference> references;
 
-            if (newPage != null)
+            if (newRoot != null)
             {
-                if (!_pagesToReferences.TryGetValue(newPage, out references))
+                if (!_rootsToReferences.TryGetValue(newRoot, out references))
                 {
                     references = new List<WeakReference>();
-                    _pagesToReferences.Add(newPage, references);
+                    _rootsToReferences.Add(newRoot, references);
                 }
                 else
                 {
@@ -252,13 +252,13 @@ namespace Microsoft.Phone.Controls
             }
             else
             {
-                if (_pagesToReferences.TryGetValue(oldPage, out references))
+                if (_rootsToReferences.TryGetValue(oldRoot, out references))
                 {
                     WeakReferenceHelper.TryRemoveTarget(references, target);
 
                     if (references.Count == 0)
                     {
-                        _pagesToReferences.Remove(oldPage);
+                        _rootsToReferences.Remove(oldRoot);
                     }
                 }
             }
@@ -497,24 +497,12 @@ namespace Microsoft.Phone.Controls
         /// <returns>
         /// A set of weak references to items sorted by their row index.
         /// </returns>
-        private static IList<WeakReference> GetTargetsToAnimate()
+        private static IList<WeakReference> GetTargetsToAnimate(UIElement root)
         {
             List<WeakReference> references;
             List<WeakReference> targets = new List<WeakReference>();
-            PhoneApplicationPage page = null;
-            PhoneApplicationFrame frame = Application.Current.RootVisual as PhoneApplicationFrame;
 
-            if (frame != null)
-            {
-                page = frame.Content as PhoneApplicationPage;
-            }
-
-            if (page == null)
-            {
-                return null;
-            }
-
-            if (!_pagesToReferences.TryGetValue(page, out references))
+            if (!_rootsToReferences.TryGetValue(root, out references))
             {
                 return null;
             }
@@ -581,14 +569,26 @@ namespace Microsoft.Phone.Controls
         {
             if (!ReaderboardEffect.GetIsSubscribed(target))
             {
-                // Find the parent page.
-                PhoneApplicationPage page = target.GetParentByType<PhoneApplicationPage>();
-                if (page == null)
+                // Find the root.
+                UIElement root = null;
+                if (root == null)
+                {
+                    foreach (FrameworkElement ancestor in target.GetVisualAncestors())
+                    {
+                        root = ancestor;
+                        if (root is PhoneApplicationPage)
+                        {
+                            break;
+                        }
+                    }
+                }
+
+                if (root == null)
                 {
                     return;
                 }
 
-                ReaderboardEffect.SetParentPage(target, page);
+                ReaderboardEffect.SetRoot(target, root);
                 ReaderboardEffect.SetIsSubscribed(target, true);
             }
         }
@@ -602,7 +602,7 @@ namespace Microsoft.Phone.Controls
             // If element is subscribed, unsubscribe.
             if (ReaderboardEffect.GetIsSubscribed(target))
             {
-                ReaderboardEffect.SetParentPage(target, null);
+                ReaderboardEffect.SetRoot(target, null);
                 ReaderboardEffect.SetIsSubscribed(target, false);
             }
         }
@@ -610,9 +610,8 @@ namespace Microsoft.Phone.Controls
         /// <summary>
         /// Prepares a framework element to be flipped by adding a plane projection to it.
         /// </summary>
-        /// <param name="root">The root visual.</param>
         /// <param name="element">The framework element.</param>
-        private static bool TryAttachProjection(PhoneApplicationFrame root, FrameworkElement element)
+        private static bool TryAttachProjection(FrameworkElement element)
         {
             // Cache original projection.
             ReaderboardEffect.SetOriginalProjection(element, element.Projection);
@@ -715,10 +714,13 @@ namespace Microsoft.Phone.Controls
         /// The storyboard where the animations
         /// will be added.
         /// </param>
+        /// <param name="beginTime">
+        /// </param>
+        /// <param name="noDelay">
+        /// </param>
         private static void ComposeInStoryboard(Storyboard storyboard, TimeSpan? beginTime, bool noDelay)
         {
             int counter = 0;
-            PhoneApplicationFrame root = Application.Current.RootVisual as PhoneApplicationFrame;
 
             foreach (WeakReference r in _targets)
             {
@@ -729,7 +731,7 @@ namespace Microsoft.Phone.Controls
                 // Hide the element until the storyboard is begun.
                 element.Opacity = 0.0;
 
-                if (!TryAttachProjection(root, element))
+                if (!TryAttachProjection(element))
                 {
                     continue;
                 }
@@ -777,10 +779,11 @@ namespace Microsoft.Phone.Controls
         /// The storyboard where the animations
         /// will be added.
         /// </param>
+        /// <param name="noDelay">
+        /// </param>
         private static void ComposeOutStoryboard(Storyboard storyboard, bool noDelay)
         {
             int counter = 0;
-            PhoneApplicationFrame root = Application.Current.RootVisual as PhoneApplicationFrame;
 
             foreach (WeakReference r in _targets)
             {
@@ -788,7 +791,7 @@ namespace Microsoft.Phone.Controls
                 double originalOpacity = element.Opacity;
                 ReaderboardEffect.SetOriginalOpacity(element, originalOpacity);
 
-                if (!TryAttachProjection(root, element))
+                if (!TryAttachProjection(element))
                 {
                     continue;
                 }
@@ -826,6 +829,8 @@ namespace Microsoft.Phone.Controls
         /// Adds a set of animations corresponding to the 
         /// readerboard effect.
         /// </summary>
+        /// <param name="root">
+        /// </param>
         /// <param name="storyboard">
         /// The storyboard where the animations
         /// will be added.</param>
@@ -834,11 +839,13 @@ namespace Microsoft.Phone.Controls
         /// <param name="mode">
         /// The mode of the readerboard effect.
         /// </param>
-        internal static void ComposeStoryboard(Storyboard storyboard, TimeSpan? beginTime, ReaderboardTransitionMode mode, bool noDelay)
+        /// <param name="noDelay">
+        /// </param>
+        internal static void ComposeStoryboard(UIElement root, Storyboard storyboard, TimeSpan? beginTime, ReaderboardTransitionMode mode, bool noDelay)
         {
             RestoreProjections();
 
-            _targets = GetTargetsToAnimate();
+            _targets = GetTargetsToAnimate(root);
 
             if (_targets == null)
             {

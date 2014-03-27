@@ -191,9 +191,6 @@
     <Compile Include="..\Microsoft.Phone.Controls.Toolkit\Common\PhysicsConstants.cs">
       <Link>Common\PhysicsConstants.cs</Link>
     </Compile>
-    <Compile Include="..\Microsoft.Phone.Controls.Toolkit\Common\PickerFlyoutHelper.cs">
-      <Link>Common\PickerFlyoutHelper.cs</Link>
-    </Compile>
     <Compile Include="..\Microsoft.Phone.Controls.Toolkit\Common\PickerPageHelper.cs">
       <Link>Common\PickerPageHelper.cs</Link>
     </Compile>
@@ -409,11 +406,17 @@
     <Compile Include="..\Microsoft.Phone.Controls.Toolkit\Flyouts\FlyoutPresenter.cs">
       <Link>Flyouts\FlyoutPresenter.cs</Link>
     </Compile>
+    <Compile Include="..\Microsoft.Phone.Controls.Toolkit\Flyouts\FlyoutTransition.cs">
+      <Link>Flyouts\FlyoutTransition.cs</Link>
+    </Compile>
     <Compile Include="..\Microsoft.Phone.Controls.Toolkit\Flyouts\PickerFlyout.cs">
       <Link>Flyouts\PickerFlyout.cs</Link>
     </Compile>
     <Compile Include="..\Microsoft.Phone.Controls.Toolkit\Flyouts\PickerFlyoutBase.cs">
       <Link>Flyouts\PickerFlyoutBase.cs</Link>
+    </Compile>
+    <Compile Include="..\Microsoft.Phone.Controls.Toolkit\Flyouts\PickerFlyoutHelper.cs">
+      <Link>Flyouts\PickerFlyoutHelper.cs</Link>
     </Compile>
     <Compile Include="..\Microsoft.Phone.Controls.Toolkit\Flyouts\PickerFlyoutPresenter.cs">
       <Link>Flyouts\PickerFlyoutPresenter.cs</Link>

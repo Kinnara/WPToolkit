@@ -1,6 +1,5 @@
 ﻿using Microsoft.Phone.Controls.Primitives;
 using System;
-using System.Globalization;
 using System.Windows;
 using System.Windows.Controls;
 
@@ -48,8 +47,6 @@ namespace Microsoft.Phone.Controls
 
         private Border ThirdPickerHost { get; set; }
 
-        private bool IsOpen { get; set; }
-
         /// <summary>
         /// Builds the visual tree for the control when a new template is applied.
         /// </summary>
@@ -69,8 +66,6 @@ namespace Microsoft.Phone.Controls
             {
                 ThirdPickerHost.Child = null;
             }
-
-            _helper.BeforeOnApplyTemplate();
 
             base.OnApplyTemplate();
 
@@ -96,7 +91,7 @@ namespace Microsoft.Phone.Controls
                 ThirdPickerHost.Child = _helper.ThirdPicker;
             }
 
-            _helper.AfterOnApplyTemplate();
+            _helper.OnApplyTemplate();
 
             _orientationHelper.OnApplyTemplate();
         }

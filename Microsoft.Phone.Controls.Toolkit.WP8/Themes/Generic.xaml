@@ -750,53 +750,7 @@
                                 </StackPanel>
                             </DataTemplate>
                         </Border.Resources>
-                        <Border.Projection>
-                            <PlaneProjection x:Name="PlaneProjection"/>
-                        </Border.Projection>
                         <VisualStateManager.VisualStateGroups>
-                            <VisualStateGroup x:Name="OpenStates">
-                                <VisualStateGroup.Transitions>
-                                    <VisualTransition To="Open">
-                                        <VisualTransition.Storyboard>
-                                            <Storyboard>
-                                                <DoubleAnimation Storyboard.TargetName="PlaneProjection" Storyboard.TargetProperty="RotationX" From="-45" To="0" Duration="0:0:0.3">
-                                                    <DoubleAnimation.EasingFunction>
-                                                        <ExponentialEase EasingMode="EaseOut" Exponent="6"/>
-                                                    </DoubleAnimation.EasingFunction>
-                                                </DoubleAnimation>
-                                                <DoubleAnimationUsingKeyFrames Storyboard.TargetName="LayoutRoot" Storyboard.TargetProperty="Opacity">
-                                                    <DiscreteDoubleKeyFrame KeyTime="0" Value="1"/>
-                                                </DoubleAnimationUsingKeyFrames>
-                                            </Storyboard>
-                                        </VisualTransition.Storyboard>
-                                    </VisualTransition>
-                                    <VisualTransition To="Closed">
-                                        <Storyboard>
-                                            <DoubleAnimation Storyboard.TargetName="PlaneProjection" Storyboard.TargetProperty="RotationX" From="0" To="60" Duration="0:0:0.2">
-                                                <DoubleAnimation.EasingFunction>
-                                                    <ExponentialEase EasingMode="EaseIn" Exponent="6"/>
-                                                </DoubleAnimation.EasingFunction>
-                                            </DoubleAnimation>
-                                            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="LayoutRoot" Storyboard.TargetProperty="Opacity">
-                                                <DiscreteDoubleKeyFrame KeyTime="0" Value="1"/>
-                                                <DiscreteDoubleKeyFrame KeyTime="0:0:0.2" Value="0"/>
-                                            </DoubleAnimationUsingKeyFrames>
-                                        </Storyboard>
-                                    </VisualTransition>
-                                </VisualStateGroup.Transitions>
-                                <VisualState x:Name="Open">
-                                    <Storyboard>
-                                        <DoubleAnimation Storyboard.TargetName="PlaneProjection" Storyboard.TargetProperty="RotationX" To="0" Duration="0"/>
-                                        <DoubleAnimation Storyboard.TargetName="LayoutRoot" Storyboard.TargetProperty="Opacity" To="1" Duration="0"/>
-                                    </Storyboard>
-                                </VisualState>
-                                <VisualState x:Name="Closed">
-                                    <Storyboard>
-                                        <DoubleAnimation Storyboard.TargetName="PlaneProjection" Storyboard.TargetProperty="RotationX" To="60" Duration="0"/>
-                                        <DoubleAnimation Storyboard.TargetName="LayoutRoot" Storyboard.TargetProperty="Opacity" To="0" Duration="0"/>
-                                    </Storyboard>
-                                </VisualState>
-                            </VisualStateGroup>
                             <VisualStateGroup x:Name="OrientationStates">
                                 <VisualState x:Name="PortraitUp"/>
                                 <VisualState x:Name="LandscapeLeft">
@@ -921,53 +875,7 @@
                                 </StackPanel>
                             </DataTemplate>
                         </Border.Resources>
-                        <Border.Projection>
-                            <PlaneProjection x:Name="PlaneProjection"/>
-                        </Border.Projection>
                         <VisualStateManager.VisualStateGroups>
-                            <VisualStateGroup x:Name="OpenStates">
-                                <VisualStateGroup.Transitions>
-                                    <VisualTransition To="Open">
-                                        <VisualTransition.Storyboard>
-                                            <Storyboard>
-                                                <DoubleAnimation Storyboard.TargetName="PlaneProjection" Storyboard.TargetProperty="RotationX" From="-45" To="0" Duration="0:0:0.3">
-                                                    <DoubleAnimation.EasingFunction>
-                                                        <ExponentialEase EasingMode="EaseOut" Exponent="6"/>
-                                                    </DoubleAnimation.EasingFunction>
-                                                </DoubleAnimation>
-                                                <DoubleAnimationUsingKeyFrames Storyboard.TargetName="LayoutRoot" Storyboard.TargetProperty="Opacity">
-                                                    <DiscreteDoubleKeyFrame KeyTime="0" Value="1"/>
-                                                </DoubleAnimationUsingKeyFrames>
-                                            </Storyboard>
-                                        </VisualTransition.Storyboard>
-                                    </VisualTransition>
-                                    <VisualTransition To="Closed">
-                                        <Storyboard>
-                                            <DoubleAnimation Storyboard.TargetName="PlaneProjection" Storyboard.TargetProperty="RotationX" From="0" To="60" Duration="0:0:0.2">
-                                                <DoubleAnimation.EasingFunction>
-                                                    <ExponentialEase EasingMode="EaseIn" Exponent="6"/>
-                                                </DoubleAnimation.EasingFunction>
-                                            </DoubleAnimation>
-                                            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="LayoutRoot" Storyboard.TargetProperty="Opacity">
-                                                <DiscreteDoubleKeyFrame KeyTime="0" Value="1"/>
-                                                <DiscreteDoubleKeyFrame KeyTime="0:0:0.2" Value="0"/>
-                                            </DoubleAnimationUsingKeyFrames>
-                                        </Storyboard>
-                                    </VisualTransition>
-                                </VisualStateGroup.Transitions>
-                                <VisualState x:Name="Open">
-                                    <Storyboard>
-                                        <DoubleAnimation Storyboard.TargetName="PlaneProjection" Storyboard.TargetProperty="RotationX" To="0" Duration="0"/>
-                                        <DoubleAnimation Storyboard.TargetName="LayoutRoot" Storyboard.TargetProperty="Opacity" To="1" Duration="0"/>
-                                    </Storyboard>
-                                </VisualState>
-                                <VisualState x:Name="Closed">
-                                    <Storyboard>
-                                        <DoubleAnimation Storyboard.TargetName="PlaneProjection" Storyboard.TargetProperty="RotationX" To="60" Duration="0"/>
-                                        <DoubleAnimation Storyboard.TargetName="LayoutRoot" Storyboard.TargetProperty="Opacity" To="0" Duration="0"/>
-                                    </Storyboard>
-                                </VisualState>
-                            </VisualStateGroup>
                             <VisualStateGroup x:Name="OrientationStates">
                                 <VisualState x:Name="PortraitUp"/>
                                 <VisualState x:Name="LandscapeLeft">
@@ -3883,54 +3791,6 @@
                 <ControlTemplate TargetType="controls:FlyoutPresenter">
                     <Border x:Name="LayoutRoot" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}"
                             Padding="{TemplateBinding Padding}">
-                        <Border.Projection>
-                            <PlaneProjection x:Name="PlaneProjection"/>
-                        </Border.Projection>
-                        <VisualStateManager.VisualStateGroups>
-                            <VisualStateGroup x:Name="OpenStates">
-                                <VisualStateGroup.Transitions>
-                                    <VisualTransition To="Open">
-                                        <VisualTransition.Storyboard>
-                                            <Storyboard>
-                                                <DoubleAnimation Storyboard.TargetName="PlaneProjection" Storyboard.TargetProperty="RotationX" From="-45" To="0" Duration="0:0:0.3">
-                                                    <DoubleAnimation.EasingFunction>
-                                                        <ExponentialEase EasingMode="EaseOut" Exponent="6"/>
-                                                    </DoubleAnimation.EasingFunction>
-                                                </DoubleAnimation>
-                                                <DoubleAnimationUsingKeyFrames Storyboard.TargetName="LayoutRoot" Storyboard.TargetProperty="Opacity">
-                                                    <DiscreteDoubleKeyFrame KeyTime="0" Value="1"/>
-                                                </DoubleAnimationUsingKeyFrames>
-                                            </Storyboard>
-                                        </VisualTransition.Storyboard>
-                                    </VisualTransition>
-                                    <VisualTransition To="Closed">
-                                        <Storyboard>
-                                            <DoubleAnimation Storyboard.TargetName="PlaneProjection" Storyboard.TargetProperty="RotationX" From="0" To="60" Duration="0:0:0.2">
-                                                <DoubleAnimation.EasingFunction>
-                                                    <ExponentialEase EasingMode="EaseIn" Exponent="6"/>
-                                                </DoubleAnimation.EasingFunction>
-                                            </DoubleAnimation>
-                                            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="LayoutRoot" Storyboard.TargetProperty="Opacity">
-                                                <DiscreteDoubleKeyFrame KeyTime="0" Value="1"/>
-                                                <DiscreteDoubleKeyFrame KeyTime="0:0:0.2" Value="0"/>
-                                            </DoubleAnimationUsingKeyFrames>
-                                        </Storyboard>
-                                    </VisualTransition>
-                                </VisualStateGroup.Transitions>
-                                <VisualState x:Name="Open">
-                                    <Storyboard>
-                                        <DoubleAnimation Storyboard.TargetName="PlaneProjection" Storyboard.TargetProperty="RotationX" To="0" Duration="0"/>
-                                        <DoubleAnimation Storyboard.TargetName="LayoutRoot" Storyboard.TargetProperty="Opacity" To="1" Duration="0"/>
-                                    </Storyboard>
-                                </VisualState>
-                                <VisualState x:Name="Closed">
-                                    <Storyboard>
-                                        <DoubleAnimation Storyboard.TargetName="PlaneProjection" Storyboard.TargetProperty="RotationX" To="60" Duration="0"/>
-                                        <DoubleAnimation Storyboard.TargetName="LayoutRoot" Storyboard.TargetProperty="Opacity" To="0" Duration="0"/>
-                                    </Storyboard>
-                                </VisualState>
-                            </VisualStateGroup>
-                        </VisualStateManager.VisualStateGroups>
                         <ContentPresenter Content="{TemplateBinding Content}" ContentTemplate="{TemplateBinding ContentTemplate}"
                                           HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
                                           VerticalAlignment="{TemplateBinding VerticalContentAlignment}" />

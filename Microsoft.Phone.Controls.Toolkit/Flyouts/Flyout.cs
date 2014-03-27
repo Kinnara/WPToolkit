@@ -1,5 +1,4 @@
 ﻿using Microsoft.Phone.Controls.Primitives;
-using System;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -98,29 +97,9 @@ namespace Microsoft.Phone.Controls
                 _presenter = new FlyoutPresenter();
                 _presenter.SetBinding(FlyoutPresenter.ContentProperty, new Binding("Content") { Source = this });
                 ApplyFlyoutPresenterStyle();
-                _presenter.Closed += OnPresenterClosed;
             }
 
             return _presenter;
-        }
-
-        internal override void OnClosing(FlyoutClosingEventArgs e)
-        {
-            base.OnClosing(e);
-
-            if (e.IsCancelable)
-            {
-                e.Cancel = _presenter.Hide(true);
-            }
-            else
-            {
-                _presenter.Hide(false);
-            }
-        }
-
-        private void OnPresenterClosed(object sender, EventArgs e)
-        {
-            InternalHide(false);
         }
     }
 }

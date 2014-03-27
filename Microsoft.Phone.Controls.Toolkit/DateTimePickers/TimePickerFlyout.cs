@@ -89,6 +89,8 @@ namespace Microsoft.Phone.Controls
             _presenter.Commit();
 
             RaiseTimePicked();
+
+            base.OnConfirmed();
         }
 
         internal override void OnOpening()

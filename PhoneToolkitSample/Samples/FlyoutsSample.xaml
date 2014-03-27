@@ -97,6 +97,16 @@
                     <toolkit:PickerFlyout
                         x:Name="AccentColorPickerFlyout"
                         toolkitPrimitives:PickerFlyoutBase.Title="ACCENTS">
+                        <toolkit:PickerFlyout.Transition>
+                            <toolkit:FlyoutTransition>
+                                <toolkit:FlyoutTransition.In>
+                                    <toolkit:ReaderboardTransition Mode="In" NoDelay="True" BeginTime="0:0:0.1"/>
+                                </toolkit:FlyoutTransition.In>
+                                <toolkit:FlyoutTransition.Out>
+                                    <toolkit:ReaderboardTransition Mode="Out" NoDelay="True"/>
+                                </toolkit:FlyoutTransition.Out>
+                            </toolkit:FlyoutTransition>
+                        </toolkit:PickerFlyout.Transition>
                         <samples:AccentColorPicker ItemPicked="AccentColorPicker_ItemPicked"/>
                     </toolkit:PickerFlyout>
                 </toolkit:ButtonExtensions.Flyout>

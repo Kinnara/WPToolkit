@@ -5,6 +5,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
 using System.Windows.Media;
+using System.Windows.Media.Animation;
 using System.Windows.Navigation;
 
 namespace Microsoft.Phone.Controls.Primitives
@@ -17,12 +18,36 @@ namespace Microsoft.Phone.Controls.Primitives
         private FlyoutPopup _popup;
         private Control _presenter;
 
+        private ITransition _inTransition;
+        private ITransition _outTransition;
+
         /// <summary>
         /// Provides base class initialization behavior for FlyoutBase derived classes.
         /// </summary>
         protected FlyoutBase()
         {
+            Transition = new FlyoutTransition
+            {
+                In = new SwivelTransition {  Mode = SwivelTransitionMode.In },
+                Out = new SwivelTransition { Mode = SwivelTransitionMode.Out },
+            };
         }
+
+        #region public FlyoutTransition Transition
+
+        public FlyoutTransition Transition
+        {
+            get { return (FlyoutTransition)GetValue(TransitionProperty); }
+            set { SetValue(TransitionProperty, value); }
+        }
+
+        public static readonly DependencyProperty TransitionProperty = DependencyProperty.Register(
+            "Transition",
+            typeof(FlyoutTransition),
+            typeof(FlyoutBase),
+            null);
+
+        #endregion
 
         #region AttachedFlyout
 
@@ -80,10 +105,10 @@ namespace Microsoft.Phone.Controls.Primitives
         /// </summary>
         public event EventHandler Opened;
 
-        ///// <summary>
-        ///// Occurs before the flyout is hidden.
-        ///// </summary>
-        internal event EventHandler<FlyoutClosingEventArgs> Closing;
+        /// <summary>
+        /// Occurs before the flyout is hidden.
+        /// </summary>
+        internal event EventHandler Closing;
 
         /// <summary>
         /// Occurs when the flyout is hidden.
@@ -105,9 +130,12 @@ namespace Microsoft.Phone.Controls.Primitives
                 Child = _presenter ?? (_presenter = CreatePresenter()),
                 ApplicationBar = CreateApplicationBar()
             };
+            popup.PopupOpened += OnPopupOpened;
             popup.PopupCancelled += OnPopupCancelled;
 
             _popup = popup;
+
+            _presenter.Opacity = 0;
 
             OnOpening();
             _popup.Show();
@@ -143,9 +171,9 @@ namespace Microsoft.Phone.Controls.Primitives
             SafeRaise.Raise(Opened, this);
         }
 
-        internal virtual void OnClosing(FlyoutClosingEventArgs e)
+        internal virtual void OnClosing()
         {
-            SafeRaise.Raise(Closing, this, e);
+            SafeRaise.Raise(Closing, this);
         }
 
         internal virtual void OnClosed()
@@ -158,25 +186,91 @@ namespace Microsoft.Phone.Controls.Primitives
             InternalHide(true);
         }
 
-        internal void InternalHide(bool isCancelable)
+        internal void InternalHide(bool useTransitions)
         {
-            var e = new FlyoutClosingEventArgs(isCancelable);
-
-            OnClosing(e);
-
-            if (e.Cancel)
+            if (_popup == null)
             {
                 return;
             }
 
-            if (_popup != null)
+            OnClosing();
+
+            CompleteInTransition();
+
+            if (useTransitions)
             {
-                _popup.Hide();
-                _popup.Child = null;
-                _popup = null;
+                if (_outTransition == null)
+                {
+                    FlyoutTransition flyoutTransition = Transition;
+                    if (flyoutTransition != null)
+                    {
+                        TransitionElement outTransitionElement = flyoutTransition.Out;
+                        if (outTransitionElement != null)
+                        {
+                            _outTransition = outTransitionElement.GetTransition(_presenter);
+                            _outTransition.Completed += OnOutTransitionCompleted;
+                            _outTransition.Begin();
+                        }
+                    }
+                }
+
+                if (_outTransition != null)
+                {
+                    return;
+                }
+            }
+            else
+            {
+                CompleteOutTransition();
             }
 
+            if (_popup == null)
+            {
+                return;
+            }
+
+            _popup.Hide();
+            _popup.Child = null;
+            _popup = null;
+
             OnClosed();
+        }
+
+        private void OnPopupOpened(object sender, EventArgs e)
+        {
+            CompleteInTransition();
+            CompleteOutTransition();
+
+            FlyoutTransition flyoutTransition = Transition;
+            ITransition inTransition = null;
+            if (flyoutTransition != null)
+            {
+                TransitionElement inTransitionElement = flyoutTransition.In;
+                if (inTransitionElement != null)
+                {
+                    _inTransition = inTransitionElement.GetTransition(_presenter);
+                    _inTransition.Completed += OnInTransitionCompleted;
+                    inTransition = _inTransition;
+                }
+            }
+
+            if (_inTransition != null)
+            {
+                AnimationHelper.InvokeOnSecondRendering(() =>
+                {
+                    _presenter.Opacity = 1;
+
+                    if (_inTransition == inTransition && _inTransition.GetCurrentState() != ClockState.Active)
+                    {
+                        _inTransition.Begin();
+                        _presenter.IsHitTestVisible = true;
+                    }
+                });
+            }
+            else
+            {
+                _presenter.Opacity = 1;
+            }
         }
 
         private void OnPopupCancelled(object sender, FlyoutPopupCancelledEventArgs e)
@@ -184,8 +278,40 @@ namespace Microsoft.Phone.Controls.Primitives
             InternalHide(e.IsDeferrable);
         }
 
+        private void CompleteInTransition()
+        {
+            if (_inTransition != null)
+            {
+                _inTransition.SkipToFill();
+                _inTransition = null;
+            }
+        }
+
+        private void CompleteOutTransition()
+        {
+            if (_outTransition != null)
+            {
+                _outTransition.SkipToFill();
+                _outTransition = null;
+            }
+        }
+
+        private void OnInTransitionCompleted(object sender, EventArgs e)
+        {
+            ((ITransition)sender).Stop();
+        }
+
+        private void OnOutTransitionCompleted(object sender, EventArgs e)
+        {
+            ((ITransition)sender).Stop();
+
+            InternalHide(false);
+        }
+
         private class FlyoutPopup
         {
+            private static WeakReference _currentInstance;
+
             private Color _systemTrayColor;
             private double _systemTrayOpacity;
             private IApplicationBar _applicationBar;
@@ -202,18 +328,32 @@ namespace Microsoft.Phone.Controls.Primitives
 
             public IApplicationBar ApplicationBar { get; set; }
 
+            public event EventHandler PopupOpened;
+
             public event EventHandler<FlyoutPopupCancelledEventArgs> PopupCancelled;
 
             public FlyoutPopup()
             {
                 _hostPopup = new Popup();
+                _hostPopup.Opened += OnPopupOpened;
             }
 
             public void Show()
             {
+                if (_currentInstance != null)
+                {
+                    FlyoutPopup target = _currentInstance.Target as FlyoutPopup;
+                    if (target != null)
+                    {
+                        target.CancelPopup(false);
+                    }
+                }
+
                 PrepareAppForFullScreen();
                 SetSizeAndOffset();
                 _hostPopup.IsOpen = true;
+
+                _currentInstance = new WeakReference(this);
             }
 
             public void Hide()
@@ -313,6 +453,13 @@ namespace Microsoft.Phone.Controls.Primitives
                     frame.Navigating -= OnFrameNavigating;
                     frame.OrientationChanged -= OnOrientationChanged;
                 }
+
+                _currentInstance = null;
+            }
+
+            private void OnPopupOpened(object sender, EventArgs e)
+            {
+                SafeRaise.Raise(PopupOpened, this);
             }
 
             private void OnBackKeyPress(object sender, CancelEventArgs args)
@@ -436,34 +583,6 @@ namespace Microsoft.Phone.Controls.Primitives
             }
 
             public bool IsDeferrable { get; private set; }
-        }
-    }
-
-    internal sealed class FlyoutClosingEventArgs : EventArgs
-    {
-        private bool _cancel;
-
-        public FlyoutClosingEventArgs(bool isCancelable)
-        {
-            IsCancelable = isCancelable;
-        }
-
-        public bool IsCancelable { get; private set; }
-
-        public bool Cancel
-        {
-            get { return _cancel; }
-            set
-            {
-                if (IsCancelable)
-                {
-                    _cancel = value;
-                }
-                else if (value)
-                {
-                    throw new InvalidOperationException();
-                }
-            }
         }
     }
 }

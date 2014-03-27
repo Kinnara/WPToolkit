@@ -180,6 +180,8 @@ namespace Microsoft.Phone.Controls
             _presenter.Commit();
 
             RaiseDatePicked();
+
+            base.OnConfirmed();
         }
 
         internal override void OnOpening()

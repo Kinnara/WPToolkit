@@ -30,6 +30,12 @@ namespace Microsoft.Phone.Controls
             _presenter.ItemPicked += OnItemPicked;
             _picker = _presenter.Picker;
             _helper = new PickerFlyoutHelper<IList>(this);
+
+            Transition = new FlyoutTransition
+            {
+                In = new ReaderboardTransition { Mode = ReaderboardTransitionMode.In, BeginTime = TimeSpan.FromMilliseconds(50) },
+                Out = new ReaderboardTransition { Mode = ReaderboardTransitionMode.Out },
+            };
         }
 
         #region public IEnumerable ItemsSource

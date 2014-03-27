@@ -59,7 +59,7 @@ namespace Microsoft.Phone.Controls.Primitives
 
         protected virtual void OnConfirmed()
         {
-            InternalHide(false);
+            InternalHide(true);
         }
 
         protected abstract bool ShouldShowConfirmationButtons();

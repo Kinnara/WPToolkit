@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Windows;
-using System.Windows.Media;
 using System.Windows.Media.Animation;
 
 namespace Microsoft.Phone.Controls
@@ -103,6 +102,8 @@ namespace Microsoft.Phone.Controls
 
         private class CustomTransition : Transition
         {
+            private UIElement _element;
+
             private ReaderboardTransitionMode _mode;
 
             private bool _noDelay;
@@ -112,6 +113,7 @@ namespace Microsoft.Phone.Controls
             public CustomTransition(UIElement element, Storyboard storyboard, ReaderboardTransitionMode mode, bool noDelay, TimeSpan? beginTime)
                 : base(element, storyboard)
             {
+                _element = element;
                 _mode = mode;
                 _noDelay = noDelay;
                 _beginTime = beginTime;
@@ -119,7 +121,7 @@ namespace Microsoft.Phone.Controls
 
             public override void Begin()
             {
-                ReaderboardEffect.ComposeStoryboard(Storyboard, _beginTime, _mode, _noDelay);
+                ReaderboardEffect.ComposeStoryboard(_element, Storyboard, _beginTime, _mode, _noDelay);
                 base.Begin();
             }
         }

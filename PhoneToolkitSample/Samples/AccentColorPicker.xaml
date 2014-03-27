@@ -20,6 +20,7 @@
                 x:Name="Picker"
                 ItemsSource="{Binding}"
                 toolkit:TiltEffect.IsTiltEnabled="True"
+                toolkit:ReaderboardEffect.RowIndex="1"
                 Margin="12 0 0 0">
             <toolkitPrimitives:PickerBoxList.ItemsPanel>
                 <ItemsPanelTemplate>

@@ -1,6 +1,7 @@
 ﻿using Microsoft.Phone.Controls.Primitives;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
@@ -9,21 +10,16 @@ namespace Microsoft.Phone.Controls
 {
     internal abstract class DateTimePickerFlyoutPresenterHelperBase
     {
-        private const string OpenGroupName = "OpenStates";
-        private const string OpenVisibilityStateName = "Open";
-        private const string ClosedVisibilityStateName = "Closed";
-
         private PickerFlyoutBase _flyout;
         private Control _presenter;
 
+        [SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         protected DateTimePickerFlyoutPresenterHelperBase(PickerFlyoutBase flyout, Control presenter)
         {
             _flyout = flyout;
             _flyout.Opening += OnFlyoutOpening;
-            _flyout.Closing += OnFlyoutClosing;
 
             _presenter = presenter;
-            _presenter.Loaded += OnPresenterLoaded;
             _presenter.Unloaded += OnPresenterUnloaded;
 
             FirstPicker = CreatePicker();
@@ -61,23 +57,11 @@ namespace Microsoft.Phone.Controls
 
         internal LoopingSelector ThirdPicker { get; private set; }
 
-        private VisualStateGroup OpenStates { get; set; }
-
-        private bool IsOpen { get; set; }
-
         protected abstract void InitializePickers();
 
         protected abstract void CommitCore(DateTime value);
 
-        internal void BeforeOnApplyTemplate()
-        {
-            if (OpenStates != null)
-            {
-                OpenStates.CurrentStateChanged -= OnOpenStatesCurrentStateChanged;
-            }
-        }
-
-        internal void AfterOnApplyTemplate()
+        internal void OnApplyTemplate()
         {
             FrameworkElement templateRoot = VisualStates.GetImplementationRoot(_presenter);
             if (templateRoot != null)
@@ -86,28 +70,11 @@ namespace Microsoft.Phone.Controls
                 SecondPicker.ItemTemplate = TryFindResource<DataTemplate>(templateRoot, "SecondPickerItemTemplate");
                 ThirdPicker.ItemTemplate = TryFindResource<DataTemplate>(templateRoot, "ThirdPickerItemTemplate");
             }
-
-            OpenStates = VisualStates.TryGetVisualStateGroup(_presenter, OpenGroupName);
-
-            if (OpenStates != null)
-            {
-                OpenStates.CurrentStateChanged += OnOpenStatesCurrentStateChanged;
-            }
-
-            UpdateVisualStates(false);
         }
 
         internal void Commit()
         {
             CommitCore(((DateTimeWrapper)FirstPicker.DataSource.SelectedItem).DateTime);
-            CloseFlyout(true);
-        }
-
-        internal void SetIsHitTestVisible(bool value)
-        {
-            FirstPicker.IsHitTestVisible = value;
-            SecondPicker.IsHitTestVisible = value;
-            ThirdPicker.IsHitTestVisible = value;
         }
 
         private void OnDataSourceSelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -147,70 +114,11 @@ namespace Microsoft.Phone.Controls
             }
         }
 
-        private void OnFlyoutClosing(object sender, FlyoutClosingEventArgs e)
-        {
-            if (IsOpen)
-            {
-                if (e.IsCancelable)
-                {
-                    e.Cancel = true;
-                    CloseFlyout(true);
-                }
-                else
-                {
-                    CloseFlyout(false);
-                }
-            }
-            else
-            {
-                if (e.IsCancelable)
-                {
-                    e.Cancel = true;
-                }
-                else
-                {
-                    UpdateVisualStates(false);
-                }
-            }
-        }
-
-        private void OnPresenterLoaded(object sender, RoutedEventArgs e)
-        {
-            AnimationHelper.InvokeOnSecondRendering(() =>
-            {
-                IsOpen = true;
-                UpdateVisualStates(true);
-            });
-        }
-
         private void OnPresenterUnloaded(object sender, RoutedEventArgs e)
         {
             FirstPicker.IsExpanded = false;
             SecondPicker.IsExpanded = false;
             ThirdPicker.IsExpanded = false;
-        }
-
-        private void OnOpenStatesCurrentStateChanged(object sender, VisualStateChangedEventArgs e)
-        {
-            if ((e.OldState != null && e.OldState.Name == OpenVisibilityStateName) &&
-                (e.NewState != null && e.NewState.Name == ClosedVisibilityStateName))
-            {
-                // Close the picker flyout
-                _flyout.InternalHide(false);
-            }
-        }
-
-        private void UpdateVisualStates(bool useTransitions)
-        {
-            SetIsHitTestVisible(IsOpen);
-
-            VisualStateManager.GoToState(_presenter, IsOpen ? OpenVisibilityStateName : ClosedVisibilityStateName, useTransitions);
-        }
-
-        private void CloseFlyout(bool useTransitions)
-        {
-            IsOpen = false;
-            UpdateVisualStates(useTransitions);
         }
 
         private LoopingSelector CreatePicker()
