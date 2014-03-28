@@ -25,7 +25,6 @@ namespace Microsoft.Phone.Controls
         {
             _flyout = flyout;
             _flyout.Opening += OnFlyoutOpening;
-            _flyout.Confirmed += OnFlyoutConfirmed;
             _flyout.Closing += OnFlyoutClosing;
 
             DefaultStyleKey = typeof(ListPickerFlyoutPresenter);
@@ -137,12 +136,6 @@ namespace Microsoft.Phone.Controls
             }
         }
 
-        private void Commit()
-        {
-            // Commit the value and close
-            _flyout.InternalHide(true);
-        }
-
         private void OnPickerItemClick(object sender, EventArgs e)
         {
             // We listen to the ItemClick event because SelectionChanged does not fire if the user picks the already selected item.
@@ -151,7 +144,6 @@ namespace Microsoft.Phone.Controls
             if (Picker.SelectionMode == SelectionMode.Single)
             {
                 // Commit the value and close
-                Commit();
                 SafeRaise.Raise(ItemPicked, this);
             }
         }
@@ -162,11 +154,6 @@ namespace Microsoft.Phone.Controls
             {
                 UpdateTitlePresenter();
             }
-        }
-
-        private void OnFlyoutConfirmed(object sender, EventArgs e)
-        {
-            Commit();
         }
 
         private void OnFlyoutClosing(object sender, EventArgs e)

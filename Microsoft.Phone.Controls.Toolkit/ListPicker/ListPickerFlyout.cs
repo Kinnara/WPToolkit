@@ -252,8 +252,6 @@ namespace Microsoft.Phone.Controls
 
         public event SelectionChangedEventHandler ItemsPicked;
 
-        internal event EventHandler Confirmed;
-
         /// <summary>
         /// Begins an asynchronous operation to show the flyout.
         /// </summary>
@@ -276,8 +274,9 @@ namespace Microsoft.Phone.Controls
 
         protected override void OnConfirmed()
         {
-            SafeRaise.Raise(Confirmed, this);
             RaiseItemsPicked();
+
+            base.OnConfirmed();
         }
 
         protected override bool ShouldShowConfirmationButtons()
@@ -336,7 +335,7 @@ namespace Microsoft.Phone.Controls
 
         private void OnItemPicked(object sender, EventArgs e)
         {
-            RaiseItemsPicked();
+            OnConfirmed();
         }
 
         private void RaiseItemsPicked()
