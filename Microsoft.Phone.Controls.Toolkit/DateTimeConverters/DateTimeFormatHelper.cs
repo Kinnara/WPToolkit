@@ -14,7 +14,7 @@ namespace Microsoft.Phone.Controls
     /// <summary>
     /// Helper methods and constants for the date time converters.
     /// </summary>
-    internal static class DateTimeFormatHelper
+    public static class DateTimeFormatHelper
     {
         /// <summary>
         /// An hour defined in minutes.
