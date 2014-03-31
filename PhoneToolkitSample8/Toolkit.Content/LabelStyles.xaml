@@ -282,6 +282,7 @@
         <Setter Property="FontFamily" Value="{StaticResource PhoneFontFamilySemiBold}"/>
         <Setter Property="FontSize" Value="{StaticResource FontExtraLargeSize}"/>
         <Setter Property="Foreground" Value="{StaticResource PhoneTextHighContrastBrush}"/>
+        <Setter Property="TextWrapping" Value="Wrap"/>
         <Setter Property="LineHeight" Value="{StaticResource FontLabelDialogTitleStyleLeading}"/>
     </Style>
 
@@ -295,6 +296,7 @@
         <Setter Property="FontFamily" Value="{StaticResource PhoneFontFamilySemiLight}"/>
         <Setter Property="FontSize" Value="{StaticResource FontExtraLargePlusSize}"/>
         <Setter Property="Foreground" Value="{StaticResource PhoneTextMidContrastBrush}"/>
+        <Setter Property="TextWrapping" Value="Wrap"/>
         <Setter Property="LineHeight" Value="{StaticResource FontExtraLargePlusLeading}"/>
     </Style>
 
