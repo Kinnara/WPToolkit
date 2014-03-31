@@ -295,11 +295,21 @@ namespace Microsoft.Phone.Controls
             "Text",
             typeof(string),
             typeof(Label),
-            new PropertyMetadata(GetDefaultValue(TextBlock.TextProperty, typeof(TextBlock)), (d, e) => ((Label)d).OnTextChanged()));
+            new PropertyMetadata(GetDefaultValue(TextBlock.TextProperty, typeof(TextBlock)), (d, e) => ((Label)d).OnTextChanged(e)));
 
-        private void OnTextChanged()
+        private void OnTextChanged(DependencyPropertyChangedEventArgs e)
         {
             _textBlock.Text = Text;
+            OnTextChanged((string)e.OldValue, (string)e.NewValue);
+        }
+
+        /// <summary>
+        /// Called when the value of the Text property changes.
+        /// </summary>
+        /// <param name="oldText">The old value of the Text property.</param>
+        /// <param name="newText">The new value of the Text property.</param>
+        protected virtual void OnTextChanged(string oldText, string newText)
+        {
         }
 
         #endregion
