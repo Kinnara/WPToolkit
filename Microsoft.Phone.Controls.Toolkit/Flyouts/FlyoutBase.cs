@@ -135,6 +135,7 @@ namespace Microsoft.Phone.Controls.Primitives
 
             _popup = popup;
 
+            AnimationHelper.PrepareForCompositor(_presenter);
             _presenter.Opacity = 0;
 
             OnOpening();

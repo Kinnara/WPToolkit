@@ -1,10 +1,13 @@
 ﻿using System;
+using System.Windows;
 using System.Windows.Media;
 
 namespace Microsoft.Phone.Controls
 {
     internal static class AnimationHelper
     {
+        private static readonly CacheMode BitmapCacheMode = new BitmapCache();
+
         public static void InvokeOnSecondRendering(Action a)
         {
             int frameCount = 0;
@@ -18,6 +21,14 @@ namespace Microsoft.Phone.Controls
                 }
             };
             CompositionTarget.Rendering += handler;
+        }
+
+        public static void PrepareForCompositor(UIElement element)
+        {
+            if (!(element.CacheMode is BitmapCache))
+            {
+                element.CacheMode = BitmapCacheMode;
+            }
         }
     }
 }

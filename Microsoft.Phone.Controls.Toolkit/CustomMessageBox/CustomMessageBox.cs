@@ -498,6 +498,7 @@ namespace Microsoft.Phone.Controls
                 }
             }
 
+            AnimationHelper.PrepareForCompositor(this);
             Opacity = 0;
             Loaded += CustomMessageBox_Loaded;
 

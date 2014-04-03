@@ -497,6 +497,7 @@ namespace Microsoft.Phone.Controls
 
             if (LayoutRoot != null)
             {
+                AnimationHelper.PrepareForCompositor(LayoutRoot);
                 LayoutRoot.Opacity = 0;
             }
 

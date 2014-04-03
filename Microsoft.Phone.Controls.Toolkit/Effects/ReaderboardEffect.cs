@@ -728,6 +728,8 @@ namespace Microsoft.Phone.Controls
                 double originalOpacity = element.Opacity;
                 ReaderboardEffect.SetOriginalOpacity(element, originalOpacity);
 
+                AnimationHelper.PrepareForCompositor(element);
+
                 // Hide the element until the storyboard is begun.
                 element.Opacity = 0.0;
 
