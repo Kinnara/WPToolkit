@@ -154,6 +154,7 @@ namespace PhoneToolkitSample.Samples
             {
                 Header = "Snooze for",
                 ItemsSource = new string[] { "5 minutes", "10 minutes", "1 hour", "4 hours", "1 day" },
+                SelectedIndex = 0,
                 Margin = new Thickness(0, 30, 12, 24)
             };
 

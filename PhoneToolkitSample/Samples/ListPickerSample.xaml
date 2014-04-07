@@ -47,20 +47,20 @@
                 <!-- For best performance, set the CacheMode on items below a ListPicker -->
                 <!-- that will be dropping down. -->
 
-                <toolkit:ListPicker Header="Use address bar button for" SelectedIndex="1" CacheMode="BitmapCache">
+                <toolkit:ListPicker Header="Use address bar button for" SelectedIndex="1">
                     <sys:String>favorites</sys:String>
                     <sys:String>stop/refresh</sys:String>
                     <sys:String>tabs</sys:String>
                 </toolkit:ListPicker>
 
-                <toolkit:ListPicker Header="Choose an app to show detailed status" SelectedIndex="1" CacheMode="BitmapCache">
+                <toolkit:ListPicker Header="Choose an app to show detailed status" SelectedIndex="1">
                     <sys:String>none</sys:String>
                     <sys:String>Calendar</sys:String>
                     <sys:String>Messaging</sys:String>
                     <sys:String>Phone</sys:String>
                 </toolkit:ListPicker>
 
-                <toolkit:ListPicker Header="Read aloud incoming text messages" SelectedIndex="3" CacheMode="BitmapCache">
+                <toolkit:ListPicker Header="Read aloud incoming text messages" SelectedIndex="3">
                     <sys:String>off</sys:String>
                     <sys:String>always on</sys:String>
                     <sys:String>Bluetooth and headsets</sys:String>
@@ -68,11 +68,11 @@
                     <sys:String>wired headset only</sys:String>
                 </toolkit:ListPicker>
 
-                <toolkit:ListPicker Header="Another Background" SelectedIndex="1" CacheMode="BitmapCache">
+                <toolkit:ListPicker Header="List picker disabled state" SelectedIndex="1" IsEnabled="False">
                     <sys:String>light</sys:String>
                     <sys:String>dark</sys:String>
                 </toolkit:ListPicker>
-                <toolkit:ListPicker Header="One more" SelectedIndex="1" CacheMode="BitmapCache">
+                <toolkit:ListPicker Header="List picker placeholder text" PlaceholderText="choose background">
                     <sys:String>light</sys:String>
                     <sys:String>dark</sys:String>
                 </toolkit:ListPicker>

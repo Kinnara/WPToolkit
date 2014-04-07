@@ -1,6 +1,11 @@
-# Windows Phone Toolkit Customized by Kinnara
+# Windows Phone Toolkit (Kinnara's fork)
 
 Includes fixes, improvements, and more controls.
+
+<a href="https://www.nuget.org/packages/WPtoolkit.Kinnara/" target="_blank">NuGet package</a>
+
+<a href="http://www.windowsphone.com/s?appid=54871b50-f399-42a7-8024-16070a338176" target="_blank">Sample app in Windows Phone Store</a>
+
 
 ## Highlights
 

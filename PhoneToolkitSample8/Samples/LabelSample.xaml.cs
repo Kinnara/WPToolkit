@@ -10,11 +10,11 @@ namespace PhoneToolkitSample.Samples
         {
             InitializeComponent();
 
-            StyleList.ItemsSource = new StandardStyles().Where(pair =>
+            StyleList.ItemsSource = Resources.MergedDictionaries[0].Where(pair =>
             {
                 var style = pair.Value as Style;
                 return style != null && style.TargetType == typeof(Label) && !((string)pair.Key).EndsWith("Base");
-            }).ToList();
+            }).Reverse().ToList();
 
             UpdateMaxLinesButtons();
         }

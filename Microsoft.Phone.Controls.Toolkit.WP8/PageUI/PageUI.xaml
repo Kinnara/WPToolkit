@@ -54,7 +54,7 @@
                                 <RowDefinition/>
                             </Grid.RowDefinitions>
 
-                            <StackPanel x:Name="TitlePanel" CacheMode="BitmapCache">
+                            <StackPanel x:Name="TitlePanel" Style="{TemplateBinding TitlePanelStyle}" CacheMode="BitmapCache">
                                 <ContentControl
                                     Content="{TemplateBinding Title}"
                                     ContentTemplate="{TemplateBinding TitleTemplate}"

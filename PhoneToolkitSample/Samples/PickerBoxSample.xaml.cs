@@ -10,6 +10,7 @@ using PhoneToolkitSample.Data;
 using System;
 using System.Windows.Controls;
 using System.Windows;
+using System.Linq;
 
 namespace PhoneToolkitSample.Samples
 {
@@ -135,6 +136,8 @@ namespace PhoneToolkitSample.Samples
 
             RegionList.ItemsSource = _regions;
             RegionList.SelectedIndex = 0;
+
+            MonthlyResetDatePicker.ItemsSource = Enumerable.Range(1, 28);
 
             AccentColorList.ItemsSource = ColorExtensions.AccentColors();
             AccentColorList.SelectedIndex = 0;

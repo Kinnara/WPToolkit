@@ -51,18 +51,9 @@
     <!--LayoutRoot-->
     <Grid x:Name="LayoutRoot" Background="Transparent">
         <!--Pivot Control-->
-        <controls:Pivot Title="{StaticResource ApplicationTitle}"
-                        toolkit:TurnstileFeatherEffect.FeatheringIndex="0">
-            <controls:Pivot.TitleTemplate>
-                <DataTemplate>
-                    <StackPanel>
-                        <StackPanel Grid.Row="0" Margin="-12,0,0,0">
-                            <TextBlock Text="{StaticResource ApplicationTitle}" Margin="12,0,0,0" Style="{StaticResource PivotTitleTextStyle}"/>
-                            <TextBlock Text="Turnstile Feather Example" Margin="12,-5,0,2" Style="{StaticResource PhoneTextSubtleStyle}"/>
-                        </StackPanel>
-                    </StackPanel>
-                </DataTemplate>
-            </controls:Pivot.TitleTemplate>
+        <toolkit:PivotEx Title="{StaticResource ApplicationTitle}"
+                         TitlePanelStyle="{StaticResource TurnstileFeatherTitlePanelStyle}"
+                         Subtitle="Turnstile Feather Example">
             <!--Pivot item one-->
             <controls:PivotItem Header="profile">
                 <Grid Margin="12,0,0,0">
@@ -143,7 +134,7 @@
                     </ListBox>
                 </Grid>
             </controls:PivotItem>
-        </controls:Pivot>
+        </toolkit:PivotEx>
     </Grid>
     
 </toolkit:BasePage>

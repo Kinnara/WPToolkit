@@ -21,7 +21,7 @@
 
     <Grid x:Name="LayoutRoot" Background="Transparent">
 
-        <controls:Pivot Title="HUBTILE SAMPLE" SelectionChanged="Pivot_SelectionChanged">
+        <toolkit:PivotEx Title="HUBTILE" SelectionChanged="Pivot_SelectionChanged">
 
             <!-- All images by Jeff Wilcox, used with permission -->
             <controls:PivotItem Header="food">
@@ -108,7 +108,7 @@
                         </TextBlock>
                         <toolkit:HubTile Grid.Row="1" Grid.Column="0"
                                          Margin="12,12,0,0"
-                                         Source="/Images/Mürren.jpg"
+                                         Source="/Images/Murren.jpg"
                                          Title="Switzerland"
                                          IsFrozen="True"
                                          GroupTag="Places"/>
@@ -223,7 +223,7 @@
                     </Grid>
                 </ScrollViewer>
             </controls:PivotItem>
-        </controls:Pivot>
+        </toolkit:PivotEx>
     </Grid>
     
 </toolkit:BasePage>

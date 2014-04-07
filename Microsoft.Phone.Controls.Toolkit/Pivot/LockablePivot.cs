@@ -22,7 +22,7 @@ namespace Microsoft.Phone.Controls
     [TemplatePart(Name = HeadersListElement, Type = typeof(PivotHeadersControl))]
     [TemplatePart(Name = PivotItemPresenterElement, Type = typeof(ItemsPresenter))]
     [StyleTypedProperty(Property = ItemContainerStyleName, StyleTargetType = typeof(PivotItem))]
-    public class LockablePivot : Pivot
+    public class LockablePivot : PivotEx
     {
         /// <summary>
         /// Headers list element template part.

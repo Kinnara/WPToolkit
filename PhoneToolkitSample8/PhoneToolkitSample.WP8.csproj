@@ -283,6 +283,18 @@ ar-SA;az-Latn-AZ;be-BY;bg-BG;ca-ES;cs-CZ;da-DK;de-DE;el-GR;en-GB;en-US;es-ES;es-
       <Link>Samples\RatingControlSample.xaml.cs</Link>
       <DependentUpon>RatingControlSample.xaml</DependentUpon>
     </Compile>
+    <Compile Include="..\PhoneToolkitSample\Samples\ReaderboardEffectSample1.xaml.cs">
+      <Link>Samples\ReaderboardEffectSample1.xaml.cs</Link>
+      <DependentUpon>ReaderboardEffectSample1.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="..\PhoneToolkitSample\Samples\ReaderboardEffectSample2.xaml.cs">
+      <Link>Samples\ReaderboardEffectSample2.xaml.cs</Link>
+      <DependentUpon>ReaderboardEffectSample2.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="..\PhoneToolkitSample\Samples\ReaderboardTransitionSample.xaml.cs">
+      <Link>Samples\ReaderboardTransitionSample.xaml.cs</Link>
+      <DependentUpon>ReaderboardTransitionSample.xaml</DependentUpon>
+    </Compile>
     <Compile Include="..\PhoneToolkitSample\Samples\SlideInEffectSample.xaml.cs">
       <Link>Samples\SlideInEffectSample.xaml.cs</Link>
       <DependentUpon>SlideInEffectSample.xaml</DependentUpon>
@@ -512,6 +524,21 @@ ar-SA;az-Latn-AZ;be-BY;bg-BG;ca-ES;cs-CZ;da-DK;de-DE;el-GR;en-GB;en-US;es-ES;es-
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="..\PhoneToolkitSample\Samples\ReaderboardEffectSample1.xaml">
+      <Link>Samples\ReaderboardEffectSample1.xaml</Link>
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="..\PhoneToolkitSample\Samples\ReaderboardEffectSample2.xaml">
+      <Link>Samples\ReaderboardEffectSample2.xaml</Link>
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="..\PhoneToolkitSample\Samples\ReaderboardTransitionSample.xaml">
+      <Link>Samples\ReaderboardTransitionSample.xaml</Link>
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="..\PhoneToolkitSample\Samples\SlideInEffectSample.xaml">
       <Link>Samples\SlideInEffectSample.xaml</Link>
       <Generator>MSBuild:Compile</Generator>
@@ -564,6 +591,14 @@ ar-SA;az-Latn-AZ;be-BY;bg-BG;ca-ES;cs-CZ;da-DK;de-DE;el-GR;en-GB;en-US;es-ES;es-
     </Page>
     <Page Include="..\PhoneToolkitSample\Samples\WrapPanelSample.xaml">
       <Link>Samples\WrapPanelSample.xaml</Link>
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Toolkit.Content\StandardStyles.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Toolkit.Content\LabelStyles.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -674,8 +709,8 @@ ar-SA;az-Latn-AZ;be-BY;bg-BG;ca-ES;cs-CZ;da-DK;de-DE;el-GR;en-GB;en-US;es-ES;es-
     <Content Include="..\PhoneToolkitSample\Images\Movie.jpg">
       <Link>Images\Movie.jpg</Link>
     </Content>
-    <Content Include="..\PhoneToolkitSample\Images\Mürren.jpg">
-      <Link>Images\Mürren.jpg</Link>
+    <Content Include="..\PhoneToolkitSample\Images\Murren.jpg">
+      <Link>Images\Murren.jpg</Link>
     </Content>
     <Content Include="..\PhoneToolkitSample\Images\Neuschwanstein.jpg">
       <Link>Images\Neuschwanstein.jpg</Link>
@@ -734,7 +769,6 @@ ar-SA;az-Latn-AZ;be-BY;bg-BG;ca-ES;cs-CZ;da-DK;de-DE;el-GR;en-GB;en-US;es-ES;es-
     <Content Include="..\PhoneToolkitSample\Toolkit.Content\ApplicationBar.Select.png">
       <Link>Toolkit.Content\ApplicationBar.Select.png</Link>
     </Content>
-    <Content Include="Assets\AlignmentGrid.png" />
     <Content Include="Assets\ApplicationIcon.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>

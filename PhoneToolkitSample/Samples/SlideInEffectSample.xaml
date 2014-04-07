@@ -22,7 +22,7 @@
     <!--LayoutRoot-->
     <Grid x:Name="LayoutRoot" Background="Transparent">
         <!--Pivot Control-->
-        <controls:Pivot Title="{StaticResource ApplicationTitle}">
+        <toolkit:PivotEx Title="SLIDEINEFFECT">
             <!--Pivot item one-->
             <controls:PivotItem Header="first">
                 <ListBox Margin="0,0,-12,0" ItemsSource="{Binding Items}">
@@ -65,7 +65,7 @@
                     </ListBox.ItemTemplate>
                 </ListBox>
             </controls:PivotItem>
-        </controls:Pivot>
+        </toolkit:PivotEx>
     </Grid>
     
 </toolkit:BasePage>

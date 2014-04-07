@@ -39,7 +39,7 @@
     <Grid x:Name="LayoutRoot" Background="Transparent">
         
         <!--Pivot Control-->
-        <controls:Pivot Title="DATE+TIME CONVERTERS">
+        <toolkit:PivotEx Title="DATE+TIME CONVERTERS">
             
             <!--Relative Time Converter-->
             <controls:PivotItem Header="relative">
@@ -230,7 +230,7 @@
                     </ListBox.ItemTemplate>
                 </ListBox>
             </controls:PivotItem>
-        </controls:Pivot>
+        </toolkit:PivotEx>
     </Grid>
 
 </toolkit:BasePage>
