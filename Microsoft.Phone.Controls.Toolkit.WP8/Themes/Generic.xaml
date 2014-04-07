@@ -35,11 +35,11 @@
         <!--<ResourceDictionary Source="/Microsoft.Phone.Controls.Toolkit;component/PhoneSlider/PhoneSlider.xaml"/>-->
         <!--<ResourceDictionary Source="/Microsoft.Phone.Controls.Toolkit;component/PhoneTextBox/PhoneTextBox.xaml"/>-->
         <!--<ResourceDictionary Source="/Microsoft.Phone.Controls.Toolkit;component/PickerBox/PickerBox.xaml"/>-->
+        <ResourceDictionary Source="/Microsoft.Phone.Controls.Toolkit;component/Pivot/PivotEx.xaml"/>
         <!--<ResourceDictionary Source="/Microsoft.Phone.Controls.Toolkit;component/PropertyUI/PropertyUI.xaml"/>-->
-        <ResourceDictionary Source="/Microsoft.Phone.Controls.Toolkit;component/RadioButtonGroup/RadioButtonGroup.xaml"/>
+        <!--<ResourceDictionary Source="/Microsoft.Phone.Controls.Toolkit;component/RadioButtonGroup/RadioButtonGroup.xaml"/>-->
         <!--<ResourceDictionary Source="/Microsoft.Phone.Controls.Toolkit;component/RatingControl/RatingControl.xaml"/>-->
         <!--<ResourceDictionary Source="/Microsoft.Phone.Controls.Toolkit;component/StartView/StartView.xaml"/>-->
-        <ResourceDictionary Source="/Microsoft.Phone.Controls.Toolkit;component/Scroller/Scroller.xaml"/>
         <!--<ResourceDictionary Source="/Microsoft.Phone.Controls.Toolkit;component/ToggleSwitch/ToggleSwitch.xaml"/>-->
         <!--<ResourceDictionary Source="/Microsoft.Phone.Controls.Toolkit;component/TransferControl/TransferControl.xaml"/>-->
         <!--<ResourceDictionary Source="/Microsoft.Phone.Controls.Toolkit;component/Transitions/Transitions.xaml"/>-->
