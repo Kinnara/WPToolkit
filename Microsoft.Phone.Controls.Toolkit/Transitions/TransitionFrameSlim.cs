@@ -78,6 +78,8 @@ namespace Microsoft.Phone.Controls
 
         private bool _deferredNavigationRequested;
 
+        private bool _wasRelaunched;
+
         /// <summary>
         /// Initialzies a new instance of the TransitionFrameSlim class.
         /// </summary>
@@ -85,6 +87,7 @@ namespace Microsoft.Phone.Controls
             : base()
         {
             Navigating += OnNavigating;
+            Navigated += OnNavigated;
             NavigationStopped += OnNavigationStopped;
         }
 
@@ -111,6 +114,18 @@ namespace Microsoft.Phone.Controls
         /// <param name="e">The event arguments.</param>
         private void OnNavigating(object sender, NavigatingCancelEventArgs e)
         {
+            if (e.NavigationMode == NavigationMode.Reset)
+            {
+                _wasRelaunched = true;
+                return;
+            }
+
+            if (_wasRelaunched)
+            {
+                _wasRelaunched = false;
+                return;
+            }
+
             // If the current application is not the origin
             // and destination of the navigation, ignore it.
             // e.g. do not play a transition when the 
@@ -177,6 +192,14 @@ namespace Microsoft.Phone.Controls
                 PerformTransition(navigationOutTransition, _contentPresenter, oldTransition);
 
                 PrepareContentPresenterForCompositor(_contentPresenter);
+            }
+        }
+
+        private void OnNavigated(object sender, NavigationEventArgs e)
+        {
+            if (_wasRelaunched && e.NavigationMode == NavigationMode.Refresh)
+            {
+                _wasRelaunched = false;
             }
         }
 
