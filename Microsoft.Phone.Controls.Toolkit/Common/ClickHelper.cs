@@ -8,16 +8,16 @@ namespace Microsoft.Phone.Controls
     {
         private bool _isMouseCaptured;
 
-        private ClickHelper(UIElement target)
+        private ClickHelper(FrameworkElement target)
         {
             Target = target;
         }
 
-        public UIElement Target { get; private set; }
+        public FrameworkElement Target { get; private set; }
 
         public event EventHandler Click;
 
-        public static ClickHelper Create(UIElement target)
+        public static ClickHelper Create(FrameworkElement target)
         {
             ClickHelper helper = new ClickHelper(target);
             helper.Start();
@@ -40,7 +40,7 @@ namespace Microsoft.Phone.Controls
         {
             e.Handled = true;
 
-            if (_isMouseCaptured)
+            if (_isMouseCaptured && new Rect(0, 0, Target.ActualWidth, Target.ActualHeight).Contains(e.GetPosition(Target)))
             {
                 SafeRaise.Raise(Click, this);
             }

@@ -167,21 +167,21 @@
     <Compile Include="..\Microsoft.Phone.Controls.Toolkit\Common\InternalUtils.cs">
       <Link>Common\InternalUtils.cs</Link>
     </Compile>
-    <Compile Include="..\Microsoft.Phone.Controls.Toolkit\Common\ItemsControlHelper.cs">
+    <None Include="..\Microsoft.Phone.Controls.Toolkit\Common\ItemsControlHelper.cs">
       <Link>Common\ItemsControlHelper.cs</Link>
-    </Compile>
+    </None>
     <None Include="..\Microsoft.Phone.Controls.Toolkit\Common\IUpdateVisualState.cs">
       <Link>Common\IUpdateVisualState.cs</Link>
     </None>
-    <Compile Include="..\Microsoft.Phone.Controls.Toolkit\Common\LengthConverter.cs">
+    <None Include="..\Microsoft.Phone.Controls.Toolkit\Common\LengthConverter.cs">
       <Link>Common\LengthConverter.cs</Link>
-    </Compile>
+    </None>
     <Compile Include="..\Microsoft.Phone.Controls.Toolkit\Common\MathHelpers.cs">
       <Link>Common\MathHelpers.cs</Link>
     </Compile>
-    <Compile Include="..\Microsoft.Phone.Controls.Toolkit\Common\NumericExtensions.cs">
+    <None Include="..\Microsoft.Phone.Controls.Toolkit\Common\NumericExtensions.cs">
       <Link>Common\NumericExtensions.cs</Link>
-    </Compile>
+    </None>
     <Compile Include="..\Microsoft.Phone.Controls.Toolkit\Common\PhoneHelper.cs">
       <Link>Common\PhoneHelper.cs</Link>
     </Compile>
@@ -215,9 +215,9 @@
     <None Include="..\Microsoft.Phone.Controls.Toolkit\Common\TransformAnimator.cs">
       <Link>Common\TransformAnimator.cs</Link>
     </None>
-    <Compile Include="..\Microsoft.Phone.Controls.Toolkit\Common\TypeConverters.cs">
+    <None Include="..\Microsoft.Phone.Controls.Toolkit\Common\TypeConverters.cs">
       <Link>Common\TypeConverters.cs</Link>
-    </Compile>
+    </None>
     <None Include="..\Microsoft.Phone.Controls.Toolkit\Common\VisualStates.cs">
       <Link>Common\VisualStates.cs</Link>
     </None>
@@ -251,12 +251,12 @@
     <None Include="..\Microsoft.Phone.Controls.Toolkit\CustomMessageBox\DismissingEventArgs.cs">
       <Link>CustomMessageBox\DismissingEventArgs.cs</Link>
     </None>
-    <Compile Include="..\Microsoft.Phone.Controls.Toolkit\Data\DataTemplateSelector.cs">
+    <None Include="..\Microsoft.Phone.Controls.Toolkit\Data\DataTemplateSelector.cs">
       <Link>Data\DataTemplateSelector.cs</Link>
-    </Compile>
-    <Compile Include="..\Microsoft.Phone.Controls.Toolkit\Data\HierarchicalDataTemplate.cs">
+    </None>
+    <None Include="..\Microsoft.Phone.Controls.Toolkit\Data\HierarchicalDataTemplate.cs">
       <Link>Data\HierarchicalDataTemplate.cs</Link>
-    </Compile>
+    </None>
     <None Include="..\Microsoft.Phone.Controls.Toolkit\DateTimeConverters\DailyDateTimeConverter.cs">
       <Link>DateTimeConverters\DailyDateTimeConverter.cs</Link>
     </None>
@@ -316,9 +316,9 @@
       <Link>DateTimePickers\TimePickerPage.xaml.cs</Link>
       <DependentUpon>TimePickerPage.xaml</DependentUpon>
     </None>
-    <Compile Include="..\Microsoft.Phone.Controls.Toolkit\Design\StandardStyles.cs">
-      <Link>Design\StandardStyles.cs</Link>
-    </Compile>
+    <None Include="..\Microsoft.Phone.Controls.Toolkit\Effects\ReaderboardEffect.cs">
+      <Link>Effects\ReaderboardEffect.cs</Link>
+    </None>
     <Compile Include="..\Microsoft.Phone.Controls.Toolkit\Effects\SlideInEffect.cs">
       <Link>Effects\SlideInEffect.cs</Link>
     </Compile>
@@ -388,9 +388,9 @@
     <Compile Include="..\Microsoft.Phone.Controls.Toolkit\GlobalSuppressions.cs">
       <Link>GlobalSuppressions.cs</Link>
     </Compile>
-    <Compile Include="..\Microsoft.Phone.Controls.Toolkit\HeaderedItemsControl\HeaderedItemsControl.cs">
+    <None Include="..\Microsoft.Phone.Controls.Toolkit\HeaderedItemsControl\HeaderedItemsControl.cs">
       <Link>HeaderedItemsControl\HeaderedItemsControl.cs</Link>
-    </Compile>
+    </None>
     <None Include="..\Microsoft.Phone.Controls.Toolkit\HubTile\HubTile.cs">
       <Link>HubTile\HubTile.cs</Link>
     </None>
@@ -406,9 +406,12 @@
     <None Include="..\Microsoft.Phone.Controls.Toolkit\Input\GestureHelperEventArgs.cs">
       <Link>Input\GestureHelperEventArgs.cs</Link>
     </None>
-    <Compile Include="..\Microsoft.Phone.Controls.Toolkit\Primitives\ContextMenuPanel.cs">
-      <Link>Primitives\ContextMenuPanel.cs</Link>
+    <Compile Include="..\Microsoft.Phone.Controls.Toolkit\Pivot\PivotEx.cs">
+      <Link>Pivot\PivotEx.cs</Link>
     </Compile>
+    <None Include="..\Microsoft.Phone.Controls.Toolkit\Primitives\ContextMenuPanel.cs">
+      <Link>Primitives\ContextMenuPanel.cs</Link>
+    </None>
     <None Include="..\Microsoft.Phone.Controls.Toolkit\Primitives\WaitCursorControl.cs">
       <Link>Primitives\WaitCursorControl.cs</Link>
     </None>
@@ -482,6 +485,12 @@
     <Compile Include="..\Microsoft.Phone.Controls.Toolkit\Transitions\TransitionFrameSlim.cs">
       <Link>Transitions\TransitionFrameSlim.cs</Link>
     </Compile>
+    <None Include="..\Microsoft.Phone.Controls.Toolkit\Transitions\Transitions\ReaderboardTransition.cs">
+      <Link>Transitions\Transitions\ReaderboardTransition.cs</Link>
+    </None>
+    <None Include="..\Microsoft.Phone.Controls.Toolkit\Transitions\Transitions\ReaderboardTransitionMode.cs">
+      <Link>Transitions\Transitions\ReaderboardTransitionMode.cs</Link>
+    </None>
     <None Include="..\Microsoft.Phone.Controls.Toolkit\VariableSizedWrapGrid\VariableSizedWrapGrid.cs">
       <Link>VariableSizedWrapGrid\VariableSizedWrapGrid.cs</Link>
     </None>
@@ -529,8 +538,6 @@
     <None Include="ListView\IncrementalLoadingTrigger.cs" />
     <None Include="ListView\ISupportIncrementalLoading.cs" />
     <None Include="ListView\LoadMoreItemsResult.cs" />
-    <Compile Include="Scroller\Scroller.cs" />
-    <Compile Include="Scroller\ScrollerContentPresenter.cs" />
     <None Include="ListView\ItemClickEventArgs.cs" />
     <None Include="ListView\ListView.cs" />
     <None Include="ListView\ListViewItem.cs" />
@@ -701,14 +708,18 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </None>
+    <Page Include="Pivot\PivotEx.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <None Include="PropertyUI\PropertyUI.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </None>
-    <Page Include="Scroller\Scroller.xaml">
-      <SubType>Designer</SubType>
+    <None Include="RadioButtonGroup\RadioButtonGroup.xaml">
       <Generator>MSBuild:Compile</Generator>
-    </Page>
+      <SubType>Designer</SubType>
+    </None>
     <None Include="ToggleSwitch\ToggleSwitch.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -749,10 +760,6 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </None>
-    <Page Include="Design\StandardStyles.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <None Include="ExpanderView\ExpanderView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
