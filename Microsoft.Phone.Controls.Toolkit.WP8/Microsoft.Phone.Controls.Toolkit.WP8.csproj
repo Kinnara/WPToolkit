@@ -173,15 +173,15 @@
     <None Include="..\Microsoft.Phone.Controls.Toolkit\Common\IUpdateVisualState.cs">
       <Link>Common\IUpdateVisualState.cs</Link>
     </None>
-    <None Include="..\Microsoft.Phone.Controls.Toolkit\Common\LengthConverter.cs">
+    <Compile Include="..\Microsoft.Phone.Controls.Toolkit\Common\LengthConverter.cs">
       <Link>Common\LengthConverter.cs</Link>
-    </None>
+    </Compile>
     <Compile Include="..\Microsoft.Phone.Controls.Toolkit\Common\MathHelpers.cs">
       <Link>Common\MathHelpers.cs</Link>
     </Compile>
-    <None Include="..\Microsoft.Phone.Controls.Toolkit\Common\NumericExtensions.cs">
+    <Compile Include="..\Microsoft.Phone.Controls.Toolkit\Common\NumericExtensions.cs">
       <Link>Common\NumericExtensions.cs</Link>
-    </None>
+    </Compile>
     <Compile Include="..\Microsoft.Phone.Controls.Toolkit\Common\PhoneHelper.cs">
       <Link>Common\PhoneHelper.cs</Link>
     </Compile>
@@ -215,9 +215,9 @@
     <None Include="..\Microsoft.Phone.Controls.Toolkit\Common\TransformAnimator.cs">
       <Link>Common\TransformAnimator.cs</Link>
     </None>
-    <None Include="..\Microsoft.Phone.Controls.Toolkit\Common\TypeConverters.cs">
+    <Compile Include="..\Microsoft.Phone.Controls.Toolkit\Common\TypeConverters.cs">
       <Link>Common\TypeConverters.cs</Link>
-    </None>
+    </Compile>
     <None Include="..\Microsoft.Phone.Controls.Toolkit\Common\VisualStates.cs">
       <Link>Common\VisualStates.cs</Link>
     </None>
@@ -655,12 +655,12 @@
     <Compile Include="..\Microsoft.Phone.Controls.Toolkit\Transitions\Transitions\TurnstileTransitionMode.cs">
       <Link>Transitions\Transitions\TurnstileTransitionMode.cs</Link>
     </Compile>
-    <None Include="..\Microsoft.Phone.Controls.Toolkit\WrapPanel\OrientedSize.cs">
+    <Compile Include="..\Microsoft.Phone.Controls.Toolkit\WrapPanel\OrientedSize.cs">
       <Link>WrapPanel\OrientedSize.cs</Link>
-    </None>
-    <None Include="..\Microsoft.Phone.Controls.Toolkit\WrapPanel\WrapPanel.cs">
+    </Compile>
+    <Compile Include="..\Microsoft.Phone.Controls.Toolkit\WrapPanel\WrapPanel.cs">
       <Link>WrapPanel\WrapPanel.cs</Link>
-    </None>
+    </Compile>
     <None Include="SpeechTextBox\SpeechRecognizedEventArgs.cs" />
     <None Include="SpeechTextBox\SpeechTextBox.cs" />
   </ItemGroup>
