@@ -35,10 +35,11 @@
         <!--<ResourceDictionary Source="/Microsoft.Phone.Controls.Toolkit;component/PhoneSlider/PhoneSlider.xaml"/>-->
         <!--<ResourceDictionary Source="/Microsoft.Phone.Controls.Toolkit;component/PhoneTextBox/PhoneTextBox.xaml"/>-->
         <!--<ResourceDictionary Source="/Microsoft.Phone.Controls.Toolkit;component/PickerBox/PickerBox.xaml"/>-->
+        <ResourceDictionary Source="/Microsoft.Phone.Controls.Toolkit;component/Pivot/PivotEx.xaml"/>
         <!--<ResourceDictionary Source="/Microsoft.Phone.Controls.Toolkit;component/PropertyUI/PropertyUI.xaml"/>-->
+        <!--<ResourceDictionary Source="/Microsoft.Phone.Controls.Toolkit;component/RadioButtonGroup/RadioButtonGroup.xaml"/>-->
         <!--<ResourceDictionary Source="/Microsoft.Phone.Controls.Toolkit;component/RatingControl/RatingControl.xaml"/>-->
         <!--<ResourceDictionary Source="/Microsoft.Phone.Controls.Toolkit;component/StartView/StartView.xaml"/>-->
-        <ResourceDictionary Source="/Microsoft.Phone.Controls.Toolkit;component/Scroller/Scroller.xaml"/>
         <!--<ResourceDictionary Source="/Microsoft.Phone.Controls.Toolkit;component/ToggleSwitch/ToggleSwitch.xaml"/>-->
         <!--<ResourceDictionary Source="/Microsoft.Phone.Controls.Toolkit;component/TransferControl/TransferControl.xaml"/>-->
         <!--<ResourceDictionary Source="/Microsoft.Phone.Controls.Toolkit;component/Transitions/Transitions.xaml"/>-->
@@ -83,26 +84,6 @@
             </Setter.Value>
         </Setter>
     </Style>
-
-    <!--<Style TargetType="controls:RadioButtonGroup">
-        <Setter Property="Template">
-            <Setter.Value>
-                <ControlTemplate TargetType="controls:RadioButtonGroup">
-                    <StackPanel>
-                        <controls:PhoneContentControl
-                            x:Name="Header"
-                            Content="{TemplateBinding Header}"
-                            ContentTemplate="{TemplateBinding HeaderTemplate}"
-                            ContentTemplateSelector="{StaticResource ControlHeaderTemplateSelector}"
-                            Foreground="{StaticResource PhoneTextMidContrastBrush}"
-                            HorizontalContentAlignment="Left"
-                            Margin="{StaticResource PhoneHorizontalMargin}"/>
-                        <ItemsPresenter/>
-                    </StackPanel>
-                </ControlTemplate>
-            </Setter.Value>
-        </Setter>
-    </Style>-->
 
     <!--<Style TargetType="system:HeaderedContentControl">
         <Setter Property="HorizontalContentAlignment" Value="Left"/>

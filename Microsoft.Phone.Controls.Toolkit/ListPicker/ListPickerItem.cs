@@ -3,8 +3,7 @@
 // Please see http://go.microsoft.com/fwlink/?LinkID=131993 for details.
 // All other rights reserved.
 
-using System.Windows;
-using System.Windows.Controls;
+using Microsoft.Phone.Controls.Primitives;
 
 namespace Microsoft.Phone.Controls
 {
@@ -12,19 +11,8 @@ namespace Microsoft.Phone.Controls
     /// Class that implements a container for the ListPicker control.
     /// </summary>
     /// <QualityBand>Preview</QualityBand>
-    [TemplateVisualState(GroupName = SelectionStatesGroupName, Name = SelectionStatesUnselectedStateName)]
-    [TemplateVisualState(GroupName = SelectionStatesGroupName, Name = SelectionStatesSelectedStateName)]
-    public class ListPickerItem : ContentControl
+    public class ListPickerItem : SimpleSelectorItem
     {
-        private const string SelectionStatesGroupName = "SelectionStates";
-        private const string SelectionStatesUnselectedStateName = "Unselected";
-        private const string SelectionStatesSelectedStateName = "Selected";
-
-        static ListPickerItem()
-        {
-            TiltEffect.TiltableItems.Add(typeof(ListPickerItem));
-        }
-
         /// <summary>
         /// Initializes a new instance of the ListPickerItem class.
         /// </summary>
@@ -34,25 +22,5 @@ namespace Microsoft.Phone.Controls
 
             TiltEffect.SetSuppressTilt(this, false);
         }
-
-        /// <summary>
-        /// Builds the visual tree for the control when a new template is applied.
-        /// </summary>
-        public override void OnApplyTemplate()
-        {
-            base.OnApplyTemplate();
-            VisualStateManager.GoToState(this, IsSelected ? SelectionStatesSelectedStateName : SelectionStatesUnselectedStateName, false);
-        }
-
-        internal bool IsSelected
-        {
-            get { return _isSelected; }
-            set
-            {
-                _isSelected = value;
-                VisualStateManager.GoToState(this, _isSelected ? SelectionStatesSelectedStateName : SelectionStatesUnselectedStateName, true);
-            }
-        }
-        private bool _isSelected;
     }
 }

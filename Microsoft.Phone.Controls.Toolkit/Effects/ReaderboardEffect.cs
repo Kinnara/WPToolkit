@@ -1,9 +1,4 @@
-﻿// (c) Copyright Microsoft Corporation.
-// This source is subject to the Microsoft Public License (Ms-PL).
-// Please see http://go.microsoft.com/fwlink/?LinkID=131993 for details.
-// All other rights reserved.
-
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
@@ -12,112 +7,62 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
-using Microsoft.Phone.Controls.Primitives;
 
 namespace Microsoft.Phone.Controls
 {
     /// <summary>
-    /// Provides attached properties to feather FrameworkElements in
-    /// and out during page transitions. The result is a 'turnstile feather' effect
+    /// Provides attached properties to flip FrameworkElements in
+    /// and out during page transitions. The result is a 'readerboard' effect
     /// added to the select elements.
     /// </summary>
-    /// <QualityBand>Preview</QualityBand>
-    public sealed class TurnstileFeatherEffect : DependencyObject
+    public sealed class ReaderboardEffect : DependencyObject
     {
         /// <summary>
-        /// The center of rotation on X for elements that are feathered.
-        /// </summary>
-        private const double FeatheringCenterOfRotationX = -0.2;
-
-        /// <summary>
         /// The duration in milliseconds that each element takes
-        /// to feather forward in.
+        /// to flip in.
         /// </summary>
-        private const double ForwardInFeatheringDuration = 350.0;
+        private const double InDuration = 350.0;
 
         /// <summary>
         /// The initial angle position for an element 
-        /// that feathers forward in.
+        /// that flips in.
         /// </summary>
-        private const double ForwardInFeatheringAngle = -80.0;
-
-        /// <summary>
-        /// The delay in milliseconds between each element that 
-        /// feathers forward in.
-        /// </summary>
-        private const double ForwardInFeatheringDelay = 33.0;
+        private const double InAngle = -60.0;
 
         /// <summary>
         /// The duration in milliseconds that each element takes
-        /// to feather forward out.
+        /// to flip out.
         /// </summary>
-        private const double ForwardOutFeatheringDuration = 250.0;
+        private const double OutDuration = 250.0;
 
         /// <summary>
         /// The final angle position for an element 
-        /// that feathers forward out.
+        /// that flips out.
         /// </summary>
-        private const double ForwardOutFeatheringAngle = 50.0;
+        private const double OutAngle = 90.0;
 
         /// <summary>
-        /// The delay in milliseconds between each element that 
-        /// feathers forward out.
+        /// The delay in milliseconds between each element.
         /// </summary>
-        private const double ForwardOutFeatheringDelay = 33.0;
-
-        /// <summary>
-        /// The duration in milliseconds that each element takes
-        /// to feather backward in.
-        /// </summary>
-        private const double BackwardInFeatheringDuration = 350.0;
-
-        /// <summary>
-        /// The initial angle position for an element 
-        /// that feathers backward in.
-        /// </summary>
-        private const double BackwardInFeatheringAngle = 50.0;
-
-        /// <summary>
-        /// The delay in milliseconds between each element that 
-        /// feathers backward in.
-        /// </summary>
-        private const double BackwardInFeatheringDelay = 33.0; 
-
-        /// <summary>
-        /// The duration in milliseconds that each element takes
-        /// to feather backward out.
-        /// </summary>
-        private const double BackwardOutFeatheringDuration = 250.0;
-
-        /// <summary>
-        /// The initial angle position for an element 
-        /// that feathers backward out.
-        /// </summary>
-        private const double BackwardOutFeatheringAngle = -80.0;
-
-        /// <summary>
-        /// The delay in milliseconds between each element that 
-        /// feathers backward out.
-        /// </summary>
-        private const double BackwardOutFeatheringDelay = 33.0; 
+        private const double Delay = 20.0;
 
         /// <summary>
         /// The easing function that defines the exponential inwards 
         /// interpolation of the storyboards.
         /// </summary>
-        private static readonly ExponentialEase TurnstileFeatheringExponentialEaseIn = new ExponentialEase() { EasingMode = EasingMode.EaseIn, Exponent = 6 };
+        private static readonly ExponentialEase ExponentialEaseIn = new ExponentialEase() { EasingMode = EasingMode.EaseIn, Exponent = 5 };
 
         /// <summary>
         /// The easing function that defines the exponential outwards
         /// interpolation of the storyboards.
         /// </summary>
-        private static readonly ExponentialEase TurnstileFeatheringExponentialEaseOut = new ExponentialEase() { EasingMode = EasingMode.EaseOut, Exponent = 6 };
+        private static readonly ExponentialEase ExponentialEaseOut = new ExponentialEase() { EasingMode = EasingMode.EaseOut, Exponent = 5 };
 
         /// <summary>
         /// The property path used to map the animation's target property
-        /// to the RotationY property of the plane projection of a UI element.
+        /// to the RotationX property of the plane projection of a UI element.
         /// </summary>
-        private static readonly PropertyPath RotationYPropertyPath = new PropertyPath("(UIElement.Projection).(PlaneProjection.RotationY)");
+        private static readonly PropertyPath RotationXPropertyPath = new PropertyPath("(UIElement.Projection).(PlaneProjection.RotationX)");
 
         /// <summary>
         /// The property path used to map the animation's target property
@@ -138,18 +83,18 @@ namespace Microsoft.Phone.Controls
 
         /// <summary>
         /// Identifies the set of framework elements that are targeted
-        /// to be feathered.
+        /// to be animated.
         /// </summary>
-        private static IList<WeakReference> _featheringTargets;
+        private static IList<WeakReference> _targets;
 
         /// <summary>
         /// Indicates whether the targeted framework elements need their
-        /// projections and transforms to be restored.
+        /// projections to be restored.
         /// </summary>
         private static bool _pendingRestore;
 
         /// <summary>
-        /// Default list of types that cannot be feathered.
+        /// Default list of types that cannot be animated.
         /// </summary>
         private static IList<Type> _nonPermittedTypes = new List<Type>() 
             { 
@@ -161,50 +106,50 @@ namespace Microsoft.Phone.Controls
             };
 
         /// <summary>
-        /// Default list of types that cannot be feathered.
+        /// Default list of types that cannot be animated.
         /// </summary>
         public static IList<Type> NonPermittedTypes
         {
             get { return _nonPermittedTypes; }
         }
 
-        #region FeatheringIndex DependencyProperty
+        #region RowIndex DependencyProperty
 
         /// <summary>
-        /// Gets the feathering index of the specified dependency object.
+        /// Gets the row index of the specified dependency object.
         /// </summary>
         /// <param name="obj">The dependency object.</param>
-        /// <returns>The feathering index.</returns>
+        /// <returns>The row index.</returns>
         [SuppressMessage("Microsoft.Design", "CA1062:Validate arguments of public methods", MessageId = "0", Justification = "Standard pattern.")]
-        public static int GetFeatheringIndex(DependencyObject obj)
+        public static int GetRowIndex(DependencyObject obj)
         {
-            return (int)obj.GetValue(FeatheringIndexProperty);
+            return (int)obj.GetValue(RowIndexProperty);
         }
 
         /// <summary>
-        /// Sets the feathering index of the specified dependency object.
+        /// Sets the row index of the specified dependency object.
         /// </summary>
         /// <param name="obj">The dependency object.</param>
-        /// <param name="value">The feathering index.</param>
+        /// <param name="value">The row index.</param>
         [SuppressMessage("Microsoft.Design", "CA1062:Validate arguments of public methods", MessageId = "0", Justification = "Standard pattern.")]
-        public static void SetFeatheringIndex(DependencyObject obj, int value)
+        public static void SetRowIndex(DependencyObject obj, int value)
         {
-            obj.SetValue(FeatheringIndexProperty, value);
+            obj.SetValue(RowIndexProperty, value);
         }
 
         /// <summary>
-        /// Identifies the feathering index of the current element,
-        /// which represents its place in the feathering order sequence.
+        /// Identifies the row index of the current element,
+        /// which represents its place in the flipping order sequence.
         /// </summary>
-        public static readonly DependencyProperty FeatheringIndexProperty =
-            DependencyProperty.RegisterAttached("FeatheringIndex", typeof(int), typeof(TurnstileFeatherEffect), new PropertyMetadata(-1, OnFeatheringIndexPropertyChanged));
+        public static readonly DependencyProperty RowIndexProperty =
+            DependencyProperty.RegisterAttached("RowIndex", typeof(int), typeof(ReaderboardEffect), new PropertyMetadata(-1, OnRowIndexPropertyChanged));
 
         /// <summary>
         /// Subscribes an element to the private manager.
         /// </summary>
         /// <param name="obj">The event sender.</param>
         /// <param name="e">The event arguments.</param>
-        private static void OnFeatheringIndexPropertyChanged(DependencyObject obj, DependencyPropertyChangedEventArgs e)
+        private static void OnRowIndexPropertyChanged(DependencyObject obj, DependencyPropertyChangedEventArgs e)
         {
             FrameworkElement target = obj as FrameworkElement;
 
@@ -221,11 +166,11 @@ namespace Microsoft.Phone.Controls
             if (index < 0)
             {
                 // Dettach event handlers.
-                if (TurnstileFeatherEffect.GetHasEventsAttached(target))
+                if (ReaderboardEffect.GetHasEventsAttached(target))
                 {
                     target.SizeChanged -= Target_SizeChanged;
                     target.Unloaded -= Target_Unloaded;
-                    TurnstileFeatherEffect.SetHasEventsAttached(target, false);
+                    ReaderboardEffect.SetHasEventsAttached(target, false);
                 }
 
                 UnsubscribeFrameworkElement(target);
@@ -233,18 +178,18 @@ namespace Microsoft.Phone.Controls
             else
             {
                 // Attach event handlers.
-                if (!TurnstileFeatherEffect.GetHasEventsAttached(target))
+                if (!ReaderboardEffect.GetHasEventsAttached(target))
                 {
                     target.SizeChanged += Target_SizeChanged;
                     target.Unloaded += Target_Unloaded;
-                    TurnstileFeatherEffect.SetHasEventsAttached(target, true);
+                    ReaderboardEffect.SetHasEventsAttached(target, true);
                 }
 
                 SubscribeFrameworkElement(target);
             }
         }
 
-        #endregion        
+        #endregion
 
         #region ParentPage DependencyProperty
 
@@ -272,7 +217,7 @@ namespace Microsoft.Phone.Controls
         /// Identifies the ParentPage dependency property.
         /// </summary>
         private static readonly DependencyProperty ParentPageProperty =
-            DependencyProperty.RegisterAttached("ParentPage", typeof(PhoneApplicationPage), typeof(TurnstileFeatherEffect), new PropertyMetadata(null, OnParentPagePropertyChanged));
+            DependencyProperty.RegisterAttached("ParentPage", typeof(PhoneApplicationPage), typeof(ReaderboardEffect), new PropertyMetadata(null, OnParentPagePropertyChanged));
 
         /// <summary>
         /// Manages subscription to a page.
@@ -307,7 +252,7 @@ namespace Microsoft.Phone.Controls
             }
             else
             {
-                if(_pagesToReferences.TryGetValue(oldPage, out references))
+                if (_pagesToReferences.TryGetValue(oldPage, out references))
                 {
                     WeakReferenceHelper.TryRemoveTarget(references, target);
 
@@ -316,7 +261,7 @@ namespace Microsoft.Phone.Controls
                         _pagesToReferences.Remove(oldPage);
                     }
                 }
-            }       
+            }
         }
 
         #endregion
@@ -349,7 +294,7 @@ namespace Microsoft.Phone.Controls
         /// Identifies the IsSubscribed dependency property.
         /// </summary>
         private static readonly DependencyProperty IsSubscribedProperty =
-            DependencyProperty.RegisterAttached("IsSubscribed", typeof(bool), typeof(TurnstileFeatherEffect), new PropertyMetadata(false));
+            DependencyProperty.RegisterAttached("IsSubscribed", typeof(bool), typeof(ReaderboardEffect), new PropertyMetadata(false));
 
         #endregion
 
@@ -381,7 +326,7 @@ namespace Microsoft.Phone.Controls
         /// Identifies the HasEventsAttached dependency property.
         /// </summary>
         private static readonly DependencyProperty HasEventsAttachedProperty =
-            DependencyProperty.RegisterAttached("HasEventsAttached", typeof(bool), typeof(TurnstileFeatherEffect), new PropertyMetadata(false));
+            DependencyProperty.RegisterAttached("HasEventsAttached", typeof(bool), typeof(ReaderboardEffect), new PropertyMetadata(false));
 
         #endregion
 
@@ -389,7 +334,7 @@ namespace Microsoft.Phone.Controls
 
         /// <summary>
         /// Gets the original projection of the specified dependency object
-        /// after the projection needed to apply the turnstile feather effect
+        /// after the projection needed to apply the readerboard effect
         /// has been attached to it.
         /// </summary>
         /// <param name="obj">The dependency object.</param>
@@ -413,40 +358,7 @@ namespace Microsoft.Phone.Controls
         /// Identifies the OriginalProjection dependency property.
         /// </summary>
         private static readonly DependencyProperty OriginalProjectionProperty =
-            DependencyProperty.RegisterAttached("OriginalProjection", typeof(Projection), typeof(TurnstileFeatherEffect), new PropertyMetadata(null));
-
-        #endregion
-
-        #region OriginalRenderTransform DependencyProperty
-
-        /// <summary>
-        /// Gets the original render transform of the specified dependency 
-        /// object after the transform needed to apply the turnstile feather 
-        /// effect has been attached to it.
-        /// </summary>
-        /// <param name="obj">The dependency object.</param>
-        /// <returns>The original render transform.</returns>
-        private static Transform GetOriginalRenderTransform(DependencyObject obj)
-        {
-            return (Transform)obj.GetValue(OriginalRenderTransformProperty);
-        }
-
-        /// <summary>
-        /// Sets the original render transform of the specified 
-        /// dependency object.
-        /// </summary>
-        /// <param name="obj">The dependency object.</param>
-        /// <param name="value">The original render transform.</param>
-        private static void SetOriginalRenderTransform(DependencyObject obj, Transform value)
-        {
-            obj.SetValue(OriginalRenderTransformProperty, value);
-        }
-
-        /// <summary>
-        /// Identifies the OriginalRenderTransform dependency property.
-        /// </summary>
-        private static readonly DependencyProperty OriginalRenderTransformProperty =
-            DependencyProperty.RegisterAttached("OriginalRenderTransform", typeof(Transform), typeof(TurnstileFeatherEffect), new PropertyMetadata(null)); 
+            DependencyProperty.RegisterAttached("OriginalProjection", typeof(Projection), typeof(ReaderboardEffect), new PropertyMetadata(null));
 
         #endregion
 
@@ -454,7 +366,7 @@ namespace Microsoft.Phone.Controls
 
         /// <summary>
         /// Gets the original opacity of the specified dependency 
-        /// object before the turnstile feather effect is applied to it.
+        /// object before the readerboard effect is applied to it.
         /// </summary>
         /// <param name="obj">The dependency object.</param>
         /// <returns>The original opacity.</returns>
@@ -478,7 +390,7 @@ namespace Microsoft.Phone.Controls
         /// Identifies the OriginalOpacity dependency property.
         /// </summary>
         private static readonly DependencyProperty OriginalOpacityProperty =
-            DependencyProperty.RegisterAttached("OriginalOpacity", typeof(double), typeof(TurnstileFeatherEffect), new PropertyMetadata(0.0));
+            DependencyProperty.RegisterAttached("OriginalOpacity", typeof(double), typeof(ReaderboardEffect), new PropertyMetadata(0.0));
 
         #endregion
 
@@ -519,26 +431,26 @@ namespace Microsoft.Phone.Controls
         {
             Type type = obj.GetType();
 
-            if(NonPermittedTypes.Contains(type))
+            if (NonPermittedTypes.Contains(type))
             {
-                string message = string.Format(CultureInfo.InvariantCulture, "Objects of the type {0} cannot be feathered.", type);
+                string message = string.Format(CultureInfo.InvariantCulture, "Objects of the type {0} cannot be flipped.", type);
                 throw new InvalidOperationException(message);
             }
         }
 
         /// <summary>
         /// Compares two weak references targeting dependency objects
-        /// to sort them based on their feathering index.
+        /// to sort them based on their row index.
         /// </summary>
         /// <param name="x">The first weak reference.</param>
         /// <param name="y">The second weak reference.</param>
         /// <returns>
         /// 0 if both weak references target dependency objects with
-        /// the same feathering index.
+        /// the same row index.
         /// 1 if the first reference targets a dependency 
-        /// object with a greater feathering index.
+        /// object with a greater row index.
         /// -1 if the second reference targets a dependency 
-        /// object with a greater feathering index.       
+        /// object with a greater row index.       
         /// </returns>
         private static int SortReferencesByIndex(WeakReference x, WeakReference y)
         {
@@ -570,8 +482,8 @@ namespace Microsoft.Phone.Controls
                 }
                 else
                 {
-                    int xIndex = GetFeatheringIndex(targetX);
-                    int yIndex = GetFeatheringIndex(targetY);
+                    int xIndex = GetRowIndex(targetX);
+                    int yIndex = GetRowIndex(targetY);
 
                     return xIndex.CompareTo(yIndex);
                 }
@@ -583,7 +495,7 @@ namespace Microsoft.Phone.Controls
         /// that must be animated.
         /// </summary>
         /// <returns>
-        /// A set of weak references to items sorted by their feathering index.
+        /// A set of weak references to items sorted by their row index.
         /// </returns>
         private static IList<WeakReference> GetTargetsToAnimate()
         {
@@ -623,7 +535,6 @@ namespace Microsoft.Phone.Controls
                     continue;
                 }
 
-                Pivot pivot = r.Target as Pivot;
                 ItemsControl itemsControl = r.Target as ItemsControl;
                 LongListSelector longListSelector = r.Target as LongListSelector;
 #if !WP7
@@ -633,31 +544,14 @@ namespace Microsoft.Phone.Controls
                 }
 #endif
 
-                if (pivot != null)
+                if (itemsControl != null)
                 {
-                    // If the target is a Pivot, feather the title and the headers individually.
-                    ContentPresenter title = pivot.GetFirstLogicalChildByType<ContentPresenter>(false);
-
-                    if (title != null)
-                    {
-                        targets.Add(new WeakReference(title));
-                    }
-
-                    PivotHeadersControl headers = pivot.GetFirstLogicalChildByType<PivotHeadersControl>(false);
-
-                    if (headers != null)
-                    {
-                        targets.Add(new WeakReference(headers));
-                    }
-                }
-                else if (itemsControl != null)
-                {
-                    // If the target is an ItemsControl, feather its items individually.
+                    // If the target is an ItemsControl, flip its items individually.
                     itemsControl.GetItemsInViewPort(targets);
                 }
                 else if (longListSelector != null)
                 {
-                    // If the target is a LongListSelector, feather its items individually.
+                    // If the target is a LongListSelector, flip its items individually.
 #if WP7
                     ListBox child = longListSelector.GetFirstLogicalChildByType<ListBox>(false);
 
@@ -671,10 +565,10 @@ namespace Microsoft.Phone.Controls
                 }
                 else
                 {
-                    // Else, feather the target as a whole.
+                    // Else, flip the target as a whole.
                     targets.Add(r);
                 }
-            }    
+            }
 
             return targets;
         }
@@ -685,7 +579,7 @@ namespace Microsoft.Phone.Controls
         /// <param name="target">The framework element.</param>
         private static void SubscribeFrameworkElement(FrameworkElement target)
         {
-            if (!TurnstileFeatherEffect.GetIsSubscribed(target))
+            if (!ReaderboardEffect.GetIsSubscribed(target))
             {
                 // Find the parent page.
                 PhoneApplicationPage page = target.GetParentByType<PhoneApplicationPage>();
@@ -694,8 +588,8 @@ namespace Microsoft.Phone.Controls
                     return;
                 }
 
-                TurnstileFeatherEffect.SetParentPage(target, page);
-                TurnstileFeatherEffect.SetIsSubscribed(target, true);
+                ReaderboardEffect.SetParentPage(target, page);
+                ReaderboardEffect.SetIsSubscribed(target, true);
             }
         }
 
@@ -706,83 +600,53 @@ namespace Microsoft.Phone.Controls
         private static void UnsubscribeFrameworkElement(FrameworkElement target)
         {
             // If element is subscribed, unsubscribe.
-            if (TurnstileFeatherEffect.GetIsSubscribed(target))
+            if (ReaderboardEffect.GetIsSubscribed(target))
             {
-                TurnstileFeatherEffect.SetParentPage(target, null);
-                TurnstileFeatherEffect.SetIsSubscribed(target, false);
+                ReaderboardEffect.SetParentPage(target, null);
+                ReaderboardEffect.SetIsSubscribed(target, false);
             }
         }
-        
+
         /// <summary>
-        /// Prepares a framework element to be feathered by adding a plane projection
-        /// and a composite transform to it.
+        /// Prepares a framework element to be flipped by adding a plane projection to it.
         /// </summary>
         /// <param name="root">The root visual.</param>
         /// <param name="element">The framework element.</param>
-        private static bool TryAttachProjectionAndTransform(PhoneApplicationFrame root, FrameworkElement element)
+        private static bool TryAttachProjection(PhoneApplicationFrame root, FrameworkElement element)
         {
-            GeneralTransform generalTransform;
-
-            try
-            {
-                generalTransform = element.TransformToVisual(root);
-            }
-            catch (ArgumentException)
-            {
-                return false;
-            }
-
-            Point coordinates = generalTransform.Transform(Origin);
-            double y = coordinates.Y + element.ActualHeight / 2.0;
-            double offset = (root.ActualHeight / 2.0) - y;
-
-            // Cache original projection and transform.
-            TurnstileFeatherEffect.SetOriginalProjection(element, element.Projection);
-            TurnstileFeatherEffect.SetOriginalRenderTransform(element, element.RenderTransform);
+            // Cache original projection.
+            ReaderboardEffect.SetOriginalProjection(element, element.Projection);
 
             // Attach projection.
             PlaneProjection projection = new PlaneProjection();
-            projection.GlobalOffsetY = offset * -1.0;
-            projection.CenterOfRotationX = FeatheringCenterOfRotationX;
             element.Projection = projection;
-
-            // Attach transform.
-            Transform originalTransform = element.RenderTransform;
-            TranslateTransform translateTransform = new TranslateTransform();
-            translateTransform.Y = offset;
-            TransformGroup transformGroup = new TransformGroup();
-            transformGroup.Children.Add(originalTransform);
-            transformGroup.Children.Add(translateTransform);
-            element.RenderTransform = transformGroup;
 
             return true;
         }
 
         /// <summary>
-        /// Restores the original projection and render transform of
+        /// Restores the original projection of
         /// the targeted framework elements.
         /// </summary>
-        private static void RestoreProjectionsAndTransforms()
+        private static void RestoreProjections()
         {
-            if (_featheringTargets == null || !_pendingRestore)
+            if (_targets == null || !_pendingRestore)
             {
                 return;
             }
 
-            foreach (WeakReference r in _featheringTargets)
+            foreach (WeakReference r in _targets)
             {
                 FrameworkElement element = r.Target as FrameworkElement;
 
                 if (element == null)
                 {
                     continue;
-                }                
+                }
 
-                Projection projection = TurnstileFeatherEffect.GetOriginalProjection(element);
-                Transform transform = TurnstileFeatherEffect.GetOriginalRenderTransform(element);
+                Projection projection = ReaderboardEffect.GetOriginalProjection(element);
 
                 element.Projection = projection;
-                element.RenderTransform = transform;
             }
 
             _pendingRestore = false;
@@ -838,74 +702,63 @@ namespace Microsoft.Phone.Controls
                 }
             }
 
-#if !WP7
-            if (!isParentTransparent)
-            {
-                Pivot pivot = ancestors.OfType<Pivot>().FirstOrDefault();
-                if (pivot != null && pivot.SelectedItem != null && ancestors.Take(ancestors.IndexOf(pivot)).OfType<ItemsPresenter>().Any())
-                {
-                    FrameworkElement selectedItemContainer = pivot.ItemContainerGenerator.ContainerFromItem(pivot.SelectedItem) as FrameworkElement;
-                    if (selectedItemContainer != null)
-                    {
-                        if (!ancestors.Contains(selectedItemContainer))
-                        {
-                            return false;
-                        }
-                    }
-                }
-            }
-#endif
-            return (bounds.Bottom > 0) && (bounds.Top < height) 
-                && (bounds.Right > 0) && (bounds.Left < width) 
+            return (bounds.Bottom > 0) && (bounds.Top < height)
+                && (bounds.Right > 0) && (bounds.Left < width)
                 && !isParentTransparent;
         }
 
         /// <summary>
         /// Adds a set of animations corresponding to the 
-        /// turnstile feather forward in effect.
+        /// readerboard in effect.
         /// </summary>
         /// <param name="storyboard">
         /// The storyboard where the animations
         /// will be added.
         /// </param>
-        private static void ComposeForwardInStoryboard(Storyboard storyboard)
-        {     
+        private static void ComposeInStoryboard(Storyboard storyboard, TimeSpan? beginTime, bool noDelay)
+        {
             int counter = 0;
             PhoneApplicationFrame root = Application.Current.RootVisual as PhoneApplicationFrame;
 
-            foreach (WeakReference r in _featheringTargets)
+            foreach (WeakReference r in _targets)
             {
                 FrameworkElement element = (FrameworkElement)r.Target;
                 double originalOpacity = element.Opacity;
-                TurnstileFeatherEffect.SetOriginalOpacity(element, originalOpacity);
+                ReaderboardEffect.SetOriginalOpacity(element, originalOpacity);
 
                 // Hide the element until the storyboard is begun.
-                element.Opacity = 0.0; 
+                element.Opacity = 0.0;
 
-                if(!TryAttachProjectionAndTransform(root, element))
+                if (!TryAttachProjection(root, element))
                 {
                     continue;
                 }
 
-                DoubleAnimation doubleAnimation = new DoubleAnimation()
+                TimeSpan initialDelay = beginTime.GetValueOrDefault();
+
+                DoubleAnimationUsingKeyFrames doubleAnimation = new DoubleAnimationUsingKeyFrames()
                 {
-                    Duration = TimeSpan.FromMilliseconds(ForwardInFeatheringDuration),
-                    From = ForwardInFeatheringAngle,
-                    To = 0.0,
-                    BeginTime = TimeSpan.FromMilliseconds(ForwardInFeatheringDelay * counter),
-                    EasingFunction = TurnstileFeatheringExponentialEaseOut
+                    BeginTime = noDelay ? (TimeSpan?)null : TimeSpan.FromMilliseconds(Delay * counter),
+                    KeyFrames =
+                    {
+                        new DiscreteDoubleKeyFrame { KeyTime = TimeSpan.Zero, Value = InAngle },
+                        new DiscreteDoubleKeyFrame { KeyTime = initialDelay, Value = InAngle },
+                        new EasingDoubleKeyFrame { KeyTime = initialDelay + TimeSpan.FromMilliseconds(InDuration), Value = 0, EasingFunction = ExponentialEaseOut }
+                    }
                 };
 
                 Storyboard.SetTarget(doubleAnimation, element);
-                Storyboard.SetTargetProperty(doubleAnimation, RotationYPropertyPath);
+                Storyboard.SetTargetProperty(doubleAnimation, RotationXPropertyPath);
                 storyboard.Children.Add(doubleAnimation);
 
-                doubleAnimation = new DoubleAnimation()
+                doubleAnimation = new DoubleAnimationUsingKeyFrames()
                 {
-                    Duration = TimeSpan.Zero,
-                    From = 0.0,
-                    To = TurnstileFeatherEffect.GetOriginalOpacity(element),
-                    BeginTime = TimeSpan.FromMilliseconds(ForwardInFeatheringDelay * counter)
+                    BeginTime = noDelay ? (TimeSpan?)null : TimeSpan.FromMilliseconds(Delay * counter),
+                    KeyFrames =
+                    {
+                        new DiscreteDoubleKeyFrame { KeyTime = TimeSpan.Zero, Value = 0 },
+                        new DiscreteDoubleKeyFrame { KeyTime = initialDelay, Value = ReaderboardEffect.GetOriginalOpacity(element) }
+                    }
                 };
 
                 Storyboard.SetTarget(doubleAnimation, element);
@@ -918,39 +771,39 @@ namespace Microsoft.Phone.Controls
 
         /// <summary>
         /// Adds a set of animations corresponding to the 
-        /// turnstile feather forward out effect.
+        /// readerboard out effect.
         /// </summary>
         /// <param name="storyboard">
         /// The storyboard where the animations
         /// will be added.
         /// </param>
-        private static void ComposeForwardOutStoryboard(Storyboard storyboard)
+        private static void ComposeOutStoryboard(Storyboard storyboard, bool noDelay)
         {
             int counter = 0;
             PhoneApplicationFrame root = Application.Current.RootVisual as PhoneApplicationFrame;
 
-            foreach (WeakReference r in _featheringTargets)
+            foreach (WeakReference r in _targets)
             {
                 FrameworkElement element = (FrameworkElement)r.Target;
                 double originalOpacity = element.Opacity;
-                TurnstileFeatherEffect.SetOriginalOpacity(element, originalOpacity);     
+                ReaderboardEffect.SetOriginalOpacity(element, originalOpacity);
 
-                if (!TryAttachProjectionAndTransform(root, element))
+                if (!TryAttachProjection(root, element))
                 {
                     continue;
                 }
 
                 DoubleAnimation doubleAnimation = new DoubleAnimation()
                 {
-                    Duration = TimeSpan.FromMilliseconds(ForwardOutFeatheringDuration),
+                    Duration = TimeSpan.FromMilliseconds(OutDuration),
                     From = 0.0,
-                    To = ForwardOutFeatheringAngle,
-                    BeginTime = TimeSpan.FromMilliseconds(ForwardOutFeatheringDelay * counter),
-                    EasingFunction = TurnstileFeatheringExponentialEaseIn
-                };         
+                    To = OutAngle,
+                    BeginTime = noDelay ? (TimeSpan?)null : TimeSpan.FromMilliseconds(Delay * counter),
+                    EasingFunction = ExponentialEaseIn
+                };
 
                 Storyboard.SetTarget(doubleAnimation, element);
-                Storyboard.SetTargetProperty(doubleAnimation, RotationYPropertyPath);
+                Storyboard.SetTargetProperty(doubleAnimation, RotationXPropertyPath);
                 storyboard.Children.Add(doubleAnimation);
 
                 doubleAnimation = new DoubleAnimation()
@@ -958,7 +811,7 @@ namespace Microsoft.Phone.Controls
                     Duration = TimeSpan.Zero,
                     From = originalOpacity,
                     To = 0.0,
-                    BeginTime = TimeSpan.FromMilliseconds(ForwardOutFeatheringDelay * counter + ForwardOutFeatheringDuration)
+                    BeginTime = TimeSpan.FromMilliseconds((noDelay ? 0 : (Delay * counter)) + OutDuration)
                 };
 
                 Storyboard.SetTarget(doubleAnimation, element);
@@ -971,116 +824,7 @@ namespace Microsoft.Phone.Controls
 
         /// <summary>
         /// Adds a set of animations corresponding to the 
-        /// turnstile feather backward in effect.
-        /// </summary>
-        /// <param name="storyboard">
-        /// The storyboard where the animations
-        /// will be added.
-        /// </param>
-        private static void ComposeBackwardInStoryboard(Storyboard storyboard)
-        {
-            int counter = 0;
-            PhoneApplicationFrame root = Application.Current.RootVisual as PhoneApplicationFrame;
-
-            foreach (WeakReference r in _featheringTargets)
-            {
-                FrameworkElement element = (FrameworkElement)r.Target;
-                double originalOpacity = element.Opacity;
-                TurnstileFeatherEffect.SetOriginalOpacity(element, originalOpacity);
-
-                // Hide the element until the storyboard is begun.
-                element.Opacity = 0.0; 
-
-                if (!TryAttachProjectionAndTransform(root, element))
-                {
-                    continue;
-                }
-
-                DoubleAnimation doubleAnimation = new DoubleAnimation()
-                {
-                    Duration = TimeSpan.FromMilliseconds(BackwardInFeatheringDuration),
-                    From = BackwardInFeatheringAngle,
-                    To = 0.0,
-                    BeginTime = TimeSpan.FromMilliseconds(BackwardInFeatheringDelay * counter),
-                    EasingFunction = TurnstileFeatheringExponentialEaseOut
-                };
-
-                Storyboard.SetTarget(doubleAnimation, element);
-                Storyboard.SetTargetProperty(doubleAnimation, RotationYPropertyPath);
-                storyboard.Children.Add(doubleAnimation);
-
-                doubleAnimation = new DoubleAnimation()
-                {
-                    Duration = TimeSpan.Zero,
-                    From = 0.0,
-                    To = originalOpacity,
-                    BeginTime = TimeSpan.FromMilliseconds(BackwardInFeatheringDelay * counter)
-                };
-
-                Storyboard.SetTarget(doubleAnimation, element);
-                Storyboard.SetTargetProperty(doubleAnimation, OpacityPropertyPath);
-                storyboard.Children.Add(doubleAnimation);
-
-                counter++;
-            }
-        }
-
-        /// <summary>
-        /// Adds a set of animations corresponding to the 
-        /// turnstile feather backward out effect.
-        /// </summary>
-        /// <param name="storyboard">
-        /// The storyboard where the animations
-        /// will be added.
-        /// </param>
-        private static void ComposeBackwardOutStoryboard(Storyboard storyboard)
-        {
-            int counter = 0;
-            PhoneApplicationFrame root = Application.Current.RootVisual as PhoneApplicationFrame;
-
-            foreach (WeakReference r in _featheringTargets)
-            {
-                FrameworkElement element = (FrameworkElement)r.Target;
-                double originalOpacity = element.Opacity;
-                TurnstileFeatherEffect.SetOriginalOpacity(element, originalOpacity);                 
-
-                if (!TryAttachProjectionAndTransform(root, element))
-                {
-                    continue;
-                }
-
-                DoubleAnimation doubleAnimation = new DoubleAnimation()
-                {
-                    Duration = TimeSpan.FromMilliseconds(BackwardOutFeatheringDuration),
-                    From = 0.0,
-                    To = BackwardOutFeatheringAngle,
-                    BeginTime = TimeSpan.FromMilliseconds(BackwardOutFeatheringDelay * counter),
-                    EasingFunction = TurnstileFeatheringExponentialEaseIn
-                };
-
-                Storyboard.SetTarget(doubleAnimation, element);
-                Storyboard.SetTargetProperty(doubleAnimation, RotationYPropertyPath);
-                storyboard.Children.Add(doubleAnimation);
-
-                doubleAnimation = new DoubleAnimation()
-                {
-                    Duration = TimeSpan.Zero,
-                    From = originalOpacity,
-                    To = 0.0,
-                    BeginTime = TimeSpan.FromMilliseconds((BackwardOutFeatheringDelay * counter) + BackwardOutFeatheringDuration)
-                };
-
-                Storyboard.SetTarget(doubleAnimation, element);
-                Storyboard.SetTargetProperty(doubleAnimation, OpacityPropertyPath);
-                storyboard.Children.Add(doubleAnimation);
-
-                counter++;
-            }
-        }
-
-        /// <summary>
-        /// Adds a set of animations corresponding to the 
-        /// turnstile feather effect.
+        /// readerboard effect.
         /// </summary>
         /// <param name="storyboard">
         /// The storyboard where the animations
@@ -1088,15 +832,15 @@ namespace Microsoft.Phone.Controls
         /// <param name="beginTime">
         /// The time at which the storyboard should begin.</param>
         /// <param name="mode">
-        /// The mode of the turnstile feather effect.
+        /// The mode of the readerboard effect.
         /// </param>
-        internal static void ComposeStoryboard(Storyboard storyboard, TimeSpan? beginTime, TurnstileFeatherTransitionMode mode)
+        internal static void ComposeStoryboard(Storyboard storyboard, TimeSpan? beginTime, ReaderboardTransitionMode mode, bool noDelay)
         {
-            RestoreProjectionsAndTransforms();
+            RestoreProjections();
 
-            _featheringTargets = GetTargetsToAnimate();
+            _targets = GetTargetsToAnimate();
 
-            if (_featheringTargets == null)
+            if (_targets == null)
             {
                 return;
             }
@@ -1105,34 +849,27 @@ namespace Microsoft.Phone.Controls
 
             switch (mode)
             {
-                case TurnstileFeatherTransitionMode.ForwardIn:
-                    ComposeForwardInStoryboard(storyboard);
+                case ReaderboardTransitionMode.In:
+                    ComposeInStoryboard(storyboard, beginTime, noDelay);
                     break;
-                case TurnstileFeatherTransitionMode.ForwardOut:
-                    ComposeForwardOutStoryboard(storyboard);
-                    break;
-                case TurnstileFeatherTransitionMode.BackwardIn:
-                    ComposeBackwardInStoryboard(storyboard);
-                    break;
-                case TurnstileFeatherTransitionMode.BackwardOut:
-                    ComposeBackwardOutStoryboard(storyboard);
+                case ReaderboardTransitionMode.Out:
+                    ComposeOutStoryboard(storyboard, noDelay);
+                    storyboard.BeginTime = beginTime;
                     break;
                 default:
                     break;
             }
 
-            storyboard.BeginTime = beginTime;
-
             storyboard.Completed += (s, e) =>
             {
-                foreach (WeakReference r in _featheringTargets)
+                foreach (WeakReference r in _targets)
                 {
                     FrameworkElement element = (FrameworkElement)r.Target;
-                    double originalOpacity = TurnstileFeatherEffect.GetOriginalOpacity(element);
+                    double originalOpacity = ReaderboardEffect.GetOriginalOpacity(element);
                     element.Opacity = originalOpacity;
                 }
 
-                RestoreProjectionsAndTransforms();
+                RestoreProjections();
             };
         }
     }
