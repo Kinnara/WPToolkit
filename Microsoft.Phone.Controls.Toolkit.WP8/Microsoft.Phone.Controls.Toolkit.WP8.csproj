@@ -227,9 +227,9 @@
     <None Include="..\Microsoft.Phone.Controls.Toolkit\Common\WeakEventListener.cs">
       <Link>Common\WeakEventListener.cs</Link>
     </None>
-    <None Include="..\Microsoft.Phone.Controls.Toolkit\Common\WeakReferenceHelper.cs">
+    <Compile Include="..\Microsoft.Phone.Controls.Toolkit\Common\WeakReferenceHelper.cs">
       <Link>Common\WeakReferenceHelper.cs</Link>
-    </None>
+    </Compile>
     <Compile Include="..\Microsoft.Phone.Controls.Toolkit\ContextMenu\ContextMenu.cs">
       <Link>ContextMenu\ContextMenu.cs</Link>
     </Compile>
@@ -500,7 +500,7 @@
     <None Include="..\Microsoft.Phone.Controls.Toolkit\WaitCursor\WaitCursorService.cs">
       <Link>WaitCursor\WaitCursorService.cs</Link>
     </None>
-    <None Include="Common\LongListSelectorExtensions.cs" />
+    <Compile Include="Common\LongListSelectorExtensions.cs" />
     <Compile Include="Common\SharedResources.cs" />
     <None Include="Data\StyleSelector.cs" />
     <None Include="Input\GestureListenerStatic.cs" />
@@ -514,9 +514,9 @@
     <None Include="..\Microsoft.Phone.Controls.Toolkit\Primitives\ClipToBounds.cs">
       <Link>Primitives\ClipToBounds.cs</Link>
     </None>
-    <None Include="..\Microsoft.Phone.Controls.Toolkit\Common\ItemsControlExtensions.cs">
+    <Compile Include="..\Microsoft.Phone.Controls.Toolkit\Common\ItemsControlExtensions.cs">
       <Link>Common\ItemsControlExtensions.cs</Link>
-    </None>
+    </Compile>
     <None Include="..\Microsoft.Phone.Controls.Toolkit\Primitives\LoopingSelectorDataSource.cs">
       <Link>Primitives\LoopingSelectorDataSource.cs</Link>
     </None>
@@ -577,9 +577,9 @@
     <Compile Include="..\Microsoft.Phone.Controls.Toolkit\Effects\TiltEffect.cs">
       <Link>Effects\TiltEffect.cs</Link>
     </Compile>
-    <None Include="..\Microsoft.Phone.Controls.Toolkit\Effects\TurnstileFeatherEffect.cs">
+    <Compile Include="..\Microsoft.Phone.Controls.Toolkit\Effects\TurnstileFeatherEffect.cs">
       <Link>Effects\TurnstileFeatherEffect.cs</Link>
-    </None>
+    </Compile>
     <None Include="..\Microsoft.Phone.Controls.Toolkit\ToggleSwitch\OffOnConverter.cs">
       <Link>ToggleSwitch\OffOnConverter.cs</Link>
     </None>
@@ -607,9 +607,9 @@
     <Compile Include="..\Microsoft.Phone.Controls.Toolkit\Transitions\NavigationTransition.cs">
       <Link>Transitions\NavigationTransition.cs</Link>
     </Compile>
-    <None Include="..\Microsoft.Phone.Controls.Toolkit\Transitions\Transitions\FeatheredTransition.cs">
+    <Compile Include="..\Microsoft.Phone.Controls.Toolkit\Transitions\Transitions\FeatheredTransition.cs">
       <Link>Transitions\Transitions\FeatheredTransition.cs</Link>
-    </None>
+    </Compile>
     <None Include="..\Microsoft.Phone.Controls.Toolkit\Transitions\Transitions\RollTransition.cs">
       <Link>Transitions\Transitions\RollTransition.cs</Link>
     </None>
@@ -640,12 +640,12 @@
     <Compile Include="..\Microsoft.Phone.Controls.Toolkit\Transitions\Transitions\SlideTransition.cs">
       <Link>Transitions\Transitions\SlideTransition.cs</Link>
     </Compile>
-    <None Include="..\Microsoft.Phone.Controls.Toolkit\Transitions\Transitions\TurnstileFeatherTransition.cs">
+    <Compile Include="..\Microsoft.Phone.Controls.Toolkit\Transitions\Transitions\TurnstileFeatherTransition.cs">
       <Link>Transitions\Transitions\TurnstileFeatherTransition.cs</Link>
-    </None>
-    <None Include="..\Microsoft.Phone.Controls.Toolkit\Transitions\Transitions\TurnstileFeatherTransitionMode.cs">
+    </Compile>
+    <Compile Include="..\Microsoft.Phone.Controls.Toolkit\Transitions\Transitions\TurnstileFeatherTransitionMode.cs">
       <Link>Transitions\Transitions\TurnstileFeatherTransitionMode.cs</Link>
-    </None>
+    </Compile>
     <Compile Include="..\Microsoft.Phone.Controls.Toolkit\Transitions\Transitions\TurnstileTransition.cs">
       <Link>Transitions\Transitions\TurnstileTransition.cs</Link>
     </Compile>
