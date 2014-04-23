@@ -436,7 +436,7 @@ namespace Microsoft.Phone.Controls
 
             _openingStoryboard = new List<Storyboard>();
 
-            _holdTimer = new DispatcherTimer { Interval = TimeSpan.FromSeconds(0.6) };
+            _holdTimer = new DispatcherTimer { Interval = TimeSpan.FromSeconds(0.7) };
             _holdTimer.Tick += OnHoldTimerTick;
 
             if (null == Application.Current.RootVisual)
