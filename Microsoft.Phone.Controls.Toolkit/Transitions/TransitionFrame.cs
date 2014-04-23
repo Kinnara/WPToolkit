@@ -230,9 +230,15 @@ namespace Microsoft.Phone.Controls
 
                 // If the app calls GoBack on NavigatedTo, we want the old content to be null
                 // because you can't have the same content in two spots on the visual tree.
-                _oldContentPresenter.Content = null;
+                if (_oldContentPresenter != null)
+                {
+                    _oldContentPresenter.Content = null;
+                }
 
-                _storedOldTransition.Stop();
+                if (_storedOldTransition != null)
+                {
+                    _storedOldTransition.Stop();
+                }
 
                 _storedNavigationOutTransition = null;
                 _storedOldTransition = null;
