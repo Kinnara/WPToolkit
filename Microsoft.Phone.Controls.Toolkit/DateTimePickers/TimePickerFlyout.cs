@@ -61,9 +61,19 @@ namespace Microsoft.Phone.Controls
 
         #endregion
 
+        /// <summary>
+        /// Occurs when the user has selected a time in the time picker flyout.
+        /// </summary>
         public event EventHandler<TimePickerValueChangedEventArgs> TimePicked;
 
-        public Task<TimeSpan?> ShowAsync()
+        /// <summary>
+        /// Begins an asynchronous operation to show the flyout placed in relation to the specified element.
+        /// </summary>
+        /// <returns>
+        /// An asynchronous operation.
+        /// </returns>
+        /// <param name="target">The element to use as the flyout's placement target.</param>
+        public Task<TimeSpan?> ShowAtAsync(FrameworkElement target)
         {
             return _helper.ShowAsync();
         }

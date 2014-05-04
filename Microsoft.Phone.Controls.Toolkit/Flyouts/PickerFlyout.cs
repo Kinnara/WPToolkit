@@ -25,12 +25,24 @@ namespace Microsoft.Phone.Controls
 
         #region public bool ConfirmationButtonsVisible
 
+        /// <summary>
+        /// Gets or sets whether the confirmation buttons are visible.
+        /// </summary>
+        /// <returns>
+        /// True of the confirmation buttons are visible; Otherwise, false.
+        /// </returns>
         public bool ConfirmationButtonsVisible
         {
             get { return (bool)GetValue(ConfirmationButtonsVisibleProperty); }
             set { SetValue(ConfirmationButtonsVisibleProperty, value); }
         }
 
+        /// <summary>
+        /// Identifies the ConfirmationButtonsVisible dependency property.
+        /// </summary>
+        /// <returns>
+        /// The identifier of the ConfirmationButtonsVisible dependency property.
+        /// </returns>
         public static readonly DependencyProperty ConfirmationButtonsVisibleProperty = DependencyProperty.Register(
             "ConfirmationButtonsVisible",
             typeof(bool),
@@ -69,17 +81,27 @@ namespace Microsoft.Phone.Controls
 
         #endregion
 
+        /// <summary>
+        /// Occurs when the user has tapped a confirmation button to confirm the selection.
+        /// </summary>
         public event EventHandler Confirmed;
 
         /// <summary>
-        /// Begins an asynchronous operation to show the flyout.
+        /// Begins an asynchronous operation to show the flyout placed in relation to the specified element.
         /// </summary>
         /// <returns>An asynchronous operation.</returns>
-        public Task<bool> ShowAsync()
+        /// <param name="target">The element to use as the flyout's placement target.</param>
+        public Task<bool> ShowAtAsync(FrameworkElement target)
         {
             return _helper.ShowAsync();
         }
 
+        /// <summary>
+        /// TBD
+        /// </summary>
+        /// <returns>
+        /// TBD
+        /// </returns>
         protected override bool ShouldShowConfirmationButtons()
         {
             return ConfirmationButtonsVisible;
@@ -96,6 +118,9 @@ namespace Microsoft.Phone.Controls
             return new PickerFlyoutPresenter(this);
         }
 
+        /// <summary>
+        /// TBD
+        /// </summary>
         protected override void OnConfirmed()
         {
             RaiseConfirmed();

@@ -61,7 +61,8 @@ namespace Microsoft.Phone.Controls
 
         private static void OnButtonClick(object sender, RoutedEventArgs e)
         {
-            GetFlyout(((Button)sender)).Show();
+            var element = (Button)sender;
+            GetFlyout(((Button)sender)).ShowAt(element);
         }
     }
 }

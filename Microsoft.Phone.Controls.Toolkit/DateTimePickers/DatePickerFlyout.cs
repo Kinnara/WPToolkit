@@ -152,9 +152,19 @@ namespace Microsoft.Phone.Controls
 
         #endregion
 
+        /// <summary>
+        /// Occurs when a date has been picked by the user.
+        /// </summary>
         public event EventHandler<DatePickerValueChangedEventArgs> DatePicked;
 
-        public Task<DateTimeOffset?> ShowAsync()
+        /// <summary>
+        /// Begins an asynchronous operation to show the flyout placed in relation to the specified element.
+        /// </summary>
+        /// <returns>
+        /// An asynchronous operation.
+        /// </returns>
+        /// <param name="target">The element to use as the flyout's placement target.</param>
+        public Task<DateTimeOffset?> ShowAtAsync(FrameworkElement target)
         {
             return _helper.ShowAsync();
         }

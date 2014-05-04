@@ -439,12 +439,6 @@
     <Compile Include="..\Microsoft.Phone.Controls.Toolkit\ItemsStackPanel\ItemsStackPanel.cs">
       <Link>ItemsStackPanel\ItemsStackPanel.cs</Link>
     </Compile>
-    <Compile Include="..\Microsoft.Phone.Controls.Toolkit\ListPicker\ListPickerFlyout.cs">
-      <Link>ListPicker\ListPickerFlyout.cs</Link>
-    </Compile>
-    <Compile Include="..\Microsoft.Phone.Controls.Toolkit\ListPicker\ListPickerFlyoutPresenter.cs">
-      <Link>ListPicker\ListPickerFlyoutPresenter.cs</Link>
-    </Compile>
     <Compile Include="..\Microsoft.Phone.Controls.Toolkit\LongListSelector\LongListSelectorItem.cs">
       <Link>LongListSelector\LongListSelectorItem.cs</Link>
     </Compile>
@@ -489,6 +483,12 @@
     </Compile>
     <Compile Include="..\Microsoft.Phone.Controls.Toolkit\Input\GestureListener.cs">
       <Link>Input\GestureListener.cs</Link>
+    </Compile>
+    <Compile Include="..\Microsoft.Phone.Controls.Toolkit\PickerBox\PickerBoxFlyout.cs">
+      <Link>PickerBox\PickerBoxFlyout.cs</Link>
+    </Compile>
+    <Compile Include="..\Microsoft.Phone.Controls.Toolkit\PickerBox\PickerBoxFlyoutPresenter.cs">
+      <Link>PickerBox\PickerBoxFlyoutPresenter.cs</Link>
     </Compile>
     <Compile Include="..\Microsoft.Phone.Controls.Toolkit\Pivot\PivotEx.cs">
       <Link>Pivot\PivotEx.cs</Link>

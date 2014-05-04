@@ -32,7 +32,7 @@ namespace Microsoft.Phone.Controls
 
             if (_isFlyoutOpen)
             {
-                EventHandler onClosed = null;
+                EventHandler<object> onClosed = null;
                 onClosed = delegate
                 {
                     _flyout.Closed -= onClosed;
@@ -58,12 +58,12 @@ namespace Microsoft.Phone.Controls
             }
         }
 
-        private void OnFlyoutOpened(object sender, EventArgs e)
+        private void OnFlyoutOpened(object sender, object e)
         {
             _isFlyoutOpen = true;
         }
 
-        private void OnFlyoutClosed(object sender, EventArgs e)
+        private void OnFlyoutClosed(object sender, object e)
         {
             _isFlyoutOpen = false;
         }

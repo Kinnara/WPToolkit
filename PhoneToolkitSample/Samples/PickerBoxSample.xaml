@@ -35,21 +35,21 @@
         <data:AccentColorNameToBrush x:Key="ColorNameToBrushConverter" />
         <data:LockScreenAppCollection x:Key="LockScreenApps"/>
 
-        <toolkit:ListPickerFlyout x:Name="AccountPicker"
+        <toolkit:PickerBoxFlyout x:Name="AccountPicker"
                                   toolkitPrimitives:PickerFlyoutBase.Title="CHOOSE ACCOUNT"
                                   ItemsPicked="AccountPicker_ItemsPicked">
-            <toolkit:ListPickerFlyout.ItemsSource>
+            <toolkit:PickerBoxFlyout.ItemsSource>
                 <data:ObjectCollection>
                     <sys:String>account1@example.com</sys:String>
                     <sys:String>account2@example.com</sys:String>
                     <sys:String>account3@example.com</sys:String>
                 </data:ObjectCollection>
-            </toolkit:ListPickerFlyout.ItemsSource>
-        </toolkit:ListPickerFlyout>
+            </toolkit:PickerBoxFlyout.ItemsSource>
+        </toolkit:PickerBoxFlyout>
 
-        <toolkit:ListPickerFlyout x:Name="StatusPicker"
+        <toolkit:PickerBoxFlyout x:Name="StatusPicker"
                                   toolkitPrimitives:PickerFlyoutBase.Title="SET CHAT STATUS">
-            <toolkit:ListPickerFlyout.ItemsSource>
+            <toolkit:PickerBoxFlyout.ItemsSource>
                 <data:ObjectCollection>
                     <sys:String>available</sys:String>
                     <sys:String>busy</sys:String>
@@ -57,9 +57,9 @@
                     <sys:String>invisible</sys:String>
                     <sys:String>offline</sys:String>
                 </data:ObjectCollection>
-            </toolkit:ListPickerFlyout.ItemsSource>
-            <toolkit:ListPickerFlyout.SelectedIndex>0</toolkit:ListPickerFlyout.SelectedIndex>
-        </toolkit:ListPickerFlyout>
+            </toolkit:PickerBoxFlyout.ItemsSource>
+            <toolkit:PickerBoxFlyout.SelectedIndex>0</toolkit:PickerBoxFlyout.SelectedIndex>
+        </toolkit:PickerBoxFlyout>
     </phone:PhoneApplicationPage.Resources>
 
     <toolkit:PageUI Header="picker box" Style="{StaticResource ScrollablePageUIStyle}">

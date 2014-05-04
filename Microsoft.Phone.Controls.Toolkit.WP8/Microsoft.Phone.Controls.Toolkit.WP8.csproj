@@ -451,12 +451,6 @@
     <Compile Include="..\microsoft.phone.controls.toolkit\itemsstackpanel\ItemsStackPanel.cs">
       <Link>ItemsStackPanel\ItemsStackPanel.cs</Link>
     </Compile>
-    <Compile Include="..\Microsoft.Phone.Controls.Toolkit\ListPicker\ListPickerFlyout.cs">
-      <Link>ListPicker\ListPickerFlyout.cs</Link>
-    </Compile>
-    <Compile Include="..\Microsoft.Phone.Controls.Toolkit\ListPicker\ListPickerFlyoutPresenter.cs">
-      <Link>ListPicker\ListPickerFlyoutPresenter.cs</Link>
-    </Compile>
     <Compile Include="..\Microsoft.Phone.Controls.Toolkit\PageUI\PageUI.cs">
       <Link>PageUI\PageUI.cs</Link>
     </Compile>
@@ -492,6 +486,12 @@
     </Compile>
     <Compile Include="..\Microsoft.Phone.Controls.Toolkit\Input\GestureHelperEventArgs.cs">
       <Link>Input\GestureHelperEventArgs.cs</Link>
+    </Compile>
+    <Compile Include="..\Microsoft.Phone.Controls.Toolkit\PickerBox\PickerBoxFlyout.cs">
+      <Link>PickerBox\PickerBoxFlyout.cs</Link>
+    </Compile>
+    <Compile Include="..\Microsoft.Phone.Controls.Toolkit\PickerBox\PickerBoxFlyoutPresenter.cs">
+      <Link>PickerBox\PickerBoxFlyoutPresenter.cs</Link>
     </Compile>
     <Compile Include="..\Microsoft.Phone.Controls.Toolkit\Pivot\PivotEx.cs">
       <Link>Pivot\PivotEx.cs</Link>
@@ -589,6 +589,7 @@
     </Compile>
     <Compile Include="Common\LongListSelectorExtensions.cs" />
     <Compile Include="Data\StyleSelector.cs" />
+    <Compile Include="Flyouts\FlyoutPlacementMode.cs" />
     <Compile Include="Input\GestureListenerStatic.cs" />
     <Compile Include="Input\GestureService.cs" />
     <Compile Include="..\Microsoft.Phone.Controls.Toolkit\ListPicker\ListPicker.cs">

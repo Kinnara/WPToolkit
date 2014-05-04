@@ -97,7 +97,7 @@ namespace Microsoft.Phone.Controls
             }
         }
 
-        private void OnFlyoutOpening(object sender, EventArgs e)
+        private void OnFlyoutOpening(object sender, object e)
         {
             // Hide all selectors
             FirstPicker.Visibility = Visibility.Collapsed;

@@ -12,22 +12,22 @@ namespace Microsoft.Phone.Controls
     /// </summary>
     [TemplatePart(Name = TitlePresenterName, Type = typeof(TextBlock))]
     [TemplatePart(Name = ItemsHostPanelName, Type = typeof(Grid))]
-    public sealed class ListPickerFlyoutPresenter : Control
+    public sealed class PickerBoxFlyoutPresenter : Control
     {
         private const string TitlePresenterName = "TitlePresenter";
         private const string ItemsHostPanelName = "ItemsHostPanel";
 
-        private ListPickerFlyout _flyout;
+        private PickerBoxFlyout _flyout;
         private bool _templateApplied;
         private OrientationHelper _orientationHelper;
 
-        internal ListPickerFlyoutPresenter(ListPickerFlyout flyout)
+        internal PickerBoxFlyoutPresenter(PickerBoxFlyout flyout)
         {
             _flyout = flyout;
             _flyout.Opening += OnFlyoutOpening;
             _flyout.Closing += OnFlyoutClosing;
 
-            DefaultStyleKey = typeof(ListPickerFlyoutPresenter);
+            DefaultStyleKey = typeof(PickerBoxFlyoutPresenter);
 
             _orientationHelper = new OrientationHelper(this);
 
@@ -148,7 +148,7 @@ namespace Microsoft.Phone.Controls
             }
         }
 
-        private void OnFlyoutOpening(object sender, EventArgs e)
+        private void OnFlyoutOpening(object sender, object e)
         {
             if (_templateApplied)
             {
@@ -156,7 +156,7 @@ namespace Microsoft.Phone.Controls
             }
         }
 
-        private void OnFlyoutClosing(object sender, EventArgs e)
+        private void OnFlyoutClosing(object sender, object e)
         {
             // If the Picker is scrolling stop it from moving, this is both
             // consistant with Metro and allows for attaching the animations

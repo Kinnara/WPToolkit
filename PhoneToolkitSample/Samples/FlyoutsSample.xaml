@@ -71,10 +71,10 @@
                 </toolkit:ButtonExtensions.Flyout>
             </Button>
 
-            <Button Content="show list picker flyout">
+            <Button Content="show picker box flyout">
                 <toolkit:ButtonExtensions.Flyout>
-                    <toolkit:ListPickerFlyout toolkitPrimitives:PickerFlyoutBase.Title="CHOOSE AN ITEM">
-                        <toolkit:ListPickerFlyout.ItemsSource>
+                    <toolkit:PickerBoxFlyout toolkitPrimitives:PickerFlyoutBase.Title="CHOOSE AN ITEM">
+                        <toolkit:PickerBoxFlyout.ItemsSource>
                             <data:ObjectCollection>
                                 <sys:String>Item 1</sys:String>
                                 <sys:String>Item 2</sys:String>
@@ -85,8 +85,8 @@
                                 <sys:String>Item 7</sys:String>
                                 <sys:String>Item 8</sys:String>
                             </data:ObjectCollection>
-                        </toolkit:ListPickerFlyout.ItemsSource>
-                    </toolkit:ListPickerFlyout>
+                        </toolkit:PickerBoxFlyout.ItemsSource>
+                    </toolkit:PickerBoxFlyout>
                 </toolkit:ButtonExtensions.Flyout>
             </Button>
 

@@ -13,20 +13,20 @@ namespace Microsoft.Phone.Controls
     /// <summary>
     /// Represents a control that allows a user to pick one or more items from a list.
     /// </summary>
-    public sealed class ListPickerFlyout : PickerFlyoutBase
+    public sealed class PickerBoxFlyout : PickerFlyoutBase
     {
-        private ListPickerFlyoutPresenter _presenter;
+        private PickerBoxFlyoutPresenter _presenter;
         private PickerBoxList _picker;
         private PickerFlyoutHelper<IList> _helper;
 
         private List<object> _selectedItemsWhenOpened;
 
         /// <summary>
-        /// Initializes a new instance of the ListPickerFlyout class.
+        /// Initializes a new instance of the PickerBoxFlyout class.
         /// </summary>
-        public ListPickerFlyout()
+        public PickerBoxFlyout()
         {
-            _presenter = new ListPickerFlyoutPresenter(this);
+            _presenter = new PickerBoxFlyoutPresenter(this);
             _presenter.ItemPicked += OnItemPicked;
             _picker = _presenter.Picker;
             _helper = new PickerFlyoutHelper<IList>(this);
@@ -63,8 +63,8 @@ namespace Microsoft.Phone.Controls
         public static readonly DependencyProperty ItemsSourceProperty = DependencyProperty.Register(
             "ItemsSource",
             typeof(IEnumerable),
-            typeof(ListPickerFlyout),
-            new PropertyMetadata((d, e) => ((ListPickerFlyout)d).OnItemsSourceChanged()));
+            typeof(PickerBoxFlyout),
+            new PropertyMetadata((d, e) => ((PickerBoxFlyout)d).OnItemsSourceChanged()));
 
         private void OnItemsSourceChanged()
         {
@@ -98,8 +98,8 @@ namespace Microsoft.Phone.Controls
         public static readonly DependencyProperty ItemTemplateProperty = DependencyProperty.Register(
             "ItemTemplate",
             typeof(DataTemplate),
-            typeof(ListPickerFlyout),
-            new PropertyMetadata((d, e) => ((ListPickerFlyout)d).OnItemTemplateChanged()));
+            typeof(PickerBoxFlyout),
+            new PropertyMetadata((d, e) => ((PickerBoxFlyout)d).OnItemTemplateChanged()));
 
         private void OnItemTemplateChanged()
         {
@@ -133,8 +133,8 @@ namespace Microsoft.Phone.Controls
         public static readonly DependencyProperty DisplayMemberPathProperty = DependencyProperty.Register(
             "DisplayMemberPath",
             typeof(string),
-            typeof(ListPickerFlyout),
-            new PropertyMetadata((d, e) => ((ListPickerFlyout)d).OnDisplayMemberPathChanged()));
+            typeof(PickerBoxFlyout),
+            new PropertyMetadata((d, e) => ((PickerBoxFlyout)d).OnDisplayMemberPathChanged()));
 
         private void OnDisplayMemberPathChanged()
         {
@@ -168,7 +168,7 @@ namespace Microsoft.Phone.Controls
         public static readonly DependencyProperty SelectedIndexProperty = DependencyProperty.Register(
             "SelectedIndex",
             typeof(int),
-            typeof(ListPickerFlyout),
+            typeof(PickerBoxFlyout),
             new PropertyMetadata(-1));
 
         #endregion
@@ -198,7 +198,7 @@ namespace Microsoft.Phone.Controls
         public static readonly DependencyProperty SelectedItemProperty = DependencyProperty.Register(
             "SelectedItem",
             typeof(object),
-            typeof(ListPickerFlyout),
+            typeof(PickerBoxFlyout),
             null);
 
         #endregion
@@ -240,8 +240,8 @@ namespace Microsoft.Phone.Controls
         public static readonly DependencyProperty SelectionModeProperty = DependencyProperty.Register(
             "SelectionMode",
             typeof(SelectionMode),
-            typeof(ListPickerFlyout),
-            new PropertyMetadata((d, e) => ((ListPickerFlyout)d).OnSelectionModeChanged()));
+            typeof(PickerBoxFlyout),
+            new PropertyMetadata((d, e) => ((PickerBoxFlyout)d).OnSelectionModeChanged()));
 
         private void OnSelectionModeChanged()
         {
@@ -250,13 +250,19 @@ namespace Microsoft.Phone.Controls
 
         #endregion
 
+        /// <summary>
+        /// Occurs when the user has selected items.
+        /// </summary>
         public event SelectionChangedEventHandler ItemsPicked;
 
         /// <summary>
-        /// Begins an asynchronous operation to show the flyout.
+        /// Begins an asynchronous operation to show the flyout placed in relation to the specified element.
         /// </summary>
-        /// <returns>An asynchronous operation.</returns>
-        public Task<IList> ShowAsync()
+        /// <returns>
+        /// An asynchronous operation.
+        /// </returns>
+        /// <param name="target">The element to use as the flyout's placement target.</param>
+        public Task<IList> ShowAtAsync(FrameworkElement target)
         {
             return _helper.ShowAsync();
         }

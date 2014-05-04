@@ -37,7 +37,7 @@ namespace Microsoft.Phone.Controls
 
         private ButtonBase _buttonPart;
 
-        private ListPickerFlyout _pickerFlyout;
+        private PickerBoxFlyout _pickerFlyout;
 
         private Binding _selectedValueBinding;
 
@@ -316,7 +316,7 @@ namespace Microsoft.Phone.Controls
 
             Loaded += OnLoaded;
 
-            _pickerFlyout = new ListPickerFlyout();
+            _pickerFlyout = new PickerBoxFlyout();
             _pickerFlyout.ItemsPicked += OnPickerFlyoutItemsPicked;
             _pickerFlyout.Closed += OnPickerFlyoutClosed;
 
@@ -496,7 +496,7 @@ namespace Microsoft.Phone.Controls
             }
         }
 
-        private void OnPickerFlyoutClosed(object sender, EventArgs e)
+        private void OnPickerFlyoutClosed(object sender, object e)
         {
             IsOpen = false;
         }

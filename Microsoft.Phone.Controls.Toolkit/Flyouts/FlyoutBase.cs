@@ -33,6 +33,39 @@ namespace Microsoft.Phone.Controls.Primitives
             };
         }
 
+        #region public FlyoutPlacementMode Placement
+
+        /// <summary>
+        /// Gets or sets the default placement to be used for the flyout, in relation to its placement target.
+        /// </summary>
+        /// <returns>
+        /// A named constant of the enumeration that indicates where the flyout is placed in relation to its placement target.
+        /// The default is Top.
+        /// </returns>
+        public FlyoutPlacementMode Placement
+        {
+            get { return (FlyoutPlacementMode)GetValue(PlacementProperty); }
+            set { SetValue(PlacementProperty, value); }
+        }
+
+        /// <summary>
+        /// Identifies the Placement dependency property.
+        /// </summary>
+        /// <returns>
+        /// The identifier for the Placement dependency property.
+        /// </returns>
+        public static readonly DependencyProperty PlacementProperty = DependencyProperty.Register(
+            "Placement",
+            typeof(FlyoutPlacementMode),
+            typeof(FlyoutBase),
+            new PropertyMetadata(FlyoutPlacementMode.Top, (d, e) => ((FlyoutBase)d).OnPlacementChanged(e)));
+
+        private void OnPlacementChanged(DependencyPropertyChangedEventArgs e)
+        {
+        }
+
+        #endregion
+
         #region public FlyoutTransition Transition
 
         public FlyoutTransition Transition
@@ -80,7 +113,7 @@ namespace Microsoft.Phone.Controls.Primitives
             FlyoutBase flyout = GetAttachedFlyout(flyoutOwner);
             if (flyout != null)
             {
-                flyout.Show();
+                flyout.ShowAt(flyoutOwner);
             }
         }
 
@@ -98,28 +131,34 @@ namespace Microsoft.Phone.Controls.Primitives
         /// <summary>
         /// Occurs before the flyout is shown.
         /// </summary>
-        public event EventHandler Opening;
+        public event EventHandler<object> Opening;
 
         /// <summary>
         /// Occurs when the flyout is shown.
         /// </summary>
-        public event EventHandler Opened;
+        public event EventHandler<object> Opened;
 
         /// <summary>
         /// Occurs before the flyout is hidden.
         /// </summary>
-        internal event EventHandler Closing;
+        internal event EventHandler<object> Closing;
 
         /// <summary>
         /// Occurs when the flyout is hidden.
         /// </summary>
-        public event EventHandler Closed;
+        public event EventHandler<object> Closed;
 
         /// <summary>
-        /// Shows the flyout.
+        /// Shows the flyout placed in relation to the specified element.
         /// </summary>
-        public void Show()
+        /// <param name="placementTarget">The element to use as the flyout's placement target.</param>
+        public void ShowAt(FrameworkElement placementTarget)
         {
+            if (placementTarget == null)
+            {
+                throw new ArgumentException();
+            }
+
             if (_popup != null)
             {
                 return;
@@ -185,6 +224,11 @@ namespace Microsoft.Phone.Controls.Primitives
         internal virtual void RequestHide()
         {
             InternalHide(true);
+        }
+
+        internal void Show()
+        {
+            ShowAt((FrameworkElement)Application.Current.RootVisual);
         }
 
         internal void InternalHide(bool useTransitions)

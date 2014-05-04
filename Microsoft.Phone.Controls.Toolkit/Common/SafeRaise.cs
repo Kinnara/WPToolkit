@@ -40,11 +40,21 @@ namespace Microsoft.Phone.Controls
         /// <summary>
         /// Raises an event in a thread-safe manner, also does the null check.
         /// </summary>
+        /// <param name="eventToRaise">The event to raise.</param>
+        /// <param name="sender">The event sender.</param>
+        public static void Raise(EventHandler<object> eventToRaise, object sender)
+        {
+            Raise(eventToRaise, sender, EventArgs.Empty);
+        }
+
+        /// <summary>
+        /// Raises an event in a thread-safe manner, also does the null check.
+        /// </summary>
         /// <typeparam name="T">The event args type.</typeparam>
         /// <param name="eventToRaise">The event to raise.</param>
         /// <param name="sender">The event sender.</param>
         /// <param name="args">The event args.</param>
-        public static void Raise<T>(EventHandler<T> eventToRaise, object sender, T args) where T : EventArgs
+        public static void Raise<T>(EventHandler<T> eventToRaise, object sender, T args)
         {
             if (eventToRaise != null)
             {
@@ -73,7 +83,7 @@ namespace Microsoft.Phone.Controls
         /// </summary>
         /// <typeparam name="T">The event type.</typeparam>
         /// <returns></returns>
-        public delegate T GetEventArgs<T>() where T : EventArgs;
+        public delegate T GetEventArgs<T>();
 
         /// <summary>
         /// Raise an event in a thread-safe manner, with the required null check. Lazily creates event args.
@@ -82,7 +92,7 @@ namespace Microsoft.Phone.Controls
         /// <param name="eventToRaise">The event to raise.</param>
         /// <param name="sender">The event sender.</param>
         /// <param name="getEventArgs">The delegate to return the event args if needed.</param>
-        public static void Raise<T>(EventHandler<T> eventToRaise, object sender, GetEventArgs<T> getEventArgs) where T : EventArgs
+        public static void Raise<T>(EventHandler<T> eventToRaise, object sender, GetEventArgs<T> getEventArgs)
         {
             if (eventToRaise != null)
             {

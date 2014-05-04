@@ -1115,7 +1115,7 @@
         </Setter>
     </Style>
 
-    <Style x:Key="ListPickerFlyoutPresenterItemStyle" TargetType="ListBoxItem">
+    <Style x:Key="PickerBoxFlyoutPresenterItemStyle" TargetType="ListBoxItem">
         <Setter Property="Background" Value="Transparent"/>
         <Setter Property="Padding" Value="6,0,0,0"/>
         <Setter Property="HorizontalContentAlignment" Value="Left"/>
@@ -1161,7 +1161,7 @@
         </Setter>
     </Style>
 
-    <DataTemplate x:Key="ListPickerFlyoutPresenterItemSingleSelectItemTemplate">
+    <DataTemplate x:Key="PickerBoxFlyoutPresenterItemSingleSelectItemTemplate">
         <TextBlock Text="{Binding}"
                    FontFamily="{StaticResource PhoneFontFamilySemiLight}"
                    FontSize="37.333"
@@ -1171,17 +1171,17 @@
                    Margin="23,4,0,39"/>
     </DataTemplate>
 
-    <DataTemplate x:Key="ListPickerFlyoutPresenterItemMultiSelectItemTemplate">
+    <DataTemplate x:Key="PickerBoxFlyoutPresenterItemMultiSelectItemTemplate">
         <TextBlock Text="{Binding}"
                    FontFamily="{StaticResource PhoneFontFamilySemiLight}"
                    FontSize="37.333"
                    Margin="-1,-4,0,37"/>
     </DataTemplate>
 
-    <Style x:Key="ListPickerFlyoutPresenterListStyle" TargetType="primitives:PickerBoxList">
-        <Setter Property="DefaultSingleSelectItemTemplate" Value="{StaticResource ListPickerFlyoutPresenterItemSingleSelectItemTemplate}"/>
-        <Setter Property="DefaultMultiSelectItemTemplate" Value="{StaticResource ListPickerFlyoutPresenterItemMultiSelectItemTemplate}"/>
-        <Setter Property="DefaultMultiSelectItemContainerStyle" Value="{StaticResource ListPickerFlyoutPresenterItemStyle}"/>
+    <Style x:Key="PickerBoxFlyoutPresenterListStyle" TargetType="primitives:PickerBoxList">
+        <Setter Property="DefaultSingleSelectItemTemplate" Value="{StaticResource PickerBoxFlyoutPresenterItemSingleSelectItemTemplate}"/>
+        <Setter Property="DefaultMultiSelectItemTemplate" Value="{StaticResource PickerBoxFlyoutPresenterItemMultiSelectItemTemplate}"/>
+        <Setter Property="DefaultMultiSelectItemContainerStyle" Value="{StaticResource PickerBoxFlyoutPresenterItemStyle}"/>
         <Setter Property="ItemsPanel">
             <Setter.Value>
                 <ItemsPanelTemplate>
@@ -1191,16 +1191,16 @@
         </Setter>
     </Style>
 
-    <Style TargetType="controls:ListPickerFlyoutPresenter">
+    <Style TargetType="controls:PickerBoxFlyoutPresenter">
         <Setter Property="Background" Value="{StaticResource PhoneChromeBrush}"/>
         <Setter Property="Template">
             <Setter.Value>
-                <ControlTemplate TargetType="controls:ListPickerFlyoutPresenter">
+                <ControlTemplate TargetType="controls:PickerBoxFlyoutPresenter">
                     <Border Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}"
                             Padding="{TemplateBinding Padding}"
                             controls:TiltEffect.IsTiltEnabled="True">
                         <Border.Resources>
-                            <Style TargetType="primitives:PickerBoxList" BasedOn="{StaticResource ListPickerFlyoutPresenterListStyle}"/>
+                            <Style TargetType="primitives:PickerBoxList" BasedOn="{StaticResource PickerBoxFlyoutPresenterListStyle}"/>
                         </Border.Resources>
                         <VisualStateManager.VisualStateGroups>
                             <VisualStateGroup x:Name="OrientationStates">

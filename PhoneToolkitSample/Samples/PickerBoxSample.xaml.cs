@@ -183,12 +183,12 @@ namespace PhoneToolkitSample.Samples
 
         private void NewButton_Click(object sender, EventArgs e)
         {
-            AccountPicker.Show();
+            AccountPicker.ShowAt(this);
         }
 
         private void StatusButton_Click(object sender, EventArgs e)
         {
-            StatusPicker.Show();
+            StatusPicker.ShowAt(this);
         }
     }
 }
