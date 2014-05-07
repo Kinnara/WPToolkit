@@ -1329,12 +1329,15 @@ namespace Microsoft.Phone.Controls
         {
             if (null != _backgroundResizeStoryboard)
             {
+                TimeSpan timespan = TimeSpan.FromSeconds(0.35);
+
                 // Swap all the From/To values to reverse the animation
                 foreach (DoubleAnimation animation in _backgroundResizeStoryboard.Children)
                 {
                     double temp = animation.From.Value;
                     animation.From = animation.To;
                     animation.To = temp;
+                    animation.Duration = timespan;
                 }
 
                 // Capture member variables for delegate closure
