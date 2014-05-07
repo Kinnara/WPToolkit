@@ -413,109 +413,112 @@
             <Setter.Value>
                 <ControlTemplate TargetType="controls:ContextMenu">
                     <StackPanel x:Name="OuterPanel">
+                        <StackPanel.Resources>
+                            <ExponentialEase x:Key="Ease" EasingMode="EaseInOut" Exponent="3"/>
+                        </StackPanel.Resources>
                         <VisualStateManager.VisualStateGroups>
                           <VisualStateGroup x:Name="VisibilityStates">
                             <VisualState x:Name="Open">
                               <Storyboard>
-                                <DoubleAnimationUsingKeyFrames Duration="0:0:0.45" Storyboard.TargetName="ScaleX" Storyboard.TargetProperty="ScaleX">
+                                <DoubleAnimationUsingKeyFrames Duration="0:0:0.5" Storyboard.TargetName="ScaleX" Storyboard.TargetProperty="ScaleX">
                                   <LinearDoubleKeyFrame KeyTime="0:0:0" Value="0"/>
-                                  <LinearDoubleKeyFrame KeyTime="0:0:0.3" Value="1"/>
+                                  <EasingDoubleKeyFrame KeyTime="0:0:0.3" Value="1" EasingFunction="{StaticResource Ease}"/>
                                 </DoubleAnimationUsingKeyFrames>
-                                <DoubleAnimationUsingKeyFrames Duration="0:0:0.45" Storyboard.TargetName="ScaleY" Storyboard.TargetProperty="ScaleY">
+                                <DoubleAnimationUsingKeyFrames Duration="0:0:0.5" Storyboard.TargetName="ScaleY" Storyboard.TargetProperty="ScaleY">
                                   <LinearDoubleKeyFrame KeyTime="0:0:0" Value="0"/>
                                   <LinearDoubleKeyFrame KeyTime="0:0:0.3" Value="0"/>
-                                  <LinearDoubleKeyFrame KeyTime="0:0:0.45" Value="1"/>
+                                  <EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="1" EasingFunction="{StaticResource Ease}"/>
                                 </DoubleAnimationUsingKeyFrames>
 
                                 <DoubleAnimation Duration="0" Storyboard.TargetName="Border1" Storyboard.TargetProperty="Opacity" To="1"/>
                                 <DoubleAnimation Duration="0" Storyboard.TargetName="Border2" Storyboard.TargetProperty="Opacity" To="1"/>
-                                <DoubleAnimationUsingKeyFrames Duration="0:0:0.45" Storyboard.TargetName="Border1Reversed" Storyboard.TargetProperty="Opacity">
+                                <DoubleAnimationUsingKeyFrames Duration="0:0:0.5" Storyboard.TargetName="Border1Reversed" Storyboard.TargetProperty="Opacity">
                                   <LinearDoubleKeyFrame KeyTime="0:0:0" Value="0"/>
-                                  <LinearDoubleKeyFrame KeyTime="0:0:0.4399" Value="0"/>
-                                  <LinearDoubleKeyFrame KeyTime="0:0:0.44" Value="1"/>
+                                  <LinearDoubleKeyFrame KeyTime="0:0:0.4899" Value="0"/>
+                                  <LinearDoubleKeyFrame KeyTime="0:0:0.49" Value="1"/>
                                 </DoubleAnimationUsingKeyFrames>
-                                <DoubleAnimationUsingKeyFrames Duration="0:0:0.45" Storyboard.TargetName="Border2Reversed" Storyboard.TargetProperty="Opacity">
+                                <DoubleAnimationUsingKeyFrames Duration="0:0:0.5" Storyboard.TargetName="Border2Reversed" Storyboard.TargetProperty="Opacity">
                                   <LinearDoubleKeyFrame KeyTime="0:0:0" Value="0"/>
-                                  <LinearDoubleKeyFrame KeyTime="0:0:0.4399" Value="0"/>
-                                  <LinearDoubleKeyFrame KeyTime="0:0:0.44" Value="1"/>
+                                  <LinearDoubleKeyFrame KeyTime="0:0:0.4899" Value="0"/>
+                                  <LinearDoubleKeyFrame KeyTime="0:0:0.49" Value="1"/>
                                 </DoubleAnimationUsingKeyFrames>
                               </Storyboard>
                             </VisualState>
                             <VisualState x:Name="OpenReversed">
                               <Storyboard>
-                                <DoubleAnimationUsingKeyFrames Duration="0:0:0.45" Storyboard.TargetName="ScaleX" Storyboard.TargetProperty="ScaleX">
+                                <DoubleAnimationUsingKeyFrames Duration="0:0:0.5" Storyboard.TargetName="ScaleX" Storyboard.TargetProperty="ScaleX">
                                   <LinearDoubleKeyFrame KeyTime="0:0:0" Value="0"/>
-                                  <LinearDoubleKeyFrame KeyTime="0:0:0.3" Value="1"/>
+                                  <EasingDoubleKeyFrame KeyTime="0:0:0.3" Value="1" EasingFunction="{StaticResource Ease}"/>
                                 </DoubleAnimationUsingKeyFrames>
-                                <DoubleAnimationUsingKeyFrames Duration="0:0:0.45" Storyboard.TargetName="ScaleY" Storyboard.TargetProperty="ScaleY">
+                                <DoubleAnimationUsingKeyFrames Duration="0:0:0.5" Storyboard.TargetName="ScaleY" Storyboard.TargetProperty="ScaleY">
                                   <LinearDoubleKeyFrame KeyTime="0:0:0" Value="0"/>
                                   <LinearDoubleKeyFrame KeyTime="0:0:0.3" Value="0"/>
-                                  <LinearDoubleKeyFrame KeyTime="0:0:0.45" Value="1"/>
+                                  <EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="1" EasingFunction="{StaticResource Ease}"/>
                                 </DoubleAnimationUsingKeyFrames>
 
                                 <DoubleAnimation Duration="0" Storyboard.TargetName="Border1Reversed" Storyboard.TargetProperty="Opacity" To="1"/>
                                 <DoubleAnimation Duration="0" Storyboard.TargetName="Border2Reversed" Storyboard.TargetProperty="Opacity" To="1"/>
-                                <DoubleAnimationUsingKeyFrames Duration="0:0:0.45" Storyboard.TargetName="Border1" Storyboard.TargetProperty="Opacity">
+                                <DoubleAnimationUsingKeyFrames Duration="0:0:0.5" Storyboard.TargetName="Border1" Storyboard.TargetProperty="Opacity">
                                   <LinearDoubleKeyFrame KeyTime="0:0:0" Value="0"/>
-                                  <LinearDoubleKeyFrame KeyTime="0:0:0.4399" Value="0"/>
-                                  <LinearDoubleKeyFrame KeyTime="0:0:0.44" Value="1"/>
+                                  <LinearDoubleKeyFrame KeyTime="0:0:0.4899" Value="0"/>
+                                  <LinearDoubleKeyFrame KeyTime="0:0:0.49" Value="1"/>
                                 </DoubleAnimationUsingKeyFrames>
-                                <DoubleAnimationUsingKeyFrames Duration="0:0:0.45" Storyboard.TargetName="Border2" Storyboard.TargetProperty="Opacity">
+                                <DoubleAnimationUsingKeyFrames Duration="0:0:0.5" Storyboard.TargetName="Border2" Storyboard.TargetProperty="Opacity">
                                   <LinearDoubleKeyFrame KeyTime="0:0:0" Value="0"/>
-                                  <LinearDoubleKeyFrame KeyTime="0:0:0.4399" Value="0"/>
-                                  <LinearDoubleKeyFrame KeyTime="0:0:0.44" Value="1"/>
+                                  <LinearDoubleKeyFrame KeyTime="0:0:0.4899" Value="0"/>
+                                  <LinearDoubleKeyFrame KeyTime="0:0:0.49" Value="1"/>
                                 </DoubleAnimationUsingKeyFrames>
                               </Storyboard>
                             </VisualState>
                             <VisualState x:Name="OpenLandscape">
                               <Storyboard>
-                                <DoubleAnimationUsingKeyFrames Duration="0:0:0.45" Storyboard.TargetName="ScaleX" Storyboard.TargetProperty="ScaleY">
+                                <DoubleAnimationUsingKeyFrames Duration="0:0:0.5" Storyboard.TargetName="ScaleX" Storyboard.TargetProperty="ScaleY">
                                   <LinearDoubleKeyFrame KeyTime="0:0:0" Value="0"/>
-                                  <LinearDoubleKeyFrame KeyTime="0:0:0.3" Value="1"/>
+                                  <EasingDoubleKeyFrame KeyTime="0:0:0.3" Value="1" EasingFunction="{StaticResource Ease}"/>
                                 </DoubleAnimationUsingKeyFrames>
-                                <DoubleAnimationUsingKeyFrames Duration="0:0:0.45" Storyboard.TargetName="ScaleY" Storyboard.TargetProperty="ScaleX">
+                                <DoubleAnimationUsingKeyFrames Duration="0:0:0.5" Storyboard.TargetName="ScaleY" Storyboard.TargetProperty="ScaleX">
                                   <LinearDoubleKeyFrame KeyTime="0:0:0" Value="0"/>
                                   <LinearDoubleKeyFrame KeyTime="0:0:0.3" Value="0"/>
-                                  <LinearDoubleKeyFrame KeyTime="0:0:0.45" Value="1"/>
+                                  <EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="1" EasingFunction="{StaticResource Ease}"/>
                                 </DoubleAnimationUsingKeyFrames>
 
                                 <DoubleAnimation Duration="0" Storyboard.TargetName="Border1" Storyboard.TargetProperty="Opacity" To="1"/>
                                 <DoubleAnimation Duration="0" Storyboard.TargetName="Border2" Storyboard.TargetProperty="Opacity" To="1"/>
-                                <DoubleAnimationUsingKeyFrames Duration="0:0:0.45" Storyboard.TargetName="Border1Reversed" Storyboard.TargetProperty="Opacity">
+                                <DoubleAnimationUsingKeyFrames Duration="0:0:0.5" Storyboard.TargetName="Border1Reversed" Storyboard.TargetProperty="Opacity">
                                   <LinearDoubleKeyFrame KeyTime="0:0:0" Value="0"/>
-                                  <LinearDoubleKeyFrame KeyTime="0:0:0.4399" Value="0"/>
-                                  <LinearDoubleKeyFrame KeyTime="0:0:0.44" Value="1"/>
+                                  <LinearDoubleKeyFrame KeyTime="0:0:0.4899" Value="0"/>
+                                  <LinearDoubleKeyFrame KeyTime="0:0:0.49" Value="1"/>
                                 </DoubleAnimationUsingKeyFrames>
-                                <DoubleAnimationUsingKeyFrames Duration="0:0:0.45" Storyboard.TargetName="Border2Reversed" Storyboard.TargetProperty="Opacity">
+                                <DoubleAnimationUsingKeyFrames Duration="0:0:0.5" Storyboard.TargetName="Border2Reversed" Storyboard.TargetProperty="Opacity">
                                   <LinearDoubleKeyFrame KeyTime="0:0:0" Value="0"/>
-                                  <LinearDoubleKeyFrame KeyTime="0:0:0.4399" Value="0"/>
-                                  <LinearDoubleKeyFrame KeyTime="0:0:0.44" Value="1"/>
+                                  <LinearDoubleKeyFrame KeyTime="0:0:0.4899" Value="0"/>
+                                  <LinearDoubleKeyFrame KeyTime="0:0:0.49" Value="1"/>
                                 </DoubleAnimationUsingKeyFrames>
                               </Storyboard>
                             </VisualState>
                             <VisualState x:Name="OpenLandscapeReversed">
                               <Storyboard>
-                                <DoubleAnimationUsingKeyFrames Duration="0:0:0.45" Storyboard.TargetName="ScaleX" Storyboard.TargetProperty="ScaleY">
+                                <DoubleAnimationUsingKeyFrames Duration="0:0:0.5" Storyboard.TargetName="ScaleX" Storyboard.TargetProperty="ScaleY">
                                   <LinearDoubleKeyFrame KeyTime="0:0:0" Value="0"/>
-                                  <LinearDoubleKeyFrame KeyTime="0:0:0.3" Value="1"/>
+                                  <EasingDoubleKeyFrame KeyTime="0:0:0.3" Value="1" EasingFunction="{StaticResource Ease}"/>
                                 </DoubleAnimationUsingKeyFrames>
-                                <DoubleAnimationUsingKeyFrames Duration="0:0:0.45" Storyboard.TargetName="ScaleY" Storyboard.TargetProperty="ScaleX">
+                                <DoubleAnimationUsingKeyFrames Duration="0:0:0.5" Storyboard.TargetName="ScaleY" Storyboard.TargetProperty="ScaleX">
                                   <LinearDoubleKeyFrame KeyTime="0:0:0" Value="0"/>
                                   <LinearDoubleKeyFrame KeyTime="0:0:0.3" Value="0"/>
-                                  <LinearDoubleKeyFrame KeyTime="0:0:0.45" Value="1"/>
+                                  <EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="1" EasingFunction="{StaticResource Ease}"/>
                                 </DoubleAnimationUsingKeyFrames>
 
                                 <DoubleAnimation Duration="0" Storyboard.TargetName="Border1Reversed" Storyboard.TargetProperty="Opacity" To="1"/>
                                 <DoubleAnimation Duration="0" Storyboard.TargetName="Border2Reversed" Storyboard.TargetProperty="Opacity" To="1"/>
-                                <DoubleAnimationUsingKeyFrames Duration="0:0:0.45" Storyboard.TargetName="Border1" Storyboard.TargetProperty="Opacity">
+                                <DoubleAnimationUsingKeyFrames Duration="0:0:0.5" Storyboard.TargetName="Border1" Storyboard.TargetProperty="Opacity">
                                   <LinearDoubleKeyFrame KeyTime="0:0:0" Value="0"/>
-                                  <LinearDoubleKeyFrame KeyTime="0:0:0.4399" Value="0"/>
-                                  <LinearDoubleKeyFrame KeyTime="0:0:0.44" Value="1"/>
+                                  <LinearDoubleKeyFrame KeyTime="0:0:0.4899" Value="0"/>
+                                  <LinearDoubleKeyFrame KeyTime="0:0:0.49" Value="1"/>
                                 </DoubleAnimationUsingKeyFrames>
-                                <DoubleAnimationUsingKeyFrames Duration="0:0:0.45" Storyboard.TargetName="Border2" Storyboard.TargetProperty="Opacity">
+                                <DoubleAnimationUsingKeyFrames Duration="0:0:0.5" Storyboard.TargetName="Border2" Storyboard.TargetProperty="Opacity">
                                   <LinearDoubleKeyFrame KeyTime="0:0:0" Value="0"/>
-                                  <LinearDoubleKeyFrame KeyTime="0:0:0.4399" Value="0"/>
-                                  <LinearDoubleKeyFrame KeyTime="0:0:0.44" Value="1"/>
+                                  <LinearDoubleKeyFrame KeyTime="0:0:0.4899" Value="0"/>
+                                  <LinearDoubleKeyFrame KeyTime="0:0:0.49" Value="1"/>
                                 </DoubleAnimationUsingKeyFrames>
                               </Storyboard>
                             </VisualState>
