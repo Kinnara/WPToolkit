@@ -1216,7 +1216,7 @@ namespace Microsoft.Phone.Controls
                 // Prepare for scale animation
                 double from = 1;
                 double to = 0.95;
-                TimeSpan timespan = TimeSpan.FromSeconds(0.45);
+                TimeSpan timespan = TimeSpan.FromSeconds(0.5);
                 IEasingFunction easingFunction = new ExponentialEase { EasingMode = EasingMode.EaseInOut };
                 _backgroundResizeStoryboard = new Storyboard();
 
