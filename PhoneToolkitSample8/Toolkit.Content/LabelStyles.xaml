@@ -20,7 +20,7 @@
     <System:Double x:Key="FontExtraLargeLeading">33.333</System:Double>
     <System:Double x:Key="FontExtraLargePlusLeading">40</System:Double>
     <System:Double x:Key="FontXXLargeLeading">42.667</System:Double>
-    <System:Double x:Key="FontLabelDialogTitleStyleLeading">39.333</System:Double>
+    <System:Double x:Key="FontDialogTitleLeading">39.333</System:Double>
 
     <Style x:Key="LabelBase" TargetType="toolkit:Label">
         <Setter Property="FontFamily" Value="{StaticResource PhoneFontFamilyNormal}"/>
@@ -278,21 +278,21 @@
         <Setter Property="Foreground" Value="{StaticResource PhoneAccentBrush}"/>
     </Style>
 
-    <Style x:Key="LabelDialogTitleStyle" TargetType="toolkit:Label" BasedOn="{StaticResource LabelBase}">
+    <Style x:Key="DialogTitleLabelStyle" TargetType="toolkit:Label" BasedOn="{StaticResource LabelBase}">
         <Setter Property="FontFamily" Value="{StaticResource PhoneFontFamilySemiBold}"/>
         <Setter Property="FontSize" Value="{StaticResource FontExtraLargeSize}"/>
         <Setter Property="Foreground" Value="{StaticResource PhoneTextHighContrastBrush}"/>
         <Setter Property="TextWrapping" Value="Wrap"/>
-        <Setter Property="LineHeight" Value="{StaticResource FontLabelDialogTitleStyleLeading}"/>
+        <Setter Property="LineHeight" Value="{StaticResource FontDialogTitleLeading}"/>
     </Style>
 
-    <Style x:Key="LabelListGroupHeaderStyle" TargetType="toolkit:Label" BasedOn="{StaticResource LabelBase}">
+    <Style x:Key="ListGroupHeaderLabelStyle" TargetType="toolkit:Label" BasedOn="{StaticResource LabelBase}">
         <Setter Property="FontFamily" Value="{StaticResource PhoneFontFamilySemiLight}"/>
         <Setter Property="FontSize" Value="{StaticResource ListGroupHeaderFontSize}"/>
         <Setter Property="Foreground" Value="{StaticResource PhoneTextMidContrastBrush}"/>
     </Style>
 
-    <Style x:Key="LabelEmptyListHeaderStyle" TargetType="toolkit:Label" BasedOn="{StaticResource LabelBase}">
+    <Style x:Key="EmptyListStaticLabelStyle" TargetType="toolkit:Label" BasedOn="{StaticResource LabelBase}">
         <Setter Property="FontFamily" Value="{StaticResource PhoneFontFamilySemiLight}"/>
         <Setter Property="FontSize" Value="{StaticResource FontExtraLargePlusSize}"/>
         <Setter Property="Foreground" Value="{StaticResource PhoneTextMidContrastBrush}"/>

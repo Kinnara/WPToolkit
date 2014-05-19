@@ -31,7 +31,7 @@
         <phone:PivotItem Header="features">
             <ScrollViewer Margin="-12,0">
                 <StackPanel Margin="12,10,12,95">
-                    <toolkit:Label Text="MaxLines" Style="{StaticResource LabelListGroupHeaderStyle}"/>
+                    <toolkit:Label Text="MaxLines" Style="{StaticResource ListGroupHeaderLabelStyle}"/>
                     <Rectangle Height="20"/>
                     <toolkit:Label Text="{Binding MaxLines, ElementName=MaxLinesSampleLabel, StringFormat='MaxLines: {0}'}"
                                    Style="{StaticResource MediumStrongHigh}"/>
@@ -50,7 +50,7 @@
                                    Style="{StaticResource LargeHighLoose}"
                                    MaxLines="{Binding SelectedItem, ElementName=MaxLinesPicker}"/>
                     <Rectangle Height="40"/>
-                    <toolkit:Label Text="TextLineBounds" Style="{StaticResource LabelListGroupHeaderStyle}"/>
+                    <toolkit:Label Text="TextLineBounds" Style="{StaticResource ListGroupHeaderLabelStyle}"/>
                     <Rectangle Height="20"/>
                     <Border Style="{StaticResource TextLineBoundsBorderStyle}">
                         <toolkit:Label Text="Full" Style="{StaticResource TextLineBoundsLabelStyle}" TextLineBounds="Full"/>
