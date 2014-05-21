@@ -269,12 +269,6 @@
     <Compile Include="..\Microsoft.Phone.Controls.Toolkit\ContextMenu\Separator.cs">
       <Link>ContextMenu\Separator.cs</Link>
     </Compile>
-    <Compile Include="..\Microsoft.Phone.Controls.Toolkit\CustomMessageBox\CustomMessageBoxResult.cs">
-      <Link>CustomMessageBox\CustomMessageBoxResult.cs</Link>
-    </Compile>
-    <Compile Include="..\Microsoft.Phone.Controls.Toolkit\CustomMessageBox\DismissingEventArgs.cs">
-      <Link>CustomMessageBox\DismissingEventArgs.cs</Link>
-    </Compile>
     <Compile Include="..\Microsoft.Phone.Controls.Toolkit\Data\DataTemplateSelector.cs">
       <Link>Data\DataTemplateSelector.cs</Link>
     </Compile>
@@ -378,12 +372,6 @@
     </Compile>
     <Compile Include="..\Microsoft.Phone.Controls.Toolkit\ExpanderView\ExpanderView.cs">
       <Link>ExpanderView\ExpanderView.cs</Link>
-    </Compile>
-    <Compile Include="..\Microsoft.Phone.Controls.Toolkit\CustomMessageBox\CustomMessageBox.cs">
-      <Link>CustomMessageBox\CustomMessageBox.cs</Link>
-    </Compile>
-    <Compile Include="..\Microsoft.Phone.Controls.Toolkit\CustomMessageBox\DismissedEventArgs.cs">
-      <Link>CustomMessageBox\DismissedEventArgs.cs</Link>
     </Compile>
     <Compile Include="..\Microsoft.Phone.Controls.Toolkit\FlipView\FlipView.cs">
       <Link>FlipView\FlipView.cs</Link>

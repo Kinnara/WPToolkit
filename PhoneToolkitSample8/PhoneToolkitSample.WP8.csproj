@@ -238,10 +238,6 @@ ar-SA;az-Latn-AZ;be-BY;bg-BG;ca-ES;cs-CZ;da-DK;de-DE;el-GR;en-GB;en-US;es-ES;es-
       <Link>Samples\ContextMenuSample.xaml.cs</Link>
       <DependentUpon>ContextMenuSample.xaml</DependentUpon>
     </Compile>
-    <Compile Include="..\PhoneToolkitSample\Samples\CustomMessageBoxSample.xaml.cs">
-      <Link>Samples\CustomMessageBoxSample.xaml.cs</Link>
-      <DependentUpon>CustomMessageBoxSample.xaml</DependentUpon>
-    </Compile>
     <Compile Include="..\PhoneToolkitSample\Samples\DateTimeConvertersSample.xaml.cs">
       <Link>Samples\DateTimeConvertersSample.xaml.cs</Link>
       <DependentUpon>DateTimeConvertersSample.xaml</DependentUpon>
@@ -496,11 +492,6 @@ ar-SA;az-Latn-AZ;be-BY;bg-BG;ca-ES;cs-CZ;da-DK;de-DE;el-GR;en-GB;en-US;es-ES;es-
     </Page>
     <Page Include="..\PhoneToolkitSample\Samples\ContextMenuSample.xaml">
       <Link>Samples\ContextMenuSample.xaml</Link>
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="..\PhoneToolkitSample\Samples\CustomMessageBoxSample.xaml">
-      <Link>Samples\CustomMessageBoxSample.xaml</Link>
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

@@ -32,7 +32,6 @@ namespace PhoneToolkitSample8
                 new SampleItem("/Samples/ButtonsSample.xaml","buttons","image button and toggle image button" ),
                 new SampleItem("/Samples/ContextMenuSample.xaml","contextmenu","tap & hold menu options control" ),
                 new SampleItem("/Samples/ContentDialogSample.xaml","contentdialog","a dialog box that can be customized" ),
-                new SampleItem("/Samples/CustomMessageBoxSample.xaml","custommessagebox","a modular dialog box to display notifications" ),
                 new SampleItem("/Samples/DateTimeConvertersSample.xaml","date+time converters","localized time display for data binding" ),
                 new SampleItem("/Samples/DateTimePickerSample.xaml","date & time pickers","controls to select dates or times" ),
                 new SampleItem("/Samples/ExpanderViewSample.xaml","expanderview","shows sub-items similar to the new email app" ),
