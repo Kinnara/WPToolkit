@@ -57,11 +57,21 @@ namespace Microsoft.Phone.Controls.Primitives
 
         #endregion
 
+        /// <summary>
+        /// Notifies PickerFlyoutBase subclasses when a user has confirmed a selection.
+        /// </summary>
         protected virtual void OnConfirmed()
         {
             InternalHide(true);
         }
 
+        /// <summary>
+        /// Gets or sets whether confirmation buttons should be shown in the picker.
+        /// Note: This method has no base class implementation and must be overridden in a derived class.
+        /// </summary>
+        /// <returns>
+        /// True if confirmation buttons should be shown in the picker; Otherwise, false.
+        /// </returns>
         protected abstract bool ShouldShowConfirmationButtons();
 
         internal override ApplicationBar CreateApplicationBar()
