@@ -1,8 +1,6 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PhoneToolkitSample.WP8", "PhoneToolkitSample8\PhoneToolkitSample.WP8.csproj", "{6E98A8F0-F831-492B-ADBF-A644F1C84273}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Windows Phone 8", "Windows Phone 8", "{61437378-45AA-4B4A-A7DD-6B1B13C6BED8}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Microsoft.Phone.Controls.Toolkit.WP8", "Microsoft.Phone.Controls.Toolkit.WP8\Microsoft.Phone.Controls.Toolkit.WP8.csproj", "{486642F0-AB94-4F28-B49C-106CA3134239}"
@@ -21,24 +19,6 @@ Global
 		Release|x86 = Release|x86
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{6E98A8F0-F831-492B-ADBF-A644F1C84273}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{6E98A8F0-F831-492B-ADBF-A644F1C84273}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{6E98A8F0-F831-492B-ADBF-A644F1C84273}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
-		{6E98A8F0-F831-492B-ADBF-A644F1C84273}.Debug|ARM.ActiveCfg = Debug|ARM
-		{6E98A8F0-F831-492B-ADBF-A644F1C84273}.Debug|ARM.Build.0 = Debug|ARM
-		{6E98A8F0-F831-492B-ADBF-A644F1C84273}.Debug|ARM.Deploy.0 = Debug|ARM
-		{6E98A8F0-F831-492B-ADBF-A644F1C84273}.Debug|x86.ActiveCfg = Debug|x86
-		{6E98A8F0-F831-492B-ADBF-A644F1C84273}.Debug|x86.Build.0 = Debug|x86
-		{6E98A8F0-F831-492B-ADBF-A644F1C84273}.Debug|x86.Deploy.0 = Debug|x86
-		{6E98A8F0-F831-492B-ADBF-A644F1C84273}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{6E98A8F0-F831-492B-ADBF-A644F1C84273}.Release|Any CPU.Build.0 = Release|Any CPU
-		{6E98A8F0-F831-492B-ADBF-A644F1C84273}.Release|Any CPU.Deploy.0 = Release|Any CPU
-		{6E98A8F0-F831-492B-ADBF-A644F1C84273}.Release|ARM.ActiveCfg = Release|ARM
-		{6E98A8F0-F831-492B-ADBF-A644F1C84273}.Release|ARM.Build.0 = Release|ARM
-		{6E98A8F0-F831-492B-ADBF-A644F1C84273}.Release|ARM.Deploy.0 = Release|ARM
-		{6E98A8F0-F831-492B-ADBF-A644F1C84273}.Release|x86.ActiveCfg = Release|x86
-		{6E98A8F0-F831-492B-ADBF-A644F1C84273}.Release|x86.Build.0 = Release|x86
-		{6E98A8F0-F831-492B-ADBF-A644F1C84273}.Release|x86.Deploy.0 = Release|x86
 		{486642F0-AB94-4F28-B49C-106CA3134239}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{486642F0-AB94-4F28-B49C-106CA3134239}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{486642F0-AB94-4F28-B49C-106CA3134239}.Debug|ARM.ActiveCfg = Debug|ARM
@@ -68,7 +48,6 @@ Global
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
-		{6E98A8F0-F831-492B-ADBF-A644F1C84273} = {61437378-45AA-4B4A-A7DD-6B1B13C6BED8}
 		{486642F0-AB94-4F28-B49C-106CA3134239} = {61437378-45AA-4B4A-A7DD-6B1B13C6BED8}
 		{05FA6951-722D-4EA0-82A9-4C81792E2992} = {1F024B7B-B2C6-4587-9205-91F33029BBC1}
 	EndGlobalSection

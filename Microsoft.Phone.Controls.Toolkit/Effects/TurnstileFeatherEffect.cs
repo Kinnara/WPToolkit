@@ -626,12 +626,12 @@ namespace Microsoft.Phone.Controls
                 Pivot pivot = r.Target as Pivot;
                 ItemsControl itemsControl = r.Target as ItemsControl;
                 LongListSelector longListSelector = r.Target as LongListSelector;
-#if !WP7
-                if (target is LongListMultiSelector || target is ListView)
-                {
-                    longListSelector = target.GetFirstLogicalChildByType<LongListSelector>(false);
-                }
-#endif
+//#if !WP7
+//                if (target is LongListMultiSelector || target is ListView)
+//                {
+//                    longListSelector = target.GetFirstLogicalChildByType<LongListSelector>(false);
+//                }
+//#endif
 
                 if (pivot != null)
                 {
