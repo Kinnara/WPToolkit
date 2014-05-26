@@ -346,6 +346,11 @@ namespace Microsoft.Phone.Controls
 
         private void RaiseItemsPicked()
         {
+            if (_selectedItemsWhenOpened == null)
+            {
+                return;
+            }
+
             _helper.CompleteShowAsync(SelectedItems);
 
             var handler = ItemsPicked;
