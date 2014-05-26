@@ -12,6 +12,12 @@ namespace Microsoft.Phone.Controls
             Result = result;
         }
 
+        /// <summary>
+        /// Gets the ContentDialogResult of the button click event.
+        /// </summary>
+        /// <returns>
+        /// The result of the button click event.
+        /// </returns>
         public ContentDialogResult Result { get; private set; }
     }
 }

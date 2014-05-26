@@ -78,6 +78,12 @@ namespace Microsoft.Phone.Controls
             return _helper.ShowAsync();
         }
 
+        /// <summary>
+        /// Gets or sets whether confirmation buttons should be shown in the picker.
+        /// </summary>
+        /// <returns>
+        /// True if confirmation buttons should be shown in the picker; Otherwise, false.
+        /// </returns>
         protected override bool ShouldShowConfirmationButtons()
         {
             return true;
@@ -94,6 +100,9 @@ namespace Microsoft.Phone.Controls
             return _presenter;
         }
 
+        /// <summary>
+        /// Notifies PickerFlyoutBase subclasses when a user has confirmed a selection.
+        /// </summary>
         protected override void OnConfirmed()
         {
             _presenter.Commit();

@@ -253,12 +253,24 @@ namespace Microsoft.Phone.Controls
 
         #region public bool IsPrimaryButtonEnabled
 
+        /// <summary>
+        /// Gets or sets whether the dialog's primary button is enabled.
+        /// </summary>
+        /// <returns>
+        /// True if the primary button of the dialog is enabled; Otherwise, false.
+        /// </returns>
         public bool IsPrimaryButtonEnabled
         {
             get { return (bool)GetValue(IsPrimaryButtonEnabledProperty); }
             set { SetValue(IsPrimaryButtonEnabledProperty, value); }
         }
 
+        /// <summary>
+        /// Gets the identifier of the IsPrimaryButtonEnabled dependency property.
+        /// </summary>
+        /// <returns>
+        /// The identifier of the IsPrimaryButtonEnabled dependency property.
+        /// </returns>
         public static readonly DependencyProperty IsPrimaryButtonEnabledProperty = DependencyProperty.Register(
             "IsPrimaryButtonEnabled",
             typeof(bool),
@@ -364,12 +376,24 @@ namespace Microsoft.Phone.Controls
 
         #region public bool IsSecondaryButtonEnabled
 
+        /// <summary>
+        /// Gets or sets whether the dialog's secondary button is enabled.
+        /// </summary>
+        /// <returns>
+        /// True if the secondary button of the dialog is enabled; Otherwise, false.
+        /// </returns>
         public bool IsSecondaryButtonEnabled
         {
             get { return (bool)GetValue(IsSecondaryButtonEnabledProperty); }
             set { SetValue(IsSecondaryButtonEnabledProperty, value); }
         }
 
+        /// <summary>
+        /// Gets the identifier of the IsSecondaryButtonEnabled dependency property.
+        /// </summary>
+        /// <returns>
+        /// The identifier of the IsSecondaryButtonEnabled dependency property.
+        /// </returns>
         public static readonly DependencyProperty IsSecondaryButtonEnabledProperty = DependencyProperty.Register(
             "IsSecondaryButtonEnabled",
             typeof(bool),
@@ -448,6 +472,9 @@ namespace Microsoft.Phone.Controls
         /// </summary>
         public event EventHandler<ContentDialogOpenedEventArgs> Opened;
 
+        /// <summary>
+        /// Occurs after the dialog starts to close, but before it is closed and before the Closed event occurs.
+        /// </summary>
         public event EventHandler<ContentDialogClosingEventArgs> Closing;
 
         /// <summary>
