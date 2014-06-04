@@ -693,6 +693,11 @@ namespace Microsoft.Phone.Controls
 
             StopHoldTimer();
 
+            if (Owner != null && !ContextMenuService.GetIsEnabled(Owner))
+            {
+                return;
+            }
+
             if (!IsOpen && ownerMouseLeftButtonDownEventArgs != null)
             {
                 OpenPopup(ownerMouseLeftButtonDownEventArgs.GetPosition(null));

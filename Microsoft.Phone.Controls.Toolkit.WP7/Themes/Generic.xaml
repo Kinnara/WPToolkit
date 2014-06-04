@@ -24,10 +24,11 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="controls:TransferControl">
-                    <Border x:Name="TransferControl" Background="Transparent" Margin="-12,0" Padding="{TemplateBinding Padding}">
+                    <Border x:Name="TransferControl" Background="Transparent" Margin="-12,0" Padding="{TemplateBinding Padding}"
+                            controls:ContextMenuService.IsEnabled="{TemplateBinding IsContextMenuEnabled}">
                         <controls:ContextMenuService.ContextMenu>
                             <controls:ContextMenu>
-                                <controls:MenuItem Header="cancel" x:Name="ContextMenuCancel" IsEnabled="{TemplateBinding IsContextMenuEnabled}"/>
+                                <controls:MenuItem Header="cancel" x:Name="ContextMenuCancel"/>
                             </controls:ContextMenu>
                         </controls:ContextMenuService.ContextMenu>
                         <VisualStateManager.VisualStateGroups>
