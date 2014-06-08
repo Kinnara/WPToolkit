@@ -1216,7 +1216,7 @@ namespace Microsoft.Phone.Controls
                 // Prepare for scale animation
                 double from = 1;
                 double to = 0.95;
-                TimeSpan timespan = TimeSpan.FromSeconds(0.45);
+                TimeSpan timespan = TimeSpan.FromSeconds(0.5);
                 IEasingFunction easingFunction = new ExponentialEase { EasingMode = EasingMode.EaseInOut };
                 _backgroundResizeStoryboard = new Storyboard();
 
@@ -1329,12 +1329,15 @@ namespace Microsoft.Phone.Controls
         {
             if (null != _backgroundResizeStoryboard)
             {
+                TimeSpan timespan = TimeSpan.FromSeconds(0.35);
+
                 // Swap all the From/To values to reverse the animation
                 foreach (DoubleAnimation animation in _backgroundResizeStoryboard.Children)
                 {
                     double temp = animation.From.Value;
                     animation.From = animation.To;
                     animation.To = temp;
+                    animation.Duration = timespan;
                 }
 
                 // Capture member variables for delegate closure
