@@ -202,6 +202,7 @@ namespace Microsoft.Phone.Controls
                         ownerFrameworkElement.RemoveHandler(MouseLeftButtonDownEvent, new MouseButtonEventHandler(OnOwnerMouseLeftButtonDown));
                         ownerFrameworkElement.ManipulationDelta -= OnOwnerManipulationDelta;
                         ownerFrameworkElement.ManipulationCompleted -= OnOwnerManipulationCompleted;
+                        ownerFrameworkElement.Tap -= OnOwnerTap;
                         ownerFrameworkElement.Unloaded -= OnOwnerUnloaded;
 
                         OnOwnerUnloaded(null, null);
@@ -226,6 +227,7 @@ namespace Microsoft.Phone.Controls
                         ownerFrameworkElement.AddHandler(MouseLeftButtonDownEvent, new MouseButtonEventHandler(OnOwnerMouseLeftButtonDown), true);
                         ownerFrameworkElement.ManipulationDelta += OnOwnerManipulationDelta;
                         ownerFrameworkElement.ManipulationCompleted += OnOwnerManipulationCompleted;
+                        ownerFrameworkElement.Tap += OnOwnerTap;
                         ownerFrameworkElement.Unloaded += OnOwnerUnloaded;
                     }
                 }
@@ -737,6 +739,19 @@ namespace Microsoft.Phone.Controls
         private void OnOwnerManipulationCompleted(object sender, ManipulationCompletedEventArgs e)
         {
             StopHoldTimer();
+        }
+
+        /// <summary>
+        /// Handles the Tap event for the owning element.
+        /// </summary>
+        /// <param name="sender">Source of the event.</param>
+        /// <param name="e">Event arguments.</param>
+        private void OnOwnerTap(object sender, System.Windows.Input.GestureEventArgs e)
+        {
+            if (IsOpen)
+            {
+                e.Handled = true;
+            }
         }
 
         /// <summary>
