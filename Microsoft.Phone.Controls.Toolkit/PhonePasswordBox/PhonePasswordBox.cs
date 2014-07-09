@@ -694,6 +694,24 @@ namespace Microsoft.Phone.Controls
 
         /// <summary>
         /// Provides handling for the
+        /// <see cref="E:System.Windows.UIElement.GotFocus" /> event.
+        /// </summary>
+        /// <param name="e">A <see cref="T:System.Windows.RoutedEventArgs" />
+        /// that contains the event data.</param>
+        protected override void OnGotFocus(RoutedEventArgs e)
+        {
+            base.OnGotFocus(e);
+            if (e.OriginalSource == this)
+            {
+                if (_passwordBox != null)
+                {
+                    _passwordBox.Focus();
+                }
+            }
+        }
+
+        /// <summary>
+        /// Provides handling for the
         /// <see cref="E:System.Windows.UIElement.LostFocus" /> event.
         /// </summary>
         /// <param name="e">A <see cref="T:System.Windows.RoutedEventArgs" />
