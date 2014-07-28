@@ -24,6 +24,7 @@ namespace Microsoft.Phone.Controls
         private const double FontExtraLargeSize = 32;
         private const double FontExtraLargePlusSize = 37.333;
         private const double FontXXLargeSize = 42.667;
+        private const double ContentControlFontSize = 25.333;
         private const double ListGroupHeaderFontSize = 29.333;
 
         private static FontMetrics DefaultFontMetrics = new FontMetrics
@@ -41,6 +42,7 @@ namespace Microsoft.Phone.Controls
             { FontExtraLargeSize, -12 },
             { FontExtraLargePlusSize, -14 },
             { FontXXLargeSize, -16 },
+            { ContentControlFontSize, -9 },
             { ListGroupHeaderFontSize, -11 },
         };
 
@@ -52,6 +54,7 @@ namespace Microsoft.Phone.Controls
             { FontExtraLargeSize, -8 },
             { FontExtraLargePlusSize, -9 },
             { FontXXLargeSize, -11 },
+            { ContentControlFontSize, -7 },
             { ListGroupHeaderFontSize, -8 },
         };
 
