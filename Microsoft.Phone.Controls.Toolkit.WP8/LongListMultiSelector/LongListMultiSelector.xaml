@@ -162,6 +162,8 @@
         <Style.Setters>
             <Setter Property="Background" Value="{StaticResource PhoneAccentBrush}"/>
             <Setter Property="CheckBoxMargin" Value="0,10,0,0"/>
+            <Setter Property="DefaultCheckBoxStyle" Value="{StaticResource MultiSelectCheckBoxStyle}"/>
+            <Setter Property="CheckBoxStyle" Value="{StaticResource MultiSelectCheckBoxStyle}"/>
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="controls:LongListMultiSelectorItem">
@@ -339,7 +341,7 @@
                                        IsHitTestVisible="False"/>
                             <Grid Background="Transparent" HorizontalAlignment="Left">
                                 <CheckBox x:Name="SelectBox"
-                                          Style="{StaticResource MultiSelectCheckBoxStyle}"
+                                          Style="{TemplateBinding CheckBoxStyle}"
                                           Margin="{TemplateBinding CheckBoxMargin}"
                                           Visibility="Collapsed"
                                           IsChecked="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=IsSelected, Mode=TwoWay}"

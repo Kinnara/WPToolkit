@@ -75,5 +75,44 @@ namespace Microsoft.Phone.Controls
                 }
             }
         }
+
+        /// <summary>
+        /// Gets the value of the IsEnabled property of the specified object.
+        /// </summary>
+        /// <param name="element">Object to query concerning the IsEnabled property.</param>
+        /// <returns>Value of the IsEnabled property.</returns>
+        public static bool GetIsEnabled(DependencyObject element)
+        {
+            if (element == null)
+            {
+                throw new ArgumentNullException("element");
+            }
+
+            return (bool)element.GetValue(IsEnabledProperty);
+        }
+
+        /// <summary>
+        /// Sets the value of the IsEnabled property of the specified object.
+        /// </summary>
+        /// <param name="element">Object to set the property on.</param>
+        /// <param name="value">Value to set.</param>
+        public static void SetIsEnabled(DependencyObject element, bool value)
+        {
+            if (element == null)
+            {
+                throw new ArgumentNullException("element");
+            }
+
+            element.SetValue(IsEnabledProperty, value);
+        }
+
+        /// <summary>
+        /// Identifies the IsEnabled attached property.
+        /// </summary>
+        public static readonly DependencyProperty IsEnabledProperty = DependencyProperty.RegisterAttached(
+            "IsEnabled",
+            typeof(bool),
+            typeof(ContextMenuService),
+            new PropertyMetadata(true));
     }
 }
