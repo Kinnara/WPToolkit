@@ -93,6 +93,7 @@
 
     <Style x:Key="MediumStrongBase" TargetType="toolkit:Label" BasedOn="{StaticResource MediumBase}">
         <Setter Property="FontFamily" Value="{StaticResource PhoneFontFamilySemiBold}"/>
+        <Setter Property="FontWeight" Value="SemiBold"/>
     </Style>
 
     <Style x:Key="MediumStrongHigh" TargetType="toolkit:Label" BasedOn="{StaticResource MediumStrongBase}">
@@ -174,6 +175,7 @@
 
     <Style x:Key="LargeStrongBase" TargetType="toolkit:Label" BasedOn="{StaticResource LargeBase}">
         <Setter Property="FontFamily" Value="{StaticResource PhoneFontFamilySemiBold}"/>
+        <Setter Property="FontWeight" Value="SemiBold"/>
     </Style>
 
     <Style x:Key="LargeStrongHigh" TargetType="toolkit:Label" BasedOn="{StaticResource LargeStrongBase}">
