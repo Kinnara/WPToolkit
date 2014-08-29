@@ -19,6 +19,17 @@ namespace Microsoft.Phone.Controls
             Unloaded += OnUnloaded;
         }
 
+        /// <summary>
+        /// Initializes a new instance of the ApplicationBarSubmenuItem class.
+        /// </summary>
+        public ApplicationBarSubmenuItem(string header)
+        {
+            DefaultStyleKey = typeof(ApplicationBarSubmenuItem);
+
+            Unloaded += OnUnloaded;
+            Header = header;
+        }
+
         #region IsSelected
 
         private bool IsSelected
