@@ -20,8 +20,9 @@ namespace Microsoft.Phone.Controls
         }
 
         /// <summary>
-        /// Initializes a new instance of the ApplicationBarSubmenuItem class.
+        /// Initializes a new instance of the ApplicationBarSubmenuItem class with the specified header.
         /// </summary>
+        /// <param name="header">The header to use for the menu item.</param>
         public ApplicationBarSubmenuItem(string header)
         {
             DefaultStyleKey = typeof(ApplicationBarSubmenuItem);
