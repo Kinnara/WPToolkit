@@ -393,4 +393,12 @@
   <data name="Copy" xml:space="preserve">
     <value>Kopyala</value>
   </data>
-<data name="ChooseItems" xml:space="preserve"><value>Öğeleri Seçin</value><comment>Default title for multiselect ListPicker.</comment></data><data name="ChooseAnItem" xml:space="preserve"><value>Öğe Seçin</value><comment>Default title for ListPicker.</comment></data></root>
+  <data name="ChooseItems" xml:space="preserve">
+    <value>Öğeleri Seçin</value>
+    <comment>Default title for multiselect ListPicker.</comment>
+  </data>
+  <data name="ChooseAnItem" xml:space="preserve">
+    <value>Öğe Seçin</value>
+    <comment>Default title for ListPicker.</comment>
+  </data>
+</root>

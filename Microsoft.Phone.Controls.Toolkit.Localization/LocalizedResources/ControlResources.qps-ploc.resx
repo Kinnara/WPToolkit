@@ -393,4 +393,12 @@
   <data name="Copy" xml:space="preserve">
     <value>[63430][!!_ćòрў_!!]</value>
   </data>
-<data name="ChooseItems" xml:space="preserve"><value>[AAE81][!!_ĊΉÕÓŜĘ ÎŢÊΜŚ_!!]</value><comment>Default title for multiselect ListPicker.</comment></data><data name="ChooseAnItem" xml:space="preserve"><value>[67723][!!_ĆΗÕÓŠÊ ÂŃ ĮŤÉΜ_!!!!]</value><comment>Default title for ListPicker.</comment></data></root>
+  <data name="ChooseItems" xml:space="preserve">
+    <value>[AAE81][!!_ĊΉÕÓŜĘ ÎŢÊΜŚ_!!]</value>
+    <comment>Default title for multiselect ListPicker.</comment>
+  </data>
+  <data name="ChooseAnItem" xml:space="preserve">
+    <value>[67723][!!_ĆΗÕÓŠÊ ÂŃ ĮŤÉΜ_!!!!]</value>
+    <comment>Default title for ListPicker.</comment>
+  </data>
+</root>

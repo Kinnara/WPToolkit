@@ -393,4 +393,12 @@
   <data name="Copy" xml:space="preserve">
     <value>kopijuoti</value>
   </data>
-<data name="ChooseItems" xml:space="preserve"><value>PASIRINKITE ELEMENTŲ</value><comment>Default title for multiselect ListPicker.</comment></data><data name="ChooseAnItem" xml:space="preserve"><value>PASIRINKITE ELEMENTĄ</value><comment>Default title for ListPicker.</comment></data></root>
+  <data name="ChooseItems" xml:space="preserve">
+    <value>PASIRINKITE ELEMENTŲ</value>
+    <comment>Default title for multiselect ListPicker.</comment>
+  </data>
+  <data name="ChooseAnItem" xml:space="preserve">
+    <value>PASIRINKITE ELEMENTĄ</value>
+    <comment>Default title for ListPicker.</comment>
+  </data>
+</root>

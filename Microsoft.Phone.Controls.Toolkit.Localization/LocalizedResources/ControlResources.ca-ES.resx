@@ -393,4 +393,12 @@
   <data name="Copy" xml:space="preserve">
     <value>copia</value>
   </data>
-<data name="ChooseItems" xml:space="preserve"><value>SELECCIONA ELS ELEMENTS</value><comment>Default title for multiselect ListPicker.</comment></data><data name="ChooseAnItem" xml:space="preserve"><value>SELECCIONA UN ELEMENT</value><comment>Default title for ListPicker.</comment></data></root>
+  <data name="ChooseItems" xml:space="preserve">
+    <value>SELECCIONA ELS ELEMENTS</value>
+    <comment>Default title for multiselect ListPicker.</comment>
+  </data>
+  <data name="ChooseAnItem" xml:space="preserve">
+    <value>SELECCIONA UN ELEMENT</value>
+    <comment>Default title for ListPicker.</comment>
+  </data>
+</root>
