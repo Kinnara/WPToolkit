@@ -171,6 +171,44 @@ namespace Microsoft.Phone.Controls
             DependencyProperty.Register("HintPanelStyle", typeof(Style), typeof(LongListMultiSelectorItem), null);
 
         /// <summary>
+        /// Gets or sets the style of the check box.
+        /// </summary>
+        public Style CheckBoxStyle
+        {
+            get { return (Style)GetValue(CheckBoxStyleProperty); }
+            set { SetValue(CheckBoxStyleProperty, value); }
+        }
+
+        /// <summary>
+        /// Identifies the CheckBoxStyle dependency property.
+        /// </summary>
+        public static readonly DependencyProperty CheckBoxStyleProperty =
+            DependencyProperty.Register("CheckBoxStyle", typeof(Style), typeof(LongListMultiSelectorItem), new PropertyMetadata(OnCheckBoxStylePropertyChanged));
+
+        static void OnCheckBoxStylePropertyChanged(object sender, DependencyPropertyChangedEventArgs e)
+        {
+            LongListMultiSelectorItem This = sender as LongListMultiSelectorItem;
+            if (This != null)
+            {
+                This.OnCheckBoxStyleChanged();
+            }
+        }
+
+        private void OnCheckBoxStyleChanged()
+        {
+            Style style = CheckBoxStyle;
+            Style defaultStyle = DefaultCheckBoxStyle;
+            if (style != null &&
+                defaultStyle != null &&
+                style != defaultStyle &&
+                style.BasedOn == null &&
+                !style.IsSealed)
+            {
+                style.BasedOn = defaultStyle;
+            }
+        }
+
+        /// <summary>
         /// Gets or sets the margin of the check box.
         /// </summary>
         public Thickness CheckBoxMargin
@@ -184,6 +222,21 @@ namespace Microsoft.Phone.Controls
         /// </summary>
         public static readonly DependencyProperty CheckBoxMarginProperty =
             DependencyProperty.Register("CheckBoxMargin", typeof(Thickness), typeof(LongListMultiSelectorItem), null);
+
+        /// <summary>
+        /// Gets or sets the default style of the check box.
+        /// </summary>
+        internal Style DefaultCheckBoxStyle
+        {
+            get { return (Style)GetValue(DefaultCheckBoxStyleProperty); }
+            set { SetValue(DefaultCheckBoxStyleProperty, value); }
+        }
+
+        /// <summary>
+        /// Identifies the DefaultCheckBoxStyle dependency property.
+        /// </summary>
+        internal static readonly DependencyProperty DefaultCheckBoxStyleProperty =
+            DependencyProperty.Register("DefaultCheckBoxStyle", typeof(Style), typeof(LongListMultiSelectorItem), null);
 
         #endregion
 
