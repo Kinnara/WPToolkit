@@ -4,7 +4,7 @@
 // Please see http://go.microsoft.com/fwlink/?LinkID=131993 for details.
 // All other rights reserved.
 -->
-    
+
 <toolkit:BasePage
     x:Class="PhoneToolkitSample.Samples.LongListSelectorSample"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
@@ -38,23 +38,6 @@
                        Foreground="{StaticResource PhoneAccentBrush}" Margin="12,28,0,24"/>
         </DataTemplate>
 
-        <!-- The template for groups when they are items in the "jump list". Not setting -->
-        <!-- the GroupItemTemplate property will disable "jump list" functionality. -->
-        <DataTemplate x:Key="groupItemHeader">
-            <Border Background="{StaticResource PhoneAccentBrush}"
-                    Width="432" Height="62"
-                    Margin="6" Padding="12,0,0,6">
-                <TextBlock Text="{Binding Key}" 
-                           Foreground="#FFFFFF" FontSize="26.667"
-                           HorizontalAlignment="Left"
-                           VerticalAlignment="Bottom"
-                           FontFamily="{StaticResource PhoneFontFamilySemiBold}"/>
-                <Border.Projection>
-                    <PlaneProjection RotationX="-60"/>
-                </Border.Projection>
-            </Border>
-        </DataTemplate>
-
         <!-- The template for movie items -->
         <DataTemplate x:Key="movieItemTemplate">
             <Grid Margin="{StaticResource PhoneTouchTargetOverhang}" Background="Transparent">
@@ -79,19 +62,22 @@
         <phone:JumpListItemForegroundConverter x:Key="ForegroundConverter"/>
 
         <Style x:Key="MoviesJumpListStyle" TargetType="phone:LongListSelector">
-            <Setter Property="Margin" Value="12,6,0,0"/>
+            <Setter Property="Margin" Value="0,19,0,0"/>
+            <Setter Property="toolkit:TiltEffect.IsTiltEnabled" Value="True"/>
             <Setter Property="ItemTemplate">
                 <Setter.Value>
                     <DataTemplate>
-                        <Border Background="{StaticResource PhoneAccentBrush}"
-                                Width="432" Height="62"
-                                Margin="6" Padding="12,0,0,6"
-                                toolkit:TiltEffect.IsTiltEnabled="True">
-                                        <TextBlock Text="{Binding Key}" 
-                                                   Foreground="#FFFFFF" FontSize="26.667"
-                                                   HorizontalAlignment="Left"
-                                                   VerticalAlignment="Bottom"
-                                                   FontFamily="{StaticResource PhoneFontFamilySemiBold}"/>
+                        <Border Background="Transparent"
+                                Margin="24,0">
+                            <Border Background="{StaticResource PhoneAccentBrush}"
+                                    Height="62"
+                                    Margin="0,0,0,12"
+                                    Padding="12,0,0,5">
+                                <TextBlock Text="{Binding Key}"
+                                           Style="{StaticResource JumpListStringStyle}"
+                                           Foreground="#FFFFFFFF"
+                                           VerticalAlignment="Bottom"/>
+                            </Border>
                         </Border>
                     </DataTemplate>
                 </Setter.Value>
@@ -155,7 +141,7 @@
                                     <DataTemplate>
                                         <Border Background="{Binding Converter={StaticResource BackgroundConverter}}"
                                                 Margin="6" toolkit:TiltEffect.IsTiltEnabled="True">
-                                                <TextBlock Text="{Binding Key}" 
+                                            <TextBlock Text="{Binding Key}" 
                                                             FontFamily="{StaticResource PhoneFontFamilySemiBold}"
                                                             FontSize="48"
                                                             Margin="12,0,0,0"
@@ -200,9 +186,9 @@
                                     Command="{StaticResource moreCommand}" CommandParameter="{Binding}"/>
                         </DataTemplate>
                     </phone:LongListSelector.GroupFooterTemplate>
-                </phone:LongListSelector>                
-            </controls:PivotItem>          
-            
+                </phone:LongListSelector>
+            </controls:PivotItem>
+
         </toolkit:PivotEx>
     </Grid>
 

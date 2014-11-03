@@ -27,7 +27,7 @@ namespace PhoneToolkitSample.Data
                 {
                     t = Char.ToUpper(s[0]) + s.Substring(1);
                 }
-                yield return new Tuple<string, string> { Item1 = t, Item2 = "http://www." + s + "+net.com/" };
+                yield return new Tuple<string, string>(t, "http://www." + s + "+net.com/");
             }
         }
 

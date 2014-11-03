@@ -575,6 +575,7 @@
     <Compile Include="..\Microsoft.Phone.Controls.Toolkit\WaitCursor\WaitCursorService.cs">
       <Link>WaitCursor\WaitCursorService.cs</Link>
     </Compile>
+    <Compile Include="ThemeResources\CustomThemeResources.cs" />
     <Compile Include="Common\LongListSelectorExtensions.cs" />
     <Compile Include="Data\StyleSelector.cs" />
     <Compile Include="Flyouts\FlyoutPlacementMode.cs" />
@@ -755,10 +756,6 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Resource Include="DateTimePickers\DatePickerPageResources.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Resource>
     <Resource Include="..\Microsoft.Phone.Controls.Toolkit\Transitions\Storyboards\SwivelIn.xaml">
       <Link>Transitions\Storyboards\SwivelIn.xaml</Link>
       <Generator>MSBuild:Compile</Generator>
@@ -769,6 +766,14 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Resource>
+    <Page Include="ThemeResources\Dark.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ThemeResources\Light.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Themes\Generic.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

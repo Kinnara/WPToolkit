@@ -300,6 +300,7 @@
         <Setter Property="Foreground" Value="{StaticResource PhoneTextMidContrastBrush}"/>
         <Setter Property="TextWrapping" Value="Wrap"/>
         <Setter Property="LineHeight" Value="{StaticResource FontExtraLargePlusLeading}"/>
+        <Setter Property="TextLineBounds" Value="TrimToCapHeight"/>
     </Style>
 
 </ResourceDictionary>

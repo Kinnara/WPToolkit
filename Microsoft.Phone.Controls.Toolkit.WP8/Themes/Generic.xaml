@@ -16,6 +16,10 @@
     xmlns:primitives="clr-namespace:Microsoft.Phone.Controls.Primitives"
     xmlns:system="clr-namespace:System.Windows.Controls">
 
+    <ResourceDictionary.MergedDictionaries>
+        <controls:CustomThemeResources/>
+    </ResourceDictionary.MergedDictionaries>
+    
     <DataTemplate x:Key="TransferControlHeaderTemplate">
         <TextBlock Text="{Binding}" Margin="0,-14,0,-9"/>
     </DataTemplate>
@@ -139,14 +143,10 @@
         <TextBlock Text="{Binding}"
                    FontFamily="{StaticResource PhoneFontFamilyNormal}"
                    FontSize="{StaticResource PhoneFontSizeNormal}"
-                   LineHeight="23.333"
-                   LineStackingStrategy="BlockLineHeight"
-                   Margin="0,-9,0,0"
-                   TextWrapping="Wrap">
-            <TextBlock.RenderTransform>
-                <TranslateTransform X="-1" Y="4"/>
-            </TextBlock.RenderTransform>
-        </TextBlock>
+                   TextWrapping="Wrap"
+                   LineHeight="22"
+                   LineStackingStrategy="BaselineToBaseline"
+                   Margin="0,-8,0,-4"/>
     </DataTemplate>
 
     <controls:SingleDataTemplateSelector x:Key="ControlHeaderTemplateSelector" Template="{StaticResource ControlHeaderTemplate}"/>
@@ -1789,9 +1789,7 @@
 
         <Setter Property="Template">
             <Setter.Value>
-
                 <ControlTemplate TargetType="controls:PhoneTextBox">
-
                     <Grid Background="Transparent" x:Name="RootGrid">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto"/>
@@ -1987,7 +1985,7 @@
                                 Grid.Row="1">
                             <TextBlock x:Name="PlaceholderTextElement"
                                        Text="{TemplateBinding PlaceholderText}"
-                                       Foreground="{StaticResource PhoneTextBoxReadOnlyBrush}"
+                                       Foreground="{StaticResource PhoneTextBoxPlaceholderBrush}"
                                        HorizontalAlignment="Left"
                                        VerticalAlignment="Top"
                                        Margin="{StaticResource PhoneTextBoxInnerMargin}"
@@ -2573,7 +2571,8 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="controls:LongListMultiSelector">
-                    <phone:LongListSelector x:Name="InnerSelector"
+                    <phone:LongListSelector
+                        x:Name="InnerSelector"
                         GridCellSize="{TemplateBinding GridCellSize}"
                         GroupFooterTemplate="{TemplateBinding GroupFooterTemplate}"
                         GroupHeaderTemplate="{TemplateBinding GroupHeaderTemplate}"
@@ -2584,16 +2583,15 @@
                         ListFooter="{TemplateBinding ListFooter}"
                         ListFooterTemplate="{TemplateBinding ListFooterTemplate}"
                         ListHeader="{TemplateBinding ListHeader}"
-                        ListHeaderTemplate="{TemplateBinding ListHeaderTemplate}"
-                    >
+                        ListHeaderTemplate="{TemplateBinding ListHeaderTemplate}">
                         <phone:LongListSelector.ItemTemplate>
                             <DataTemplate>
-                                <controls:LongListMultiSelectorItem Style="{StaticResource LongListMultiSelectorItemListStyle}"
+                                <controls:LongListMultiSelectorItem
+                                    Style="{StaticResource LongListMultiSelectorItemListStyle}"
                                     x:Name="LLSItem"
                                     HorizontalContentAlignment="Stretch"
                                     VerticalAlignment="Stretch"
-                                    Content="{Binding}"
-                                    >
+                                    Content="{Binding}">
                                 </controls:LongListMultiSelectorItem>
                             </DataTemplate>
                         </phone:LongListSelector.ItemTemplate>
@@ -3104,7 +3102,7 @@
                                 Margin="{StaticResource PhoneTouchTargetOverhang}"
                                 Grid.Row="1">
                             <TextBlock x:Name="PlaceholderText"
-                                       Foreground="{StaticResource PhoneTextBoxReadOnlyBrush}"
+                                       Foreground="{StaticResource PhoneTextBoxPlaceholderBrush}"
                                        Text="{TemplateBinding PlaceholderText}"
                                        HorizontalAlignment="Left"
                                        VerticalAlignment="Top"
@@ -3483,7 +3481,7 @@
 
     <Style TargetType="controls:ApplicationBarSubmenu">
         <Setter Property="Background" Value="{StaticResource PhoneChromeBrush}"/>
-        <Setter Property="Padding" Value="0 20 0 22"/>
+        <Setter Property="Padding" Value="0,22,0,20"/>
         <Setter Property="VerticalAlignment" Value="Bottom"/>
         <Setter Property="Template">
             <Setter.Value>
@@ -3574,14 +3572,14 @@
         <Setter Property="FontSize" Value="{StaticResource PhoneFontSizeNormal}"/>
         <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
         <Setter Property="VerticalContentAlignment" Value="Top"/>
-        <Setter Property="Padding" Value="0,13,0,29"/>
+        <Setter Property="Padding" Value="0,10,0,23"/>
         <Setter Property="HeaderTemplate">
             <Setter.Value>
                 <DataTemplate>
                     <TextBlock Text="{Binding}"
                                FontFamily="{StaticResource PhoneFontFamilySemiLight}"
                                FontSize="37.333"
-                               Margin="-1,-14,0,-9"/>
+                               Margin="0,-14,0,-9"/>
                 </DataTemplate>
             </Setter.Value>
         </Setter>
@@ -3593,8 +3591,9 @@
                                FontSize="{StaticResource PhoneFontSizeNormal}"
                                TextWrapping="Wrap"
                                LineHeight="22"
-                               LineStackingStrategy="BlockLineHeight"
-                               Margin="-1,7,0,-3"/>
+                               LineStackingStrategy="BaselineToBaseline"
+                               Margin="0,-8,0,-4"
+                               Padding="0,12,0,0"/>
                 </DataTemplate>
             </Setter.Value>
         </Setter>

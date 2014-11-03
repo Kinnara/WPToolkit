@@ -49,24 +49,27 @@
         </DataTemplate>
 
         <!-- Resources for Buddies LongListMultiSelector -->
-        <data:GroupToBackgroundBrushValueConverter x:Key="GroupBackground"/>
-        <data:GroupToForegroundBrushValueConverter x:Key="GroupForeground"/>
+        <phone:JumpListItemBackgroundConverter x:Key="GroupBackground"/>
+        <phone:JumpListItemForegroundConverter x:Key="GroupForeground"/>
         <data:PeopleByFirstName x:Key="buddies"/>
         <Style TargetType="phone:LongListSelector" x:Key="BuddiesJumpListStyle">
             <Setter Property="LayoutMode" Value="Grid"/>
             <Setter Property="GridCellSize" Value="111,111"/>
-            <Setter Property="Padding" Value="18,13,0,0"/>
+            <Setter Property="Padding" Value="24,19,-12,0"/>
             <Setter Property="toolkit:TiltEffect.IsTiltEnabled" Value="True"/>
             <Setter Property="ItemTemplate">
                 <Setter.Value>
                     <DataTemplate>
-                        <Border Background="{Binding Converter={StaticResource GroupBackground}}" 
-                                Width="99" Height="99" Margin="6">
-                            <TextBlock Text="{Binding Key}" 
-                                       Style="{StaticResource JumpListAlphabetStyle}"
-                                       Margin="10,0,0,0"
-                                       Foreground="{Binding Converter={StaticResource GroupForeground}}"                                        
-                                       VerticalAlignment="Bottom"/>
+                        <Border Background="Transparent">
+                            <Border Background="{Binding Converter={StaticResource GroupBackground}}"
+                                    Margin="0,0,12,12">
+                                <TextBlock Text="{Binding Key}" 
+                                           Style="{StaticResource JumpListAlphabetStyle}"
+                                           Margin="10,0,0,0"
+                                           Foreground="{Binding Converter={StaticResource GroupForeground}}" 
+                                           VerticalAlignment="Bottom"
+                                           TextOptions.DisplayColorEmoji="False"/>
+                            </Border>
                         </Border>
                     </DataTemplate>
                 </Setter.Value>
@@ -262,7 +265,7 @@
     </Grid>
 
     <phone:PhoneApplicationPage.ApplicationBar>
-        <shell:ApplicationBar IsVisible="False" IsMenuEnabled="True" Opacity="0.999">
+        <shell:ApplicationBar IsVisible="False" Opacity="0.999">
         </shell:ApplicationBar>
     </phone:PhoneApplicationPage.ApplicationBar>
 

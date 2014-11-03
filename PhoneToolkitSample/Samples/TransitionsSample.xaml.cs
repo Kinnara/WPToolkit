@@ -151,43 +151,13 @@ namespace PhoneToolkitSample.Samples
                 case "Roll":
                     return new List<string>();
                 case "Rotate":
-                    return new List<string>
-                    {
-                        "In90Clockwise",
-                        "In90Counterclockwise",
-                        "In180Clockwise",
-                        "In180Counterclockwise",
-                        "Out90Clockwise",
-                        "Out90Counterclockwise",
-                        "Out180Clockwise",
-                        "Out180Counterclockwise"
-                    };
+                    return Enum.GetNames(typeof(RotateTransitionMode));
                 case "Slide":
-                    return new List<string>
-                    {
-                        "SlideUpFadeIn",
-                        "SlideUpFadeOut",
-                        "SlideDownFadeIn",
-                        "SlideDownFadeOut",
-                        "SlideLeftFadeIn",
-                        "SlideLeftFadeOut",
-                        "SlideRightFadeIn",
-                        "SlideRightFadeOut"
-                    };
+                    return Enum.GetNames(typeof(SlideTransitionMode));
                 case "Swivel":
-                    return new List<string>
-                    {
-                        "In",
-                        "Out"
-                    };
+                    return Enum.GetNames(typeof(SwivelTransitionMode));
                 case "Turnstile":
-                    return new List<string>
-                    {
-                        "ForwardIn",
-                        "ForwardOut",
-                        "BackwardIn",
-                        "BackwardOut"
-                    };
+                    return Enum.GetNames(typeof(TurnstileTransitionMode));
             }
             return null;
         }

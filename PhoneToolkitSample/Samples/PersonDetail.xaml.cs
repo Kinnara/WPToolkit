@@ -18,11 +18,6 @@ namespace PhoneToolkitSample.Samples
         {
             InitializeComponent();
 
-#if WP7
-            SystemTray.SetOpacity(this, 0);
-            Margin = new Thickness(0, 32, 0, 0);
-#endif
-
             quote.Text = 
                 LoremIpsum.GetParagraph(4) + Environment.NewLine + Environment.NewLine + 
                 LoremIpsum.GetParagraph(8) + Environment.NewLine + Environment.NewLine + 

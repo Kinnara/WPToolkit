@@ -121,12 +121,6 @@ ar-SA;az-Latn-AZ;be-BY;bg-BG;ca-ES;cs-CZ;da-DK;de-DE;el-GR;en-GB;en-US;es-ES;es-
     <Compile Include="..\PhoneToolkitSample\Data\EmailObject.cs">
       <Link>Data\EmailObject.cs</Link>
     </Compile>
-    <Compile Include="..\PhoneToolkitSample\Data\GroupToBackgroundBrushValueConverter.cs">
-      <Link>Data\GroupToBackgroundBrushValueConverter.cs</Link>
-    </Compile>
-    <Compile Include="..\PhoneToolkitSample\Data\GroupToForegroundBrushValueConverter.cs">
-      <Link>Data\GroupToForegroundBrushValueConverter.cs</Link>
-    </Compile>
     <Compile Include="..\PhoneToolkitSample\Data\InboxObject.cs">
       <Link>Data\InboxObject.cs</Link>
     </Compile>
@@ -171,9 +165,6 @@ ar-SA;az-Latn-AZ;be-BY;bg-BG;ca-ES;cs-CZ;da-DK;de-DE;el-GR;en-GB;en-US;es-ES;es-
     </Compile>
     <Compile Include="..\PhoneToolkitSample\Data\RandomPeople.cs">
       <Link>Data\RandomPeople.cs</Link>
-    </Compile>
-    <Compile Include="..\PhoneToolkitSample\Data\Tuple.cs">
-      <Link>Data\Tuple.cs</Link>
     </Compile>
     <Compile Include="..\PhoneToolkitSample\Data\UnreadToBrushConverter.cs">
       <Link>Data\UnreadToBrushConverter.cs</Link>

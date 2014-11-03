@@ -21,11 +21,7 @@ namespace PhoneToolkitSample.Data
             }
             else
             {
-#if WP7
-                return (SolidColorBrush)(Application.Current.Resources["PhoneSubtleBrush"]);
-#else
                 return (SolidColorBrush)(Application.Current.Resources["PhoneTextMidContrastBrush"]);
-#endif
             }
         }
 
