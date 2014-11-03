@@ -537,12 +537,10 @@ namespace Microsoft.Phone.Controls
 
                 ItemsControl itemsControl = r.Target as ItemsControl;
                 LongListSelector longListSelector = r.Target as LongListSelector;
-#if !WP7
                 if (target is LongListMultiSelector || target is ListView)
                 {
                     longListSelector = target.GetFirstLogicalChildByType<LongListSelector>(false);
                 }
-#endif
 
                 if (itemsControl != null)
                 {
@@ -552,16 +550,7 @@ namespace Microsoft.Phone.Controls
                 else if (longListSelector != null)
                 {
                     // If the target is a LongListSelector, flip its items individually.
-#if WP7
-                    ListBox child = longListSelector.GetFirstLogicalChildByType<ListBox>(false);
-
-                    if (child != null)
-                    {
-                        child.GetItemsInViewPort(targets);
-                    }
-#else
                     longListSelector.GetItemsInViewPort(targets);
-#endif
                 }
                 else
                 {

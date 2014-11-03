@@ -41,16 +41,5 @@ namespace Microsoft.Phone.Controls
 
             return Math.Sqrt(dx * dx + dy * dy);
         }
-#if WP7
-        /// <summary>
-        /// Helper extension method for turning XNA's Vector2 type into a Point
-        /// </summary>
-        /// <param name="v">The Vector2.</param>
-        /// <returns>The point.</returns>
-        public static Point ToPoint(this Microsoft.Xna.Framework.Vector2 v)
-        {
-            return new Point(v.X, v.Y);
-        } 
-#endif
     }
 }

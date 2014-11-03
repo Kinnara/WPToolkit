@@ -49,8 +49,8 @@
         </DataTemplate>
 
         <!-- Resources for Buddies LongListMultiSelector -->
-        <data:GroupToBackgroundBrushValueConverter x:Key="GroupBackground"/>
-        <data:GroupToForegroundBrushValueConverter x:Key="GroupForeground"/>
+        <phone:JumpListItemBackgroundConverter x:Key="GroupBackground"/>
+        <phone:JumpListItemForegroundConverter x:Key="GroupForeground"/>
         <data:PeopleByFirstName x:Key="buddies"/>
         <Style TargetType="phone:LongListSelector" x:Key="BuddiesJumpListStyle">
             <Setter Property="LayoutMode" Value="Grid"/>

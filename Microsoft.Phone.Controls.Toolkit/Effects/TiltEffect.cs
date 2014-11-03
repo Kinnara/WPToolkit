@@ -325,14 +325,12 @@ namespace Microsoft.Phone.Controls
                         }
                         else
                         {
-#if WP8
                             if (t == typeof(LongListSelector))
                             {
                                 StartTiltEffectOnLLS((LongListSelector)ancestor, e);
                             }
                             else
                             {
-#endif
                                 // Use first child of the control, so that we can add transforms and not
                                 // impact any transforms on the control itself.
                                 FrameworkElement element = VisualTreeHelper.GetChild(ancestor, 0) as FrameworkElement;
@@ -351,9 +349,7 @@ namespace Microsoft.Phone.Controls
                                 Point centerToCenterDelta = GetCenterToCenterDelta(element, source);
 
                                 BeginTiltEffect(element, tiltTouchPoint, elementCenter, centerToCenterDelta);
-#if WP8
                             }
-#endif
 
                             return;
                         }
@@ -363,7 +359,6 @@ namespace Microsoft.Phone.Controls
         }
 
 
-#if WP8
         /// <summary>
         /// Starts the tilt effect on LLS items or sticky header.
         /// </summary>
@@ -414,7 +409,6 @@ namespace Microsoft.Phone.Controls
                 }
             }
         }
-#endif
 
         /// <summary>
         /// Computes the delta between the centre of an element and its 
