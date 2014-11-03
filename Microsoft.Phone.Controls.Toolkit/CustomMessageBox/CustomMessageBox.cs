@@ -677,8 +677,8 @@ namespace Microsoft.Phone.Controls
             // Close popup.
             if (useTransition)
             {
-                SwivelTransition backwardOut = new SwivelTransition { Mode = SwivelTransitionMode.BackwardOut };
-                ITransition swivelTransition = backwardOut.GetTransition(this);
+                SwivelTransition swivelOut = new SwivelTransition { Mode = SwivelTransitionMode.Out };
+                ITransition swivelTransition = swivelOut.GetTransition(this);
                 swivelTransition.Completed += (s, e) =>
                 {
                     swivelTransition.Stop();
@@ -761,8 +761,8 @@ namespace Microsoft.Phone.Controls
         /// <param name="e">The event information.</param>
         private void CustomMessageBox_LayoutUpdated(object sender, EventArgs e)
         {
-            SwivelTransition backwardIn = new SwivelTransition { Mode = SwivelTransitionMode.BackwardIn };
-            ITransition swivelTransition = backwardIn.GetTransition(this);
+            SwivelTransition swivelIn = new SwivelTransition { Mode = SwivelTransitionMode.In };
+            ITransition swivelTransition = swivelIn.GetTransition(this);
             swivelTransition.Completed += (s1, e1) => swivelTransition.Stop();
             swivelTransition.Begin();
             LayoutUpdated -= CustomMessageBox_LayoutUpdated;

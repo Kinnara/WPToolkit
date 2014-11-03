@@ -500,6 +500,7 @@
     <Compile Include="..\Microsoft.Phone.Controls.Toolkit\WaitCursor\WaitCursorService.cs">
       <Link>WaitCursor\WaitCursorService.cs</Link>
     </Compile>
+    <Compile Include="ThemeResources\CustomThemeResources.cs" />
     <Compile Include="Common\LongListSelectorExtensions.cs" />
     <Compile Include="Data\StyleSelector.cs" />
     <Compile Include="Input\GestureListenerStatic.cs" />
@@ -679,10 +680,24 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Resource Include="DateTimePickers\DatePickerPageResources.xaml">
+    <Resource Include="..\Microsoft.Phone.Controls.Toolkit\Transitions\Storyboards\SwivelIn.xaml">
+      <Link>Transitions\Storyboards\SwivelIn.xaml</Link>
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Resource>
+    <Resource Include="..\Microsoft.Phone.Controls.Toolkit\Transitions\Storyboards\SwivelOut.xaml">
+      <Link>Transitions\Storyboards\SwivelOut.xaml</Link>
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Resource>
+    <Page Include="ThemeResources\Dark.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ThemeResources\Light.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Themes\Generic.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -890,16 +905,6 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Resource>
-    <Resource Include="..\Microsoft.Phone.Controls.Toolkit\Transitions\Storyboards\SwivelBackwardIn.xaml">
-      <Link>Transitions\Storyboards\SwivelBackwardIn.xaml</Link>
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Resource>
-    <Resource Include="..\Microsoft.Phone.Controls.Toolkit\Transitions\Storyboards\SwivelBackwardOut.xaml">
-      <Link>Transitions\Storyboards\SwivelBackwardOut.xaml</Link>
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Resource>
     <Resource Include="..\Microsoft.Phone.Controls.Toolkit\Transitions\Storyboards\RotateIn180Clockwise.xaml">
       <Link>Transitions\Storyboards\RotateIn180Clockwise.xaml</Link>
       <SubType>Designer</SubType>
@@ -950,16 +955,6 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Resource>
-    <Resource Include="..\Microsoft.Phone.Controls.Toolkit\Transitions\Storyboards\SwivelFullScreenOut.xaml">
-      <Link>Transitions\Storyboards\SwivelFullScreenOut.xaml</Link>
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Resource>
-    <Resource Include="..\Microsoft.Phone.Controls.Toolkit\Transitions\Storyboards\SwivelForwardOut.xaml">
-      <Link>Transitions\Storyboards\SwivelForwardOut.xaml</Link>
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Resource>
     <Resource Include="..\Microsoft.Phone.Controls.Toolkit\Transitions\Storyboards\TurnstileForwardOut.xaml">
       <Link>Transitions\Storyboards\TurnstileForwardOut.xaml</Link>
       <SubType>Designer</SubType>
@@ -977,16 +972,6 @@
     </Resource>
     <Resource Include="..\Microsoft.Phone.Controls.Toolkit\Transitions\Storyboards\TurnstileBackwardOut.xaml">
       <Link>Transitions\Storyboards\TurnstileBackwardOut.xaml</Link>
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Resource>
-    <Resource Include="..\Microsoft.Phone.Controls.Toolkit\Transitions\Storyboards\SwivelForwardIn.xaml">
-      <Link>Transitions\Storyboards\SwivelForwardIn.xaml</Link>
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Resource>
-    <Resource Include="..\Microsoft.Phone.Controls.Toolkit\Transitions\Storyboards\SwivelFullScreenIn.xaml">
-      <Link>Transitions\Storyboards\SwivelFullScreenIn.xaml</Link>
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Resource>

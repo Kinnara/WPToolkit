@@ -23,90 +23,32 @@
     shell:SystemTray.IsVisible="True"
     shell:SystemTray.Opacity="0">
 
+    <controls:TransitionService.NavigationInTransition>
+        <controls:NavigationInTransition>
+            <controls:NavigationInTransition.Forward>
+                <controls:SwivelTransition Mode="In"/>
+            </controls:NavigationInTransition.Forward>
+        </controls:NavigationInTransition>
+    </controls:TransitionService.NavigationInTransition>
+    <controls:TransitionService.NavigationOutTransition>
+        <controls:NavigationOutTransition>
+            <controls:NavigationOutTransition.Backward>
+                <controls:SwivelTransition Mode="Out"/>
+            </controls:NavigationOutTransition.Backward>
+        </controls:NavigationOutTransition>
+    </controls:TransitionService.NavigationOutTransition>
+
     <primitives:DateTimePickerPageBase.Resources>
-        <ResourceDictionary>
-            <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="/Microsoft.Phone.Controls.Toolkit;component/DateTimePickers/DatePickerPageResources.xaml"/>
-            </ResourceDictionary.MergedDictionaries>
-            <controls:DateTimePickerResources x:Key="DateTimePickerResources"/>
-        </ResourceDictionary>
+        <controls:DateTimePickerResources x:Key="DateTimePickerResources"/>
+        <Style x:Key="SubTextStyle" TargetType="TextBlock">
+            <Setter Property="FontSize" Value="20"/>
+            <Setter Property="FontFamily" Value="{StaticResource PhoneFontFamilyNormal}"/>
+            <Setter Property="Margin" Value="0,-2"/>
+        </Style>
     </primitives:DateTimePickerPageBase.Resources>
 
     <Grid x:Name="LayoutRoot" Background="{StaticResource PhoneChromeBrush}">
         <VisualStateManager.VisualStateGroups>
-            <VisualStateGroup x:Name="VisibilityStates">
-                <VisualStateGroup.Transitions>
-                    <VisualTransition To="Open">
-                        <VisualTransition.Storyboard>
-                            <Storyboard>
-                                <DoubleAnimation
-                                    Storyboard.TargetName="PlaneProjection"
-                                    Storyboard.TargetProperty="RotationX"
-                                    From="-45"
-                                    To="0"
-                                    Duration="0:0:0.3">
-                                    <DoubleAnimation.EasingFunction>
-                                        <ExponentialEase EasingMode="EaseOut" Exponent="6"/>
-                                    </DoubleAnimation.EasingFunction>
-                                </DoubleAnimation>
-                                <DoubleAnimationUsingKeyFrames
-                                    Storyboard.TargetName="LayoutRoot"
-                                    Storyboard.TargetProperty="Opacity">
-                                    <EasingDoubleKeyFrame KeyTime="0" Value="1"/>
-                                </DoubleAnimationUsingKeyFrames>
-                            </Storyboard>
-                        </VisualTransition.Storyboard>
-                    </VisualTransition>
-                    <VisualTransition To="Closed">
-                        <Storyboard>
-                            <DoubleAnimation
-                                Storyboard.TargetName="PlaneProjection"
-                                Storyboard.TargetProperty="RotationX"
-                                From="0"
-                                To="60"
-                                Duration="0:0:0.2">
-                                <DoubleAnimation.EasingFunction>
-                                    <ExponentialEase EasingMode="EaseIn" Exponent="6"/>
-                                </DoubleAnimation.EasingFunction>
-                            </DoubleAnimation>
-                            <DoubleAnimationUsingKeyFrames
-                                Storyboard.TargetName="LayoutRoot"
-                                Storyboard.TargetProperty="Opacity">
-                                <DiscreteDoubleKeyFrame KeyTime="0" Value="1"/>
-                                <DiscreteDoubleKeyFrame KeyTime="0:0:0.2" Value="0"/>
-                            </DoubleAnimationUsingKeyFrames>
-                        </Storyboard>
-                    </VisualTransition>
-                </VisualStateGroup.Transitions>
-                <VisualState x:Name="Open">
-                    <Storyboard>
-                        <DoubleAnimation
-                            Storyboard.TargetName="PlaneProjection"
-                            Storyboard.TargetProperty="RotationX"
-                            To="0"
-                            Duration="0"/>
-                        <DoubleAnimation
-                            Storyboard.TargetName="LayoutRoot"
-                            Storyboard.TargetProperty="Opacity"
-                            To="1"
-                            Duration="0"/>
-                    </Storyboard>
-                </VisualState>
-                <VisualState x:Name="Closed">
-                    <Storyboard>
-                        <DoubleAnimation
-                            Storyboard.TargetName="PlaneProjection"
-                            Storyboard.TargetProperty="RotationX"
-                            To="60"
-                            Duration="0"/>
-                        <DoubleAnimation
-                            Storyboard.TargetName="LayoutRoot"
-                            Storyboard.TargetProperty="Opacity"
-                            To="0"
-                            Duration="0"/>
-                    </Storyboard>
-                </VisualState>
-            </VisualStateGroup>
             <VisualStateGroup x:Name="OrientationStates">
                 <VisualState x:Name="PortraitUp"/>
                 <VisualState x:Name="LandscapeLeft">
@@ -125,9 +67,6 @@
                 </VisualState>
             </VisualStateGroup>
         </VisualStateManager.VisualStateGroups>
-        <Grid.Projection>
-            <PlaneProjection x:Name="PlaneProjection"/>
-        </Grid.Projection>
 
         <Grid x:Name="MainGrid" Margin="0,32,0,0">
             <Grid.RowDefinitions>
