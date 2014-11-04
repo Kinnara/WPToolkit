@@ -10,7 +10,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
     <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Projection).(PlaneProjection.RotationX)">
         <EasingDoubleKeyFrame KeyTime="0" Value="0"/>
-        <EasingDoubleKeyFrame KeyTime="0:0:0.15" Value="45">
+        <EasingDoubleKeyFrame KeyTime="0:0:0.15" Value="60">
             <EasingDoubleKeyFrame.EasingFunction>
                 <ExponentialEase EasingMode="EaseIn" Exponent="6"/>
             </EasingDoubleKeyFrame.EasingFunction>
