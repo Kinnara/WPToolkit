@@ -672,7 +672,7 @@
         <Setter Property="Margin" Value="0,-2"/>
     </Style>
 
-    <Style TargetType="controls:DatePicker">
+    <Style x:Key="DateTimePickerBase" TargetType="controls:DateTimePickerBase">
         <Setter Property="Background" Value="Transparent"/>
         <Setter Property="BorderBrush" Value="{StaticResource PhoneForegroundBrush}"/>
         <Setter Property="BorderThickness" Value="{StaticResource PhoneBorderThickness}"/>
@@ -680,19 +680,16 @@
         <Setter Property="FontSize" Value="{StaticResource PhoneFontSizeMediumLarge}"/>
         <Setter Property="HorizontalContentAlignment" Value="Left"/>
         <Setter Property="Padding" Value="7,2,7,6"/>
-        <Setter Property="PickerPageUri" Value="/Microsoft.Phone.Controls.Toolkit;component/DateTimePickers/DatePickerPage.xaml"/>
-        <!-- For RTL, the pattern needs to be reversed -->
-        <!-- <Setter Property="ValueStringFormat" Value="{}{0:d}"/> -->
         <Setter Property="Template">
             <Setter.Value>
-                <ControlTemplate TargetType="controls:DatePicker">
+                <ControlTemplate TargetType="controls:DateTimePickerBase">
                     <StackPanel>
                         <VisualStateManager.VisualStateGroups>
                             <VisualStateGroup x:Name="CommonStates">
                                 <VisualState x:Name="Normal"/>
                                 <VisualState x:Name="Disabled">
                                     <Storyboard>
-                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="Header" Storyboard.TargetProperty="Foreground">
+                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="HeaderContentPresenter" Storyboard.TargetProperty="Foreground">
                                             <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource PhoneTextLowContrastBrush}"/>
                                         </ObjectAnimationUsingKeyFrames>
                                     </Storyboard>
@@ -700,7 +697,7 @@
                             </VisualStateGroup>
                         </VisualStateManager.VisualStateGroups>
                         <controls:PhoneContentControl
-                            x:Name="Header"
+                            x:Name="HeaderContentPresenter"
                             Content="{TemplateBinding Header}"
                             ContentTemplate="{TemplateBinding HeaderTemplate}"
                             ContentTemplateSelector="{StaticResource ControlHeaderTemplateSelector}"
@@ -708,8 +705,7 @@
                             HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
                             Margin="{StaticResource PhoneHorizontalMargin}"/>
                         <Button
-                            x:Name="DateTimeButton"
-                            Content="{TemplateBinding ValueString}"
+                            x:Name="FlyoutButton"
                             Background="{TemplateBinding Background}"
                             BorderBrush="{TemplateBinding BorderBrush}"
                             BorderThickness="{TemplateBinding BorderThickness}"
@@ -717,13 +713,15 @@
                             FontSize="{TemplateBinding FontSize}"
                             Foreground="{TemplateBinding Foreground}"
                             Padding="{TemplateBinding Padding}"
-                            Height="72"
+                            MinHeight="72"
                             HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"/>
                     </StackPanel>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
     </Style>
+
+    <Style TargetType="controls:DatePicker" BasedOn="{StaticResource DateTimePickerBase}"/>
 
     <Style TargetType="controls:DatePickerFlyoutPresenter">
         <Setter Property="FontFamily" Value="{StaticResource PhoneFontFamilyNormal}" />
@@ -798,60 +796,7 @@
         </Setter>
     </Style>
 
-    <Style TargetType="controls:TimePicker">
-        <Setter Property="Background" Value="Transparent"/>
-        <Setter Property="BorderBrush" Value="{StaticResource PhoneForegroundBrush}"/>
-        <Setter Property="BorderThickness" Value="{StaticResource PhoneBorderThickness}"/>
-        <Setter Property="Foreground" Value="{StaticResource PhoneForegroundBrush}"/>
-        <Setter Property="FontSize" Value="{StaticResource PhoneFontSizeMediumLarge}"/>
-        <Setter Property="HorizontalContentAlignment" Value="Left"/>
-        <Setter Property="Padding" Value="7,2,7,6"/>
-        <Setter Property="PickerPageUri" Value="/Microsoft.Phone.Controls.Toolkit;component/DateTimePickers/TimePickerPage.xaml"/>
-        <!-- Ideally, the short time pattern 't' would be correct. However, it does not respect
-             the system's "24-hour clock" setting override and so the correct effective value of
-             ValueStringFormat is determined on an as-needed basis (unless overridden). -->
-        <!--<Setter Property="ValueStringFormat" Value="{}{0:t}"/>-->
-        <Setter Property="Template">
-            <Setter.Value>
-                <ControlTemplate TargetType="controls:TimePicker">
-                    <StackPanel>
-                        <VisualStateManager.VisualStateGroups>
-                            <VisualStateGroup x:Name="CommonStates">
-                                <VisualState x:Name="Normal"/>
-                                <VisualState x:Name="Disabled">
-                                    <Storyboard>
-                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="Header" Storyboard.TargetProperty="Foreground">
-                                            <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource PhoneTextLowContrastBrush}"/>
-                                        </ObjectAnimationUsingKeyFrames>
-                                    </Storyboard>
-                                </VisualState>
-                            </VisualStateGroup>
-                        </VisualStateManager.VisualStateGroups>
-                        <controls:PhoneContentControl
-                            x:Name="Header"
-                            Content="{TemplateBinding Header}"
-                            ContentTemplate="{TemplateBinding HeaderTemplate}"
-                            ContentTemplateSelector="{StaticResource ControlHeaderTemplateSelector}"
-                            Foreground="{StaticResource PhoneTextMidContrastBrush}"
-                            HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
-                            Margin="{StaticResource PhoneHorizontalMargin}"/>
-                        <Button
-                            x:Name="DateTimeButton"
-                            Content="{TemplateBinding ValueString}"
-                            Background="{TemplateBinding Background}"
-                            BorderBrush="{TemplateBinding BorderBrush}"
-                            BorderThickness="{TemplateBinding BorderThickness}"
-                            FontFamily="{TemplateBinding FontFamily}"
-                            FontSize="{TemplateBinding FontSize}"
-                            Foreground="{TemplateBinding Foreground}"
-                            Padding="{TemplateBinding Padding}"
-                            Height="72"
-                            HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"/>
-                    </StackPanel>
-                </ControlTemplate>
-            </Setter.Value>
-        </Setter>
-    </Style>
+    <Style TargetType="controls:TimePicker" BasedOn="{StaticResource DateTimePickerBase}"/>
 
     <Style TargetType="controls:TimePickerFlyoutPresenter">
         <Setter Property="FontFamily" Value="{StaticResource PhoneFontFamilyNormal}" />

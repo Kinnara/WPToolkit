@@ -1,33 +1,34 @@
 ﻿using System;
+using System.Windows;
 
 namespace Microsoft.Phone.Controls
 {
     /// <summary>
-    /// Provides event data for the DatePicker.DateChanged event.
+    /// Provides data for the DatePicked event.
     /// </summary>
-    public sealed class DatePickerValueChangedEventArgs : EventArgs
+    public sealed class DatePickedEventArgs : DependencyObject
     {
-        internal DatePickerValueChangedEventArgs(DateTimeOffset oldDate, DateTimeOffset newDate)
+        internal DatePickedEventArgs(DateTimeOffset oldDate, DateTimeOffset newDate)
         {
             OldDate = oldDate;
             NewDate = newDate;
         }
 
         /// <summary>
-        /// Gets the date previously selected in the picker.
+        /// Gets the previous date.
         /// </summary>
         /// 
         /// <returns>
-        /// The date previously selected in the picker.
+        /// The previous date.
         /// </returns>
         public DateTimeOffset OldDate { get; private set; }
 
         /// <summary>
-        /// Gets the new date selected in the picker.
+        /// Gets the date that was selected by the user.
         /// </summary>
         /// 
         /// <returns>
-        /// The new date selected in the picker.
+        /// The date that was selected by the user.
         /// </returns>
         public DateTimeOffset NewDate { get; private set; }
     }

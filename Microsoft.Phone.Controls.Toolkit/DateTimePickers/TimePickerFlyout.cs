@@ -3,6 +3,7 @@ using System;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using Windows.Foundation;
 
 namespace Microsoft.Phone.Controls
 {
@@ -64,7 +65,7 @@ namespace Microsoft.Phone.Controls
         /// <summary>
         /// Occurs when the user has selected a time in the time picker flyout.
         /// </summary>
-        public event EventHandler<TimePickerValueChangedEventArgs> TimePicked;
+        public event TypedEventHandler<TimePickerFlyout, TimePickedEventArgs> TimePicked;
 
         /// <summary>
         /// Begins an asynchronous operation to show the flyout placed in relation to the specified element.
@@ -148,7 +149,7 @@ namespace Microsoft.Phone.Controls
             var handler = TimePicked;
             if (handler != null)
             {
-                handler(this, new TimePickerValueChangedEventArgs(oldTime, newTime));
+                handler(this, new TimePickedEventArgs(oldTime, newTime));
             }
         }
     }

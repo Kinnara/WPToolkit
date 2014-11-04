@@ -1,33 +1,34 @@
 ﻿using System;
+using System.Windows;
 
 namespace Microsoft.Phone.Controls
 {
     /// <summary>
-    /// Provides event data for the TimePicker.TimeChanged event.
+    /// Provides data for the TimePicked event.
     /// </summary>
-    public sealed class TimePickerValueChangedEventArgs : EventArgs
+    public sealed class TimePickedEventArgs : DependencyObject
     {
-        internal TimePickerValueChangedEventArgs(TimeSpan oldTime, TimeSpan newTime)
+        internal TimePickedEventArgs(TimeSpan oldTime, TimeSpan newTime)
         {
             OldTime = oldTime;
             NewTime = newTime;
         }
 
         /// <summary>
-        /// Gets the time previously selected in the picker.
+        /// Gets the old time value.
         /// </summary>
         /// 
         /// <returns>
-        /// The time previously selected in the picker.
+        /// The old time value.
         /// </returns>
         public TimeSpan OldTime { get; private set; }
 
         /// <summary>
-        /// Gets the new time selected in the picker.
+        /// Gets the time that was selected by the user.
         /// </summary>
         /// 
         /// <returns>
-        /// The new time selected in the picker.
+        /// The time that was selected by the user.
         /// </returns>
         public TimeSpan NewTime { get; private set; }
     }

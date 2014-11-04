@@ -37,7 +37,7 @@ namespace Microsoft.Phone.Controls
         {
             string pattern = CultureInfo.CurrentCulture.DateTimeFormat.ShortDatePattern.ToUpperInvariant();
 
-            if (DateTimePickerBase.DateShouldFlowRTL())
+            if (DateTimePickerHelper.DateShouldFlowRTL())
             {
                 char[] reversedPattern = pattern.ToCharArray();
                 Array.Reverse(reversedPattern);

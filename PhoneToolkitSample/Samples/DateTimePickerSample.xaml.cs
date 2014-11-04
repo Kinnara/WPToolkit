@@ -18,15 +18,5 @@ namespace PhoneToolkitSample.Samples
         {
             InitializeComponent();
         }
-
-        private void DatePicker_ValueChanged(object sender, DateTimeValueChangedEventArgs e)
-        {
-
-        }
-
-        private void TimePicker_ValueChanged(object sender, DateTimeValueChangedEventArgs e)
-        {
-
-        }
     }
 }

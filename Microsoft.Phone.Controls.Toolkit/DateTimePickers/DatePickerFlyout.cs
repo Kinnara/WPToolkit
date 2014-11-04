@@ -3,6 +3,7 @@ using System;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using Windows.Foundation;
 
 namespace Microsoft.Phone.Controls
 {
@@ -155,7 +156,7 @@ namespace Microsoft.Phone.Controls
         /// <summary>
         /// Occurs when a date has been picked by the user.
         /// </summary>
-        public event EventHandler<DatePickerValueChangedEventArgs> DatePicked;
+        public event TypedEventHandler<DatePickerFlyout, DatePickedEventArgs> DatePicked;
 
         /// <summary>
         /// Begins an asynchronous operation to show the flyout placed in relation to the specified element.
@@ -239,7 +240,7 @@ namespace Microsoft.Phone.Controls
             var handler = DatePicked;
             if (handler != null)
             {
-                handler(this, new DatePickerValueChangedEventArgs(oldDate, newDate));
+                handler(this, new DatePickedEventArgs(oldDate, newDate));
             }
         }
     }

@@ -22,9 +22,9 @@
     <toolkit:PageUI Header="date &amp; time pickers" Style="{StaticResource ScrollablePageUIStyle}">
         <toolkit:PageUI.Content>
             <StackPanel x:Name="ContentPanel">
-                <toolkit:DatePicker Header="Select date" Margin="0,0,0,26" ValueChanged="DatePicker_ValueChanged"/>
+                <toolkit:DatePicker Header="Select date" Margin="0,0,0,26"/>
                 <toolkit:DatePicker Header="Date picker disabled" Margin="0,0,0,26" IsEnabled="False"/>
-                <toolkit:TimePicker Header="Select time" Margin="0,0,0,26" ValueChanged="TimePicker_ValueChanged"/>
+                <toolkit:TimePicker Header="Select time" Margin="0,0,0,26"/>
                 <toolkit:TimePicker Header="Time picker disabled" Margin="0,0,0,26" IsEnabled="False"/>
                 <TextBlock Text="note" Style="{StaticResource PhoneTextLargeStyle}"/>
                 <TextBlock TextWrapping="Wrap" Style="{StaticResource PhoneTextNormalStyle}">
