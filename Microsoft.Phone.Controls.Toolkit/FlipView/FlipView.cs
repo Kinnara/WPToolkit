@@ -366,6 +366,7 @@ namespace Microsoft.Phone.Controls
         /// </summary>
         /// <param name="e">A <see cref="T:System.Collections.Specialized.NotifyCollectionChangedEventArgs"/> that contains the event data.</param>
         [SuppressMessage("Microsoft.Design", "CA1062:Validate arguments of public methods", MessageId = "0", Justification = "Standard pattern.")]
+        [SuppressMessage("Microsoft.Maintainability", "CA1502:AvoidExcessiveComplexity")]
         protected override void OnItemsChanged(NotifyCollectionChangedEventArgs e)
         {
             base.OnItemsChanged(e);
@@ -1176,6 +1177,7 @@ namespace Microsoft.Phone.Controls
                 get { return _orientation; }
             }
 
+            [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
             public void GoTo(double targetOffset, Duration duration)
             {
                 GoTo(targetOffset, duration, null, null);

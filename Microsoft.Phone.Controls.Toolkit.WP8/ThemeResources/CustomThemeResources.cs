@@ -1,11 +1,13 @@
 ﻿using System;
 using System.Collections;
 using System.ComponentModel;
+using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
 using System.Windows;
 
 namespace Microsoft.Phone.Controls
 {
+    [SuppressMessage("Microsoft.Naming", "CA1710:IdentifiersShouldHaveCorrectSuffix")]
     public sealed class CustomThemeResources : ResourceDictionary
     {
         private static readonly Uri _source = new Uri(
@@ -17,6 +19,7 @@ namespace Microsoft.Phone.Controls
 
         private static readonly ResourceDictionary _instance;
 
+        [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline")]
         static CustomThemeResources()
         {
             if (!DesignerProperties.IsInDesignTool)

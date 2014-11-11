@@ -15,6 +15,7 @@ namespace Microsoft.Phone.Controls
     /// and out during page transitions. The result is a 'readerboard' effect
     /// added to the select elements.
     /// </summary>
+    [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Readerboard")]
     public sealed class ReaderboardEffect : DependencyObject
     {
         /// <summary>
@@ -599,9 +600,8 @@ namespace Microsoft.Phone.Controls
         /// <summary>
         /// Prepares a framework element to be flipped by adding a plane projection to it.
         /// </summary>
-        /// <param name="root">The root visual.</param>
         /// <param name="element">The framework element.</param>
-        private static bool TryAttachProjection(PhoneApplicationFrame root, FrameworkElement element)
+        private static bool TryAttachProjection(FrameworkElement element)
         {
             // Cache original projection.
             ReaderboardEffect.SetOriginalProjection(element, element.Projection);
@@ -707,7 +707,6 @@ namespace Microsoft.Phone.Controls
         private static void ComposeInStoryboard(Storyboard storyboard, TimeSpan? beginTime, bool noDelay)
         {
             int counter = 0;
-            PhoneApplicationFrame root = Application.Current.RootVisual as PhoneApplicationFrame;
 
             foreach (WeakReference r in _targets)
             {
@@ -718,7 +717,7 @@ namespace Microsoft.Phone.Controls
                 // Hide the element until the storyboard is begun.
                 element.Opacity = 0.0;
 
-                if (!TryAttachProjection(root, element))
+                if (!TryAttachProjection(element))
                 {
                     continue;
                 }
@@ -769,7 +768,6 @@ namespace Microsoft.Phone.Controls
         private static void ComposeOutStoryboard(Storyboard storyboard, bool noDelay)
         {
             int counter = 0;
-            PhoneApplicationFrame root = Application.Current.RootVisual as PhoneApplicationFrame;
 
             foreach (WeakReference r in _targets)
             {
@@ -777,7 +775,7 @@ namespace Microsoft.Phone.Controls
                 double originalOpacity = element.Opacity;
                 ReaderboardEffect.SetOriginalOpacity(element, originalOpacity);
 
-                if (!TryAttachProjection(root, element))
+                if (!TryAttachProjection(element))
                 {
                     continue;
                 }
