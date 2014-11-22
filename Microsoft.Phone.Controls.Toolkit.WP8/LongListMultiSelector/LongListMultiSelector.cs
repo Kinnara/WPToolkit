@@ -1001,7 +1001,7 @@ namespace Microsoft.Phone.Controls
                             else
                             {
                                 // item's bottom is visible if >= 0
-                                pt = itemTransform.Transform(new Point(item.ActualHeight, 0));
+                                pt = itemTransform.Transform(new Point(0, item.ActualHeight));
                                 isVisible = pt.Y >= 0;
                             }
                             if (isVisible)
