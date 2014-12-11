@@ -9,14 +9,14 @@
         <Setter Property="FontSize" Value="{StaticResource PhoneFontSizeNormal}"/>
         <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
         <Setter Property="VerticalContentAlignment" Value="Top"/>
-        <Setter Property="Padding" Value="0,13,0,29"/>
+        <Setter Property="Padding" Value="0,10,0,23"/>
         <Setter Property="HeaderTemplate">
             <Setter.Value>
                 <DataTemplate>
                     <TextBlock Text="{Binding}"
                                FontFamily="{StaticResource PhoneFontFamilySemiLight}"
                                FontSize="37.333"
-                               Margin="-1,-14,0,-9"/>
+                               Margin="0,-14,0,-9"/>
                 </DataTemplate>
             </Setter.Value>
         </Setter>
@@ -28,8 +28,9 @@
                                FontSize="{StaticResource PhoneFontSizeNormal}"
                                TextWrapping="Wrap"
                                LineHeight="22"
-                               LineStackingStrategy="BlockLineHeight"
-                               Margin="-1,7,0,-3"/>
+                               LineStackingStrategy="BaselineToBaseline"
+                               Margin="0,-8,0,-4"
+                               Padding="0,12,0,0"/>
                 </DataTemplate>
             </Setter.Value>
         </Setter>

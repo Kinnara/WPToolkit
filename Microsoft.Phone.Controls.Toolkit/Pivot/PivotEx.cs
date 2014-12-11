@@ -1,10 +1,12 @@
-﻿using System.Windows;
+﻿using System.Diagnostics.CodeAnalysis;
+using System.Windows;
 
 namespace Microsoft.Phone.Controls
 {
     /// <summary>
     /// An extended Pivot.
     /// </summary>
+    [SuppressMessage("Microsoft.Naming", "CA1711:IdentifiersShouldNotHaveIncorrectSuffix")]
     public class PivotEx : Pivot
     {
         /// <summary>

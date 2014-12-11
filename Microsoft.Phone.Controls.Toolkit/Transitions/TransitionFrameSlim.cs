@@ -78,9 +78,7 @@ namespace Microsoft.Phone.Controls
 
         private bool _deferredNavigationRequested;
 
-#if WP8
         private bool _wasRelaunched;
-#endif
 
         /// <summary>
         /// Initialzies a new instance of the TransitionFrameSlim class.
@@ -89,9 +87,7 @@ namespace Microsoft.Phone.Controls
             : base()
         {
             Navigating += OnNavigating;
-#if WP8
             Navigated += OnNavigated;
-#endif
             NavigationStopped += OnNavigationStopped;
         }
 
@@ -118,7 +114,6 @@ namespace Microsoft.Phone.Controls
         /// <param name="e">The event arguments.</param>
         private void OnNavigating(object sender, NavigatingCancelEventArgs e)
         {
-#if WP8
             if (e.NavigationMode == NavigationMode.Reset)
             {
                 _wasRelaunched = true;
@@ -130,7 +125,6 @@ namespace Microsoft.Phone.Controls
                 _wasRelaunched = false;
                 return;
             }
-#endif
 
             // If the current application is not the origin
             // and destination of the navigation, ignore it.
@@ -201,7 +195,6 @@ namespace Microsoft.Phone.Controls
             }
         }
 
-#if WP8
         private void OnNavigated(object sender, NavigationEventArgs e)
         {
             if (_wasRelaunched && e.NavigationMode == NavigationMode.Refresh)
@@ -209,7 +202,6 @@ namespace Microsoft.Phone.Controls
                 _wasRelaunched = false;
             }
         }
-#endif
 
         /// <summary>
         /// Handles the NavigationStopped event of the frame. Set a value indicating 

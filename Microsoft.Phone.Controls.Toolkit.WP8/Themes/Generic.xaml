@@ -19,8 +19,8 @@
         <controls:SharedResources/>
         <!--<ResourceDictionary Source="/Microsoft.Phone.Controls.Toolkit;component/ApplicationBarSubmenu/ApplicationBarSubmenu.xaml"/>-->
         <!--<ResourceDictionary Source="/Microsoft.Phone.Controls.Toolkit;component/AutoCompleteBox/AutoCompleteBox.xaml"/>-->
-        <ResourceDictionary Source="/Microsoft.Phone.Controls.Toolkit;component/Buttons/Buttons.xaml"/>
-        <ResourceDictionary Source="/Microsoft.Phone.Controls.Toolkit;component/ContextMenu/ContextMenu.xaml"/>
+        <!--<ResourceDictionary Source="/Microsoft.Phone.Controls.Toolkit;component/Buttons/Buttons.xaml"/>-->
+        <!--<ResourceDictionary Source="/Microsoft.Phone.Controls.Toolkit;component/ContextMenu/ContextMenu.xaml"/>-->
         <!--<ResourceDictionary Source="/Microsoft.Phone.Controls.Toolkit;component/CustomMessageBox/CustomMessageBox.xaml"/>-->
         <!--<ResourceDictionary Source="/Microsoft.Phone.Controls.Toolkit;component/DateTimePickers/DateTimePickers.xaml"/>-->
         <!--<ResourceDictionary Source="/Microsoft.Phone.Controls.Toolkit;component/ExpanderView/ExpanderView.xaml"/>-->
@@ -115,7 +115,7 @@
         </Setter>
     </Style>-->
     
-    <Style TargetType="controls:ThemedImage">
+    <!--<Style TargetType="controls:ThemedImage">
         <Setter Property="Foreground" Value="{StaticResource PhoneForegroundBrush}"/>
         <Setter Property="Template">
             <Setter.Value>
@@ -128,6 +128,6 @@
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
-    </Style>
+    </Style>-->
 </ResourceDictionary>
 

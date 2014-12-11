@@ -1,6 +1,8 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2012
+# Visual Studio 2013
+VisualStudioVersion = 12.0.31101.0
+MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Windows Phone 8", "Windows Phone 8", "{61437378-45AA-4B4A-A7DD-6B1B13C6BED8}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Microsoft.Phone.Controls.Toolkit.WP8", "Microsoft.Phone.Controls.Toolkit.WP8\Microsoft.Phone.Controls.Toolkit.WP8.csproj", "{486642F0-AB94-4F28-B49C-106CA3134239}"

@@ -174,9 +174,7 @@ namespace Microsoft.Phone.Controls
 
         private MouseButtonEventArgs _ownerMouseLeftButtonDownEventArgs;
 
-#if !WP7
         private bool _ownerUseOptimizedManipulationRoutingSet;
-#endif
 
         /// <summary>
         /// Gets or sets the owning object for the ContextMenu.
@@ -191,13 +189,11 @@ namespace Microsoft.Phone.Controls
                     FrameworkElement ownerFrameworkElement = _owner as FrameworkElement;
                     if (null != ownerFrameworkElement)
                     {
-#if !WP7
                         if (_ownerUseOptimizedManipulationRoutingSet)
                         {
                             ownerFrameworkElement.ClearValue(FrameworkElement.UseOptimizedManipulationRoutingProperty);
                             _ownerUseOptimizedManipulationRoutingSet = false;
                         }
-#endif
 
                         ownerFrameworkElement.RemoveHandler(MouseLeftButtonDownEvent, new MouseButtonEventHandler(OnOwnerMouseLeftButtonDown));
                         ownerFrameworkElement.ManipulationDelta -= OnOwnerManipulationDelta;
@@ -216,13 +212,11 @@ namespace Microsoft.Phone.Controls
                     FrameworkElement ownerFrameworkElement = _owner as FrameworkElement;
                     if (null != ownerFrameworkElement)
                     {
-#if !WP7
                         if (ownerFrameworkElement.ReadLocalValue(FrameworkElement.UseOptimizedManipulationRoutingProperty) == DependencyProperty.UnsetValue)
                         {
                             ownerFrameworkElement.UseOptimizedManipulationRouting = false;
                             _ownerUseOptimizedManipulationRoutingSet = true;
                         }
-#endif
 
                         ownerFrameworkElement.AddHandler(MouseLeftButtonDownEvent, new MouseButtonEventHandler(OnOwnerMouseLeftButtonDown), true);
                         ownerFrameworkElement.ManipulationDelta += OnOwnerManipulationDelta;
@@ -389,11 +383,7 @@ namespace Microsoft.Phone.Controls
         {
             if (DesignerProperties.IsInDesignTool || _rootVisual.Orientation.IsPortrait())
             {
-                double x = 0.5;
-                if (null != _popupAlignmentPoint)
-                {
-                    x = _popupAlignmentPoint.X / Width;
-                }
+                double x = _popupAlignmentPoint.X / Width;
 
                 if (_outerPanel != null)
                 {
@@ -1010,7 +1000,7 @@ namespace Microsoft.Phone.Controls
                 {
                     bounds = SafeTransformToVisual(_page, _rootVisual).TransformBounds(new Rect(0, 0, _page.ActualWidth, _page.ActualHeight));
 
-                    if (portrait && bounds != null && _page.ApplicationBar != null && _page.ApplicationBar.IsVisible)
+                    if (portrait && _page.ApplicationBar != null && _page.ApplicationBar.IsVisible)
                     {
                         double actualReservedSpace = effectiveHeight - bounds.Bottom;
                         double desiredReservedSpace = _page.ApplicationBar.DefaultSize;
@@ -1021,7 +1011,7 @@ namespace Microsoft.Phone.Controls
                     }
                 }
 
-                if (portrait && null != _rootVisual && null != bounds)
+                if (portrait && null != _rootVisual)
                 {
                     double roiY;
                     double roiHeight;

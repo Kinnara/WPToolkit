@@ -162,6 +162,8 @@
         <Style.Setters>
             <Setter Property="Background" Value="{StaticResource PhoneAccentBrush}"/>
             <Setter Property="CheckBoxMargin" Value="0,10,0,0"/>
+            <Setter Property="DefaultCheckBoxStyle" Value="{StaticResource MultiSelectCheckBoxStyle}"/>
+            <Setter Property="CheckBoxStyle" Value="{StaticResource MultiSelectCheckBoxStyle}"/>
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="controls:LongListMultiSelectorItem">
@@ -339,7 +341,7 @@
                                        IsHitTestVisible="False"/>
                             <Grid Background="Transparent" HorizontalAlignment="Left">
                                 <CheckBox x:Name="SelectBox"
-                                          Style="{StaticResource MultiSelectCheckBoxStyle}"
+                                          Style="{TemplateBinding CheckBoxStyle}"
                                           Margin="{TemplateBinding CheckBoxMargin}"
                                           Visibility="Collapsed"
                                           IsChecked="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=IsSelected, Mode=TwoWay}"
@@ -362,7 +364,8 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="controls:LongListMultiSelector">
-                    <phone:LongListSelector x:Name="InnerSelector"
+                    <phone:LongListSelector
+                        x:Name="InnerSelector"
                         GridCellSize="{TemplateBinding GridCellSize}"
                         GroupFooterTemplate="{TemplateBinding GroupFooterTemplate}"
                         GroupHeaderTemplate="{TemplateBinding GroupHeaderTemplate}"
@@ -373,16 +376,15 @@
                         ListFooter="{TemplateBinding ListFooter}"
                         ListFooterTemplate="{TemplateBinding ListFooterTemplate}"
                         ListHeader="{TemplateBinding ListHeader}"
-                        ListHeaderTemplate="{TemplateBinding ListHeaderTemplate}"
-                    >
+                        ListHeaderTemplate="{TemplateBinding ListHeaderTemplate}">
                         <phone:LongListSelector.ItemTemplate>
                             <DataTemplate>
-                                <controls:LongListMultiSelectorItem Style="{StaticResource LongListMultiSelectorItemListStyle}"
+                                <controls:LongListMultiSelectorItem
+                                    Style="{StaticResource LongListMultiSelectorItemListStyle}"
                                     x:Name="LLSItem"
                                     HorizontalContentAlignment="Stretch"
                                     VerticalAlignment="Stretch"
-                                    Content="{Binding}"
-                                    >
+                                    Content="{Binding}">
                                 </controls:LongListMultiSelectorItem>
                             </DataTemplate>
                         </phone:LongListSelector.ItemTemplate>

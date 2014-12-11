@@ -31,7 +31,7 @@
     <NoConfig>true</NoConfig>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <RunCodeAnalysis>true</RunCodeAnalysis>
+    <RunCodeAnalysis>false</RunCodeAnalysis>
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
     <DocumentationFile>..\Bin\WP8\Debug\Microsoft.Phone.Controls.Toolkit.XML</DocumentationFile>
   </PropertyGroup>
@@ -140,12 +140,12 @@
     <Compile Include="..\Microsoft.Phone.Controls.Toolkit\BasePage\BasePage.cs">
       <Link>BasePage\BasePage.cs</Link>
     </Compile>
-    <Compile Include="..\Microsoft.Phone.Controls.Toolkit\Buttons\ImageButton.cs">
+    <None Include="..\Microsoft.Phone.Controls.Toolkit\Buttons\ImageButton.cs">
       <Link>Buttons\ImageButton.cs</Link>
-    </Compile>
-    <Compile Include="..\Microsoft.Phone.Controls.Toolkit\Buttons\ToggleImageButton.cs">
+    </None>
+    <None Include="..\Microsoft.Phone.Controls.Toolkit\Buttons\ToggleImageButton.cs">
       <Link>Buttons\ToggleImageButton.cs</Link>
-    </Compile>
+    </None>
     <Compile Include="..\Microsoft.Phone.Controls.Toolkit\Common\AnimationHelper.cs">
       <Link>Common\AnimationHelper.cs</Link>
     </Compile>
@@ -167,21 +167,21 @@
     <Compile Include="..\Microsoft.Phone.Controls.Toolkit\Common\InternalUtils.cs">
       <Link>Common\InternalUtils.cs</Link>
     </Compile>
-    <Compile Include="..\Microsoft.Phone.Controls.Toolkit\Common\ItemsControlHelper.cs">
+    <None Include="..\Microsoft.Phone.Controls.Toolkit\Common\ItemsControlHelper.cs">
       <Link>Common\ItemsControlHelper.cs</Link>
-    </Compile>
+    </None>
     <None Include="..\Microsoft.Phone.Controls.Toolkit\Common\IUpdateVisualState.cs">
       <Link>Common\IUpdateVisualState.cs</Link>
     </None>
-    <Compile Include="..\Microsoft.Phone.Controls.Toolkit\Common\LengthConverter.cs">
+    <None Include="..\Microsoft.Phone.Controls.Toolkit\Common\LengthConverter.cs">
       <Link>Common\LengthConverter.cs</Link>
-    </Compile>
-    <Compile Include="..\Microsoft.Phone.Controls.Toolkit\Common\MathHelpers.cs">
+    </None>
+    <None Include="..\Microsoft.Phone.Controls.Toolkit\Common\MathHelpers.cs">
       <Link>Common\MathHelpers.cs</Link>
-    </Compile>
-    <Compile Include="..\Microsoft.Phone.Controls.Toolkit\Common\NumericExtensions.cs">
+    </None>
+    <None Include="..\Microsoft.Phone.Controls.Toolkit\Common\NumericExtensions.cs">
       <Link>Common\NumericExtensions.cs</Link>
-    </Compile>
+    </None>
     <Compile Include="..\Microsoft.Phone.Controls.Toolkit\Common\PhoneHelper.cs">
       <Link>Common\PhoneHelper.cs</Link>
     </Compile>
@@ -215,9 +215,9 @@
     <None Include="..\Microsoft.Phone.Controls.Toolkit\Common\TransformAnimator.cs">
       <Link>Common\TransformAnimator.cs</Link>
     </None>
-    <Compile Include="..\Microsoft.Phone.Controls.Toolkit\Common\TypeConverters.cs">
+    <None Include="..\Microsoft.Phone.Controls.Toolkit\Common\TypeConverters.cs">
       <Link>Common\TypeConverters.cs</Link>
-    </Compile>
+    </None>
     <None Include="..\Microsoft.Phone.Controls.Toolkit\Common\VisualStates.cs">
       <Link>Common\VisualStates.cs</Link>
     </None>
@@ -227,24 +227,24 @@
     <None Include="..\Microsoft.Phone.Controls.Toolkit\Common\WeakEventListener.cs">
       <Link>Common\WeakEventListener.cs</Link>
     </None>
-    <Compile Include="..\Microsoft.Phone.Controls.Toolkit\Common\WeakReferenceHelper.cs">
+    <None Include="..\Microsoft.Phone.Controls.Toolkit\Common\WeakReferenceHelper.cs">
       <Link>Common\WeakReferenceHelper.cs</Link>
-    </Compile>
-    <Compile Include="..\Microsoft.Phone.Controls.Toolkit\ContextMenu\ContextMenu.cs">
+    </None>
+    <None Include="..\Microsoft.Phone.Controls.Toolkit\ContextMenu\ContextMenu.cs">
       <Link>ContextMenu\ContextMenu.cs</Link>
-    </Compile>
-    <Compile Include="..\Microsoft.Phone.Controls.Toolkit\ContextMenu\ContextMenuService.cs">
+    </None>
+    <None Include="..\Microsoft.Phone.Controls.Toolkit\ContextMenu\ContextMenuService.cs">
       <Link>ContextMenu\ContextMenuService.cs</Link>
-    </Compile>
-    <Compile Include="..\Microsoft.Phone.Controls.Toolkit\ContextMenu\MenuBase.cs">
+    </None>
+    <None Include="..\Microsoft.Phone.Controls.Toolkit\ContextMenu\MenuBase.cs">
       <Link>ContextMenu\MenuBase.cs</Link>
-    </Compile>
-    <Compile Include="..\Microsoft.Phone.Controls.Toolkit\ContextMenu\MenuItem.cs">
+    </None>
+    <None Include="..\Microsoft.Phone.Controls.Toolkit\ContextMenu\MenuItem.cs">
       <Link>ContextMenu\MenuItem.cs</Link>
-    </Compile>
-    <Compile Include="..\Microsoft.Phone.Controls.Toolkit\ContextMenu\Separator.cs">
+    </None>
+    <None Include="..\Microsoft.Phone.Controls.Toolkit\ContextMenu\Separator.cs">
       <Link>ContextMenu\Separator.cs</Link>
-    </Compile>
+    </None>
     <None Include="..\Microsoft.Phone.Controls.Toolkit\CustomMessageBox\CustomMessageBoxResult.cs">
       <Link>CustomMessageBox\CustomMessageBoxResult.cs</Link>
     </None>
@@ -254,9 +254,9 @@
     <None Include="..\Microsoft.Phone.Controls.Toolkit\Data\DataTemplateSelector.cs">
       <Link>Data\DataTemplateSelector.cs</Link>
     </None>
-    <Compile Include="..\Microsoft.Phone.Controls.Toolkit\Data\HierarchicalDataTemplate.cs">
+    <None Include="..\Microsoft.Phone.Controls.Toolkit\Data\HierarchicalDataTemplate.cs">
       <Link>Data\HierarchicalDataTemplate.cs</Link>
-    </Compile>
+    </None>
     <None Include="..\Microsoft.Phone.Controls.Toolkit\DateTimeConverters\DailyDateTimeConverter.cs">
       <Link>DateTimeConverters\DailyDateTimeConverter.cs</Link>
     </None>
@@ -319,9 +319,9 @@
     <None Include="..\Microsoft.Phone.Controls.Toolkit\Effects\ReaderboardEffect.cs">
       <Link>Effects\ReaderboardEffect.cs</Link>
     </None>
-    <Compile Include="..\Microsoft.Phone.Controls.Toolkit\Effects\SlideInEffect.cs">
+    <None Include="..\Microsoft.Phone.Controls.Toolkit\Effects\SlideInEffect.cs">
       <Link>Effects\SlideInEffect.cs</Link>
-    </Compile>
+    </None>
     <None Include="..\Microsoft.Phone.Controls.Toolkit\ExpanderView\ExpanderView.cs">
       <Link>ExpanderView\ExpanderView.cs</Link>
     </None>
@@ -388,9 +388,9 @@
     <Compile Include="..\Microsoft.Phone.Controls.Toolkit\GlobalSuppressions.cs">
       <Link>GlobalSuppressions.cs</Link>
     </Compile>
-    <Compile Include="..\Microsoft.Phone.Controls.Toolkit\HeaderedItemsControl\HeaderedItemsControl.cs">
+    <None Include="..\Microsoft.Phone.Controls.Toolkit\HeaderedItemsControl\HeaderedItemsControl.cs">
       <Link>HeaderedItemsControl\HeaderedItemsControl.cs</Link>
-    </Compile>
+    </None>
     <None Include="..\Microsoft.Phone.Controls.Toolkit\HubTile\HubTile.cs">
       <Link>HubTile\HubTile.cs</Link>
     </None>
@@ -409,18 +409,18 @@
     <Compile Include="..\Microsoft.Phone.Controls.Toolkit\Pivot\PivotEx.cs">
       <Link>Pivot\PivotEx.cs</Link>
     </Compile>
-    <Compile Include="..\Microsoft.Phone.Controls.Toolkit\Primitives\ContextMenuPanel.cs">
+    <None Include="..\Microsoft.Phone.Controls.Toolkit\Primitives\ContextMenuPanel.cs">
       <Link>Primitives\ContextMenuPanel.cs</Link>
-    </Compile>
+    </None>
     <None Include="..\Microsoft.Phone.Controls.Toolkit\Primitives\WaitCursorControl.cs">
       <Link>Primitives\WaitCursorControl.cs</Link>
     </None>
     <None Include="..\Microsoft.Phone.Controls.Toolkit\PropertyUI\PropertyUI.cs">
       <Link>PropertyUI\PropertyUI.cs</Link>
     </None>
-    <Compile Include="..\Microsoft.Phone.Controls.Toolkit\ThemedImage\ThemedImage.cs">
+    <None Include="..\Microsoft.Phone.Controls.Toolkit\ThemedImage\ThemedImage.cs">
       <Link>ThemedImage\ThemedImage.cs</Link>
-    </Compile>
+    </None>
     <None Include="..\Microsoft.Phone.Controls.Toolkit\TransferControl\NullToVisibilityConverter.cs">
       <Link>TransferControl\NullToVisibilityConverter.cs</Link>
     </None>
@@ -500,7 +500,8 @@
     <None Include="..\Microsoft.Phone.Controls.Toolkit\WaitCursor\WaitCursorService.cs">
       <Link>WaitCursor\WaitCursorService.cs</Link>
     </None>
-    <Compile Include="Common\LongListSelectorExtensions.cs" />
+    <None Include="ThemeResources\CustomThemeResources.cs" />
+    <None Include="Common\LongListSelectorExtensions.cs" />
     <Compile Include="Common\SharedResources.cs" />
     <None Include="Data\StyleSelector.cs" />
     <None Include="Input\GestureListenerStatic.cs" />
@@ -577,9 +578,9 @@
     <Compile Include="..\Microsoft.Phone.Controls.Toolkit\Effects\TiltEffect.cs">
       <Link>Effects\TiltEffect.cs</Link>
     </Compile>
-    <Compile Include="..\Microsoft.Phone.Controls.Toolkit\Effects\TurnstileFeatherEffect.cs">
+    <None Include="..\Microsoft.Phone.Controls.Toolkit\Effects\TurnstileFeatherEffect.cs">
       <Link>Effects\TurnstileFeatherEffect.cs</Link>
-    </Compile>
+    </None>
     <None Include="..\Microsoft.Phone.Controls.Toolkit\ToggleSwitch\OffOnConverter.cs">
       <Link>ToggleSwitch\OffOnConverter.cs</Link>
     </None>
@@ -607,9 +608,9 @@
     <Compile Include="..\Microsoft.Phone.Controls.Toolkit\Transitions\NavigationTransition.cs">
       <Link>Transitions\NavigationTransition.cs</Link>
     </Compile>
-    <Compile Include="..\Microsoft.Phone.Controls.Toolkit\Transitions\Transitions\FeatheredTransition.cs">
+    <None Include="..\Microsoft.Phone.Controls.Toolkit\Transitions\Transitions\FeatheredTransition.cs">
       <Link>Transitions\Transitions\FeatheredTransition.cs</Link>
-    </Compile>
+    </None>
     <None Include="..\Microsoft.Phone.Controls.Toolkit\Transitions\Transitions\RollTransition.cs">
       <Link>Transitions\Transitions\RollTransition.cs</Link>
     </None>
@@ -640,27 +641,27 @@
     <Compile Include="..\Microsoft.Phone.Controls.Toolkit\Transitions\Transitions\SlideTransition.cs">
       <Link>Transitions\Transitions\SlideTransition.cs</Link>
     </Compile>
-    <Compile Include="..\Microsoft.Phone.Controls.Toolkit\Transitions\Transitions\TurnstileFeatherTransition.cs">
+    <None Include="..\Microsoft.Phone.Controls.Toolkit\Transitions\Transitions\TurnstileFeatherTransition.cs">
       <Link>Transitions\Transitions\TurnstileFeatherTransition.cs</Link>
-    </Compile>
-    <Compile Include="..\Microsoft.Phone.Controls.Toolkit\Transitions\Transitions\TurnstileFeatherTransitionMode.cs">
+    </None>
+    <None Include="..\Microsoft.Phone.Controls.Toolkit\Transitions\Transitions\TurnstileFeatherTransitionMode.cs">
       <Link>Transitions\Transitions\TurnstileFeatherTransitionMode.cs</Link>
-    </Compile>
-    <Compile Include="..\Microsoft.Phone.Controls.Toolkit\Transitions\Transitions\TurnstileTransition.cs">
+    </None>
+    <None Include="..\Microsoft.Phone.Controls.Toolkit\Transitions\Transitions\TurnstileTransition.cs">
       <Link>Transitions\Transitions\TurnstileTransition.cs</Link>
-    </Compile>
+    </None>
     <Compile Include="..\Microsoft.Phone.Controls.Toolkit\Transitions\Transitions.cs">
       <Link>Transitions\Transitions.cs</Link>
     </Compile>
-    <Compile Include="..\Microsoft.Phone.Controls.Toolkit\Transitions\Transitions\TurnstileTransitionMode.cs">
+    <None Include="..\Microsoft.Phone.Controls.Toolkit\Transitions\Transitions\TurnstileTransitionMode.cs">
       <Link>Transitions\Transitions\TurnstileTransitionMode.cs</Link>
-    </Compile>
-    <Compile Include="..\Microsoft.Phone.Controls.Toolkit\WrapPanel\OrientedSize.cs">
+    </None>
+    <None Include="..\Microsoft.Phone.Controls.Toolkit\WrapPanel\OrientedSize.cs">
       <Link>WrapPanel\OrientedSize.cs</Link>
-    </Compile>
-    <Compile Include="..\Microsoft.Phone.Controls.Toolkit\WrapPanel\WrapPanel.cs">
+    </None>
+    <None Include="..\Microsoft.Phone.Controls.Toolkit\WrapPanel\WrapPanel.cs">
       <Link>WrapPanel\WrapPanel.cs</Link>
-    </Compile>
+    </None>
     <None Include="SpeechTextBox\SpeechRecognizedEventArgs.cs" />
     <None Include="SpeechTextBox\SpeechTextBox.cs" />
   </ItemGroup>
@@ -736,9 +737,23 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </None>
-    <None Include="DateTimePickers\DatePickerPageResources.xaml">
+    <None Include="..\Microsoft.Phone.Controls.Toolkit\Transitions\Storyboards\SwivelIn.xaml">
+      <Link>Transitions\Storyboards\SwivelIn.xaml</Link>
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </None>
+    <None Include="..\Microsoft.Phone.Controls.Toolkit\Transitions\Storyboards\SwivelOut.xaml">
+      <Link>Transitions\Storyboards\SwivelOut.xaml</Link>
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="ThemeResources\Dark.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </None>
+    <None Include="ThemeResources\Light.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </None>
     <None Include="ApplicationBarSubmenu\ApplicationBarSubmenu.xaml">
       <SubType>Designer</SubType>
@@ -748,14 +763,14 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </None>
-    <Page Include="Buttons\Buttons.xaml">
+    <None Include="Buttons\Buttons.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="ContextMenu\ContextMenu.xaml">
+    </None>
+    <None Include="ContextMenu\ContextMenu.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
-    </Page>
+    </None>
     <None Include="CustomMessageBox\CustomMessageBox.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -1003,16 +1018,6 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </None>
-    <None Include="..\Microsoft.Phone.Controls.Toolkit\Transitions\Storyboards\SwivelBackwardIn.xaml">
-      <Link>Transitions\Storyboards\SwivelBackwardIn.xaml</Link>
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </None>
-    <None Include="..\Microsoft.Phone.Controls.Toolkit\Transitions\Storyboards\SwivelBackwardOut.xaml">
-      <Link>Transitions\Storyboards\SwivelBackwardOut.xaml</Link>
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </None>
     <None Include="..\Microsoft.Phone.Controls.Toolkit\Transitions\Storyboards\RotateIn180Clockwise.xaml">
       <Link>Transitions\Storyboards\RotateIn180Clockwise.xaml</Link>
       <SubType>Designer</SubType>
@@ -1063,43 +1068,23 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Resource>
-    <None Include="..\Microsoft.Phone.Controls.Toolkit\Transitions\Storyboards\SwivelFullScreenOut.xaml">
-      <Link>Transitions\Storyboards\SwivelFullScreenOut.xaml</Link>
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </None>
-    <None Include="..\Microsoft.Phone.Controls.Toolkit\Transitions\Storyboards\SwivelForwardOut.xaml">
-      <Link>Transitions\Storyboards\SwivelForwardOut.xaml</Link>
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </None>
-    <Resource Include="..\Microsoft.Phone.Controls.Toolkit\Transitions\Storyboards\TurnstileForwardOut.xaml">
+    <None Include="..\Microsoft.Phone.Controls.Toolkit\Transitions\Storyboards\TurnstileForwardOut.xaml">
       <Link>Transitions\Storyboards\TurnstileForwardOut.xaml</Link>
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
-    </Resource>
-    <Resource Include="..\Microsoft.Phone.Controls.Toolkit\Transitions\Storyboards\TurnstileForwardIn.xaml">
+    </None>
+    <None Include="..\Microsoft.Phone.Controls.Toolkit\Transitions\Storyboards\TurnstileForwardIn.xaml">
       <Link>Transitions\Storyboards\TurnstileForwardIn.xaml</Link>
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
-    </Resource>
-    <Resource Include="..\Microsoft.Phone.Controls.Toolkit\Transitions\Storyboards\TurnstileBackwardIn.xaml">
+    </None>
+    <None Include="..\Microsoft.Phone.Controls.Toolkit\Transitions\Storyboards\TurnstileBackwardIn.xaml">
       <Link>Transitions\Storyboards\TurnstileBackwardIn.xaml</Link>
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
-    </Resource>
-    <Resource Include="..\Microsoft.Phone.Controls.Toolkit\Transitions\Storyboards\TurnstileBackwardOut.xaml">
-      <Link>Transitions\Storyboards\TurnstileBackwardOut.xaml</Link>
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Resource>
-    <None Include="..\Microsoft.Phone.Controls.Toolkit\Transitions\Storyboards\SwivelForwardIn.xaml">
-      <Link>Transitions\Storyboards\SwivelForwardIn.xaml</Link>
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
     </None>
-    <None Include="..\Microsoft.Phone.Controls.Toolkit\Transitions\Storyboards\SwivelFullScreenIn.xaml">
-      <Link>Transitions\Storyboards\SwivelFullScreenIn.xaml</Link>
+    <None Include="..\Microsoft.Phone.Controls.Toolkit\Transitions\Storyboards\TurnstileBackwardOut.xaml">
+      <Link>Transitions\Storyboards\TurnstileBackwardOut.xaml</Link>
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </None>

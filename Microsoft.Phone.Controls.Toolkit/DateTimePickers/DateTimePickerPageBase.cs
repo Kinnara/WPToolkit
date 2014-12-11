@@ -23,15 +23,11 @@ namespace Microsoft.Phone.Controls.Primitives
     /// </summary>
     public abstract class DateTimePickerPageBase : BasePage, IDateTimePickerPage
     {
-        private const string VisibilityGroupName = "VisibilityStates";
-        private const string OpenVisibilityStateName = "Open";
-        private const string ClosedVisibilityStateName = "Closed";
         private const string StateKey_Value = "DateTimePickerPageBase_State_Value";
 
         private LoopingSelector _primarySelectorPart;
         private LoopingSelector _secondarySelectorPart;
         private LoopingSelector _tertiarySelectorPart;
-        private Storyboard _closedStoryboard;
 
         /// <summary>
         /// Initializes the DateTimePickerPageBase class; must be called from the subclass's constructor.
@@ -101,19 +97,6 @@ namespace Microsoft.Phone.Controls.Primitives
                     }
                 }
             }
-
-            VisualStateManager.GoToState(this, ClosedVisibilityStateName, false);
-            Loaded += OnLoaded;
-        }
-
-        private void OnLoaded(object sender, RoutedEventArgs e)
-        {
-            Loaded -= OnLoaded;
-            AnimationHelper.InvokeOnSecondRendering(() =>
-            {
-                // Play the Open state
-                VisualStateManager.GoToState(this, OpenVisibilityStateName, true);
-            });
         }
 
         private void OnDataSourceSelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -169,42 +152,6 @@ namespace Microsoft.Phone.Controls.Primitives
         }
 
         private void ClosePickerPage()
-        {
-            if (null == _closedStoryboard)
-            {
-                // Hook up to storyboard(s)
-                FrameworkElement templateRoot = VisualTreeHelper.GetChild(this, 0) as FrameworkElement;
-                if (null != templateRoot)
-                {
-                    foreach (VisualStateGroup group in VisualStateManager.GetVisualStateGroups(templateRoot))
-                    {
-                        if (VisibilityGroupName == group.Name)
-                        {
-                            foreach (VisualState state in group.States)
-                            {
-                                if ((ClosedVisibilityStateName == state.Name) && (null != state.Storyboard))
-                                {
-                                    _closedStoryboard = state.Storyboard;
-                                    _closedStoryboard.Completed += OnClosedStoryboardCompleted;
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-
-            // Play the Close state (if available)
-            if (null != _closedStoryboard)
-            {
-                VisualStateManager.GoToState(this, ClosedVisibilityStateName, true);
-            }
-            else
-            {
-                OnClosedStoryboardCompleted(null, null);
-            }
-        }
-
-        private void OnClosedStoryboardCompleted(object sender, EventArgs e)
         {
             // Close the picker page
             NavigationService.GoBack();

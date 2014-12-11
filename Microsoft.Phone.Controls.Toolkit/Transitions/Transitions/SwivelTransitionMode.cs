@@ -11,28 +11,12 @@ namespace Microsoft.Phone.Controls
     public enum SwivelTransitionMode
     {
         /// <summary>
-        /// The swivel full screen in transition mode.
+        /// The swivel in transition mode.
         /// </summary>
-        FullScreenIn,
+        In,
         /// <summary>
-        /// The swivel full screen out transition mode.
+        /// The swivel out transition mode.
         /// </summary>
-        FullScreenOut,
-        /// <summary>
-        /// The swivel forward in transition mode.
-        /// </summary>
-        ForwardIn,
-        /// <summary>
-        /// The swivel forward out transition mode.
-        /// </summary>
-        ForwardOut,
-        /// <summary>
-        /// The swivel backward in transition mode.
-        /// </summary>
-        BackwardIn,
-        /// <summary>
-        /// The swivel backward out transition mode.
-        /// </summary>
-        BackwardOut
+        Out
     };
 }
