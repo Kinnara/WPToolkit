@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics.CodeAnalysis;
 using System.Windows;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
@@ -8,6 +9,7 @@ namespace Microsoft.Phone.Controls
     /// <summary>
     /// Provides readerboard <see cref="T:Microsoft.Phone.Controls.ITransition"/>s.
     /// </summary>
+    [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Readerboard")]
     public class ReaderboardTransition : TransitionElement
     {
         /// <summary>

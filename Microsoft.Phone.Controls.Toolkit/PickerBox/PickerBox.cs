@@ -287,6 +287,7 @@ namespace Microsoft.Phone.Controls
             typeof(PickerBox),
             new PropertyMetadata(string.Empty, (d, e) => ((PickerBox)d).OnPlaceholderTextChanged(e)));
 
+        [SuppressMessage("Microsoft.Usage", "CA1801:ReviewUnusedParameters", MessageId = "e")]
         private void OnPlaceholderTextChanged(DependencyPropertyChangedEventArgs e)
         {
             UpdateVisualStates(false);

@@ -171,7 +171,7 @@ namespace Microsoft.Phone.Controls.Primitives
                 {
                     if (DisplayMemberPath != null)
                     {
-                        container.SetBinding(ListBoxItem.ContentProperty, new Binding(DisplayMemberPath));
+                        container.SetBinding(ListBoxItem.ContentProperty, new Binding(DisplayMemberPath) { Source = item });
                     }
 
                     container.ContentTemplate = defaultItemTemplate;

@@ -15,13 +15,14 @@ namespace Microsoft.Phone.Controls
     /// and out during page transitions. The result is a 'readerboard' effect
     /// added to the select elements.
     /// </summary>
+    [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Readerboard")]
     public sealed class ReaderboardEffect : DependencyObject
     {
         /// <summary>
         /// The duration in milliseconds that each element takes
         /// to flip in.
         /// </summary>
-        private const double InDuration = 350.0;
+        private const double InDuration = 300.0;
 
         /// <summary>
         /// The initial angle position for an element 
@@ -33,7 +34,7 @@ namespace Microsoft.Phone.Controls
         /// The duration in milliseconds that each element takes
         /// to flip out.
         /// </summary>
-        private const double OutDuration = 250.0;
+        private const double OutDuration = 150.0;
 
         /// <summary>
         /// The final angle position for an element 
@@ -50,13 +51,13 @@ namespace Microsoft.Phone.Controls
         /// The easing function that defines the exponential inwards 
         /// interpolation of the storyboards.
         /// </summary>
-        private static readonly ExponentialEase ExponentialEaseIn = new ExponentialEase() { EasingMode = EasingMode.EaseIn, Exponent = 5 };
+        private static readonly ExponentialEase ExponentialEaseIn = new ExponentialEase() { EasingMode = EasingMode.EaseIn, Exponent = 4 };
 
         /// <summary>
         /// The easing function that defines the exponential outwards
         /// interpolation of the storyboards.
         /// </summary>
-        private static readonly ExponentialEase ExponentialEaseOut = new ExponentialEase() { EasingMode = EasingMode.EaseOut, Exponent = 5 };
+        private static readonly ExponentialEase ExponentialEaseOut = new ExponentialEase() { EasingMode = EasingMode.EaseOut, Exponent = 4 };
 
         /// <summary>
         /// The property path used to map the animation's target property
@@ -537,12 +538,10 @@ namespace Microsoft.Phone.Controls
 
                 ItemsControl itemsControl = r.Target as ItemsControl;
                 LongListSelector longListSelector = r.Target as LongListSelector;
-#if !WP7
                 if (target is LongListMultiSelector || target is ListView)
                 {
                     longListSelector = target.GetFirstLogicalChildByType<LongListSelector>(false);
                 }
-#endif
 
                 if (itemsControl != null)
                 {
@@ -552,16 +551,7 @@ namespace Microsoft.Phone.Controls
                 else if (longListSelector != null)
                 {
                     // If the target is a LongListSelector, flip its items individually.
-#if WP7
-                    ListBox child = longListSelector.GetFirstLogicalChildByType<ListBox>(false);
-
-                    if (child != null)
-                    {
-                        child.GetItemsInViewPort(targets);
-                    }
-#else
                     longListSelector.GetItemsInViewPort(targets);
-#endif
                 }
                 else
                 {
@@ -610,9 +600,8 @@ namespace Microsoft.Phone.Controls
         /// <summary>
         /// Prepares a framework element to be flipped by adding a plane projection to it.
         /// </summary>
-        /// <param name="root">The root visual.</param>
         /// <param name="element">The framework element.</param>
-        private static bool TryAttachProjection(PhoneApplicationFrame root, FrameworkElement element)
+        private static bool TryAttachProjection(FrameworkElement element)
         {
             // Cache original projection.
             ReaderboardEffect.SetOriginalProjection(element, element.Projection);
@@ -718,7 +707,6 @@ namespace Microsoft.Phone.Controls
         private static void ComposeInStoryboard(Storyboard storyboard, TimeSpan? beginTime, bool noDelay)
         {
             int counter = 0;
-            PhoneApplicationFrame root = Application.Current.RootVisual as PhoneApplicationFrame;
 
             foreach (WeakReference r in _targets)
             {
@@ -729,7 +717,7 @@ namespace Microsoft.Phone.Controls
                 // Hide the element until the storyboard is begun.
                 element.Opacity = 0.0;
 
-                if (!TryAttachProjection(root, element))
+                if (!TryAttachProjection(element))
                 {
                     continue;
                 }
@@ -780,7 +768,6 @@ namespace Microsoft.Phone.Controls
         private static void ComposeOutStoryboard(Storyboard storyboard, bool noDelay)
         {
             int counter = 0;
-            PhoneApplicationFrame root = Application.Current.RootVisual as PhoneApplicationFrame;
 
             foreach (WeakReference r in _targets)
             {
@@ -788,7 +775,7 @@ namespace Microsoft.Phone.Controls
                 double originalOpacity = element.Opacity;
                 ReaderboardEffect.SetOriginalOpacity(element, originalOpacity);
 
-                if (!TryAttachProjection(root, element))
+                if (!TryAttachProjection(element))
                 {
                     continue;
                 }

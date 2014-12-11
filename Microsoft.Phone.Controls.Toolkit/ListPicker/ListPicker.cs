@@ -15,6 +15,7 @@ using System.Windows.Media;
 using System.Windows.Media.Animation;
 using System.Windows.Navigation;
 using Microsoft.Phone.Controls.Primitives;
+using System.Diagnostics.CodeAnalysis;
 
 namespace Microsoft.Phone.Controls
 {
@@ -92,6 +93,7 @@ namespace Microsoft.Phone.Controls
             typeof(ListPicker),
             new PropertyMetadata(string.Empty, (d, e) => ((ListPicker)d).OnPlaceholderTextChanged(e)));
 
+        [SuppressMessage("Microsoft.Usage", "CA1801:ReviewUnusedParameters", MessageId = "e")]
         private void OnPlaceholderTextChanged(DependencyPropertyChangedEventArgs e)
         {
             UpdateVisualStates(false);

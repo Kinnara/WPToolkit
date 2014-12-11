@@ -5,6 +5,7 @@
     xmlns:primitives="clr-namespace:Microsoft.Phone.Controls.Primitives">
 
     <ResourceDictionary.MergedDictionaries>
+        <controls:CustomThemeResources/>
         <controls:SharedResources/>
     </ResourceDictionary.MergedDictionaries>
 
@@ -22,9 +23,7 @@
 
         <Setter Property="Template">
             <Setter.Value>
-
                 <ControlTemplate TargetType="controls:PhoneTextBox">
-
                     <Grid Background="Transparent" x:Name="RootGrid">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto"/>
@@ -220,7 +219,7 @@
                                 Grid.Row="1">
                             <TextBlock x:Name="PlaceholderTextElement"
                                        Text="{TemplateBinding PlaceholderText}"
-                                       Foreground="{StaticResource PhoneTextBoxReadOnlyBrush}"
+                                       Foreground="{StaticResource PhoneTextBoxPlaceholderBrush}"
                                        HorizontalAlignment="Left"
                                        VerticalAlignment="Top"
                                        Margin="{StaticResource PhoneTextBoxInnerMargin}"

@@ -67,9 +67,7 @@ namespace Microsoft.Phone.Controls.Primitives
         // Always updated at the end of OnIsExpandedChanged.
         private bool _actualIsExpanded = false;
 
-#if WP8
         private bool _changeStateAfterAnimation;
-#endif
 
         private enum State
         {
@@ -295,9 +293,7 @@ namespace Microsoft.Phone.Controls.Primitives
             if (_isDragging)
             {
                 AnimatePanel(_panDuration, _panEase, _dragTarget += e.DeltaManipulation.Translation.Y);
-#if WP8
                 _changeStateAfterAnimation = false;
-#endif
                 e.Handled = true;
             }
             else if (Math.Abs(e.CumulativeManipulation.Translation.X) > DragSensitivity)
@@ -348,9 +344,7 @@ namespace Microsoft.Phone.Controls.Primitives
 
                     AnimatePanel(new Duration(TimeSpan.FromSeconds(flickDuration)), flickEase, adjustedEndPoint);
 
-#if WP8
                     _changeStateAfterAnimation = false;
-#endif
 
                     e.Handled = true;
 
@@ -421,10 +415,6 @@ namespace Microsoft.Phone.Controls.Primitives
                 });
             }
 
-#if WP7
-            _selectedItem.SetState(LoopingSelectorItem.State.Selected, true);
-#endif
-
             TranslateTransform transform = item.Transform;
             if (transform != null)
             {
@@ -432,9 +422,7 @@ namespace Microsoft.Phone.Controls.Primitives
                 if (_panningTransform.Y != newPosition)
                 {
                     AnimatePanel(_selectDuration, _selectEase, newPosition);
-#if WP8
                     _changeStateAfterAnimation = true;
-#endif
                 }
                 else
                 {
@@ -519,9 +507,7 @@ namespace Microsoft.Phone.Controls.Primitives
             Duration duration = new Duration(TimeSpan.FromMilliseconds(_panelAnimation.Duration.TimeSpan.Milliseconds * factor));
 
             AnimatePanel(duration, _panelAnimation.EasingFunction, newStoppingPoint);
-#if WP8
             _changeStateAfterAnimation = false;
-#endif
         }
 
         private bool IsReady
@@ -729,12 +715,10 @@ namespace Microsoft.Phone.Controls.Primitives
             _isAnimating = false;
             if (_state != State.Dragging)
             {
-#if WP8
                 if (_changeStateAfterAnimation)
                 {
                     _selectedItem.SetState(LoopingSelectorItem.State.Selected, true);
                 }
-#endif
 
                 SelectAndSnapToClosest();
             }

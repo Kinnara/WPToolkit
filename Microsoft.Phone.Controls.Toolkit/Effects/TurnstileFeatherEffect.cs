@@ -626,12 +626,10 @@ namespace Microsoft.Phone.Controls
                 Pivot pivot = r.Target as Pivot;
                 ItemsControl itemsControl = r.Target as ItemsControl;
                 LongListSelector longListSelector = r.Target as LongListSelector;
-#if !WP7
                 if (target is LongListMultiSelector || target is ListView)
                 {
                     longListSelector = target.GetFirstLogicalChildByType<LongListSelector>(false);
                 }
-#endif
 
                 if (pivot != null)
                 {
@@ -658,16 +656,7 @@ namespace Microsoft.Phone.Controls
                 else if (longListSelector != null)
                 {
                     // If the target is a LongListSelector, feather its items individually.
-#if WP7
-                    ListBox child = longListSelector.GetFirstLogicalChildByType<ListBox>(false);
-
-                    if (child != null)
-                    {
-                        child.GetItemsInViewPort(targets);
-                    }
-#else
                     longListSelector.GetItemsInViewPort(targets);
-#endif
                 }
                 else
                 {
@@ -838,7 +827,6 @@ namespace Microsoft.Phone.Controls
                 }
             }
 
-#if !WP7
             if (!isParentTransparent)
             {
                 Pivot pivot = ancestors.OfType<Pivot>().FirstOrDefault();
@@ -854,7 +842,7 @@ namespace Microsoft.Phone.Controls
                     }
                 }
             }
-#endif
+
             return (bounds.Bottom > 0) && (bounds.Top < height) 
                 && (bounds.Right > 0) && (bounds.Left < width) 
                 && !isParentTransparent;

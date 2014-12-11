@@ -455,13 +455,13 @@ namespace Microsoft.Phone.Controls
         protected virtual Storyboard AnimationForElement(FrameworkElement element, int index)
         {
             double delay = 20;
-            double duration = (IsOpen) ? 300 : 200;
-            double from = (IsOpen) ? -45 : 0;
+            double duration = (IsOpen) ? 300 : 150;
+            double from = (IsOpen) ? -60 : 0;
             double to = (IsOpen) ? 0 : 90;
             ExponentialEase ee = new ExponentialEase()
             {
                 EasingMode = (IsOpen) ? EasingMode.EaseOut : EasingMode.EaseIn,
-                Exponent = 5,
+                Exponent = 4,
             };
 
             DoubleAnimation anim = new DoubleAnimation()

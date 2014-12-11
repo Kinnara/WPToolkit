@@ -63,7 +63,6 @@ namespace Microsoft.Phone.Controls
                         TransitionService.SetNavigationInTransition(frameContentWhenOpenedAsUIElement, null);
                         _savedNavigationOutTransition = TransitionService.GetNavigationOutTransition(frameContentWhenOpenedAsUIElement);
                         TransitionService.SetNavigationOutTransition(frameContentWhenOpenedAsUIElement, null);
-
                     }
 
                     _frame.Navigated += OnFrameNavigated;
@@ -129,6 +128,8 @@ namespace Microsoft.Phone.Controls
                 _pickerPage = e.Content as T;
                 if (null != _pickerPage)
                 {
+                    _frame.NavigationStopped -= OnFrameNavigationStoppedOrFailed;
+
                     PhoneApplicationPage pickerPageAsPhoneApplicationPage = _pickerPage as PhoneApplicationPage;
                     if (pickerPageAsPhoneApplicationPage != null)
                     {

@@ -62,20 +62,6 @@ namespace Microsoft.Phone.Controls
         /// </summary>
         private static readonly PropertyPath XPropertyPath = new PropertyPath("X");
 
-#if WP7
-        /// <summary>
-        /// Identifies whether there was a SelectionChanged event
-        /// triggered by a pivot.
-        /// </summary>
-        private static bool _selectionChanged;
-
-        /// <summary>
-        /// Identifies whether there was a ManipulationStarted event
-        /// triggered by a pivot.
-        /// </summary>
-        private static bool _manipulatedStarted;
-#endif
-        
         /// <summary>
         /// Private manager that represents a correlation between Pivots
         /// and the number of indexed elements it contains.
@@ -208,10 +194,6 @@ namespace Microsoft.Phone.Controls
                 {
                     // Attach event handlers to the parent Pivot.
                     newPivot.SelectionChanged += Pivot_SelectionChanged;
-#if WP7
-                    newPivot.ManipulationStarted += Pivot_ManipulationStarted;
-                    newPivot.ManipulationCompleted += Pivot_ManipulationCompleted;
-#endif
                     _pivotsToElementCounters.Add(newPivot, 1);
                 }
                 else
@@ -229,10 +211,6 @@ namespace Microsoft.Phone.Controls
                     {
                         // Dettach event handlers from the parent Pivot.
                         oldPivot.SelectionChanged -= Pivot_SelectionChanged;
-#if WP7
-                        oldPivot.ManipulationStarted -= Pivot_ManipulationStarted;
-                        oldPivot.ManipulationCompleted -= Pivot_ManipulationCompleted;
-#endif
                         _pivotsToElementCounters.Remove(oldPivot);
                     }
                 }
@@ -431,9 +409,6 @@ namespace Microsoft.Phone.Controls
         /// <param name="e">The event information.</param>
         private static void Pivot_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-#if WP7
-            _selectionChanged = true;
-#else
             Pivot pivot = (Pivot)sender;
             PivotItem pivotItem = pivot.ItemContainerGenerator.ContainerFromItem(pivot.SelectedItem) as PivotItem;
             
@@ -476,69 +451,7 @@ namespace Microsoft.Phone.Controls
                     storyboard.Begin();
                 }
             }
-#endif
         }
-
-#if WP7
-        /// <summary>
-        /// Sets a flag indicating that a ManipulationStarted event ocurred.
-        /// </summary>
-        /// <param name="sender">The event sender.</param>
-        /// <param name="e">The event information.</param>
-        private static void Pivot_ManipulationStarted(object sender, ManipulationStartedEventArgs e)
-        {
-            _manipulatedStarted = true;
-        }
-
-        /// <summary>
-        /// Animates the corresponding elements.
-        /// </summary>
-        /// <param name="sender">The event sender.</param>
-        /// <param name="e">The event information.</param>
-        private static void Pivot_ManipulationCompleted(object sender, ManipulationCompletedEventArgs e)
-        {
-            if (_selectionChanged && _manipulatedStarted)
-            {
-                Pivot pivot = (Pivot)sender;
-                PivotItem pivotItem = pivot.ItemContainerGenerator.ContainerFromItem(pivot.SelectedItem) as PivotItem;
-
-                if (pivotItem == null)
-                {
-                    return;
-                }
-
-                List<FrameworkElement> elements;
-
-                if (!_pivotItemsToElements.TryGetValue(pivotItem, out elements))
-                {
-                    return;
-                }
-
-                Storyboard storyboard = new Storyboard();
-
-                foreach (FrameworkElement target in elements)
-                {
-                    if (target != null)
-                    {
-                        if (IsOnScreen(target))
-                        {
-                            bool fromRight = (e.TotalManipulation.Translation.X <= 0);
-                            ComposeStoryboard(target, fromRight, ref storyboard);
-                        }
-                    }
-                }
-
-                storyboard.Completed += (s1, e1) =>
-                {
-                    storyboard.Stop();
-                };
-
-                storyboard.Begin();
-            }
-
-            _selectionChanged = _manipulatedStarted = false;
-        }
-#endif
 
         /// <summary>
         /// Subscribes an element to the private managers.
