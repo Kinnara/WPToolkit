@@ -1,4 +1,4 @@
-﻿// Copyright Microsoft Corporation.
+// Copyright Microsoft Corporation.
 // This source is subject to the Microsoft Public License (Ms-PL).
 // Please see http://go.microsoft.com/fwlink/?LinkID=131993 for details.
 // All other rights reserved.
@@ -985,24 +985,27 @@ namespace Microsoft.Phone.Controls
                     {
                         if (wr.TryGetTarget(out item))
                         {
+                            bool isVisible = false;
                             itemTransform = item.TransformToVisual(_innerSelector);
-                            Point pt = itemTransform.Transform(new Point(0.0, 0.0));
-                            bool isVisible;
-                            if (pt.Y > bottom)
+                            if (itemTransform != null)
                             {
-                                // item's bottom will also be outside of inner lls
-                                isVisible = false;
-                            }
-                            else if (pt.Y >= 0)
-                            {
-                                // whatever the position of item's botton, its top is visible
-                                isVisible = true;
-                            }
-                            else
-                            {
-                                // item's bottom is visible if >= 0
-                                pt = itemTransform.Transform(new Point(0, item.ActualHeight));
-                                isVisible = pt.Y >= 0;
+                                Point pt = itemTransform.Transform(new Point(0.0, 0.0));
+                                if (pt.Y > bottom)
+                                {
+                                    // item's bottom will also be outside of inner lls
+                                    isVisible = false;
+                                }
+                                else if (pt.Y >= 0)
+                                {
+                                    // whatever the position of item's botton, its top is visible
+                                    isVisible = true;
+                                }
+                                else
+                                {
+                                    // item's bottom is visible if >= 0
+                                    pt = itemTransform.Transform(new Point(0, item.ActualHeight));
+                                    isVisible = pt.Y >= 0;
+                                }
                             }
                             if (isVisible)
                             {
