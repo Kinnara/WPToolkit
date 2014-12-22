@@ -1,4 +1,4 @@
-﻿// Copyright Microsoft Corporation.
+// Copyright Microsoft Corporation.
 // This source is subject to the Microsoft Public License (Ms-PL).
 // Please see http://go.microsoft.com/fwlink/?LinkID=131993 for details.
 // All other rights reserved.
@@ -6,6 +6,7 @@
 using System;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Media;
 using System.Windows.Shapes;
 
 namespace Microsoft.Phone.Controls
@@ -425,6 +426,12 @@ namespace Microsoft.Phone.Controls
                 llms.ConfigureItem(this);
             }
             base.OnContentChanged(oldContent, newContent);
+        }
+
+        public new GeneralTransform TransformToVisual(UIElement visual)
+        {
+            Size size = new Size(0, 0);
+            return visual.DesiredSize == size && visual.RenderSize == size ? null : base.TransformToVisual(visual);
         }
     }
 }
