@@ -19,6 +19,8 @@ namespace Microsoft.Phone.Controls
 
         private FullScreenPopup _popup;
         private bool _isHiding;
+        private bool _isOpen;
+        public bool IsOpen { get { return _isOpen; } }
 
         /// <summary>
         /// Initializes a new instance of the ApplicationBarSubmenu class.
@@ -55,6 +57,7 @@ namespace Microsoft.Phone.Controls
             };
             _popup.PopupCancelled += OnPopupCancelled;
             _popup.Show();
+            _isOpen = true;
         }
 
         /// <summary>
@@ -93,6 +96,7 @@ namespace Microsoft.Phone.Controls
                 _popup = null;
 
                 _isHiding = false;
+                _isOpen = false;
             };
             transition.Begin();
         }
