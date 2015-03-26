@@ -162,5 +162,25 @@ namespace Microsoft.Phone.Controls
             double height = phoneApplicationFrame.GetUsefulHeight() - phoneApplicationFrame.GetSipCoveredSize().Height;
             return new Size(width, height);
         }
+
+        /// <summary>
+        /// Gets the height of the ApplicationBar which
+        /// is currently displayed.
+        /// Returns 0 if no ApplicationBar is visible or
+        /// if the phone is in landscape mode.
+        /// </summary>
+        /// <param name="phoneApplicationFrame">The <see cref="T:PhoneApplicationFrame"/>.</param>
+        /// <returns></returns>
+        public static double GetApplicationBarHeight(this PhoneApplicationFrame phoneApplicationFrame)
+        {
+            var page = phoneApplicationFrame.Content as PhoneApplicationPage;
+
+            if (page != null && IsPortrait(phoneApplicationFrame) && page.ApplicationBar != null)
+            {
+                return page.ApplicationBar.Mode == Shell.ApplicationBarMode.Default ? page.ApplicationBar.DefaultSize : page.ApplicationBar.MiniSize;
+            }
+
+            return 0d;
+        }
     }
 }
