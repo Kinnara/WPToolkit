@@ -113,6 +113,17 @@ namespace Microsoft.Phone.Controls
         /// <returns><code>true</code> if the <see cref="T:TextBox"/> woudl show the SIP text completion; <code>false</code> otherwise.</returns>
         public static bool IsSipTextCompletionShown(this TextBox textBox)
         {
+            /*
+             * If the clipboard has content,
+             * a paste-button is shown and
+             * the height of the keyboard
+             * is higher
+             */
+            if (Clipboard.ContainsText())
+            {
+                return true;
+            }
+
             if (textBox.InputScope == null)
             {
                 return false;
@@ -124,9 +135,12 @@ namespace Microsoft.Phone.Controls
                 {
                     case InputScopeNameValue.Text:
                     case InputScopeNameValue.Chat:
+                    case InputScopeNameValue.Search:
+                    case InputScopeNameValue.Maps:
                         return true;
                 }
             }
+
             return false;
         }
 
