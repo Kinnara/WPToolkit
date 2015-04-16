@@ -320,6 +320,10 @@ namespace Microsoft.Phone.Controls
             {
                 childSize.Height = Math.Max(childSize.Height - 32, 0);
             }
+            else if(!isChildAbove && frame.IsPortrait())
+            {
+                childSize.Height = Math.Max(childSize.Height - frame.GetApplicationBarHeight(), 0);
+            }
             if (frameSize.Width == 0 || frameSize.Height == 0 || childSize.Height == 0)
             {
                 return;

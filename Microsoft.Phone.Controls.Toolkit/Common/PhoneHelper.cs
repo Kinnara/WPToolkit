@@ -113,6 +113,17 @@ namespace Microsoft.Phone.Controls
         /// <returns><code>true</code> if the <see cref="T:TextBox"/> woudl show the SIP text completion; <code>false</code> otherwise.</returns>
         public static bool IsSipTextCompletionShown(this TextBox textBox)
         {
+            /*
+             * If the clipboard has content,
+             * a paste-button is shown and
+             * the height of the keyboard
+             * is higher
+             */
+            if (Clipboard.ContainsText())
+            {
+                return true;
+            }
+
             if (textBox.InputScope == null)
             {
                 return false;
@@ -124,9 +135,12 @@ namespace Microsoft.Phone.Controls
                 {
                     case InputScopeNameValue.Text:
                     case InputScopeNameValue.Chat:
+                    case InputScopeNameValue.Search:
+                    case InputScopeNameValue.Maps:
                         return true;
                 }
             }
+
             return false;
         }
 
@@ -161,6 +175,26 @@ namespace Microsoft.Phone.Controls
             double width = phoneApplicationFrame.GetUsefulWidth();
             double height = phoneApplicationFrame.GetUsefulHeight() - phoneApplicationFrame.GetSipCoveredSize().Height;
             return new Size(width, height);
+        }
+
+        /// <summary>
+        /// Gets the height of the ApplicationBar which
+        /// is currently displayed.
+        /// Returns 0 if no ApplicationBar is visible or
+        /// if the phone is in landscape mode.
+        /// </summary>
+        /// <param name="phoneApplicationFrame">The <see cref="T:PhoneApplicationFrame"/>.</param>
+        /// <returns></returns>
+        public static double GetApplicationBarHeight(this PhoneApplicationFrame phoneApplicationFrame)
+        {
+            var page = phoneApplicationFrame.Content as PhoneApplicationPage;
+
+            if (page != null && IsPortrait(phoneApplicationFrame) && page.ApplicationBar != null)
+            {
+                return page.ApplicationBar.Mode == Shell.ApplicationBarMode.Default ? page.ApplicationBar.DefaultSize : page.ApplicationBar.MiniSize;
+            }
+
+            return 0d;
         }
     }
 }
